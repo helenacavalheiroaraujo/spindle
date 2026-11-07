@@ -94,7 +94,7 @@ Not in this MVP: stories 10, 11
 
 ### Scope
 - Priorities screen ("What matters most to you?"), opened when the buyer taps an album in the search results
-- Four options: **Sound**, **Price**, **Original**, **Condition**, each with a short plain-language line (e.g. Price: "I don't want to overpay")
+- Four options: **Sound**, **Price**, **Original**, **Condition**, each with a short plain-language line: Sound: "I want the best-sounding one" · Price: "I don't want to overpay" · Original: "I want the first pressing" · Condition: "I want a near-mint copy"
 - The buyer picks one or more and **ranks them by tap order**: the first tap is 1, the second is 2, and so on
 - Button **"See recommendation"** → story 3
 
@@ -110,12 +110,12 @@ Not in this MVP: stories 10, 11
 - Without an account, or without a saved ranking: the screen is always shown
 
 ### Acceptance criteria
-- [ ] Tapping an album in the search results opens this screen
-- [ ] "See recommendation" is disabled until at least one option is picked
-- [ ] Each picked option shows its rank number, in tap order
-- [ ] Unpicking an option renumbers the others without gaps
-- [ ] All four options can be picked
-- [ ] The recommendation receives the options in rank order
+- [x] Tapping an album in the search results opens this screen
+- [x] "See recommendation" is disabled until at least one option is picked
+- [x] Each picked option shows its rank number, in tap order
+- [x] Unpicking an option renumbers the others without gaps
+- [x] All four options can be picked
+- [x] The recommendation receives the options in rank order
 - [ ] *(Phase 2)* A signed-in buyer's ranking is saved and reused on the next album
 - [ ] *(Phase 2)* With a saved ranking, the screen is skipped and "Change" is shown on the recommendation
 
@@ -520,7 +520,11 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 1 | "No listings" from active listings only | `lib/rules/activeListings.ts`, `lib/rules/trafficLight.ts`, `lib/db/albums.ts` | `tests/unit/activeListings.test.ts`, `tests/unit/trafficLight.test.ts`, `tests/e2e/search.spec.ts` |
 | 1 | Tap: priorities screen, or "Nobody is selling this album right now" | `app/AlbumSearch.tsx` | `tests/e2e/search.spec.ts` |
 | 1 | Error screen with "Try again" keeps the typed text (Shared rules) | `components/ErrorScreen.tsx`, `app/AlbumSearch.tsx` | `tests/e2e/search.spec.ts` |
-| 2 | | | |
+| 2 | Pick by tap order, ranks shown as numbers; unpick closes the gap; all four can be picked | `lib/rules/priorities.ts`, `app/albums/[albumId]/priorities/PriorityPicker.tsx` | `tests/unit/priorities.test.ts`, `tests/e2e/priorities.spec.ts` |
+| 2 | "See recommendation" disabled until one option is picked, and again when all are unpicked | `lib/rules/priorities.ts`, `app/albums/[albumId]/priorities/PriorityPicker.tsx` | `tests/unit/priorities.test.ts`, `tests/e2e/priorities.spec.ts` |
+| 2 | Tap an album → this screen, with the album and the four options and their lines | `app/albums/[albumId]/priorities/page.tsx`, `lib/db/albums.ts` | `tests/e2e/priorities.spec.ts` |
+| 2 | The recommendation receives the ranking in order, in the page address; "Change" refills it | `lib/rules/priorities.ts`, `app/albums/[albumId]/priorities/page.tsx` | `tests/unit/priorities.test.ts`, `tests/e2e/priorities.spec.ts` |
+| 2 | Loading mask and error screen with "Try again" (Shared rules) | `app/albums/[albumId]/priorities/loading.tsx`, `app/albums/[albumId]/priorities/error.tsx` | Not tested automatically |
 | 3 | | | |
 | 5 | | | |
 | 6 | | | |

@@ -48,3 +48,18 @@ export async function listAlbumSummaries(): Promise<AlbumSummary[]> {
     };
   });
 }
+
+export type AlbumHeader = { id: string; title: string; artist: string; coverUrl: string; versionCount: number };
+
+// One album for the header of the priorities screen (story 2), or null if there is no such album.
+export async function getAlbumHeader(albumId: string): Promise<AlbumHeader | null> {
+  const { data, error } = await db()
+    .from("albums")
+    .select("id, title, artist, cover_url, versions (id)")
+    .eq("id", albumId)
+    .maybeSingle();
+  if (error?.code === "22P02") return null; // not a valid album id
+  if (error) throw error;
+  if (!data) return null;
+  return { id: data.id, title: data.title, artist: data.artist, coverUrl: data.cover_url, versionCount: data.versions.length };
+}

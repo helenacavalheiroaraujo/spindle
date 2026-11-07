@@ -3,6 +3,14 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Story 2 · Priorities
+
+### The ranking travels in the page address (story 2 · architecture)
+- **Why:** the recommendation reads the ranking from the address (e.g. `/albums/7/recommendation?priorities=price,sound`), so it needs no database in phase 1, survives a reload during the demo, and "Change" can refill the priorities screen with the current order. Unknown or repeated values in the address are ignored.
+
+### Story 2 is built for phase 1 only; finding #11 waits for phase 2 (process)
+- **Why:** saving a ranking needs accounts (story 9), which come later in the build order. Whether "Change" replaces a saved ranking is decided when accounts exist.
+
 ## 2026-11-07 — Story 1 · Search
 
 ### Search and suggestions run on the full album list, in a pure rule (story 1 · architecture)

@@ -4,7 +4,7 @@
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
     "iteration": 3,
-    "updated": "2026-11-07T23:15:00+00:00"
+    "updated": "2026-11-07T23:59:00+00:00"
   },
   "iterations": [
     {
@@ -405,7 +405,11 @@
       "question": "When a signed-in buyer changes priorities for one album, should that become the saved ranking?",
       "status": "open",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-07",
+        "decision": "Deferred to phase 2 (no saved rankings in phase 1). Stays open; leaning towards: the new ranking replaces the saved one."
+      }
     },
     {
       "id": 12,
@@ -610,9 +614,13 @@
         "proposed": "Sound: \"I want the best-sounding one\" · Price: \"I don't want to overpay\" · Original: \"I want the first pressing\" · Condition: \"I want a near-mint copy\""
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-07",
+        "decision": "Approved before building story 2. SPEC lists the four lines from the design p. 15."
+      }
     },
     {
       "id": 19,
