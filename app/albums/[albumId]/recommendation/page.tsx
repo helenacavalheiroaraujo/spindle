@@ -152,7 +152,7 @@ export default async function RecommendationPage({
       <div className="mt-8 flex flex-col gap-3">
         {/* Phone: listings open on their own screen (story 5). Desktop: they sit beside this (story 5). */}
         <Link
-          href={`/versions/${version.id}/listings`}
+          href={`/versions/${version.id}/listings?priorities=${formatPriorities(ranking)}`}
           className="flex min-h-14 items-center justify-center rounded-full bg-navy px-6 text-lg font-semibold text-cream lg:hidden"
         >
           See verified listings
