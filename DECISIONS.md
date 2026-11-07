@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Process (screenshots)
+
+### Screenshots for the final PDF are saved by the Playwright tests, only on request (process)
+- **Why:** the PDF needs current screens at 375 and 1280 px. The tests already open every screen, so they take the pictures. They are saved in `docs/screenshots/story-<n>/` only with `npm run screenshots` (`SCREENSHOTS=1`), because saving on every run would change the images in git each time, even with no visible change.
+- **Trade-off accepted:** the images can fall behind the app between runs; `npm run screenshots` is run before the PDF. Test coverage metrics wait until after stories 7 and 8 (no new package now).
+
 ## 2026-11-07 — Story 9 · Accounts (sign-up)
 
 ### Sessions are kept in cookies with @supabase/ssr (story 9)

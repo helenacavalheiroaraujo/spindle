@@ -3,6 +3,7 @@
 import { expect, test } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
+import { screenshot } from "./screenshot";
 
 function env(name: string) {
   if (process.env[name]) return process.env[name]!;
@@ -24,6 +25,7 @@ test.afterAll(async () => {
 test("a new user signs up with name, email and password and is signed in", async ({ page }, info) => {
   const email = `spindle-test-${info.project.name}-${Date.now()}@spindle.test`; // Supabase refuses @example.com
   await page.goto("/signup");
+  await screenshot(page, 9, "signup");
   await page.getByLabel("Name").fill("Ana Silva");
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("vinyl-test-123");
@@ -31,6 +33,7 @@ test("a new user signs up with name, email and password and is signed in", async
 
   await expect(page).toHaveURL("/");
   await expect(page.getByRole("img", { name: "Signed in as Ana Silva" })).toHaveText("AS");
+  await screenshot(page, 9, "signed-in");
 
   const { data } = await admin().from("profiles").select("user_id, name").eq("name", "Ana Silva");
   const users = await admin().auth.admin.listUsers();
@@ -46,6 +49,7 @@ test("a new user signs up with name, email and password and is signed in", async
   await page.getByLabel("Password").fill("vinyl-test-123");
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(page.getByText("This email already has an account")).toBeVisible();
+  await screenshot(page, 9, "signup-email-in-use");
 });
 
 test("passwords shorter than 8 characters are refused", async ({ page }) => {
@@ -55,6 +59,7 @@ test("passwords shorter than 8 characters are refused", async ({ page }) => {
   await page.getByLabel("Password").fill("1234567");
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(page.getByText("Use at least 8 characters.")).toBeVisible();
+  await screenshot(page, 9, "signup-short-password");
   await expect(page).toHaveURL("/signup");
   await expect(page.getByLabel("Name")).toHaveValue("Ana Silva"); // what was typed is kept
 });
