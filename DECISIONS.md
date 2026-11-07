@@ -3,6 +3,21 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Database decisions (docs/database.md)
+
+### Store facts, calculate judgements (architecture)
+- **Why:** the traffic light, active listings, price and condition scores and the price label are calculated by the rules in `lib/rules/`, never stored; a stored judgement goes stale when the data changes (same reason as findings #1 and #2).
+
+### Illustrative sellers have no account (architecture)
+- **Why:** demo listings need sellers, but creating fake accounts with emails and passwords adds risk and work for no visible gain. Sellers in the seed have a name and city only and cannot log in.
+
+### Only phase 1 tables are created now (process)
+- **Why:** keeps the database as small as the current phase needs; orders and saved priorities are described in `docs/database.md` and created when phase 2 starts.
+
+### Condition grade explanations (stories 3, 5, 8)
+- Near mint: "Almost like new, no marks" · Very good: "Light signs of wear" · Good: "Visible wear and some audible noise" · Fair: "Heavily played, noticeable noise"
+- **Why:** written for buyers who are not specialists (plain-language rule, finding #8).
+
 ## 2026-11-07 — Project rules (CLAUDE.md)
 
 ### Every change is explained in plain language, with evidence, before I accept it (process)
