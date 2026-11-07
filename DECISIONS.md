@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Process
+
+### Options are shown without the AI's recommendation; I choose first (process)
+- **Why:** a recommendation shown first anchors the choice. In stories 3, 5, 6 and 9 every finding was decided as the AI recommended, so the log could not show my own reasoning. Choosing first and then comparing with the AI keeps the decision, and its justification, mine.
+- **Trade-off accepted:** each decision takes slightly longer.
+
 ## 2026-11-07 — Story 9 · Accounts (findings)
 
 ### After login from Buy, the user goes to the checkout (story 9 · finding #9)

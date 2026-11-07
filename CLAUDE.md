@@ -17,7 +17,7 @@ Spindle helps non-specialist buyers pick the right pressing of a vinyl record an
 - Loading and errors always use the shared `LoadingMask` and `ErrorScreen`.
 
 ## How we build a story
-1. Before starting: list the open findings for this story in `findings.json` and ask me to decide each one. Do not build until they are decided.
+1. Before starting: list the open findings for this story in `findings.json` and ask me to decide each one. Show the options with their trade-offs but without your recommendation; I choose first, then you say what you would choose and why, and challenge my choice if you disagree. Do not build until they are decided.
 2. Data tables before screens (`supabase/migrations/`, described in `docs/database.md`).
 3. One flow at a time, in small changes.
 4. Tests in every flow, written with the code: a Vitest decision table for each rule (from the SPEC's acceptance criteria and example data); a Playwright test for each critical flow.
