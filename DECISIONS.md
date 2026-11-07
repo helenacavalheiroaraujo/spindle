@@ -3,6 +3,15 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Story 9 · Accounts (findings)
+
+### After login from Buy, the user goes to the checkout (story 9 · finding #9)
+- **Why:** tapping Buy already says what the user wants; sending them back to the listing makes them tap Buy twice. Matches story 7's edge case.
+- **Trade-off accepted:** the checkout is built in story 7, so the Playwright test for this return is finished there; story 9 tests the return to the page the user came from.
+
+### Sign-up has no "I also want to sell" box and no terms line (story 9 · finding #23)
+- **Why:** there is one account for buying and selling, and seller details (city, shop name) are asked when selling (story 8). There are no terms or privacy pages, so the line would point to documents that do not exist. Differs from the Assignment 1 design on purpose.
+
 ## 2026-11-07 — Story 6 · Fair price (findings)
 
 ### The typical price is shown as a range, not one value (story 6 · finding #20)

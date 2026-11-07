@@ -345,9 +345,13 @@
         "proposed": "after login, goes to the checkout for that listing"
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-07",
+        "decision": "Approved: after login from Buy, the user goes to the checkout for that listing. Recorded in DECISIONS.md."
+      }
     },
     {
       "id": 10,
@@ -772,9 +776,13 @@
         "proposed": "A wrong password shows \"That email and password don't match. Check them and try again.\" (no reset link in the MVP)"
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-07",
+        "decision": "Approved: \"That email and password don't match. Check them and try again.\" (no reset link in the MVP)."
+      }
     },
     {
       "id": 23,
@@ -798,9 +806,13 @@
       ],
       "proposal": null,
       "question": "With one account for buying and selling, drop the \"I also want to sell\" checkbox? Keep the terms line as text only?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-07",
+        "decision": "Drop both the \"I also want to sell records\" checkbox and the terms line; added to Out of scope. Recorded in DECISIONS.md."
+      }
     },
     {
       "id": 24,
@@ -1422,8 +1434,8 @@
       "id": "Q6",
       "finding": 23,
       "question": "Drop the \"I also want to sell records\" checkbox; keep the terms line as text?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Drop both the checkbox and the terms line."
     },
     {
       "id": "Q7",
@@ -1436,8 +1448,8 @@
       "id": "Q8",
       "finding": 28,
       "question": "\"Ideal but unavailable\": stored scores only, price and condition as 0, or drop the note?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Option (b): full total, with price and condition counted as 0 for a version with no listings (finding #28)."
     },
     {
       "id": "Q9",
@@ -1450,8 +1462,8 @@
       "id": "Q10",
       "finding": 32,
       "question": "Price in a reason for a version with no listings: typical range, or leave the comparison out?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Use the typical range of that version, with \"typically\" (finding #32)."
     }
   ],
   "todo": [
@@ -1489,7 +1501,7 @@
       "id": "T6",
       "text": "Before building story 3: decide #28 (High), #31, #32 and #17",
       "finding": 28,
-      "done": false
+      "done": true
     }
   ]
 }
