@@ -170,7 +170,11 @@ export default async function RecommendationPage({
         </div>
 
         {/* Desktop: the listings sit beside the recommendation (story 3 · Scope, finding #21). */}
-        <ListingsBeside versionId={version.id} ranking={ranking} />
+        <ListingsBeside
+          versionId={version.id}
+          ranking={ranking}
+          typicalRange={{ min: version.typicalMin, max: version.typicalMax }}
+        />
       </div>
     </main>
   );

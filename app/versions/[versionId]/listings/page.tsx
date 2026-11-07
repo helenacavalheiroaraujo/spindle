@@ -44,7 +44,14 @@ export default async function ListingsPage({
       </div>
 
       <div className="mt-6">
-        <ListingList versionId={version.id} listings={listings} ranking={ranking} from="list" Heading="h1" />
+        <ListingList
+          versionId={version.id}
+          listings={listings}
+          typicalRange={version.typicalRange}
+          ranking={ranking}
+          from="list"
+          Heading="h1"
+        />
       </div>
     </main>
   );

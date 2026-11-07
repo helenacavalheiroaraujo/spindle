@@ -3,6 +3,11 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Story 6 · Fair price (findings)
+
+### The typical price is shown as a range, not one value (story 6 · finding #20)
+- **Why:** a range explains why a price is "Typical"; the recommendation reasons (story 3) and the sell screen design already use a range.
+
 ## 2026-11-07 — Specification layout
 
 ### One file per user story in `specs/`; SPEC.md becomes the index

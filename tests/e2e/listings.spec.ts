@@ -60,7 +60,7 @@ test("green and yellow cheapest first, red last although cheapest; every light s
   await expect(rows(page).nth(1)).toContainText("€36");
   await expect(rows(page).nth(1)).toContainText("Check");
   await expect(rows(page).nth(2)).toContainText("No match");
-  await expect(page.getByText("Check results are illustrative data")).toBeVisible();
+  await expect(page.getByText("Check results and typical prices are illustrative data")).toBeVisible();
 });
 
 test("red listing: moved to its version, not for sale here, no Buy button", async ({ page }) => {
@@ -97,7 +97,7 @@ test("green: Buy shows no warning", async ({ page }) => {
 test("1990 Reissue: listings moved here are yellow with 'Moved here · check pending'", async ({ page }) => {
   await page.goto(`/versions/${V1990}/listings`);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("4 for sale");
-  const prices = await rows(page).locator("p.text-lg").allTextContents();
+  const prices = await rows(page).locator("span.text-lg").allTextContents();
   expect(prices).toEqual(["€24", "€29", "€30", "€185"]);
   const moved = rows(page).filter({ hasText: "Moved here · check pending" });
   await expect(moved).toHaveCount(2);

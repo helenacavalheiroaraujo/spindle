@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { versionListings } from "@/app/actions";
 import type { ListingDetails } from "@/lib/db/listings";
 import type { Priority } from "@/lib/rules/priorities";
+import type { TypicalRange } from "@/lib/rules/fairPrice";
 import { ErrorScreen } from "./ErrorScreen";
 import { ListingList } from "./ListingList";
 import { LoadingMask } from "./LoadingMask";
@@ -13,7 +14,15 @@ const DESKTOP = "(min-width: 1024px)";
 
 type State = { kind: "loading" } | { kind: "error" } | { kind: "ready"; listings: ListingDetails[] };
 
-export function ListingsBeside({ versionId, ranking }: { versionId: string; ranking: Priority[] }) {
+export function ListingsBeside({
+  versionId,
+  ranking,
+  typicalRange,
+}: {
+  versionId: string;
+  ranking: Priority[];
+  typicalRange: TypicalRange;
+}) {
   const [state, setState] = useState<State>({ kind: "loading" });
   const [attempt, setAttempt] = useState(0);
 
@@ -36,7 +45,14 @@ export function ListingsBeside({ versionId, ranking }: { versionId: string; rank
         <ErrorScreen message="We couldn't load the listings. Check your connection." onRetry={() => setAttempt((n) => n + 1)} />
       )}
       {state.kind === "ready" && (
-        <ListingList versionId={versionId} listings={state.listings} ranking={ranking} from="recommendation" Heading="h2" />
+        <ListingList
+          versionId={versionId}
+          listings={state.listings}
+          typicalRange={typicalRange}
+          ranking={ranking}
+          from="recommendation"
+          Heading="h2"
+        />
       )}
     </aside>
   );

@@ -86,7 +86,10 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 5 | Listings on their own screen on phone, beside the recommendation on desktop | `app/versions/[versionId]/listings/page.tsx`, `components/ListingsBeside.tsx`, `app/albums/[albumId]/recommendation/page.tsx` | `tests/e2e/listings.spec.ts` |
 | 5 | Desktop: if the listings beside fail, only that area shows the error; "Try again" recovers | `components/ListingsBeside.tsx`, `components/ErrorScreen.tsx` | `tests/e2e/listings.spec.ts` (desktop only) |
 | 5 | Loading mask and error screen with "Try again" on the listings and listing check screens (Shared rules) | `app/versions/[versionId]/listings/loading.tsx`, `app/versions/[versionId]/listings/error.tsx`, `app/listings/[listingId]/loading.tsx`, `app/listings/[listingId]/error.tsx` | Not tested automatically |
-| 6 | | | |
+| 6 | Label rule: below / typical (limits included) / above; €24, €28, €36, €40 with €28–€36 | `lib/rules/fairPrice.ts` | `tests/unit/fairPrice.test.ts` |
+| 6 | Every listing (green, yellow and red) shows its label; red uses its actual version's range | `components/ListingList.tsx`, `lib/db/listings.ts` | `tests/unit/fairPrice.test.ts`, `tests/e2e/fairPrice.spec.ts` |
+| 6 | "Typical price for this pressing: €min–€max" below the list, on phone and beside the recommendation | `components/ListingList.tsx`, `components/ListingsBeside.tsx` | `tests/e2e/fairPrice.spec.ts` |
+| 6 | Version without a range: no label and no range line | `lib/rules/fairPrice.ts`, `components/ListingList.tsx`, `supabase/seed.sql` | `tests/unit/fairPrice.test.ts`, `tests/e2e/fairPrice.spec.ts` |
 | 9 | | | |
 | 7 | | | |
 | 8 | | | |

@@ -1,5 +1,6 @@
-// Listing rows → the facts the rules need (lib/rules/activeListings), and the listings screen data (story 5).
+// Listing rows → the facts the rules need (lib/rules/activeListings), and the listings screen data (stories 5 and 6).
 import { db } from "./client";
+import type { TypicalRange } from "@/lib/rules/fairPrice";
 import type { ListingForList } from "@/lib/rules/listingOrder";
 import type { ListingFacts } from "@/lib/rules/activeListings";
 import type { CheckItem, CheckResult } from "@/lib/rules/trafficLight";
@@ -33,10 +34,19 @@ export type ListingDetails = ListingForList & {
   condition: { code: string; name: string; explanation: string };
   claimedVersionName: string;
   actualVersionName: string;
+  actualTypicalRange: TypicalRange; // story 6: the price label uses the range of the actual version
 };
 
+type RangeRow = { typical_price_min: string | number | null; typical_price_max: string | number | null };
+export function toTypicalRange(r: RangeRow): TypicalRange {
+  return {
+    min: r.typical_price_min === null ? null : Number(r.typical_price_min),
+    max: r.typical_price_max === null ? null : Number(r.typical_price_max),
+  };
+}
+
 export type VersionListings = {
-  version: { id: string; name: string; albumId: string; albumTitle: string; artist: string };
+  version: { id: string; name: string; albumId: string; albumTitle: string; artist: string; typicalRange: TypicalRange };
   listings: ListingDetails[]; // on sale, claimed for this version or moved to it; the rules order them
 };
 
@@ -45,7 +55,7 @@ export async function getVersionListings(versionId: string): Promise<VersionList
   const client = db();
   const versionResult = await client
     .from("versions")
-    .select("id, name, albums (id, title, artist)")
+    .select("id, name, typical_price_min, typical_price_max, albums (id, title, artist)")
     .eq("id", versionId)
     .maybeSingle();
   if (versionResult.error?.code === "22P02") return null; // not a valid version id
@@ -61,14 +71,21 @@ export async function getVersionListings(versionId: string): Promise<VersionList
        profiles (name, city),
        condition_grades (code, name, explanation),
        claimed:versions!listings_claimed_version_id_fkey (name),
-       actual:versions!listings_actual_version_id_fkey (name)`,
+       actual:versions!listings_actual_version_id_fkey (name, typical_price_min, typical_price_max)`,
     )
     .eq("status", "on_sale")
     .or(`claimed_version_id.eq.${versionId},actual_version_id.eq.${versionId}`);
   if (listings.error) throw listings.error;
 
   return {
-    version: { id: v.id, name: v.name, albumId: album.id, albumTitle: album.title, artist: album.artist },
+    version: {
+      id: v.id,
+      name: v.name,
+      albumId: album.id,
+      albumTitle: album.title,
+      artist: album.artist,
+      typicalRange: toTypicalRange(v),
+    },
     listings: listings.data.map((l) => {
       const seller = l.profiles as unknown as { name: string; city: string | null };
       const grade = l.condition_grades as unknown as ListingDetails["condition"];
@@ -81,6 +98,7 @@ export async function getVersionListings(versionId: string): Promise<VersionList
         condition: grade,
         claimedVersionName: (l.claimed as unknown as { name: string }).name,
         actualVersionName: (l.actual as unknown as { name: string }).name,
+        actualTypicalRange: toTypicalRange(l.actual as unknown as RangeRow),
       };
     }),
   };
@@ -104,7 +122,7 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
        profiles (name, city),
        condition_grades (code, name, explanation),
        claimed:versions!listings_claimed_version_id_fkey (name, albums (id, title, artist)),
-       actual:versions!listings_actual_version_id_fkey (name)`,
+       actual:versions!listings_actual_version_id_fkey (name, typical_price_min, typical_price_max)`,
     )
     .eq("id", listingId)
     .maybeSingle();
@@ -123,6 +141,7 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
     condition: l.condition_grades as unknown as ListingDetails["condition"],
     claimedVersionName: claimed.name,
     actualVersionName: (l.actual as unknown as { name: string }).name,
+    actualTypicalRange: toTypicalRange(l.actual as unknown as RangeRow),
     albumId: claimed.albums.id,
     albumTitle: claimed.albums.title,
     artist: claimed.albums.artist,

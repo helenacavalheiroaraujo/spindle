@@ -691,9 +691,13 @@
         "proposed": "### The typical price is shown as a range, not one value (story 6)\n- Why: a range explains why a price is \"Typical\" (the sell screen design already uses a range: €24–34)."
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-07",
+        "decision": "Approved. The typical price is shown as a range (e.g. €28–€36), not one value. Recorded in DECISIONS.md."
+      }
     },
     {
       "id": 21,

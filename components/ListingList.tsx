@@ -4,20 +4,24 @@ import { allRed, listingsForVersion } from "@/lib/rules/listingOrder";
 import { formatPriorities, type Priority } from "@/lib/rules/priorities";
 import { formatPrice } from "@/lib/rules/recommendation";
 import { yellowWarning } from "@/lib/rules/yellowWarning";
+import { priceLabel, type TypicalRange } from "@/lib/rules/fairPrice";
 import { LightLegend, TrafficLight } from "@/components/TrafficLight";
 import { BuyButton } from "@/components/BuyButton";
 
-// Verified listings for one version (story 5): on its own screen on phone, beside the recommendation on desktop.
+// Verified listings for one version (story 5), each with its price label (story 6): on its own screen on phone, beside the recommendation on desktop.
 // "from" tells the listing check screen where its Back button goes.
 export function ListingList({
   versionId,
   listings,
+  typicalRange,
   ranking,
   from,
   Heading,
 }: {
   versionId: string;
   listings: ListingDetails[];
+  typicalRange: TypicalRange; // this version's range, for the line below the list
+
   ranking: Priority[];
   from: "list" | "recommendation";
   Heading: "h1" | "h2";
@@ -57,10 +61,11 @@ export function ListingList({
                   <>
                     <p className="font-semibold">It&apos;s a different pressing · moved to {l.actualVersionName}</p>
                     <p className="text-navy/70">Not for sale here</p>
+                    <Price price={l.price} range={l.actualTypicalRange} />
                   </>
                 ) : (
                   <>
-                    <p className="text-lg font-bold">{formatPrice(l.price)}</p>
+                    <Price price={l.price} range={l.actualTypicalRange} big />
                     {movedHere && <p className="font-semibold">Moved here · check pending</p>}
                   </>
                 )}
@@ -87,7 +92,28 @@ export function ListingList({
         })}
       </ul>
 
-      <p className="mt-6 text-sm text-navy/70">Check results are illustrative data</p>
+      {typicalRange.min !== null && typicalRange.max !== null && (
+        <p className="mt-6 font-semibold">
+          Typical price for this pressing: {formatPrice(typicalRange.min)}–{formatPrice(typicalRange.max)}
+        </p>
+      )}
+      <p className="mt-2 text-sm text-navy/70">Check results and typical prices are illustrative data</p>
     </>
+  );
+}
+
+// Price with its label (story 6). A red listing passes its actual version's range (shared rule).
+// No range → no label, never a guess.
+function Price({ price, range, big = false }: { price: number; range: TypicalRange; big?: boolean }) {
+  const label = priceLabel(price, range);
+  return (
+    <p className="flex flex-wrap items-center gap-2">
+      <span className={big ? "text-lg font-bold" : "font-semibold"}>{formatPrice(price)}</span>
+      {label && (
+        <span className="whitespace-nowrap rounded-full border border-line bg-white/70 px-2.5 py-0.5 text-xs font-semibold">
+          {label}
+        </span>
+      )}
+    </p>
   );
 }

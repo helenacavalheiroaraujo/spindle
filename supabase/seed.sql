@@ -5,7 +5,7 @@
 -- What the data covers:
 --   Story 1: "ziggy", "bowie" (newest first), "bjork" -> "Björk", "zigy" suggestion, "No listings".
 --   Let's Dance has only a sold listing -> "No listings" (active listings only).
---   Ziggy Stardust is the only album with active listings and full story 3/5/6 data:
+--   Ziggy Stardust is the only album with full story 3/5/6 data (Hunky Dory has one listing, for story 6):
 --     1990 Reissue   lowest active €24 -> price score 5, sound 2
 --     2012 Remaster  lowest active €32 -> price score 4, sound 5  ("1. Price, 2. Sound": 22 vs 19)
 --     1972 UK original has no active listing: its only listing is red and counts for the 1990 Reissue
@@ -13,6 +13,8 @@
 --   Story 5: the 2012 Remaster list (the default recommendation) has green €32, yellow €36 and a red €29
 --     claimed as 2012 but actually a 1990 Reissue: red goes last although cheapest, and shows "moved to".
 --     1972 UK original has only a red listing -> "No listing matches this version yet".
+--   Story 6: Ziggy Stardust versions have typical ranges. Hunky Dory 2015 Remaster has one green listing
+--     and no range -> no price label and no range line (never a guess).
 
 truncate table check_results, listings, profiles, tracks, reason_texts, versions, albums, glossary_terms;
 
@@ -104,7 +106,9 @@ insert into listings (id, seller_id, claimed_version_id, actual_version_id, cond
   -- Claimed as 2012 Remaster, actually a 1990 Reissue (VG keeps the 1990 condition score at VG+)
   ('40000000-0000-0000-0000-000000000008', '30000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000002', 'VG',  29.00,  'on_sale', '/photos/cover.svg', '/photos/record.svg', '/photos/matrix.svg'),  -- red
   -- Let's Dance: sold only, so the album shows "No listings"
-  ('40000000-0000-0000-0000-000000000007', '30000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000006', 'VG',  18.00,  'sold',    '/photos/cover.svg', '/photos/record.svg', '/photos/matrix.svg');
+  ('40000000-0000-0000-0000-000000000007', '30000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000006', 'VG',  18.00,  'sold',    '/photos/cover.svg', '/photos/record.svg', '/photos/matrix.svg'),
+  -- Hunky Dory 2015 Remaster: a version with no typical range (story 6)
+  ('40000000-0000-0000-0000-000000000009', '30000000-0000-0000-0000-000000000004', '20000000-0000-0000-0000-000000000005', '20000000-0000-0000-0000-000000000005', 'NM',  30.00,  'on_sale', '/photos/cover.svg', '/photos/record.svg', '/photos/matrix.svg');  -- green
 
 -- Check results (mock data) ------------------------------------------------
 insert into check_results (listing_id, item, result) values
@@ -131,4 +135,7 @@ insert into check_results (listing_id, item, result) values
   ('40000000-0000-0000-0000-000000000007', 'matrix', 'match'),
   ('40000000-0000-0000-0000-000000000008', 'cover_label', 'match'),
   ('40000000-0000-0000-0000-000000000008', 'country_year', 'no_match'),
-  ('40000000-0000-0000-0000-000000000008', 'matrix', 'no_match');
+  ('40000000-0000-0000-0000-000000000008', 'matrix', 'no_match'),
+  ('40000000-0000-0000-0000-000000000009', 'cover_label', 'match'),
+  ('40000000-0000-0000-0000-000000000009', 'country_year', 'match'),
+  ('40000000-0000-0000-0000-000000000009', 'matrix', 'match');
