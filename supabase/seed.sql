@@ -10,6 +10,9 @@
 --     2012 Remaster  lowest active €32 -> price score 4, sound 5  ("1. Price, 2. Sound": 22 vs 19)
 --     1972 UK original has no active listing: its only listing is red and counts for the 1990 Reissue
 --     (shown there yellow, "Moved here"), so the "ideal but unavailable" note can be tested.
+--   Story 5: the 2012 Remaster list (the default recommendation) has green €32, yellow €36 and a red €29
+--     claimed as 2012 but actually a 1990 Reissue: red goes last although cheapest, and shows "moved to".
+--     1972 UK original has only a red listing -> "No listing matches this version yet".
 
 truncate table check_results, listings, profiles, tracks, reason_texts, versions, albums, glossary_terms;
 
@@ -98,6 +101,8 @@ insert into listings (id, seller_id, claimed_version_id, actual_version_id, cond
   -- 2012 Remaster
   ('40000000-0000-0000-0000-000000000005', '30000000-0000-0000-0000-000000000002', '20000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000003', 'NM',  32.00,  'on_sale', '/photos/cover.svg', '/photos/record.svg', '/photos/matrix.svg'),  -- green
   ('40000000-0000-0000-0000-000000000006', '30000000-0000-0000-0000-000000000001', '20000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000003', 'VG+', 36.00,  'on_sale', '/photos/cover.svg', '/photos/record.svg', '/photos/matrix.svg'),  -- yellow: matrix photo not sharp
+  -- Claimed as 2012 Remaster, actually a 1990 Reissue (VG keeps the 1990 condition score at VG+)
+  ('40000000-0000-0000-0000-000000000008', '30000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000002', 'VG',  29.00,  'on_sale', '/photos/cover.svg', '/photos/record.svg', '/photos/matrix.svg'),  -- red
   -- Let's Dance: sold only, so the album shows "No listings"
   ('40000000-0000-0000-0000-000000000007', '30000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000006', 'VG',  18.00,  'sold',    '/photos/cover.svg', '/photos/record.svg', '/photos/matrix.svg');
 
@@ -123,4 +128,7 @@ insert into check_results (listing_id, item, result) values
   ('40000000-0000-0000-0000-000000000006', 'matrix', 'uncertain'),
   ('40000000-0000-0000-0000-000000000007', 'cover_label', 'match'),
   ('40000000-0000-0000-0000-000000000007', 'country_year', 'match'),
-  ('40000000-0000-0000-0000-000000000007', 'matrix', 'match');
+  ('40000000-0000-0000-0000-000000000007', 'matrix', 'match'),
+  ('40000000-0000-0000-0000-000000000008', 'cover_label', 'match'),
+  ('40000000-0000-0000-0000-000000000008', 'country_year', 'no_match'),
+  ('40000000-0000-0000-0000-000000000008', 'matrix', 'no_match');
