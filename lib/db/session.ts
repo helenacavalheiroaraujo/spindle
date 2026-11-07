@@ -1,0 +1,69 @@
+// The signed-in user's session (story 9), kept in cookies by @supabase/ssr.
+// Uses the publishable key: Supabase Auth checks the password, the app never sees or stores it.
+import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
+import { NextResponse, type NextRequest } from "next/server";
+
+function env() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  if (!url || !key) throw new Error("Supabase URL or publishable key is missing from the environment.");
+  return { url, key };
+}
+
+// For server actions and server components. Server components cannot write cookies; the proxy refreshes them.
+export async function authClient() {
+  const store = await cookies();
+  const { url, key } = env();
+  return createServerClient(url, key, {
+    cookies: {
+      getAll: () => store.getAll(),
+      setAll: (toSet) => {
+        try {
+          toSet.forEach(({ name, value, options }) => store.set(name, value, options));
+        } catch {
+          // Called from a server component: the proxy has already refreshed the cookies.
+        }
+      },
+    },
+  });
+}
+
+// Runs before every page (proxy.ts): renews an expired session and writes the new cookies.
+export async function refreshSession(request: NextRequest) {
+  let response = NextResponse.next({ request });
+  const { url, key } = env();
+  const supabase = createServerClient(url, key, {
+    cookies: {
+      getAll: () => request.cookies.getAll(),
+      setAll: (toSet, headers) => {
+        toSet.forEach(({ name, value }) => request.cookies.set(name, value));
+        response = NextResponse.next({ request });
+        toSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
+        Object.entries(headers ?? {}).forEach(([k, v]) => response.headers.set(k, v));
+      },
+    },
+  });
+  await supabase.auth.getClaims();
+  return response;
+}
+
+// The signed-in user's id, checked by Supabase (not just read from the cookie). Null when signed out.
+export async function currentUserId(): Promise<string | null> {
+  const supabase = await authClient();
+  const { data } = await supabase.auth.getClaims();
+  return data?.claims.sub ?? null;
+}
+
+export type SignUpResult = { userId: string } | { errorCode: string | undefined };
+
+// Creates the account and signs the user in (no email confirmation in the MVP).
+// The name is also kept on the account, so a missing profile can be recreated later (DECISIONS · story 9).
+export async function signUpWithPassword(name: string, email: string, password: string): Promise<SignUpResult> {
+  const supabase = await authClient();
+  const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { name } } });
+  if (error) return { errorCode: error.code };
+  // With email confirmation on, Supabase hides a used email: no session, no identities.
+  if (!data.session || !data.user) return { errorCode: data.user?.identities?.length === 0 ? "user_already_exists" : "no_session" };
+  return { userId: data.user.id };
+}

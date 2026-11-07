@@ -3,6 +3,16 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Story 9 · Accounts (sign-up)
+
+### Sessions are kept in cookies with @supabase/ssr (story 9)
+- **Why:** the server must know who is signed in, to check the profile before Buy / Sell and, later, to protect checkout (story 7) and selling (story 8). The package renews the session in cookies on its own (`proxy.ts`), so the app has no hand-written token refresh code, where errors are hard to catch in tests.
+- **Trade-off accepted:** one more package (`@supabase/ssr`) and a `proxy.ts` file that runs before every page.
+
+### Email confirmation is off in Supabase Auth (story 9)
+- **Why:** the story asks that a new user is signed in straight after sign-up, and the demo must not depend on email delivery (the free plan limits emails per hour).
+- **Trade-off accepted:** nobody checks that the email belongs to the person: someone can sign up with another person's address, a typo cannot be fixed (no password reset in the MVP), and "This email already has an account" shows which emails are registered. The setting applies to the whole Supabase project, including the Vercel version.
+
 ## 2026-11-07 — Story 9 · Accounts (database)
 
 ### The app's server code creates the profile at sign-up, not a database trigger (story 9)
