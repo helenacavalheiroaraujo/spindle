@@ -5,6 +5,9 @@
 
 ## 2026-11-07 — Decisions from spec review (iteration 1)
 
+### An album with no listings shows the message straight away (story 1 · finding #5)
+- **Why:** sending the buyer through the priorities screen only to say nobody is selling wastes two screens.
+
 ### Only active listings count (Shared rules · finding #4)
 - **Why:** several stories count listings or show the lowest price; without one rule, sold, removed or wrong-version listings could inflate counts or show a price nobody can pay. Active = on sale and green or yellow; a red listing counts for its actual version.
 

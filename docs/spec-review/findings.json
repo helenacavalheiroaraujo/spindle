@@ -4,7 +4,7 @@
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
     "iteration": 1,
-    "updated": "2026-11-07T20:05:00+00:00"
+    "updated": "2026-11-07T20:10:00+00:00"
   },
   "iterations": [
     {
@@ -202,9 +202,13 @@
         "proposed": "Tapping an album with active listings opens the priorities screen (story 2). Tapping an album with no listings shows \"Nobody is selling this album right now\" directly, without the priorities screen."
       },
       "question": "Should an album with no listings skip the priorities screen and show the message straight away?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 1,
+        "date": "2026-11-07",
+        "decision": "Approved. Album with no listings shows the message directly; story 3 edge case updated."
+      }
     },
     {
       "id": 6,
@@ -1023,8 +1027,8 @@
       "id": "Q2",
       "finding": 5,
       "question": "Album with no listings: skip the priorities screen and show the message straight away?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Yes, show the message straight away."
     },
     {
       "id": "Q3",

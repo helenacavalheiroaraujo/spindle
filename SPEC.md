@@ -41,7 +41,8 @@ Not in this MVP: stories 10, 11
 
 ### Use cases
 1. **Search** → list of albums, **newest release first**
-2. **Pick an album** → priorities screen (story 2)
+2. **Pick an album with active listings** → priorities screen (story 2)
+3. **Pick an album with no listings** → message "Nobody is selling this album right now", without the priorities screen
 
 ### What each screen shows
 - **Search result:** cover, album title, artist, release year, number of versions; label **"No listings"** when the album has no active listings
@@ -53,7 +54,8 @@ Not in this MVP: stories 10, 11
 - [ ] Each result shows cover, title, artist, year and number of versions
 - [ ] An album with no listings appears with the label "No listings"
 - [ ] A search with no matches shows suggestions close to the typed text ("Did you mean *Ziggy Stardust*?")
-- [ ] Tapping an album opens the priorities screen (story 2)
+- [ ] Tapping an album with active listings opens the priorities screen (story 2)
+- [ ] Tapping an album with no listings shows "Nobody is selling this album right now" directly
 
 ### Edge cases
 - Typos → suggestions by similar text, never an empty screen
@@ -175,7 +177,7 @@ Not in this MVP: stories 10, 11
 | 2012 Remaster | €32 | 4 | 5 |
 
 ### Edge cases
-- No version of the album has listings → no recommendation; message: "Nobody is selling this album right now" + the ideal version
+- No version of the album has listings → does not reach this screen (story 1 shows "Nobody is selling this album right now" instead)
 - Only one version has listings → it is recommended; no alternative
 - Conflicting priorities → the weighted total decides; the alternative shows the other side
 
