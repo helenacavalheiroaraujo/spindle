@@ -3,6 +3,20 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Product decisions (SPEC.md, story 8)
+
+### Sellers pick the exact version from a list of versions (story 8)
+- **Why:** unlike buyers, sellers already know which pressing they own; picking from the catalogue is what lets Spindle check the listing later.
+
+### New listings are always yellow in the MVP (story 8)
+- **Why:** automatic photo and matrix checks are out of scope, so the check is uncertain; Assignment 1 says "uncertain check: show yellow, never green".
+
+### Cover and record photos required; matrix optional (story 8)
+- **Why:** buyers need to see what they are buying; a missing matrix photo already keeps the listing yellow.
+
+### Sellers can see, edit and remove their listings (story 8)
+- **Why:** sellers need to correct prices and withdraw records sold elsewhere (they may also sell on other platforms). If time is short, editing is the first part to drop.
+
 ## 2026-11-07 — Product decisions (SPEC.md, story 7)
 
 ### Payment is simulated; only step 1 of the protection flow works in the MVP (story 7)
