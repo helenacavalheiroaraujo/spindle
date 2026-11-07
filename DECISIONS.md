@@ -3,6 +3,20 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Product decisions (SPEC.md, story 9)
+
+### One account for buying and selling (story 9)
+- **Why:** two account types would confuse users; paid professional accounts for shops can come after the MVP.
+
+### No public profile page in the MVP; listings show "Shop" or "Private seller" and the city (story 9)
+- **Why:** reviews come later, so a profile would be empty or need invented ratings, which would contradict "only verified buyers can review" in a product built on trust. Trust in the MVP comes from listing verification and buyer protection.
+
+### Login only when buying or selling, returning to the same place (story 9)
+- **Why:** visitors see the value (recommendation, verified listings) before being asked to sign up.
+
+### No email confirmation or password reset in the MVP (story 9)
+- **Why:** keeps the live demo independent of email delivery; not needed to show the core flow.
+
 ## 2026-11-07 — Product decisions (SPEC.md, phase 1)
 
 ### Tapping an album opens the priorities screen, not a list of versions (stories 1–2)
