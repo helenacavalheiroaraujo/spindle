@@ -9,7 +9,7 @@
 - **Why:** I verify by behaviour, not by reading code; the assignment asks to "verify each change before accepting it". Each change states what changed, why, the evidence (test output or screenshot) and any doubts.
 
 ### Open review findings are decided before building their story (process)
-- **Why:** the 16 low findings change small rules and texts; deciding them first avoids rebuilding screens and tests.
+- **Why:** deciding before building changes one sentence in SPEC.md, and the decision is mine. A vague rule left open is decided by the agent while building, by criteria I may not want; correcting it later means changing the rule, the code, the tests and the screens that use it.
 
 ### No ready-made component libraries; new packages only after my yes (architecture)
 - **Why:** keeps the app simple and small enough for me to verify; the look comes from the Assignment 1 designs, not from a library's default style.
