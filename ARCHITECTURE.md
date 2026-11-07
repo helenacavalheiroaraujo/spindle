@@ -28,7 +28,8 @@ app/                                ← screens (one folder per route)
   login/                            ← sign in / create account (story 9)
   sell/ · my-listings/              ← story 8 (phase 3)
   compare/[albumId]/                ← story 4 (phase 4)
-components/                         ← shared UI: Header, LoadingMask, ErrorScreen, TrafficLight, PriceLabel
+components/                         ← shared UI: Header, LoadingMask, ErrorScreen, TrafficLight, PriceLabel,
+                                      ListingList, ListingsBeside, BuyButton
 lib/rules/                          ← business rules, pure functions, no database
   recommendation.ts                 ← scores, weights, tie, alternative, ideal (story 3)
   trafficLight.ts                   ← checklist → green / yellow / red (story 5)

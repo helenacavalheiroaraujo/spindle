@@ -8,14 +8,48 @@ const V1990 = "20000000-0000-0000-0000-000000000002";
 const V2012 = "20000000-0000-0000-0000-000000000003";
 const rows = (page: Page) => page.getByRole("list", { name: "Verified listings" }).getByRole("listitem");
 
-test("phone: See verified listings opens the 2012 Remaster list", async ({ page, isMobile }) => {
-  test.skip(!isMobile, "on desktop the listings sit beside the recommendation (next step)");
+test("recommended version's listings: own screen on phone, beside the recommendation on desktop", async ({ page, isMobile }) => {
   await page.goto(`/albums/${ZIGGY_ID}/recommendation?priorities=price,sound`);
-  await page.getByRole("link", { name: "See verified listings" }).click();
-  await expect(page).toHaveURL(`/versions/${V2012}/listings?priorities=price,sound`);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("2 for sale · 1 moved");
-  await page.getByRole("link", { name: "Back to the recommendation" }).click();
-  await expect(page).toHaveURL(`/albums/${ZIGGY_ID}/recommendation?priorities=price,sound`);
+  if (isMobile) {
+    await page.getByRole("link", { name: "See verified listings" }).click();
+    await expect(page).toHaveURL(`/versions/${V2012}/listings?priorities=price,sound`);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("2 for sale · 1 moved");
+    await page.getByRole("link", { name: "Back to the recommendation" }).click();
+    await expect(page).toHaveURL(`/albums/${ZIGGY_ID}/recommendation?priorities=price,sound`);
+  } else {
+    await expect(page).toHaveURL(`/albums/${ZIGGY_ID}/recommendation?priorities=price,sound`);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("2012 Remaster");
+    const beside = page.getByRole("complementary", { name: "Verified listings for this version" });
+    await expect(beside.getByRole("heading", { level: 2 })).toHaveText("2 for sale · 1 moved");
+    await expect(rows(page)).toHaveCount(3);
+    await expect(rows(page).nth(0)).toContainText("€32");
+    // A listing opened from beside the recommendation goes back to the recommendation.
+    await page.getByRole("link", { name: /^Open €36/ }).click();
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Is it really this one?");
+    await page.getByRole("link", { name: "Back to the recommendation" }).click();
+    await expect(page).toHaveURL(`/albums/${ZIGGY_ID}/recommendation?priorities=price,sound`);
+  }
+});
+
+test("desktop: if the listings beside fail, only that area shows the error; Try again recovers", async ({ page, isMobile }) => {
+  test.skip(isMobile, "on phone the listings open on their own screen");
+  // Cut only the listings request (Next.js server actions are POSTs with a "next-action" header).
+  let fail = true;
+  await page.route("**/*", (route) => {
+    const r = route.request();
+    if (fail && r.method() === "POST" && r.headers()["next-action"]) return route.abort();
+    return route.continue();
+  });
+  await page.goto(`/albums/${ZIGGY_ID}/recommendation?priorities=price,sound`);
+  const beside = page.getByRole("complementary", { name: "Verified listings for this version" });
+  const alert = beside.getByRole("alert").filter({ hasText: "We couldn't load the listings" });
+  await expect(alert).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("2012 Remaster");
+
+  fail = false;
+  await alert.getByRole("button", { name: "Try again" }).click();
+  await expect(rows(page)).toHaveCount(3);
+  await expect(alert).toHaveCount(0);
 });
 
 test("green and yellow cheapest first, red last although cheapest; every light shows its word", async ({ page }) => {

@@ -5,6 +5,12 @@
 
 ## 2026-11-07 — Story 5 · Listing check screen
 
+### On desktop, the listings sit beside the recommendation from 1024 px (stories 3 and 5 · finding #21)
+- **Why:** 1024 px (Tailwind's `lg`) is the narrowest width where two columns keep the listing rows readable. Below it, tablets included, the phone layout with "See verified listings" is used. The demo runs on a laptop.
+
+### The listing check screen's Back returns to where the listing was opened (story 5)
+- **Why:** opened beside the recommendation (desktop), it goes back to the recommendation; opened from the phone list, it goes back to the list. The address says which (`from=recommendation`), like the ranking (story 2), so it survives a reload.
+
 ### The listing check screen takes the version in its address (story 5 · architecture)
 - **Why:** the same listing is red under the version the seller claimed and yellow under its actual version, so the screen needs to know where the buyer came from: `/listings/[listingId]?version=[versionId]`. This keeps the folder in ARCHITECTURE.md. Without `version`, the claimed version is used.
 

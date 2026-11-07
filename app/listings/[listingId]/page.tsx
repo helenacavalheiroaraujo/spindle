@@ -8,7 +8,7 @@ import { formatPrice } from "@/lib/rules/recommendation";
 import { yellowWarning } from "@/lib/rules/yellowWarning";
 import { Header } from "@/components/Header";
 import { TrafficLight } from "@/components/TrafficLight";
-import { BuyButton } from "@/app/versions/[versionId]/listings/BuyButton";
+import { BuyButton } from "@/components/BuyButton";
 
 const one = (v?: string | string[]) => (Array.isArray(v) ? v[0] : v);
 
@@ -26,7 +26,7 @@ export default async function ListingCheckPage({
   searchParams,
 }: {
   params: Promise<{ listingId: string }>;
-  searchParams: Promise<{ version?: string | string[]; priorities?: string | string[] }>;
+  searchParams: Promise<{ version?: string | string[]; priorities?: string | string[]; from?: string | string[] }>;
 }) {
   const { listingId } = await params;
   const query = await searchParams;
@@ -42,7 +42,14 @@ export default async function ListingCheckPage({
   const summary = checkSummary(light, rows, movedHere, row.movedToVersionId ? l.actualVersionName : null);
   const versionName = versionId === l.actualVersionId ? l.actualVersionName : l.claimedVersionName;
   const ranking = parsePriorities(one(query.priorities));
-  const backHref = `/versions/${versionId}/listings${ranking.length ? `?priorities=${formatPriorities(ranking)}` : ""}`;
+  const prioritiesQuery = ranking.length ? `?priorities=${formatPriorities(ranking)}` : "";
+  // Opened beside the recommendation (desktop) → back there; opened from the phone list → back to the list.
+  const fromRecommendation = one(query.from) === "recommendation";
+  const backHref = fromRecommendation
+    ? ranking.length
+      ? `/albums/${l.albumId}/recommendation${prioritiesQuery}`
+      : `/albums/${l.albumId}/priorities`
+    : `/versions/${versionId}/listings${prioritiesQuery}`;
   const label = `${formatPrice(l.price)}, ${l.condition.name}, ${l.sellerName}`;
 
   return (
@@ -51,7 +58,7 @@ export default async function ListingCheckPage({
       <div className="flex items-center gap-3">
         <Link
           href={backHref}
-          aria-label="Back to the listings"
+          aria-label={fromRecommendation ? "Back to the recommendation" : "Back to the listings"}
           className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-navy/30"
         >
           <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">

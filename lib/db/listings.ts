@@ -89,6 +89,7 @@ export async function getVersionListings(versionId: string): Promise<VersionList
 // --- Listing check screen (story 5) -----------------------------------------
 
 export type ListingCheckData = ListingDetails & {
+  albumId: string;
   albumTitle: string;
   artist: string;
   photos: { cover: string | null; record: string | null; matrix: string | null };
@@ -102,7 +103,7 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
       `id, price, cover_photo_url, record_photo_url, ${LISTING_FACTS_COLUMNS},
        profiles (name, city),
        condition_grades (code, name, explanation),
-       claimed:versions!listings_claimed_version_id_fkey (name, albums (title, artist)),
+       claimed:versions!listings_claimed_version_id_fkey (name, albums (id, title, artist)),
        actual:versions!listings_actual_version_id_fkey (name)`,
     )
     .eq("id", listingId)
@@ -112,7 +113,7 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
   const l = result.data;
   if (!l) return null;
   const seller = l.profiles as unknown as { name: string; city: string | null };
-  const claimed = l.claimed as unknown as { name: string; albums: { title: string; artist: string } };
+  const claimed = l.claimed as unknown as { name: string; albums: { id: string; title: string; artist: string } };
   return {
     ...toListingFacts(l as unknown as ListingRow),
     id: l.id,
@@ -122,6 +123,7 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
     condition: l.condition_grades as unknown as ListingDetails["condition"],
     claimedVersionName: claimed.name,
     actualVersionName: (l.actual as unknown as { name: string }).name,
+    albumId: claimed.albums.id,
     albumTitle: claimed.albums.title,
     artist: claimed.albums.artist,
     photos: { cover: l.cover_photo_url, record: l.record_photo_url, matrix: l.matrix_photo_url },
