@@ -1,6 +1,6 @@
 ---
 name: spec-review
-description: Reviews the Spindle user stories in SPEC.md for gaps, inconsistencies and ambiguities, including mismatches with the Assignment 1 designs in docs/design, and keeps a numbered findings register with a private HTML report. Use whenever the user asks to review, check, validate or "find problems in" the user stories, the SPEC, the acceptance criteria, or asks whether stories contradict each other or the design — and also when the user asks to "fix" or "correct" a story (that is a request for a proposal, not a change). Read-only unless the user confirms a specific change.
+description: Reviews the Spindle user stories (index in SPEC.md, one file per story in specs/) for gaps, inconsistencies and ambiguities, including mismatches with the Assignment 1 designs in docs/design, and keeps a numbered findings register with a private HTML report. Use whenever the user asks to review, check, validate or "find problems in" the user stories, the SPEC, the acceptance criteria, or asks whether stories contradict each other or the design — and also when the user asks to "fix" or "correct" a story (that is a request for a proposal, not a change). Read-only unless the user confirms a specific change.
 ---
 
 # Spec review (Spindle)
@@ -11,16 +11,17 @@ The user is the Product Owner. The value of this review is that every finding is
 
 ## Fixed rules
 
-1. **Read-only.** Never edit `SPEC.md`, `DECISIONS.md` or any other project file unless the user has confirmed *that exact change*. "Fix the story" / "corrige a US" is a request for a **proposal**, not a confirmation.
+1. **Read-only.** Never edit `SPEC.md`, the story files in `specs/`, `DECISIONS.md` or any other project file unless the user has confirmed *that exact change*. "Fix the story" / "corrige a US" is a request for a **proposal**, not a confirmation.
 2. **Every change is proposed as a table** — current text vs. proposed text, with the file and section — and written only after the user says yes to it. Approval of one change never covers another.
 3. **No changes to tested stories.** A story is *tested* when its row in the `## Traceability` table of `SPEC.md` has the "Covered by test" column filled in. For a tested story, do not propose edits: propose a **new user story** that carries the decision instead.
 4. **The report is updated every time the user decides something** (approves, rejects, defers, or turns a finding into a new story): update the register, rebuild the report, republish it.
-5. **Only findings with evidence.** Each finding quotes the exact text (from `SPEC.md`, `DECISIONS.md`, the Assignment 1 brief/report, or a named design screen) that shows the problem. No quote, no finding.
+5. **Only findings with evidence.** Each finding quotes the exact text (from `SPEC.md`, a story file in `specs/`, `DECISIONS.md`, the Assignment 1 brief/report, or a named design screen) that shows the problem. No quote, no finding.
 6. **Finding numbers (#) never change.** New findings get the next free number; resolved or rejected findings keep theirs. Never renumber, never reuse a number.
 
 ## Inputs
 
-- `SPEC.md` — the stories (source of truth for *what*)
+- `SPEC.md` — index: build order, out of scope, shared rules, traceability
+- `specs/story-*.md` — one file per story (source of truth for *what*)
 - `DECISIONS.md` — decisions and their reasons (source of truth for *why*)
 - `docs/design/` — Assignment 1 designs: `HappyPath.png` (mobile flow), `Spindle_user_flow_desktop.png` (desktop flow), `Spindle_mockups_by_section.pdf` (all screens)
   - To look at the PDF pages, render them to PNG first:
@@ -30,7 +31,7 @@ The user is the Product Owner. The value of this review is that every finding is
 
 ## What to check
 
-Check every story in `SPEC.md`, then the stories against each other, then against the design.
+Check every story in `specs/` (and the shared rules in `SPEC.md`), then the stories against each other, then against the design.
 
 **1. Template** — each story has:
 - *As a / I want / So I* (the story sentence)
@@ -74,7 +75,7 @@ Check every story in `SPEC.md`, then the stories against each other, then agains
 
 ## How to run a review
 
-1. Read `SPEC.md`, `DECISIONS.md` and the register (if it exists). Look at the design images.
+1. Read `SPEC.md`, every file in `specs/`, `DECISIONS.md` and the register (if it exists). Look at the design images.
 2. Re-check the open findings: if the text that caused one has changed, mark it resolved (with the iteration) only if the problem is really gone.
 3. Look for new findings with the checklist above. Before adding one, check that it is not already in the register (open or resolved).
 4. For each finding, write: stories, type, severity, a one-line title, the evidence (quotes with their location), and a proposal (current vs. proposed text). If the decision is the user's to make, add a **question** instead of guessing.
@@ -109,5 +110,6 @@ Report in English (like the rest of the project). Chat answer in the user's lang
 Then stop and let the user decide. Do not start editing.
 
 ## Histórico
+- 2026-11-07 · As stories passaram para um ficheiro cada em `specs/`; `SPEC.md` ficou como índice (build order, shared rules, traceability) · a Helena prefere um ficheiro por story, mais fácil de ler
 - 2026-11-07 · Retirada a secção Pre-condition do template verificado · a Helena quis reduzir a complexidade das stories nesta fase
 - 2026-11-07 · Skill criada a partir das regras definidas pela Helena (só leitura, propostas em tabela, achados numerados com evidência, relatório HTML privado) · para rever as US do Spindle de forma repetível antes da arquitetura

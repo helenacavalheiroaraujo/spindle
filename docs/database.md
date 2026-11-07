@@ -1,6 +1,6 @@
 # Spindle MVP — Database
 
-> Data tables before screens (CLAUDE.md, "How we build a story"). What each story needs: the "Data used" sections of `SPEC.md`. Where database code lives: `lib/db/` (`ARCHITECTURE.md`).
+> Data tables before screens (CLAUDE.md, "How we build a story"). What each story needs: the "Data used" section of each story in `specs/`. Where database code lives: `lib/db/` (`ARCHITECTURE.md`).
 
 ## Principles
 

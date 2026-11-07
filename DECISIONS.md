@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Specification layout
+
+### One file per user story in `specs/`; SPEC.md becomes the index
+- **Why:** a single SPEC file with every story had grown long and was hard to read and work through. Separate files per story are easier to read and let each story be opened on its own while it is built. SPEC.md keeps what spans all stories (build order, out of scope, shared rules, traceability), so the path every document points to still exists.
+- Files: `specs/story-<n>-<name>.md` · the spec-review skill reads both
+
 ## 2026-11-07 — Story 5 · Listing check screen
 
 ### On desktop, the listings sit beside the recommendation from 1024 px (stories 3 and 5 · finding #21)

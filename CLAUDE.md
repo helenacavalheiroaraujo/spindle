@@ -3,7 +3,8 @@
 Spindle helps non-specialist buyers pick the right pressing of a vinyl record and buy a verified copy safely. MVP for Assignment 2 (ASI, MESG/FEUP): due 15 Nov 2026, 5-minute live demo.
 
 ## Read first
-- `SPEC.md` — what to build. The source of truth for scope and acceptance criteria.
+- `SPEC.md` — what to build: build order, out of scope, shared rules, traceability, and links to each story
+- `specs/story-*.md` — one file per story. The source of truth for scope and acceptance criteria.
 - `ARCHITECTURE.md` — parts, folder structure, where each kind of code goes
 - `DECISIONS.md` — why things are as they are. Never reverse a decision without asking me.
 - `docs/spec-review/findings.json` — review findings still open
@@ -34,7 +35,7 @@ Wait for my yes before committing.
 
 ## Record as we go
 - Every new decision and its reason go in `DECISIONS.md` (most recent first), in the same commit. Show me the text first.
-- SPEC.md changes are shown as current vs proposed text, and saved only after my yes.
+- SPEC.md and `specs/` changes are shown as current vs proposed text, and saved only after my yes.
 - At the end of each session, propose a row for `docs/AI_USAGE.md`.
 
 ## Visual direction (Assignment 1 designs, `docs/design/`)
