@@ -1,9 +1,17 @@
 "use client";
 import { useId, useState } from "react";
 
-// Buy (green and yellow only, story 5). A yellow listing first shows what is uncertain (finding #34).
+// Buy, or "Buy with protection" on the listing check screen (green and yellow only, story 5). A yellow listing first shows what is uncertain (finding #34).
 // Checkout does not exist yet (story 7), so "Continue to checkout" is disabled for now.
-export function BuyButton({ warning, listingLabel }: { warning: string[] | null; listingLabel: string }) {
+export function BuyButton({
+  warning,
+  listingLabel,
+  text = "Buy",
+}: {
+  warning: string[] | null;
+  listingLabel: string;
+  text?: string;
+}) {
   const [open, setOpen] = useState(false);
   const noteId = useId();
 
@@ -12,10 +20,10 @@ export function BuyButton({ warning, listingLabel }: { warning: string[] | null;
       <button
         type="button"
         onClick={() => setOpen(true)}
-        aria-label={`Buy ${listingLabel}`}
+        aria-label={`${text} ${listingLabel}`}
         className="min-h-12 rounded-full bg-navy px-6 font-semibold text-cream"
       >
-        Buy
+        {text}
       </button>
     );
   }

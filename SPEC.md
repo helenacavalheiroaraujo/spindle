@@ -234,6 +234,10 @@ Three items, each **✓ matches**, **? uncertain / no photo**, or **✗ does not
 - **Order:** green and yellow mixed, **cheapest first**; red listings at the end
 - **Red listing:** "It's a different pressing · moved to [version]"; "Not for sale here"; no Buy button
 - **Listing check screen:** traffic light and one-line summary; the checklist; the seller's photos (cover, record, matrix); the condition explained in plain words (e.g. "VG+ means very good, with light signs of wear"); **"Buy with protection"** (green and yellow)
+  - **Summary:** green "All three checks match this version"; yellow "One check is uncertain" (or "Two…", "Three checks are uncertain"); moved here "Moved here · check pending"; red "It's a different pressing · moved to [version]"
+  - **Moved here:** the three items show "? Check pending", because they were checked against another version
+  - **Red listings open it too**, with no "Buy with protection"
+  - **Missing photo:** its place says "No matrix photo" (or cover / record)
 - **Yellow:** Buy (in the list or on the listing check screen) first shows a warning that says what is uncertain (e.g. "The matrix photo isn't sharp. If it turns out to be another pressing, you get your money back."), with "Continue to checkout" and "Back"
 
 ### Use cases

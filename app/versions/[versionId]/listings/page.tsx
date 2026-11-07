@@ -72,7 +72,11 @@ export default async function ListingsPage({
               <span aria-hidden className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy">
                 <span className="h-3 w-3 rounded-full bg-cream" />
               </span>
-              <div className="min-w-0 flex-1 text-sm">
+              <Link
+                href={`/listings/${l.id}?version=${version.id}${ranking.length ? `&priorities=${formatPriorities(ranking)}` : ""}`}
+                aria-label={`Open ${label}`}
+                className="min-w-0 flex-1 rounded-lg text-sm"
+              >
                 {light === "red" ? (
                   <>
                     <p className="font-semibold">It&apos;s a different pressing · moved to {l.actualVersionName}</p>
@@ -91,7 +95,8 @@ export default async function ListingsPage({
                   {l.sellerName}
                   {l.city && `, ${l.city}`}
                 </p>
-              </div>
+                <p className="mt-1 font-semibold underline underline-offset-4">See the checks</p>
+              </Link>
               <TrafficLight light={light} />
               {light !== "red" && (
                 <div className="flex w-full justify-end">

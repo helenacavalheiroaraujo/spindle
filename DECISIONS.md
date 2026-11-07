@@ -3,6 +3,17 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Story 5 · Listing check screen
+
+### The listing check screen takes the version in its address (story 5 · architecture)
+- **Why:** the same listing is red under the version the seller claimed and yellow under its actual version, so the screen needs to know where the buyer came from: `/listings/[listingId]?version=[versionId]`. This keeps the folder in ARCHITECTURE.md. Without `version`, the claimed version is used.
+
+### A listing moved here shows its three checks as "check pending" (story 5)
+- **Why:** its results were made against another pressing; showing ✗ on a listing that is for sale here would contradict its yellow light and confuse a non-specialist buyer.
+
+### Red listings open the listing check screen, without "Buy with protection" (story 5)
+- **Why:** the buyer sees which checks failed and where the copy was moved, which is what makes the red light trustworthy.
+
 ## 2026-11-07 — Story 5 · Verified listings (findings)
 
 ### A red listing whose correct version is not in the catalogue is out of the MVP (story 5 · finding #33)

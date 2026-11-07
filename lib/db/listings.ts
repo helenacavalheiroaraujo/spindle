@@ -85,3 +85,45 @@ export async function getVersionListings(versionId: string): Promise<VersionList
     }),
   };
 }
+
+// --- Listing check screen (story 5) -----------------------------------------
+
+export type ListingCheckData = ListingDetails & {
+  albumTitle: string;
+  artist: string;
+  photos: { cover: string | null; record: string | null; matrix: string | null };
+};
+
+// Null when there is no such listing.
+export async function getListingCheck(listingId: string): Promise<ListingCheckData | null> {
+  const result = await db()
+    .from("listings")
+    .select(
+      `id, price, cover_photo_url, record_photo_url, ${LISTING_FACTS_COLUMNS},
+       profiles (name, city),
+       condition_grades (code, name, explanation),
+       claimed:versions!listings_claimed_version_id_fkey (name, albums (title, artist)),
+       actual:versions!listings_actual_version_id_fkey (name)`,
+    )
+    .eq("id", listingId)
+    .maybeSingle();
+  if (result.error?.code === "22P02") return null; // not a valid listing id
+  if (result.error) throw result.error;
+  const l = result.data;
+  if (!l) return null;
+  const seller = l.profiles as unknown as { name: string; city: string | null };
+  const claimed = l.claimed as unknown as { name: string; albums: { title: string; artist: string } };
+  return {
+    ...toListingFacts(l as unknown as ListingRow),
+    id: l.id,
+    price: Number(l.price),
+    sellerName: seller.name,
+    city: seller.city,
+    condition: l.condition_grades as unknown as ListingDetails["condition"],
+    claimedVersionName: claimed.name,
+    actualVersionName: (l.actual as unknown as { name: string }).name,
+    albumTitle: claimed.albums.title,
+    artist: claimed.albums.artist,
+    photos: { cover: l.cover_photo_url, record: l.record_photo_url, matrix: l.matrix_photo_url },
+  };
+}
