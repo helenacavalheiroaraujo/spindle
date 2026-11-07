@@ -3,6 +3,14 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Story 3 · Recommendation (findings)
+
+### A version with no listings scores 0 on price and condition when finding the ideal version (story 3 · finding #28)
+- **Why:** one scoring rule for every version, with no special case. A buyer who ranks price never sees an expensive, unavailable pressing as their "ideal"; with sound or original ranked first and price unranked, the note still appears (e.g. "1. Original, 2. Sound" → 1972 UK original).
+
+### A reason quotes the typical range of a version with no listings (story 3 · finding #32)
+- **Why:** the comparison with the first pressing is the strongest reason to choose a remaster, and the typical range is already stored for story 6. "Typically" makes clear it is not a current listing.
+
 ## 2026-11-07 — Story 2 · Priorities
 
 ### The ranking travels in the page address (story 2 · architecture)

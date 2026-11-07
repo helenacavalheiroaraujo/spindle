@@ -583,9 +583,13 @@
         "proposed": "Every term in the glossary (at least: remaster, reissue, first pressing, matrix, and each condition grade) shows its plain explanation wherever it appears"
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-07",
+        "decision": "Approved. The criterion lists the glossary terms (remaster, reissue, first pressing, matrix, each condition grade)."
+      }
     },
     {
       "id": 18,
@@ -937,9 +941,13 @@
       ],
       "proposal": null,
       "question": "A version with no listings has no price or condition score. Which rule decides the \"ideal\" version: (a) only the stored scores (sound, original), and the note appears only when the buyer's 1st priority is sound or original; (b) the full total, with price and condition counted as 0; or (c) drop the note from the MVP?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 2,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-07",
+        "decision": "Option (b): the ideal version is the highest total among all versions; a version with no listings scores 0 on price and condition. Recorded in DECISIONS.md."
+      }
     },
     {
       "id": 29,
@@ -1033,9 +1041,13 @@
         "proposed": "with a label per 1st priority: Price → \"Cheapest option\"; Sound → \"Best sound\"; Original → \"Closest to the original\"; Condition → \"Best condition\" (e.g. \"Cheapest option: 1990 Reissue, €24\"); on a tie, the cheaper version"
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 2,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-07",
+        "decision": "Approved. One label per 1st priority (Cheapest option / Best sound / Closest to the original / Best condition); on a tie, the cheaper version."
+      }
     },
     {
       "id": 32,
@@ -1064,9 +1076,13 @@
       ],
       "proposal": null,
       "question": "When a price in a reason belongs to a version with no active listings: use that version's typical price range, or leave the comparison out of the sentence?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 2,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-07",
+        "decision": "Use the typical range of that version, with \"typically\"; the acceptance criterion now allows it. Recorded in DECISIONS.md."
+      }
     },
     {
       "id": 33,
