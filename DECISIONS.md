@@ -3,6 +3,18 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Product decisions (SPEC.md, story 7)
+
+### Payment is simulated; only step 1 of the protection flow works in the MVP (story 7)
+- **Why:** keeps phase 2 (the safe demo) small. The four steps are explained on screen; buyer confirmation (step 3) is the first item of phase 4.
+- **Trade-off accepted:** "Seller is paid only after I confirm" (Assignment 1) is explained, not yet working.
+
+### Buyer protection is a fixed €2 per order (story 7)
+- **Why:** it is the assumption Assignment 1 wants to test ("about €2 per order"), easy to understand, and simple to calculate.
+
+### The app never asks for card or bank details, not even simulated ones (story 7)
+- **Why:** there is no real payment, so there is no reason to collect sensitive data.
+
 ## 2026-11-07 — Product decisions (SPEC.md, story 9)
 
 ### One account for buying and selling (story 9)
