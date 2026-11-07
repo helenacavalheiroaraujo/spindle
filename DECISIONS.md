@@ -3,6 +3,18 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Decisions from spec review (iteration 2)
+
+### Search results show no price or listing count (story 1 · finding #19)
+- **Why:** "from €24" is the cheapest copy of any pressing, often not the one Spindle recommends; it anchors the buyer on a price the recommendation then contradicts. Whether an album can be bought is already shown by the "No listings" label. Differs from the Assignment 1 design on purpose.
+
+### Search suggestions compare each word, with a tolerance that grows with the typed text (story 1 · finding #29)
+- **Why:** compared with the whole title, a typo was never "2 letters away", so the criterion's own example failed. Short texts need less tolerance: with 2 letters allowed, any 3-letter text is close to "the" or "and". Replaces the rule decided for finding #7.
+- **Trade-off accepted:** a search with several misspelled words (e.g. "zigy stardst") may get no suggestion.
+
+### Search ignores upper and lower case and accents (story 1 · finding #30)
+- **Why:** buyers often type without capitals or accents, especially on a phone; it keeps the search tests unambiguous and costs almost nothing.
+
 ## 2026-11-07 — Phone and desktop checks (CLAUDE.md)
 
 ### Every screen is checked on phone and desktop (process)

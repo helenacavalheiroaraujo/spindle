@@ -40,6 +40,7 @@ Not in this MVP: stories 10, 11
 ### Scope
 - Search box on the home page; results update as the user types, from the 3rd character
 - The search matches the **album title** and the **artist name**; results are always **albums**
+- Matching ignores upper and lower case and accents (e.g. "bjork" finds "Björk")
 - The buyer sees **how many versions exist** (a count on each result), without browsing them: Spindle reduces them to one recommendation (story 3)
 - Tapping an album opens the **priorities screen** (story 2)
 
@@ -57,13 +58,15 @@ Not in this MVP: stories 10, 11
 - [ ] "bowie" returns David Bowie's albums, newest first
 - [ ] Each result shows cover, title, artist, year and number of versions
 - [ ] An album with no listings appears with the label "No listings"
-- [ ] A search with no matches shows up to 3 album titles that differ from the typed text by at most 2 letters (e.g. "zigy" → "Did you mean *Ziggy Stardust*?")
+- [ ] A search with no matches shows up to 3 albums with a word in the title or artist name close to the typed text: at most 1 letter different when 4–5 letters are typed, at most 2 when 6 or more are typed; each suggestion shows the full album title (e.g. "zigy" → "Did you mean *The Rise and Fall of Ziggy Stardust…*?")
+- [ ] With 3 letters typed and no matches, no suggestions are shown, only "No albums found"
+- [ ] "BOWIE" and "bowie" return the same albums; "bjork" finds "Björk"
 - [ ] With no album that close, it shows "No albums found"
 - [ ] Tapping an album with active listings opens the priorities screen (story 2)
 - [ ] Tapping an album with no listings shows "Nobody is selling this album right now" directly
 
 ### Edge cases
-- Typos → up to 3 suggestions (at most 2 letters different), or "No albums found"; never an empty screen
+- Typos → up to 3 suggestions (rule in the acceptance criteria), or "No albums found"; never an empty screen
 - Album with no listings → shown, not hidden
 - Many results (e.g. 20+ albums by one artist) → all listed, newest first
 

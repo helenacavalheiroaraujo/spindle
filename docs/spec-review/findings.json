@@ -3,14 +3,19 @@
     "project": "Spindle MVP",
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
-    "iteration": 1,
-    "updated": "2026-11-07T20:45:00+00:00"
+    "iteration": 2,
+    "updated": "2026-11-07T23:00:00+00:00"
   },
   "iterations": [
     {
       "n": 1,
       "date": "2026-11-07",
       "note": "First review of all stories (1, 2, 3, 5, 6, 9, 7, 8, 4) against each other, DECISIONS.md and the Assignment 1 designs"
+    },
+    {
+      "n": 2,
+      "date": "2026-11-07",
+      "note": "Second review before building story 1: SPEC.md unchanged since iteration 1, so all open findings stay open; 9 new findings, mostly from rules written in iteration 1 (#29, #28) and checks across stories"
     }
   ],
   "findings": [
@@ -628,12 +633,16 @@
         "file": "DECISIONS.md",
         "section": "Product decisions",
         "current": "",
-        "proposed": "### Search results show no price or listing count (story 1)\n- Why: (your reason)"
+        "proposed": "### Search results show no price or listing count (story 1 · finding #19)\n- Why: \"from €24\" is the cheapest copy of any pressing, often not the one Spindle recommends; it anchors the buyer on a price the recommendation then contradicts. Whether an album can be bought is already shown by the \"No listings\" label."
       },
       "question": "Keep the results without price and copies (then record why), or follow the design?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 2,
+        "date": "2026-11-07",
+        "decision": "Keep the SPEC: no price or listing count in search results; reason recorded in DECISIONS.md (the cheapest copy of any pressing anchors the buyer on the wrong price)."
+      }
     },
     {
       "id": 20,
@@ -887,6 +896,300 @@
       "status": "open",
       "first_seen": 1,
       "resolution": null
+    },
+    {
+      "id": 28,
+      "stories": [
+        "3"
+      ],
+      "type": "Inconsistency",
+      "severity": "High",
+      "title": "\"Ideal but unavailable\" needs a total for a version with no listings, but its price and condition scores come from listings",
+      "evidence": [
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · What the screen shows",
+          "quote": "Ideal but unavailable: if the best version overall has no listings, a small note"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · How the pick is made",
+          "quote": "The price score is calculated from each version's lowest active price"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · How the pick is made",
+          "quote": "The condition score is calculated: the best condition among the version's active listings"
+        }
+      ],
+      "proposal": null,
+      "question": "A version with no listings has no price or condition score. Which rule decides the \"ideal\" version: (a) only the stored scores (sound, original), and the note appears only when the buyer's 1st priority is sound or original; (b) the full total, with price and condition counted as 0; or (c) drop the note from the MVP?",
+      "status": "open",
+      "first_seen": 2,
+      "resolution": null
+    },
+    {
+      "id": 29,
+      "stories": [
+        "1"
+      ],
+      "type": "Ambiguity",
+      "severity": "High",
+      "title": "\"At most 2 letters different\" from what? Against the full title, the story's own example fails",
+      "evidence": [
+        {
+          "source": "SPEC.md",
+          "where": "Story 1 · Acceptance criteria",
+          "quote": "A search with no matches shows up to 3 album titles that differ from the typed text by at most 2 letters (e.g. \"zigy\" → \"Did you mean *Ziggy Stardust*?\")"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 1 · Acceptance criteria",
+          "quote": "\"ziggy\" returns *The Rise and Fall of Ziggy Stardust…*"
+        }
+      ],
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 1 · Acceptance criteria and Edge cases",
+        "current": "A search with no matches shows up to 3 album titles that differ from the typed text by at most 2 letters (e.g. \"zigy\" → \"Did you mean *Ziggy Stardust*?\")",
+        "proposed": "A search with no matches shows up to 3 albums with a word in the title or artist name close to the typed text: at most 1 letter different when 4–5 letters are typed, at most 2 when 6 or more are typed; each suggestion shows the full album title. With 3 letters typed and no matches, only \"No albums found\"."
+      },
+      "question": "Compare the typed text with each word of the title and artist (proposal), or with the whole title?",
+      "status": "resolved",
+      "first_seen": 2,
+      "resolution": {
+        "iteration": 2,
+        "date": "2026-11-07",
+        "decision": "Approved with a revised rule: compare the typed text with each word of the title and artist; 1 letter for 4–5 letters typed, 2 for 6+; no suggestions with 3 letters; suggestions show the full title."
+      }
+    },
+    {
+      "id": 30,
+      "stories": [
+        "1"
+      ],
+      "type": "Ambiguity",
+      "severity": "Low",
+      "title": "The search does not say whether it ignores upper/lower case and accents",
+      "evidence": [
+        {
+          "source": "SPEC.md",
+          "where": "Story 1 · Scope",
+          "quote": "The search matches the **album title** and the **artist name**; results are always **albums**"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 1 · Acceptance criteria",
+          "quote": "\"ziggy\" returns *The Rise and Fall of Ziggy Stardust…*"
+        }
+      ],
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 1 · Scope",
+        "current": "",
+        "proposed": "- Matching ignores upper and lower case and accents (e.g. \"bjork\" finds \"Björk\")"
+      },
+      "question": null,
+      "status": "resolved",
+      "first_seen": 2,
+      "resolution": {
+        "iteration": 2,
+        "date": "2026-11-07",
+        "decision": "Approved. Matching ignores upper and lower case and accents."
+      }
+    },
+    {
+      "id": 31,
+      "stories": [
+        "3"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "The alternative's label is only given for Price (\"Cheapest option\"); no text for Sound, Original or Condition",
+      "evidence": [
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · What the screen shows",
+          "quote": "Alternative: the best version on the 1st priority alone, shown small, only if different from the recommendation (e.g. \"Cheapest option: 1990 Reissue, €24\")"
+        }
+      ],
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 3 · What the screen shows",
+        "current": "(e.g. \"Cheapest option: 1990 Reissue, €24\")",
+        "proposed": "with a label per 1st priority: Price → \"Cheapest option\"; Sound → \"Best sound\"; Original → \"Closest to the original\"; Condition → \"Best condition\" (e.g. \"Cheapest option: 1990 Reissue, €24\"); on a tie, the cheaper version"
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 2,
+      "resolution": null
+    },
+    {
+      "id": 32,
+      "stories": [
+        "3"
+      ],
+      "type": "Ambiguity",
+      "severity": "Low",
+      "title": "A reason can quote the price of another version (e.g. the first pressing) that has no active listings",
+      "evidence": [
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · What the screen shows",
+          "quote": "prices inside sentences come from the data (e.g. \"Costs €[lowest price], vs €[first pressing price] for a first pressing\")"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · What the screen shows",
+          "quote": "The ideal pressing for your priorities is the 1972 UK original, but nobody is selling it right now."
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · Acceptance criteria",
+          "quote": "Prices in the reasons match the current listings"
+        }
+      ],
+      "proposal": null,
+      "question": "When a price in a reason belongs to a version with no active listings: use that version's typical price range, or leave the comparison out of the sentence?",
+      "status": "open",
+      "first_seen": 2,
+      "resolution": null
+    },
+    {
+      "id": 33,
+      "stories": [
+        "5"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "No rule for a red listing whose correct version is not in the catalogue",
+      "evidence": [
+        {
+          "source": "SPEC.md",
+          "where": "Story 5 · What the screens show",
+          "quote": "Red listing: \"It's a different pressing · moved to [version]\""
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 8 · Edge cases",
+          "quote": "Version not in the catalogue → message \"This version isn't in our catalogue yet\""
+        },
+        {
+          "source": "docs/database.md",
+          "where": "listings",
+          "quote": "actual_version_id | → versions | equal to claimed, unless the listing is red and was moved"
+        }
+      ],
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 5 · What the screens show",
+        "current": "",
+        "proposed": "- Red listing whose correct version is not in the catalogue: \"It's a different pressing\" (no \"moved to\"); it appears under no other version"
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 2,
+      "resolution": null
+    },
+    {
+      "id": 34,
+      "stories": [
+        "5",
+        "7"
+      ],
+      "type": "Ambiguity",
+      "severity": "Low",
+      "title": "Where the yellow warning appears when Buy is tapped in the list, without opening the listing check screen",
+      "evidence": [
+        {
+          "source": "SPEC.md",
+          "where": "Story 5 · What the screens show",
+          "quote": "Listing (in the list): traffic light with its word (Match / Check / No match), price, condition, seller, city, **Buy** (green and yellow only)"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 5 · What the screens show",
+          "quote": "Yellow: a warning before buying that says what is uncertain"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 7 · Use cases",
+          "quote": "Yellow listing → the warning from story 5 is shown before the checkout"
+        }
+      ],
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 5 · What the screens show",
+        "current": "Yellow: a warning before buying that says what is uncertain",
+        "proposed": "Yellow: Buy (in the list or on the listing check screen) first shows a warning that says what is uncertain, with \"Continue to checkout\" and \"Back\""
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 2,
+      "resolution": null
+    },
+    {
+      "id": 35,
+      "stories": [
+        "8"
+      ],
+      "type": "Ambiguity",
+      "severity": "Low",
+      "title": "Does \"My listings\" show removed listings?",
+      "evidence": [
+        {
+          "source": "SPEC.md",
+          "where": "Story 8 · Use cases",
+          "quote": "My listings → see own listings with status (on sale / sold)"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 8 · Data used",
+          "quote": "status (on sale / sold / removed)"
+        }
+      ],
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 8 · Use cases",
+        "current": "My listings → see own listings with status (on sale / sold)",
+        "proposed": "My listings → see own listings with status (on sale / sold); removed listings are not shown"
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 2,
+      "resolution": null
+    },
+    {
+      "id": 36,
+      "stories": [
+        "1",
+        "8"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
+      "title": "The seller uses \"the same search as story 1\", but in story 1 tapping an album opens the priorities screen or the \"Nobody is selling\" message",
+      "evidence": [
+        {
+          "source": "SPEC.md",
+          "where": "Story 8 · Scope",
+          "quote": "Seller searches the album (same search as story 1) → sees the **list of versions**"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 1 · Acceptance criteria",
+          "quote": "Tapping an album with no listings shows \"Nobody is selling this album right now\" directly"
+        }
+      ],
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 8 · Scope",
+        "current": "Seller searches the album (same search as story 1) → sees the **list of versions**",
+        "proposed": "Seller searches the album (same search box and matching as story 1); tapping an album opens its **list of versions**, even when nobody is selling it"
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 2,
+      "resolution": null
     }
   ],
   "coverage": [
@@ -1068,8 +1371,8 @@
       "id": "Q5",
       "finding": 19,
       "question": "Search results without price and copies (record why), or follow the design?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Keep the SPEC: no price or copies in search results."
     },
     {
       "id": "Q6",
@@ -1082,6 +1385,27 @@
       "id": "Q7",
       "finding": 14,
       "question": "Story 4: define the version page in phase 4, or drop the link?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q8",
+      "finding": 28,
+      "question": "\"Ideal but unavailable\": stored scores only, price and condition as 0, or drop the note?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q9",
+      "finding": 29,
+      "question": "Suggestions: compare the typed text with each word of the title and artist, or with the whole title?",
+      "status": "answered",
+      "answer": "Each word of title and artist; tolerance 1 letter for 4–5 letters, 2 for 6+."
+    },
+    {
+      "id": "Q10",
+      "finding": 32,
+      "question": "Price in a reason for a version with no listings: typical range, or leave the comparison out?",
       "status": "open",
       "answer": null
     }
@@ -1109,6 +1433,18 @@
       "id": "T4",
       "text": "Decide each remaining low finding before building the story it belongs to (only #21 and #16 were needed before the architecture)",
       "finding": null,
+      "done": false
+    },
+    {
+      "id": "T5",
+      "text": "Before building story 1: decide #19, #29 and #30",
+      "finding": 29,
+      "done": true
+    },
+    {
+      "id": "T6",
+      "text": "Before building story 3: decide #28 (High), #31, #32 and #17",
+      "finding": 28,
       "done": false
     }
   ]
