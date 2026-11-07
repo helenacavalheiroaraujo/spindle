@@ -5,6 +5,9 @@
 
 ## 2026-11-07 — Decisions from spec review (iteration 1)
 
+### Search suggestions: up to 3 titles at most 2 letters away (story 1 · finding #7)
+- **Why:** "similar to the typed text" could not be tested; a fixed limit makes the criterion pass or fail, and still catches common typos.
+
 ### A moved listing is yellow under its correct version (story 5 · finding #6)
 - **Why:** its checklist was made against the version the seller claimed, so nobody has checked it against the correct one; Assignment 1 says "uncertain check: show yellow, never green".
 

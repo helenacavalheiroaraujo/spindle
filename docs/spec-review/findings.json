@@ -4,7 +4,7 @@
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
     "iteration": 1,
-    "updated": "2026-11-07T20:15:00+00:00"
+    "updated": "2026-11-07T20:20:00+00:00"
   },
   "iterations": [
     {
@@ -267,9 +267,13 @@
         "proposed": "A search with no matches shows up to 3 album titles that differ from the typed text by at most 2 letters (e.g. \"zigy\" → \"Did you mean Ziggy Stardust?\"). With no such album, it shows \"No albums found\"."
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 1,
+        "date": "2026-11-07",
+        "decision": "Approved. Up to 3 album titles at most 2 letters away; otherwise 'No albums found'."
+      }
     },
     {
       "id": 8,

@@ -53,12 +53,13 @@ Not in this MVP: stories 10, 11
 - [ ] "bowie" returns David Bowie's albums, newest first
 - [ ] Each result shows cover, title, artist, year and number of versions
 - [ ] An album with no listings appears with the label "No listings"
-- [ ] A search with no matches shows suggestions close to the typed text ("Did you mean *Ziggy Stardust*?")
+- [ ] A search with no matches shows up to 3 album titles that differ from the typed text by at most 2 letters (e.g. "zigy" → "Did you mean *Ziggy Stardust*?")
+- [ ] With no album that close, it shows "No albums found"
 - [ ] Tapping an album with active listings opens the priorities screen (story 2)
 - [ ] Tapping an album with no listings shows "Nobody is selling this album right now" directly
 
 ### Edge cases
-- Typos → suggestions by similar text, never an empty screen
+- Typos → up to 3 suggestions (at most 2 letters different), or "No albums found"; never an empty screen
 - Album with no listings → shown, not hidden
 - Many results (e.g. 20+ albums by one artist) → all listed, newest first
 
