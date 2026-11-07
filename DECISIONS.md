@@ -3,6 +3,19 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Architecture decisions
+
+### TypeScript, not plain JavaScript (architecture)
+- **Why:** many errors show up before the app runs; it is the standard in Next.js projects, and the AI works very well with it.
+- **Trade-off accepted:** the code has more annotations, so it is a little harder for me to read.
+
+### Tailwind CSS for styling (architecture)
+- **Why:** spacing and colours come from a fixed scale, so screens stay consistent (checked in the UX/UI review); it is the Next.js default and the AI generates it quickly and reliably. It is not a component library, so it keeps the "no complex UI libraries" rule.
+- **Trade-off accepted:** the HTML carries many style classes; I verify by behaviour and screenshots, not by reading the markup.
+
+### No public API in the MVP (architecture)
+- **Why:** it is not assessed in this assignment and the next brief is not known yet; all rules live in `lib/rules/`, so an API can reuse them later without reorganising the code.
+
 ## 2026-11-07 — Decisions from spec review (iteration 1)
 
 ### One shared rule for loading and errors (Shared rules · finding #16)
