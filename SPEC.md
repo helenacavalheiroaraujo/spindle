@@ -76,7 +76,16 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 3 | Version details, source line, track list collapsed with "Bonus" | `app/albums/[albumId]/recommendation/page.tsx` | `tests/e2e/recommendation.spec.ts` |
 | 3 | "Change" → priorities with the ranking filled in; "See verified listings" on phone only | `app/albums/[albumId]/recommendation/page.tsx` | `tests/e2e/recommendation.spec.ts` |
 | 3 | Loading mask and error screen with "Try again" (Shared rules) | `app/albums/[albumId]/recommendation/loading.tsx`, `app/albums/[albumId]/recommendation/error.tsx` | Not tested automatically |
-| 5 | | | |
+| 5 | Traffic light from the three checklist items: all ✓ → green "Match"; no ✗ and a ? → yellow "Check"; any ✗ → red "No match" | `lib/rules/trafficLight.ts`, `components/TrafficLight.tsx` | `tests/unit/trafficLight.test.ts`, `tests/e2e/listings.spec.ts` |
+| 5 | Missing matrix photo → yellow, never green | `lib/rules/trafficLight.ts`, `lib/rules/listingCheck.ts` | `tests/unit/trafficLight.test.ts`, `tests/unit/listingCheck.test.ts`, `tests/e2e/listings.spec.ts` |
+| 5 | Green and yellow cheapest first, red last; every light shows its word | `lib/rules/listingOrder.ts`, `components/ListingList.tsx` | `tests/unit/listingOrder.test.ts`, `tests/e2e/listings.spec.ts` |
+| 5 | Red: "moved to [version]", "Not for sale here", no Buy; all red → "No listing matches this version yet" | `lib/rules/listingOrder.ts`, `components/ListingList.tsx` | `tests/unit/listingOrder.test.ts`, `tests/e2e/listings.spec.ts` |
+| 5 | A red listing also appears under its correct version, yellow, "Moved here · check pending" | `lib/rules/listingOrder.ts`, `lib/rules/listingCheck.ts`, `lib/db/listings.ts` | `tests/unit/listingOrder.test.ts`, `tests/unit/listingCheck.test.ts`, `tests/e2e/listings.spec.ts`, `tests/e2e/listingCheck.spec.ts` |
+| 5 | Yellow: Buy first shows what is uncertain, with "Continue to checkout" and "Back", from the list and the check screen | `lib/rules/yellowWarning.ts`, `components/BuyButton.tsx` | `tests/unit/yellowWarning.test.ts`, `tests/e2e/listings.spec.ts`, `tests/e2e/listingCheck.spec.ts` |
+| 5 | Listing check screen: summary, checklist, photos (or "No … photo"), condition in plain words; "Buy with protection" for green and yellow only | `lib/rules/listingCheck.ts`, `app/listings/[listingId]/page.tsx` | `tests/unit/listingCheck.test.ts`, `tests/e2e/listingCheck.spec.ts` |
+| 5 | Listings on their own screen on phone, beside the recommendation on desktop | `app/versions/[versionId]/listings/page.tsx`, `components/ListingsBeside.tsx`, `app/albums/[albumId]/recommendation/page.tsx` | `tests/e2e/listings.spec.ts` |
+| 5 | Desktop: if the listings beside fail, only that area shows the error; "Try again" recovers | `components/ListingsBeside.tsx`, `components/ErrorScreen.tsx` | `tests/e2e/listings.spec.ts` (desktop only) |
+| 5 | Loading mask and error screen with "Try again" on the listings and listing check screens (Shared rules) | `app/versions/[versionId]/listings/loading.tsx`, `app/versions/[versionId]/listings/error.tsx`, `app/listings/[listingId]/loading.tsx`, `app/listings/[listingId]/error.tsx` | Not tested automatically |
 | 6 | | | |
 | 9 | | | |
 | 7 | | | |
