@@ -3,6 +3,17 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Project rules (CLAUDE.md)
+
+### Every change is explained in plain language, with evidence, before I accept it (process)
+- **Why:** I verify by behaviour, not by reading code; the assignment asks to "verify each change before accepting it". Each change states what changed, why, the evidence (test output or screenshot) and any doubts.
+
+### Open review findings are decided before building their story (process)
+- **Why:** the 16 low findings change small rules and texts; deciding them first avoids rebuilding screens and tests.
+
+### No ready-made component libraries; new packages only after my yes (architecture)
+- **Why:** keeps the app simple and small enough for me to verify; the look comes from the Assignment 1 designs, not from a library's default style.
+
 ## 2026-11-07 — Architecture decisions
 
 ### TypeScript, not plain JavaScript (architecture)
@@ -144,6 +155,8 @@
 | Database | **PostgreSQL on Supabase** (free plan) | Built-in sign-up and login (story 9); built-in file storage for photos (story 8); visual table editor to check the data |
 | End-to-end tests | **Playwright** | Simple setup; waits for elements automatically; official Next.js guide |
 | Unit tests | **Vitest** | Simple setup; fast |
+
+**React comes with Next.js:** every Next.js screen is a React component, so React is not a separate choice. React draws the screens but brings no ready-made buttons or styles, so it keeps the "no complex UI libraries" rule.
 
 **Criteria (Class 2, slide 11):** familiarity · ecosystem maturity · hosting target · how well the AI knows the stack
 **Priority:** deliver safely
