@@ -166,18 +166,18 @@ Not in this MVP: stories 10, 11
 - **"Change"** (priorities) → back to story 2
 
 ### Acceptance criteria
-- [ ] With "1. Price, 2. Sound" and the example data, the 2012 Remaster is recommended (22 vs 19 points)
-- [ ] With "1. Price" only, the 1990 Reissue is recommended
-- [ ] On a tie, the cheaper version is recommended
-- [ ] A version with no listings is never the main recommendation
-- [ ] If the best overall version has no listings, the "ideal but unavailable" note is shown
-- [ ] The alternative is shown only when it differs from the recommendation
-- [ ] "Matches" tags appear only for chosen priorities with a score of 4 or 5
-- [ ] With "1. Sound, 2. Price", the first reason is about sound and the second about price
-- [ ] Prices in the reasons match the current listings, or the typical range of a version with no active listings
-- [ ] Every term in the glossary (at least: remaster, reissue, first pressing, matrix, and each condition grade) shows its plain explanation wherever it appears
-- [ ] The source line is shown
-- [ ] The track list is collapsed until tapped; extra tracks show "Bonus"
+- [x] With "1. Price, 2. Sound" and the example data, the 2012 Remaster is recommended (22 vs 19 points)
+- [x] With "1. Price" only, the 1990 Reissue is recommended
+- [x] On a tie, the cheaper version is recommended
+- [x] A version with no listings is never the main recommendation
+- [x] If the best overall version has no listings, the "ideal but unavailable" note is shown
+- [x] The alternative is shown only when it differs from the recommendation
+- [x] "Matches" tags appear only for chosen priorities with a score of 4 or 5
+- [x] With "1. Sound, 2. Price", the first reason is about sound and the second about price
+- [x] Prices in the reasons match the current listings, or the typical range of a version with no active listings
+- [x] Every term in the glossary (at least: remaster, reissue, first pressing, matrix, and each condition grade) shows its plain explanation wherever it appears
+- [x] The source line is shown
+- [x] The track list is collapsed until tapped; extra tracks show "Bonus"
 
 ### Example data for the tests
 | Version | Lowest price | Price score (calculated) | Sound score |
@@ -526,7 +526,15 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 2 | Tap an album → this screen, with the album and the four options and their lines | `app/albums/[albumId]/priorities/page.tsx`, `lib/db/albums.ts` | `tests/e2e/priorities.spec.ts` |
 | 2 | The recommendation receives the ranking in order, in the page address; "Change" refills it | `lib/rules/priorities.ts`, `app/albums/[albumId]/priorities/page.tsx` | `tests/unit/priorities.test.ts`, `tests/e2e/priorities.spec.ts` |
 | 2 | Loading mask and error screen with "Try again" (Shared rules) | `app/albums/[albumId]/priorities/loading.tsx`, `app/albums/[albumId]/priorities/error.tsx` | Not tested automatically |
-| 3 | | | |
+| 3 | One version among those with active listings; weighted total; tie → cheaper; 1. Price, 2. Sound → 2012 Remaster; 1. Price → 1990 Reissue | `lib/rules/recommendation.ts`, `lib/db/recommendation.ts` | `tests/unit/recommendation.test.ts`, `tests/e2e/recommendation.spec.ts` |
+| 3 | "Matches" tags for chosen priorities scoring 4 or 5 | `lib/rules/recommendation.ts`, `app/albums/[albumId]/recommendation/page.tsx` | `tests/unit/recommendation.test.ts`, `tests/e2e/recommendation.spec.ts` |
+| 3 | Reasons in rank order (max 3), prices from the listings or the typical range | `lib/rules/recommendation.ts`, `app/albums/[albumId]/recommendation/page.tsx` | `tests/unit/recommendation.test.ts`, `tests/e2e/recommendation.spec.ts` |
+| 3 | Alternative with a label per 1st priority, only when different | `lib/rules/recommendation.ts`, `app/albums/[albumId]/recommendation/page.tsx` | `tests/unit/recommendation.test.ts`, `tests/e2e/recommendation.spec.ts` |
+| 3 | "Ideal but unavailable" note (no listings → price and condition 0) | `lib/rules/recommendation.ts`, `app/albums/[albumId]/recommendation/page.tsx` | `tests/unit/recommendation.test.ts`, `tests/e2e/recommendation.spec.ts` |
+| 3 | Glossary terms show their plain explanation | `lib/rules/glossary.ts`, `app/albums/[albumId]/recommendation/GlossaryText.tsx` | `tests/unit/glossary.test.ts`, `tests/e2e/recommendation.spec.ts` |
+| 3 | Version details, source line, track list collapsed with "Bonus" | `app/albums/[albumId]/recommendation/page.tsx` | `tests/e2e/recommendation.spec.ts` |
+| 3 | "Change" → priorities with the ranking filled in; "See verified listings" on phone only | `app/albums/[albumId]/recommendation/page.tsx` | `tests/e2e/recommendation.spec.ts` |
+| 3 | Loading mask and error screen with "Try again" (Shared rules) | `app/albums/[albumId]/recommendation/loading.tsx`, `app/albums/[albumId]/recommendation/error.tsx` | Not tested automatically |
 | 5 | | | |
 | 6 | | | |
 | 9 | | | |

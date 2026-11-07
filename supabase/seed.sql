@@ -60,7 +60,7 @@ insert into tracks (version_id, position, title, is_extra) values
 -- Reason texts (Ziggy Stardust only) ---------------------------------------
 insert into reason_texts (version_id, criterion, sentence) values
   ('20000000-0000-0000-0000-000000000001', 'sound',     'Cut from the original master tapes: warm and full, the way the album first sounded.'),
-  ('20000000-0000-0000-0000-000000000001', 'price',     'A first pressing usually costs €150–€220.'),
+  ('20000000-0000-0000-0000-000000000001', 'price',     'A first pressing costs {lowest_price}.'),
   ('20000000-0000-0000-0000-000000000001', 'original',  'The first pressing, made in 1972 on the RCA Victor label.'),
   ('20000000-0000-0000-0000-000000000001', 'condition', 'Copies are over 50 years old, so most show signs of wear.'),
   ('20000000-0000-0000-0000-000000000002', 'sound',     'Made from a copy of the master tapes, so it sounds flatter than the original.'),
@@ -68,7 +68,7 @@ insert into reason_texts (version_id, criterion, sentence) values
   ('20000000-0000-0000-0000-000000000002', 'original',  'A reissue made in 1990, not a first pressing.'),
   ('20000000-0000-0000-0000-000000000002', 'condition', 'Copies are often in good shape: many were kept by collectors.'),
   ('20000000-0000-0000-0000-000000000003', 'sound',     'A careful remaster: clear and detailed, with less background noise.'),
-  ('20000000-0000-0000-0000-000000000003', 'price',     'Costs {lowest_price}, far less than a first pressing.'),
+  ('20000000-0000-0000-0000-000000000003', 'price',     'Costs {lowest_price}, vs {first_pressing_price} for a first pressing.'),
   ('20000000-0000-0000-0000-000000000003', 'original',  'A modern pressing that keeps the original artwork and track list.'),
   ('20000000-0000-0000-0000-000000000003', 'condition', 'A recent pressing, so copies are usually clean and quiet.');
 
