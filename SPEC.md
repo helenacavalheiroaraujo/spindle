@@ -13,6 +13,7 @@ Not in this MVP: stories 10, 11
 
 ## Out of scope
 - Search by artist with an artist page (possible future story)
+- New (sealed) records: the MVP lists used records only
 - From Assignment 1, p. 12:
   - Real payments and shipping (simulated)
   - Automatic photo and matrix checks (results are mock data)
