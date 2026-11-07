@@ -119,6 +119,76 @@ Not in this MVP: stories 10, 11
 
 ---
 
+## Story 3 · Get one recommendation
+
+**As a buyer, I want one version picked for me, and why, so I don't get lost.**
+
+### Scope
+- Recommendation screen ("Get this one"), opened from the priorities screen (story 2)
+- Picks **one version among those with active listings**, using the buyer's ranked priorities
+- Shows **why**, in plain language, tied to the buyer's priorities
+- Below it, the listings for that version (story 5)
+
+### How the pick is made
+- Each version has a **score from 1 to 5** for each criterion: sound, price, original, condition (illustrative data)
+- Each rank position has fixed **weights**: 1st = 3, 2nd = 2, 3rd = 1, 4th = 0.5 (starting values, to be tuned)
+- **Total = sum of (score × weight)** for the chosen priorities; the highest total wins
+- **Tie:** the cheaper version wins
+- Only versions with at least one active listing can be recommended
+
+### What the screen shows
+- **Recommended version:** name (e.g. "2012 Remaster"), release year, country, label, format, number of listings, lowest price
+- **Matches:** tags for the chosen priorities where the version scores 4 or 5 (e.g. "Matches: sound", "Matches: price")
+- **Reasons:** up to 3 short sentences from fixed text (e.g. "Costs €32, vs €185 for a first pressing")
+- **Technical terms** (e.g. "remaster", "first pressing", "matrix") always come with a short plain explanation
+- **Source:** "Based on N collector ratings · Illustrative data"
+- **Track list:** collapsed; tap to open; extra tracks labelled **"Bonus"**
+- **Alternative:** the best version on the 1st priority alone, shown small, only if different from the recommendation (e.g. "Cheapest option: 1990 Reissue, €24")
+- **Ideal but unavailable:** if the best version overall has no listings, a small note: "The ideal pressing for your priorities is the 1972 UK original, but nobody is selling it right now."
+- **"Change"** (priorities) → back to story 2
+
+### Acceptance criteria
+- [ ] With "1. Price, 2. Sound" and the example data, the 2012 Remaster is recommended (22 vs 19 points)
+- [ ] With "1. Price" only, the 1990 Reissue is recommended
+- [ ] On a tie, the cheaper version is recommended
+- [ ] A version with no listings is never the main recommendation
+- [ ] If the best overall version has no listings, the "ideal but unavailable" note is shown
+- [ ] The alternative is shown only when it differs from the recommendation
+- [ ] "Matches" tags appear only for chosen priorities with a score of 4 or 5
+- [ ] Every technical term on the screen has a plain explanation
+- [ ] The source line is shown
+- [ ] The track list is collapsed until tapped; extra tracks show "Bonus"
+
+### Example data for the tests
+| Version | Price score | Sound score | Lowest price |
+|---|---|---|---|
+| 1990 Reissue | 5 | 2 | €24 |
+| 2012 Remaster | 4 | 5 | €32 |
+
+### Edge cases
+- No version of the album has listings → no recommendation; message: "Nobody is selling this album right now" + the ideal version
+- Only one version has listings → it is recommended; no alternative
+- Conflicting priorities → the weighted total decides; the alternative shows the other side
+
+### Data used
+- **Version:** release year, country, label, format, scores (sound, price, original, condition), number of collector ratings
+- **Track:** version, position, title, is extra (yes/no)
+- **Listing:** version, price (count and lowest price)
+- **Glossary term:** term, plain explanation
+- **Reason text:** fixed sentences per version
+
+### Non-functional
+- The recommendation is calculated in one place (one function), covered by unit tests
+- All data labelled illustrative
+
+### Out of scope (MVP)
+- 30-second previews (story 11)
+- Social proof ("128 buyers chose…", "last copy sold…")
+- "Compare pressings" (story 4, phase 4)
+- AI-written explanations (fixed text, Assignment 1 p. 12)
+
+---
+
 ## Traceability
 
 Every requirement maps to at least one feature and one automated test (Class 2, slide 26).
@@ -127,3 +197,4 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 |---|---|---|---|
 | 1 | | | |
 | 2 | | | |
+| 3 | | | |
