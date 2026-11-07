@@ -254,6 +254,43 @@ Three items, each **✓ matches**, **? uncertain / no photo**, or **✗ does not
 
 ---
 
+## Story 6 · Fair price
+
+**As a buyer, I want to know if a listing is above or below the usual price.**
+
+### Scope
+- Each version has a **typical price range** (e.g. €28–€36), stored as illustrative data that stands for past sales
+- Each listing shows a **price label** comparing its price with that range
+- Below the list: "Typical price for this pressing: €28–€36"
+
+### Label rule
+- **Below typical:** price lower than the bottom of the range
+- **Typical:** price within the range, limits included
+- **Above typical:** price higher than the top of the range
+
+### Acceptance criteria
+- [ ] With a range of €28–€36: €24 → "Below typical"; €28 → "Typical"; €36 → "Typical"; €40 → "Above typical"
+- [ ] Every listing in the list (green, yellow and red) shows its label
+- [ ] The typical range is shown below the list
+- [ ] A version without a range shows no label and no range line
+
+### Edge cases
+- Version with no range → no label (never a guess)
+- Price exactly on a limit → "Typical"
+
+### Data used
+- **Version:** typical price minimum, typical price maximum
+- **Listing:** price
+
+### Non-functional
+- The label rule lives in one function, covered by unit tests
+- Typical ranges are illustrative data
+
+### Moved to story 8
+- "Sellers see the typical range when listing" (seller side, phase 3)
+
+---
+
 ## Traceability
 
 Every requirement maps to at least one feature and one automated test (Class 2, slide 26).
@@ -264,3 +301,4 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 2 | | | |
 | 3 | | | |
 | 5 | | | |
+| 6 | | | |
