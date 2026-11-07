@@ -35,8 +35,9 @@ Check every story in `SPEC.md`, then the stories against each other, then agains
 **1. Template** — each story has:
 - *As a / I want / So I* (the story sentence)
 - *Scope*
-- *Pre-condition* (what must be true before the story starts: signed in or not, which screen, which data exists)
 - *Acceptance criteria*
+
+(No Pre-condition section: dropped on purpose to keep the stories simple. What must be true before a story starts is described in its Scope.)
 
 **2. Quality of the criteria**
 - **Vague terms** with no measurable meaning ("fast", "clear", "easy", "some", "relevant", "similar")
@@ -108,4 +109,5 @@ Report in English (like the rest of the project). Chat answer in the user's lang
 Then stop and let the user decide. Do not start editing.
 
 ## Histórico
+- 2026-11-07 · Retirada a secção Pre-condition do template verificado · a Helena quis reduzir a complexidade das stories nesta fase
 - 2026-11-07 · Skill criada a partir das regras definidas pela Helena (só leitura, propostas em tabela, achados numerados com evidência, relatório HTML privado) · para rever as US do Spindle de forma repetível antes da arquitetura

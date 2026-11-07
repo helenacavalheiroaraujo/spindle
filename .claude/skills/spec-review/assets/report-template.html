@@ -220,7 +220,7 @@ const DATA = /*__DATA__*/null;
   const C = DATA.coverage || [];
   const mark = (v) => v === true || v === "done" ? `<td class="yes">✓</td>` : v === false ? `<td class="no">✗</td>` : v === "n/a" ? `<td class="na">–</td>` : `<td class="na">${esc(v ?? "–")}</td>`;
   const openFor = (s) => open.filter((f) => (f.stories || []).includes(s) || (f.stories || []).includes("all")).length;
-  $("coverage").innerHTML = `<thead><tr><th>Story</th><th>Tested</th><th>Story sentence</th><th>Scope</th><th>Pre-condition</th><th>Criteria</th><th>Criteria check</th><th>States</th><th>Data</th><th>Design</th><th>Open</th></tr></thead><tbody>` +
-    C.map((c) => `<tr><td>${esc(c.story)} · ${esc(c.title)}</td>${c.tested ? `<td class="yes">Yes</td>` : `<td class="na">No</td>`}${mark(c.template?.story)}${mark(c.template?.scope)}${mark(c.template?.precondition)}${mark(c.template?.criteria)}${mark(c.checks?.criteria)}${mark(c.checks?.states)}${mark(c.checks?.data)}${mark(c.checks?.design)}<td>${openFor(String(c.story))}</td></tr>`).join("") + `</tbody>`;
+  $("coverage").innerHTML = `<thead><tr><th>Story</th><th>Tested</th><th>Story sentence</th><th>Scope</th><th>Criteria</th><th>Criteria check</th><th>States</th><th>Data</th><th>Design</th><th>Open</th></tr></thead><tbody>` +
+    C.map((c) => `<tr><td>${esc(c.story)} · ${esc(c.title)}</td>${c.tested ? `<td class="yes">Yes</td>` : `<td class="na">No</td>`}${mark(c.template?.story)}${mark(c.template?.scope)}${mark(c.template?.criteria)}${mark(c.checks?.criteria)}${mark(c.checks?.states)}${mark(c.checks?.data)}${mark(c.checks?.design)}<td>${openFor(String(c.story))}</td></tr>`).join("") + `</tbody>`;
 })();
 </script>

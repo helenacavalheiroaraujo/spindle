@@ -4,304 +4,1078 @@
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
     "iteration": 1,
-    "updated": "2026-11-07T19:30:00+00:00"
+    "updated": "2026-11-07T20:00:00+00:00"
   },
   "iterations": [
-    { "n": 1, "date": "2026-11-07", "note": "First review of all stories (1, 2, 3, 5, 6, 9, 7, 8, 4) against each other, DECISIONS.md and the Assignment 1 designs" }
+    {
+      "n": 1,
+      "date": "2026-11-07",
+      "note": "First review of all stories (1, 2, 3, 5, 6, 9, 7, 8, 4) against each other, DECISIONS.md and the Assignment 1 designs"
+    }
   ],
   "findings": [
     {
-      "id": 1, "stories": ["3"], "type": "Inconsistency", "severity": "High",
+      "id": 1,
+      "stories": [
+        "3"
+      ],
+      "type": "Inconsistency",
+      "severity": "High",
       "title": "Condition is scored per version, but condition belongs to each copy (listing)",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 3 · How the pick is made", "quote": "Each version has a score from 1 to 5 for each criterion: sound, price, original, condition (illustrative data)" },
-        { "source": "SPEC.md", "where": "Story 5 · Data used", "quote": "Listing: claimed version, actual version, price, condition, seller, city, photos" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · How the pick is made",
+          "quote": "Each version has a score from 1 to 5 for each criterion: sound, price, original, condition (illustrative data)"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 5 · Data used",
+          "quote": "Listing: claimed version, actual version, price, condition, seller, city, photos"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 3 · How the pick is made", "current": "Each version has a score from 1 to 5 for each criterion: sound, price, original, condition (illustrative data)", "proposed": "Sound and original scores (1–5) are stored per version (illustrative data). The condition score is calculated: the best condition among the version's listings on sale (M = 5, NM = 4, VG+ = 3, VG = 2, G = 1)." },
-      "question": null, "status": "resolved", "first_seen": 1, "resolution": { "iteration": 1, "date": "2026-11-07", "decision": "Approved. Condition score = best condition among the version's active listings. Grade values may change with #8." }
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 3 · How the pick is made",
+        "current": "Each version has a score from 1 to 5 for each criterion: sound, price, original, condition (illustrative data)",
+        "proposed": "Sound and original scores (1–5) are stored per version (illustrative data). The condition score is calculated: the best condition among the version's listings on sale (M = 5, NM = 4, VG+ = 3, VG = 2, G = 1)."
+      },
+      "question": null,
+      "status": "resolved",
+      "first_seen": 1,
+      "resolution": {
+        "iteration": 1,
+        "date": "2026-11-07",
+        "decision": "Approved. Condition score = best condition among the version's active listings. Grade values may change with #8."
+      }
     },
     {
-      "id": 2, "stories": ["3", "6"], "type": "Inconsistency", "severity": "High",
+      "id": 2,
+      "stories": [
+        "3",
+        "6"
+      ],
+      "type": "Inconsistency",
+      "severity": "High",
       "title": "Price score is stored per version, while real prices live in the listings and change",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 3 · How the pick is made", "quote": "Each version has a score from 1 to 5 for each criterion: sound, price, original, condition" },
-        { "source": "SPEC.md", "where": "Story 3 · What the screen shows", "quote": "number of listings, lowest price" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · How the pick is made",
+          "quote": "Each version has a score from 1 to 5 for each criterion: sound, price, original, condition"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · What the screen shows",
+          "quote": "number of listings, lowest price"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 3 · How the pick is made", "current": "(price score stored with the version)", "proposed": "The price score is calculated from each version's lowest active price: 5 × (cheapest lowest price ÷ this version's lowest price), rounded, minimum 1." },
-      "question": null, "status": "resolved", "first_seen": 1, "resolution": { "iteration": 1, "date": "2026-11-07", "decision": "Approved with a revised formula: 5 × (cheapest ÷ this lowest price), rounded, min 1. The first proposal (cheapest = 5, dearest = 1) was dropped because it changed the example result." }
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 3 · How the pick is made",
+        "current": "(price score stored with the version)",
+        "proposed": "The price score is calculated from each version's lowest active price: 5 × (cheapest lowest price ÷ this version's lowest price), rounded, minimum 1."
+      },
+      "question": null,
+      "status": "resolved",
+      "first_seen": 1,
+      "resolution": {
+        "iteration": 1,
+        "date": "2026-11-07",
+        "decision": "Approved with a revised formula: 5 × (cheapest ÷ this lowest price), rounded, min 1. The first proposal (cheapest = 5, dearest = 1) was dropped because it changed the example result."
+      }
     },
     {
-      "id": 3, "stories": ["3"], "type": "Inconsistency", "severity": "High",
+      "id": 3,
+      "stories": [
+        "3"
+      ],
+      "type": "Inconsistency",
+      "severity": "High",
       "title": "Reasons are fixed per version, but Assignment 1 asks for reasons tied to the buyer's priorities",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 3 · Data used", "quote": "Reason text: fixed sentences per version" },
-        { "source": "Assignment 1 report", "where": "p. 10 · Story 3", "quote": "One version, with reasons tied to my priorities" },
-        { "source": "SPEC.md", "where": "Story 3 · What the screen shows", "quote": "e.g. \"Costs €32, vs €185 for a first pressing\"" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · Data used",
+          "quote": "Reason text: fixed sentences per version"
+        },
+        {
+          "source": "Assignment 1 report",
+          "where": "p. 10 · Story 3",
+          "quote": "One version, with reasons tied to my priorities"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · What the screen shows",
+          "quote": "e.g. \"Costs €32, vs €185 for a first pressing\""
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 3 · Data used / What the screen shows", "current": "Reason text: fixed sentences per version", "proposed": "Reason text: fixed sentences per version and per criterion (sound, price, original, condition). The screen shows the sentences for the buyer's chosen priorities, in rank order (max 3). Prices inside sentences come from the data, not from the text." },
-      "question": null, "status": "resolved", "first_seen": 1, "resolution": { "iteration": 1, "date": "2026-11-07", "decision": "Approved. One sentence per version and criterion, shown for the chosen priorities in rank order (max 3); prices from the data." }
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 3 · Data used / What the screen shows",
+        "current": "Reason text: fixed sentences per version",
+        "proposed": "Reason text: fixed sentences per version and per criterion (sound, price, original, condition). The screen shows the sentences for the buyer's chosen priorities, in rank order (max 3). Prices inside sentences come from the data, not from the text."
+      },
+      "question": null,
+      "status": "resolved",
+      "first_seen": 1,
+      "resolution": {
+        "iteration": 1,
+        "date": "2026-11-07",
+        "decision": "Approved. One sentence per version and criterion, shown for the chosen priorities in rank order (max 3); prices from the data."
+      }
     },
     {
-      "id": 4, "stories": ["1", "3", "5", "6"], "type": "Ambiguity", "severity": "High",
+      "id": 4,
+      "stories": [
+        "1",
+        "3",
+        "5",
+        "6"
+      ],
+      "type": "Ambiguity",
+      "severity": "High",
       "title": "Which listings count for a version is not defined (counts, lowest price, \"No listings\", \"has listings\")",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 1 · What each screen shows", "quote": "label \"No listings\" when the album has no active listings" },
-        { "source": "SPEC.md", "where": "Story 3 · How the pick is made", "quote": "Only versions with at least one active listing can be recommended" },
-        { "source": "SPEC.md", "where": "Story 5 · Use cases", "quote": "Red listing → appears here as a warning and also under the correct version" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 1 · What each screen shows",
+          "quote": "label \"No listings\" when the album has no active listings"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · How the pick is made",
+          "quote": "Only versions with at least one active listing can be recommended"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 5 · Use cases",
+          "quote": "Red listing → appears here as a warning and also under the correct version"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "New section before Story 1 · Shared rules", "current": "", "proposed": "Active listing: a listing on sale (not sold, not removed) that is green or yellow. Counts, lowest price, \"No listings\" and \"has listings\" use active listings only. A red listing counts for its actual version, not for the version the seller claimed." },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "New section before Story 1 · Shared rules",
+        "current": "",
+        "proposed": "Active listing: a listing on sale (not sold, not removed) that is green or yellow. Counts, lowest price, \"No listings\" and \"has listings\" use active listings only. A red listing counts for its actual version, not for the version the seller claimed."
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 5, "stories": ["1", "2", "3"], "type": "Gap", "severity": "High",
+      "id": 5,
+      "stories": [
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "Gap",
+      "severity": "High",
       "title": "Album with no listings leads the buyer through the priorities screen to a dead end",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 1 · Edge cases", "quote": "Album with no listings → shown, not hidden" },
-        { "source": "SPEC.md", "where": "Story 1 · Acceptance criteria", "quote": "Tapping an album opens the priorities screen (story 2)" },
-        { "source": "SPEC.md", "where": "Story 3 · Edge cases", "quote": "No version of the album has listings → no recommendation; message: \"Nobody is selling this album right now\"" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 1 · Edge cases",
+          "quote": "Album with no listings → shown, not hidden"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 1 · Acceptance criteria",
+          "quote": "Tapping an album opens the priorities screen (story 2)"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · Edge cases",
+          "quote": "No version of the album has listings → no recommendation; message: \"Nobody is selling this album right now\""
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 1 · Use cases / Acceptance criteria", "current": "Tapping an album opens the priorities screen (story 2)", "proposed": "Tapping an album with active listings opens the priorities screen (story 2). Tapping an album with no listings shows \"Nobody is selling this album right now\" directly, without the priorities screen." },
-      "question": "Should an album with no listings skip the priorities screen and show the message straight away?", "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 1 · Use cases / Acceptance criteria",
+        "current": "Tapping an album opens the priorities screen (story 2)",
+        "proposed": "Tapping an album with active listings opens the priorities screen (story 2). Tapping an album with no listings shows \"Nobody is selling this album right now\" directly, without the priorities screen."
+      },
+      "question": "Should an album with no listings skip the priorities screen and show the message straight away?",
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 6, "stories": ["5"], "type": "Ambiguity", "severity": "High",
+      "id": 6,
+      "stories": [
+        "5"
+      ],
+      "type": "Ambiguity",
+      "severity": "High",
       "title": "Traffic light of a red listing once it appears under its correct version is undefined",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 5 · Use cases", "quote": "appears here as a warning and also under the correct version, where it is checked again" },
-        { "source": "SPEC.md", "where": "Story 5 · Data used", "quote": "Check result: listing, item (cover/label, country/year, matrix), result" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 5 · Use cases",
+          "quote": "appears here as a warning and also under the correct version, where it is checked again"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 5 · Data used",
+          "quote": "Check result: listing, item (cover/label, country/year, matrix), result"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 5 · Use cases", "current": "where it is checked again", "proposed": "where it is shown yellow (\"Moved here · check pending\"), because its checklist was made against the claimed version, not this one." },
-      "question": "Under its correct version, should a moved listing show yellow until it is checked again?", "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 5 · Use cases",
+        "current": "where it is checked again",
+        "proposed": "where it is shown yellow (\"Moved here · check pending\"), because its checklist was made against the claimed version, not this one."
+      },
+      "question": "Under its correct version, should a moved listing show yellow until it is checked again?",
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 7, "stories": ["1"], "type": "Ambiguity", "severity": "High",
+      "id": 7,
+      "stories": [
+        "1"
+      ],
+      "type": "Ambiguity",
+      "severity": "High",
       "title": "\"Suggestions close to the typed text\" cannot be tested: no rule for how close or how many",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 1 · Acceptance criteria", "quote": "A search with no matches shows suggestions close to the typed text (\"Did you mean Ziggy Stardust?\")" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 1 · Acceptance criteria",
+          "quote": "A search with no matches shows suggestions close to the typed text (\"Did you mean Ziggy Stardust?\")"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 1 · Acceptance criteria", "current": "A search with no matches shows suggestions close to the typed text", "proposed": "A search with no matches shows up to 3 album titles that differ from the typed text by at most 2 letters (e.g. \"zigy\" → \"Did you mean Ziggy Stardust?\"). With no such album, it shows \"No albums found\"." },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 1 · Acceptance criteria",
+        "current": "A search with no matches shows suggestions close to the typed text",
+        "proposed": "A search with no matches shows up to 3 album titles that differ from the typed text by at most 2 letters (e.g. \"zigy\" → \"Did you mean Ziggy Stardust?\"). With no such album, it shows \"No albums found\"."
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 8, "stories": ["8", "5", "3"], "type": "Inconsistency", "severity": "High",
+      "id": 8,
+      "stories": [
+        "8",
+        "5",
+        "3"
+      ],
+      "type": "Inconsistency",
+      "severity": "High",
       "title": "Condition grades differ between the story and the sell screen design",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 8 · Data used", "quote": "Mint (M), Near Mint (NM), Very Good Plus (VG+), Very Good (VG), Good (G)" },
-        { "source": "Spindle_mockups_by_section.pdf", "where": "p. 16 · Sell a record", "quote": "Near mint NM · Very good VG+ · Good VG · Fair G" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 8 · Data used",
+          "quote": "Mint (M), Near Mint (NM), Very Good Plus (VG+), Very Good (VG), Good (G)"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 16 · Sell a record",
+          "quote": "Near mint NM · Very good VG+ · Good VG · Fair G"
+        }
       ],
       "proposal": null,
-      "question": "Which condition list is the one: the story's five grades (M, NM, VG+, VG, G) or the design's four (Near mint, Very good, Good, Fair)?", "status": "open", "first_seen": 1, "resolution": null
+      "question": "Which condition list is the one: the story's five grades (M, NM, VG+, VG, G) or the design's four (Near mint, Very good, Good, Fair)?",
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 9, "stories": ["7", "9"], "type": "Inconsistency", "severity": "Low",
+      "id": 9,
+      "stories": [
+        "7",
+        "9"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
       "title": "After login from Buy: story 9 returns to the listing, story 7 returns to the checkout",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 9 · Acceptance criteria", "quote": "Tapping Buy while signed out opens login and, after login, returns to the same listing" },
-        { "source": "SPEC.md", "where": "Story 7 · Edge cases", "quote": "Buyer not signed in → login first (story 9), then back to the checkout" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 9 · Acceptance criteria",
+          "quote": "Tapping Buy while signed out opens login and, after login, returns to the same listing"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 7 · Edge cases",
+          "quote": "Buyer not signed in → login first (story 9), then back to the checkout"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 9 · Acceptance criteria and Edge cases", "current": "after login, returns to the same listing", "proposed": "after login, goes to the checkout for that listing" },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 9 · Acceptance criteria and Edge cases",
+        "current": "after login, returns to the same listing",
+        "proposed": "after login, goes to the checkout for that listing"
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 10, "stories": ["5", "6"], "type": "Ambiguity", "severity": "Low",
+      "id": 10,
+      "stories": [
+        "5",
+        "6"
+      ],
+      "type": "Ambiguity",
+      "severity": "Low",
       "title": "Price label of a red listing: compared with which version's typical range?",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 6 · Acceptance criteria", "quote": "Every listing in the list (green, yellow and red) shows its label" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 6 · Acceptance criteria",
+          "quote": "Every listing in the list (green, yellow and red) shows its label"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 6 · Label rule", "current": "", "proposed": "A red listing is compared with the typical range of its actual version." },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 6 · Label rule",
+        "current": "",
+        "proposed": "A red listing is compared with the typical range of its actual version."
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 11, "stories": ["2"], "type": "Ambiguity", "severity": "Low",
+      "id": 11,
+      "stories": [
+        "2"
+      ],
+      "type": "Ambiguity",
+      "severity": "Low",
       "title": "Does \"Change\" overwrite the saved priorities of a signed-in buyer?",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 2 · Phase 2", "quote": "Signed-in buyer: the ranking is saved to the account" },
-        { "source": "SPEC.md", "where": "Story 2 · Edge cases", "quote": "Saved ranking but this album is different → \"Change\" on the recommendation" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 2 · Phase 2",
+          "quote": "Signed-in buyer: the ranking is saved to the account"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 2 · Edge cases",
+          "quote": "Saved ranking but this album is different → \"Change\" on the recommendation"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 2 · Phase 2", "current": "", "proposed": "When a signed-in buyer changes the ranking, the new ranking replaces the saved one." },
-      "question": "When a signed-in buyer changes priorities for one album, should that become the saved ranking?", "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 2 · Phase 2",
+        "current": "",
+        "proposed": "When a signed-in buyer changes the ranking, the new ranking replaces the saved one."
+      },
+      "question": "When a signed-in buyer changes priorities for one album, should that become the saved ranking?",
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 12, "stories": ["5", "7", "8"], "type": "Gap", "severity": "Low",
+      "id": 12,
+      "stories": [
+        "5",
+        "7",
+        "8"
+      ],
+      "type": "Gap",
+      "severity": "Low",
       "title": "Nothing stops a seller from buying their own listing",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 9 · Scope", "quote": "One account for buying and selling" },
-        { "source": "SPEC.md", "where": "Story 5 · What the screens show", "quote": "Buy (green and yellow only)" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 9 · Scope",
+          "quote": "One account for buying and selling"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 5 · What the screens show",
+          "quote": "Buy (green and yellow only)"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 5 · Acceptance criteria", "current": "", "proposed": "A signed-in seller sees their own listings without the Buy button (\"Your listing\")." },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 5 · Acceptance criteria",
+        "current": "",
+        "proposed": "A signed-in seller sees their own listings without the Buy button (\"Your listing\")."
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 13, "stories": ["8"], "type": "Gap", "severity": "Low",
+      "id": 13,
+      "stories": [
+        "8"
+      ],
+      "type": "Gap",
+      "severity": "Low",
       "title": "No story says where \"My listings\" is reached from",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 8 · Scope", "quote": "\"My listings\": see, edit and remove own listings" },
-        { "source": "Spindle_mockups_by_section.pdf", "where": "p. 2 · Homepage", "quote": "Header: search, Sell for free and the account menu. On mobile, the menu is a hamburger." }
+        {
+          "source": "SPEC.md",
+          "where": "Story 8 · Scope",
+          "quote": "\"My listings\": see, edit and remove own listings"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 2 · Homepage",
+          "quote": "Header: search, Sell for free and the account menu. On mobile, the menu is a hamburger."
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 8 · Scope", "current": "", "proposed": "\"My listings\" is reached from the account menu (initials on desktop, hamburger on mobile)." },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 8 · Scope",
+        "current": "",
+        "proposed": "\"My listings\" is reached from the account menu (initials on desktop, hamburger on mobile)."
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 14, "stories": ["4"], "type": "Gap", "severity": "Low",
+      "id": 14,
+      "stories": [
+        "4"
+      ],
+      "type": "Gap",
+      "severity": "Low",
       "title": "Story 4 links to a \"version page\" that no story defines",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 4 · Scope", "quote": "Tapping a version → its recommendation-style page with its listings" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 4 · Scope",
+          "quote": "Tapping a version → its recommendation-style page with its listings"
+        }
       ],
       "proposal": null,
-      "question": "Define the version page when phase 4 is reached (or drop the link from the comparison)?", "status": "open", "first_seen": 1, "resolution": null
+      "question": "Define the version page when phase 4 is reached (or drop the link from the comparison)?",
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 15, "stories": ["all"], "type": "Gap", "severity": "Low",
+      "id": 15,
+      "stories": [
+        "all"
+      ],
+      "type": "Gap",
+      "severity": "Low",
       "title": "No story has a Pre-condition section",
       "evidence": [
-        { "source": "SPEC.md", "where": "All stories", "quote": "Sections used: Scope, Use cases, Acceptance criteria, Edge cases, Data used, Non-functional, Out of scope" }
+        {
+          "source": "SPEC.md",
+          "where": "All stories",
+          "quote": "Sections used: Scope, Use cases, Acceptance criteria, Edge cases, Data used, Non-functional, Out of scope"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Every story, after Scope", "current": "", "proposed": "### Pre-condition — e.g. Story 3: the buyer picked an album with active listings and at least one priority. Story 7: the buyer is signed in and tapped Buy on a green or yellow listing on sale." },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Every story, after Scope",
+        "current": "",
+        "proposed": "### Pre-condition — e.g. Story 3: the buyer picked an album with active listings and at least one priority. Story 7: the buyer is signed in and tapped Buy on a green or yellow listing on sale."
+      },
+      "question": null,
+      "status": "wont-fix",
+      "first_seen": 1,
+      "resolution": {
+        "iteration": 1,
+        "date": "2026-11-07",
+        "decision": "Won't fix. Pre-condition removed from the story template to reduce complexity; what must be true before a story starts stays in its Scope."
+      }
     },
     {
-      "id": 16, "stories": ["1", "3", "5", "7", "8"], "type": "Gap", "severity": "Low",
+      "id": 16,
+      "stories": [
+        "1",
+        "3",
+        "5",
+        "7",
+        "8"
+      ],
+      "type": "Gap",
+      "severity": "Low",
       "title": "Loading and error states are missing (data takes time, or fails to load or save)",
       "evidence": [
-        { "source": "SPEC.md", "where": "Stories 1, 3, 5 · Edge cases", "quote": "(no loading or failure case listed)" }
+        {
+          "source": "SPEC.md",
+          "where": "Stories 1, 3, 5 · Edge cases",
+          "quote": "(no loading or failure case listed)"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "New section · Shared rules", "current": "", "proposed": "While data loads, screens show a placeholder. If loading or saving fails, the screen says what failed and offers \"Try again\"; nothing typed is lost." },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "New section · Shared rules",
+        "current": "",
+        "proposed": "While data loads, screens show a placeholder. If loading or saving fails, the screen says what failed and offers \"Try again\"; nothing typed is lost."
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 17, "stories": ["3", "5"], "type": "Ambiguity", "severity": "Low",
+      "id": 17,
+      "stories": [
+        "3",
+        "5"
+      ],
+      "type": "Ambiguity",
+      "severity": "Low",
       "title": "\"Every technical term\" is not testable without a list of terms",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 3 · Acceptance criteria", "quote": "Every technical term on the screen has a plain explanation" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · Acceptance criteria",
+          "quote": "Every technical term on the screen has a plain explanation"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 3 · Acceptance criteria", "current": "Every technical term on the screen has a plain explanation", "proposed": "Every term in the glossary (at least: remaster, reissue, first pressing, matrix, and each condition grade) shows its plain explanation wherever it appears" },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 3 · Acceptance criteria",
+        "current": "Every technical term on the screen has a plain explanation",
+        "proposed": "Every term in the glossary (at least: remaster, reissue, first pressing, matrix, and each condition grade) shows its plain explanation wherever it appears"
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 18, "stories": ["2"], "type": "Gap", "severity": "Low",
+      "id": 18,
+      "stories": [
+        "2"
+      ],
+      "type": "Gap",
+      "severity": "Low",
       "title": "The plain-language line of each priority is only given for Price; the design has all four",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 2 · Scope", "quote": "each with a short plain-language line (e.g. Price: \"I don't want to overpay\")" },
-        { "source": "Spindle_mockups_by_section.pdf", "where": "p. 15 · Priorities", "quote": "I want the best-sounding one · I don't want to overpay · I want the first pressing · I want a near-mint copy" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 2 · Scope",
+          "quote": "each with a short plain-language line (e.g. Price: \"I don't want to overpay\")"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 15 · Priorities",
+          "quote": "I want the best-sounding one · I don't want to overpay · I want the first pressing · I want a near-mint copy"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 2 · Scope", "current": "(e.g. Price: \"I don't want to overpay\")", "proposed": "Sound: \"I want the best-sounding one\" · Price: \"I don't want to overpay\" · Original: \"I want the first pressing\" · Condition: \"I want a near-mint copy\"" },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 2 · Scope",
+        "current": "(e.g. Price: \"I don't want to overpay\")",
+        "proposed": "Sound: \"I want the best-sounding one\" · Price: \"I don't want to overpay\" · Original: \"I want the first pressing\" · Condition: \"I want a near-mint copy\""
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 19, "stories": ["1"], "type": "Inconsistency", "severity": "Low",
+      "id": 19,
+      "stories": [
+        "1"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
       "title": "Search results in the design show \"from €24 · 3 verified copies\"; the story moved price to the detail page without recording why",
       "evidence": [
-        { "source": "Spindle_mockups_by_section.pdf", "where": "p. 15 · Search", "quote": "Ziggy Stardust · David Bowie, 1972 · from €24 · 3 verified copies · 477 versions" },
-        { "source": "SPEC.md", "where": "Story 1 · What each screen shows", "quote": "Search result: cover, album title, artist, release year, number of versions" }
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 15 · Search",
+          "quote": "Ziggy Stardust · David Bowie, 1972 · from €24 · 3 verified copies · 477 versions"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 1 · What each screen shows",
+          "quote": "Search result: cover, album title, artist, release year, number of versions"
+        }
       ],
-      "proposal": { "file": "DECISIONS.md", "section": "Product decisions", "current": "", "proposed": "### Search results show no price or listing count (story 1)\n- Why: (your reason)" },
-      "question": "Keep the results without price and copies (then record why), or follow the design?", "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "DECISIONS.md",
+        "section": "Product decisions",
+        "current": "",
+        "proposed": "### Search results show no price or listing count (story 1)\n- Why: (your reason)"
+      },
+      "question": "Keep the results without price and copies (then record why), or follow the design?",
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 20, "stories": ["6"], "type": "Inconsistency", "severity": "Low",
+      "id": 20,
+      "stories": [
+        "6"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
       "title": "Typical price: the story shows a range (€28–€36), the design shows one value (€32); the change is not recorded",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 6 · Scope", "quote": "Below the list: \"Typical price for this pressing: €28–€36\"" },
-        { "source": "Spindle_mockups_by_section.pdf", "where": "p. 15 · Verified listings", "quote": "Typical price for this pressing: €32" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 6 · Scope",
+          "quote": "Below the list: \"Typical price for this pressing: €28–€36\""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 15 · Verified listings",
+          "quote": "Typical price for this pressing: €32"
+        }
       ],
-      "proposal": { "file": "DECISIONS.md", "section": "Product decisions", "current": "", "proposed": "### The typical price is shown as a range, not one value (story 6)\n- Why: a range explains why a price is \"Typical\" (the sell screen design already uses a range: €24–34)." },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "DECISIONS.md",
+        "section": "Product decisions",
+        "current": "",
+        "proposed": "### The typical price is shown as a range, not one value (story 6)\n- Why: a range explains why a price is \"Typical\" (the sell screen design already uses a range: €24–34)."
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 21, "stories": ["3", "5"], "type": "Inconsistency", "severity": "Low",
+      "id": 21,
+      "stories": [
+        "3",
+        "5"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
       "title": "Listings on the same screen as the recommendation (story), but on a separate screen on mobile (design)",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 3 · Scope", "quote": "Below it, the listings for that version (story 5)" },
-        { "source": "Spindle_mockups_by_section.pdf", "where": "p. 11 · Recommendation (mobile)", "quote": "Compare · See verified listings" },
-        { "source": "Spindle_mockups_by_section.pdf", "where": "p. 15 · Verified listings", "quote": "3 for sale · 1 moved" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 3 · Scope",
+          "quote": "Below it, the listings for that version (story 5)"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 11 · Recommendation (mobile)",
+          "quote": "Compare · See verified listings"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 15 · Verified listings",
+          "quote": "3 for sale · 1 moved"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 3 · Scope", "current": "Below it, the listings for that version (story 5)", "proposed": "Desktop: the listings appear beside the recommendation. Phone: a \"See verified listings\" button opens them on their own screen (as in the designs)." },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 3 · Scope",
+        "current": "Below it, the listings for that version (story 5)",
+        "proposed": "Desktop: the listings appear beside the recommendation. Phone: a \"See verified listings\" button opens them on their own screen (as in the designs)."
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 22, "stories": ["9"], "type": "Inconsistency", "severity": "Low",
+      "id": 22,
+      "stories": [
+        "9"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
       "title": "Sign-in error text differs from the design, and the design's text mentions a password reset that is out of scope",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 9 · Acceptance criteria", "quote": "A wrong password shows \"Email or password is wrong\"" },
-        { "source": "Spindle_mockups_by_section.pdf", "where": "p. 5 · Sign in error", "quote": "That email and password don't match. Check them and try again, or reset your password." },
-        { "source": "DECISIONS.md", "where": "Story 9", "quote": "No email confirmation or password reset in the MVP" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 9 · Acceptance criteria",
+          "quote": "A wrong password shows \"Email or password is wrong\""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 5 · Sign in error",
+          "quote": "That email and password don't match. Check them and try again, or reset your password."
+        },
+        {
+          "source": "DECISIONS.md",
+          "where": "Story 9",
+          "quote": "No email confirmation or password reset in the MVP"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 9 · Acceptance criteria", "current": "A wrong password shows \"Email or password is wrong\"", "proposed": "A wrong password shows \"That email and password don't match. Check them and try again.\" (no reset link in the MVP)" },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 9 · Acceptance criteria",
+        "current": "A wrong password shows \"Email or password is wrong\"",
+        "proposed": "A wrong password shows \"That email and password don't match. Check them and try again.\" (no reset link in the MVP)"
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 23, "stories": ["9"], "type": "Inconsistency", "severity": "Low",
+      "id": 23,
+      "stories": [
+        "9"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
       "title": "The design's sign-up has \"I also want to sell records\" and a terms line; the story has neither",
       "evidence": [
-        { "source": "Spindle_mockups_by_section.pdf", "where": "p. 5 · Create account", "quote": "I also want to sell records (it's free) · By creating an account you accept the terms and privacy policy." },
-        { "source": "SPEC.md", "where": "Story 9 · Scope", "quote": "Sign up with name, email and password" }
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 5 · Create account",
+          "quote": "I also want to sell records (it's free) · By creating an account you accept the terms and privacy policy."
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 9 · Scope",
+          "quote": "Sign up with name, email and password"
+        }
       ],
       "proposal": null,
-      "question": "With one account for buying and selling, drop the \"I also want to sell\" checkbox? Keep the terms line as text only?", "status": "open", "first_seen": 1, "resolution": null
+      "question": "With one account for buying and selling, drop the \"I also want to sell\" checkbox? Keep the terms line as text only?",
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 24, "stories": ["7"], "type": "Inconsistency", "severity": "Low",
+      "id": 24,
+      "stories": [
+        "7"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
       "title": "Checkout design shows a saved address and a phone number for MB WAY; the story types the address each time and shows the method as a label only — not recorded in DECISIONS",
       "evidence": [
-        { "source": "Spindle_mockups_by_section.pdf", "where": "p. 16 · Buy with protection", "quote": "Ship to Rua do Almada 120, Porto · Change · Pay with MB WAY · 912 *** 345 · Change" },
-        { "source": "SPEC.md", "where": "Story 7 · What the checkout shows", "quote": "typed for each order, not saved · choice of MB WAY or card, as a label only" }
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 16 · Buy with protection",
+          "quote": "Ship to Rua do Almada 120, Porto · Change · Pay with MB WAY · 912 *** 345 · Change"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 7 · What the checkout shows",
+          "quote": "typed for each order, not saved · choice of MB WAY or card, as a label only"
+        }
       ],
-      "proposal": { "file": "DECISIONS.md", "section": "Product decisions", "current": "", "proposed": "### Checkout address is typed for each order; the payment method is a label only (story 7)\n- Why: no personal data stored beyond the order; payment is simulated." },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "DECISIONS.md",
+        "section": "Product decisions",
+        "current": "",
+        "proposed": "### Checkout address is typed for each order; the payment method is a label only (story 7)\n- Why: no personal data stored beyond the order; payment is simulated."
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 25, "stories": ["7"], "type": "Gap", "severity": "Low",
+      "id": 25,
+      "stories": [
+        "7"
+      ],
+      "type": "Gap",
+      "severity": "Low",
       "title": "The design explains what protection covers; the story does not include that text",
       "evidence": [
-        { "source": "Spindle_mockups_by_section.pdf", "where": "p. 16 · Buy with protection", "quote": "What protection covers: Pressing check, payment held until delivery, and a refund if the record isn't as listed." }
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 16 · Buy with protection",
+          "quote": "What protection covers: Pressing check, payment held until delivery, and a refund if the record isn't as listed."
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 7 · What the checkout shows", "current": "", "proposed": "- \"What protection covers: pressing check, payment held until delivery, and a refund if the record isn't as listed.\"" },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 7 · What the checkout shows",
+        "current": "",
+        "proposed": "- \"What protection covers: pressing check, payment held until delivery, and a refund if the record isn't as listed.\""
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 26, "stories": ["4"], "type": "Inconsistency", "severity": "Low",
+      "id": 26,
+      "stories": [
+        "4"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
       "title": "Comparison rows: story shows 1–5 scores, design shows plain words (Cleaner / Warmer, Yes / No, Near mint / Worn)",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 4 · Scope", "quote": "sound, price, original, condition (scores 1–5)" },
-        { "source": "Spindle_mockups_by_section.pdf", "where": "p. 11 · Compare", "quote": "Sound: Cleaner / Warmer · Typical price: €32 / €185 · First pressing? No / Yes · Condition for sale: Near mint / Worn" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 4 · Scope",
+          "quote": "sound, price, original, condition (scores 1–5)"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 11 · Compare",
+          "quote": "Sound: Cleaner / Warmer · Typical price: €32 / €185 · First pressing? No / Yes · Condition for sale: Near mint / Worn"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 4 · Scope", "current": "sound, price, original, condition (scores 1–5)", "proposed": "sound (short word from the data, e.g. \"Cleaner\"), typical price, first pressing (Yes / No), best condition on sale (grade name), number for sale" },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 4 · Scope",
+        "current": "sound, price, original, condition (scores 1–5)",
+        "proposed": "sound (short word from the data, e.g. \"Cleaner\"), typical price, first pressing (Yes / No), best condition on sale (grade name), number for sale"
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     },
     {
-      "id": 27, "stories": ["7"], "type": "Ambiguity", "severity": "Low",
+      "id": 27,
+      "stories": [
+        "7"
+      ],
+      "type": "Ambiguity",
+      "severity": "Low",
       "title": "Is a payment method required before Pay, and is one pre-selected?",
       "evidence": [
-        { "source": "SPEC.md", "where": "Story 7 · Acceptance criteria", "quote": "Pay is disabled until the address fields are filled in" },
-        { "source": "SPEC.md", "where": "Story 7 · What the checkout shows", "quote": "Payment method: choice of MB WAY or card, as a label only" }
+        {
+          "source": "SPEC.md",
+          "where": "Story 7 · Acceptance criteria",
+          "quote": "Pay is disabled until the address fields are filled in"
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Story 7 · What the checkout shows",
+          "quote": "Payment method: choice of MB WAY or card, as a label only"
+        }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 7 · What the checkout shows", "current": "choice of MB WAY or card, as a label only", "proposed": "choice of MB WAY or card, as a label only; MB WAY is selected by default" },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": {
+        "file": "SPEC.md",
+        "section": "Story 7 · What the checkout shows",
+        "current": "choice of MB WAY or card, as a label only",
+        "proposed": "choice of MB WAY or card, as a label only; MB WAY is selected by default"
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
     }
   ],
   "coverage": [
-    { "story": "1", "title": "Search for an album", "tested": false, "template": { "story": true, "scope": true, "precondition": false, "criteria": true }, "checks": { "criteria": "done", "states": "done", "data": "done", "design": "done" } },
-    { "story": "2", "title": "Say what matters to me", "tested": false, "template": { "story": true, "scope": true, "precondition": false, "criteria": true }, "checks": { "criteria": "done", "states": "done", "data": "done", "design": "done" } },
-    { "story": "3", "title": "Get one recommendation", "tested": false, "template": { "story": true, "scope": true, "precondition": false, "criteria": true }, "checks": { "criteria": "done", "states": "done", "data": "done", "design": "done" } },
-    { "story": "5", "title": "See verified listings", "tested": false, "template": { "story": true, "scope": true, "precondition": false, "criteria": true }, "checks": { "criteria": "done", "states": "done", "data": "done", "design": "done" } },
-    { "story": "6", "title": "Fair price", "tested": false, "template": { "story": true, "scope": true, "precondition": false, "criteria": true }, "checks": { "criteria": "done", "states": "done", "data": "done", "design": "done" } },
-    { "story": "9", "title": "Sign up, log in", "tested": false, "template": { "story": true, "scope": true, "precondition": false, "criteria": true }, "checks": { "criteria": "done", "states": "done", "data": "done", "design": "done" } },
-    { "story": "7", "title": "Buy with protection", "tested": false, "template": { "story": true, "scope": true, "precondition": false, "criteria": true }, "checks": { "criteria": "done", "states": "done", "data": "done", "design": "done" } },
-    { "story": "8", "title": "Sell a record for free", "tested": false, "template": { "story": true, "scope": true, "precondition": false, "criteria": true }, "checks": { "criteria": "done", "states": "done", "data": "done", "design": "done" } },
-    { "story": "4", "title": "Compare versions", "tested": false, "template": { "story": true, "scope": true, "precondition": false, "criteria": true }, "checks": { "criteria": "done", "states": "done", "data": "done", "design": "done" } }
+    {
+      "story": "1",
+      "title": "Search for an album",
+      "tested": false,
+      "template": {
+        "story": true,
+        "scope": true,
+        "criteria": true
+      },
+      "checks": {
+        "criteria": "done",
+        "states": "done",
+        "data": "done",
+        "design": "done"
+      }
+    },
+    {
+      "story": "2",
+      "title": "Say what matters to me",
+      "tested": false,
+      "template": {
+        "story": true,
+        "scope": true,
+        "criteria": true
+      },
+      "checks": {
+        "criteria": "done",
+        "states": "done",
+        "data": "done",
+        "design": "done"
+      }
+    },
+    {
+      "story": "3",
+      "title": "Get one recommendation",
+      "tested": false,
+      "template": {
+        "story": true,
+        "scope": true,
+        "criteria": true
+      },
+      "checks": {
+        "criteria": "done",
+        "states": "done",
+        "data": "done",
+        "design": "done"
+      }
+    },
+    {
+      "story": "5",
+      "title": "See verified listings",
+      "tested": false,
+      "template": {
+        "story": true,
+        "scope": true,
+        "criteria": true
+      },
+      "checks": {
+        "criteria": "done",
+        "states": "done",
+        "data": "done",
+        "design": "done"
+      }
+    },
+    {
+      "story": "6",
+      "title": "Fair price",
+      "tested": false,
+      "template": {
+        "story": true,
+        "scope": true,
+        "criteria": true
+      },
+      "checks": {
+        "criteria": "done",
+        "states": "done",
+        "data": "done",
+        "design": "done"
+      }
+    },
+    {
+      "story": "9",
+      "title": "Sign up, log in",
+      "tested": false,
+      "template": {
+        "story": true,
+        "scope": true,
+        "criteria": true
+      },
+      "checks": {
+        "criteria": "done",
+        "states": "done",
+        "data": "done",
+        "design": "done"
+      }
+    },
+    {
+      "story": "7",
+      "title": "Buy with protection",
+      "tested": false,
+      "template": {
+        "story": true,
+        "scope": true,
+        "criteria": true
+      },
+      "checks": {
+        "criteria": "done",
+        "states": "done",
+        "data": "done",
+        "design": "done"
+      }
+    },
+    {
+      "story": "8",
+      "title": "Sell a record for free",
+      "tested": false,
+      "template": {
+        "story": true,
+        "scope": true,
+        "criteria": true
+      },
+      "checks": {
+        "criteria": "done",
+        "states": "done",
+        "data": "done",
+        "design": "done"
+      }
+    },
+    {
+      "story": "4",
+      "title": "Compare versions",
+      "tested": false,
+      "template": {
+        "story": true,
+        "scope": true,
+        "criteria": true
+      },
+      "checks": {
+        "criteria": "done",
+        "states": "done",
+        "data": "done",
+        "design": "done"
+      }
+    }
   ],
   "questions": [
-    { "id": "Q1", "finding": 8, "question": "Condition list: the story's five grades (M, NM, VG+, VG, G) or the design's four (Near mint, Very good, Good, Fair)?", "status": "open", "answer": null },
-    { "id": "Q2", "finding": 5, "question": "Album with no listings: skip the priorities screen and show the message straight away?", "status": "open", "answer": null },
-    { "id": "Q3", "finding": 6, "question": "Moved (red) listing under its correct version: yellow until checked again?", "status": "open", "answer": null },
-    { "id": "Q4", "finding": 11, "question": "Does changing priorities replace the saved ranking?", "status": "open", "answer": null },
-    { "id": "Q5", "finding": 19, "question": "Search results without price and copies (record why), or follow the design?", "status": "open", "answer": null },
-    { "id": "Q6", "finding": 23, "question": "Drop the \"I also want to sell records\" checkbox; keep the terms line as text?", "status": "open", "answer": null },
-    { "id": "Q7", "finding": 14, "question": "Story 4: define the version page in phase 4, or drop the link?", "status": "open", "answer": null }
+    {
+      "id": "Q1",
+      "finding": 8,
+      "question": "Condition list: the story's five grades (M, NM, VG+, VG, G) or the design's four (Near mint, Very good, Good, Fair)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q2",
+      "finding": 5,
+      "question": "Album with no listings: skip the priorities screen and show the message straight away?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q3",
+      "finding": 6,
+      "question": "Moved (red) listing under its correct version: yellow until checked again?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q4",
+      "finding": 11,
+      "question": "Does changing priorities replace the saved ranking?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q5",
+      "finding": 19,
+      "question": "Search results without price and copies (record why), or follow the design?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q6",
+      "finding": 23,
+      "question": "Drop the \"I also want to sell records\" checkbox; keep the terms line as text?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q7",
+      "finding": 14,
+      "question": "Story 4: define the version page in phase 4, or drop the link?",
+      "status": "open",
+      "answer": null
+    }
   ],
   "todo": [
-    { "id": "T1", "text": "Decide the 3 High inconsistencies in story 3 (#1, #2, #3) before the architecture: they change how the recommendation is calculated", "finding": 1, "done": true },
-    { "id": "T2", "text": "Add a \"Shared rules\" section to SPEC.md (active listings, loading and error states) once #4 and #16 are approved", "finding": 4, "done": false },
-    { "id": "T3", "text": "Answer questions Q1–Q7", "finding": null, "done": false }
+    {
+      "id": "T1",
+      "text": "Decide the 3 High inconsistencies in story 3 (#1, #2, #3) before the architecture: they change how the recommendation is calculated",
+      "finding": 1,
+      "done": true
+    },
+    {
+      "id": "T2",
+      "text": "Add a \"Shared rules\" section to SPEC.md (active listings, loading and error states) once #4 and #16 are approved",
+      "finding": 4,
+      "done": false
+    },
+    {
+      "id": "T3",
+      "text": "Answer questions Q1–Q7",
+      "finding": null,
+      "done": false
+    }
   ]
 }

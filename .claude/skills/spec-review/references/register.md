@@ -42,7 +42,7 @@ One JSON file holds the whole review history. The report is built from it, so an
       "story": "1",
       "title": "Search for an album",
       "tested": false,
-      "template": { "story": true, "scope": true, "precondition": false, "criteria": true },
+      "template": { "story": true, "scope": true, "criteria": true },
       "checks": { "criteria": "done", "states": "done", "data": "done", "design": "done" }
     }
   ],
