@@ -5,6 +5,12 @@
 
 ## 2026-11-07 — Decisions from spec review (iteration 1)
 
+### Listings: beside the recommendation on desktop, on their own screen on phone (stories 3, 5 · finding #21)
+- **Why:** follows the Assignment 1 designs; on a phone, the recommendation and the listings do not fit one screen.
+
+### Before the architecture, only findings that affect it are resolved (process)
+- **Why:** to reduce complexity now. #21 (how many screens) and #16 (shared loading and error states) change the folder structure and the shared components, so they are decided first. The other low findings (texts, small rules, phase 4) are decided before building the story they belong to.
+
 ### Condition grades use the buyer's language: Near mint, Very good, Good, Fair (stories 3, 5, 8 · finding #8)
 - **Why:** Spindle's buyers are not specialists; plain names follow Assignment 1's plain-language rule and the designs. The collector code (NM, VG+, VG, G) stays beside each name for sellers who know the Goldmine scale.
 - **Trade-off accepted:** "Good" here means VG on the collector scale. New (sealed) records are left out of the MVP.

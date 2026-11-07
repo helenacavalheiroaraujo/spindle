@@ -136,7 +136,7 @@ Not in this MVP: stories 10, 11
 - Recommendation screen ("Get this one"), opened from the priorities screen (story 2)
 - Picks **one version among those with active listings**, using the buyer's ranked priorities
 - Shows **why**, in plain language, tied to the buyer's priorities
-- Below it, the listings for that version (story 5)
+- Listings for that version (story 5): on **desktop**, beside the recommendation; on **phone**, a **"See verified listings"** button opens them on their own screen (as in the designs)
 
 ### How the pick is made
 - **Sound** and **original** scores (1–5) are stored per version (illustrative data)
@@ -207,7 +207,7 @@ Not in this MVP: stories 10, 11
 **As a buyer, I want listings already checked, so I can buy without fear.**
 
 ### Scope
-- List of listings for the recommended version, below the recommendation (story 3)
+- List of listings for the recommended version: beside the recommendation on desktop; on its own screen on phone, opened with "See verified listings" (story 3)
 - Each listing has a **traffic light**, calculated from a **checklist** (mock check results, Assignment 1 p. 12)
 - Tapping a listing opens the **listing check** screen ("Is it really this one?")
 

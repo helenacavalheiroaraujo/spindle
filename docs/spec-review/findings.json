@@ -4,7 +4,7 @@
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
     "iteration": 1,
-    "updated": "2026-11-07T20:30:00+00:00"
+    "updated": "2026-11-07T20:40:00+00:00"
   },
   "iterations": [
     {
@@ -695,9 +695,13 @@
         "proposed": "Desktop: the listings appear beside the recommendation. Phone: a \"See verified listings\" button opens them on their own screen (as in the designs)."
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 1,
+        "date": "2026-11-07",
+        "decision": "Follow the design: listings beside the recommendation on desktop; own screen on phone via 'See verified listings'."
+      }
     },
     {
       "id": 22,
@@ -1094,6 +1098,12 @@
     {
       "id": "T3",
       "text": "Answer questions Q1–Q7",
+      "finding": null,
+      "done": false
+    },
+    {
+      "id": "T4",
+      "text": "Decide each remaining low finding before building the story it belongs to (only #21 and #16 were needed before the architecture)",
       "finding": null,
       "done": false
     }
