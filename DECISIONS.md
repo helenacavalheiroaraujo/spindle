@@ -5,6 +5,10 @@
 
 ## 2026-11-07 — Decisions from spec review (iteration 1)
 
+### Condition grades use the buyer's language: Near mint, Very good, Good, Fair (stories 3, 5, 8 · finding #8)
+- **Why:** Spindle's buyers are not specialists; plain names follow Assignment 1's plain-language rule and the designs. The collector code (NM, VG+, VG, G) stays beside each name for sellers who know the Goldmine scale.
+- **Trade-off accepted:** "Good" here means VG on the collector scale. New (sealed) records are left out of the MVP.
+
 ### Search suggestions: up to 3 titles at most 2 letters away (story 1 · finding #7)
 - **Why:** "similar to the typed text" could not be tested; a fixed limit makes the criterion pass or fail, and still catches common typos.
 

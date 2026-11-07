@@ -139,7 +139,7 @@ Not in this MVP: stories 10, 11
 
 ### How the pick is made
 - **Sound** and **original** scores (1–5) are stored per version (illustrative data)
-- The **condition** score is calculated: the best condition among the version's active listings (M = 5, NM = 4, VG+ = 3, VG = 2, G = 1)
+- The **condition** score is calculated: the best condition among the version's active listings (Near mint = 5, Very good = 4, Good = 3, Fair = 2)
 - The **price** score is calculated from each version's lowest active price: **5 × (cheapest lowest price of the album ÷ this version's lowest price)**, rounded to a whole number, minimum 1 (e.g. €24 → 5, €32 → 4, €185 → 1)
 - Each rank position has fixed **weights**: 1st = 3, 2nd = 2, 3rd = 1, 4th = 0.5 (starting values, to be tuned)
 - **Total = sum of (score × weight)** for the chosen priorities; the highest total wins
@@ -453,7 +453,7 @@ Three items, each **✓ matches**, **? uncertain / no photo**, or **✗ does not
 - **Listing:** seller, version (claimed = actual for new listings), condition, price, photos, status (on sale / sold / removed), created date
 - **Check result:** three items set to "uncertain" for new listings
 - **User:** city, shop name (optional)
-- **Condition grade:** fixed list — Mint (M), Near Mint (NM), Very Good Plus (VG+), Very Good (VG), Good (G), each with a plain explanation
+- **Condition grade:** fixed list in the buyer's language, with the collector code beside it — **Near mint** (NM · no marks), **Very good** (VG+ · light marks), **Good** (VG · audible noise), **Fair** (G · heavily played)
 - Photos stored in Supabase Storage
 
 ### Non-functional

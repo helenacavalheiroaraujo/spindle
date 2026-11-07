@@ -4,7 +4,7 @@
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
     "iteration": 1,
-    "updated": "2026-11-07T20:20:00+00:00"
+    "updated": "2026-11-07T20:30:00+00:00"
   },
   "iterations": [
     {
@@ -299,9 +299,13 @@
       ],
       "proposal": null,
       "question": "Which condition list is the one: the story's five grades (M, NM, VG+, VG, G) or the design's four (Near mint, Very good, Good, Fair)?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 1,
+        "date": "2026-11-07",
+        "decision": "Design's list in the buyer's language: Near mint (NM), Very good (VG+), Good (VG), Fair (G); condition score 5/4/3/2; new sealed records out of the MVP."
+      }
     },
     {
       "id": 9,
@@ -1028,8 +1032,8 @@
       "id": "Q1",
       "finding": 8,
       "question": "Condition list: the story's five grades (M, NM, VG+, VG, G) or the design's four (Near mint, Very good, Good, Fair)?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "The buyer's language: the design's four grades, with the collector code beside each."
     },
     {
       "id": "Q2",
