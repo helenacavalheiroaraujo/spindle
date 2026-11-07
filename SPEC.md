@@ -515,7 +515,10 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 
 | Story | Requirement | Implemented in | Covered by test |
 |---|---|---|---|
-| 1 | | | |
+| 1 | Search by title or artist from the 3rd character, ignoring case and accents, newest first | `lib/rules/albumSearch.ts`, `app/AlbumSearch.tsx` | `tests/unit/albumSearch.test.ts`, `tests/e2e/search.spec.ts` |
+| 1 | Up to 3 suggestions, or "No albums found" | `lib/rules/searchSuggestions.ts` | `tests/unit/searchSuggestions.test.ts`, `tests/e2e/search.spec.ts` |
+| 1 | "No listings" from active listings only | `lib/rules/activeListings.ts`, `lib/rules/trafficLight.ts`, `lib/db/albums.ts` | `tests/unit/activeListings.test.ts`, `tests/unit/trafficLight.test.ts`, `tests/e2e/search.spec.ts` |
+| 1 | Tap: priorities screen, or "Nobody is selling this album right now" | `app/AlbumSearch.tsx` | `tests/e2e/search.spec.ts` |
 | 2 | | | |
 | 3 | | | |
 | 5 | | | |

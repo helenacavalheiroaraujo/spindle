@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
+import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
+
+// Headings: bold condensed sans-serif; body: plain readable sans-serif (CLAUDE.md, visual direction).
+const heading = Barlow_Condensed({ subsets: ["latin"], weight: ["700"], variable: "--font-heading" });
+const body = Inter({ subsets: ["latin"], variable: "--font-body" });
 
 export const metadata: Metadata = {
   title: "Spindle",
@@ -8,8 +13,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen antialiased">{children}</body>
+    <html lang="en" className={`${heading.variable} ${body.variable}`}>
+      <body className="min-h-screen font-body antialiased">{children}</body>
     </html>
   );
 }

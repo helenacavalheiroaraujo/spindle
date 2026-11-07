@@ -34,6 +34,7 @@ lib/rules/                          ← business rules, pure functions, no datab
   trafficLight.ts                   ← checklist → green / yellow / red (story 5)
   fairPrice.ts                      ← below / typical / above (story 6)
   checkoutTotal.ts                  ← record + €4.90 + €2.00 (story 7)
+  albumSearch.ts                    ← title/artist match, newest first (story 1)
   searchSuggestions.ts              ← up to 3 albums, tolerance by typed length (story 1)
   activeListings.ts                 ← which listings count (Shared rules)
 lib/db/                             ← all database access (Supabase), one file per entity
@@ -51,7 +52,7 @@ Every rule the SPEC marks "in one function, covered by unit tests" is a pure fun
 ## Example: what happens on a search
 
 1. The buyer types "zig" → the search screen asks the server for albums
-2. The server (`lib/db/albums`) queries Supabase by title and artist
+2. The server (`lib/db/albums`) reads every album with its number of versions and its listings; `lib/rules/albumSearch` keeps those whose title or artist contains the typed text, ignoring case and accents
 3. If nothing matches, `lib/rules/searchSuggestions` picks up to 3 close titles
 4. The screen shows the albums (newest first) or the suggestions
 

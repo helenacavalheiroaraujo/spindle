@@ -1,0 +1,77 @@
+// Story 1 · Search for an album — critical flow, run on phone and desktop (playwright.config.ts).
+// Uses the illustrative data in supabase/seed.sql.
+import { expect, test } from "@playwright/test";
+
+const ZIGGY = "The Rise and Fall of Ziggy Stardust and the Spiders from Mars";
+
+test.beforeEach(async ({ page }) => {
+  await page.goto("/");
+});
+
+const box = (page: import("@playwright/test").Page) => page.getByRole("searchbox", { name: "Album or artist" });
+const rows = (page: import("@playwright/test").Page) => page.getByRole("listitem");
+
+test("fewer than 3 characters shows no results", async ({ page }) => {
+  await box(page).fill("zi");
+  await page.waitForTimeout(600);
+  await expect(rows(page)).toHaveCount(0);
+  await expect(page.getByText("No albums found")).toHaveCount(0);
+});
+
+test("'ziggy' finds Ziggy Stardust with cover, title, artist, year and versions", async ({ page }) => {
+  await box(page).fill("ziggy");
+  const row = rows(page).filter({ hasText: ZIGGY });
+  await expect(row).toHaveCount(1);
+  await expect(row).toContainText("David Bowie, 1972");
+  await expect(row).toContainText("3 versions");
+  await expect(row.locator("img")).toHaveAttribute("src", "/covers/ziggy-stardust.svg");
+  await expect(row).not.toContainText("No listings");
+});
+
+test("'bowie' and 'BOWIE' list Bowie's albums, newest first", async ({ page }) => {
+  const expected = ["Blackstar", "Let's Dance", ZIGGY, "Hunky Dory"];
+  for (const typed of ["bowie", "BOWIE"]) {
+    await box(page).fill(typed);
+    await expect(rows(page)).toHaveCount(4);
+    for (const [i, title] of expected.entries()) await expect(rows(page).nth(i)).toContainText(title);
+  }
+});
+
+test("'bjork' finds Björk", async ({ page }) => {
+  await box(page).fill("bjork");
+  await expect(rows(page).filter({ hasText: "Homogenic" })).toContainText("Björk");
+});
+
+test("albums without active listings show 'No listings' (including one with only a sold copy)", async ({ page }) => {
+  await box(page).fill("bowie");
+  await expect(rows(page).filter({ hasText: "Blackstar" })).toContainText("No listings");
+  await expect(rows(page).filter({ hasText: "Let's Dance" })).toContainText("No listings");
+});
+
+test("a typo suggests the full album title", async ({ page }) => {
+  await box(page).fill("zigy");
+  await expect(page.getByText("Did you mean…?")).toBeVisible();
+  await expect(rows(page)).toHaveCount(1);
+  await expect(rows(page).first()).toContainText(ZIGGY);
+});
+
+test("3 letters with no match, or nothing close, shows only 'No albums found'", async ({ page }) => {
+  for (const typed of ["zgy", "xyzzy"]) {
+    await box(page).fill(typed);
+    await expect(page.getByText("No albums found")).toBeVisible();
+    await expect(rows(page)).toHaveCount(0);
+  }
+});
+
+test("tapping an album with active listings opens the priorities screen", async ({ page }) => {
+  await box(page).fill("ziggy");
+  await rows(page).filter({ hasText: ZIGGY }).getByRole("link").click();
+  await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001\/priorities$/);
+});
+
+test("tapping an album with no listings shows the message directly", async ({ page }) => {
+  await box(page).fill("blackstar");
+  await rows(page).filter({ hasText: "Blackstar" }).getByRole("button").click();
+  await expect(page.getByText("Nobody is selling this album right now")).toBeVisible();
+  await expect(page).toHaveURL("/");
+});

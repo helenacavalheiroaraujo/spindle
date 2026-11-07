@@ -3,6 +3,18 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Story 1 · Search
+
+### Search and suggestions run on the full album list, in a pure rule (story 1 · architecture)
+- **Why:** matching must ignore accents ("bjork" finds "Björk", finding #30), which plain database search cannot do without an extra extension, and the suggestions (finding #29) need every title and artist anyway. The catalogue is small, so reading every album per search is fast. The rules stay in `lib/rules/` and are unit-tested.
+- **Trade-off accepted:** a catalogue of many thousands of albums would need the search moved into the database. Changes step 2 of the search example in ARCHITECTURE.md.
+
+### The server reads the database with the Supabase secret key (architecture)
+- **Why:** RLS blocks every public read, so `lib/db/` uses `SUPABASE_SECRET_KEY`. It has no `NEXT_PUBLIC_` prefix, so it never reaches the browser. It must also be added to the Vercel settings.
+
+### Generated covers and photos (seed)
+- **Why:** real album covers are copyrighted, and links to them could break during the demo. The covers and listing photos are simple generated images labelled "Illustrative".
+
 ## 2026-11-07 — Project setup
 
 ### Supabase in the cloud, tables applied with the Supabase CLI (process)

@@ -6,6 +6,8 @@
   --color-navy: #1d2433;
   --color-brown: #5a3a24;
   --color-line: #e2dacb;
+  --font-heading: var(--font-heading), "Arial Narrow", sans-serif;
+  --font-body: var(--font-body), system-ui, sans-serif;
 }
 
 body {

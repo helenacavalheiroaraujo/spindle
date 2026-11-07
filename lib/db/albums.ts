@@ -1,0 +1,50 @@
+// Album reads for the search (story 1). Facts only: the rules in lib/rules/ decide.
+import { db } from "./client";
+import { hasActiveListings, type ListingFacts } from "@/lib/rules/activeListings";
+import type { CheckItem, CheckResult } from "@/lib/rules/trafficLight";
+
+export type AlbumSummary = {
+  id: string;
+  title: string;
+  artist: string;
+  releaseYear: number;
+  coverUrl: string;
+  versionCount: number;
+  hasListings: boolean;
+};
+
+// Every album with its number of versions and whether it has active listings.
+// The catalogue is small, so search and suggestions run on the full list (DECISIONS.md).
+export async function listAlbumSummaries(): Promise<AlbumSummary[]> {
+  const client = db();
+  const [albums, listings] = await Promise.all([
+    client.from("albums").select("id, title, artist, release_year, cover_url, versions (id)"),
+    client
+      .from("listings")
+      .select("status, claimed_version_id, actual_version_id, matrix_photo_url, check_results (item, result)")
+      .eq("status", "on_sale"),
+  ]);
+  if (albums.error) throw albums.error;
+  if (listings.error) throw listings.error;
+
+  const facts: ListingFacts[] = listings.data.map((l) => ({
+    status: l.status,
+    claimedVersionId: l.claimed_version_id,
+    actualVersionId: l.actual_version_id,
+    hasMatrixPhoto: l.matrix_photo_url !== null,
+    checks: Object.fromEntries(l.check_results.map((c) => [c.item, c.result])) as Record<CheckItem, CheckResult>,
+  }));
+
+  return albums.data.map((a) => {
+    const versionIds = a.versions.map((v) => v.id);
+    return {
+      id: a.id,
+      title: a.title,
+      artist: a.artist,
+      releaseYear: a.release_year,
+      coverUrl: a.cover_url,
+      versionCount: versionIds.length,
+      hasListings: hasActiveListings(facts, versionIds),
+    };
+  });
+}
