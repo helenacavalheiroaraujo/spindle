@@ -3,6 +3,11 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Phone and desktop checks (CLAUDE.md)
+
+### Every screen is checked on phone and desktop (process)
+- **Why:** the SPEC asks for phone and desktop, and some criteria depend on screen size (story 3: listings beside the recommendation on desktop, on their own screen on phone; story 4: 2 versions on phone, 3 on desktop). I verify by behaviour, so each screen change shows both sizes, and the end-to-end tests run at both sizes. Before the demo, the app is also checked on a real phone.
+
 ## 2026-11-07 — Database decisions (docs/database.md)
 
 ### Store facts, calculate judgements (architecture)

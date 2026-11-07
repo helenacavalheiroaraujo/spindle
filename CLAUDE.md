@@ -27,6 +27,7 @@ Explain it in plain language, without jargon. I verify by behaviour, not by read
 - **What** changed (2–3 bullets) and in which files
 - **Why**: which acceptance criterion or decision it serves
 - **Evidence**: test output or a screenshot. If something was not tested, say so.
+- **Screens**: a change to a screen shows a phone (375 px) and a desktop (1280 px) screenshot; Playwright runs every critical flow at both sizes.
 - **Doubts**: anything you were unsure of, or anything that differs from SPEC.md
 
 Wait for my yes before committing.
