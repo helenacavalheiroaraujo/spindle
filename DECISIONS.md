@@ -3,6 +3,18 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Decisions from spec review (iteration 1)
+
+### Reasons follow the buyer's priorities (story 3 · finding #3)
+- **Why:** Assignment 1 asks for "reasons tied to my priorities"; one fixed text per version says the same to every buyer. One sentence per criterion, shown in the buyer's rank order, with prices taken from the listings so they never go stale.
+
+### The price score is calculated from the listings, not stored (story 3 · finding #2)
+- **Why:** prices change with the listings, so a stored score would go stale and contradict the prices the buyer sees.
+- **Formula:** 5 × (cheapest lowest price ÷ this version's lowest price), rounded, minimum 1 — a version that is only slightly dearer keeps a good score; a much dearer one drops to 1.
+
+### The condition score of a version is calculated from its best listing (story 3 · finding #1)
+- **Why:** condition belongs to each copy, not to the version; a version with a near-mint copy and a worn copy has no single condition. The best copy on sale is what the buyer can get.
+
 ## 2026-11-07 — Process decisions
 
 ### User stories are reviewed with a project skill before they are built (spec-review)

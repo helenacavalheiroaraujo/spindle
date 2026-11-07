@@ -130,7 +130,9 @@ Not in this MVP: stories 10, 11
 - Below it, the listings for that version (story 5)
 
 ### How the pick is made
-- Each version has a **score from 1 to 5** for each criterion: sound, price, original, condition (illustrative data)
+- **Sound** and **original** scores (1–5) are stored per version (illustrative data)
+- The **condition** score is calculated: the best condition among the version's active listings (M = 5, NM = 4, VG+ = 3, VG = 2, G = 1)
+- The **price** score is calculated from each version's lowest active price: **5 × (cheapest lowest price of the album ÷ this version's lowest price)**, rounded to a whole number, minimum 1 (e.g. €24 → 5, €32 → 4, €185 → 1)
 - Each rank position has fixed **weights**: 1st = 3, 2nd = 2, 3rd = 1, 4th = 0.5 (starting values, to be tuned)
 - **Total = sum of (score × weight)** for the chosen priorities; the highest total wins
 - **Tie:** the cheaper version wins
@@ -139,7 +141,7 @@ Not in this MVP: stories 10, 11
 ### What the screen shows
 - **Recommended version:** name (e.g. "2012 Remaster"), release year, country, label, format, number of listings, lowest price
 - **Matches:** tags for the chosen priorities where the version scores 4 or 5 (e.g. "Matches: sound", "Matches: price")
-- **Reasons:** up to 3 short sentences from fixed text (e.g. "Costs €32, vs €185 for a first pressing")
+- **Reasons:** one sentence per chosen priority, in rank order (max 3), from fixed text per version and per criterion; prices inside sentences come from the data (e.g. "Costs €[lowest price], vs €[first pressing price] for a first pressing")
 - **Technical terms** (e.g. "remaster", "first pressing", "matrix") always come with a short plain explanation
 - **Source:** "Based on N collector ratings · Illustrative data"
 - **Track list:** collapsed; tap to open; extra tracks labelled **"Bonus"**
@@ -155,15 +157,17 @@ Not in this MVP: stories 10, 11
 - [ ] If the best overall version has no listings, the "ideal but unavailable" note is shown
 - [ ] The alternative is shown only when it differs from the recommendation
 - [ ] "Matches" tags appear only for chosen priorities with a score of 4 or 5
+- [ ] With "1. Sound, 2. Price", the first reason is about sound and the second about price
+- [ ] Prices in the reasons match the current listings
 - [ ] Every technical term on the screen has a plain explanation
 - [ ] The source line is shown
 - [ ] The track list is collapsed until tapped; extra tracks show "Bonus"
 
 ### Example data for the tests
-| Version | Price score | Sound score | Lowest price |
+| Version | Lowest price | Price score (calculated) | Sound score |
 |---|---|---|---|
-| 1990 Reissue | 5 | 2 | €24 |
-| 2012 Remaster | 4 | 5 | €32 |
+| 1990 Reissue | €24 | 5 | 2 |
+| 2012 Remaster | €32 | 4 | 5 |
 
 ### Edge cases
 - No version of the album has listings → no recommendation; message: "Nobody is selling this album right now" + the ideal version
@@ -175,7 +179,7 @@ Not in this MVP: stories 10, 11
 - **Track:** version, position, title, is extra (yes/no)
 - **Listing:** version, price (count and lowest price)
 - **Glossary term:** term, plain explanation
-- **Reason text:** fixed sentences per version
+- **Reason text:** version, criterion (sound / price / original / condition), sentence (may contain price placeholders)
 
 ### Non-functional
 - The recommendation is calculated in one place (one function), covered by unit tests

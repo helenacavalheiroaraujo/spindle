@@ -18,7 +18,7 @@
         { "source": "SPEC.md", "where": "Story 5 · Data used", "quote": "Listing: claimed version, actual version, price, condition, seller, city, photos" }
       ],
       "proposal": { "file": "SPEC.md", "section": "Story 3 · How the pick is made", "current": "Each version has a score from 1 to 5 for each criterion: sound, price, original, condition (illustrative data)", "proposed": "Sound and original scores (1–5) are stored per version (illustrative data). The condition score is calculated: the best condition among the version's listings on sale (M = 5, NM = 4, VG+ = 3, VG = 2, G = 1)." },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "question": null, "status": "resolved", "first_seen": 1, "resolution": { "iteration": 1, "date": "2026-11-07", "decision": "Approved. Condition score = best condition among the version's active listings. Grade values may change with #8." }
     },
     {
       "id": 2, "stories": ["3", "6"], "type": "Inconsistency", "severity": "High",
@@ -27,8 +27,8 @@
         { "source": "SPEC.md", "where": "Story 3 · How the pick is made", "quote": "Each version has a score from 1 to 5 for each criterion: sound, price, original, condition" },
         { "source": "SPEC.md", "where": "Story 3 · What the screen shows", "quote": "number of listings, lowest price" }
       ],
-      "proposal": { "file": "SPEC.md", "section": "Story 3 · How the pick is made", "current": "(price score stored with the version)", "proposed": "The price score is calculated from each version's lowest price on sale: the cheapest version of the album scores 5, the most expensive scores 1, the others in between (rounded to the nearest whole number)." },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "proposal": { "file": "SPEC.md", "section": "Story 3 · How the pick is made", "current": "(price score stored with the version)", "proposed": "The price score is calculated from each version's lowest active price: 5 × (cheapest lowest price ÷ this version's lowest price), rounded, minimum 1." },
+      "question": null, "status": "resolved", "first_seen": 1, "resolution": { "iteration": 1, "date": "2026-11-07", "decision": "Approved with a revised formula: 5 × (cheapest ÷ this lowest price), rounded, min 1. The first proposal (cheapest = 5, dearest = 1) was dropped because it changed the example result." }
     },
     {
       "id": 3, "stories": ["3"], "type": "Inconsistency", "severity": "High",
@@ -39,7 +39,7 @@
         { "source": "SPEC.md", "where": "Story 3 · What the screen shows", "quote": "e.g. \"Costs €32, vs €185 for a first pressing\"" }
       ],
       "proposal": { "file": "SPEC.md", "section": "Story 3 · Data used / What the screen shows", "current": "Reason text: fixed sentences per version", "proposed": "Reason text: fixed sentences per version and per criterion (sound, price, original, condition). The screen shows the sentences for the buyer's chosen priorities, in rank order (max 3). Prices inside sentences come from the data, not from the text." },
-      "question": null, "status": "open", "first_seen": 1, "resolution": null
+      "question": null, "status": "resolved", "first_seen": 1, "resolution": { "iteration": 1, "date": "2026-11-07", "decision": "Approved. One sentence per version and criterion, shown for the chosen priorities in rank order (max 3); prices from the data." }
     },
     {
       "id": 4, "stories": ["1", "3", "5", "6"], "type": "Ambiguity", "severity": "High",
@@ -300,7 +300,7 @@
     { "id": "Q7", "finding": 14, "question": "Story 4: define the version page in phase 4, or drop the link?", "status": "open", "answer": null }
   ],
   "todo": [
-    { "id": "T1", "text": "Decide the 3 High inconsistencies in story 3 (#1, #2, #3) before the architecture: they change how the recommendation is calculated", "finding": 1, "done": false },
+    { "id": "T1", "text": "Decide the 3 High inconsistencies in story 3 (#1, #2, #3) before the architecture: they change how the recommendation is calculated", "finding": 1, "done": true },
     { "id": "T2", "text": "Add a \"Shared rules\" section to SPEC.md (active listings, loading and error states) once #4 and #16 are approved", "finding": 4, "done": false },
     { "id": "T3", "text": "Answer questions Q1–Q7", "finding": null, "done": false }
   ]
