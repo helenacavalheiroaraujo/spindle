@@ -3,6 +3,11 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Product decisions (SPEC.md, story 4)
+
+### The comparison picks versions automatically, by total score (story 4)
+- **Why:** consistent with the recommendation and with Spindle's promise to do the work for the buyer; choosing versions by hand would bring back the "hundreds of versions" problem.
+
 ## 2026-11-07 — Product decisions (SPEC.md, story 8)
 
 ### Sellers pick the exact version from a list of versions (story 8)
