@@ -34,7 +34,7 @@ lib/rules/                          ← business rules, pure functions, no datab
   trafficLight.ts                   ← checklist → green / yellow / red (story 5)
   fairPrice.ts                      ← below / typical / above (story 6)
   checkoutTotal.ts                  ← record + €4.90 + €2.00 (story 7)
-  searchSuggestions.ts              ← up to 3 titles, at most 2 letters away (story 1)
+  searchSuggestions.ts              ← up to 3 albums, tolerance by typed length (story 1)
   activeListings.ts                 ← which listings count (Shared rules)
 lib/db/                             ← all database access (Supabase), one file per entity
 supabase/migrations/                ← tables (next step: docs/database.md)
