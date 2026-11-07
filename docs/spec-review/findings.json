@@ -3,8 +3,8 @@
     "project": "Spindle MVP",
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
-    "iteration": 2,
-    "updated": "2026-11-07T23:00:00+00:00"
+    "iteration": 3,
+    "updated": "2026-11-07T23:15:00+00:00"
   },
   "iterations": [
     {
@@ -16,6 +16,11 @@
       "n": 2,
       "date": "2026-11-07",
       "note": "Second review before building story 1: SPEC.md unchanged since iteration 1, so all open findings stay open; 9 new findings, mostly from rules written in iteration 1 (#29, #28) and checks across stories"
+    },
+    {
+      "n": 3,
+      "date": "2026-11-07",
+      "note": "Re-check after the iteration 2 decisions: only story 1 changed (#19, #29, #30 approved); the new text resolves them and adds no new findings"
     }
   ],
   "findings": [

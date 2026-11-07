@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Project setup
+
+### Supabase in the cloud, tables applied with the Supabase CLI (process)
+- **Why:** the app must be online for the demo, so the database lives in the cloud from the start. The CLI applies the migrations and the illustrative data with one command, so the database can be rebuilt the same way before the demo; pasting SQL by hand is easy to get wrong.
+- **Trade-off accepted:** one more development package (`supabase`). No local database (it would need Docker).
+
 ## 2026-11-07 — Decisions from spec review (iteration 2)
 
 ### Search results show no price or listing count (story 1 · finding #19)

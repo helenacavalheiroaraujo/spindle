@@ -1,3 +1,12 @@
 .spec-review/
 CLAUDE.local.md
 .env*.local
+
+# Next.js, tests, Supabase CLI
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+test-results/
+playwright-report/
+supabase/.temp/

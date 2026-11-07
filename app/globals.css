@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/* Colours from the Assignment 1 designs (CLAUDE.md, visual direction). */
+@theme {
+  --color-cream: #f4efe6;
+  --color-navy: #1d2433;
+  --color-brown: #5a3a24;
+  --color-line: #e2dacb;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-navy);
+}
