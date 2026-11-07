@@ -4,7 +4,7 @@
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
     "iteration": 1,
-    "updated": "2026-11-07T20:10:00+00:00"
+    "updated": "2026-11-07T20:15:00+00:00"
   },
   "iterations": [
     {
@@ -237,9 +237,13 @@
         "proposed": "where it is shown yellow (\"Moved here · check pending\"), because its checklist was made against the claimed version, not this one."
       },
       "question": "Under its correct version, should a moved listing show yellow until it is checked again?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 1,
+        "date": "2026-11-07",
+        "decision": "Approved. Under its correct version a moved listing is yellow ('Moved here · check pending')."
+      }
     },
     {
       "id": 7,
@@ -1034,8 +1038,8 @@
       "id": "Q3",
       "finding": 6,
       "question": "Moved (red) listing under its correct version: yellow until checked again?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Yes, yellow until checked again."
     },
     {
       "id": "Q4",

@@ -231,7 +231,7 @@ Three items, each **✓ matches**, **? uncertain / no photo**, or **✗ does not
 1. **See listings** for the recommended version
 2. **Open a listing** → listing check screen
 3. **Buy** (green / yellow) → purchase (story 7)
-4. **Red listing** → appears here as a warning and also under the **correct version**, where it is checked again
+4. **Red listing** → appears here as a warning and also under the **correct version**, where it is shown **yellow** ("Moved here · check pending"), because its checklist was made against the claimed version
 
 ### Acceptance criteria
 - [ ] All three items ✓ → green, "Match"
@@ -240,7 +240,7 @@ Three items, each **✓ matches**, **? uncertain / no photo**, or **✗ does not
 - [ ] Any ✗ → red, "No match"
 - [ ] Green and yellow listings are sorted by price, cheapest first; red listings come last
 - [ ] Red listings have no Buy button and show the version they were moved to
-- [ ] A red listing also appears in the list of its correct version
+- [ ] A red listing also appears in the list of its correct version, yellow, with "Moved here · check pending"
 - [ ] Yellow listings show the warning before buying
 - [ ] Buyer protection is shown for green and yellow only
 - [ ] The listing check screen shows the checklist, the photos and the condition in plain words

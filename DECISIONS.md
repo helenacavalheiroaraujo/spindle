@@ -5,6 +5,9 @@
 
 ## 2026-11-07 — Decisions from spec review (iteration 1)
 
+### A moved listing is yellow under its correct version (story 5 · finding #6)
+- **Why:** its checklist was made against the version the seller claimed, so nobody has checked it against the correct one; Assignment 1 says "uncertain check: show yellow, never green".
+
 ### An album with no listings shows the message straight away (story 1 · finding #5)
 - **Why:** sending the buyer through the priorities screen only to say nobody is selling wastes two screens.
 
