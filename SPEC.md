@@ -22,6 +22,11 @@ Not in this MVP: stories 10, 11
   - Real catalogue data
   - Links to other platforms
 
+## Shared rules
+- **Active listing:** a listing on sale (not sold, not removed) that is green or yellow.
+- Every count, lowest price, "No listings" label and "has listings" check uses **active listings only**.
+- A red listing counts for its **actual** version, not for the version the seller claimed.
+
 ---
 
 ## Story 1 · Search for an album

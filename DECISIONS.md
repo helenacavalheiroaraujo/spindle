@@ -5,6 +5,9 @@
 
 ## 2026-11-07 — Decisions from spec review (iteration 1)
 
+### Only active listings count (Shared rules · finding #4)
+- **Why:** several stories count listings or show the lowest price; without one rule, sold, removed or wrong-version listings could inflate counts or show a price nobody can pay. Active = on sale and green or yellow; a red listing counts for its actual version.
+
 ### Reasons follow the buyer's priorities (story 3 · finding #3)
 - **Why:** Assignment 1 asks for "reasons tied to my priorities"; one fixed text per version says the same to every buyer. One sentence per criterion, shown in the buyer's rank order, with prices taken from the listings so they never go stale.
 

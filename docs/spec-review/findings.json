@@ -4,7 +4,7 @@
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
     "iteration": 1,
-    "updated": "2026-11-07T20:00:00+00:00"
+    "updated": "2026-11-07T20:05:00+00:00"
   },
   "iterations": [
     {
@@ -160,9 +160,13 @@
         "proposed": "Active listing: a listing on sale (not sold, not removed) that is green or yellow. Counts, lowest price, \"No listings\" and \"has listings\" use active listings only. A red listing counts for its actual version, not for the version the seller claimed."
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 1,
+        "date": "2026-11-07",
+        "decision": "Approved. New 'Shared rules' section in SPEC.md defines active listings; all counts and prices use them; red listings count for their actual version."
+      }
     },
     {
       "id": 5,
@@ -1067,8 +1071,8 @@
     },
     {
       "id": "T2",
-      "text": "Add a \"Shared rules\" section to SPEC.md (active listings, loading and error states) once #4 and #16 are approved",
-      "finding": 4,
+      "text": "Add loading and error states to 'Shared rules' if #16 is approved (active listings already added for #4)",
+      "finding": 16,
       "done": false
     },
     {
