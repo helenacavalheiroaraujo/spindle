@@ -27,6 +27,9 @@ Not in this MVP: stories 10, 11
 - **Active listing:** a listing on sale (not sold, not removed) that is green or yellow.
 - Every count, lowest price, "No listings" label and "has listings" check uses **active listings only**.
 - A red listing counts for its **actual** version, not for the version the seller claimed.
+- **While loading:** a loading mask covers the area that is loading.
+- **If loading or saving fails:** an error screen says what failed, in plain language, with a **"Try again"** button.
+- After "Try again", **forms keep what was typed** (e.g. the checkout address, the sell form and its photos).
 
 ---
 

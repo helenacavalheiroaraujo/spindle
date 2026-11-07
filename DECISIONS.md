@@ -5,6 +5,9 @@
 
 ## 2026-11-07 — Decisions from spec review (iteration 1)
 
+### One shared rule for loading and errors (Shared rules · finding #16)
+- **Why:** without it each screen would handle waiting and failures differently. Loading mask while loading; an error screen in plain language with "Try again" on failure; forms keep what was typed, so a failed payment or listing does not cost the user their input. In the architecture this becomes one shared component.
+
 ### Listings: beside the recommendation on desktop, on their own screen on phone (stories 3, 5 · finding #21)
 - **Why:** follows the Assignment 1 designs; on a phone, the recommendation and the listings do not fit one screen.
 

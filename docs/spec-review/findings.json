@@ -4,7 +4,7 @@
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
     "iteration": 1,
-    "updated": "2026-11-07T20:40:00+00:00"
+    "updated": "2026-11-07T20:45:00+00:00"
   },
   "iterations": [
     {
@@ -538,9 +538,13 @@
         "proposed": "While data loads, screens show a placeholder. If loading or saving fails, the screen says what failed and offers \"Try again\"; nothing typed is lost."
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 1,
+        "date": "2026-11-07",
+        "decision": "Shared rule: loading mask while loading; error screen in plain language with 'Try again'; forms keep what was typed."
+      }
     },
     {
       "id": 17,
@@ -1093,7 +1097,7 @@
       "id": "T2",
       "text": "Add loading and error states to 'Shared rules' if #16 is approved (active listings already added for #4)",
       "finding": 16,
-      "done": false
+      "done": true
     },
     {
       "id": "T3",
