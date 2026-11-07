@@ -3,6 +3,13 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Process decisions
+
+### User stories are reviewed with a project skill before they are built (spec-review)
+- **Why:** the first manual review found contradictions between stories and with the designs (e.g. story 1 vs the designed flow). A skill makes the same review repeatable after every change to SPEC.md, with numbered findings, evidence and a report.
+- **Rules:** read-only; every change proposed as current vs proposed text and written only after my yes; tested stories are not edited (a new story carries the decision); finding numbers never change.
+- Skill: `.claude/skills/spec-review/` · register: `docs/spec-review/findings.json`
+
 ## 2026-11-07 — Product decisions (SPEC.md, story 4)
 
 ### The comparison picks versions automatically, by total score (story 4)
