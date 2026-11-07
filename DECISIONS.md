@@ -3,6 +3,16 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Story 9 · Accounts (database)
+
+### The app's server code creates the profile at sign-up, not a database trigger (story 9)
+- **Why:** a trigger hides the logic in SQL, where Vitest cannot test it and errors reach the user as a generic Supabase message. Keeping it in `lib/db/profiles.ts` keeps it visible and testable like every other flow. Story 9 needs no new migration: `profiles` already has `user_id`, `name`, `city` and `shop_name`.
+- **Trade-off accepted:** sign-up becomes two steps (account, then profile). If the second fails, the account has no profile; the server checks for the profile at login and before Buy / Sell and creates it if missing.
+
+### Phase 2 tables are created with their own story (process)
+- **Why:** `orders` waits for story 7 and `user_preferences` for story 2, so their open findings (e.g. #12) are decided before the columns exist, and no correcting migration is needed.
+- **Trade-off accepted:** more, smaller migrations instead of one for phase 2.
+
 ## 2026-11-07 — Process
 
 ### Options are shown without the AI's recommendation; I choose first (process)

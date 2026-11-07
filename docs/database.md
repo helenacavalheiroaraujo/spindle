@@ -14,7 +14,7 @@
 | Phase | Tables | Stories | Migration |
 |---|---|---|---|
 | 1 · Core | `albums`, `versions`, `tracks`, `glossary_terms`, `reason_texts`, `condition_grades`, `profiles`, `listings`, `check_results` | 1, 2, 3, 5, 6 | `0001_core.sql` |
-| 2 · Purchase | `user_preferences`, `orders` (+ `profiles.user_id` filled in at sign-up) | 9, 7, 2 | later, when phase 2 starts |
+| 2 · Purchase | `user_preferences` (story 2), `orders` (story 7); story 9 adds no table, the app fills `profiles.user_id` at sign-up | 9, 7, 2 | one migration per story, created with that story |
 | 3 · Seller | no new tables (listings, photos in Storage) | 8 | — |
 
 ## Diagram (phase 1)
@@ -100,7 +100,7 @@ Public seller details. Passwords and emails stay in Supabase Auth.
 | Column | Type | Notes |
 |---|---|---|
 | `id` | uuid, primary key | |
-| `user_id` | → Supabase Auth user, nullable, unique | empty for illustrative sellers in the seed; filled in at sign-up (phase 2) |
+| `user_id` | → Supabase Auth user, nullable, unique | empty for illustrative sellers in the seed; filled in by the app's server code at sign-up (story 9), and created at login or before Buy / Sell if missing |
 | `name` | text | |
 | `city` | text, nullable | shown on listings |
 | `shop_name` | text, nullable | filled → "Shop"; empty → "Private seller" (story 9) |
