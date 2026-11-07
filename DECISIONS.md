@@ -3,6 +3,14 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-07 — Story 5 · Verified listings (findings)
+
+### A red listing whose correct version is not in the catalogue is out of the MVP (story 5 · finding #33)
+- **Why:** the data is illustrative and ours; every red listing in the seed has its correct version. Handling the case would make `actual_version_id` optional and add a migration, a seed case and a test for something the demo never shows.
+
+### A red listing's price label uses the typical range of its actual version (story 6 · finding #10)
+- **Why:** it follows the shared rule that a red listing counts for its actual version; the claimed version's range would compare it with the wrong pressing.
+
 ## 2026-11-07 — Story 3 · Recommendation (findings)
 
 ### A version with no listings scores 0 on price and condition when finding the ideal version (story 3 · finding #28)

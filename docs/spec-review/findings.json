@@ -372,9 +372,13 @@
         "proposed": "A red listing is compared with the typical range of its actual version."
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-07",
+        "decision": "Approved. A red listing is compared with the typical range of its actual version (story 6 label rule). Recorded in DECISIONS.md."
+      }
     },
     {
       "id": 11,
@@ -414,9 +418,8 @@
     {
       "id": 12,
       "stories": [
-        "5",
         "7",
-        "8"
+        "9"
       ],
       "type": "Gap",
       "severity": "Low",
@@ -1116,9 +1119,13 @@
         "proposed": "- Red listing whose correct version is not in the catalogue: \"It's a different pressing\" (no \"moved to\"); it appears under no other version"
       },
       "question": null,
-      "status": "open",
+      "status": "wont-fix",
       "first_seen": 2,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-07",
+        "decision": "Won't fix in the MVP. Every red listing in the illustrative data has its correct version in the catalogue; recorded as a story 5 edge case and in DECISIONS.md."
+      }
     },
     {
       "id": 34,
@@ -1153,9 +1160,13 @@
         "proposed": "Yellow: Buy (in the list or on the listing check screen) first shows a warning that says what is uncertain, with \"Continue to checkout\" and \"Back\""
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 2,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-07",
+        "decision": "Approved. Buy on a yellow listing, in the list or on the listing check screen, first shows the warning with \"Continue to checkout\" and \"Back\"."
+      }
     },
     {
       "id": 35,

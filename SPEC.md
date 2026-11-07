@@ -234,7 +234,7 @@ Three items, each **✓ matches**, **? uncertain / no photo**, or **✗ does not
 - **Order:** green and yellow mixed, **cheapest first**; red listings at the end
 - **Red listing:** "It's a different pressing · moved to [version]"; "Not for sale here"; no Buy button
 - **Listing check screen:** traffic light and one-line summary; the checklist; the seller's photos (cover, record, matrix); the condition explained in plain words (e.g. "VG+ means very good, with light signs of wear"); **"Buy with protection"** (green and yellow)
-- **Yellow:** a warning before buying that says what is uncertain (e.g. "The matrix photo isn't sharp. If it turns out to be another pressing, you get your money back.")
+- **Yellow:** Buy (in the list or on the listing check screen) first shows a warning that says what is uncertain (e.g. "The matrix photo isn't sharp. If it turns out to be another pressing, you get your money back."), with "Continue to checkout" and "Back"
 
 ### Use cases
 1. **See listings** for the recommended version
@@ -250,7 +250,7 @@ Three items, each **✓ matches**, **? uncertain / no photo**, or **✗ does not
 - [ ] Green and yellow listings are sorted by price, cheapest first; red listings come last
 - [ ] Red listings have no Buy button and show the version they were moved to
 - [ ] A red listing also appears in the list of its correct version, yellow, with "Moved here · check pending"
-- [ ] Yellow listings show the warning before buying
+- [ ] Yellow listings show the warning before buying, from the list and from the listing check screen
 - [ ] Buyer protection is shown for green and yellow only
 - [ ] The listing check screen shows the checklist, the photos and the condition in plain words
 
@@ -258,6 +258,7 @@ Three items, each **✓ matches**, **? uncertain / no photo**, or **✗ does not
 - No listings for the version → story 3 handles it (the recommendation only picks versions with listings)
 - All listings red → no Buy button anywhere; message: "No listing matches this version yet"
 - Listing without photos → matrix item is ?, so the listing is yellow
+- Red listing whose correct version is not in the catalogue → not handled in the MVP: every red listing in the illustrative data has its correct version in the catalogue
 
 ### Data used
 - **Listing:** claimed version, actual version, price, condition, seller, city, photos (cover, record, matrix)
@@ -287,6 +288,7 @@ Three items, each **✓ matches**, **? uncertain / no photo**, or **✗ does not
 - **Below typical:** price lower than the bottom of the range
 - **Typical:** price within the range, limits included
 - **Above typical:** price higher than the top of the range
+- A red listing is compared with the typical range of its **actual** version (shared rule).
 
 ### Acceptance criteria
 - [ ] With a range of €28–€36: €24 → "Below typical"; €28 → "Typical"; €36 → "Typical"; €40 → "Above typical"
