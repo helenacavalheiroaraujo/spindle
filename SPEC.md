@@ -53,17 +53,17 @@ Not in this MVP: stories 10, 11
 - **Search result:** cover, album title, artist, release year, number of versions; label **"No listings"** when the album has no active listings
 
 ### Acceptance criteria
-- [ ] With fewer than 3 characters, no results are shown
-- [ ] "ziggy" returns *The Rise and Fall of Ziggy Stardust…*
-- [ ] "bowie" returns David Bowie's albums, newest first
-- [ ] Each result shows cover, title, artist, year and number of versions
-- [ ] An album with no listings appears with the label "No listings"
-- [ ] A search with no matches shows up to 3 albums with a word in the title or artist name close to the typed text: at most 1 letter different when 4–5 letters are typed, at most 2 when 6 or more are typed; each suggestion shows the full album title (e.g. "zigy" → "Did you mean *The Rise and Fall of Ziggy Stardust…*?")
-- [ ] With 3 letters typed and no matches, no suggestions are shown, only "No albums found"
-- [ ] "BOWIE" and "bowie" return the same albums; "bjork" finds "Björk"
-- [ ] With no album that close, it shows "No albums found"
-- [ ] Tapping an album with active listings opens the priorities screen (story 2)
-- [ ] Tapping an album with no listings shows "Nobody is selling this album right now" directly
+- [x] With fewer than 3 characters, no results are shown
+- [x] "ziggy" returns *The Rise and Fall of Ziggy Stardust…*
+- [x] "bowie" returns David Bowie's albums, newest first
+- [x] Each result shows cover, title, artist, year and number of versions
+- [x] An album with no listings appears with the label "No listings"
+- [x] A search with no matches shows up to 3 albums with a word in the title or artist name close to the typed text: at most 1 letter different when 4–5 letters are typed, at most 2 when 6 or more are typed; each suggestion shows the full album title (e.g. "zigy" → "Did you mean *The Rise and Fall of Ziggy Stardust…*?")
+- [x] With 3 letters typed and no matches, no suggestions are shown, only "No albums found"
+- [x] "BOWIE" and "bowie" return the same albums; "bjork" finds "Björk"
+- [x] With no album that close, it shows "No albums found"
+- [x] Tapping an album with active listings opens the priorities screen (story 2)
+- [x] Tapping an album with no listings shows "Nobody is selling this album right now" directly
 
 ### Edge cases
 - Typos → up to 3 suggestions (rule in the acceptance criteria), or "No albums found"; never an empty screen
@@ -519,6 +519,7 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 1 | Up to 3 suggestions, or "No albums found" | `lib/rules/searchSuggestions.ts` | `tests/unit/searchSuggestions.test.ts`, `tests/e2e/search.spec.ts` |
 | 1 | "No listings" from active listings only | `lib/rules/activeListings.ts`, `lib/rules/trafficLight.ts`, `lib/db/albums.ts` | `tests/unit/activeListings.test.ts`, `tests/unit/trafficLight.test.ts`, `tests/e2e/search.spec.ts` |
 | 1 | Tap: priorities screen, or "Nobody is selling this album right now" | `app/AlbumSearch.tsx` | `tests/e2e/search.spec.ts` |
+| 1 | Error screen with "Try again" keeps the typed text (Shared rules) | `components/ErrorScreen.tsx`, `app/AlbumSearch.tsx` | `tests/e2e/search.spec.ts` |
 | 2 | | | |
 | 3 | | | |
 | 5 | | | |

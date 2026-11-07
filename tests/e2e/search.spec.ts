@@ -75,3 +75,24 @@ test("tapping an album with no listings shows the message directly", async ({ pa
   await expect(page.getByText("Nobody is selling this album right now")).toBeVisible();
   await expect(page).toHaveURL("/");
 });
+
+test("if the search fails, an error screen with 'Try again' recovers and keeps what was typed", async ({ page }) => {
+  // Cut only the search requests (Next.js server actions are POSTs with a "next-action" header).
+  let fail = true;
+  await page.route("**/*", (route) => {
+    const r = route.request();
+    if (fail && r.method() === "POST" && r.headers()["next-action"]) return route.abort();
+    return route.continue();
+  });
+
+  await box(page).fill("ziggy");
+  // Next.js adds its own empty "alert" (route announcer), so look for ours by its text.
+  const alert = page.getByRole("alert").filter({ hasText: "We couldn't load the albums" });
+  await expect(alert).toBeVisible();
+
+  fail = false;
+  await alert.getByRole("button", { name: "Try again" }).click();
+  await expect(rows(page).filter({ hasText: ZIGGY })).toHaveCount(1);
+  await expect(box(page)).toHaveValue("ziggy");
+  await expect(alert).toHaveCount(0);
+});
