@@ -23,12 +23,14 @@
 - [ ] Tapping a crate opens the genre screen with only that genre's albums, newest first
 - [ ] On desktop the search is in the header on every page and gives the same results as story 1
 - [ ] "This weekend" opens the featured album's priorities screen; "For sellers" opens the sell flow
+- [ ] "This weekend" features the album that opens (story 1) with the most active listings, newest first on a tie; if no album opens, the card is not shown
 
 ## Edge cases
-- Featured album with no active listings → [to decide with the design]
+- Featured album sells out → the next album that opens takes its place; if none, only "For sellers" is shown
 
 ## Data used
 - **Album:** genre (new, one per album)
+- **Demo data (seed):** Rock: Ziggy Stardust, Hunky Dory, Blackstar, The Dark Side of the Moon (Pink Floyd, 1973) · Soul and funk: Let's Dance · Electronic: Homogenic, Megalithic Symphony (AWOLNATION, 2011). Let's Dance, Homogenic (2017 Reissue only), The Dark Side of the Moon and Megalithic Symphony get full demo data (versions, scores, reasons, listings, checks), so every crate opens at least one album on sale.
 
 ## Non-functional
 - Works on phone and desktop; crates large enough to tap

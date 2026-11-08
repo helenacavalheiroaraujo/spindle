@@ -3,6 +3,15 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 12 · Demo data and featured album
+
+### Genres and more demo albums, so every crate opens an album on sale (story 12)
+- **Why:** with real counts only genres with albums show, and in the seed only Ziggy Stardust opens. Three crates (Rock, Soul and funk, Electronic) are closer to the design; completing Let's Dance and Homogenic and adding The Dark Side of the Moon and Megalithic Symphony means none of them leads only to albums that cannot be bought.
+- **Kept for the tests:** Homogenic 1997 stays without listings (the sell tests publish on it); the search test's "only a sold copy" case moves from Let's Dance to Blackstar, which gets one sold listing.
+
+### The featured album is chosen by a rule, not fixed (story 12)
+- **Why:** a fixed album could sell out during the demo and leave the card pointing to "Nobody is selling". The album that opens with the most active listings is always one the buyer can buy.
+
 ## 2026-11-08 — Story 12 · Designs
 
 ### Genre screen: the tapped crate on top; This week: stacked cards, side by side on desktop (story 12)
