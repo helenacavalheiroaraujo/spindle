@@ -3,8 +3,8 @@
     "project": "Spindle MVP",
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
-    "iteration": 5,
-    "updated": "2026-11-08T20:00:00+00:00"
+    "iteration": 6,
+    "updated": "2026-11-09T09:00:00+00:00"
   },
   "iterations": [
     {
@@ -31,6 +31,11 @@
       "n": 5,
       "date": "2026-11-08",
       "note": "Check 6 (audit of built stories 1, 2, 3, 5, 6, 9 against the code), redone after the first audit file was lost. 30 new findings (#42–#71); related small items are grouped; choices that match the design (HappyPath.png) or DECISIONS.md are left out, and issues already in docs/ux-review/findings.json are not repeated."
+    },
+    {
+      "n": 6,
+      "date": "2026-11-08",
+      "note": "Before story 8: checked its designs (3 screens without design: Blockers #72-#74), the sell form against the design pages 16 and 20 (#75-#78), and the story's own gaps (#79-#82). Audit of story 7 against the code: 1 new finding (#83); texts of the checkout and confirmation come from the design or DECISIONS.md. #57 resolved (story 7 built). Questions of already-resolved findings closed. Open findings #11-#14, #26, #42-#71 not re-checked beyond the files story 7 changed."
     }
   ],
   "findings": [
@@ -488,9 +493,13 @@
         "proposed": "\"My listings\" is reached from the account menu (initials on desktop, hamburger on mobile)."
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option A: \"My listings\" is reached from the account menu (initials, then Your account). The header stays minimal for the MVP: only \"Sell for free\", the initials and the My listings link are built with story 8; search in the header and the hamburger menu are left out. Story 8 updated and recorded in DECISIONS.md."
+      }
     },
     {
       "id": 14,
@@ -1233,9 +1242,13 @@
         "proposed": "My listings → see own listings with status (on sale / sold); removed listings are not shown"
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 2,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option A with a confirmation: removed listings are not shown in My listings. Removing asks \"Remove this listing?\" and then a toast \"Listing removed\" with \"Undo\" stays 5 seconds; after that the removal is final. Story 8 updated and recorded in DECISIONS.md."
+      }
     },
     {
       "id": 36,
@@ -1265,9 +1278,13 @@
         "proposed": "Seller searches the album (same search box and matching as story 1); tapping an album opens its **list of versions**, even when nobody is selling it"
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 2,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option A: \"Sell for free\" opens a search screen of its own, with the same search box and matching as story 1; tapping an album opens the list of versions even when nobody is selling it. No \"No listings\" or \"Not in the demo\"; the version count stays. Story 8 updated and recorded in DECISIONS.md."
+      }
     },
     {
       "id": 37,
@@ -1878,12 +1895,12 @@
       "proposal": null,
       "question": "Confirm that story 7 replaces this panel: green Buy goes straight to the checkout (or login).",
       "id": 57,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
       "resolution": {
-        "iteration": 5,
+        "iteration": 6,
         "date": "2026-11-08",
-        "decision": "Option A: story 7 replaces the panel; green Buy goes straight to the checkout (or login). Resolved when the story 7 screens are built."
+        "decision": "Option A, now built: green Buy is a link straight to the checkout (components/BuyButton.tsx lines 22-27); yellow shows the warning, then \"Continue to checkout\". The disabled button and \"Checkout comes in story 7\" are gone."
       }
     },
     {
@@ -2302,6 +2319,424 @@
       "status": "open",
       "first_seen": 5,
       "resolution": null
+    },
+    {
+      "id": 72,
+      "stories": [
+        "8"
+      ],
+      "type": "Gap",
+      "severity": "Blocker",
+      "title": "The list of versions the seller picks from has no design",
+      "evidence": [
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Designs",
+          "quote": "| List of versions to pick from | **None yet: Canva design needed before building** |"
+        },
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Scope",
+          "quote": "sees the **list of versions** (year, country, label, format) → picks the exact one"
+        }
+      ],
+      "proposal": {
+        "file": "specs/story-8-sell.md",
+        "section": "Designs",
+        "current": "| List of versions to pick from | **None yet: Canva design needed before building** |",
+        "proposed": "| List of versions to pick from | [link to the approved Canva design, or a page in docs/design/] |"
+      },
+      "question": "Approve a design for this screen. It also depends on #36 (the list opens even when nobody is selling the album).",
+      "status": "open",
+      "first_seen": 6,
+      "resolution": null
+    },
+    {
+      "id": 73,
+      "stories": [
+        "8"
+      ],
+      "type": "Gap",
+      "severity": "Blocker",
+      "title": "First-time selling (city and shop name) has no design, and the story does not say if it is its own screen or fields on the sell form",
+      "evidence": [
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Designs",
+          "quote": "| First time selling: city and shop name | **None yet: Canva design needed before building** (or fields on the sell form: to decide) |"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf · p. 16 and p. 20",
+          "where": "Sell a record",
+          "quote": "Pressing · Condition · Photos · Price · List for sale (no city or shop name field)"
+        }
+      ],
+      "proposal": null,
+      "question": "Own screen before the form, or city and shop name as fields on the sell form (shown only the first time)? Then approve its design.",
+      "status": "resolved",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option B: city and shop name are fields on the sell form, first time only, as a row \"Add your city\" that opens them (design option C). Phone and desktop designs approved (docs/design/sell-form-first-time-options.html and sell-form-first-time-desktop.html). Story 8 updated and recorded in DECISIONS.md."
+      }
+    },
+    {
+      "id": 74,
+      "stories": [
+        "8"
+      ],
+      "type": "Gap",
+      "severity": "Blocker",
+      "title": "\"My listings\" has no design",
+      "evidence": [
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Designs",
+          "quote": "| My listings | **None yet: Canva design needed before building** |"
+        },
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Scope",
+          "quote": "**\"My listings\":** see, edit and remove own listings"
+        }
+      ],
+      "proposal": {
+        "file": "specs/story-8-sell.md",
+        "section": "Designs",
+        "current": "| My listings | **None yet: Canva design needed before building** |",
+        "proposed": "| My listings | [link to the approved Canva design, or a page in docs/design/] |"
+      },
+      "question": "Approve a design for this screen. It depends on #13 (how to reach it), #35 (which statuses show), #80 (edit) and #81 (remove).",
+      "status": "open",
+      "first_seen": 6,
+      "resolution": null
+    },
+    {
+      "id": 75,
+      "stories": [
+        "8",
+        "5"
+      ],
+      "type": "Inconsistency",
+      "severity": "High",
+      "title": "Matrix photo: optional in the story, required in the sell design",
+      "evidence": [
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Scope",
+          "quote": "**photos** (cover and record required; matrix optional)"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf · p. 16 and p. 20",
+          "where": "Sell a record · Photos",
+          "quote": "Matrix required"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf · p. 20",
+          "where": "Sell a record · Photos",
+          "quote": "More (a fourth photo slot, desktop only)"
+        }
+      ],
+      "proposal": null,
+      "question": "Matrix photo: optional as in the story (a listing without it is yellow, story 5) or required as in the design? And does the desktop \"More\" slot exist?",
+      "status": "resolved",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option A: the matrix photo is optional, as in the story; no \"More\" photo slot. Story 8 unchanged (already says so); the difference from the Assignment 1 design (\"Matrix required\") is recorded in DECISIONS.md."
+      }
+    },
+    {
+      "id": 76,
+      "stories": [
+        "8"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
+      "title": "Button text: the story says \"Publish\", the design says \"List for sale\"; the phone header says \"+ Sell\", the story \"Sell for free\"",
+      "evidence": [
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Acceptance criteria",
+          "quote": "Publish is disabled until condition, price, cover photo and record photo are filled in"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf · p. 16",
+          "where": "Sell a record",
+          "quote": "List for sale"
+        },
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Scope",
+          "quote": "**\"Sell for free\"** in the header; requires login (story 9)"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf · p. 16",
+          "where": "Sell a record (phone header)",
+          "quote": "+ Sell"
+        }
+      ],
+      "proposal": {
+        "file": "specs/story-8-sell.md",
+        "section": "Acceptance criteria",
+        "current": "Publish is disabled until condition, price, cover photo and record photo are filled in",
+        "proposed": "\"List for sale\" is disabled until condition, price, cover photo and record photo are filled in"
+      },
+      "question": "Use the design's \"List for sale\"? And on a phone, \"+ Sell\" or \"Sell for free\" in the header?",
+      "status": "resolved",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Both follow the design: the button says \"List for sale\" and, on a phone, the header says \"+ Sell\" (desktop: \"Sell for free\"). Story 8 updated and recorded in DECISIONS.md."
+      }
+    },
+    {
+      "id": 77,
+      "stories": [
+        "8",
+        "5"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
+      "title": "Sell design promises checks and payout the MVP does not do, and has no \"you receive €[price]\" line",
+      "evidence": [
+        {
+          "source": "Spindle_mockups_by_section.pdf · p. 20",
+          "where": "Sell a record · dark card",
+          "quote": "Your listing is checked against the catalogue, so buyers know it's the right pressing."
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf · p. 20",
+          "where": "Sell a record · dark card",
+          "quote": "You get paid as soon as the buyer confirms the record arrived as listed."
+        },
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Traffic light for new listings",
+          "quote": "Automatic checks are out of scope, so every item of a new listing's checklist is **? (uncertain)**"
+        },
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Acceptance criteria",
+          "quote": "The form says \"No commission: you receive €[price]\""
+        }
+      ],
+      "proposal": null,
+      "question": "Desktop card: keep it as designed (and label it illustrative), keep only \"0% commission\", or drop it? Where does \"No commission: you receive €[price]\" go on the form?",
+      "status": "resolved",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option A: the card only says \"0% commission on every sale\" and \"No commission: you receive €[price]\"; on a phone, the same line sits under the price. The two sentences about checks and payout are left out. Story 8 unchanged (the criterion already says it); recorded in DECISIONS.md."
+      }
+    },
+    {
+      "id": 78,
+      "stories": [
+        "8",
+        "6"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "The sell form shows the typical range but not the label the listing will get, and no rule for a version without a range",
+      "evidence": [
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Scope",
+          "quote": "While typing the price, the seller sees the **typical range** for that version and the label the listing will get (story 6)"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf · p. 16",
+          "where": "Sell a record · Price",
+          "quote": "Typical for this pressing: €24–34"
+        },
+        {
+          "source": "specs/story-6-fair-price.md",
+          "where": "What the screens show",
+          "quote": "Below the list: \"Typical price for this pressing: €28–€36\""
+        }
+      ],
+      "proposal": {
+        "file": "specs/story-8-sell.md",
+        "section": "Scope",
+        "current": "While typing the price, the seller sees the **typical range** for that version and the label the listing will get (story 6)",
+        "proposed": "While typing the price, the seller sees \"Typical for this pressing: €min–€max\" and, next to it, the label the listing will get (\"Below typical\", \"Typical\" or \"Above typical\"). A version without a range shows neither (story 6)."
+      },
+      "question": null,
+      "status": "resolved",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option A: while typing the price the seller sees \"Typical for this pressing: €min–€max\" and the label the listing will get (Below typical / Typical / Above typical); a version without a range shows neither. Story 8 updated, the label added to both first-time designs, recorded in DECISIONS.md."
+      }
+    },
+    {
+      "id": 79,
+      "stories": [
+        "8"
+      ],
+      "type": "Ambiguity",
+      "severity": "Low",
+      "title": "Which prices are valid? Only \"0 or negative\" is refused",
+      "evidence": [
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Edge cases",
+          "quote": "Price of 0 or negative → refused"
+        },
+        {
+          "source": "specs/story-7-checkout.md",
+          "where": "What the checkout shows",
+          "quote": "record price + insured shipping **€4.90** + buyer protection **€2.00** = total"
+        }
+      ],
+      "proposal": null,
+      "question": "Whole euros or up to 2 decimals (e.g. 28.50)? A maximum? Text of the message when refused?",
+      "status": "resolved",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option C: a price must be a number above €0 with at most 2 decimals and at most €1000; otherwise refused with \"Enter a price above €0, with up to 2 decimals\" or \"The maximum price is €1000\". Story 8 updated and recorded in DECISIONS.md."
+      }
+    },
+    {
+      "id": 80,
+      "stories": [
+        "8"
+      ],
+      "type": "Ambiguity",
+      "severity": "Low",
+      "title": "Edit a listing: which fields can change, and on which screen?",
+      "evidence": [
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Use cases",
+          "quote": "**Edit** a listing on sale → changes saved; price label updated"
+        },
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Acceptance criteria",
+          "quote": "Editing the price of a listing updates its label"
+        }
+      ],
+      "proposal": null,
+      "question": "Price only, or also condition and photos? The same form as selling, filled in (the version stays fixed)?",
+      "status": "resolved",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option A: editing a listing changes only its price (the price rule applies); condition, photos and version are fixed by removing and listing again. Story 8 updated and recorded in DECISIONS.md; the price edit control goes into the \"My listings\" design (#74)."
+      }
+    },
+    {
+      "id": 81,
+      "stories": [
+        "8"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Remove a listing: no confirmation, and no rule for a listing bought at the same moment",
+      "evidence": [
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Use cases",
+          "quote": "**Remove** a listing on sale → it no longer appears to buyers"
+        },
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Edge cases",
+          "quote": "Listing bought while the seller is editing it → edit refused: \"This record was just sold\""
+        }
+      ],
+      "proposal": {
+        "file": "specs/story-8-sell.md",
+        "section": "Edge cases",
+        "current": "",
+        "proposed": "Listing bought while the seller is removing it → removal refused: \"This record was just sold\""
+      },
+      "question": "Ask \"Remove this listing?\" before removing, or remove at once?",
+      "status": "resolved",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Confirmation before removing (\"Remove this listing?\"), plus the 5-second Undo. A listing bought while being removed: removal refused (\"This record was just sold\"). Story 8 updated and recorded in DECISIONS.md."
+      }
+    },
+    {
+      "id": 82,
+      "stories": [
+        "8",
+        "9"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "City is asked the first time, but publishing does not depend on it; no way to change city or shop name later",
+      "evidence": [
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Scope",
+          "quote": "First time selling: the seller adds their **city** and, optionally, a **shop name**"
+        },
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Acceptance criteria",
+          "quote": "Publish is disabled until condition, price, cover photo and record photo are filled in"
+        },
+        {
+          "source": "specs/story-9-accounts.md",
+          "where": "Scope",
+          "quote": "On listings, the seller appears as **\"Shop\"** or **\"Private seller\"**, with the city"
+        }
+      ],
+      "proposal": {
+        "file": "specs/story-8-sell.md",
+        "section": "Acceptance criteria",
+        "current": "Publish is disabled until condition, price, cover photo and record photo are filled in",
+        "proposed": "Publish is disabled until condition, price, cover photo and record photo are filled in and, the first time, the city"
+      },
+      "question": "Can the seller change city and shop name later (no screen for it today)?",
+      "status": "resolved",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "The city is required to list the first time (\"List for sale\" stays disabled until it is filled in, as in the first-time design); changing city and shop name later is out of scope for the MVP and a next-phase improvement (T12). Story 8 updated and recorded in DECISIONS.md."
+      }
+    },
+    {
+      "id": 83,
+      "stories": [
+        "7",
+        "5"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: opening the checkout address directly skips the yellow warning",
+      "evidence": [
+        {
+          "source": "specs/story-7-checkout.md",
+          "where": "Use cases",
+          "quote": "**Yellow listing** → the warning from story 5 is shown before the checkout"
+        },
+        {
+          "source": "app/checkout/[listingId]/page.tsx",
+          "where": "line 29",
+          "quote": "if (!canCheckout(l, versionId)) notFound(); // red, sold or removed: never reaches the checkout"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "first_seen": 6,
+      "resolution": null
     }
   ],
   "coverage": [
@@ -2404,7 +2839,7 @@
     {
       "story": "7",
       "title": "Buy with protection",
-      "tested": false,
+      "tested": true,
       "template": {
         "story": true,
         "scope": true,
@@ -2430,7 +2865,7 @@
         "criteria": "done",
         "states": "done",
         "data": "done",
-        "design": "done"
+        "design": "todo"
       }
     },
     {
@@ -2525,22 +2960,22 @@
       "id": "Q11",
       "finding": 37,
       "question": "Keep €2.00 and record the difference in DECISIONS, or follow the design (€2.10, total €35.00)?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Option A. Buyer protection stays €2.00 (total €34.90 for a €28 record); differs from the design's €2.10 on purpose. Recorded in DECISIONS.md."
     },
     {
       "id": "Q12",
       "finding": 39,
       "question": "What should the confirmation screen show, and where does its button lead?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Proposal accepted with option A: the confirmation shows 'Order placed', the total paid, the status, the record and the four steps; its button 'Back to search' leads to the home page. Design: docs/design/order-confirmation.html (variant B). Added to story 7 and recorded in DECISIONS.md."
     },
     {
       "id": "Q13",
       "finding": 41,
       "question": "Check the postcode format (0000-000) or only that it is not empty?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Option B. The postcode must have the format 0000-000; otherwise 'Use the format 0000-000' under the field and Pay stays disabled. Story 7 updated and recorded in DECISIONS.md."
     },
     {
       "id": "Q14",
@@ -2588,15 +3023,15 @@
       "id": "Q20",
       "finding": 48,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Option A: keep the tap. Recorded in DECISIONS.md."
     },
     {
       "id": "Q21",
       "finding": 50,
       "question": "Add reasons and tracks for Hunky Dory, or keep only Ziggy Stardust openable in the demo?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Option B2: an album opens only with active listings and reason texts; Hunky Dory shows \"Not in the demo\" and does not open. Rule in lib/rules/albumAccess.ts; recorded in DECISIONS.md."
     },
     {
       "id": "Q22",
@@ -2630,8 +3065,8 @@
       "id": "Q26",
       "finding": 55,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Option B: changed to \"Based on: Price, Sound · Change\" as in story 2 (defect fix)."
     },
     {
       "id": "Q27",
@@ -2644,15 +3079,15 @@
       "id": "Q28",
       "finding": 57,
       "question": "Confirm that story 7 replaces this panel: green Buy goes straight to the checkout (or login).",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Option A, now built: green Buy is a link straight to the checkout (components/BuyButton.tsx lines 22-27); yellow shows the warning, then \"Continue to checkout\". The disabled button and \"Checkout comes in story 7\" are gone."
     },
     {
       "id": "Q29",
       "finding": 58,
       "question": "Keep the invented sentences (cover/label, country/year, no matrix photo, moved here)? And keep the money-back promise, with a demo answer for how a refund would work?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Option A for both: keep the four extra sentences and the money-back promise (from story 5's example). Recorded in DECISIONS.md."
     },
     {
       "id": "Q30",
@@ -2686,8 +3121,8 @@
       "id": "Q34",
       "finding": 64,
       "question": "Fix the defect: shops show \"Shop\" (story 9) or the shop name, as in the design (\"Discos do Bairro\")? Private sellers show \"Private seller\".",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Option E2: shops show their shop name with a neutral \"Shop\" tag; others show \"Private seller\"; personal names never shown. Rule in lib/rules/seller.ts; recorded in DECISIONS.md."
     },
     {
       "id": "Q35",
@@ -2700,8 +3135,8 @@
       "id": "Q36",
       "finding": 66,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
-      "status": "open",
-      "answer": null
+      "status": "answered",
+      "answer": "Option A: keep the messages. Recorded in DECISIONS.md."
     },
     {
       "id": "Q37",
@@ -2734,6 +3169,83 @@
     {
       "id": "Q41",
       "finding": 71,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q42",
+      "finding": 72,
+      "question": "Approve a design for this screen. It also depends on #36 (the list opens even when nobody is selling the album).",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q43",
+      "finding": 73,
+      "question": "Own screen before the form, or city and shop name as fields on the sell form (shown only the first time)? Then approve its design.",
+      "status": "answered",
+      "answer": "Option B: city and shop name are fields on the sell form, first time only, as a row \"Add your city\" that opens them (design option C, phone). Story 8 updated and recorded in DECISIONS.md. Stays open as a Blocker until the desktop version of the design is approved."
+    },
+    {
+      "id": "Q44",
+      "finding": 74,
+      "question": "Approve a design for this screen. It depends on #13 (how to reach it), #35 (which statuses show), #80 (edit) and #81 (remove).",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q45",
+      "finding": 75,
+      "question": "Matrix photo: optional as in the story (a listing without it is yellow, story 5) or required as in the design? And does the desktop \"More\" slot exist?",
+      "status": "answered",
+      "answer": "Option A: the matrix photo is optional, as in the story; no \"More\" photo slot. Story 8 unchanged (already says so); the difference from the Assignment 1 design (\"Matrix required\") is recorded in DECISIONS.md."
+    },
+    {
+      "id": "Q46",
+      "finding": 76,
+      "question": "Use the design's \"List for sale\"? And on a phone, \"+ Sell\" or \"Sell for free\" in the header?",
+      "status": "answered",
+      "answer": "Both follow the design: the button says \"List for sale\" and, on a phone, the header says \"+ Sell\" (desktop: \"Sell for free\"). Story 8 updated and recorded in DECISIONS.md."
+    },
+    {
+      "id": "Q47",
+      "finding": 77,
+      "question": "Desktop card: keep it as designed (and label it illustrative), keep only \"0% commission\", or drop it? Where does \"No commission: you receive €[price]\" go on the form?",
+      "status": "answered",
+      "answer": "Option A: the card only says \"0% commission on every sale\" and \"No commission: you receive €[price]\"; on a phone, the same line sits under the price. The two sentences about checks and payout are left out. Story 8 unchanged (the criterion already says it); recorded in DECISIONS.md."
+    },
+    {
+      "id": "Q48",
+      "finding": 79,
+      "question": "Whole euros or up to 2 decimals (e.g. 28.50)? A maximum? Text of the message when refused?",
+      "status": "answered",
+      "answer": "Option C: a price must be a number above €0 with at most 2 decimals and at most €1000; otherwise refused with \"Enter a price above €0, with up to 2 decimals\" or \"The maximum price is €1000\". Story 8 updated and recorded in DECISIONS.md."
+    },
+    {
+      "id": "Q49",
+      "finding": 80,
+      "question": "Price only, or also condition and photos? The same form as selling, filled in (the version stays fixed)?",
+      "status": "answered",
+      "answer": "Option A: editing a listing changes only its price (the price rule applies); condition, photos and version are fixed by removing and listing again. Story 8 updated and recorded in DECISIONS.md; the price edit control goes into the \"My listings\" design (#74)."
+    },
+    {
+      "id": "Q50",
+      "finding": 81,
+      "question": "Ask \"Remove this listing?\" before removing, or remove at once?",
+      "status": "answered",
+      "answer": "Confirmation before removing (\"Remove this listing?\"), plus the 5-second Undo. A listing bought while being removed: removal refused (\"This record was just sold\"). Story 8 updated and recorded in DECISIONS.md."
+    },
+    {
+      "id": "Q51",
+      "finding": 82,
+      "question": "Can the seller change city and shop name later (no screen for it today)?",
+      "status": "answered",
+      "answer": "The city is required to list the first time (\"List for sale\" stays disabled until it is filled in, as in the first-time design); changing city and shop name later is out of scope for the MVP and a next-phase improvement (T12). Story 8 updated and recorded in DECISIONS.md."
+    },
+    {
+      "id": "Q52",
+      "finding": 83,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "status": "open",
       "answer": null
@@ -2787,6 +3299,36 @@
       "text": "When story 8 starts: decide #12 (seller buying their own listing), with #13, #35 and #36",
       "finding": 12,
       "done": false
+    },
+    {
+      "id": "T9",
+      "text": "Before building story 8: approve the 3 missing designs (#72, #73, #74) and decide #13, #35, #36 and #73's screen-or-fields question",
+      "finding": 72,
+      "done": false
+    },
+    {
+      "id": "T10",
+      "text": "Before building story 8: decide #75 (High), then #76-#82; decide #12 with them",
+      "finding": 75,
+      "done": false
+    },
+    {
+      "id": "T11",
+      "text": "Decide #83 (audit of story 7): keep as built or new story",
+      "finding": 83,
+      "done": false
+    },
+    {
+      "id": "T12",
+      "text": "Next phase (after the MVP): let the seller change city and shop name after the first sale (there is no screen for it in the MVP; part of #82)",
+      "finding": 82,
+      "done": false
+    },
+    {
+      "id": "T13",
+      "text": "Design the desktop version of the sell form with the 'Add your city' row (finding #73) and get it approved before building story 8",
+      "finding": 73,
+      "done": true
     }
   ]
 }

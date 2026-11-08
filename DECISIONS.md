@@ -3,6 +3,52 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 8 (sell) · findings
+
+### The city is required to list the first time; city and shop name cannot be changed later (story 8 · finding #82)
+- **Why:** buyers see the seller's city on every listing, so a listing needs it. The first-time design (finding #73) already disables "List for sale" until the city is filled in. Changing city or shop name later has no screen and is a next-phase improvement.
+- **Trade-off accepted:** a seller who moves or opens a shop cannot update the data in the MVP.
+
+### Editing a listing changes only its price (story 8 · finding #80)
+- **Why:** the acceptance criterion only asks for the price; a small price-only edit is the cheapest to design and test. A seller who got the condition, a photo or the version wrong removes the listing and lists it again.
+- **Trade-off accepted:** fixing a condition or photo takes a remove plus a new listing. The price edit control (not designed yet) has to be part of the "My listings" design (#74).
+
+### Price rule on the sell form: up to 2 decimals, above €0, at most €1000 (story 8 · finding #79)
+- **Why:** the checkout adds amounts in cents and the database checks the same sum, so more than 2 decimals could break it at payment. The maximum catches typing mistakes such as €3000 for €30; the demo catalogue goes up to €185.
+- **Trade-off accepted:** €1000 is an arbitrary limit, so a rare record above it cannot be listed in the MVP. The two messages were written by the AI, not by the story.
+
+### The sell form shows the price label while typing (story 8 · finding #78)
+- **Why:** the story asks the seller to see the label the listing will get. The Assignment 1 design only shows the range ("€24–34"); the label is added next to it, using the three labels of story 6. A version without a typical range shows neither (story 6).
+- **Trade-off accepted:** the form differs from the design (p. 16 and p. 20) by one extra element, written by the AI into the approved first-time designs. The range is written "€24–€34", as in story 6, not "€24–34".
+
+### The sell form's commission card only says what is true (story 8 · finding #77)
+- **Why:** the Assignment 1 desktop card also promises that the listing is checked against the catalogue and that the seller is paid when the buyer confirms. Neither works in the MVP (automatic checks and steps 2 and 4 are out of scope). The card says "0% commission on every sale" and "No commission: you receive €[price]"; on a phone, the same line sits under the price.
+- **Trade-off accepted:** the form differs from the Assignment 1 design (p. 20), which has the two extra sentences. The line under the price on the phone was added by the AI to the approved phone design.
+
+### The sell button says "List for sale"; on a phone the header says "+ Sell" (story 8 · finding #76)
+- **Why:** both follow the Assignment 1 design, so what is built matches what was approved. "List for sale" also fits the words "listing" and "My listings" used elsewhere.
+- **Trade-off accepted:** the word "free" is not in the phone header; the "0% commission" message stays on the sell form.
+
+### The matrix photo is optional on the sell form; no "More" photo slot (story 8 · finding #75)
+- **Why:** a seller can publish with the cover and the record photo; without a matrix photo the listing is yellow with the warning "There's no matrix photo" (story 5), which is what the product shows. The first-time designs already say "optional". The extra "More" slot in the desktop design has no story.
+- **Trade-off accepted:** differs from the Assignment 1 design (p. 16 and p. 20), which says "Matrix required" and has a "More" slot. Listings without a matrix photo exist, so buyers see the yellow warning more often.
+
+### City and shop name are asked on the sell form, only the first time, as a row that opens the fields (story 8 · finding #73)
+- **Why:** two extra fields on the form avoid a separate screen and an extra step in the first sale, which is the one the demo shows. Of three options (card at the top, section before the button, one row that opens), the row "Add your city" was chosen: it takes the least space and leaves the rest of the form as designed. The button "List for sale" stays disabled, with "Add your city to continue", until the city is filled in.
+- **Trade-off accepted:** the sell form design (Assignment 1, p. 16 and p. 20) is extended with this row (`docs/design/sell-form-first-time-options.html` for the phone, `docs/design/sell-form-first-time-desktop.html` for the desktop). The form has two variants (with and without the row), and filling the city costs one extra tap. Once filled in, city and shop name cannot be changed in the MVP; changing them is a next-phase improvement (finding #82, to-do T12). The texts "Selling from", "Add your city", "Your details", "City", "Shop name (optional)", the line about the "Shop" tag and "Add your city to continue" were written by the AI, not by the story.
+
+### The seller searches on a screen of its own, with the same search as story 1 (story 8 · finding #36)
+- **Why:** in story 1, tapping an album opens the priorities screen, or the message "Nobody is selling this album right now" or "Not in the demo". A seller must reach the list of versions even when nobody sells the album. A separate screen opened from "Sell for free" shares the search box and the matching rules, and leaves the buyer's flow, which has tests, untouched.
+- **Trade-off accepted:** there are two search screens to maintain; they share the component and the rules in `lib/rules/`. The seller's results do not show "No listings" or "Not in the demo", and keep the number of versions of each album.
+
+### Removing a listing: confirm first, then a 5-second "Undo"; removed listings are not shown (story 8 · findings #35, #81)
+- **Why:** removing is a safe, two-step action: the seller confirms ("Remove this listing?", buttons "Remove" and "Keep it"), and a toast "Listing removed" with "Undo" stays 5 seconds. The listing is removed at once, so no buyer can buy it meanwhile; Undo puts it back on sale as before. After 5 seconds, or if the seller leaves the page, the removal is final. "My listings" shows on-sale and sold listings only. If the listing is bought while the seller removes it, the removal is refused ("This record was just sold").
+- **Trade-off accepted:** confirmation and Undo protect against the same mistake, so removing takes one more tap. The toast is a new element beyond `LoadingMask` and `ErrorScreen`; it must be in the "My listings" design (#74). The button names "Remove" and "Keep it" were suggested by the AI, not by the story.
+
+### "My listings" is reached from the account menu; the header stays minimal (story 8 · finding #13)
+- **Why:** the full header in the Assignment 1 design (search in the header, hamburger on phone) is not built, and there is no time to build it before the demo. Story 8 adds only what selling needs: "Sell for free", the user's initials when signed in, and a "My listings" link inside "Your account".
+- **Trade-off accepted:** the header differs from the design (no search box, no hamburger menu). "My listings" takes two taps (initials, then My listings). The initials and menu are built with story 8, not story 9.
+
 ## 2026-11-08 — Story 7 (checkout and confirmation)
 
 ### Buyer protection fee is €2.00, not the €2.10 shown in the design
