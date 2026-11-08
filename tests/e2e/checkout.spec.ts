@@ -19,11 +19,38 @@ const V2012 = "20000000-0000-0000-0000-000000000003";
 const GREEN_32 = "40000000-0000-0000-0000-000000000005";
 const YELLOW_36 = "40000000-0000-0000-0000-000000000006";
 const RED_29 = "40000000-0000-0000-0000-000000000008"; // claimed 2012 Remaster, actually 1990 Reissue
+const V_HOMOGENIC_2017 = "20000000-0000-0000-0000-000000000010"; // no seed listings: the Pay tests add their own
 const rows = (page: Page) => page.getByRole("list", { name: "Verified listings" }).getByRole("listitem");
 
 const PASSWORD = "vinyl-test-123";
 let email = "";
 let userId = "";
+let toBuy = ""; // green €28 listing, bought in the test
+let toLose = ""; // green €28 listing, sold to someone else while the buyer is on the checkout
+
+// A green €28 listing of its own for each run, so paying never changes the demo data.
+async function addListing(): Promise<string> {
+  const { data, error } = await admin()
+    .from("listings")
+    .insert({
+      seller_id: "30000000-0000-0000-0000-000000000001",
+      claimed_version_id: V_HOMOGENIC_2017,
+      actual_version_id: V_HOMOGENIC_2017,
+      condition_code: "VG+",
+      price: 28,
+      status: "on_sale",
+      cover_photo_url: "/photos/cover.svg",
+      record_photo_url: "/photos/record.svg",
+      matrix_photo_url: "/photos/matrix.svg",
+    })
+    .select("id")
+    .single();
+  if (error) throw error;
+  const items = ["cover_label", "country_year", "matrix"].map((item) => ({ listing_id: data.id, item, result: "match" }));
+  const checks = await admin().from("check_results").insert(items);
+  if (checks.error) throw checks.error;
+  return data.id;
+}
 
 test.beforeAll(async ({}, info) => {
   email = `spindle-checkout-${info.project.name}-${Date.now()}@spindle.test`;
@@ -36,9 +63,16 @@ test.beforeAll(async ({}, info) => {
   if (error) throw error;
   userId = data.user.id;
   await admin().from("profiles").insert({ user_id: userId, name: "Rui Costa" });
+  toBuy = await addListing();
+  toLose = await addListing();
 });
 
 test.afterAll(async () => {
+  for (const id of [toBuy, toLose]) {
+    await admin().from("orders").delete().eq("listing_id", id);
+    await admin().from("check_results").delete().eq("listing_id", id);
+    await admin().from("listings").delete().eq("id", id);
+  }
   await admin().from("profiles").delete().eq("user_id", userId);
   await admin().auth.admin.deleteUser(userId);
 });
@@ -57,7 +91,6 @@ test("signed out: Buy on a green listing asks to log in, then lands on its check
   await expect(page).toHaveURL(`/checkout/${GREEN_32}?version=${V2012}`);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Buy with protection");
   await expect(page.getByRole("region", { name: "The record" })).toContainText("Spiders from Mars, 2012 Remaster");
-  await screenshot(page, 7, "checkout");
 });
 
 test("signed out: Continue to checkout after the yellow warning asks to log in, then lands on its checkout", async ({ page }) => {
@@ -78,4 +111,111 @@ test("signed in: a red listing never reaches the checkout; the same listing unde
   await page.goto(`/checkout/${RED_29}?version=${V1990}`);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Buy with protection");
   await expect(page.getByRole("region", { name: "The record" })).toContainText("Spiders from Mars, 1990 Reissue");
+});
+
+async function fillAddress(page: Page) {
+  await page.getByLabel("Name").fill("Rui Costa");
+  await page.getByLabel("Street").fill("Rua do Almada 120");
+  await page.getByLabel("Postcode").fill("4050-031");
+  await page.getByLabel("City").fill("Porto");
+}
+
+test("checkout: fee and total before paying; Pay waits for a full address; no card or bank details", async ({ page }) => {
+  await page.goto(`/login?next=${encodeURIComponent(`/checkout/${toBuy}?version=${V_HOMOGENIC_2017}`)}`);
+  await logIn(page);
+  const price = page.getByRole("definition");
+  await expect(price).toHaveText(["€28.00", "€4.90", "€2.00", "€34.90"]); // record, insured shipping, buyer protection, total
+  await expect(page.getByText("MB WAY")).toBeVisible();
+  await expect(page.getByRole("list", { name: "How protection works" }).getByRole("listitem")).toHaveText([
+    "1You pay Spindle",
+    "2Seller ships",
+    "3You confirm it's all good",
+    "4Seller gets paid",
+  ]);
+  await expect(page.getByText("Pressing check, payment held until delivery, and a refund if the record isn't as listed.")).toBeVisible();
+  await expect(page.getByText("Simulated payment · Illustrative data")).toBeVisible();
+
+  const payButton = page.getByRole("button", { name: "Pay €34.90" });
+  await expect(payButton).toBeDisabled();
+  await page.getByLabel("Name").fill("Rui Costa");
+  await page.getByLabel("Street").fill("Rua do Almada 120");
+  await page.getByLabel("City").fill("Porto");
+  await expect(payButton).toBeDisabled(); // postcode still missing
+  await page.getByLabel("Postcode").fill("4050031");
+  await expect(page.getByText("Use the format 0000-000")).toBeVisible();
+  await expect(payButton).toBeDisabled();
+  await page.getByLabel("Postcode").fill("4050-031");
+  await expect(page.getByText("Use the format 0000-000")).toHaveCount(0);
+  await expect(payButton).toBeEnabled();
+
+  // No card number or bank details anywhere.
+  await expect(page.locator('input[autocomplete^="cc-"]')).toHaveCount(0);
+  await expect(page.getByText(/card number|IBAN|CVV|expiry/i)).toHaveCount(0);
+  await expect(page.getByRole("textbox")).toHaveCount(4);
+  await screenshot(page, 7, "checkout");
+});
+
+test("Pay: the order is created as 'Paid · waiting for the seller'; the listing is sold, gone from the list and cannot be bought again", async ({ page }) => {
+  await page.goto(`/login?next=${encodeURIComponent(`/checkout/${toBuy}?version=${V_HOMOGENIC_2017}`)}`);
+  await logIn(page);
+  await fillAddress(page);
+  await page.getByRole("button", { name: "Pay €34.90" }).click();
+  await expect(page).toHaveURL(/\/orders\/[0-9a-f-]{36}$/);
+
+  // Confirmation (story 7 · What the confirmation shows).
+  const orderUrl = page.url();
+  await expect(page.getByRole("heading", { name: "Order placed" })).toBeVisible();
+  await expect(page.getByText("€34.90 paid")).toBeVisible();
+  await expect(page.getByText("Paid · waiting for the seller")).toBeVisible();
+  await expect(page.getByText(/Homogenic, 2017 Reissue/).and(page.locator(":visible"))).toBeVisible();
+  const steps = page.getByRole("list", { name: "How protection works" }).getByRole("listitem");
+  await expect(steps).toHaveCount(4);
+  await expect(steps.first()).toContainText("done");
+  await expect(page.getByText("Simulated payment · Illustrative data")).toBeVisible();
+  await screenshot(page, 7, "order-confirmation");
+  // Only the buyer can open it: signed out, the login is asked; the link then comes back to the order.
+  await page.context().clearCookies();
+  await page.goto(orderUrl);
+  await expect(page).toHaveURL(/\/login/);
+  await logIn(page);
+  await expect(page.getByRole("heading", { name: "Order placed" })).toBeVisible();
+  await page.getByRole("link", { name: "Back to search" }).click();
+  await expect(page).toHaveURL("/");
+
+  const { data: order } = await admin().from("orders").select("*").eq("listing_id", toBuy).single();
+  const { data: profile } = await admin().from("profiles").select("id").eq("user_id", userId).single();
+  expect(order).toMatchObject({
+    buyer_id: profile!.id,
+    status: "paid_waiting_seller",
+    record_price: 28,
+    shipping: 4.9,
+    protection_fee: 2,
+    total: 34.9,
+    ship_name: "Rui Costa",
+    ship_postcode: "4050-031",
+  });
+  const { data: listing } = await admin().from("listings").select("status").eq("id", toBuy).single();
+  expect(listing?.status).toBe("sold");
+
+  await page.goto(`/versions/${V_HOMOGENIC_2017}/listings`);
+  await expect(page.getByRole("list", { name: "Verified listings" }).getByRole("link", { name: /^Buy €28/ })).toHaveCount(
+    (await admin().from("listings").select("id").eq("claimed_version_id", V_HOMOGENIC_2017).eq("status", "on_sale")).data!.length,
+  );
+  await expect(page.locator(`a[href^="/checkout/${toBuy}"]`)).toHaveCount(0);
+  await page.goto(`/checkout/${toBuy}?version=${V_HOMOGENIC_2017}`);
+  await expect(page.getByText("This page could not be found.")).toBeVisible();
+});
+
+test("sold while the buyer is on the checkout: 'Sorry, this record was just sold' and no order", async ({ page }) => {
+  await page.goto(`/login?next=${encodeURIComponent(`/checkout/${toLose}?version=${V_HOMOGENIC_2017}`)}`);
+  await logIn(page);
+  await fillAddress(page);
+  await admin().from("listings").update({ status: "sold" }).eq("id", toLose); // someone else bought it
+  await page.getByRole("button", { name: "Pay €34.90" }).click();
+  await expect(page.getByRole("alert").filter({ hasText: "Sorry" })).toContainText("Sorry, this record was just sold");
+  await expect(page.getByRole("button", { name: /^Pay/ })).toHaveCount(0);
+  await expect(page.getByLabel("Street")).toHaveValue("Rua do Almada 120"); // what was typed is kept
+  const { data: orders } = await admin().from("orders").select("id").eq("listing_id", toLose);
+  expect(orders).toHaveLength(0);
+  await screenshot(page, 7, "checkout-just-sold");
 });

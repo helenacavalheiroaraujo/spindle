@@ -92,8 +92,15 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 6 | Version without a range: no label and no range line | `lib/rules/fairPrice.ts`, `components/ListingList.tsx`, `supabase/seed.sql` | `tests/unit/fairPrice.test.ts`, `tests/e2e/fairPrice.spec.ts` |
 | 9 | Sign up; log in; wrong password message; log out from Your account; return to where the user was | `lib/rules/signUp.ts`, `lib/rules/login.ts`, `lib/db/session.ts`, `lib/db/profiles.ts` | `tests/unit/signUp.test.ts`, `tests/unit/login.test.ts`, `tests/e2e/signup.spec.ts`, `tests/e2e/login.spec.ts` |
 | 9 | Sellers: shop name and "Shop" tag, or "Private seller"; no personal names (finding #64) | `lib/rules/seller.ts`, `lib/db/listings.ts`, `components/SellerLine.tsx` | `tests/unit/seller.test.ts`, `tests/e2e/listings.spec.ts` |
-| 9 | Tap Buy while signed out → log in or sign up → checkout for that listing | Built with story 7 | Written with story 7 |
+| 9 | Tap Buy while signed out → log in or sign up → checkout for that listing | `app/checkout/[listingId]/page.tsx`, `lib/rules/checkoutAccess.ts`, `lib/rules/login.ts` | `tests/e2e/checkout.spec.ts` |
 | 9 | Tap Sell while signed out → log in or sign up → back to the sell form | Built with story 8 | Written with story 8 |
-| 7 | | | |
+| 7 | Checkout shows the record, address, MB WAY label, price breakdown, steps and "Pay €[total]"; total €34.90 for a €28 record | `lib/rules/checkoutTotal.ts`, `app/checkout/[listingId]/page.tsx`, `app/checkout/[listingId]/CheckoutForm.tsx` | `tests/unit/checkoutTotal.test.ts`, `tests/e2e/checkout.spec.ts` |
+| 7 | Pay disabled until the address is complete; postcode "0000-000" | `lib/rules/shippingAddress.ts`, `app/checkout/[listingId]/CheckoutForm.tsx` | `tests/unit/shippingAddress.test.ts`, `tests/e2e/checkout.spec.ts` |
+| 7 | Pay creates the order "Paid · waiting for the seller" and marks the listing sold; a sold listing cannot be bought again | `app/checkout/[listingId]/actions.ts`, `lib/db/orders.ts`, `supabase/migrations/0002_orders.sql` | `tests/e2e/checkout.spec.ts` |
+| 7 | Red or sold listings never reach the checkout; signed out → login first | `lib/rules/checkoutAccess.ts`, `app/checkout/[listingId]/page.tsx` | `tests/unit/checkoutAccess.test.ts`, `tests/e2e/checkout.spec.ts` |
+| 7 | Sold while on the checkout → "Sorry, this record was just sold", no order | `app/checkout/[listingId]/actions.ts`, `app/checkout/[listingId]/CheckoutForm.tsx` | `tests/e2e/checkout.spec.ts` |
+| 7 | No card or bank details | `app/checkout/[listingId]/CheckoutForm.tsx` | `tests/e2e/checkout.spec.ts` |
+| 7 | Confirmation: "Order placed", total, status, record, steps with 1 done, "Back to search"; only the buyer opens it | `app/orders/[id]/page.tsx`, `lib/db/orders.ts` | `tests/e2e/checkout.spec.ts` |
+| 7 | Loading mask and error screen on the checkout and the confirmation (Shared rules) | `app/checkout/[listingId]/loading.tsx`, `app/checkout/[listingId]/error.tsx`, `app/orders/[id]/loading.tsx`, `app/orders/[id]/error.tsx` | Not tested automatically |
 | 8 | | | |
 | 4 | | | |

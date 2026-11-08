@@ -1,10 +1,12 @@
-// Labelled text field with its hint or error, shared by the sign-up and log-in forms (story 9).
+// Labelled text field with its hint or error, shared by the sign-up and log-in forms (story 9) and the checkout (story 7).
 export function Field({
   name,
   label,
   type = "text",
   autoComplete,
   defaultValue,
+  value,
+  onChange,
   hint,
   error,
 }: {
@@ -13,6 +15,8 @@ export function Field({
   type?: string;
   autoComplete: string;
   defaultValue?: string;
+  value?: string; // with onChange: the form checks each keystroke (checkout)
+  onChange?: (value: string) => void;
   hint?: string;
   error?: string;
 }) {
@@ -26,6 +30,8 @@ export function Field({
         type={type}
         autoComplete={autoComplete}
         defaultValue={defaultValue}
+        value={value}
+        onChange={onChange ? (e) => onChange(e.target.value) : undefined}
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy}
         className={`mt-1 min-h-12 w-full rounded-2xl border bg-white/70 px-4 ${error ? "border-red-700" : "border-line"}`}

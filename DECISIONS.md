@@ -3,6 +3,23 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 7 (checkout and confirmation)
+
+### Buyer protection fee is €2.00, not the €2.10 shown in the design
+- **Why:** story 7 and its acceptance criteria say €2.00 (a €28 record totals €34.90). The Assignment 1 design shows €2.10, which would make the total €35.00.
+- **Trade-off accepted:** the screen differs from the design by 10 cents; the story is the source of truth.
+
+### The confirmation shows the record's actual version
+- **Why:** the orders table does not store which version the buyer came from, so the confirmation reads the listing's actual version. Storing the chosen version would need a new column and a change to `place_order`, which the story does not ask for.
+- **Trade-off accepted:** for a yellow listing, the checkout can show the claimed version and the confirmation the actual one.
+
+### Wording and behaviour written during the build (story 7)
+- "We couldn't complete the payment. Nothing was charged." when Pay fails; "Paying…" while it runs.
+- The "Sorry, this record was just sold" message has a link "See other listings"; the typed address stays in the form.
+- "Loading your order…" and "We couldn't load your order. Check your connection." on the confirmation.
+- **Why:** the story gives the sold message but not these texts.
+- **Trade-off accepted:** the wording was not in the story.
+
 ## 2026-11-08 — Audit of built stories (findings, iteration 5)
 
 ### Shops show their shop name and a "Shop" tag; private sellers show "Private seller" (story 9 · finding #64)
