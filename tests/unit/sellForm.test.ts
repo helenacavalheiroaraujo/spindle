@@ -1,0 +1,77 @@
+// Decision tables from SPEC story 8 · Acceptance criteria, Edge cases and Non-functional; findings #73 and #79.
+import { describe, expect, it } from "vitest";
+import {
+  PRICE_FORMAT_MESSAGE as FORMAT,
+  PRICE_MAX_MESSAGE as MAX,
+  canList,
+  checkPrice,
+  listHint,
+  photoTooBig,
+  type SellFormInput,
+} from "@/lib/rules/sellForm";
+
+describe("checkPrice", () => {
+  it.each([
+    // typed, price or message
+    ["30", 30], // seed range €28–€36: a typical price
+    ["24.50", 24.5],
+    ["24,50", 24.5], // comma as decimal point
+    ["€30", 30],
+    ["0.01", 0.01], // smallest valid price
+    ["1000", 1000], // maximum included
+    ["1000.00", 1000],
+    ["0", FORMAT], // acceptance criterion: 0 refused
+    ["0.00", FORMAT],
+    ["-5", FORMAT], // acceptance criterion: negative refused
+    ["thirty", FORMAT], // acceptance criterion: text refused
+    ["12.345", FORMAT], // acceptance criterion: more than 2 decimals refused
+    ["12.", FORMAT],
+    ["1,000", FORMAT], // a thousands separator reads as 3 decimals: refused
+    ["1000.01", MAX], // acceptance criterion: above €1000 refused
+    ["3000", MAX], // the typing mistake the limit catches (finding #79)
+  ] as const)("%s → %s", (typed, expected) => {
+    const result = checkPrice(typed);
+    if (typeof expected === "number") expect(result).toEqual({ ok: true, price: expected });
+    else expect(result).toEqual({ ok: false, message: expected });
+  });
+
+  it("empty → not valid, no message yet", () => {
+    expect(checkPrice("")).toEqual({ ok: false, message: null });
+    expect(checkPrice("   ")).toEqual({ ok: false, message: null });
+  });
+});
+
+const FULL: SellFormInput = { condition: "VG+", price: "30", hasCover: true, hasRecord: true, needsCity: false, city: "" };
+
+describe("canList and listHint", () => {
+  it.each([
+    // change from a complete form, enabled, hint
+    [{}, true, null],
+    [{ condition: null }, false, null],
+    [{ condition: "Mint" }, false, null], // not one of the four grades
+    [{ price: "" }, false, null],
+    [{ price: "0" }, false, null],
+    [{ price: "1001" }, false, null],
+    [{ hasCover: false }, false, null],
+    [{ hasRecord: false }, false, null],
+    [{ needsCity: true, city: "" }, false, "Add your city to continue"], // first time, no city
+    [{ needsCity: true, city: "   " }, false, "Add your city to continue"],
+    [{ needsCity: true, city: "Porto" }, true, null], // first time, city filled in; shop name optional
+    [{ needsCity: false, city: "" }, true, null], // city already saved
+    [{ needsCity: true, city: "", price: "" }, false, "Add your city to continue"],
+  ] as const)("%o → enabled %s, hint %s", (change, enabled, hint) => {
+    const form = { ...FULL, ...change } as SellFormInput;
+    expect(canList(form)).toBe(enabled);
+    expect(listHint(form)).toBe(hint);
+  });
+});
+
+describe("photoTooBig (5 MB each)", () => {
+  it.each([
+    [1024 * 1024, false],
+    [5 * 1024 * 1024, false], // exactly 5 MB is accepted
+    [5 * 1024 * 1024 + 1, true],
+  ] as const)("%s bytes → %s", (bytes, tooBig) => {
+    expect(photoTooBig(bytes)).toBe(tooBig);
+  });
+});

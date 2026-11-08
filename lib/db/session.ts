@@ -68,14 +68,15 @@ export async function signUpWithPassword(name: string, email: string, password: 
   return { userId: data.user.id };
 }
 
-export type SignedInUser = { id: string; email: string };
+export type SignedInUser = { id: string; email: string; name: string };
 
 // The signed-in user's id and email, checked by Supabase. Null when signed out.
 export async function currentUser(): Promise<SignedInUser | null> {
   const supabase = await authClient();
   const { data } = await supabase.auth.getClaims();
   if (!data?.claims.sub) return null;
-  return { id: data.claims.sub, email: String(data.claims.email ?? "") };
+  const metadata = data.claims.user_metadata as { name?: unknown } | undefined;
+  return { id: data.claims.sub, email: String(data.claims.email ?? ""), name: String(metadata?.name ?? "") };
 }
 
 export type LogInResult = { userId: string; name: string } | { errorCode: string | undefined };

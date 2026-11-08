@@ -1,6 +1,7 @@
 // Top-right of every page (story 9): "Log in" when signed out; the user's initials when signed in,
 // which open Your account (name, email, Log out — DECISIONS · story 9).
 // Lives in the root layout, not in Header, because Header is also used inside client error screens.
+// Also "Sell for free" (story 8; "+ Sell" on a phone, finding #76): signed out, /sell sends to log-in first.
 import { Suspense } from "react";
 import Link from "next/link";
 import { currentUserId } from "@/lib/db/session";
@@ -23,7 +24,14 @@ export async function AccountBadge() {
   const letters = initials(name);
 
   return (
-    <div className="absolute right-4 top-4 z-20">
+    <div className="pointer-events-none absolute inset-x-4 top-4 z-20 flex items-center justify-between gap-2 sm:justify-end [&>*]:pointer-events-auto">
+      {/* Phone: on the left (the design's menu slot, not built), so it never covers the centred logo. */}
+      <Link
+        href="/sell"
+        className="flex min-h-11 items-center rounded-full bg-navy px-4 text-sm font-semibold text-cream"
+      >
+        <span aria-hidden>+&nbsp;</span>Sell<span className="hidden sm:inline">&nbsp;for free</span>
+      </Link>
       {!signedIn ? (
         <Suspense>
           <LogInLink />

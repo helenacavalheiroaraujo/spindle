@@ -149,3 +149,41 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
     photos: { cover: l.cover_photo_url, record: l.record_photo_url, matrix: l.matrix_photo_url },
   };
 }
+
+// --- Sell (story 8) ---------------------------------------------------------
+
+export type NewListing = {
+  sellerId: string; // profile id
+  versionId: string;
+  conditionCode: string;
+  price: number;
+  photos: { cover: string; record: string; matrix: string | null };
+  city: string | null; // first time only (finding #73)
+  shopName: string | null;
+};
+
+export type CreateListingResult =
+  | { listingId: string }
+  | { error: "version_not_found" | "city_required" | "photos_required" };
+
+// "List for sale": create_listing (migration 0003) creates the listing and its three "uncertain" checks,
+// and the first time the seller's city and shop name, all or nothing.
+export async function createListing(l: NewListing): Promise<CreateListingResult> {
+  const { data, error } = await db().rpc("create_listing", {
+    p_seller_id: l.sellerId,
+    p_version_id: l.versionId,
+    p_condition_code: l.conditionCode,
+    p_price: l.price,
+    p_cover_photo_url: l.photos.cover,
+    p_record_photo_url: l.photos.record,
+    p_matrix_photo_url: l.photos.matrix,
+    p_city: l.city,
+    p_shop_name: l.shopName,
+  });
+  if (error) {
+    for (const known of ["version_not_found", "city_required", "photos_required"] as const)
+      if (error.message.includes(known)) return { error: known };
+    throw new Error(`Could not create the listing: ${error.message}`);
+  }
+  return { listingId: data as string };
+}

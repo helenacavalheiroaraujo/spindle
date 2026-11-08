@@ -1,5 +1,7 @@
 "use client";
 // Search box and results (story 1). Rules live in lib/rules; this screen only shows what they return.
+// mode "sell" (story 8 · finding #36): same box and matching, but every album opens its list of versions,
+// with no "No listings" or "Not in the demo" tags.
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { search, type SearchResponse } from "./actions";
@@ -14,7 +16,9 @@ type State =
   | { kind: "done"; response: SearchResponse }
   | { kind: "error" };
 
-export function AlbumSearch() {
+type Mode = "buy" | "sell";
+
+export function AlbumSearch({ mode = "buy" }: { mode?: Mode }) {
   const [typed, setTyped] = useState("");
   const [state, setState] = useState<State>({ kind: "idle" });
   const [attempt, setAttempt] = useState(0);
@@ -70,13 +74,15 @@ export function AlbumSearch() {
             </p>
           </div>
         )}
-        {response && <Results response={response} onNobodySelling={setNobodySelling} />}
+        {response && <Results response={response} mode={mode} onNobodySelling={setNobodySelling} />}
       </div>
     </section>
   );
 }
 
-function Results({ response, onNobodySelling }: { response: SearchResponse; onNobodySelling: (a: AlbumSummary) => void }) {
+type RowProps = { mode: Mode; onNobodySelling: (a: AlbumSummary) => void };
+
+function Results({ response, mode, onNobodySelling }: RowProps & { response: SearchResponse }) {
   const { albums, suggestions } = response;
   if (albums.length > 0) {
     return (
@@ -87,7 +93,7 @@ function Results({ response, onNobodySelling }: { response: SearchResponse; onNo
         <ul className="divide-y divide-line border-y border-line">
           {albums.map((a) => (
             <li key={a.id}>
-              <AlbumRow album={a} onNobodySelling={onNobodySelling} />
+              <AlbumRow album={a} mode={mode} onNobodySelling={onNobodySelling} />
             </li>
           ))}
         </ul>
@@ -101,7 +107,7 @@ function Results({ response, onNobodySelling }: { response: SearchResponse; onNo
         <ul className="divide-y divide-line border-y border-line">
           {suggestions.map((a) => (
             <li key={a.id}>
-              <AlbumRow album={a} onNobodySelling={onNobodySelling} />
+              <AlbumRow album={a} mode={mode} onNobodySelling={onNobodySelling} />
             </li>
           ))}
         </ul>
@@ -111,7 +117,7 @@ function Results({ response, onNobodySelling }: { response: SearchResponse; onNo
   return <p className="font-medium">No albums found</p>;
 }
 
-function AlbumRow({ album, onNobodySelling }: { album: AlbumSummary; onNobodySelling: (a: AlbumSummary) => void }) {
+function AlbumRow({ album, mode, onNobodySelling }: RowProps & { album: AlbumSummary }) {
   const content = (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -121,7 +127,7 @@ function AlbumRow({ album, onNobodySelling }: { album: AlbumSummary; onNobodySel
         <span className="block text-sm text-navy/70">
           {album.artist}, {album.releaseYear}
         </span>
-        {album.access !== "open" && (
+        {mode === "buy" && album.access !== "open" && (
           <span className="mt-1 inline-block rounded-full border border-navy/30 px-2 py-0.5 text-xs">
             {album.access === "no_listings" ? "No listings" : "Not in the demo"}
           </span>
@@ -133,6 +139,12 @@ function AlbumRow({ album, onNobodySelling }: { album: AlbumSummary; onNobodySel
     </>
   );
   const rowClass = "flex min-h-20 w-full items-center gap-3 py-3 text-left";
+  if (mode === "sell")
+    return (
+      <Link href={`/sell/albums/${album.id}`} className={rowClass}>
+        {content}
+      </Link>
+    );
   // Only albums with recommendation data open (finding #50); "Not in the demo" rows do nothing.
   if (album.access === "open")
     return (

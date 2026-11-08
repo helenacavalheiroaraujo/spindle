@@ -70,3 +70,55 @@ export async function getAlbumHeader(albumId: string): Promise<AlbumHeader | nul
   if (!data) return null;
   return { id: data.id, title: data.title, artist: data.artist, coverUrl: data.cover_url, versionCount: data.versions.length };
 }
+
+// --- Sell (story 8) ---------------------------------------------------------
+
+export type SellVersion = { id: string; name: string; releaseYear: number; country: string; label: string; format: string };
+export type AlbumVersions = AlbumHeader & { versions: SellVersion[] };
+
+// An album with every version in the catalogue, oldest first, even when nobody sells it. Null when there is no such album.
+export async function getAlbumVersions(albumId: string): Promise<AlbumVersions | null> {
+  const { data, error } = await db()
+    .from("albums")
+    .select("id, title, artist, cover_url, versions (id, name, release_year, country, label, format)")
+    .eq("id", albumId)
+    .maybeSingle();
+  if (error?.code === "22P02") return null; // not a valid album id
+  if (error) throw error;
+  if (!data) return null;
+  const versions = data.versions
+    .map((v) => ({ id: v.id, name: v.name, releaseYear: v.release_year, country: v.country, label: v.label, format: v.format }))
+    .sort((a, b) => a.releaseYear - b.releaseYear || a.name.localeCompare(b.name));
+  return { id: data.id, title: data.title, artist: data.artist, coverUrl: data.cover_url, versionCount: versions.length, versions };
+}
+
+export type VersionToSell = {
+  id: string;
+  name: string;
+  albumId: string;
+  albumTitle: string;
+  typicalRange: { min: number | null; max: number | null };
+};
+
+// The version picked on the sell form. Null when it is not in the catalogue.
+export async function getVersionToSell(versionId: string): Promise<VersionToSell | null> {
+  const { data, error } = await db()
+    .from("versions")
+    .select("id, name, typical_price_min, typical_price_max, albums (id, title)")
+    .eq("id", versionId)
+    .maybeSingle();
+  if (error?.code === "22P02") return null; // not a valid version id
+  if (error) throw error;
+  if (!data) return null;
+  const album = data.albums as unknown as { id: string; title: string };
+  return {
+    id: data.id,
+    name: data.name,
+    albumId: album.id,
+    albumTitle: album.title,
+    typicalRange: {
+      min: data.typical_price_min === null ? null : Number(data.typical_price_min),
+      max: data.typical_price_max === null ? null : Number(data.typical_price_max),
+    },
+  };
+}

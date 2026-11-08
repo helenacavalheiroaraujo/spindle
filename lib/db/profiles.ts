@@ -17,3 +17,19 @@ export async function getProfileName(userId: string): Promise<string | null> {
 export async function ensureProfile(userId: string, name: string): Promise<void> {
   if ((await getProfileName(userId)) === null && name) await createProfile(userId, name);
 }
+
+export type SellerProfile = { id: string; city: string | null; shopName: string | null };
+
+// The signed-in user's profile for selling (story 8). Recreated first if sign-up saved the account
+// but not the profile (DECISIONS · story 9). Null if it still cannot be found.
+export async function getSellerProfile(userId: string, nameIfMissing: string): Promise<SellerProfile | null> {
+  const read = () => db().from("profiles").select("id, city, shop_name").eq("user_id", userId).maybeSingle();
+  let { data, error } = await read();
+  if (error) throw new Error(`Could not load the profile: ${error.message}`);
+  if (!data) {
+    await createProfile(userId, nameIfMissing || "Seller");
+    ({ data, error } = await read());
+    if (error) throw new Error(`Could not load the profile: ${error.message}`);
+  }
+  return data ? { id: data.id, city: data.city, shopName: data.shop_name } : null;
+}
