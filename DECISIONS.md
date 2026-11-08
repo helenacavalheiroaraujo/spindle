@@ -3,6 +3,17 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 14 outside the MVP (process)
+- **Decision:** the desktop footer (story 14) is not part of the MVP. Its spec file stays.
+- **Why:** it is not on the demo path, it has no approved design, and its links are undecided (there are no About, Terms or Contact pages). The week before the 15 Nov delivery goes to the demo script, the PDF and the stories that fix a real problem (17, 16).
+- **Supersedes:** "Stories 14 and 15 in phase 4" for story 14. Story 15 stays in phase 4.
+- **Trade-off accepted:** the desktop demo has no footer, so "All catalogue data is illustrative" shows only in the labels on each screen.
+
+## 2026-11-08 — Real album covers (seed)
+- **Decision:** the 10 seed albums use real covers, linked from Cover Art Archive (`coverartarchive.org/release-group/<id>/front-500`). This replaces "Generated covers and photos (seed)" for album covers only; listing photos stay generated.
+- **Why:** real covers make the catalogue recognisable to a buyer. Links, not copies: the app stores no image files and no new package or key is needed. The ids were looked up once in MusicBrainz and saved in `seed.sql`.
+- **Trade-off accepted:** (1) copyright: the covers belong to their owners; the app only links to a public archive, as an academic prototype. (2) If Cover Art Archive is slow or down, the covers do not show and there is no fallback (it returned one temporary error during checking); without internet the app would not work anyway. (3) Only the 10 seed albums; a new album still needs a link, because `cover_url` stays required. (4) The files in `public/covers/` are no longer used and were left in place.
+
 ## 2026-11-08 — Stories 16 and 17 · Search (spec)
 - **Decision:** search results move from the home page to a page of their own (story 17); a suggestion box with covers (option B) appears under the search box (story 16). Story 1 stays as built.
 - **Why:** after typing, the home page showed the results above the crates and the featured card, so it was unclear which page the buyer was on. The suggestion box covers "results while typing" and the page covers "all results".

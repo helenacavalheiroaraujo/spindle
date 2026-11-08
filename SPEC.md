@@ -7,9 +7,9 @@ Stack and hosting: see `DECISIONS.md`. Assignment 1 stated PHP; the MVP uses Nex
 1. **Core:** stories 1, 2, 3, 5, 6, 12
 2. **Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)
 3. **Seller:** story 8
-4. **If time allows:** story 7 step 3 (confirm receipt), story 4, story 9 (reviews), story 14 (desktop footer), story 15 (menu), story 17 (results page), story 16 (suggestions; opens story 17, so it comes after it)
+4. **If time allows:** story 7 step 3 (confirm receipt), story 4, story 9 (reviews), story 15 (menu), story 17 (results page), story 16 (suggestions; opens story 17, so it comes after it)
 
-Not in this MVP: stories 10, 11, 13
+Not in this MVP: stories 10, 11, 13, 14
 
 ## Out of scope
 - Search by artist with an artist page (possible future story)
