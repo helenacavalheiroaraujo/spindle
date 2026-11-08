@@ -3,6 +3,27 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Stories 16 and 17 · Search (spec)
+- **Decision:** search results move from the home page to a page of their own (story 17); a suggestion box with covers (option B) appears under the search box (story 16). Story 1 stays as built.
+- **Why:** after typing, the home page showed the results above the crates and the featured card, so it was unclear which page the buyer was on. The suggestion box covers "results while typing" and the page covers "all results".
+- **Trade-off accepted:** story 1's "results update as the user types" on the home page is replaced. A decision made in story 1 is reversed, with the owner's approval.
+- **Open:** the sell search screen (story 8) shares the search component; it stays as built until decided.
+
+## 2026-11-08 — Stories 14 and 15 in phase 4 (process)
+- **Decision:** the desktop footer (story 14) and the menu (story 15) go in phase 4, "If time allows".
+- **Why:** neither is needed for the 5-minute demo path, and neither has an approved design yet. They are cut first, together with the other phase 4 stories.
+
+## 2026-11-08 — Story 4 (phase 4): compare pressings
+
+### The version page is defined, from the "Compare pressings" columns (finding #14)
+- **Why:** story 4 linked to a "version page" that no story defined. Design: `docs/design/version-page.html` (same blocks as the recommendation screen and the listings).
+- **Decided:** option A, a dedicated page per version, with a "Back to compare" link.
+- **Trade-off accepted:** one more screen to build and test.
+
+### The comparison rows are plain words, not 1–5 scores (finding #26)
+- **Why:** the design (`Spindle_mockups_by_section.pdf` p. 11) uses words (Cleaner / Warmer, Yes / No, Near mint / Worn). Scores stay inside the recommendation rule (story 3).
+- **Differs from:** story 4 as first written ("scores 1–5").
+
 ## 2026-11-08 — Story 7 · Step 3 (phase 4): the buyer confirms receipt
 
 ### "It arrived, all good" sits on the "On its way" card in Your account; no "My orders" list page (story 7 · Phase 4)

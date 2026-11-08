@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Version page</title>
+<!-- Story 4 · Version page, opened by tapping a version in "Compare pressings". Finding #14, option A. PROPOSAL, awaiting approval. Same building blocks as the recommendation screen (story 3) and the listings (story 5). -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: Inter, sans-serif; background: #f4efe6; color: #1d2433; font-size: 15px; line-height: 1.4; }
+  .hd { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: -.01em; }
+  header { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid #e2dacb; }
+  .dot { width: 22px; height: 22px; border-radius: 50%; background: #2b2118; border: 6px solid #5a3a24; }
+  main { padding: 16px; display: grid; gap: 16px; }
+  .back { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 500; color: #1d2433; text-decoration: none; }
+  .back-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(29,36,51,.3); display: flex; align-items: center; justify-content: center; flex: none; }
+  .small { font-size: 13px; color: #6b6457; }
+  .card { background: #faf7f1; border: 1px solid #e2dacb; border-radius: 14px; padding: 16px; }
+  .sand { background: #ece3d1; border: 1px solid #d9ccb2; border-radius: 16px; padding: 20px; }
+  h1 { font-size: 40px; line-height: 1; }
+  h2 { font-size: 22px; line-height: 1.1; margin-bottom: 8px; }
+  .meta { margin-top: 6px; }
+  .price { font-size: 22px; font-weight: 500; margin-top: 12px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag { border-radius: 999px; padding: 5px 14px; font-size: 13px; font-weight: 500; background: #1d2433; color: #fff; }
+  .tag.off { background: transparent; color: #1d2433; border: 1.5px solid #1d2433; }
+  ul.reasons { padding-left: 18px; display: grid; gap: 8px; }
+  .term { border-bottom: 1px dotted #1d2433; }
+  .btn { display: block; background: #1d2433; color: #fff; border-radius: 999px; text-align: center; padding: 15px; font-weight: 500; text-decoration: none; }
+  .btn.ghost { background: transparent; color: #1d2433; border: 1.5px solid #1d2433; }
+  details summary { cursor: pointer; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
+  details summary::after { content: "+"; }
+  details[open] summary::after { content: "–"; }
+  .tracks { margin-top: 10px; display: grid; gap: 6px; font-size: 14px; }
+  .listing { display: grid; gap: 4px; padding: 14px 0; border-top: 1px solid #e2dacb; }
+  .listing:first-of-type { border-top: 0; padding-top: 0; }
+  .row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .light { border-radius: 999px; padding: 3px 12px; font-size: 12px; font-weight: 500; border: 1.5px solid #1d2433; }
+  .light.match { background: #1d2433; color: #fff; }
+  .light.check { background: #f4efe6; }
+  .buy { padding: 9px 22px; margin-top: 6px; display: inline-block; width: auto; font-size: 14px; }
+  .foot { font-size: 12px; color: #6b6457; text-align: center; }
+  .listings { display: none; }
+  @media (min-width: 1024px) {
+    header { padding: 22px max(32px, calc((100vw - 1080px) / 2)); }
+    main { grid-template-columns: 1fr 400px; gap: 32px; max-width: 1080px; margin: 0 auto; padding: 40px 0; align-items: start; }
+    h1 { font-size: 64px; }
+    .listings { display: block; }
+    .phone-only { display: none; }
+    .span2 { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body>
+<header><span class="dot"></span><span class="hd" style="font-size:22px">SPINDLE</span></header>
+<main>
+  <a class="back span2" href="#" aria-label="Back to compare">
+    <span class="back-btn"><svg aria-hidden viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></span>
+    <span>Compare pressings</span>
+  </a>
+
+  <div style="display:grid;gap:16px">
+    <section class="sand">
+      <p class="small">Ziggy Stardust · version</p>
+      <h1 class="hd">1990 Reissue</h1>
+      <p class="small meta">1990 · UK · RCA · 12" vinyl · 6 listings</p>
+      <p class="price">From €24</p>
+      <div class="tags">
+        <span class="tag">Matches: price</span>
+        <span class="tag off">Not a match: sound</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="hd">How it fits your priorities</h2>
+      <ul class="reasons">
+        <li><strong>1. Price:</strong> costs €24, vs €32 for the recommended 2012 Remaster.</li>
+        <li><strong>2. Sound:</strong> a <span class="term">reissue</span> (a later pressing of the same album) sounds a bit flatter than the recommended version.</li>
+      </ul>
+      <p class="small" style="margin-top:12px">Based on 148 collector ratings · Illustrative data</p>
+    </section>
+
+    <details class="card">
+      <summary>Track list</summary>
+      <div class="tracks"><span>1. Five Years</span><span>2. Soul Love</span><span>3. Moonage Daydream</span><span class="small">… 11. Round and Round · Bonus</span></div>
+    </details>
+
+    <a class="btn phone-only" href="#">See verified listings</a>
+    <p class="foot phone-only">6 verified listings · from €24</p>
+  </div>
+
+  <aside class="listings card">
+    <h2 class="hd">Verified listings</h2>
+    <div class="listing">
+      <div class="row"><strong>€24.00</strong><span class="light match">Match</span></div>
+      <span>Near mint · Shop, Lisbon</span>
+      <a class="btn buy" href="#">Buy</a>
+    </div>
+    <div class="listing">
+      <div class="row"><strong>€27.50</strong><span class="light check">Check</span></div>
+      <span>Very good · Private seller, Porto</span>
+      <span class="small">Photos are not clear about the sleeve</span>
+      <a class="btn ghost buy" href="#">Buy</a>
+    </div>
+    <div class="listing">
+      <div class="row"><strong>€29.00</strong><span class="light match">Match</span></div>
+      <span>Good · Private seller, Braga</span>
+      <a class="btn buy" href="#">Buy</a>
+    </div>
+    <p class="small">Illustrative data</p>
+  </aside>
+</main>
+</body>
+</html>

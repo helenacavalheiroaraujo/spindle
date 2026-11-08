@@ -7,7 +7,7 @@ Stack and hosting: see `DECISIONS.md`. Assignment 1 stated PHP; the MVP uses Nex
 1. **Core:** stories 1, 2, 3, 5, 6, 12
 2. **Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)
 3. **Seller:** story 8
-4. **If time allows:** story 7 step 3 (confirm receipt), story 4, story 9 (reviews)
+4. **If time allows:** story 7 step 3 (confirm receipt), story 4, story 9 (reviews), story 14 (desktop footer), story 15 (menu), story 17 (results page), story 16 (suggestions; opens story 17, so it comes after it)
 
 Not in this MVP: stories 10, 11, 13
 
@@ -49,6 +49,10 @@ In build order. Each story has its own file in `specs/`.
 | Story 8 · Sell a record for free (phase 3) | [`specs/story-8-sell.md`](specs/story-8-sell.md) |
 | Story 4 · Compare versions (phase 4) | [`specs/story-4-compare.md`](specs/story-4-compare.md) |
 | Story 12 · Home page | [`specs/story-12-home.md`](specs/story-12-home.md) |
+| Story 14 · Desktop footer | [`specs/story-14-footer.md`](specs/story-14-footer.md) |
+| Story 15 · Menu | [`specs/story-15-menu.md`](specs/story-15-menu.md) |
+| Story 17 · Search results page | [`specs/story-17-results.md`](specs/story-17-results.md) |
+| Story 16 · Search suggestions | [`specs/story-16-suggestions.md`](specs/story-16-suggestions.md) |
 
 ---
 
@@ -131,3 +135,5 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 12 | Loading mask and error screen with "Try again" (home sections, genre screen) | `app/HomeSections.tsx`, `app/genres/[genre]/loading.tsx`, `app/genres/[genre]/error.tsx` | Home sections: `tests/e2e/home.spec.ts`, `tests/e2e/loadingScreens.spec.ts`; genre screen: not tested automatically: manual test M10 (`docs/manual-tests.md`) |
 | 1 | Loading mask "Searching…" while the albums load | `app/AlbumSearch.tsx`, `components/LoadingMask.tsx` | `tests/e2e/loadingScreens.spec.ts` |
 | 5 | Listings beside the recommendation (desktop): loading mask, and an error screen with "Try again" that recovers while the recommendation stays | `components/ListingsBeside.tsx`, `components/ErrorScreen.tsx` | `tests/e2e/loadingScreens.spec.ts` |
+| 14 | | | |
+| 15 | | | |

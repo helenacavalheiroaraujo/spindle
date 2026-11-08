@@ -9,15 +9,15 @@
 - **"Compare pressings"** on the recommendation screen (story 3)
 - Shows the recommended version and the next best by total score (story 3 rule): **2 on phone, 3 on desktop**
 - Only versions **with active listings** (same rule as the recommendation)
-- Rows (same order for every version): sound, price, original, condition (scores 1–5); lowest price; typical price range; number of listings; release year; country; label; format
+- Rows (same order for every version), in plain words as in the design: sound (a short word from the data, e.g. "Cleaner"); typical price; first pressing (Yes / No); best condition on sale (grade name, e.g. "Near mint"); number for sale. Release year, country, label and format sit in the column heading. No 1–5 scores are shown.
 - **The buyer's chosen priorities are highlighted**, in rank order, at the top
-- Tapping a version → its recommendation-style page with its listings
+- Tapping a version → the version page (design: `docs/design/version-page.html`): version details, how it fits the buyer's priorities, track list, and its verified listings (beside it on desktop; on phone behind "See verified listings"). "Back to compare" returns to the comparison.
 
 ## Designs
 | Screen | Design |
 |---|---|
 | Compare pressings | `Spindle_mockups_by_section.pdf` p. 11 (phone) |
-| Version page (from a column) | **None yet: Canva design needed before building** (finding #14) |
+| Version page (from a column) | `docs/design/version-page.html` (approved 2026-11-08) |
 
 ## Acceptance criteria
 - [ ] On a phone-sized screen, 2 versions are shown; on desktop, up to 3
@@ -39,3 +39,4 @@
 
 ## Out of scope (MVP)
 - Choosing which versions to compare
+- Buying from the version page uses the same Buy flow as story 5

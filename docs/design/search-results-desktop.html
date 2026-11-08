@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search results page</title>
+<!-- Proposed story 17 · a page of its own for search results (address /search?q=…). Replaces the list that today appears on the home page under the search box. Phone (375 px) and desktop (1280 px), three states. Texts are proposals. Illustrative data. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:-.01em}
+.vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px}
+.wrap{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;justify-content:center} .col{width:375px}
+.phone{border:1px solid #1d2433;border-radius:28px;overflow:hidden;background:#f4efe6}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px} .logo{display:flex;gap:8px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em}
+.dot{width:20px;height:20px;border-radius:50%;border:5px solid #1d2433;display:inline-block} .menu{font-size:20px} .sellpill{border:1.5px solid #1d2433;border-radius:999px;padding:6px 12px;font-weight:600;font-size:13px}
+.pad{padding:4px 16px 22px} .box{display:flex;align-items:center;background:#fffdf9;border:1.5px solid #1d2433;border-radius:999px;padding:4px 4px 4px 16px;min-height:48px;gap:8px}
+.box span{flex:1;font-size:16px} .box b{background:#1d2433;color:#f4efe6;border-radius:999px;padding:11px 18px;font-size:14px}
+.back{font-size:13px;font-weight:600;display:block;margin:14px 0 6px} h1{font-size:34px;line-height:1.02;margin:4px 0 4px} .small{font-size:12px;color:#6f6a60}
+.res{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #e2dacb;min-height:72px}
+.cover{width:56px;height:56px;border-radius:8px;flex:none} .c1{background:#1d2433} .c2{background:#c9a46a} .c3{background:#5a3a24} .c4{background:#8a8f9c}
+.res .m{min-width:0;flex:1} .res b{display:block;font-weight:600} .res .small{display:block}
+.tag{background:#dfe3ef;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:600;white-space:nowrap}
+.tag.none{background:transparent;border:1px solid #c8bfae;font-weight:500;display:inline-block;margin-top:4px}
+.ill{border:1px solid #c8bfae;border-radius:999px;padding:3px 9px;font-size:11px;display:inline-block;margin-top:12px}
+.dym{margin-top:14px;background:#efe7d6;border:1px solid #c8bfae;border-radius:18px;padding:14px}
+.dym p{font-size:14px;margin-bottom:8px}
+.lbl{font-size:12px;font-weight:600;color:#6f6a60;margin:26px 0 6px;text-align:center}
+.desk{width:1280px;margin:0 auto;border:1px solid #1d2433;border-radius:14px;background:#f4efe6;overflow:hidden}
+.dh{display:flex;align-items:center;gap:20px;padding:20px 54px} .dh .box{flex:1;min-height:52px}
+.dm{max-width:880px;margin:0 auto;padding:10px 54px 60px} .dm h1{font-size:56px} .dm .res{padding:16px 0;min-height:96px} .dm .cover{width:72px;height:72px}
+.dm .res b{font-size:18px} .dm .small{font-size:14px}
+.dsplit{display:flex;gap:40px;align-items:flex-start} .dsplit>div{flex:1}
+</style></head><body>
+<h2 class="vt" style="text-align:center">Search results page · story 17</h2>
+<p class="why" style="text-align:center;margin-bottom:18px">Opens when the buyer presses Search or Enter (or picks “See all results” in the suggestion box). Only the results: no crates, no “This week”. The search box stays at the top with what was typed. Same rows as the genre screen. Newest first.</p>
+
+<div class="wrap">
+<section class="col"><h2 class="vt">Phone · results</h2><p class="why">Query “bowie”, 4 albums.</p>
+<div class="phone"><header class="top"><span class="menu">☰</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="sellpill">+ Sell</span></header><div class="pad">
+<div class="box"><span>bowie</span><b>Search</b></div>
+<span class="back">← Back to home</span>
+<h1 class="hd">Results for “bowie”</h1><p class="small">4 albums · newest first</p>
+<div class="res"><i class="cover c4"></i><div class="m"><b>Blackstar</b><span class="small">David Bowie, 2016</span><span class="tag none">No listings</span></div><span class="tag">2 versions</span></div>
+<div class="res"><i class="cover c3"></i><div class="m"><b>Let's Dance</b><span class="small">David Bowie, 1983</span><span class="tag none">No listings</span></div><span class="tag">1 version</span></div>
+<div class="res"><i class="cover c1"></i><div class="m"><b>The Rise and Fall of Ziggy Stardust…</b><span class="small">David Bowie, 1972</span></div><span class="tag">3 versions</span></div>
+<div class="res"><i class="cover c2"></i><div class="m"><b>Hunky Dory</b><span class="small">David Bowie, 1971</span></div><span class="tag">2 versions</span></div>
+<span class="ill">Illustrative data</span></div></div></section>
+
+<section class="col"><h2 class="vt">Phone · one result</h2><p class="why">Query “ziggy”. Same page, one row.</p>
+<div class="phone"><header class="top"><span class="menu">☰</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="sellpill">+ Sell</span></header><div class="pad">
+<div class="box"><span>ziggy</span><b>Search</b></div>
+<span class="back">← Back to home</span>
+<h1 class="hd">Results for “ziggy”</h1><p class="small">1 album</p>
+<div class="res"><i class="cover c1"></i><div class="m"><b>The Rise and Fall of Ziggy Stardust and the Spiders from Mars</b><span class="small">David Bowie, 1972</span></div><span class="tag">3 versions</span></div>
+<span class="ill">Illustrative data</span></div></div></section>
+
+<section class="col"><h2 class="vt">Phone · typo</h2><p class="why">Query “zigy”. Nothing matches, so up to 3 “Did you mean” albums (story 1 rule), or “No albums found”.</p>
+<div class="phone"><header class="top"><span class="menu">☰</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="sellpill">+ Sell</span></header><div class="pad">
+<div class="box"><span>zigy</span><b>Search</b></div>
+<span class="back">← Back to home</span>
+<h1 class="hd">No albums found for “zigy”</h1>
+<div class="dym"><p>Did you mean…</p>
+<div class="res" style="border:0;padding:6px 0"><i class="cover c1"></i><div class="m"><b>The Rise and Fall of Ziggy Stardust and the Spiders from Mars</b><span class="small">David Bowie, 1972</span></div></div></div>
+<span class="ill">Illustrative data</span></div></div></section>
+</div>
+
+<p class="lbl">Desktop · 1280 px · query “bowie”</p>
+<div class="desk"><div class="dh"><span class="logo"><i class="dot"></i>SPINDLE</span><div class="box"><span>bowie</span><b>Search</b></div><span class="sellpill">+ Sell for free</span></div>
+<div class="dm"><span class="back">← Back to home</span><h1 class="hd">Results for “bowie”</h1><p class="small">4 albums · newest first</p>
+<div class="res"><i class="cover c4"></i><div class="m"><b>Blackstar</b><span class="small">David Bowie, 2016</span><span class="tag none">No listings</span></div><span class="tag">2 versions</span></div>
+<div class="res"><i class="cover c3"></i><div class="m"><b>Let's Dance</b><span class="small">David Bowie, 1983</span><span class="tag none">No listings</span></div><span class="tag">1 version</span></div>
+<div class="res"><i class="cover c1"></i><div class="m"><b>The Rise and Fall of Ziggy Stardust and the Spiders from Mars</b><span class="small">David Bowie, 1972</span></div><span class="tag">3 versions</span></div>
+<div class="res"><i class="cover c2"></i><div class="m"><b>Hunky Dory</b><span class="small">David Bowie, 1971</span></div><span class="tag">2 versions</span></div>
+<span class="ill">Illustrative data</span></div></div>
+</body></html>
