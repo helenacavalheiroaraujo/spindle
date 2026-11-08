@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Featured card: three options for the cover</title>
+<!-- Story 12 · "This weekend" card on the home page: the dark brown cover square is too strong. Three ways to soften it (same sand card, same texts). Illustrative data (seed). -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:15px;line-height:1.35;padding:24px}
+.wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:flex-start}
+.col{width:400px} .vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px}
+.feat{background:#ebdcc4;border-radius:22px;padding:22px;display:grid;gap:14px}
+.tag{display:inline-block;border-radius:999px;padding:4px 11px;font-size:12px;font-weight:600;background:#5a3a24;color:#f4efe6;justify-self:start}
+.btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;padding:0 24px;font-weight:600;justify-self:start;background:#1d2433;color:#f4efe6}
+.row{display:flex;gap:16px;align-items:center} .small{font-size:13px;color:#4a5163}
+b.t{font-size:19px;line-height:1.2;display:block}
+/* the real cover of Ziggy Stardust is dark brown (#5a3a24) with a ring */
+.cover{border-radius:12px;background:#5a3a24;flex:none;position:relative}
+.cover:after{content:"";position:absolute;right:18%;top:18%;width:22%;height:22%;border-radius:50%;border:3px solid rgba(244,239,230,.55)}
+.disc{border-radius:50%;background:radial-gradient(circle,#ebdcc4 0 9px,#1d2433 10px 36px,#ebdcc4 37px);width:72px;height:72px;flex:none;box-shadow:0 0 0 1px rgba(29,36,51,.2)}
+.light{background:#c9a46a}
+.light:after{border-color:rgba(29,36,51,.35)}
+</style></head><body><div class="wrap">
+
+<section class="col"><h2 class="vt">Option 1 · Smaller cover</h2><p class="why">The same cover, but at 56 px instead of 96 px, so the dark square no longer dominates the card.</p>
+<div class="feat"><span class="tag">This weekend</span><div class="row"><i class="cover" style="width:56px;height:56px"></i><div><b class="t">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</b><span class="small">David Bowie, 1972 · verified copies for sale</span></div></div><span class="btn">See which to buy</span></div></section>
+
+<section class="col"><h2 class="vt">Option 2 · A record, no cover</h2><p class="why">No cover in the card: a round record in navy and sand, like the ones on the crates. The cover is shown on the next screen anyway.</p>
+<div class="feat"><span class="tag">This weekend</span><div class="row"><i class="disc"></i><div><b class="t">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</b><span class="small">David Bowie, 1972 · verified copies for sale</span></div></div><span class="btn">See which to buy</span></div></section>
+
+<section class="col"><h2 class="vt">Option 3 · A lighter cover</h2><p class="why">Ziggy Stardust's illustrative cover changes from dark brown to the tan of Hunky Dory's. It changes everywhere the cover appears (search, priorities, recommendation), not just here.</p>
+<div class="feat"><span class="tag">This weekend</span><div class="row"><i class="cover light" style="width:80px;height:80px"></i><div><b class="t">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</b><span class="small">David Bowie, 1972 · verified copies for sale</span></div></div><span class="btn">See which to buy</span></div></section>
+
+</div></body></html>

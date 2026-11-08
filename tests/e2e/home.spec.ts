@@ -12,16 +12,17 @@ test("home page: title, search, one crate per genre with real counts, and two 'T
   await expect(page.getByText("No jargon, no homework.")).toBeVisible();
   await expect(page.getByRole("searchbox", { name: "Album or artist" })).toBeVisible();
 
-  const crates = page.getByRole("list").filter({ has: page.getByRole("link", { name: /^Rock/ }) }).getByRole("link");
-  await expect(crates).toHaveCount(3); // genres with no albums (Jazz, Fado, Hip-hop) are not shown
-  await expect(page.getByRole("link", { name: "Rock, 4 records" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Soul and funk, 1 record" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Electronic, 2 records" })).toBeVisible();
+  const crates = page.getByRole("region", { name: "Pick a crate" }).getByRole("link");
+  await expect(crates).toHaveCount(6); // the six genres of the design, each with its real number of albums
+  for (const name of ["Rock, 4 records", "Jazz, 1 record", "Soul and funk, 1 record", "Fado, 1 record", "Electronic, 2 records", "Hip-hop, 1 record"]) {
+    await expect(page.getByRole("link", { name })).toBeVisible();
+  }
 
   const week = page.getByRole("region", { name: "This week at the shop" });
   await expect(week.getByText("This weekend")).toBeVisible();
   await expect(week.getByText(ZIGGY)).toBeVisible(); // the album that opens with the most active listings
-  await expect(week.getByText("0% commission: you keep the full price.")).toBeVisible();
+  await expect(week).toContainText("Sell for free.");
+  await expect(week).toContainText("0% commission.");
   await screenshot(page, 12, "home");
 });
 
@@ -48,7 +49,7 @@ test("a crate opens the genre screen: only that genre's albums, newest first, ro
   await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001\/priorities$/);
 });
 
-test("every crate opens at least one album on sale", async ({ page }) => {
+test("Rock, Soul and funk and Electronic open at least one album on sale", async ({ page }) => {
   for (const [slug, album] of [["soul-and-funk", "Let's Dance"], ["electronic", "Megalithic Symphony"]]) {
     await page.goto(`/genres/${slug}`);
     await page.getByRole("listitem").filter({ hasText: album }).getByRole("link").click();
@@ -56,11 +57,16 @@ test("every crate opens at least one album on sale", async ({ page }) => {
   }
 });
 
-test("a genre with no albums, or an unknown one, shows the not-found page", async ({ page }) => {
-  for (const slug of ["jazz", "polka"]) {
+test("showcase genres (Jazz, Fado, Hip-hop) open their album with 'No listings'; an unknown genre is not found", async ({ page }) => {
+  for (const [slug, album] of [["jazz", "Kind of Blue"], ["fado", "Com que voz"], ["hip-hop", "Illmatic"]]) {
     await page.goto(`/genres/${slug}`);
-    await expect(page.getByText("This page could not be found.")).toBeVisible();
+    const row = page.getByRole("listitem").filter({ hasText: album });
+    await expect(row).toContainText("No listings");
+    await row.getByRole("button").click();
+    await expect(page.getByText("Nobody is selling this album right now")).toBeVisible();
   }
+  await page.goto("/genres/polka");
+  await expect(page.getByText("This page could not be found.")).toBeVisible();
 });
 
 test("'This weekend' opens the featured album; 'For sellers' opens selling", async ({ page }) => {

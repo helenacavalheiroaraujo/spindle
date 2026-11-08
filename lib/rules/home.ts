@@ -2,14 +2,15 @@
 // Covered by tests/unit/home.test.ts.
 import type { AlbumAccess } from "./albumAccess";
 
-// The six genres of the design, in the order the crates are shown. "tone" tells which text colour reads on the crate.
+// The six genres of the design, with its colours, in the order the crates are shown. "tone" tells which text colour reads
+// on the crate; "dot" is the centre of the record.
 export const GENRES = [
-  { slug: "rock", name: "Rock", color: "#c9a46a", tone: "dark" },
-  { slug: "jazz", name: "Jazz", color: "#1f2a44", tone: "light" },
-  { slug: "soul-and-funk", name: "Soul and funk", color: "#b08a58", tone: "dark" },
-  { slug: "fado", name: "Fado", color: "#3a2418", tone: "light" },
-  { slug: "electronic", name: "Electronic", color: "#cfb68a", tone: "dark" },
-  { slug: "hip-hop", name: "Hip-hop", color: "#8c7a63", tone: "light" },
+  { slug: "rock", name: "Rock", color: "#c6a26b", tone: "dark", dot: "#1f2a44" },
+  { slug: "jazz", name: "Jazz", color: "#1f2a44", tone: "light", dot: "#c9d2ea" },
+  { slug: "soul-and-funk", name: "Soul and funk", color: "#a98c5f", tone: "light", dot: "#f4efe6" },
+  { slug: "fado", name: "Fado", color: "#3a2a1f", tone: "light", dot: "#f4efe6" },
+  { slug: "electronic", name: "Electronic", color: "#d6c6a4", tone: "dark", dot: "#1f2a44" },
+  { slug: "hip-hop", name: "Hip-hop", color: "#8b7b68", tone: "light", dot: "#f4efe6" },
 ] as const;
 
 export type Genre = (typeof GENRES)[number];

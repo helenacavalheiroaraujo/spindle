@@ -15,9 +15,10 @@
 --     1972 UK original has only a red listing -> "No listing matches this version yet".
 --   Story 6: Ziggy Stardust versions have typical ranges. Hunky Dory 2015 Remaster has one green listing
 --     and no range -> no price label and no range line (never a guess).
---   Story 12: one genre per album (Rock 4, Soul and funk 1, Electronic 2). Let's Dance, Homogenic (2017 Reissue
+--   Story 12: one genre per album (Rock 4, Jazz 1, Soul and funk 1, Fado 1, Electronic 2, Hip-hop 1). Let's Dance, Homogenic (2017 Reissue
 --     only; the 1997 UK original stays empty for the sell tests), The Dark Side of the Moon and Megalithic Symphony
---     have full story 3/5/6 data, so every crate opens an album on sale. Ziggy Stardust keeps the most active
+--     have full story 3/5/6 data, so Rock, Soul and funk and Electronic open an album on sale. Kind of Blue, Com que voz
+--     and Illmatic are showcase albums (versions only, no listings) so Jazz, Fado and Hip-hop have a crate: "No listings". Ziggy Stardust keeps the most active
 --     listings (5), so it is the featured album ("This weekend").
 
 truncate table check_results, listings, profiles, tracks, reason_texts, versions, albums, glossary_terms;
@@ -30,7 +31,10 @@ insert into albums (id, title, artist, release_year, cover_url, genre) values
   ('10000000-0000-0000-0000-000000000004', 'Blackstar', 'David Bowie', 2016, '/covers/blackstar.svg', 'Rock'),
   ('10000000-0000-0000-0000-000000000005', 'Homogenic', 'Björk', 1997, '/covers/homogenic.svg', 'Electronic'),
   ('10000000-0000-0000-0000-000000000006', 'The Dark Side of the Moon', 'Pink Floyd', 1973, '/covers/dark-side-of-the-moon.svg', 'Rock'),
-  ('10000000-0000-0000-0000-000000000007', 'Megalithic Symphony', 'AWOLNATION', 2011, '/covers/megalithic-symphony.svg', 'Electronic');
+  ('10000000-0000-0000-0000-000000000007', 'Megalithic Symphony', 'AWOLNATION', 2011, '/covers/megalithic-symphony.svg', 'Electronic'),
+  ('10000000-0000-0000-0000-000000000008', 'Kind of Blue', 'Miles Davis', 1959, '/covers/kind-of-blue.svg', 'Jazz'),
+  ('10000000-0000-0000-0000-000000000009', 'Com que voz', 'Amália Rodrigues', 1970, '/covers/com-que-voz.svg', 'Fado'),
+  ('10000000-0000-0000-0000-000000000010', 'Illmatic', 'Nas', 1994, '/covers/illmatic.svg', 'Hip-hop');
 
 -- Versions -----------------------------------------------------------------
 insert into versions (id, album_id, name, release_year, country, label, format, sound_score, original_score, rating_count, typical_price_min, typical_price_max) values
@@ -55,7 +59,14 @@ insert into versions (id, album_id, name, release_year, country, label, format, 
   ('20000000-0000-0000-0000-000000000013', '10000000-0000-0000-0000-000000000006', '2016 Remaster',    2016, 'EU', 'Pink Floyd Records', 'LP, 180 g', 5, 3, 410, 28.00, 35.00),
   -- Megalithic Symphony
   ('20000000-0000-0000-0000-000000000014', '10000000-0000-0000-0000-000000000007', '2011 US original', 2011, 'US', 'Red Bull Records', '2LP', 4, 5, 45, 40.00, 60.00),
-  ('20000000-0000-0000-0000-000000000015', '10000000-0000-0000-0000-000000000007', '2021 Anniversary edition', 2021, 'US', 'Red Bull Records', 'LP', 5, 3, 30, 25.00, 32.00);
+  ('20000000-0000-0000-0000-000000000015', '10000000-0000-0000-0000-000000000007', '2021 Anniversary edition', 2021, 'US', 'Red Bull Records', 'LP', 5, 3, 30, 25.00, 32.00),
+  -- Showcase albums (story 12): one per remaining genre, no listings, so they open as "No listings"
+  ('20000000-0000-0000-0000-000000000016', '10000000-0000-0000-0000-000000000008', '1959 US original', 1959, 'US', 'Columbia', 'LP', 4, 5, 120, null, null),
+  ('20000000-0000-0000-0000-000000000017', '10000000-0000-0000-0000-000000000008', '2015 Reissue',     2015, 'EU', 'Columbia', 'LP, 180 g', 5, 3, 140, null, null),
+  ('20000000-0000-0000-0000-000000000018', '10000000-0000-0000-0000-000000000009', '1970 PT original', 1970, 'PT', 'Valentim de Carvalho', 'LP', 4, 5, 60, null, null),
+  ('20000000-0000-0000-0000-000000000019', '10000000-0000-0000-0000-000000000009', '2020 Reissue',     2020, 'PT', 'Valentim de Carvalho', 'LP', 5, 3, 45, null, null),
+  ('20000000-0000-0000-0000-000000000020', '10000000-0000-0000-0000-000000000010', '1994 US original', 1994, 'US', 'Columbia', 'LP', 4, 5, 90, null, null),
+  ('20000000-0000-0000-0000-000000000021', '10000000-0000-0000-0000-000000000010', '2014 Reissue',     2014, 'EU', 'Columbia', 'LP', 5, 3, 70, null, null);
 
 -- Tracks (Ziggy Stardust only: the other albums never reach story 3) --------
 insert into tracks (version_id, position, title, is_extra)

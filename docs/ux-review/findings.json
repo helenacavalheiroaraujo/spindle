@@ -2,8 +2,8 @@
   "meta": {
     "project": "Spindle MVP",
     "report_url": "https://claude.ai/artifact/6inbbjVxsF4Hi7Q2cr2n28",
-    "iteration": 2,
-    "updated": "2026-11-08T18:00:00+00:00"
+    "iteration": 3,
+    "updated": "2026-11-08T19:21:28.517557+00:00"
   },
   "iterations": [
     {
@@ -15,19 +15,24 @@
       "n": 2,
       "date": "2026-11-08",
       "note": "After story 7: checkout, confirmation and 'just sold' built; re-check of open findings"
+    },
+    {
+      "n": 3,
+      "date": "2026-11-08",
+      "note": "After stories 2 (save to account), 8 (sell), 12 (home page): screen inventory updated, all built screens re-captured and reviewed"
     }
   ],
   "screens": [
     {
       "key": "home",
       "name": "Home with search",
-      "story": "1",
+      "story": "12",
       "phase": 1,
       "design": "Spindle_mockups_by_section.pdf · p. 2–3 (homepage), p. 15/17 (search)",
       "route": "/",
       "auth": false,
       "status": "built",
-      "note": ""
+      "note": "Story 12: title, search, crates by genre, \"This week at the shop\""
     },
     {
       "key": "search-results",
@@ -216,8 +221,8 @@
       "design": null,
       "route": null,
       "auth": true,
-      "status": "missing",
-      "note": ""
+      "status": "built",
+      "note": "State with a saved ranking, signed in. Not captured here; screenshot from the story 2 e2e run (docs/screenshots/story-2/saved-ranking-skips-screen-*.png)"
     },
     {
       "key": "sell-pick-version",
@@ -225,9 +230,9 @@
       "story": "8",
       "phase": 3,
       "design": null,
-      "route": null,
+      "route": "/sell/albums/10000000-0000-0000-0000-000000000005",
       "auth": true,
-      "status": "missing",
+      "status": "built",
       "note": ""
     },
     {
@@ -236,9 +241,9 @@
       "story": "8",
       "phase": 3,
       "design": "Spindle_mockups_by_section.pdf · p. 16 (mobile), p. 19 (desktop)",
-      "route": null,
+      "route": "/sell/versions/20000000-0000-0000-0000-000000000009",
       "auth": true,
-      "status": "missing",
+      "status": "built",
       "note": ""
     },
     {
@@ -249,8 +254,8 @@
       "design": null,
       "route": null,
       "auth": true,
-      "status": "missing",
-      "note": ""
+      "status": "built",
+      "note": "First-time state of the sell form (city and shop name); screenshots from the story 8 e2e run (docs/screenshots/story-8)"
     },
     {
       "key": "my-listings",
@@ -258,9 +263,9 @@
       "story": "8",
       "phase": 3,
       "design": "Spindle_mockups_by_section.pdf · p. 9 (Your listings, desktop account)",
-      "route": null,
+      "route": "/my-listings",
       "auth": true,
-      "status": "missing",
+      "status": "built",
       "note": ""
     },
     {
@@ -269,9 +274,9 @@
       "story": "8",
       "phase": 3,
       "design": null,
-      "route": null,
+      "route": "/sell/versions/20000000-0000-0000-0000-000000000999",
       "auth": true,
-      "status": "missing",
+      "status": "built",
       "note": ""
     },
     {
@@ -298,14 +303,14 @@
     },
     {
       "key": "design-homepage-crates",
-      "name": "Homepage crates, promos, best sellers",
-      "story": "—",
+      "name": "Homepage: \"Because you like…\", best sellers, \"All genres and formats\"",
+      "story": "13",
       "phase": 4,
       "design": "Spindle_mockups_by_section.pdf · p. 2–3",
       "route": null,
       "auth": false,
       "status": "later",
-      "note": "Design only; not in any story"
+      "note": "Crates and \"This week at the shop\" are built (story 12); \"Because you like…\" is story 13, not in the MVP; \"All genres and formats\" needs filters (story 10)"
     },
     {
       "key": "design-search-filters",
@@ -339,6 +344,28 @@
       "auth": false,
       "status": "later",
       "note": "Design only; not in any story"
+    },
+    {
+      "key": "genre",
+      "name": "Genre screen (a crate)",
+      "story": "12",
+      "phase": 1,
+      "design": "docs/design/genre-screen-options.html (option B), genre-screen-desktop.html",
+      "route": "/genres/rock",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "sell-search",
+      "name": "Sell: search for the album",
+      "story": "8",
+      "phase": 3,
+      "design": "Spindle_mockups_by_section.pdf · p. 16 (mobile), p. 19 (desktop)",
+      "route": "/sell",
+      "auth": true,
+      "status": "built",
+      "note": ""
     }
   ],
   "findings": [
@@ -439,9 +466,13 @@
       ],
       "proposal": null,
       "question": "Story 2 phase 2 is in the Purchase phase, after story 7. Keep it before the demo, or move it to 'if time allows'?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-08",
+        "decision": "Built in story 2 (migration 0004, saved ranking, screen skipped, 'Based on … Change'); the screen state was checked from the e2e screenshot docs/screenshots/story-2/saved-ranking-skips-screen-*.png, not from this capture."
+      }
     },
     {
       "id": 4,
@@ -488,9 +519,13 @@
       ],
       "proposal": "Story 8 cannot start yet: three of its screens (pick a version, first-time city/shop, My listings) have no design. Approve those three designs first, then build: pick version, form, first-time details, My listings, and the 'not in our catalogue' message.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-08",
+        "decision": "Built in story 8: 'Sell for free' in the header, sell search, versions, sell form and My listings are captured in this iteration (.ux-review/shots/sell-*, my-listings)."
+      }
     },
     {
       "id": 5,
@@ -582,7 +617,8 @@
       "question": null,
       "status": "open",
       "first_seen": 1,
-      "resolution": null
+      "resolution": null,
+      "note": "Iteration 3: the desktop header now has the logo on the left followed by the search (story 12); the account badge and \"Sell for free\" are still pinned to the window edge, outside the content width on narrow pages."
     },
     {
       "id": 7,
@@ -882,6 +918,156 @@
       "status": "open",
       "first_seen": 2,
       "resolution": null
+    },
+    {
+      "id": 16,
+      "screens": [
+        "recommendation",
+        "my-listings",
+        "checkout"
+      ],
+      "stories": [
+        "12"
+      ],
+      "type": "Rule broken",
+      "severity": "High",
+      "title": "On wide desktop pages the header search was covered by 'Sell for free' (the Search button was hidden behind it)",
+      "evidence": [
+        {
+          "source": "CLAUDE.md",
+          "where": "Layout at both widths (checklist A)",
+          "quote": "nothing cut off or overlapping"
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/recommendation-1280.png (before the fix: the Search button sat under the Sell pill)",
+          "quote": ""
+        }
+      ],
+      "proposal": "The header leaves room for the account badge, calculated from the width of the page (components/Header.tsx). Already applied during this review, see the resolution.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 3,
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-08",
+        "decision": "Introduced by the story 12 header search and fixed during this review: the header padding on desktop now keeps the search clear of the badge. The change was made by the AI without waiting for a confirmation, which the ux-review skill asks for — to be confirmed or reverted by the Product Owner. Checked in the new capture at 1280 px."
+      }
+    },
+    {
+      "id": 17,
+      "screens": [
+        "search-results",
+        "home"
+      ],
+      "stories": [
+        "12",
+        "1"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "On the home page the crates and 'This week at the shop' stay under the search results, competing with the list",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/search-results-q-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "CLAUDE.md",
+          "where": "Checklist C · Minimalist design",
+          "quote": "nothing on screen competes with the primary action without reason"
+        }
+      ],
+      "proposal": "While a search is active (3 or more letters), show only the results; bring the crates and 'This week' back when the search is cleared.",
+      "question": null,
+      "status": "open",
+      "first_seen": 3,
+      "resolution": null
+    },
+    {
+      "id": 18,
+      "screens": [
+        "home"
+      ],
+      "stories": [
+        "12"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "The home page has a heading 'Pick a crate' right below the title 'Pick a crate. We'll pick the pressing.'",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/home-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "HappyPath.png",
+          "where": "screen 1 (Start)",
+          "quote": "the crates have no heading of their own in the design"
+        }
+      ],
+      "proposal": "Remove the heading, or call it 'Browse by genre'.",
+      "question": null,
+      "status": "open",
+      "first_seen": 3,
+      "resolution": null
+    },
+    {
+      "id": 19,
+      "screens": [
+        "sell-form"
+      ],
+      "stories": [
+        "8"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "On a phone the version name on the sell form is cut ('Homogenic, 1997 UK o…') next to 'Change'",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/sell-form-375.png",
+          "quote": ""
+        }
+      ],
+      "proposal": "Let the name wrap onto two lines instead of cutting it.",
+      "question": null,
+      "status": "open",
+      "first_seen": 3,
+      "resolution": null
+    },
+    {
+      "id": 20,
+      "screens": [
+        "search-results",
+        "home"
+      ],
+      "stories": [
+        "12",
+        "1"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "The search in the desktop header only searches on Search or Enter, while the box on the phone searches as you type",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/search-results-q-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "specs/story-1-search.md",
+          "where": "Scope",
+          "quote": "results update as the user types, from the 3rd character"
+        }
+      ],
+      "proposal": "Make the header search update the results as you type, as story 1 says.",
+      "question": null,
+      "status": "open",
+      "first_seen": 3,
+      "resolution": null
     }
   ],
   "questions": [
@@ -904,6 +1090,12 @@
     {
       "id": "T1",
       "text": "Not captured: yellow warning dialog, 'Nobody is selling' message, wrong-password state, loading and error states. Order confirmation and 'just sold' were taken from the story 7 e2e screenshots (same commit as the code), not from this capture.",
+      "finding": null,
+      "done": false
+    },
+    {
+      "id": "T2",
+      "text": "Iteration 3: open findings #5, #7–#15 were not re-checked against the new captures; the desktop search results were captured by hand (search-results-q) because the capture script types into the header box without pressing Enter; loading and error states of the new screens are in docs/manual-tests.md.",
       "finding": null,
       "done": false
     }

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home page: desktop (option A)</title>
+<!-- Story 12 · desktop version of option A (crates first) with the light sand featured card. The crates and the "This week" cards share the same three-column grid: the featured album takes two columns, "For sellers" one, both the same height. Header as in genre-screen-desktop.html. Illustrative data (seed). -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:15px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:-.01em} .vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;margin:0 0 8px}
+.fr{max-width:1232px;margin:0 auto 36px} .desk{border:1px solid #1d2433;border-radius:20px;overflow:hidden;background:#f4efe6}
+.top{display:flex;align-items:center;gap:24px;padding:16px 48px;border-bottom:1px solid #e2dacb;background:#faf7f1} .logo{display:flex;gap:8px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;letter-spacing:.04em;flex:none}
+.dot{width:22px;height:22px;border-radius:50%;border:6px solid #1d2433;display:inline-block}
+.search{flex:1;display:flex;align-items:center;gap:10px;border:1.5px solid #1d2433;border-radius:999px;padding:6px 6px 6px 18px;background:#fff;color:#6f6a60}
+.search .go{margin-left:auto;background:#1d2433;color:#fff;border-radius:999px;padding:8px 18px;font-weight:600;font-size:14px}
+.right{display:flex;gap:14px;align-items:center;flex:none} .sellpill{border:1.5px solid #1d2433;border-radius:999px;padding:9px 18px;font-weight:600} .avatar{width:42px;height:42px;border-radius:50%;background:#1d2433;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600}
+main{padding:36px 48px 44px;display:grid;grid-template-columns:minmax(0,1fr);gap:32px}
+h1{font-size:72px;line-height:.95} .line{font-size:16px;margin-top:10px} h2{font-size:34px;line-height:1} .small{font-size:13px;color:#6f6a60}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:12px}
+.crate{border-radius:22px;position:relative;overflow:hidden;padding:18px;min-height:130px;color:#1d2433}
+.crate .rec{position:absolute;right:-24px;top:-24px;width:96px;height:96px;border-radius:50%;background:#1d2433;box-shadow:inset 0 0 0 30px #1d2433,inset 0 0 0 38px #f4efe6}
+.crate b{font-family:'Barlow Condensed',sans-serif;font-size:34px;line-height:1;position:absolute;left:18px;bottom:40px} .crate span{position:absolute;left:18px;bottom:18px;font-size:14px}
+.rock{background:#c9a46a} .soul{background:#b08a58} .elec{background:#cfb68a}
+.cover{width:96px;height:96px;border-radius:12px;background:#5a3a24;border:1px solid rgba(29,36,51,.25);flex:none;position:relative}
+.cover:after{content:"";position:absolute;right:10px;top:10px;width:22px;height:22px;border-radius:50%;border:3px solid rgba(244,239,230,.55)}
+.tag{display:inline-block;border-radius:999px;padding:4px 11px;font-size:12px;font-weight:600;justify-self:start}
+.btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;padding:0 24px;font-weight:600;justify-self:start}
+.feat{grid-column:span 2;background:#ebdcc4;border-radius:22px;padding:24px;display:grid;gap:14px;align-content:space-between}
+.feat .tag{background:#5a3a24;color:#f4efe6} .feat .btn{background:#1d2433;color:#f4efe6} .row{display:flex;gap:18px;align-items:center}
+.sell{border:1.5px solid #1d2433;border-radius:22px;padding:24px;display:grid;gap:10px;align-content:space-between}
+.sell .tag{background:#e3e0d9} .sell .btn{background:#1d2433;color:#f4efe6}
+.ill{border:1px solid #c8bfae;border-radius:999px;padding:3px 9px;font-size:12px;justify-self:start}
+</style></head><body>
+<section class="fr"><h2 class="vt">Desktop · Home page (option A, sand card)</h2><div class="desk">
+<header class="top"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="search">⌕ Which record are you after?<span class="go">Search</span></span><span class="right"><span class="sellpill">+ Sell for free</span><span class="avatar">AR</span></span></header>
+<main>
+<div><h1 class="hd">Pick a crate. We'll pick the pressing.</h1><p class="line">No jargon, no homework. We tell you which version to buy and check every listing.</p></div>
+<div><div class="grid3">
+<div class="crate rock"><i class="rec"></i><b>Rock</b><span>4 records</span></div>
+<div class="crate soul"><i class="rec"></i><b>Soul and funk</b><span>1 record</span></div>
+<div class="crate elec"><i class="rec"></i><b>Electronic</b><span>2 records</span></div></div></div>
+<div><h2 class="hd">This week at the shop</h2><div class="grid3">
+<div class="feat"><span class="tag">This weekend</span><div class="row"><i class="cover"></i><div><b style="font-size:22px;line-height:1.2;display:block">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</b><span class="small" style="display:block;margin-top:4px">David Bowie, 1972 · verified copies for sale</span></div></div><span class="btn">See which to buy</span></div>
+<div class="sell"><span class="tag">For sellers</span><div><b style="font-size:22px;display:block">Sell for free</b><span class="small" style="display:block;margin-top:4px">0% commission: you keep the full price.</span></div><span class="btn">Sell a record</span></div></div></div>
+<span class="ill">Illustrative data</span>
+</main></div></section>
+</body></html>

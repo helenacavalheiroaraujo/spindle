@@ -3,6 +3,14 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 12 · Home page as in the design
+
+### The home page follows the Assignment 1 design: six crates, navy featured card (story 12)
+- **Why:** the colour balance of the design comes from six crates in different colours (tan, navy, dark brown, cream, grey) that spread the dark across the row, and from a navy featured card balanced by a light card. With three beige crates and a beige card the page looked flat. Replaces the earlier choices of showing only genres whose albums open and of a sand featured card.
+- **Kind of Blue (Jazz), Com que voz (Fado) and Illmatic (Hip-hop) are showcase albums:** versions only, no listings, so those crates open as "No listings". Counts stay real. Illmatic was chosen by the AI; the design has no hip-hop album.
+- **Exception to CLAUDE.md:** the strong colour of the featured card is the design's navy, not dark brown.
+- **Left out:** the second right-hand card of the design ("48 first pressings just in"), "Because you like…" (story 13), "Best sellers", "Picked by the shop" and "All genres and formats".
+
 ## 2026-11-08 — Story 12 · MVP scope
 
 ### Story 12 (home page) is part of the MVP core, not phase 4 (process)

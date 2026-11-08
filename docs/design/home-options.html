@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home page: three options</title>
+<!-- Story 12 · the whole home page, redone for balance. Chosen: option A with the light sand card (#ebdcc4); the light blue (#dfe3ef) was tried and dropped. The "For sellers" band is outlined. Three options to choose from (phone). Same content in all three: title and line, search, crates by genre, "This weekend" (featured album) and "For sellers". Texts and colours are the ones already built; only the layout changes. Illustrative data (seed). -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:-.01em}
+.wrap{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+.col{width:375px} .vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px}
+.phone{border:1px solid #1d2433;border-radius:28px;overflow:hidden;background:#f4efe6}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px} .logo{display:flex;gap:8px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em}
+.dot{width:20px;height:20px;border-radius:50%;border:5px solid #1d2433;display:inline-block}
+.pill{border-radius:999px;padding:8px 14px;font-weight:600;font-size:13px;border:1.5px solid #1d2433} .pill.dark{background:#1d2433;color:#f4efe6}
+main{padding:4px 16px 24px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+h1{font-size:34px;line-height:1} .line{font-size:14px;margin-top:6px}
+.search{display:flex;align-items:center;gap:10px;border:1.5px solid #1d2433;border-radius:999px;padding:0 18px;min-height:52px;background:#fff;color:#6f6a60}
+h2{font-size:24px;line-height:1} .small{font-size:12px;color:#6f6a60}
+.ill{border:1px solid #c8bfae;border-radius:999px;padding:3px 9px;font-size:11px;justify-self:start}
+.crate{border-radius:18px;position:relative;overflow:hidden;color:#1d2433;padding:12px}
+.crate .rec{position:absolute;right:-16px;top:-16px;width:52px;height:52px;border-radius:50%;background:#1d2433;box-shadow:inset 0 0 0 16px #1d2433,inset 0 0 0 20px #f4efe6}
+.crate b{font-family:'Barlow Condensed',sans-serif;font-size:22px;line-height:1;display:block} .crate span{font-size:12px}
+.rock{background:#c9a46a} .soul{background:#b08a58} .elec{background:#cfb68a}
+.cover{border-radius:12px;background:#5a3a24;border:1px solid rgba(244,239,230,.4);flex:none;position:relative}
+.cover:after{content:"";position:absolute;right:8px;top:8px;width:18px;height:18px;border-radius:50%;border:3px solid rgba(244,239,230,.55)}
+.tag{display:inline-block;border-radius:999px;padding:3px 10px;font-size:11px;font-weight:600}
+.btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;padding:0 20px;font-weight:600;font-size:13px}
+.feat{background:#ebdcc4;color:#1d2433;border-radius:20px;padding:16px;display:grid;gap:10px}
+.feat .tag{background:#5a3a24;color:#f4efe6;justify-self:start} .feat .btn{background:#1d2433;color:#f4efe6;justify-self:start}
+.sell{border-radius:20px;border:1.5px solid #1d2433;padding:16px;display:grid;gap:8px}
+.sell .tag{background:#e3e0d9;justify-self:start} .sell .btn{background:#1d2433;color:#f4efe6;justify-self:start}
+.band{display:flex;align-items:center;gap:12px;border-radius:20px;border:1.5px solid #1d2433;color:#1d2433;padding:14px 16px}
+.band .btn{background:#1d2433;color:#f4efe6;margin-left:auto;min-height:40px;padding:0 16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px} .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+</style></head><body><div class="wrap">
+
+<!-- A -->
+<section class="col"><h2 class="vt">Option A · Crates first</h2><p class="why">The order of the design: title, search, then the crates in one row of three equal tiles, then the featured album, and "For sellers" as a slim full-width band at the end. One rhythm top to bottom, every block as wide as the page.</p>
+<div class="phone"><header class="top"><span class="pill dark">+ Sell</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="pill">Log in</span></header><main>
+<div><h1 class="hd">Pick a crate. We'll pick the pressing.</h1><p class="line">No jargon, no homework. We tell you which version to buy and check every listing.</p></div>
+<div class="search">⌕ Album or artist</div>
+<div style="display:grid;gap:10px"><h2 class="hd">Pick a crate</h2>
+<div class="grid3"><div class="crate rock" style="min-height:96px"><i class="rec"></i><b style="margin-top:38px">Rock</b><span>4 records</span></div><div class="crate soul" style="min-height:96px"><i class="rec"></i><b style="margin-top:38px">Soul and funk</b><span>1 record</span></div><div class="crate elec" style="min-height:96px"><i class="rec"></i><b style="margin-top:38px">Electronic</b><span>2 records</span></div></div></div>
+<div style="display:grid;gap:10px"><h2 class="hd">This week at the shop</h2>
+<div class="feat"><span class="tag">This weekend</span><div style="display:flex;gap:12px;align-items:center"><i class="cover" style="width:72px;height:72px"></i><div><b style="font-size:16px;line-height:1.2;display:block">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</b><span class="small" style="color:#4a5163">David Bowie, 1972 · verified copies for sale</span></div></div><span class="btn">See which to buy</span></div>
+<div class="band"><div><b style="display:block">Sell for free</b><span class="small" style="color:#4a5163">0% commission: you keep the full price.</span></div><span class="btn">Sell a record</span></div></div>
+<span class="ill">Illustrative data</span>
+</main></div></section>
+
+<!-- B -->
+<section class="col"><h2 class="vt">Option B · Pick of the week on top</h2><p class="why">The featured album becomes the first thing under the search, large, with its cover. The crates follow as three equal tiles, and "For sellers" closes the page as an outlined card. The heaviest element comes first and the weight then decreases.</p>
+<div class="phone"><header class="top"><span class="pill dark">+ Sell</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="pill">Log in</span></header><main>
+<div><h1 class="hd">Pick a crate. We'll pick the pressing.</h1><p class="line">No jargon, no homework. We tell you which version to buy and check every listing.</p></div>
+<div class="search">⌕ Album or artist</div>
+<div class="feat" style="padding:18px;gap:12px"><span class="tag">This weekend</span><div style="display:flex;gap:14px;align-items:center"><i class="cover" style="width:96px;height:96px"></i><div><b style="font-size:18px;line-height:1.15;display:block">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</b><span class="small" style="color:#4a5163">David Bowie, 1972</span></div></div><span class="small" style="color:#4a5163">Verified copies for sale</span><span class="btn" style="width:100%">See which to buy</span></div>
+<div style="display:grid;gap:10px"><h2 class="hd">Or pick a crate</h2>
+<div class="grid3"><div class="crate rock" style="min-height:96px"><i class="rec"></i><b style="margin-top:38px">Rock</b><span>4 records</span></div><div class="crate soul" style="min-height:96px"><i class="rec"></i><b style="margin-top:38px">Soul and funk</b><span>1 record</span></div><div class="crate elec" style="min-height:96px"><i class="rec"></i><b style="margin-top:38px">Electronic</b><span>2 records</span></div></div></div>
+<div class="sell" style="text-align:left"><span class="tag">For sellers</span><b style="font-size:18px">Sell for free</b><span class="small">0% commission: you keep the full price.</span><span class="btn" style="width:100%">Sell a record</span></div>
+<span class="ill">Illustrative data</span>
+</main></div></section>
+
+<!-- C -->
+<section class="col"><h2 class="vt">Option C · Two equal halves</h2><p class="why">Everything below the search sits in pairs of equal width and height: the three crates as a compact row, then the two "This week" cards side by side with the same size and the same weight (both cover the same area; one filled, one outlined).</p>
+<div class="phone"><header class="top"><span class="pill dark">+ Sell</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="pill">Log in</span></header><main>
+<div><h1 class="hd">Pick a crate. We'll pick the pressing.</h1><p class="line">No jargon, no homework. We tell you which version to buy and check every listing.</p></div>
+<div class="search">⌕ Album or artist</div>
+<div style="display:grid;gap:10px"><h2 class="hd">Pick a crate</h2>
+<div class="grid3"><div class="crate rock" style="min-height:96px"><i class="rec"></i><b style="margin-top:38px">Rock</b><span>4 records</span></div><div class="crate soul" style="min-height:96px"><i class="rec"></i><b style="margin-top:38px">Soul and funk</b><span>1 record</span></div><div class="crate elec" style="min-height:96px"><i class="rec"></i><b style="margin-top:38px">Electronic</b><span>2 records</span></div></div></div>
+<div style="display:grid;gap:10px"><h2 class="hd">This week at the shop</h2>
+<div class="grid2" style="align-items:stretch">
+<div class="feat" style="padding:14px;gap:8px;align-content:start"><span class="tag">This weekend</span><i class="cover" style="width:100%;aspect-ratio:1/1;height:auto"></i><b style="font-size:14px;line-height:1.2">Ziggy Stardust</b><span class="small" style="color:#4a5163">David Bowie, 1972</span><span class="btn" style="width:100%;min-height:40px;padding:0 10px;margin-top:auto">See which to buy</span></div>
+<div class="sell" style="padding:14px;align-content:start;gap:8px"><span class="tag">For sellers</span><b style="font-size:20px;line-height:1.1;margin-top:6px">Sell for free</b><span class="small">0% commission: you keep the full price.</span><span class="btn" style="width:100%;min-height:40px;padding:0 10px;margin-top:auto">Sell a record</span></div></div></div>
+<span class="ill">Illustrative data</span>
+</main></div></section>
+
+</div></body></html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home page: colour balance, three options</title>
+<!-- Story 12 · home page, layout A. The colour balance did not please: three palettes to choose from (phone). Same layout, texts and content. Illustrative data (seed). -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:-.01em}
+.wrap{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+.col{width:375px} .vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px}
+.phone{border:1px solid #1d2433;border-radius:28px;overflow:hidden;background:#f4efe6}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px} .logo{display:flex;gap:8px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em}
+.dot{width:20px;height:20px;border-radius:50%;border:5px solid #1d2433;display:inline-block}
+.pill{border-radius:999px;padding:8px 14px;font-weight:600;font-size:13px;border:1.5px solid #1d2433} .pill.dark{background:#1d2433;color:#f4efe6}
+main{padding:4px 16px 24px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+h1{font-size:34px;line-height:1} .line{font-size:14px;margin-top:6px}
+.search{display:flex;align-items:center;gap:10px;border:1.5px solid #1d2433;border-radius:999px;padding:0 18px;min-height:52px;background:#fff;color:#6f6a60}
+h2{font-size:24px;line-height:1} .small{font-size:12px;color:#6f6a60}
+.ill{border:1px solid #c8bfae;border-radius:999px;padding:3px 9px;font-size:11px;justify-self:start}
+.crate{border-radius:18px;position:relative;overflow:hidden;color:#1d2433;padding:12px}
+.crate .rec{position:absolute;right:-16px;top:-16px;width:52px;height:52px;border-radius:50%;background:#1d2433;box-shadow:inset 0 0 0 16px #1d2433,inset 0 0 0 20px #f4efe6}
+.crate b{font-family:'Barlow Condensed',sans-serif;font-size:22px;line-height:1;display:block} .crate span{font-size:12px}
+.rock{background:#c9a46a} .soul{background:#b08a58} .elec{background:#cfb68a}
+.cover{border-radius:12px;background:#5a3a24;border:1px solid rgba(244,239,230,.4);flex:none;position:relative}
+.cover:after{content:"";position:absolute;right:8px;top:8px;width:18px;height:18px;border-radius:50%;border:3px solid rgba(244,239,230,.55)}
+.tag{display:inline-block;border-radius:999px;padding:3px 10px;font-size:11px;font-weight:600}
+.btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;padding:0 20px;font-weight:600;font-size:13px}
+.feat{background:#ebdcc4;color:#1d2433;border-radius:20px;padding:16px;display:grid;gap:10px}
+.feat .tag{background:#5a3a24;color:#f4efe6;justify-self:start} .feat .btn{background:#1d2433;color:#f4efe6;justify-self:start}
+.sell{border-radius:20px;border:1.5px solid #1d2433;padding:16px;display:grid;gap:8px}
+.sell .tag{background:#e3e0d9;justify-self:start} .sell .btn{background:#1d2433;color:#f4efe6;justify-self:start}
+.band{display:flex;align-items:center;gap:12px;border-radius:20px;border:1.5px solid #1d2433;color:#1d2433;padding:14px 16px}
+.band .btn{background:#1d2433;color:#f4efe6;margin-left:auto;min-height:40px;padding:0 16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px} .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.crate{min-height:96px;padding:12px} .crate b{margin-top:38px} .crate .rec{background:#1d2433;box-shadow:inset 0 0 0 16px #1d2433,inset 0 0 0 20px #f4efe6} .cover{background:#c9a46a}
+</style></head><body><div class="wrap"><section class="col"><h2 class="vt">Option 1 · Calm cream</h2><p class="why">Everything light: the crates are pale tints with a thin border, no dark discs, the featured card is nearly white with a border. The only dark elements are the buttons and the text. Looks airy; relies on the thin borders to separate blocks.</p><div class="phone"><header class="top"><span class="pill dark">+ Sell</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="pill">Log in</span></header><main>
+<div><h1 class="hd">Pick a crate. We'll pick the pressing.</h1><p class="line">No jargon, no homework. We tell you which version to buy and check every listing.</p></div>
+<div class="search">⌕ Album or artist</div>
+<div style="display:grid;gap:10px"><h2 class="hd">Pick a crate</h2><div class="grid3"><div class="crate" style="background:#f1e4cc;border:1px solid #d9cfba"><i class="rec" style="display:none"></i><b>Rock</b><span>4 records</span></div><div class="crate" style="background:#efdcc2;border:1px solid #d9cfba"><i class="rec" style="display:none"></i><b>Soul and funk</b><span>1 record</span></div><div class="crate" style="background:#e9e5da;border:1px solid #d9cfba"><i class="rec" style="display:none"></i><b>Electronic</b><span>2 records</span></div></div></div>
+<div style="display:grid;gap:10px"><h2 class="hd">This week at the shop</h2>
+<div class="feat" style="background:#fbf8f2;border:1px solid #d9cfba"><span class="tag" style="background:#dfe3ef;color:#1d2433">This weekend</span><div style="display:flex;gap:12px;align-items:center"><i class="cover" style="width:56px;height:56px;background:#c9a46a"></i><div><b style="font-size:16px;line-height:1.2;display:block">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</b><span class="small">David Bowie, 1972 · verified copies for sale</span></div></div><span class="btn" style="background:#1d2433;color:#f4efe6">See which to buy</span></div>
+<div class="band" style="background:#fbf8f2;border:1px solid #d9cfba"><div><b style="display:block">Sell for free</b><span class="small">0% commission: you keep the full price.</span></div><span class="btn" style="background:#1d2433;color:#f4efe6">Sell a record</span></div></div>
+<span class="ill">Illustrative data</span></main></div></section><section class="col"><h2 class="vt">Option 2 · Cream and blue</h2><p class="why">Two colour families instead of one: warm sand for the crates, the design's light blue for the featured card and for the discs; the sellers band stays outlined. Blue breaks up the all-beige look without adding anything dark.</p><div class="phone"><header class="top"><span class="pill dark">+ Sell</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="pill">Log in</span></header><main>
+<div><h1 class="hd">Pick a crate. We'll pick the pressing.</h1><p class="line">No jargon, no homework. We tell you which version to buy and check every listing.</p></div>
+<div class="search">⌕ Album or artist</div>
+<div style="display:grid;gap:10px"><h2 class="hd">Pick a crate</h2><div class="grid3"><div class="crate" style="background:#ead9bd;border:none"><i class="rec" style="background:#dfe3ef;box-shadow:inset 0 0 0 16px #dfe3ef,inset 0 0 0 20px #1d2433;"></i><b>Rock</b><span>4 records</span></div><div class="crate" style="background:#e6cfae;border:none"><i class="rec" style="background:#dfe3ef;box-shadow:inset 0 0 0 16px #dfe3ef,inset 0 0 0 20px #1d2433;"></i><b>Soul and funk</b><span>1 record</span></div><div class="crate" style="background:#efe3cc;border:none"><i class="rec" style="background:#dfe3ef;box-shadow:inset 0 0 0 16px #dfe3ef,inset 0 0 0 20px #1d2433;"></i><b>Electronic</b><span>2 records</span></div></div></div>
+<div style="display:grid;gap:10px"><h2 class="hd">This week at the shop</h2>
+<div class="feat" style="background:#dfe3ef;border:none"><span class="tag" style="background:#1d2433;color:#f4efe6">This weekend</span><div style="display:flex;gap:12px;align-items:center"><i class="cover" style="width:56px;height:56px;background:#c9a46a"></i><div><b style="font-size:16px;line-height:1.2;display:block">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</b><span class="small">David Bowie, 1972 · verified copies for sale</span></div></div><span class="btn" style="background:#1d2433;color:#f4efe6">See which to buy</span></div>
+<div class="band" style="background:#fbf8f2;border:1px solid #1d2433"><div><b style="display:block">Sell for free</b><span class="small">0% commission: you keep the full price.</span></div><span class="btn" style="background:#1d2433;color:#f4efe6">Sell a record</span></div></div>
+<span class="ill">Illustrative data</span></main></div></section><section class="col"><h2 class="vt">Option 3 · One tone, three steps</h2><p class="why">Warm only, but in steps of the same sand: the crates go from light to a bit darker, the featured card is the lightest, the sellers band is outlined. No dark discs and no dark brown. Quietest of the three; the navy buttons are the only contrast.</p><div class="phone"><header class="top"><span class="pill dark">+ Sell</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="pill">Log in</span></header><main>
+<div><h1 class="hd">Pick a crate. We'll pick the pressing.</h1><p class="line">No jargon, no homework. We tell you which version to buy and check every listing.</p></div>
+<div class="search">⌕ Album or artist</div>
+<div style="display:grid;gap:10px"><h2 class="hd">Pick a crate</h2><div class="grid3"><div class="crate" style="background:#f0e3cb;border:none"><i class="rec" style="display:none"></i><b>Rock</b><span>4 records</span></div><div class="crate" style="background:#e9d7b6;border:none"><i class="rec" style="display:none"></i><b>Soul and funk</b><span>1 record</span></div><div class="crate" style="background:#e2cca4;border:none"><i class="rec" style="display:none"></i><b>Electronic</b><span>2 records</span></div></div></div>
+<div style="display:grid;gap:10px"><h2 class="hd">This week at the shop</h2>
+<div class="feat" style="background:#f7efe0;border:none"><span class="tag" style="background:#e2cca4;color:#1d2433">This weekend</span><div style="display:flex;gap:12px;align-items:center"><i class="cover" style="width:56px;height:56px;background:#c9a46a"></i><div><b style="font-size:16px;line-height:1.2;display:block">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</b><span class="small">David Bowie, 1972 · verified copies for sale</span></div></div><span class="btn" style="background:#1d2433;color:#f4efe6">See which to buy</span></div>
+<div class="band" style="background:#fbf8f2;border:1px solid #1d2433"><div><b style="display:block">Sell for free</b><span class="small">0% commission: you keep the full price.</span></div><span class="btn" style="background:#1d2433;color:#f4efe6">Sell a record</span></div></div>
+<span class="ill">Illustrative data</span></main></div></section></div></body></html>

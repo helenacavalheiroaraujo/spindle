@@ -16,7 +16,7 @@ export default async function GenrePage({ params }: { params: Promise<{ genre: s
 
   return (
     <main className="mx-auto max-w-2xl px-4 pb-16 lg:max-w-5xl">
-      <Header wide />
+      <Header />
       <Link href="/" className="inline-flex min-h-12 items-center text-sm font-semibold">
         ← Back to home
       </Link>

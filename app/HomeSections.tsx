@@ -42,9 +42,8 @@ function Sections({ data }: { data: HomeData }) {
   return (
     <>
       {data.crates.length > 0 && (
-        <section aria-labelledby="crates">
-          <h2 id="crates" className="font-heading text-3xl">Pick a crate</h2>
-          <ul className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+        <section aria-label="Pick a crate">
+          <ul className="grid grid-cols-3 gap-3 lg:grid-cols-6">
             {data.crates.map(({ genre, count }) => (
               <li key={genre.slug}>
                 <Link href={`/genres/${genre.slug}`} aria-label={`${genre.name}, ${recordsLabel(count)}`} className="block">
@@ -58,34 +57,36 @@ function Sections({ data }: { data: HomeData }) {
       )}
 
       <section aria-labelledby="week" className="mt-10">
-        <h2 id="week" className="font-heading text-3xl">This week at the shop</h2>
-        <div className="mt-3 grid gap-3 lg:grid-cols-[3fr_2fr]">
+        <h2 id="week" className="font-heading text-3xl lg:text-4xl">This week at the shop</h2>
+        <div className="mt-3 grid gap-3 lg:grid-cols-[13fr_7fr]">
           {featured && (
-            <div className="grid gap-3 rounded-3xl bg-brown p-5 text-cream">
-              <span className="w-fit rounded-full bg-cream px-3 py-1 text-xs font-semibold text-brown">This weekend</span>
-              <div className="flex items-center gap-4">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={featured.coverUrl} alt="" width={80} height={80} className="h-20 w-20 shrink-0 rounded-xl border border-cream/40" />
-                <p className="min-w-0">
-                  <span className="block font-semibold leading-snug lg:text-xl">{featured.title}</span>
-                  <span className="mt-1 block text-sm opacity-90">
-                    {featured.artist}, {featured.releaseYear} · verified copies for sale
-                  </span>
+            <div className="grid grid-cols-[1.35fr_1fr] overflow-hidden rounded-3xl bg-navy text-cream">
+              <div className="flex flex-col items-start gap-3 p-5 lg:p-7">
+                <span className="rounded-full bg-cream px-3 py-1 text-xs font-semibold text-navy">This weekend</span>
+                <p className="font-heading text-2xl leading-none sm:text-3xl lg:text-4xl">{featured.title}</p>
+                <p className="text-sm text-cream/80">
+                  {featured.artist}, {featured.releaseYear} · verified copies for sale
                 </p>
+                <Link
+                  href={`/albums/${featured.id}/priorities`}
+                  className="mt-auto flex min-h-12 items-center whitespace-nowrap rounded-full bg-cream px-4 text-sm font-semibold text-navy sm:px-6 sm:text-base"
+                >
+                  See which to buy
+                </Link>
               </div>
-              <Link
-                href={`/albums/${featured.id}/priorities`}
-                className="flex min-h-12 w-fit items-center rounded-full bg-cream px-6 font-semibold text-navy"
-              >
-                See which to buy
-              </Link>
+              <div className="flex items-center justify-center bg-[#e6dccb] p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={featured.coverUrl} alt="" width={160} height={160} className="aspect-square w-full max-w-40 rounded-xl" />
+              </div>
             </div>
           )}
-          <div className="grid content-start gap-2 rounded-3xl border border-navy p-5">
+          <div className="flex flex-col justify-between gap-6 rounded-3xl bg-[#e6d8bf] p-5 lg:p-7">
             <span className="w-fit rounded-full bg-navy/10 px-3 py-1 text-xs font-semibold">For sellers</span>
-            <p className="text-lg font-semibold lg:text-xl">Sell for free</p>
-            <p className="text-sm text-navy/70">0% commission: you keep the full price.</p>
-            <Link href="/sell" className="mt-1 flex min-h-12 w-fit items-center rounded-full bg-navy px-6 font-semibold text-cream">
+            <p className="font-heading text-3xl leading-none lg:text-4xl">
+              <span className="block">Sell for free.</span>
+              <span className="block">0% commission.</span>
+            </p>
+            <Link href="/sell" className="flex min-h-12 w-fit items-center rounded-full bg-navy px-6 font-semibold text-cream">
               Sell a record
             </Link>
           </div>
