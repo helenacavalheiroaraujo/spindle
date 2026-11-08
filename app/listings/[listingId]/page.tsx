@@ -9,6 +9,8 @@ import { yellowWarning } from "@/lib/rules/yellowWarning";
 import { Header } from "@/components/Header";
 import { TrafficLight } from "@/components/TrafficLight";
 import { BuyButton } from "@/components/BuyButton";
+import { sellerText } from "@/lib/rules/seller";
+import { SellerLine } from "@/components/SellerLine";
 
 const one = (v?: string | string[]) => (Array.isArray(v) ? v[0] : v);
 
@@ -50,7 +52,7 @@ export default async function ListingCheckPage({
       ? `/albums/${l.albumId}/recommendation${prioritiesQuery}`
       : `/albums/${l.albumId}/priorities`
     : `/versions/${versionId}/listings${prioritiesQuery}`;
-  const label = `${formatPrice(l.price)}, ${l.condition.name}, ${l.sellerName}`;
+  const label = `${formatPrice(l.price)}, ${l.condition.name}, ${sellerText(l.seller)}`;
 
   return (
     <main className="mx-auto max-w-2xl px-4 pb-16">
@@ -128,8 +130,7 @@ export default async function ListingCheckPage({
         <p>
           <span className="block text-2xl font-bold">{formatPrice(l.price)}</span>
           <span className="text-sm text-navy/70">
-            {l.sellerName}
-            {l.city && `, ${l.city}`}
+            <SellerLine seller={l.seller} city={l.city} />
           </span>
         </p>
         {light === "red" ? (

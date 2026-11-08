@@ -161,7 +161,8 @@ export default async function RecommendationPage({
               See verified listings
             </Link>
             <p className="flex flex-wrap items-center justify-center gap-x-2 text-sm">
-              <span>Your priorities: {ranking.map((p, i) => `${i + 1}. ${LABEL[p]}`).join(" · ")}</span>
+              <span>Based on: {ranking.map((p) => LABEL[p]).join(", ")}</span>
+              <span aria-hidden>·</span>
               <Link href={changeHref} className="inline-flex min-h-12 items-center font-semibold underline">
                 Change
               </Link>

@@ -3,6 +3,28 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Audit of built stories (findings, iteration 5)
+
+### Shops show their shop name and a "Shop" tag; private sellers show "Private seller" (story 9 · finding #64)
+- **Why:** the Assignment 1 design names the shop ("Discos do Bairro"), and story 8 asks sellers for a shop name, so showing it uses data the seller gave. The "Shop" tag keeps story 9's criterion. A seller's personal name is never shown on listings.
+- **Trade-off accepted:** a shop name is not verified by Spindle; trust in the record comes from the traffic light, so the tag has a neutral style and does not compete with it.
+
+### Sign-up and login messages written during the build (story 9 · finding #66)
+- **Why:** story 9 only states the rules (e.g. passwords shorter than 8 characters are refused), not the wording. The messages are short, say what to fix, and are covered by the tests.
+- **Trade-off accepted:** the wording was not in the story.
+
+### Yellow warning: one sentence per uncertain check, ending with the money-back promise (story 5 · finding #58)
+- **Why:** story 5 gives one example ("The matrix photo isn't sharp. If it turns out to be another pressing, you get your money back."). The other uncertain cases (cover and label, country and year, no matrix photo, moved here) need a sentence of the same kind. The money-back sentence comes from story 5 and matches the protection explained in story 7.
+- **Trade-off accepted:** the four extra sentences were written during the build, not in the story. The refund is promised but, like every protection step after step 1, does not work in the MVP.
+
+### Only albums with recommendation data open; others show "Not in the demo" (story 3 · finding #50)
+- **Why:** Hunky Dory has a listing for story 6 but no reason texts or tracks, so its recommendation would show an empty "Why this one" and "Track list (0)". Inventing that data adds work the 5-minute demo does not show. The rule lives in `lib/rules/` and the story 6 listing stays.
+- **Trade-off accepted:** only Ziggy Stardust opens a recommendation in the MVP.
+
+### Glossary terms show their explanation on tap, not always (story 3 · finding #48)
+- **Why:** showing every explanation inline makes the recommendation long on a phone and repeats explanations when a term appears more than once. A tap keeps the screen short while every term still has its plain explanation one tap away.
+- **Trade-off accepted:** differs from story 3 ("always come with a short plain explanation"). The only cue is a dotted underline, so a buyer may not discover the tap; the cue is not changed in the MVP.
+
 ## 2026-11-08 — Process (MVP progress)
 
 ### MVP progress report after each story (process)

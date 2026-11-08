@@ -121,8 +121,10 @@ function AlbumRow({ album, onNobodySelling }: { album: AlbumSummary; onNobodySel
         <span className="block text-sm text-navy/70">
           {album.artist}, {album.releaseYear}
         </span>
-        {!album.hasListings && (
-          <span className="mt-1 inline-block rounded-full border border-navy/30 px-2 py-0.5 text-xs">No listings</span>
+        {album.access !== "open" && (
+          <span className="mt-1 inline-block rounded-full border border-navy/30 px-2 py-0.5 text-xs">
+            {album.access === "no_listings" ? "No listings" : "Not in the demo"}
+          </span>
         )}
       </span>
       <span className="shrink-0 rounded-full bg-navy/10 px-3 py-1 text-xs font-semibold">
@@ -131,11 +133,15 @@ function AlbumRow({ album, onNobodySelling }: { album: AlbumSummary; onNobodySel
     </>
   );
   const rowClass = "flex min-h-20 w-full items-center gap-3 py-3 text-left";
-  return album.hasListings ? (
-    <Link href={`/albums/${album.id}/priorities`} className={rowClass}>
-      {content}
-    </Link>
-  ) : (
+  // Only albums with recommendation data open (finding #50); "Not in the demo" rows do nothing.
+  if (album.access === "open")
+    return (
+      <Link href={`/albums/${album.id}/priorities`} className={rowClass}>
+        {content}
+      </Link>
+    );
+  if (album.access === "not_in_demo") return <div className={rowClass}>{content}</div>;
+  return (
     <button type="button" onClick={() => onNobodySelling(album)} className={rowClass}>
       {content}
     </button>

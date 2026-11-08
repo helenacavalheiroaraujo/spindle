@@ -48,6 +48,14 @@ test("albums without active listings show 'No listings' (including one with only
   await expect(rows(page).filter({ hasText: "Let's Dance" })).toContainText("No listings");
 });
 
+test("an album with listings but no recommendation data shows 'Not in the demo' and does not open (#50)", async ({ page }) => {
+  await box(page).fill("hunky");
+  const row = rows(page).filter({ hasText: "Hunky Dory" });
+  await expect(row).toContainText("Not in the demo");
+  await expect(row.getByRole("link")).toHaveCount(0);
+  await expect(row.getByRole("button")).toHaveCount(0);
+});
+
 test("a typo suggests the full album title", async ({ page }) => {
   await box(page).fill("zigy");
   await expect(page.getByText("Did you mean…?")).toBeVisible();

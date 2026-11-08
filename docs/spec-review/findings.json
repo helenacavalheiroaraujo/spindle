@@ -1616,9 +1616,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 48,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-08",
+        "decision": "Option A: keep the tap. Recorded in DECISIONS.md."
+      }
     },
     {
       "stories": [
@@ -1647,9 +1651,13 @@
       },
       "question": null,
       "id": 49,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-08",
+        "decision": "Closed as already met: condition grades appear only on the listing card and the listing check screen, and both show the plain explanation next to the grade. Adding \"Good\" and \"Fair\" to the glossary would wrongly match common words (\"good shape\", \"fair price\"). No change."
+      }
     },
     {
       "stories": [
@@ -1678,9 +1686,13 @@
       "proposal": null,
       "question": "Add reasons and tracks for Hunky Dory, or keep only Ziggy Stardust openable in the demo?",
       "id": 50,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-08",
+        "decision": "Option B2: an album opens only with active listings and reason texts; Hunky Dory shows \"Not in the demo\" and does not open. Rule in lib/rules/albumAccess.ts; recorded in DECISIONS.md."
+      }
     },
     {
       "stories": [
@@ -1809,9 +1821,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 55,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-08",
+        "decision": "Option B: changed to \"Based on: Price, Sound · Change\" as in story 2 (defect fix)."
+      }
     },
     {
       "stories": [
@@ -1864,7 +1880,11 @@
       "id": 57,
       "status": "open",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-08",
+        "decision": "Option A: story 7 replaces the panel; green Buy goes straight to the checkout (or login). Resolved when the story 7 screens are built."
+      }
     },
     {
       "stories": [
@@ -1893,9 +1913,13 @@
       "proposal": null,
       "question": "Keep the invented sentences (cover/label, country/year, no matrix photo, moved here)? And keep the money-back promise, with a demo answer for how a refund would work?",
       "id": 58,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-08",
+        "decision": "Option A for both: keep the four extra sentences and the money-back promise (from story 5's example). Recorded in DECISIONS.md."
+      }
     },
     {
       "stories": [
@@ -2070,9 +2094,13 @@
       "proposal": null,
       "question": "Fix the defect: shops show \"Shop\" (story 9) or the shop name, as in the design (\"Discos do Bairro\")? Private sellers show \"Private seller\".",
       "id": 64,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-08",
+        "decision": "Option E2: shops show their shop name with a neutral \"Shop\" tag; others show \"Private seller\"; personal names never shown. Rule in lib/rules/seller.ts; recorded in DECISIONS.md."
+      }
     },
     {
       "stories": [
@@ -2132,9 +2160,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 66,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-08",
+        "decision": "Option A: keep the messages. Recorded in DECISIONS.md."
+      }
     },
     {
       "stories": [

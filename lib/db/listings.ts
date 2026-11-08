@@ -4,6 +4,7 @@ import type { TypicalRange } from "@/lib/rules/fairPrice";
 import type { ListingForList } from "@/lib/rules/listingOrder";
 import type { ListingFacts } from "@/lib/rules/activeListings";
 import type { CheckItem, CheckResult } from "@/lib/rules/trafficLight";
+import { sellerOf, type Seller } from "@/lib/rules/seller";
 
 export const LISTING_FACTS_COLUMNS =
   "status, claimed_version_id, actual_version_id, matrix_photo_url, check_results (item, result)";
@@ -29,7 +30,7 @@ export function toListingFacts(l: ListingRow): ListingFacts {
 // --- Listings screen (story 5) ----------------------------------------------
 
 export type ListingDetails = ListingForList & {
-  sellerName: string;
+  seller: Seller;
   city: string | null;
   condition: { code: string; name: string; explanation: string };
   claimedVersionName: string;
@@ -68,7 +69,7 @@ export async function getVersionListings(versionId: string): Promise<VersionList
     .from("listings")
     .select(
       `id, price, ${LISTING_FACTS_COLUMNS},
-       profiles (name, city),
+       profiles (shop_name, city),
        condition_grades (code, name, explanation),
        claimed:versions!listings_claimed_version_id_fkey (name),
        actual:versions!listings_actual_version_id_fkey (name, typical_price_min, typical_price_max)`,
@@ -87,13 +88,13 @@ export async function getVersionListings(versionId: string): Promise<VersionList
       typicalRange: toTypicalRange(v),
     },
     listings: listings.data.map((l) => {
-      const seller = l.profiles as unknown as { name: string; city: string | null };
+      const seller = l.profiles as unknown as { shop_name: string | null; city: string | null };
       const grade = l.condition_grades as unknown as ListingDetails["condition"];
       return {
         ...toListingFacts(l as unknown as ListingRow),
         id: l.id,
         price: Number(l.price),
-        sellerName: seller.name,
+        seller: sellerOf(seller.shop_name),
         city: seller.city,
         condition: grade,
         claimedVersionName: (l.claimed as unknown as { name: string }).name,
@@ -119,7 +120,7 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
     .from("listings")
     .select(
       `id, price, cover_photo_url, record_photo_url, ${LISTING_FACTS_COLUMNS},
-       profiles (name, city),
+       profiles (shop_name, city),
        condition_grades (code, name, explanation),
        claimed:versions!listings_claimed_version_id_fkey (name, albums (id, title, artist)),
        actual:versions!listings_actual_version_id_fkey (name, typical_price_min, typical_price_max)`,
@@ -130,13 +131,13 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
   if (result.error) throw result.error;
   const l = result.data;
   if (!l) return null;
-  const seller = l.profiles as unknown as { name: string; city: string | null };
+  const seller = l.profiles as unknown as { shop_name: string | null; city: string | null };
   const claimed = l.claimed as unknown as { name: string; albums: { id: string; title: string; artist: string } };
   return {
     ...toListingFacts(l as unknown as ListingRow),
     id: l.id,
     price: Number(l.price),
-    sellerName: seller.name,
+    seller: sellerOf(seller.shop_name),
     city: seller.city,
     condition: l.condition_grades as unknown as ListingDetails["condition"],
     claimedVersionName: claimed.name,

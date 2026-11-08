@@ -76,6 +76,15 @@ test("the condition is shown in plain words", async ({ page }) => {
   await expect(rows(page).nth(1)).toContainText("Very good (VG+): light signs of wear");
 });
 
+test("sellers: a shop shows its name and a Shop tag; others show Private seller; no personal names (story 9 · #64)", async ({ page }) => {
+  await page.goto(`/versions/${V1990}/listings`);
+  const shop = rows(page).filter({ hasText: "€30" });
+  await expect(shop).toContainText("Discos do Rui, Lisboa");
+  await expect(shop.getByText("Shop", { exact: true })).toBeVisible();
+  await expect(rows(page).filter({ hasText: "€24" })).toContainText("Private seller, Porto");
+  await expect(page.getByText(/Ana Sousa|Rui Ferreira|Marta Lopes|João Pinto/)).toHaveCount(0);
+});
+
 test("yellow: Buy first shows what is uncertain; Back closes it; checkout comes in story 7", async ({ page }) => {
   await page.goto(`/versions/${V2012}/listings`);
   await rows(page).nth(1).getByRole("button", { name: /^Buy/ }).click();

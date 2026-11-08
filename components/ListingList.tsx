@@ -7,6 +7,8 @@ import { yellowWarning } from "@/lib/rules/yellowWarning";
 import { priceLabel, type TypicalRange } from "@/lib/rules/fairPrice";
 import { LightLegend, TrafficLight } from "@/components/TrafficLight";
 import { BuyButton } from "@/components/BuyButton";
+import { sellerText } from "@/lib/rules/seller";
+import { SellerLine } from "@/components/SellerLine";
 
 // Verified listings for one version (story 5), each with its price label (story 6): on its own screen on phone, beside the recommendation on desktop.
 // "from" tells the listing check screen where its Back button goes.
@@ -50,7 +52,7 @@ export function ListingList({
 
       <ul aria-label="Verified listings">
         {rows.map(({ listing: l, light, movedHere }) => {
-          const label = `${formatPrice(l.price)}, ${l.condition.name}, ${l.sellerName}`;
+          const label = `${formatPrice(l.price)}, ${l.condition.name}, ${sellerText(l.seller)}`;
           return (
             <li key={l.id} aria-label={label} className="flex flex-wrap items-start gap-x-4 gap-y-3 border-b border-line py-4">
               <span aria-hidden className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy">
@@ -73,8 +75,7 @@ export function ListingList({
                   {l.condition.name} ({l.condition.code}): {l.condition.explanation.toLowerCase()}
                 </p>
                 <p className="text-navy/70">
-                  {l.sellerName}
-                  {l.city && `, ${l.city}`}
+                  <SellerLine seller={l.seller} city={l.city} />
                 </p>
                 <p className="mt-1 font-semibold underline underline-offset-4">See the checks</p>
               </Link>

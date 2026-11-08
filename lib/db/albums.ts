@@ -1,6 +1,7 @@
 // Album reads for the search (story 1). Facts only: the rules in lib/rules/ decide.
 import { db } from "./client";
 import { hasActiveListings, type ListingFacts } from "@/lib/rules/activeListings";
+import { albumAccess, type AlbumAccess } from "@/lib/rules/albumAccess";
 import type { CheckItem, CheckResult } from "@/lib/rules/trafficLight";
 
 export type AlbumSummary = {
@@ -11,21 +12,25 @@ export type AlbumSummary = {
   coverUrl: string;
   versionCount: number;
   hasListings: boolean;
+  access: AlbumAccess;
 };
 
-// Every album with its number of versions and whether it has active listings.
+// Every album with its number of versions, whether it has active listings, and whether it opens.
 // The catalogue is small, so search and suggestions run on the full list (DECISIONS.md).
 export async function listAlbumSummaries(): Promise<AlbumSummary[]> {
   const client = db();
-  const [albums, listings] = await Promise.all([
+  const [albums, listings, reasons] = await Promise.all([
     client.from("albums").select("id, title, artist, release_year, cover_url, versions (id)"),
     client
       .from("listings")
       .select("status, claimed_version_id, actual_version_id, matrix_photo_url, check_results (item, result)")
       .eq("status", "on_sale"),
+    client.from("reason_texts").select("version_id"),
   ]);
   if (albums.error) throw albums.error;
   if (listings.error) throw listings.error;
+  if (reasons.error) throw reasons.error;
+  const withReasons = new Set(reasons.data.map((r) => r.version_id));
 
   const facts: ListingFacts[] = listings.data.map((l) => ({
     status: l.status,
@@ -37,6 +42,7 @@ export async function listAlbumSummaries(): Promise<AlbumSummary[]> {
 
   return albums.data.map((a) => {
     const versionIds = a.versions.map((v) => v.id);
+    const hasListings = hasActiveListings(facts, versionIds);
     return {
       id: a.id,
       title: a.title,
@@ -44,7 +50,8 @@ export async function listAlbumSummaries(): Promise<AlbumSummary[]> {
       releaseYear: a.release_year,
       coverUrl: a.cover_url,
       versionCount: versionIds.length,
-      hasListings: hasActiveListings(facts, versionIds),
+      hasListings,
+      access: albumAccess(hasListings, versionIds.some((v) => withReasons.has(v))),
     };
   });
 }

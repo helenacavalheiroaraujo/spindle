@@ -71,7 +71,7 @@ test("track list is collapsed until tapped; extra tracks show Bonus", async ({ p
 
 test("Change → priorities screen with the ranking filled in", async ({ page }) => {
   await page.goto(url("sound,price"));
-  await expect(page.getByText("Your priorities: 1. Sound · 2. Price")).toBeVisible();
+  await expect(page.getByText("Based on: Sound, Price")).toBeVisible();
   await page.getByRole("link", { name: "Change" }).click();
   await expect(page).toHaveURL(`/albums/${ZIGGY_ID}/priorities?priorities=sound,price`);
   await expect(page.getByRole("button", { name: /^Sound/ })).toHaveAttribute("aria-pressed", "true");

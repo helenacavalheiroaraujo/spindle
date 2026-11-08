@@ -60,7 +60,7 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 1 | Search by title or artist from the 3rd character, ignoring case and accents, newest first | `lib/rules/albumSearch.ts`, `app/AlbumSearch.tsx` | `tests/unit/albumSearch.test.ts`, `tests/e2e/search.spec.ts` |
 | 1 | Up to 3 suggestions, or "No albums found" | `lib/rules/searchSuggestions.ts` | `tests/unit/searchSuggestions.test.ts`, `tests/e2e/search.spec.ts` |
 | 1 | "No listings" from active listings only | `lib/rules/activeListings.ts`, `lib/rules/trafficLight.ts`, `lib/db/albums.ts` | `tests/unit/activeListings.test.ts`, `tests/unit/trafficLight.test.ts`, `tests/e2e/search.spec.ts` |
-| 1 | Tap: priorities screen, or "Nobody is selling this album right now" | `app/AlbumSearch.tsx` | `tests/e2e/search.spec.ts` |
+| 1 | Tap: priorities screen, or "Nobody is selling this album right now"; albums without recommendation data show "Not in the demo" and do not open (finding #50) | `lib/rules/albumAccess.ts`, `lib/db/albums.ts`, `app/AlbumSearch.tsx` | `tests/unit/albumAccess.test.ts`, `tests/e2e/search.spec.ts` |
 | 1 | Error screen with "Try again" keeps the typed text (Shared rules) | `components/ErrorScreen.tsx`, `app/AlbumSearch.tsx` | `tests/e2e/search.spec.ts` |
 | 2 | Pick by tap order, ranks shown as numbers; unpick closes the gap; all four can be picked | `lib/rules/priorities.ts`, `app/albums/[albumId]/priorities/PriorityPicker.tsx` | `tests/unit/priorities.test.ts`, `tests/e2e/priorities.spec.ts` |
 | 2 | "See recommendation" disabled until one option is picked, and again when all are unpicked | `lib/rules/priorities.ts`, `app/albums/[albumId]/priorities/PriorityPicker.tsx` | `tests/unit/priorities.test.ts`, `tests/e2e/priorities.spec.ts` |
@@ -91,6 +91,7 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 6 | "Typical price for this pressing: €min–€max" below the list, on phone and beside the recommendation | `components/ListingList.tsx`, `components/ListingsBeside.tsx` | `tests/e2e/fairPrice.spec.ts` |
 | 6 | Version without a range: no label and no range line | `lib/rules/fairPrice.ts`, `components/ListingList.tsx`, `supabase/seed.sql` | `tests/unit/fairPrice.test.ts`, `tests/e2e/fairPrice.spec.ts` |
 | 9 | Sign up; log in; wrong password message; log out from Your account; return to where the user was | `lib/rules/signUp.ts`, `lib/rules/login.ts`, `lib/db/session.ts`, `lib/db/profiles.ts` | `tests/unit/signUp.test.ts`, `tests/unit/login.test.ts`, `tests/e2e/signup.spec.ts`, `tests/e2e/login.spec.ts` |
+| 9 | Sellers: shop name and "Shop" tag, or "Private seller"; no personal names (finding #64) | `lib/rules/seller.ts`, `lib/db/listings.ts`, `components/SellerLine.tsx` | `tests/unit/seller.test.ts`, `tests/e2e/listings.spec.ts` |
 | 9 | Tap Buy while signed out → log in or sign up → checkout for that listing | Built with story 7 | Written with story 7 |
 | 9 | Tap Sell while signed out → log in or sign up → back to the sell form | Built with story 8 | Written with story 8 |
 | 7 | | | |
