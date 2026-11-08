@@ -3,7 +3,25 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 7 · Checkout (findings)
+
+### A seller buying their own listing waits for story 8 (stories 7 and 9 · finding #12)
+- **Why:** demo sellers have no account, so no signed-in user can own a listing until story 8 (sell) exists. Decide the rule when story 8 is built.
+
+### Checkout address is typed for each order; the payment method is a label only (story 7 · finding #24)
+- **Why:** no personal data is stored beyond the order, and payment is simulated. Differs from the Assignment 1 design (saved address, MB WAY phone number) on purpose.
+
+### The checkout explains what protection covers (story 7 · finding #25)
+- **Why:** it states Spindle's value in one line during the demo; refunds themselves stay out of the MVP.
+
+### MB WAY is selected by default on the checkout (story 7 · finding #27)
+- **Why:** Pay depends only on the address, as the acceptance criterion says; one tap fewer in the demo.
+
 ## 2026-11-08 — Story 9 · Log in and log out
+
+### Buy and Sell while signed out are built with stories 7 and 8, not in story 9 (story 9)
+- **Why:** the login and return address already work; what is missing is the page to return to. Building the check on the real checkout (story 7) and the real sell form (story 8) avoids a placeholder page that would be rewritten, and the Playwright test is written once, against the real flow.
+- **Trade-off accepted:** story 9 is closed with two criteria waiting ("Tapping Buy while signed out…" and Sell while signed out); they are the first step of stories 7 and 8.
 
 ### Log out lives on a "Your account" page opened from the initials (story 9)
 - **Why:** one page with name, email and Log out is simple to build and test, and keeps the corner as in the designs.

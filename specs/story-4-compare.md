@@ -13,6 +13,12 @@
 - **The buyer's chosen priorities are highlighted**, in rank order, at the top
 - Tapping a version → its recommendation-style page with its listings
 
+## Designs
+| Screen | Design |
+|---|---|
+| Compare pressings | `Spindle_mockups_by_section.pdf` p. 11 (phone) |
+| Version page (from a column) | **None yet: Canva design needed before building** (finding #14) |
+
 ## Acceptance criteria
 - [ ] On a phone-sized screen, 2 versions are shown; on desktop, up to 3
 - [ ] The first column is the recommended version; the others follow by total score

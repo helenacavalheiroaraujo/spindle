@@ -3,8 +3,8 @@
     "project": "Spindle MVP",
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
-    "iteration": 3,
-    "updated": "2026-11-07T23:59:00+00:00"
+    "iteration": 4,
+    "updated": "2026-11-08T12:30:00+00:00"
   },
   "iterations": [
     {
@@ -21,6 +21,11 @@
       "n": 3,
       "date": "2026-11-07",
       "note": "Re-check after the iteration 2 decisions: only story 1 changed (#19, #29, #30 approved); the new text resolves them and adds no new findings"
+    },
+    {
+      "n": 4,
+      "date": "2026-11-08",
+      "note": "Before building story 7: recorded the decisions on #24, #25, #27 (and #12 deferred to story 8); re-checked story 7 against the checkout design (p. 16) and stories 5 and 9; 5 new findings (#37–#41), all Low. Coverage marks stories 1, 2, 3, 5, 6 and 9 as tested."
     }
   ],
   "findings": [
@@ -446,7 +451,7 @@
         "current": "",
         "proposed": "A signed-in seller sees their own listings without the Buy button (\"Your listing\")."
       },
-      "question": null,
+      "question": "Option B chosen on 2026-11-08: waits for story 8. Decide the rule when story 8 is built (recorded in DECISIONS.md).",
       "status": "open",
       "first_seen": 1,
       "resolution": null
@@ -841,9 +846,13 @@
         "proposed": "### Checkout address is typed for each order; the payment method is a label only (story 7)\n- Why: no personal data stored beyond the order; payment is simulated."
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 4,
+        "date": "2026-11-08",
+        "decision": "Option A. The address is typed for each order and the payment method is a label only; differs from the Assignment 1 design on purpose. Recorded in DECISIONS.md."
+      }
     },
     {
       "id": 25,
@@ -867,9 +876,13 @@
         "proposed": "- \"What protection covers: pressing check, payment held until delivery, and a refund if the record isn't as listed.\""
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 4,
+        "date": "2026-11-08",
+        "decision": "Option A. The checkout shows \"What protection covers: pressing check, payment held until delivery, and a refund if the record isn't as listed.\" Added to story 7 and recorded in DECISIONS.md."
+      }
     },
     {
       "id": 26,
@@ -929,9 +942,13 @@
         "proposed": "choice of MB WAY or card, as a label only; MB WAY is selected by default"
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 4,
+        "date": "2026-11-08",
+        "decision": "Option A. MB WAY is selected by default, so Pay depends only on the address. Added to story 7 and recorded in DECISIONS.md."
+      }
     },
     {
       "id": 28,
@@ -1246,13 +1263,160 @@
       "status": "open",
       "first_seen": 2,
       "resolution": null
+    },
+    {
+      "id": 37,
+      "stories": [
+        "7"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
+      "title": "Buyer protection is €2.00 (total €34.90) in the story, €2.10 (total €35.00) in the design — not recorded in DECISIONS",
+      "evidence": [
+        {
+          "source": "specs/story-7-checkout.md",
+          "where": "Story 7 · Acceptance criteria",
+          "quote": "For a €28 record, the total is €34.90 (28 + 4.90 + 2.00)"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 16 · Buy with protection",
+          "quote": "Buyer protection €2.10 · Total €35.00 · Pay €35.00"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep €2.00 and record the difference in DECISIONS, or follow the design (€2.10, total €35.00)?",
+      "status": "open",
+      "first_seen": 4,
+      "resolution": null
+    },
+    {
+      "id": 38,
+      "stories": [
+        "7"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
+      "title": "Design offers card and PayPal besides MB WAY; the story offers MB WAY or card only",
+      "evidence": [
+        {
+          "source": "specs/story-7-checkout.md",
+          "where": "Story 7 · What the checkout shows",
+          "quote": "choice of MB WAY or card, as a label only; MB WAY is selected by default"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 16 · Buy with protection",
+          "quote": "MB WAY · 912 *** 345 · Or card, PayPal"
+        }
+      ],
+      "proposal": {
+        "file": "DECISIONS.md",
+        "section": "2026-11-08 — Story 7 · Checkout (findings)",
+        "current": "",
+        "proposed": "### PayPal is not offered on the checkout (story 7 · finding #38)\n- **Why:** payment is simulated; two labels (MB WAY, card) are enough to show the choice."
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 4,
+      "resolution": null
+    },
+    {
+      "id": 39,
+      "stories": [
+        "7"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "The confirmation screen after Pay is not described (texts, what it shows, where the buyer goes next)",
+      "evidence": [
+        {
+          "source": "specs/story-7-checkout.md",
+          "where": "Story 7 · Use cases",
+          "quote": "Pay → order created, status \"Paid · waiting for the seller\"; confirmation screen"
+        }
+      ],
+      "proposal": {
+        "file": "specs/story-7-checkout.md",
+        "section": "Story 7 · What the checkout shows (new sub-list: confirmation screen)",
+        "current": "",
+        "proposed": "- **Confirmation screen:** heading \"Order placed\", the record, the total paid, the status \"Paid · waiting for the seller\", the four steps with step 1 done, and a button \"Back to search\""
+      },
+      "question": "What should the confirmation screen show, and where does its button lead?",
+      "status": "open",
+      "first_seen": 4,
+      "resolution": null
+    },
+    {
+      "id": 40,
+      "stories": [
+        "5",
+        "7",
+        "9"
+      ],
+      "type": "Ambiguity",
+      "severity": "Low",
+      "title": "On a yellow listing, is login asked when tapping Buy (story 9) or after the warning's \"Continue to checkout\" (story 5)?",
+      "evidence": [
+        {
+          "source": "specs/story-9-accounts.md",
+          "where": "Story 9 · Acceptance criteria",
+          "quote": "Tapping Buy while signed out opens login and, after login, goes to the checkout for that listing"
+        },
+        {
+          "source": "specs/story-5-listings.md",
+          "where": "Story 5 · What the screens show",
+          "quote": "Buy (in the list or on the listing check screen) first shows a warning that says what is uncertain"
+        }
+      ],
+      "proposal": {
+        "file": "specs/story-7-checkout.md",
+        "section": "Story 7 · Edge cases",
+        "current": "Buyer not signed in → login first (story 9), then back to the checkout",
+        "proposed": "Buyer not signed in → login is asked when going to the checkout (Buy on a green listing; \"Continue to checkout\" after the warning on a yellow one), then the buyer lands on the checkout"
+      },
+      "question": null,
+      "status": "open",
+      "first_seen": 4,
+      "resolution": null
+    },
+    {
+      "id": 41,
+      "stories": [
+        "7"
+      ],
+      "type": "Ambiguity",
+      "severity": "Low",
+      "title": "\"Address fields filled in\" has no rule for the postcode (any text, or the Portuguese format 0000-000?)",
+      "evidence": [
+        {
+          "source": "specs/story-7-checkout.md",
+          "where": "Story 7 · Acceptance criteria",
+          "quote": "Pay is disabled until the address fields are filled in"
+        },
+        {
+          "source": "specs/story-7-checkout.md",
+          "where": "Story 7 · What the checkout shows",
+          "quote": "Shipping address: name, street, postcode, city"
+        }
+      ],
+      "proposal": {
+        "file": "specs/story-7-checkout.md",
+        "section": "Story 7 · Acceptance criteria",
+        "current": "Pay is disabled until the address fields are filled in",
+        "proposed": "Pay is disabled until name, street, postcode and city are filled in (not empty; the postcode format is not checked in the MVP)"
+      },
+      "question": "Check the postcode format (0000-000) or only that it is not empty?",
+      "status": "open",
+      "first_seen": 4,
+      "resolution": null
     }
   ],
   "coverage": [
     {
       "story": "1",
       "title": "Search for an album",
-      "tested": false,
+      "tested": true,
       "template": {
         "story": true,
         "scope": true,
@@ -1268,7 +1432,7 @@
     {
       "story": "2",
       "title": "Say what matters to me",
-      "tested": false,
+      "tested": true,
       "template": {
         "story": true,
         "scope": true,
@@ -1284,7 +1448,7 @@
     {
       "story": "3",
       "title": "Get one recommendation",
-      "tested": false,
+      "tested": true,
       "template": {
         "story": true,
         "scope": true,
@@ -1300,7 +1464,7 @@
     {
       "story": "5",
       "title": "See verified listings",
-      "tested": false,
+      "tested": true,
       "template": {
         "story": true,
         "scope": true,
@@ -1316,7 +1480,7 @@
     {
       "story": "6",
       "title": "Fair price",
-      "tested": false,
+      "tested": true,
       "template": {
         "story": true,
         "scope": true,
@@ -1332,7 +1496,7 @@
     {
       "story": "9",
       "title": "Sign up, log in",
-      "tested": false,
+      "tested": true,
       "template": {
         "story": true,
         "scope": true,
@@ -1464,6 +1628,27 @@
       "question": "Price in a reason for a version with no listings: typical range, or leave the comparison out?",
       "status": "answered",
       "answer": "Use the typical range of that version, with \"typically\" (finding #32)."
+    },
+    {
+      "id": "Q11",
+      "finding": 37,
+      "question": "Keep €2.00 and record the difference in DECISIONS, or follow the design (€2.10, total €35.00)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q12",
+      "finding": 39,
+      "question": "What should the confirmation screen show, and where does its button lead?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q13",
+      "finding": 41,
+      "question": "Check the postcode format (0000-000) or only that it is not empty?",
+      "status": "open",
+      "answer": null
     }
   ],
   "todo": [
@@ -1502,6 +1687,18 @@
       "text": "Before building story 3: decide #28 (High), #31, #32 and #17",
       "finding": 28,
       "done": true
+    },
+    {
+      "id": "T7",
+      "text": "Before building story 7: decide #37, #38, #39, #40 and #41",
+      "finding": 39,
+      "done": false
+    },
+    {
+      "id": "T8",
+      "text": "When story 8 starts: decide #12 (seller buying their own listing), with #13, #35 and #36",
+      "finding": 12,
+      "done": false
     }
   ]
 }

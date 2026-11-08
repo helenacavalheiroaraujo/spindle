@@ -18,6 +18,7 @@ Spindle helps non-specialist buyers pick the right pressing of a vinyl record an
 
 ## How we build a story
 1. Before starting: list the open findings for this story in `findings.json` and ask me to decide each one. Show the options with their trade-offs but without your recommendation; I choose first, then you say what you would choose and why, and challenge my choice if you disagree. Do not build until they are decided.
+1b. Every new screen the story needs has an approved design (in docs/design/ or a Canva link in the story's "Designs" section). Without it, the story does not start.
 2. Data tables before screens (`supabase/migrations/`, described in `docs/database.md`).
 3. One flow at a time, in small changes.
 4. Tests in every flow, written with the code: a Vitest decision table for each rule (from the SPEC's acceptance criteria and example data); a Playwright test for each critical flow.
@@ -30,11 +31,13 @@ Explain it in plain language, without jargon. I verify by behaviour, not by read
 - **Evidence**: test output or a screenshot. If something was not tested, say so.
 - **Screens**: a change to a screen shows a phone (375 px) and a desktop (1280 px) screenshot; Playwright runs every critical flow at both sizes.
 - **Doubts**: anything you were unsure of, or anything that differs from SPEC.md
+- **My choices**: every text, default or behaviour I chose that does not come from SPEC.md, the story file, DECISIONS.md or the design. "None" if none.
 
 Wait for my yes before committing.
 
 ## Record as we go
 - Every new decision and its reason go in `DECISIONS.md` (most recent first), in the same commit. Show me the text first.
+- Before a story is built, its file may be refined (clearer criteria, missing details). Once its Traceability row has tests, the story file is not changed: a new requirement becomes a new story, and a rule for a built story goes in DECISIONS.md.
 - SPEC.md and `specs/` changes are shown as current vs proposed text, and saved only after my yes.
 - At the end of each session, propose a row for `docs/AI_USAGE.md`.
 

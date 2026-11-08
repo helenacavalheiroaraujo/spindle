@@ -61,6 +61,17 @@ Check every story in `specs/` (and the shared rules in `SPEC.md`), then the stor
 - Flow order (which screen follows which)
 - If a story deliberately differs from the design and `DECISIONS.md` records why, it is **not** a finding.
 
+**5. Design for every new screen** (before a story is built)
+- List each new screen the story needs (from Scope, Use cases, Edge cases). States and variants of a screen that already has a design (errors, loading, "just sold") are covered by the story text and the shared rules.
+- Each new screen must have a design: a page in `docs/design/` or a Canva link in the story's `## Designs` section, approved by the user.
+- A new screen without a design is a **Gap, severity Blocker**: the story cannot start until the Canva design is linked.
+
+**6. Built stories vs. the code** (audit)
+- For each tested story, list what the user sees or what happens in the app that comes from no story, DECISIONS entry or design (invented texts, gaps filled by the AI, differences).
+- Evidence: `file:line` and the closest spec text, or "none".
+- Type: Gap (the spec is silent) or Inconsistency (the app differs from the spec). Severity by demo impact.
+- Proposal follows rule 3: a new story, or an entry in DECISIONS.md. A failed acceptance criterion is reported as a defect, not as a choice.
+
 ## How to classify
 
 **Type**
@@ -110,6 +121,7 @@ Report in English (like the rest of the project). Chat answer in the user's lang
 Then stop and let the user decide. Do not start editing.
 
 ## Histórico
+- 2026-11-08 · Added the design check for new screens (Canva, Blocker) and the audit of built stories against the code · Helena wants no screen built without an approved design, and to see what the AI decided without saying so
 - 2026-11-07 · As stories passaram para um ficheiro cada em `specs/`; `SPEC.md` ficou como índice (build order, shared rules, traceability) · a Helena prefere um ficheiro por story, mais fácil de ler
 - 2026-11-07 · Retirada a secção Pre-condition do template verificado · a Helena quis reduzir a complexidade das stories nesta fase
 - 2026-11-07 · Skill criada a partir das regras definidas pela Helena (só leitura, propostas em tabela, achados numerados com evidência, relatório HTML privado) · para rever as US do Spindle de forma repetível antes da arquitetura

@@ -14,6 +14,14 @@
 - **"My listings":** see, edit and remove own listings
 - No commission: the seller receives the full price (shown on the form)
 
+## Designs
+| Screen | Design |
+|---|---|
+| Sell form ("Sell a record") | `Spindle_mockups_by_section.pdf` p. 16 (phone), p. 20 (desktop) |
+| List of versions to pick from | **None yet: Canva design needed before building** |
+| First time selling: city and shop name | **None yet: Canva design needed before building** (or fields on the sell form: to decide) |
+| My listings | **None yet: Canva design needed before building** |
+
 ## Traffic light for new listings
 - Automatic checks are out of scope, so every item of a new listing's checklist is **? (uncertain)** → new listings are always **yellow** in the MVP (rule from story 5)
 

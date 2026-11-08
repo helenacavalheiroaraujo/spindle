@@ -91,6 +91,8 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 6 | "Typical price for this pressing: €min–€max" below the list, on phone and beside the recommendation | `components/ListingList.tsx`, `components/ListingsBeside.tsx` | `tests/e2e/fairPrice.spec.ts` |
 | 6 | Version without a range: no label and no range line | `lib/rules/fairPrice.ts`, `components/ListingList.tsx`, `supabase/seed.sql` | `tests/unit/fairPrice.test.ts`, `tests/e2e/fairPrice.spec.ts` |
 | 9 | Sign up; log in; wrong password message; log out from Your account; return to where the user was | `lib/rules/signUp.ts`, `lib/rules/login.ts`, `lib/db/session.ts`, `lib/db/profiles.ts` | `tests/unit/signUp.test.ts`, `tests/unit/login.test.ts`, `tests/e2e/signup.spec.ts`, `tests/e2e/login.spec.ts` |
+| 9 | Tap Buy while signed out → log in or sign up → checkout for that listing | Built with story 7 | Written with story 7 |
+| 9 | Tap Sell while signed out → log in or sign up → back to the sell form | Built with story 8 | Written with story 8 |
 | 7 | | | |
 | 8 | | | |
 | 4 | | | |

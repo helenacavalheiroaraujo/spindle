@@ -14,11 +14,18 @@
 ## What the checkout shows
 - The record: version, condition, seller ("Shop" / "Private seller"), city
 - **Shipping address:** name, street, postcode, city — typed for each order, not saved
-- **Payment method:** choice of MB WAY or card, as a label only
+- **Payment method:** choice of MB WAY or card, as a label only; MB WAY is selected by default
 - **Price breakdown, before paying:** record price + insured shipping **€4.90** + buyer protection **€2.00** = total
 - The four steps: 1. You pay Spindle → 2. Seller ships → 3. You confirm it's all good → 4. Seller gets paid
+- "What protection covers: pressing check, payment held until delivery, and a refund if the record isn't as listed."
 - Line: "Simulated payment · Illustrative data"
 - Button: **"Pay €[total]"**
+
+## Designs
+| Screen | Design |
+|---|---|
+| Checkout ("Buy with protection") | `Spindle_mockups_by_section.pdf` p. 16 (phone), p. 19 (desktop) |
+| Confirmation after Pay | **None yet: Canva design needed before building** |
 
 ## Use cases
 1. **Buy** (green or yellow) → checkout
