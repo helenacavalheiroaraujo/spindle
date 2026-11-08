@@ -42,10 +42,11 @@ test("'bjork' finds Björk", async ({ page }) => {
   await expect(rows(page).filter({ hasText: "Homogenic" })).toContainText("Björk");
 });
 
-test("albums without active listings show 'No listings' (including one with only a sold copy)", async ({ page }) => {
+test("an album without active listings shows 'No listings', even with a sold copy", async ({ page }) => {
   await box(page).fill("bowie");
+  // Blackstar has only a sold copy (seed); Let's Dance has active listings since story 12.
   await expect(rows(page).filter({ hasText: "Blackstar" })).toContainText("No listings");
-  await expect(rows(page).filter({ hasText: "Let's Dance" })).toContainText("No listings");
+  await expect(rows(page).filter({ hasText: "Let's Dance" })).not.toContainText("No listings");
 });
 
 test("an album with listings but no recommendation data shows 'Not in the demo' and does not open (#50)", async ({ page }) => {

@@ -19,7 +19,7 @@ const V2012 = "20000000-0000-0000-0000-000000000003";
 const GREEN_32 = "40000000-0000-0000-0000-000000000005";
 const YELLOW_36 = "40000000-0000-0000-0000-000000000006";
 const RED_29 = "40000000-0000-0000-0000-000000000008"; // claimed 2012 Remaster, actually 1990 Reissue
-const V_HOMOGENIC_2017 = "20000000-0000-0000-0000-000000000010"; // no seed listings: the Pay tests add their own
+const V_HOMOGENIC_2017 = "20000000-0000-0000-0000-000000000010"; // the Pay tests add their own €28 listings (the seed has €34 and €31 here)
 const rows = (page: Page) => page.getByRole("list", { name: "Verified listings" }).getByRole("listitem");
 
 const PASSWORD = "vinyl-test-123";
@@ -199,7 +199,7 @@ test("Pay: the order is created as 'Paid · waiting for the seller'; the listing
 
   await page.goto(`/versions/${V_HOMOGENIC_2017}/listings`);
   await expect(page.getByRole("list", { name: "Verified listings" }).getByRole("link", { name: /^Buy €28/ })).toHaveCount(
-    (await admin().from("listings").select("id").eq("claimed_version_id", V_HOMOGENIC_2017).eq("status", "on_sale")).data!.length,
+    (await admin().from("listings").select("id").eq("claimed_version_id", V_HOMOGENIC_2017).eq("status", "on_sale").eq("price", 28)).data!.length,
   );
   await expect(page.locator(`a[href^="/checkout/${toBuy}"]`)).toHaveCount(0);
   await page.goto(`/checkout/${toBuy}?version=${V_HOMOGENIC_2017}`);
