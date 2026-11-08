@@ -122,8 +122,8 @@ export default async function ListingCheckPage({
         </ul>
       </section>
 
-      <section aria-labelledby="condition" className="mt-6 rounded-2xl bg-brown p-4 text-cream">
-        <h2 id="condition" className="text-sm opacity-80">Condition</h2>
+      <section aria-labelledby="condition" className="mt-6 rounded-2xl border border-line bg-sand p-4 text-navy">
+        <h2 id="condition" className="text-sm text-navy/70">Condition</h2>
         <p className="mt-1 text-lg font-semibold">
           {l.condition.code} means {l.condition.name.toLowerCase()}, with {l.condition.explanation.toLowerCase()}
         </p>

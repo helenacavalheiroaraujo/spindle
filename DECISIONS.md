@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Light emphasis cards
+
+### Emphasis cards are light sand, not dark brown (all screens)
+- **Why:** the dark brown cards (order confirmation, "Nobody is selling this album right now", the listing check's condition, the "0% commission" card on the sell form) were too heavy and unbalanced the pages. They are now sand (#f1e6d0) with a thin border and navy text. The home page's featured card keeps the design's navy.
+- **Differs from:** the Assignment 1 designs and `order-confirmation.html`, where these cards are dark brown.
+
 ## 2026-11-08 — Story 12 · Home page as in the design
 
 ### The home page follows the Assignment 1 design: six crates, navy featured card (story 12)

@@ -48,3 +48,18 @@ Basic accessibility:
 - Text contrast looks sufficient (body text on cream, white on navy); flag doubtful pairs, do not guess ratios without measuring
 - Interactive elements look interactive; focus is visible
 - Images that carry meaning have text (album cover, photos); icons have labels
+
+## D. UI principles (type: Usability — Low unless it blocks a demo task)
+
+Added 2026-11-08 from Figma's article "Princípios de design de UI" (https://www.figma.com/pt-br/resource-library/principios-design-ui/), written in our own words and tied to what went wrong in Spindle. Use them to look at a screen as a whole; a finding still needs a screenshot or a design page as evidence.
+
+- **Hierarchy:** the most important thing on the screen (the answer, the primary action) is the strongest by size, weight, colour and space; look at the screenshot squinting: is it the first thing seen? Content is ordered by what the user needs first.
+- **Progressive disclosure:** a long task is split into steps, each showing only what that step needs, and the user can tell where they are and what is left (sell flow, checkout). Detail that is not needed yet stays out of sight.
+- **Consistency:** the same kind of element looks and behaves the same everywhere (buttons, cards, tags, back buttons, "Try again"); a deviation needs a reason recorded in `DECISIONS.md`.
+- **Contrast and balance of colour:** strong contrast only for what must be noticed (the primary action, a warning); softer for the rest. Across the whole page, dark and light weight should be spread evenly, not clustered, and colours should not all be the same family (the old home page: three beige crates and one dark card looked flat and lopsided). Compare against the colours of the design page.
+- **Accessibility:** contrast measured, not guessed (WCAG AA: 4.5:1 for body text, 3:1 for large text and controls); alt text for images that carry meaning; visible focus; everything reachable by keyboard; tap targets of at least 44 px; meaning never carried by colour alone.
+- **Proximity:** related things sit together and unrelated things apart, so groups are read correctly and the wrong thing is not tapped (a tag next to the name it belongs to; "Change" next to the thing it changes; destructive actions apart from safe ones).
+- **Alignment:** blocks on a page share one grid and the same left and right edges; rows of cards have equal sizes and gaps (the old home page: three equal columns above, a 3:2 split below, a card with an empty gap at its bottom).
+- **Flow (perspective):** the screen leads the eye through the steps in the order the user's goal needs, and the next action is where the eye ends up.
+- **Effortless use:** navigation is the same on every page, every action gives visible feedback (selected, loading, saved, failed) and common tasks have a shortcut (search in the header on desktop).
+- **Test with people:** when the check is about how it feels, say so in the report and propose watching someone use the screen (the Product Owner's own eye counts: her "this is not balanced" on the home page was a valid finding).

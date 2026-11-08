@@ -63,7 +63,7 @@ Look at both screenshots and the matching design page, then go through `referenc
 
 - **Design mismatch** — elements, texts, order and layout that differ from the Assignment 1 screen (minus deliberate differences)
 - **Rule broken** — a `CLAUDE.md` rule the screen breaks (traffic-light word, illustrative-data label, 375/1280 layout, shared loading/error, palette and type, tap targets)
-- **Usability** — heuristics and basic accessibility
+- **Usability** — heuristics, basic accessibility and the UI principles of section D (hierarchy, progressive disclosure, consistency, contrast and colour balance, accessibility, proximity, alignment)
 
 Before adding a finding, check the register: re-check open findings (mark `resolved` only if the new screenshot shows the problem gone) and avoid duplicates.
 
@@ -95,3 +95,4 @@ Then stop and let the user decide. Do not start fixing.
 
 ## Histórico
 - 2026-11-08 · Skill criada: ecrãs em falta primeiro, depois fidelidade aos mockups, regras do CLAUDE.md e heurísticas (estas sempre Low salvo se bloquearem a demo); screenshots Playwright a 375/1280; registo + relatório HTML privado · a Helena quis validar os ecrãs construídos e saber o que falta antes da entrega
+- 2026-11-08 · Checklist com a secção D (princípios de design de UI do artigo da Figma, reescritos e ligados ao que correu mal na homepage: hierarquia, equilíbrio de cor, alinhamento à mesma grelha) · a Helena achou a homepage desequilibrada e pediu para juntar estas recomendações à skill

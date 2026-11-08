@@ -20,14 +20,14 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
     <main className="mx-auto max-w-5xl px-4 pb-16">
       <Header />
       <div className="mt-4 grid gap-4 lg:grid-cols-[3fr_2fr] lg:items-start">
-        <section aria-label="Order" className="rounded-3xl bg-brown p-6 text-cream lg:p-10">
-          <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-lg text-brown">✓</span>
+        <section aria-label="Order" className="rounded-3xl border border-line bg-sand p-6 text-navy lg:p-10">
+          <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-navy text-lg text-cream">✓</span>
           <h1 className="mt-4 font-heading text-5xl leading-none lg:text-7xl">Order placed</h1>
           <p className="mt-2 text-2xl lg:text-3xl">{euros(order.total)} paid</p>
-          <p className="mt-4 inline-block rounded-full bg-cream px-3 py-1 text-sm font-semibold text-brown">
+          <p className="mt-4 inline-block rounded-full bg-navy px-3 py-1 text-sm font-semibold text-cream">
             Paid · waiting for the seller
           </p>
-          <div className="mt-6 hidden items-center gap-3 lg:flex">{record(order)}</div>
+          <div className="mt-6 hidden items-center gap-3 lg:flex">{record(order, true)}</div>
         </section>
 
         <div className="flex flex-col gap-4">

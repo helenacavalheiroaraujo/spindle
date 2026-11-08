@@ -10,9 +10,9 @@ export function GenreAlbums({ albums }: { albums: AlbumSummary[] }) {
   return (
     <>
       {nobodySelling && (
-        <div role="status" className="mb-4 rounded-2xl bg-brown p-5 text-cream">
+        <div role="status" className="mb-4 rounded-2xl border border-line bg-sand p-5 text-navy">
           <p className="font-heading text-2xl">Nobody is selling this album right now</p>
-          <p className="mt-1 text-sm opacity-90">
+          <p className="mt-1 text-sm text-navy/80">
             {nobodySelling.title} · {nobodySelling.artist}
           </p>
         </div>

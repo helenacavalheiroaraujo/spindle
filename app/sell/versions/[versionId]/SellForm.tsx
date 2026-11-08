@@ -208,7 +208,7 @@ export function SellForm({ version, needsCity }: { version: VersionToSell; needs
         </div>
       </div>
 
-      <aside aria-label="Commission" className="mt-8 hidden rounded-3xl bg-brown p-6 text-cream lg:mt-20 lg:block">
+      <aside aria-label="Commission" className="mt-8 hidden rounded-3xl border border-line bg-sand p-6 text-navy lg:mt-20 lg:block">
         <p className="font-heading text-7xl leading-none">0%</p>
         <p className="mt-1 text-xl font-semibold">commission on every sale</p>
         <p className="mt-4">{youReceive}</p>
