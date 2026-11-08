@@ -3,6 +3,14 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 12 · Home page (spec)
+
+### The home page from the design becomes story 12, in phase 4; the wishlist is story 13, not in this MVP (process)
+- **Why:** the design's home page makes the work more complete, but "Because you like…" needs a wishlist, which is a feature of its own. Splitting keeps story 12 to what the demo shows. Numbers 10 and 11 are already used for ideas outside the MVP.
+
+### A crate opens a genre screen; crates show real counts; "This week" cards open existing flows (story 12)
+- **Why:** a genre screen with the same rows as search shows what the crate promises without changing story 1, which is built and tested. Real counts always match the list that opens, so only genres with albums are shown (the demo has 5 albums). "This weekend" opens a featured album and "For sellers" opens selling (story 8), so no card is a dead end in the demo.
+
 ## 2026-11-08 — Story 7 · Yellow warning
 
 ### Opening the checkout address directly does not show the yellow warning (story 7 · finding #83)

@@ -7,9 +7,9 @@ Stack and hosting: see `DECISIONS.md`. Assignment 1 stated PHP; the MVP uses Nex
 1. **Core:** stories 1, 2, 3, 5, 6
 2. **Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)
 3. **Seller:** story 8
-4. **If time allows:** story 7 step 3 (confirm receipt), story 4, story 9 (reviews)
+4. **If time allows:** story 7 step 3 (confirm receipt), story 4, story 9 (reviews), story 12 (home page)
 
-Not in this MVP: stories 10, 11
+Not in this MVP: stories 10, 11, 13
 
 ## Out of scope
 - Search by artist with an artist page (possible future story)
@@ -48,6 +48,7 @@ In build order. Each story has its own file in `specs/`.
 | Story 7 · Buy with protection | [`specs/story-7-checkout.md`](specs/story-7-checkout.md) |
 | Story 8 · Sell a record for free (phase 3) | [`specs/story-8-sell.md`](specs/story-8-sell.md) |
 | Story 4 · Compare versions (phase 4) | [`specs/story-4-compare.md`](specs/story-4-compare.md) |
+| Story 12 · Home page | [`specs/story-12-home.md`](specs/story-12-home.md) |
 
 ---
 
