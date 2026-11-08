@@ -152,7 +152,7 @@ The three-item checklist per listing (story 5). Mock data.
 | `buyer_id` | → `profiles` | |
 | `listing_id` | → `listings`, unique | one order per listing: a sold listing cannot be bought again (story 7) |
 | `record_price`, `shipping`, `protection_fee`, `total` | numeric(8,2) | amounts at the time of paying; `total` is calculated in `lib/rules/` and the table refuses a total that is not the sum |
-| `status` | paid_waiting_seller / seller_paid | `seller_paid` is used from phase 4; nothing in the MVP sets it |
+| `status` | paid_waiting_seller / seller_paid | `seller_paid` is set when the buyer taps "It arrived, all good" (story 7 · step 3): one conditional update in `lib/db/orders.ts` (`confirmReceipt`), only for the buyer's own order and only while it is `paid_waiting_seller` |
 | `ship_name`, `ship_street`, `ship_postcode`, `ship_city` | text, not empty | typed per order; postcode format 0000-000 (finding #41) |
 | `created_at` | timestamp | |
 

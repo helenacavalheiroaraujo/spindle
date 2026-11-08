@@ -1,7 +1,7 @@
 // Decision table from story 7 · Acceptance criteria: red listings cannot reach the checkout;
 // a sold listing cannot be bought again. Green and yellow can (use case 1).
 import { describe, expect, it } from "vitest";
-import { canCheckout, checkoutPath, isOwnListing } from "@/lib/rules/checkoutAccess";
+import { canCheckout, checkoutPath, isNoLongerAvailable, isOwnListing } from "@/lib/rules/checkoutAccess";
 import type { ListingForList } from "@/lib/rules/listingOrder";
 
 const allMatch = { cover_label: "match", country_year: "match", matrix: "match" } as const;
@@ -51,5 +51,16 @@ describe("isOwnListing and the seller's own listing", () => {
 describe("checkoutPath", () => {
   it("carries the version the buyer came from", () => {
     expect(checkoutPath("l1", "v1990")).toBe("/checkout/l1?version=v1990");
+  });
+});
+
+// Finding #61 (DECISIONS 2026-11-08): sold or removed listings opened from a link say so.
+describe("isNoLongerAvailable", () => {
+  it.each([
+    ["on_sale", false],
+    ["sold", true],
+    ["removed", true],
+  ] as const)("%s → %s", (status, expected) => {
+    expect(isNoLongerAvailable(status)).toBe(expected);
   });
 });

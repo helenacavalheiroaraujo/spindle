@@ -2,8 +2,8 @@
   "meta": {
     "project": "Spindle MVP",
     "report_url": "https://claude.ai/artifact/6inbbjVxsF4Hi7Q2cr2n28",
-    "iteration": 3,
-    "updated": "2026-11-08T19:21:28.517557+00:00"
+    "iteration": 4,
+    "updated": "2026-11-08T20:01:14.028081+00:00"
   },
   "iterations": [
     {
@@ -20,6 +20,11 @@
       "n": 3,
       "date": "2026-11-08",
       "note": "After stories 2 (save to account), 8 (sell), 12 (home page): screen inventory updated, all built screens re-captured and reviewed"
+    },
+    {
+      "n": 4,
+      "date": "2026-11-08",
+      "note": "After the sand emphasis cards and the home page redo: all screens re-captured; #18 resolved, #8 updated, new #21–#23"
     }
   ],
   "screens": [
@@ -667,7 +672,7 @@
       ],
       "type": "Design mismatch",
       "severity": "Low",
-      "title": "The listing check verdict is a small chip; the design makes it a dark-brown emphasis card",
+      "title": "The listing check verdict is a plain light box; the design makes it an emphasis card (now sand, per DECISIONS)",
       "evidence": [
         {
           "source": "screenshot",
@@ -677,15 +682,15 @@
         {
           "source": "Spindle_mockups_by_section.pdf",
           "where": "p. 11 and p. 13",
-          "quote": "'Check first' card: dark brown, traffic light, one-line summary"
+          "quote": "'Check first' card: traffic light, one-line summary"
         },
         {
           "source": "CLAUDE.md",
           "where": "Visual direction",
-          "quote": "dark brown for emphasis cards"
+          "quote": "light sand cards (with a thin border) for emphasis"
         }
       ],
-      "proposal": "Turn the summary box into the dark-brown card (light + word + summary). It is the answer to the screen's question, so it should be the strongest element.",
+      "proposal": "Make the verdict box a sand card like the Condition card below it (light + word + summary), so the answer to the screen's question is the strongest element. The dark brown of the design is a deliberate difference (DECISIONS 2026-11-08) and is no longer asked for.",
       "question": null,
       "status": "open",
       "first_seen": 1,
@@ -1010,9 +1015,13 @@
       ],
       "proposal": "Remove the heading, or call it 'Browse by genre'.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 3,
-      "resolution": null
+      "resolution": {
+        "iteration": 4,
+        "date": "2026-11-08",
+        "decision": "home-1280.png and home-375.png: the crates have no heading of their own any more"
+      }
     },
     {
       "id": 19,
@@ -1068,6 +1077,107 @@
       "status": "open",
       "first_seen": 3,
       "resolution": null
+    },
+    {
+      "id": 21,
+      "screens": [
+        "home",
+        "search-results"
+      ],
+      "stories": [
+        "12"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "Crate text is hard to read on two crates: 'Soul and funk' white on tan 2.8:1, 'Hip-hop' white on grey-brown 3.6:1",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/home-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "checklist",
+          "where": "D · Accessibility",
+          "quote": "WCAG AA: 4.5:1 for body text, 3:1 for large text and controls"
+        }
+      ],
+      "proposal": "Measured on the 1280 px capture. Use navy text on 'Soul and funk' (4.9:1) and darken the 'Hip-hop' background so white text passes 4.5:1 (neither colour passes there today).",
+      "question": null,
+      "status": "open",
+      "first_seen": 4,
+      "resolution": null
+    },
+    {
+      "id": 22,
+      "screens": [
+        "home",
+        "recommendation",
+        "my-listings",
+        "checkout"
+      ],
+      "stories": [
+        "all"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "Page content starts at a different left edge on different pages, so the logo and the content jump between screens (home and My listings at 144 px, recommendation at 80 px, at 1280 px)",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/home-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/recommendation-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "checklist",
+          "where": "D · Alignment",
+          "quote": "blocks on a page share one grid and the same left and right edges"
+        }
+      ],
+      "proposal": "Use one page width for all desktop screens, with the header inside it. Related to #5 and #6.",
+      "question": null,
+      "status": "open",
+      "first_seen": 4,
+      "resolution": null
+    },
+    {
+      "id": 23,
+      "screens": [
+        "genre"
+      ],
+      "stories": [
+        "12"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "The genre screen goes back with a text link 'Back to home'; every other screen uses the round back button",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/genre-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/checkout-375.png",
+          "quote": ""
+        },
+        {
+          "source": "checklist",
+          "where": "D · Consistency",
+          "quote": "the same kind of element looks and behaves the same everywhere (buttons, cards, tags, back buttons"
+        }
+      ],
+      "proposal": "Use the round back button, as on checkout and the listing check.",
+      "question": null,
+      "status": "open",
+      "first_seen": 4,
+      "resolution": null
     }
   ],
   "questions": [
@@ -1095,7 +1205,7 @@
     },
     {
       "id": "T2",
-      "text": "Iteration 3: open findings #5, #7–#15 were not re-checked against the new captures; the desktop search results were captured by hand (search-results-q) because the capture script types into the header box without pressing Enter; loading and error states of the new screens are in docs/manual-tests.md.",
+      "text": "Iteration 4: all built screens were re-captured after the sand-card change. Open findings #5, #7, #9–#15 were looked at again and are unchanged on the screens seen (home, recommendation, listing check, checkout, genre, sell form, My listings); the rest of the screens were captured but not re-read one by one. The capture script still does not show the search results at 1280 px (search-results-1280 shows only the home page).",
       "finding": null,
       "done": false
     }

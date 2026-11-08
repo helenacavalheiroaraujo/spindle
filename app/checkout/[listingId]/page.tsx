@@ -3,7 +3,8 @@ import { notFound, redirect } from "next/navigation";
 import { getListingCheck } from "@/lib/db/listings";
 import { currentUserId } from "@/lib/db/session";
 import { currentProfileId } from "@/lib/db/profiles";
-import { canCheckout, checkoutPath } from "@/lib/rules/checkoutAccess";
+import { canCheckout, checkoutPath, isNoLongerAvailable } from "@/lib/rules/checkoutAccess";
+import { ListingUnavailable } from "@/components/ListingUnavailable";
 import { withReturn } from "@/lib/rules/login";
 import { Header } from "@/components/Header";
 import { SellerLine } from "@/components/SellerLine";
@@ -24,6 +25,7 @@ export default async function CheckoutPage({
   const { listingId } = await params;
   const l = await getListingCheck(listingId);
   if (!l) notFound();
+  if (isNoLongerAvailable(l.status)) return <ListingUnavailable />; // sold or removed (finding #61)
   const versionId = one((await searchParams).version) ?? l.claimedVersionId;
 
   if (!(await currentUserId())) redirect(withReturn("/login", checkoutPath(listingId, versionId)));

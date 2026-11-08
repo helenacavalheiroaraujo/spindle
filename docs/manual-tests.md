@@ -26,6 +26,7 @@ For each screen: the loading mask says what is loading; the error screen says wh
 | M8 | 8 | Sell form | Pick a version → Continue | the loading mask | "We couldn't load the sell form. Check your connection." | Not run |
 | M9 | 8 | My listings | Your account → My listings | "Loading your listings…" | "We couldn't load your listings. Check your connection." | Not run |
 | M10 | 12 | Genre screen | Tap a crate on the home page | "Loading the crate…" | "We couldn't load this crate. Check your connection." | Not run |
+| M13 | 7 | Your account (with "On its way") | Tap the initials in the header (signed in) | "Loading your account…" | "We couldn't load your account. Check your connection." | Not run |
 
 ## Other manual checks
 

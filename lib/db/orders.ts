@@ -4,6 +4,7 @@ import { db } from "./client";
 import type { CheckoutTotal } from "@/lib/rules/checkoutTotal";
 import type { ShippingAddress } from "@/lib/rules/shippingAddress";
 import { sellerOf, type Seller } from "@/lib/rules/seller";
+import type { OrderStatus } from "@/lib/rules/orderProgress";
 
 export type PlaceOrderResult = { orderId: string } | { sold: true };
 
@@ -36,7 +37,7 @@ export async function placeOrder(
 export type OrderView = {
   id: string;
   total: number;
-  status: "paid_waiting_seller";
+  status: OrderStatus;
   albumTitle: string;
   versionName: string;
   condition: { code: string; name: string };
@@ -45,24 +46,14 @@ export type OrderView = {
   cover: string | null;
 };
 
-// The order as its buyer sees it. Null when it does not exist or belongs to someone else.
-// The order does not store which version the buyer came from, so the record's actual version is shown.
-export async function getOrderForBuyer(orderId: string, buyerUserId: string): Promise<OrderView | null> {
-  const { data, error } = await db()
-    .from("orders")
-    .select(
-      `id, total, status, profiles!orders_buyer_id_fkey (user_id),
-       listings (cover_photo_url, profiles (shop_name, city), condition_grades (code, name),
-         actual:versions!listings_actual_version_id_fkey (name, albums (title)))`,
-    )
-    .eq("id", orderId)
-    .maybeSingle();
-  if (error?.code === "22P02") return null; // not a valid order id
-  if (error) throw error;
-  if (!data) return null;
-  const buyer = data.profiles as unknown as { user_id: string };
-  if (buyer.user_id !== buyerUserId) return null;
-  const l = data.listings as unknown as {
+const ORDER_COLUMNS = `id, total, status, profiles!orders_buyer_id_fkey (user_id),
+  listings (cover_photo_url, profiles (shop_name, city), condition_grades (code, name),
+    actual:versions!listings_actual_version_id_fkey (name, albums (title)))`;
+
+type OrderRow = { id: string; total: number | string; status: OrderStatus; profiles: unknown; listings: unknown };
+
+function toOrderView(data: OrderRow): OrderView {
+  const l = data.listings as {
     cover_photo_url: string | null;
     profiles: { shop_name: string | null; city: string | null };
     condition_grades: { code: string; name: string };
@@ -79,4 +70,49 @@ export async function getOrderForBuyer(orderId: string, buyerUserId: string): Pr
     city: l.profiles.city,
     cover: l.cover_photo_url,
   };
+}
+
+// The order as its buyer sees it. Null when it does not exist or belongs to someone else.
+// The order does not store which version the buyer came from, so the record's actual version is shown.
+export async function getOrderForBuyer(orderId: string, buyerUserId: string): Promise<OrderView | null> {
+  const { data, error } = await db().from("orders").select(ORDER_COLUMNS).eq("id", orderId).maybeSingle();
+  if (error?.code === "22P02") return null; // not a valid order id
+  if (error) throw error;
+  if (!data) return null;
+  const buyer = data.profiles as unknown as { user_id: string };
+  if (buyer.user_id !== buyerUserId) return null;
+  return toOrderView(data as unknown as OrderRow);
+}
+
+// All of the signed-in buyer's orders, newest first (story 7 · step 3: "On its way" on Your account).
+export async function getOrdersForBuyer(buyerUserId: string): Promise<OrderView[]> {
+  const profile = await db().from("profiles").select("id").eq("user_id", buyerUserId).maybeSingle();
+  if (profile.error) throw profile.error;
+  if (!profile.data) return []; // no profile yet, so no orders
+  const { data, error } = await db()
+    .from("orders")
+    .select(ORDER_COLUMNS)
+    .eq("buyer_id", profile.data.id)
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return (data ?? []).map((row) => toOrderView(row as unknown as OrderRow));
+}
+
+// "confirmed": the order is now "Seller paid". "not_waiting": it is not this buyer's order, or it was
+// already confirmed; nothing changed. Throws on any other failure (the caller shows the error screen).
+// One conditional update, so two taps or two tabs confirm it only once.
+export async function confirmReceipt(orderId: string, buyerUserId: string): Promise<"confirmed" | "not_waiting"> {
+  const profile = await db().from("profiles").select("id").eq("user_id", buyerUserId).maybeSingle();
+  if (profile.error) throw profile.error;
+  if (!profile.data) return "not_waiting";
+  const { data, error } = await db()
+    .from("orders")
+    .update({ status: "seller_paid" })
+    .eq("id", orderId)
+    .eq("buyer_id", profile.data.id)
+    .eq("status", "paid_waiting_seller")
+    .select("id");
+  if (error?.code === "22P02") return "not_waiting"; // not a valid order id
+  if (error) throw error;
+  return data.length > 0 ? "confirmed" : "not_waiting";
 }

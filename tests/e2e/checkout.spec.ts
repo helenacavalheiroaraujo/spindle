@@ -203,7 +203,9 @@ test("Pay: the order is created as 'Paid · waiting for the seller'; the listing
   );
   await expect(page.locator(`a[href^="/checkout/${toBuy}"]`)).toHaveCount(0);
   await page.goto(`/checkout/${toBuy}?version=${V_HOMOGENIC_2017}`);
-  await expect(page.getByText("This page could not be found.")).toBeVisible();
+  // Finding #61 (DECISIONS 2026-11-08): a sold listing opened from a link says so, instead of "not found".
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("This record is no longer available");
+  await expect(page.getByRole("button", { name: /^Pay/ })).toHaveCount(0);
 });
 
 test("sold while the buyer is on the checkout: 'Sorry, this record was just sold' and no order", async ({ page }) => {

@@ -25,3 +25,9 @@ export function canCheckout(
 export function checkoutPath(listingId: string, versionId: string): string {
   return `/checkout/${listingId}?version=${versionId}`;
 }
+
+// A listing opened from a link after it was sold or removed (story 7 / story 5 · finding #61, DECISIONS 2026-11-08):
+// "This record is no longer available" instead of the generic "not found".
+export function isNoLongerAvailable(status: "on_sale" | "sold" | "removed"): boolean {
+  return status !== "on_sale";
+}

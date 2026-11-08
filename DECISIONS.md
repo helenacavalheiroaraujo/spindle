@@ -3,6 +3,34 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 7 · Step 3 (phase 4): the buyer confirms receipt
+
+### "It arrived, all good" sits on the "On its way" card in Your account; no "My orders" list page (story 7 · Phase 4)
+- **Why:** the design (`Spindle_mockups_by_section.pdf` p. 8 phone, p. 10 desktop) shows the card on Your account; a list page has no design.
+- **Decided:** orders still waiting show under "On its way"; confirmed ones move to "Delivered", without a button (my choice, so that a confirmed order does not stay under "On its way").
+- **Differs from:** story 7 · Phase 4, which says step 3 "needs a My orders screen".
+
+### The buyer can confirm right after paying, even though "Seller ships" does not work (story 7 · Out of scope)
+- **Why:** step 2 is out of the MVP, so nothing marks an order as shipped; waiting for it would need a seller-side screen that has no design. "Shipped" stays undone on the bar.
+- **Differs from:** the design, which shows "Shipped" already done.
+
+### One more question before the money is released: "Are you sure? The money is released to the seller."
+- **Why:** confirming cannot be undone. Buttons "Yes, release the money" and "Not yet" (my wording).
+- **Trade-off accepted:** one extra tap on the happy path.
+
+### "Report a problem" is not shown
+- **Why:** refunds and disputes are out of scope (story 7). A button that does nothing would mislead.
+- **Differs from:** the design, which shows the button.
+
+### Confirming is one conditional update, not a database function
+- **Why:** only an order of this buyer that is still "Paid · waiting for the seller" becomes "Seller paid", in one statement, so a double tap or two tabs confirm it once. No migration; `orders.status` already has `seller_paid`.
+
+### A sold or removed listing opened from a link says "This record is no longer available", with "Back to search" (story 5 and 7 · finding #61)
+- **Why:** the generic "not found" page does not say what happened. Applies to the listing check and the checkout. A listing that never existed stays "not found".
+
+### Your account is as wide as My listings (max 2xl) instead of a narrow column
+- **Why:** the order card with its four steps needs the width on desktop. My choice.
+
 ## 2026-11-08 — Light emphasis cards
 
 ### Emphasis cards are light sand, not dark brown (all screens)

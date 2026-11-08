@@ -9,7 +9,8 @@ import { yellowWarning } from "@/lib/rules/yellowWarning";
 import { Header } from "@/components/Header";
 import { TrafficLight } from "@/components/TrafficLight";
 import { BuyButton } from "@/components/BuyButton";
-import { checkoutPath, isOwnListing } from "@/lib/rules/checkoutAccess";
+import { checkoutPath, isNoLongerAvailable, isOwnListing } from "@/lib/rules/checkoutAccess";
+import { ListingUnavailable } from "@/components/ListingUnavailable";
 import { currentProfileId } from "@/lib/db/profiles";
 import { YourListing } from "@/components/YourListing";
 import { sellerText } from "@/lib/rules/seller";
@@ -37,6 +38,7 @@ export default async function ListingCheckPage({
   const query = await searchParams;
   const [l, viewerId] = await Promise.all([getListingCheck(listingId), currentProfileId()]);
   if (!l) notFound();
+  if (isNoLongerAvailable(l.status)) return <ListingUnavailable />; // sold or removed (finding #61)
 
   const versionId = one(query.version) ?? l.claimedVersionId;
   const row = listingsForVersion([l], versionId)[0];
