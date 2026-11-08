@@ -56,7 +56,7 @@
 - Buyer not signed in → login is asked when going to the checkout (Buy on a green listing; "Continue to checkout" after the warning on a yellow one), then the buyer lands on the checkout
 
 ## Data used
-- **Order:** buyer, listing, record price, shipping, protection fee, total, status, shipping address, payment method label, date
+- **Order:** buyer, listing, record price, shipping, protection fee, total, status, shipping address, date
 - **Listing:** status (on sale / sold)
 
 ## Non-functional

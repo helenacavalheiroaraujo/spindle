@@ -14,7 +14,7 @@
 | Phase | Tables | Stories | Migration |
 |---|---|---|---|
 | 1 · Core | `albums`, `versions`, `tracks`, `glossary_terms`, `reason_texts`, `condition_grades`, `profiles`, `listings`, `check_results` | 1, 2, 3, 5, 6 | `0001_core.sql` |
-| 2 · Purchase | `user_preferences` (story 2), `orders` (story 7); story 9 adds no table, the app fills `profiles.user_id` at sign-up | 9, 7, 2 | one migration per story, created with that story |
+| 2 · Purchase | `user_preferences` (story 2), `orders` (story 7); story 9 adds no table, the app fills `profiles.user_id` at sign-up | 9, 7, 2 | `0002_orders.sql` (story 7); story 2 gets its own |
 | 3 · Seller | no new tables (listings, photos in Storage) | 8 | — |
 
 ## Diagram (phase 1)
@@ -135,22 +135,25 @@ The three-item checklist per listing (story 5). Mock data.
 - **Lowest price, counts, "No listings"**: from active listings only.
 - **Price label** (`lib/rules/fairPrice.ts`): `listings.price` against the version's typical range.
 
-## Phase 2 tables (planned, not yet created)
+## Phase 2 tables
 
-### `user_preferences`
+### `user_preferences` (planned, not yet created)
 | Column | Type | Notes |
 |---|---|---|
 | `user_id` | → Supabase Auth user, primary key | |
 | `ranking` | ordered list of criteria, 1–4 items | story 2 |
 
-### `orders`
+### `orders` (created: `0002_orders.sql`)
 | Column | Type | Notes |
 |---|---|---|
 | `id` | uuid, primary key | |
 | `buyer_id` | → `profiles` | |
 | `listing_id` | → `listings`, unique | one order per listing: a sold listing cannot be bought again (story 7) |
-| `record_price`, `shipping`, `protection_fee`, `total` | numeric(8,2) | amounts at the time of paying |
-| `status` | paid_waiting_seller / seller_paid | |
-| `ship_name`, `ship_street`, `ship_postcode`, `ship_city` | text | typed per order |
-| `payment_method` | mbway / card | label only, no card details |
+| `record_price`, `shipping`, `protection_fee`, `total` | numeric(8,2) | amounts at the time of paying; `total` is calculated in `lib/rules/` and the table refuses a total that is not the sum |
+| `status` | paid_waiting_seller / seller_paid | `seller_paid` is used from phase 4; nothing in the MVP sets it |
+| `ship_name`, `ship_street`, `ship_postcode`, `ship_city` | text, not empty | typed per order; postcode format 0000-000 (finding #41) |
 | `created_at` | timestamp | |
+
+No payment method column: MB WAY is the only method (finding #38).
+
+**`place_order(...)`** (same migration): Pay in one step, all or nothing. Marks the listing `sold` only if it is still `on_sale`, then creates the order with the listing's price; otherwise raises `listing_not_on_sale` and changes nothing ("Sorry, this record was just sold"). Only the server key can call it.

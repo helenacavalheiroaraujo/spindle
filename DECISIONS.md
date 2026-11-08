@@ -11,6 +11,13 @@
 
 ## 2026-11-08 — Story 7 · Checkout (findings)
 
+### Pay is one database function, all or nothing (story 7 · orders table)
+- **Why:** marking the listing sold and creating the order must happen together, so the "just sold" case never leaves a sold listing without an order. Unlike the profile trigger rejected in story 9, the function is called explicitly from `lib/db/`.
+- **Trade-off accepted:** the logic is in SQL, so Vitest cannot test it directly; the Playwright test for Pay covers it, including the "just sold" case.
+
+### The order does not store the payment method; status "seller paid" exists from the start (story 7 · orders table)
+- **Why:** MB WAY is the only method (finding #38), so a column would always hold the same value. "Seller paid" is kept so the final report shows the full order flow and phase 4 needs no new migration; nothing in the MVP sets it.
+
 ### The checkout postcode must have the Portuguese format 0000-000 (story 7 · finding #41)
 - **Why:** with MB WAY as the only payment method the app is for Portugal only; the check catches typos before the order is created.
 
