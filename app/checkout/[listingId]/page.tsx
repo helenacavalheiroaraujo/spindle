@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { getListingCheck } from "@/lib/db/listings";
 import { currentUserId } from "@/lib/db/session";
+import { currentProfileId } from "@/lib/db/profiles";
 import { canCheckout, checkoutPath } from "@/lib/rules/checkoutAccess";
 import { withReturn } from "@/lib/rules/login";
 import { Header } from "@/components/Header";
@@ -26,7 +27,8 @@ export default async function CheckoutPage({
   const versionId = one((await searchParams).version) ?? l.claimedVersionId;
 
   if (!(await currentUserId())) redirect(withReturn("/login", checkoutPath(listingId, versionId)));
-  if (!canCheckout(l, versionId)) notFound(); // red, sold or removed: never reaches the checkout
+  // Red, sold or removed, or the seller's own listing (finding #12): never reaches the checkout.
+  if (!canCheckout(l, versionId, await currentProfileId())) notFound();
 
   const versionName = versionId === l.actualVersionId ? l.actualVersionName : l.claimedVersionName;
 

@@ -7,12 +7,14 @@ import { yellowWarning } from "@/lib/rules/yellowWarning";
 import { priceLabel, type TypicalRange } from "@/lib/rules/fairPrice";
 import { LightLegend, TrafficLight } from "@/components/TrafficLight";
 import { BuyButton } from "@/components/BuyButton";
-import { checkoutPath } from "@/lib/rules/checkoutAccess";
+import { checkoutPath, isOwnListing } from "@/lib/rules/checkoutAccess";
+import { YourListing } from "@/components/YourListing";
 import { sellerText } from "@/lib/rules/seller";
 import { SellerLine } from "@/components/SellerLine";
 
 // Verified listings for one version (story 5), each with its price label (story 6): on its own screen on phone, beside the recommendation on desktop.
-// "from" tells the listing check screen where its Back button goes.
+// "from" tells the listing check screen where its Back button goes. viewerId: the signed-in user's profile id,
+// so their own listings show "Your listing" instead of Buy (story 8 · finding #12).
 export function ListingList({
   versionId,
   listings,
@@ -20,6 +22,7 @@ export function ListingList({
   ranking,
   from,
   Heading,
+  viewerId,
 }: {
   versionId: string;
   listings: ListingDetails[];
@@ -28,6 +31,7 @@ export function ListingList({
   ranking: Priority[];
   from: "list" | "recommendation";
   Heading: "h1" | "h2";
+  viewerId: string | null;
 }) {
   const rows = listingsForVersion(listings, versionId);
   const forSale = rows.filter((r) => r.light !== "red").length;
@@ -83,11 +87,15 @@ export function ListingList({
               <TrafficLight light={light} />
               {light !== "red" && (
                 <div className="flex w-full justify-end">
-                  <BuyButton
-                    href={checkoutPath(l.id, versionId)}
-                    listingLabel={label}
-                    warning={light === "yellow" ? yellowWarning(l.checks, l.hasMatrixPhoto, movedHere) : null}
-                  />
+                  {isOwnListing(l.sellerId, viewerId) ? (
+                    <YourListing />
+                  ) : (
+                    <BuyButton
+                      href={checkoutPath(l.id, versionId)}
+                      listingLabel={label}
+                      warning={light === "yellow" ? yellowWarning(l.checks, l.hasMatrixPhoto, movedHere) : null}
+                    />
+                  )}
                 </div>
               )}
             </li>

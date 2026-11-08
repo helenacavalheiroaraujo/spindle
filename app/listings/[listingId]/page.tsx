@@ -9,7 +9,9 @@ import { yellowWarning } from "@/lib/rules/yellowWarning";
 import { Header } from "@/components/Header";
 import { TrafficLight } from "@/components/TrafficLight";
 import { BuyButton } from "@/components/BuyButton";
-import { checkoutPath } from "@/lib/rules/checkoutAccess";
+import { checkoutPath, isOwnListing } from "@/lib/rules/checkoutAccess";
+import { currentProfileId } from "@/lib/db/profiles";
+import { YourListing } from "@/components/YourListing";
 import { sellerText } from "@/lib/rules/seller";
 import { SellerLine } from "@/components/SellerLine";
 
@@ -33,7 +35,7 @@ export default async function ListingCheckPage({
 }) {
   const { listingId } = await params;
   const query = await searchParams;
-  const l = await getListingCheck(listingId);
+  const [l, viewerId] = await Promise.all([getListingCheck(listingId), currentProfileId()]);
   if (!l) notFound();
 
   const versionId = one(query.version) ?? l.claimedVersionId;
@@ -136,6 +138,8 @@ export default async function ListingCheckPage({
         </p>
         {light === "red" ? (
           <p className="font-semibold">Not for sale here</p>
+        ) : isOwnListing(l.sellerId, viewerId) ? (
+          <YourListing />
         ) : (
           <BuyButton
             text="Buy with protection"

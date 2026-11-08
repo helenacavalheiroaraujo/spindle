@@ -1,5 +1,6 @@
 // Public profile of a signed-in user (story 9). Created by the app at sign-up, not by a database trigger (DECISIONS · story 9).
 import { db } from "./client";
+import { currentUserId } from "./session";
 
 // True when the profile was saved. False leaves the account without a profile; it is recreated at login or before Buy / Sell.
 export async function createProfile(userId: string, name: string): Promise<boolean> {
@@ -32,4 +33,14 @@ export async function getSellerProfile(userId: string, nameIfMissing: string): P
     if (error) throw new Error(`Could not load the profile: ${error.message}`);
   }
   return data ? { id: data.id, city: data.city, shopName: data.shop_name } : null;
+}
+
+// The signed-in user's profile id, or null when signed out or without a profile.
+// Used to show "Your listing" instead of Buy on the seller's own listings (finding #12).
+export async function currentProfileId(): Promise<string | null> {
+  const userId = await currentUserId();
+  if (!userId) return null;
+  const { data, error } = await db().from("profiles").select("id").eq("user_id", userId).maybeSingle();
+  if (error) throw new Error(`Could not load the profile: ${error.message}`);
+  return data?.id ?? null;
 }

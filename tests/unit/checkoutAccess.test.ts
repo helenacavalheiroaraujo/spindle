@@ -1,7 +1,7 @@
 // Decision table from story 7 · Acceptance criteria: red listings cannot reach the checkout;
 // a sold listing cannot be bought again. Green and yellow can (use case 1).
 import { describe, expect, it } from "vitest";
-import { canCheckout, checkoutPath } from "@/lib/rules/checkoutAccess";
+import { canCheckout, checkoutPath, isOwnListing } from "@/lib/rules/checkoutAccess";
 import type { ListingForList } from "@/lib/rules/listingOrder";
 
 const allMatch = { cover_label: "match", country_year: "match", matrix: "match" } as const;
@@ -25,6 +25,26 @@ describe("canCheckout", () => {
     ["version it is not shown under", listing(), "v1972", false],
   ] as const)("%s → %s", (_case, l, versionId, expected) => {
     expect(canCheckout(l, versionId)).toBe(expected);
+  });
+});
+
+// Story 8 · finding #12 (DECISIONS): a signed-in seller sees "Your listing" instead of Buy, and never reaches the checkout.
+describe("isOwnListing and the seller's own listing", () => {
+  it.each([
+    // listing's seller, signed-in seller, own
+    ["p1", "p1", true],
+    ["p1", "p2", false],
+    ["p1", null, false], // signed out: Buy, then log in (story 7)
+  ] as const)("seller %s, viewer %s → %s", (seller, viewer, expected) => {
+    expect(isOwnListing(seller, viewer)).toBe(expected);
+  });
+
+  it.each([
+    ["green, own listing", "p1", false],
+    ["green, someone else's", "p2", true],
+    ["green, signed out", null, true],
+  ] as const)("%s → can reach the checkout %s", (_case, viewer, expected) => {
+    expect(canCheckout({ ...listing(), sellerId: "p1" }, "v2012", viewer)).toBe(expected);
   });
 });
 

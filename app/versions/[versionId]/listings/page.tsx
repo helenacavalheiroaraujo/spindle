@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getVersionListings } from "@/lib/db/listings";
+import { currentProfileId } from "@/lib/db/profiles";
 import { parsePriorities, formatPriorities } from "@/lib/rules/priorities";
 import { Header } from "@/components/Header";
 import { ListingList } from "@/components/ListingList";
@@ -15,7 +16,7 @@ export default async function ListingsPage({
 }) {
   const { versionId } = await params;
   const { priorities } = await searchParams;
-  const data = await getVersionListings(versionId);
+  const [data, viewerId] = await Promise.all([getVersionListings(versionId), currentProfileId()]);
   if (!data) notFound();
   const { version, listings } = data;
 
@@ -51,6 +52,7 @@ export default async function ListingsPage({
           ranking={ranking}
           from="list"
           Heading="h1"
+          viewerId={viewerId}
         />
       </div>
     </main>

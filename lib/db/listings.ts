@@ -30,6 +30,7 @@ export function toListingFacts(l: ListingRow): ListingFacts {
 // --- Listings screen (story 5) ----------------------------------------------
 
 export type ListingDetails = ListingForList & {
+  sellerId: string; // profile id: the seller sees "Your listing" instead of Buy (finding #12)
   seller: Seller;
   city: string | null;
   condition: { code: string; name: string; explanation: string };
@@ -68,7 +69,7 @@ export async function getVersionListings(versionId: string): Promise<VersionList
   const listings = await client
     .from("listings")
     .select(
-      `id, price, ${LISTING_FACTS_COLUMNS},
+      `id, price, seller_id, ${LISTING_FACTS_COLUMNS},
        profiles (shop_name, city),
        condition_grades (code, name, explanation),
        claimed:versions!listings_claimed_version_id_fkey (name),
@@ -94,6 +95,7 @@ export async function getVersionListings(versionId: string): Promise<VersionList
         ...toListingFacts(l as unknown as ListingRow),
         id: l.id,
         price: Number(l.price),
+        sellerId: l.seller_id,
         seller: sellerOf(seller.shop_name),
         city: seller.city,
         condition: grade,
@@ -119,7 +121,7 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
   const result = await db()
     .from("listings")
     .select(
-      `id, price, cover_photo_url, record_photo_url, ${LISTING_FACTS_COLUMNS},
+      `id, price, seller_id, cover_photo_url, record_photo_url, ${LISTING_FACTS_COLUMNS},
        profiles (shop_name, city),
        condition_grades (code, name, explanation),
        claimed:versions!listings_claimed_version_id_fkey (name, albums (id, title, artist)),
@@ -137,6 +139,7 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
     ...toListingFacts(l as unknown as ListingRow),
     id: l.id,
     price: Number(l.price),
+    sellerId: l.seller_id,
     seller: sellerOf(seller.shop_name),
     city: seller.city,
     condition: l.condition_grades as unknown as ListingDetails["condition"],

@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { getListingCheck } from "@/lib/db/listings";
 import { placeOrder } from "@/lib/db/orders";
 import { currentUserId } from "@/lib/db/session";
+import { currentProfileId } from "@/lib/db/profiles";
 import { canCheckout, checkoutPath } from "@/lib/rules/checkoutAccess";
 import { checkoutTotal } from "@/lib/rules/checkoutTotal";
 import { withReturn } from "@/lib/rules/login";
@@ -31,6 +32,7 @@ export async function pay(listingId: string, versionId: string, _prev: PayState,
     const listing = await getListingCheck(listingId);
     // Checked again here: the listing may have been sold, or the page opened for a red listing.
     if (!listing || !canCheckout(listing, versionId)) return { status: "sold" };
+    if (!canCheckout(listing, versionId, await currentProfileId())) return { status: "failed" }; // own listing (#12)
     const result = await placeOrder(buyerId, listingId, checkoutTotal(listing.price), address);
     if ("sold" in result) return { status: "sold" };
     orderId = result.orderId;

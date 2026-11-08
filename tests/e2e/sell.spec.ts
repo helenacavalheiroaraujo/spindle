@@ -136,7 +136,15 @@ test("first sale: List for sale waits for every required field and the city; the
   await expect(row).toContainText("Check");
   await expect(row).toContainText("Discos do Bairro");
   await expect(row).toContainText("Porto");
+  // The seller's own listing: "Your listing" instead of Buy (finding #12), on the list and the check screen.
+  await expect(row.getByText("Your listing")).toBeVisible();
+  await expect(row.getByRole("link", { name: /^Buy/ })).toHaveCount(0);
+  await expect(row.getByRole("button", { name: /^Buy/ })).toHaveCount(0);
   await screenshot(page, 8, "sell-listed");
+  await row.getByRole("link", { name: /^Open/ }).click();
+  await expect(page.getByText("Your listing")).toBeVisible();
+  await expect(page.getByRole("button", { name: /Buy with protection/ })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /Buy with protection/ })).toHaveCount(0);
 
   const { data } = await admin()
     .from("listings")
@@ -152,6 +160,11 @@ test("first sale: List for sale waits for every required field and the city; the
     profiles: { city: "Porto", shop_name: "Discos do Bairro" },
   });
   expect(data!.check_results.map((c) => c.result)).toEqual(["uncertain", "uncertain", "uncertain"]);
+
+  // Never the checkout for the seller's own listing, even from its address.
+  const own = await admin().from("listings").select("id").eq("seller_id", profileId).single();
+  await page.goto(`/checkout/${own.data!.id}?version=${V_HOMOGENIC_1997}`);
+  await expect(page.getByText("This page could not be found.")).toBeVisible();
 });
 
 test("price: typical range and label while typing; invalid prices refused; photos above 5 MB refused", async ({ page }) => {
