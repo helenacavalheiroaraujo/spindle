@@ -1,6 +1,6 @@
 "use client";
-// Desktop only (story 12): the search sits in the header of every page. Typing and pressing Search opens the home page
-// with the search ("?q="), which shows the same results as story 1. Not on the sell pages: selling has its own search
+// Desktop only (story 12): the search sits in the header of every page. Typing and pressing Search opens the results
+// page (story 17, "/search?q="). Not on the sell pages: selling has its own search
 // (story 8 · finding #36).
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -16,7 +16,7 @@ export function HeaderSearch() {
       className="hidden min-w-0 flex-1 lg:block"
       onSubmit={(e) => {
         e.preventDefault();
-        router.push(typed.trim() ? `/?q=${encodeURIComponent(typed.trim())}` : "/");
+        router.push(`/search?q=${encodeURIComponent(typed.trim())}`);
       }}
     >
       <label className="flex min-h-12 items-center gap-2 rounded-full border border-navy/40 bg-white/80 py-1 pl-5 pr-1 focus-within:border-navy">

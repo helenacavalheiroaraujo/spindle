@@ -78,14 +78,15 @@ test("'This weekend' opens the featured album; 'For sellers' opens selling", asy
   await expect(page).toHaveURL(/\/login\?next=%2Fsell$|\/sell$/);
 });
 
-test("the search works from the home page at both sizes, and from the header of another page on desktop", async ({ page }) => {
+test("the search opens the results page from the home page at both sizes, and from the header of another page on desktop", async ({ page }) => {
   await page.goto("/");
   await typeSearch(page, "ziggy");
+  await expect(page).toHaveURL("/search?q=ziggy");
   await expect(page.getByRole("listitem").filter({ hasText: ZIGGY })).toHaveCount(1);
   if ((page.viewportSize()?.width ?? 0) >= 1024) {
     await page.goto("/genres/rock");
     await typeSearch(page, "bowie");
-    await expect(page).toHaveURL("/?q=bowie");
+    await expect(page).toHaveURL("/search?q=bowie");
     await expect(page.getByRole("listitem").filter({ hasText: "Blackstar" })).toHaveCount(1);
   } else {
     await page.goto("/genres/rock");

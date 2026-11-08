@@ -28,7 +28,7 @@
 - [ ] Phone (375 px) and desktop (1280 px) as in the design
 
 ## Edge cases
-- Fewer than 3 characters: no search is run (message to be decided at build time)
+- Fewer than 3 characters: no search is run; the page shows "Type at least 3 characters to search."
 - Loading shows the shared `LoadingMask`; a failure shows the shared `ErrorScreen` with "Try again", keeping the typed text
 
 ## Non-functional
@@ -42,4 +42,3 @@
 
 ## Open points
 1. The sell search screen (story 8) is not changed by this story; it gets the suggestion box with story 16.
-2. Message for fewer than 3 characters.

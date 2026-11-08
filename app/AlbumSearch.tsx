@@ -1,5 +1,5 @@
 "use client";
-// Search box and results (story 1). Rules live in lib/rules; this screen only shows what they return.
+// Search box and results (story 1). Since story 17 only the sell screen uses it: buyers search on /search. Rules live in lib/rules; this screen only shows what they return.
 // mode "sell" (story 8 · finding #36): same box and matching, but every album opens its list of versions,
 // with no "No listings" or "Not in the demo" tags.
 import Link from "next/link";
@@ -18,18 +18,8 @@ type State =
 
 type Mode = "buy" | "sell";
 
-// "initial": a search typed in the header (desktop) arrives as ?q=. "boxOnPhoneOnly": on desktop the box lives in the
-// header (story 12), so the one on the page is hidden there; the results stay.
-export function AlbumSearch({
-  mode = "buy",
-  initial = "",
-  boxOnPhoneOnly = false,
-}: {
-  mode?: Mode;
-  initial?: string;
-  boxOnPhoneOnly?: boolean;
-}) {
-  const [typed, setTyped] = useState(initial);
+export function AlbumSearch({ mode = "buy" }: { mode?: Mode }) {
+  const [typed, setTyped] = useState("");
   const [state, setState] = useState<State>({ kind: "idle" });
   const [attempt, setAttempt] = useState(0);
   const [nobodySelling, setNobodySelling] = useState<AlbumSummary | null>(null);
@@ -55,11 +45,7 @@ export function AlbumSearch({
 
   return (
     <section className="mt-6">
-      <label
-        className={`min-h-14 items-center gap-3 rounded-full border border-navy/30 bg-white/70 px-5 focus-within:border-navy ${
-          boxOnPhoneOnly ? "flex lg:hidden" : "flex"
-        }`}
-      >
+      <label className="flex min-h-14 items-center gap-3 rounded-full border border-navy/30 bg-white/70 px-5 focus-within:border-navy">
         <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="11" cy="11" r="7" />
           <path d="m20 20-3.5-3.5" />

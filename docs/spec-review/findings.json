@@ -4,7 +4,7 @@
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
     "iteration": 6,
-    "updated": "2026-11-09T09:00:00+00:00"
+    "updated": "2026-11-09T10:00:00+00:00"
   },
   "iterations": [
     {
@@ -36,6 +36,11 @@
       "n": 6,
       "date": "2026-11-08",
       "note": "Before story 8: checked its designs (3 screens without design: Blockers #72-#74), the sell form against the design pages 16 and 20 (#75-#78), and the story's own gaps (#79-#82). Audit of story 7 against the code: 1 new finding (#83); texts of the checkout and confirmation come from the design or DECISIONS.md. #57 resolved (story 7 built). Questions of already-resolved findings closed. Open findings #11-#14, #26, #42-#71 not re-checked beyond the files story 7 changed."
+    },
+    {
+      "n": 7,
+      "date": "2026-11-09",
+      "note": "Before building story 17: decisions on #42–#45 and #54 (keep as built); short-search message decided."
     }
   ],
   "findings": [
@@ -1487,9 +1492,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 42,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 7,
+        "date": "2026-11-09",
+        "decision": "Keep as built. Recorded in DECISIONS.md (Story 17 · Search decisions)."
+      }
     },
     {
       "stories": [
@@ -1513,9 +1522,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 43,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 7,
+        "date": "2026-11-09",
+        "decision": "Keep as built. Recorded in DECISIONS.md (Story 17 · Search decisions)."
+      }
     },
     {
       "stories": [
@@ -1539,9 +1552,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 44,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 7,
+        "date": "2026-11-09",
+        "decision": "Keep as built. Recorded in DECISIONS.md (Story 17 · Search decisions)."
+      }
     },
     {
       "stories": [
@@ -1565,9 +1582,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 45,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 7,
+        "date": "2026-11-09",
+        "decision": "Keep as built. Recorded in DECISIONS.md (Story 17 · Search decisions)."
+      }
     },
     {
       "stories": [
@@ -1823,9 +1844,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 54,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 7,
+        "date": "2026-11-09",
+        "decision": "Keep as built. Recorded in DECISIONS.md (Story 17 · Search decisions)."
+      }
     },
     {
       "stories": [

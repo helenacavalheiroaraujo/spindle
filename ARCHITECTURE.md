@@ -18,7 +18,8 @@ Browser (phone or desktop)
 
 ```
 app/                                ← screens (one folder per route)
-  page.tsx                          ← home + search (story 1)
+  page.tsx                          ← home (story 12)
+  search/                           ← results page /search?q=… (story 17)
   albums/[albumId]/priorities/      ← story 2
   albums/[albumId]/recommendation/  ← story 3 (+ listings beside it on desktop)
   versions/[versionId]/listings/    ← story 5, phone screen

@@ -1,12 +1,10 @@
-import { AlbumSearch } from "./AlbumSearch";
 import { HomeSections } from "./HomeSections";
 import { Header } from "@/components/Header";
+import { SearchBox } from "@/components/SearchBox";
 
-// Home page (story 12): title, search (story 1), crates by genre and "This week at the shop".
-// "?q=" is a search typed in the header on desktop.
-export default async function Home({ searchParams }: { searchParams: Promise<{ q?: string | string[] }> }) {
-  const { q } = await searchParams;
-  const initial = (Array.isArray(q) ? q[0] : q) ?? "";
+// Home page (story 12): title, search box, crates by genre and "This week at the shop".
+// Searching opens the results page /search (story 17); results are never shown here.
+export default function Home() {
   return (
     <main className="mx-auto max-w-2xl px-4 pb-16 lg:max-w-5xl">
       <Header />
@@ -16,7 +14,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ q
           No jargon, no homework. We tell you which version to buy and check every listing.
         </p>
       </div>
-      <AlbumSearch key={initial} initial={initial} boxOnPhoneOnly />
+      <div className="mt-6">
+        <SearchBox />
+      </div>
       <HomeSections />
     </main>
   );

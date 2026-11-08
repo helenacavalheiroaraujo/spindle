@@ -3,6 +3,14 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-09 — Story 17 · Search decisions (findings #42–#45, #54)
+- **#42 One heading:** up to 3 suggested albums sit under one heading "Did you mean…?", each with the full album title. Why: one heading is enough for up to 3 items; repeating it adds noise on a phone. The story 17 design shows the same.
+- **#43 Suggestion order:** closest first; on equal distance, newest release first. Why: the spec was silent; it matches the "newest first" rule used for results.
+- **#44 "Nobody is selling" card:** after tapping an album with no listings, the dark card with the album title and artist stays above the results. Why: the spec was silent; story 17 does not change this screen.
+- **#45 Timing and texts:** the search waits 250 ms after typing; "Searching…" and "We couldn't load the albums. Check your connection." stay, used on /search in the shared `LoadingMask` and `ErrorScreen`. Why: the spec gives no texts or timing; chosen in story 1 and accepted.
+- **#54 Old link:** the bare page "Nobody is selling this album right now." stays, and its "Back to search" link goes to /search. Why: story 1 already stops the buyer before this screen; the page only covers old links.
+- **Short search text:** with fewer than 3 characters no search runs and the page shows "Type at least 3 characters to search.", keeping the typed text in the search box. Why: the user sees why nothing happened; no search was made, so "No albums found" would be wrong.
+
 ## 2026-11-08 — Build order of stories 17, 16 and 15 (process)
 - **Decision:** story 17 (results page) is built first in phase 4, then story 4 and story 9 (reviews). Stories 16 (suggestions) and 15 (menu) are built only if time is left, in that order.
 - **Why:** story 17 fixes the screen that confuses buyers on the demo path. The others are additions. A clear cut line keeps the week before 15 Nov for the demo script and the PDF.

@@ -1,7 +1,8 @@
-// Story 1 · Search for an album — critical flow, run on phone and desktop (playwright.config.ts).
-// Uses the illustrative data in supabase/seed.sql.
+// Story 1 · Search for an album, shown on the results page of story 17 (/search?q=…).
+// Critical flow, run on phone and desktop (playwright.config.ts). Uses the illustrative data in supabase/seed.sql.
 import { expect, test } from "@playwright/test";
 import { typeSearch } from "./searchBox";
+import { screenshot } from "./screenshot";
 
 const ZIGGY = "The Rise and Fall of Ziggy Stardust and the Spiders from Mars";
 
@@ -11,13 +12,56 @@ test.beforeEach(async ({ page }) => {
 
 const box = (page: import("@playwright/test").Page) => page.getByRole("searchbox", { name: "Album or artist" });
 const rows = (page: import("@playwright/test").Page) =>
-  page.getByRole("list", { name: "Search results" }).getByRole("listitem"); // the home page also lists crates
+  page.getByRole("list", { name: "Search results" }).getByRole("listitem");
 
-test("fewer than 3 characters shows no results", async ({ page }) => {
+test("fewer than 3 characters: no search, a hint, and the typed text stays", async ({ page }) => {
   await typeSearch(page, "zi");
-  await page.waitForTimeout(600);
+  await expect(page).toHaveURL("/search?q=zi");
+  await expect(page.getByText("Type at least 3 characters to search.")).toBeVisible();
   await expect(rows(page)).toHaveCount(0);
-  await expect(page.getByText("No albums found")).toHaveCount(0);
+  await expect(page.getByText(/No albums found/)).toHaveCount(0);
+  await expect(box(page)).toHaveValue("zi");
+});
+
+test("a search opens a page of its own with only the results, never the home content", async ({ page }) => {
+  await typeSearch(page, "bowie");
+  await expect(page).toHaveURL("/search?q=bowie");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Results for “bowie”");
+  await expect(page.getByText("4 albums · newest first")).toBeVisible();
+  await expect(page.getByText("Illustrative data")).toBeVisible();
+  await expect(page.getByText("This week at the shop")).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /^Rock, / })).toHaveCount(0); // no crates
+  await screenshot(page, 17, "results");
+});
+
+test("the home page lists no results under the search box", async ({ page }) => {
+  await expect(page.getByRole("list", { name: "Search results" })).toHaveCount(0);
+  await page.goto("/?q=bowie"); // an old address: the home page ignores it
+  await expect(page.getByRole("list", { name: "Search results" })).toHaveCount(0);
+});
+
+test("'← Back to home' returns to the home page", async ({ page }) => {
+  await typeSearch(page, "bowie");
+  await page.getByRole("link", { name: "Back to home" }).click();
+  await expect(page).toHaveURL("/");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Pick a crate");
+});
+
+test("opening the address directly, or reloading, gives the same results with the text in the box", async ({ page }) => {
+  await page.goto("/search?q=bowie");
+  await expect(rows(page)).toHaveCount(4);
+  await expect(box(page)).toHaveValue("bowie");
+  await page.reload();
+  await expect(rows(page)).toHaveCount(4);
+});
+
+test("editing the text and searching again shows the new results", async ({ page }) => {
+  await typeSearch(page, "bowie");
+  await expect(rows(page)).toHaveCount(4);
+  await typeSearch(page, "bjork");
+  await expect(page).toHaveURL("/search?q=bjork");
+  await expect(rows(page)).toHaveCount(1);
+  await expect(rows(page).first()).toContainText("Homogenic");
 });
 
 test("'ziggy' finds Ziggy Stardust with cover, title, artist, year and versions", async ({ page }) => {
@@ -28,6 +72,7 @@ test("'ziggy' finds Ziggy Stardust with cover, title, artist, year and versions"
   await expect(row).toContainText("3 versions");
   await expect(row.locator("img")).toHaveAttribute("src", "https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500");
   await expect(row).not.toContainText("No listings");
+  await expect(page.getByText("1 album ·")).toBeVisible();
 });
 
 test("'bowie' and 'BOWIE' list Bowie's albums, newest first", async ({ page }) => {
@@ -61,15 +106,18 @@ test("an album with listings but no recommendation data shows 'Not in the demo' 
 
 test("a typo suggests the full album title", async ({ page }) => {
   await typeSearch(page, "zigy");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("No albums found for “zigy”");
   await expect(page.getByText("Did you mean…?")).toBeVisible();
   await expect(rows(page)).toHaveCount(1);
   await expect(rows(page).first()).toContainText(ZIGGY);
+  await screenshot(page, 17, "typo");
 });
 
 test("3 letters with no match, or nothing close, shows only 'No albums found'", async ({ page }) => {
   for (const typed of ["zgy", "xyzzy"]) {
     await typeSearch(page, typed);
-    await expect(page.getByText("No albums found")).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(`No albums found for “${typed}”`);
+    await expect(page.getByText("Did you mean")).toHaveCount(0);
     await expect(rows(page)).toHaveCount(0);
   }
 });
@@ -84,26 +132,5 @@ test("tapping an album with no listings shows the message directly", async ({ pa
   await typeSearch(page, "blackstar");
   await rows(page).filter({ hasText: "Blackstar" }).getByRole("button").click();
   await expect(page.getByText("Nobody is selling this album right now")).toBeVisible();
-  expect(new URL(page.url()).pathname).toBe("/"); // stays on the home page (desktop adds ?q= from the header)
-});
-
-test("if the search fails, an error screen with 'Try again' recovers and keeps what was typed", async ({ page }) => {
-  // Cut only the search requests (Next.js server actions are POSTs with a "next-action" header).
-  let fail = true;
-  await page.route("**/*", (route) => {
-    const r = route.request();
-    if (fail && r.method() === "POST" && r.headers()["next-action"]) return route.abort();
-    return route.continue();
-  });
-
-  await typeSearch(page, "ziggy");
-  // Next.js adds its own empty "alert" (route announcer), so look for ours by its text.
-  const alert = page.getByRole("alert").filter({ hasText: "We couldn't load the albums" });
-  await expect(alert).toBeVisible();
-
-  fail = false;
-  await alert.getByRole("button", { name: "Try again" }).click();
-  await expect(rows(page).filter({ hasText: ZIGGY })).toHaveCount(1);
-  await expect(box(page)).toHaveValue("ziggy");
-  await expect(alert).toHaveCount(0);
+  expect(new URL(page.url()).pathname).toBe("/search"); // stays on the results page
 });

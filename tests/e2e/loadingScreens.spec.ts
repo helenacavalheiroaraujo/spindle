@@ -3,7 +3,6 @@
 // The loading masks and error screens of the pages built on the server cannot be provoked from the browser:
 // they are in the manual test record (docs/manual-tests.md, DECISIONS · Testing).
 import { expect, test } from "@playwright/test";
-import { typeSearch } from "./searchBox";
 
 const ZIGGY_ID = "10000000-0000-0000-0000-000000000001";
 const isServerAction = (route: { request: () => { method: () => string; headers: () => Record<string, string> } }) =>
@@ -50,19 +49,4 @@ test("listings beside the recommendation (desktop): loading mask, then an error 
   await alert.getByRole("button", { name: "Try again" }).click();
   await expect(beside.getByRole("listitem").first()).toBeVisible();
   await expect(alert).toHaveCount(0);
-});
-
-test("search: 'Searching…' while the albums load, with the typed text kept", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.getByRole("link", { name: "Rock, 4 records" })).toBeVisible(); // the page has finished loading
-  let release: () => void = () => {};
-  const gate = new Promise<void>((resolve) => (release = resolve));
-  await page.route("**/*", async (route) => {
-    if (isServerAction(route)) await gate;
-    await route.continue();
-  });
-  await typeSearch(page, "ziggy");
-  await expect(page.getByRole("status").filter({ hasText: "Searching…" })).toBeVisible();
-  release();
-  await expect(page.getByRole("list", { name: "Search results" }).getByRole("listitem")).toHaveCount(1);
 });

@@ -1,6 +1,6 @@
 // Decision table from SPEC story 1 · Acceptance criteria (seed-like data).
 import { describe, expect, it } from "vitest";
-import { normalize, searchAlbums } from "@/lib/rules/albumSearch";
+import { isTooShort, normalize, searchAlbums } from "@/lib/rules/albumSearch";
 import { albums, ZIGGY } from "./fixtures/albums";
 
 const titles = (typed: string) => searchAlbums(albums, typed).map((a) => a.title);
@@ -35,5 +35,20 @@ describe("normalize", () => {
   it("ignores case and accents", () => {
     expect(normalize("  BJÖRK ")).toBe("bjork");
     expect(normalize("Sigur Rós")).toBe("sigur ros");
+  });
+});
+
+// Story 17 · edge case: fewer than 3 characters → no search is run, the page shows the hint.
+describe("isTooShort", () => {
+  it.each([
+    ["", true],
+    ["zi", true],
+    ["  zi ", true], // spaces do not count
+    ["   ", true],
+    ["zig", false],
+    ["  zig ", false],
+    ["Bjö", false],
+  ] as const)("%j → %j", (typed, expected) => {
+    expect(isTooShort(typed)).toBe(expected);
   });
 });
