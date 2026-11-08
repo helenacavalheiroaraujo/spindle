@@ -89,7 +89,7 @@ Fixed list in the buyer's language (finding #8).
 |---|---|---|
 | `code` | text, primary key | NM, VG+, VG, G |
 | `name` | text | Near mint, Very good, Good, Fair |
-| `explanation` | text | approved texts: Almost like new, no marks · Light signs of wear · Visible wear and some audible noise · Heavily played, noticeable noise |
+| `explanation` | text | approved texts: No marks, almost like new (`0005_condition_text.sql`, finding #59) · Light signs of wear · Visible wear and some audible noise · Heavily played, noticeable noise |
 | `sort_order` | integer | best first |
 
 The condition **score** (Near mint = 5 … Fair = 2) lives in `lib/rules/recommendation.ts`, not here.

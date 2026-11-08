@@ -3,6 +3,11 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 5 · Condition sentence
+
+### Condition explanations are written to follow "with" (story 5 · finding #59)
+- **Why:** the listing check screen reads "[code] means [name], with [explanation]", as in the story's example. Only NM did not fit ("with almost like new, no marks"); its text becomes "No marks, almost like new". The sentence itself is unchanged.
+
 ## 2026-11-08 — Testing
 
 ### Loading and error screens are checked by hand, not by Playwright (process)

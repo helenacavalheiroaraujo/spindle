@@ -25,7 +25,7 @@ test("green: summary, three ✓, photos, condition in plain words, Buy with prot
   await expect(result(page)).toContainText("All three checks match this version");
   await expect(checklist(page)).toHaveText([/Cover and label match the version.*Matches/, /Country and year match.*Matches/, /Matrix photo matches.*Matches/]);
   for (const kind of ["cover", "record", "matrix"]) await expect(page.getByRole("img", { name: `${kind} photo` })).toBeVisible();
-  await expect(page.getByText("NM means near mint")).toBeVisible();
+  await expect(page.getByText("NM means near mint, with no marks, almost like new")).toBeVisible(); // finding #59
   await expect(page.getByRole("link", { name: /^Buy with protection/ })).toHaveAttribute("href", `/checkout/${GREEN_32}?version=${V2012}`);
   await expect(page.getByRole("group", { name: "Before you buy" })).toHaveCount(0);
   await expect(page.getByText("Check results and photos are illustrative data")).toBeVisible();

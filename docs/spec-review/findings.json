@@ -1969,9 +1969,13 @@
       },
       "question": null,
       "id": 59,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 4,
+        "date": "2026-11-08",
+        "decision": "Approved: NM explanation changed to 'No marks, almost like new' (migration 0005); the sentence is unchanged."
+      }
     },
     {
       "stories": [
