@@ -5,9 +5,9 @@ Updated 2026-11-08 after story 2 "save to account" · Deadline 15 Nov 2026 · **
 
 ## Summary
 - **Stories:** 7 of 9 MVP stories built (5 with gaps), 0 in progress, 1 not started (4); story 2 "save to account" built
-- **Tests:** unit 298/298 · end-to-end 142/144 (2 skipped: desktop-only tests on the phone run) — all pass
+- **Tests:** unit 298/298 · end-to-end 144/148 (4 skipped: 3 desktop-only tests on the phone run, and the failed-upload test, which WebKit cannot run) — all pass
 - **Demo:** every step from search to the order confirmation, and selling, is covered by a passing test; the whole path in one go has not been run as one test or rehearsed. The demo data was restored (the 1990 Reissue €24 listing is on sale again)
-- **Next:** Playwright tests for the loading and error screens (stories 2, 3, 5, 7, 8), then the brief items: demo script, submission PDF, manual test record, push
+- **Next:** the brief items: demo script, submission PDF, manual test record, push
 - **Risk:** 7 days for the demo script, the submission PDF, the manual test record, the UX findings and push/online check. Phase 4 (story 4, story 7 step 3, story 9 reviews) are the first things to cut
 
 ## Against the brief
@@ -15,7 +15,7 @@ Updated 2026-11-08 after story 2 "save to account" · Deadline 15 Nov 2026 · **
 |---|---|---|
 | 1 · Core features work end to end | Partly | Search → priorities → recommendation → listings → checkout → confirmation, and selling (story 8), and "save to account" (story 2), built and tested |
 | 2 · Data tables | Done | `0001_core.sql`, `0002_orders.sql`, `0003_sell.sql`, `0004_preferences.sql` (not committed yet), applied and described in `docs/database.md` |
-| 3 · Testing, automated and manual | Partly | Automated: 298 unit and 142 end-to-end, all pass. Manual: no record of checking every screen by hand |
+| 3 · Testing, automated and manual | Partly | Automated: 298 unit and 144 end-to-end, all pass. Manual: no record of checking every screen by hand |
 | 4 · LLM good practices in the repo | Done | SPEC.md, `specs/`, CLAUDE.md, ARCHITECTURE.md, DECISIONS.md, `docs/AI_USAGE.md`, tests committed |
 | 5 · UX and UI quality | Partly | UX review register: 13 open (2 High, 11 Low), 2 resolved. Story 8 screens are not yet in the UX review |
 | 6 · App online and reachable | Not checked | The Vercel address is not in the repo; 11 commits are not pushed, plus story 2 "save to account" (not committed yet) |
@@ -58,7 +58,8 @@ Updated 2026-11-08 after story 2 "save to account" · Deadline 15 Nov 2026 · **
 - Story 5: loading mask and error screen with "Try again" on the listings and listing check screens
 - Story 7: loading mask and error screen on the checkout and the confirmation
 - Story 8: loading mask and error screen with "Try again"; the sell form keeps what was typed
-- Story 8 (noted in the build, not a Traceability row): a failed photo upload; "Your listing" beside the recommendation on desktop
+- Story 8 (noted in the build): a failed photo upload is tested on desktop only (WebKit, used for the phone run, cannot rewrite a request with files); "Your listing" beside the recommendation on desktop is now tested
+- All five loading and error rows are checked by hand in the manual test record (DECISIONS · Testing)
 
 ## Before the next story can start
 - Story 4 (phase 4): findings #14 and #26 open; recommended to cut.

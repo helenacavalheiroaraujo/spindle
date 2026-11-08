@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Testing
+
+### Loading and error screens are checked by hand, not by Playwright (process)
+- **Why:** these screens belong to pages built on the server; a browser test cannot make the server's database read fail (search can, because it is a browser action). Making it fail would need test-only code inside the app. The manual test record, required by the brief anyway, covers them.
+- **Trade-off accepted:** the five Traceability rows (stories 2, 3, 5, 7, 8) stay "Not tested automatically".
+
 ## 2026-11-08 — Story 2 · Save to account
 
 ### "Change" replaces the saved ranking (story 2 · finding #11)
