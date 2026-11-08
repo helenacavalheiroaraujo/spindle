@@ -2,14 +2,19 @@
   "meta": {
     "project": "Spindle MVP",
     "report_url": "https://claude.ai/artifact/6inbbjVxsF4Hi7Q2cr2n28",
-    "iteration": 1,
-    "updated": "2026-11-08T12:00:00+00:00"
+    "iteration": 2,
+    "updated": "2026-11-08T18:00:00+00:00"
   },
   "iterations": [
     {
       "n": 1,
       "date": "2026-11-08",
       "note": "First UX review: screen inventory, then every built screen"
+    },
+    {
+      "n": 2,
+      "date": "2026-11-08",
+      "note": "After story 7: checkout, confirmation and 'just sold' built; re-check of open findings"
     }
   ],
   "screens": [
@@ -175,10 +180,10 @@
       "name": "Checkout (Buy with protection)",
       "story": "7",
       "phase": 2,
-      "design": "Spindle_mockups_by_section.pdf · p. 15 (mobile), p. 19 (desktop)",
-      "route": null,
+      "design": "Spindle_mockups_by_section.pdf · p. 16 (mobile), p. 19 (desktop)",
+      "route": "/checkout/40000000-0000-0000-0000-000000000005?version=20000000-0000-0000-0000-000000000003",
       "auth": true,
-      "status": "missing",
+      "status": "built",
       "note": ""
     },
     {
@@ -186,11 +191,11 @@
       "name": "Order confirmation",
       "story": "7",
       "phase": 2,
-      "design": null,
+      "design": "order-confirmation.html (order-confirmation-375.png, order-confirmation-1280.png)",
       "route": null,
       "auth": true,
-      "status": "missing",
-      "note": ""
+      "status": "built",
+      "note": "Needs an order of the signed-in buyer; screenshot taken from the story 7 e2e run (docs/screenshots/story-7, same commit as the code)"
     },
     {
       "key": "checkout-just-sold",
@@ -200,8 +205,8 @@
       "design": null,
       "route": null,
       "auth": true,
-      "status": "missing",
-      "note": ""
+      "status": "built",
+      "note": "Needs a listing sold during checkout; screenshot taken from the story 7 e2e run (docs/screenshots/story-7)"
     },
     {
       "key": "saved-priorities",
@@ -373,9 +378,13 @@
       ],
       "proposal": "Build story 7 next (it is in progress): checkout from Buy, Pay, and a confirmation screen. These close the demo flow search → buy.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 2,
+        "date": "2026-11-08",
+        "decision": "Built in story 7 (d648e9e). Checked on .ux-review/shots/checkout-375/1280.png and order-confirmation-375/1280.png; both match the designs, apart from the recorded decisions (€2.00 fee, address typed, MB WAY label only)."
+      }
     },
     {
       "id": 2,
@@ -397,9 +406,13 @@
       ],
       "proposal": "Build it with the checkout: same layout as the error screen, with a way back to the listings.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 2,
+        "date": "2026-11-08",
+        "decision": "Built in story 7: the message replaces Pay and offers 'See other listings'; the typed address stays. Checked on .ux-review/shots/checkout-just-sold-375/1280.png."
+      }
     },
     {
       "id": 3,
@@ -461,9 +474,19 @@
           "source": "screenshot",
           "where": ".ux-review/shots/home-1280.png",
           "quote": ""
+        },
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Designs",
+          "quote": "**None yet: Canva design needed before building**"
+        },
+        {
+          "source": "CLAUDE.md",
+          "where": "How we build a story, step 1b",
+          "quote": "Every new screen the story needs has an approved design (in docs/design/ or a Canva link in the story's \"Designs\" section). Without it, the story does not start."
         }
       ],
-      "proposal": "Build story 8 after story 7: pick version, form, first-time city/shop, My listings (see, edit, remove), and the 'not in our catalogue' message.",
+      "proposal": "Story 8 cannot start yet: three of its screens (pick a version, first-time city/shop, My listings) have no design. Approve those three designs first, then build: pick version, form, first-time details, My listings, and the 'not in our catalogue' message.",
       "question": null,
       "status": "open",
       "first_seen": 1,
@@ -523,7 +546,9 @@
       "screens": [
         "home",
         "recommendation",
-        "listing-check-yellow"
+        "listing-check-yellow",
+        "checkout",
+        "order-confirmation"
       ],
       "stories": [
         "all"
@@ -541,6 +566,16 @@
           "source": "Spindle_mockups_by_section.pdf",
           "where": "p. 3–4 (desktop header)",
           "quote": "Logo left, then search, 'Sell for free' and the account button, all inside the page width"
+        },
+        {
+          "source": "order-confirmation-1280.png",
+          "where": "docs/design (story 7 design)",
+          "quote": "Logo on the left, inside the page width, with a thin line under the header"
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/order-confirmation-1280.png",
+          "quote": ""
         }
       ],
       "proposal": "Put the logo on the left and 'Log in' / initials on the right inside the same max width as the content; leave room for 'Sell for free' (story 8).",
@@ -772,6 +807,81 @@
       "status": "open",
       "first_seen": 1,
       "resolution": null
+    },
+    {
+      "id": 14,
+      "screens": [
+        "checkout"
+      ],
+      "stories": [
+        "7"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "Pay is greyed out with no word on what is missing",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/checkout-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/checkout-1280.png",
+          "quote": ""
+        },
+        {
+          "source": ".claude/skills/ux-review/references/checklist.md",
+          "where": "C. Error prevention",
+          "quote": "disabled actions explain why, or what is missing is visible"
+        }
+      ],
+      "proposal": "Under the greyed-out Pay button, show one line until the address is complete, e.g. \"Fill in your address to pay\". The wording is yours to choose; it would go in DECISIONS.md like the other build-time texts.",
+      "question": null,
+      "status": "open",
+      "first_seen": 2,
+      "resolution": null
+    },
+    {
+      "id": 15,
+      "screens": [
+        "listings",
+        "checkout",
+        "listing-check-yellow"
+      ],
+      "stories": [
+        "9"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "The 'Shop' tag drops onto its own line, slightly indented, after the city",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listings-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/checkout-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/checkout-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "DECISIONS.md",
+          "where": "2026-11-08 · finding #64",
+          "quote": "the \"Shop\" tag keeps story 9's criterion"
+        }
+      ],
+      "proposal": "Put the tag right after the shop name (\"Discos do Rui [Shop], Lisboa\") so it stays on the same line as the name and no longer starts a new line with a gap in front.",
+      "question": null,
+      "status": "open",
+      "first_seen": 2,
+      "resolution": null
     }
   ],
   "questions": [
@@ -793,7 +903,7 @@
   "todo": [
     {
       "id": "T1",
-      "text": "Not captured: yellow warning dialog, 'Nobody is selling' message, loading and error states, wrong-password state. Check them in the next run.",
+      "text": "Not captured: yellow warning dialog, 'Nobody is selling' message, wrong-password state, loading and error states. Order confirmation and 'just sold' were taken from the story 7 e2e screenshots (same commit as the code), not from this capture.",
       "finding": null,
       "done": false
     }
