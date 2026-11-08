@@ -1,0 +1,801 @@
+{
+  "meta": {
+    "project": "Spindle MVP",
+    "report_url": "https://claude.ai/artifact/6inbbjVxsF4Hi7Q2cr2n28",
+    "iteration": 1,
+    "updated": "2026-11-08T12:00:00+00:00"
+  },
+  "iterations": [
+    {
+      "n": 1,
+      "date": "2026-11-08",
+      "note": "First UX review: screen inventory, then every built screen"
+    }
+  ],
+  "screens": [
+    {
+      "key": "home",
+      "name": "Home with search",
+      "story": "1",
+      "phase": 1,
+      "design": "Spindle_mockups_by_section.pdf · p. 2–3 (homepage), p. 15/17 (search)",
+      "route": "/",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "search-results",
+      "name": "Search results",
+      "story": "1",
+      "phase": 1,
+      "design": "Spindle_mockups_by_section.pdf · p. 15 (Search, mobile), p. 17 (desktop)",
+      "route": "/",
+      "auth": false,
+      "status": "built",
+      "note": "",
+      "search": "bowie"
+    },
+    {
+      "key": "search-no-results",
+      "name": "Search: no albums found",
+      "story": "1",
+      "phase": 1,
+      "design": null,
+      "route": "/",
+      "auth": false,
+      "status": "built",
+      "note": "",
+      "search": "xyzq"
+    },
+    {
+      "key": "search-no-listings",
+      "name": "Search: album with no listings",
+      "story": "1",
+      "phase": 1,
+      "design": null,
+      "route": "/",
+      "auth": false,
+      "status": "built",
+      "note": "The 'Nobody is selling this album right now' message after the tap is not captured",
+      "search": "let's dance"
+    },
+    {
+      "key": "priorities",
+      "name": "Priorities",
+      "story": "2",
+      "phase": 1,
+      "design": "Spindle_mockups_by_section.pdf · p. 15 (mobile), p. 18 (desktop)",
+      "route": "/albums/10000000-0000-0000-0000-000000000001/priorities",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "recommendation",
+      "name": "Recommendation",
+      "story": "3",
+      "phase": 1,
+      "design": "Spindle_mockups_by_section.pdf · p. 11 (mobile and desktop)",
+      "route": "/albums/10000000-0000-0000-0000-000000000001/recommendation?priorities=price,sound",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "recommendation-ideal-unavailable",
+      "name": "Recommendation with 'ideal but unavailable' note",
+      "story": "3",
+      "phase": 1,
+      "design": null,
+      "route": "/albums/10000000-0000-0000-0000-000000000001/recommendation?priorities=original,sound",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "listings",
+      "name": "Verified listings (own screen)",
+      "story": "5",
+      "phase": 1,
+      "design": "Spindle_mockups_by_section.pdf · p. 15 (Verified listings, mobile)",
+      "route": "/versions/20000000-0000-0000-0000-000000000003/listings?priorities=price,sound",
+      "auth": false,
+      "status": "built",
+      "note": "On desktop the listings sit beside the recommendation; this screen is the phone layout"
+    },
+    {
+      "key": "listing-check-yellow",
+      "name": "Listing check: yellow (Check)",
+      "story": "5",
+      "phase": 1,
+      "design": "Spindle_mockups_by_section.pdf · p. 11 (mobile), p. 13 (desktop)",
+      "route": "/listings/40000000-0000-0000-0000-000000000006?version=20000000-0000-0000-0000-000000000003",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "listing-check-red",
+      "name": "Listing check: red (No match)",
+      "story": "5",
+      "phase": 1,
+      "design": null,
+      "route": "/listings/40000000-0000-0000-0000-000000000008?version=20000000-0000-0000-0000-000000000003",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "yellow-warning",
+      "name": "Yellow listing warning before checkout",
+      "story": "5",
+      "phase": 1,
+      "design": "Spindle_mockups_by_section.pdf · p. 11/13 (yellow note on the listing)",
+      "route": null,
+      "auth": false,
+      "status": "built",
+      "note": "A dialog after tapping Buy; not captured"
+    },
+    {
+      "key": "signup",
+      "name": "Sign up",
+      "story": "9",
+      "phase": 2,
+      "design": "Spindle_mockups_by_section.pdf · p. 5 (Create account, mobile), p. 7 (desktop)",
+      "route": "/signup",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "login",
+      "name": "Log in",
+      "story": "9",
+      "phase": 2,
+      "design": "Spindle_mockups_by_section.pdf · p. 5 (Sign in, mobile and desktop)",
+      "route": "/login",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "account",
+      "name": "Your account",
+      "story": "9",
+      "phase": 2,
+      "design": "Spindle_mockups_by_section.pdf · p. 7 (mobile), p. 9 (desktop)",
+      "route": "/account",
+      "auth": true,
+      "status": "built",
+      "note": "Deliberately smaller than the design (DECISIONS 2026-11-08)"
+    },
+    {
+      "key": "checkout",
+      "name": "Checkout (Buy with protection)",
+      "story": "7",
+      "phase": 2,
+      "design": "Spindle_mockups_by_section.pdf · p. 15 (mobile), p. 19 (desktop)",
+      "route": null,
+      "auth": true,
+      "status": "missing",
+      "note": ""
+    },
+    {
+      "key": "order-confirmation",
+      "name": "Order confirmation",
+      "story": "7",
+      "phase": 2,
+      "design": null,
+      "route": null,
+      "auth": true,
+      "status": "missing",
+      "note": ""
+    },
+    {
+      "key": "checkout-just-sold",
+      "name": "Checkout: 'Sorry, this record was just sold'",
+      "story": "7",
+      "phase": 2,
+      "design": null,
+      "route": null,
+      "auth": true,
+      "status": "missing",
+      "note": ""
+    },
+    {
+      "key": "saved-priorities",
+      "name": "Recommendation with saved ranking ('Based on: … Change')",
+      "story": "2",
+      "phase": 2,
+      "design": null,
+      "route": null,
+      "auth": true,
+      "status": "missing",
+      "note": ""
+    },
+    {
+      "key": "sell-pick-version",
+      "name": "Sell: search album and pick the version",
+      "story": "8",
+      "phase": 3,
+      "design": null,
+      "route": null,
+      "auth": true,
+      "status": "missing",
+      "note": ""
+    },
+    {
+      "key": "sell-form",
+      "name": "Sell a record (form)",
+      "story": "8",
+      "phase": 3,
+      "design": "Spindle_mockups_by_section.pdf · p. 16 (mobile), p. 19 (desktop)",
+      "route": null,
+      "auth": true,
+      "status": "missing",
+      "note": ""
+    },
+    {
+      "key": "sell-seller-details",
+      "name": "Sell: first time, city and shop name",
+      "story": "8",
+      "phase": 3,
+      "design": null,
+      "route": null,
+      "auth": true,
+      "status": "missing",
+      "note": ""
+    },
+    {
+      "key": "my-listings",
+      "name": "My listings (see, edit, remove)",
+      "story": "8",
+      "phase": 3,
+      "design": "Spindle_mockups_by_section.pdf · p. 9 (Your listings, desktop account)",
+      "route": null,
+      "auth": true,
+      "status": "missing",
+      "note": ""
+    },
+    {
+      "key": "sell-not-in-catalogue",
+      "name": "Sell: 'This version isn't in our catalogue yet'",
+      "story": "8",
+      "phase": 3,
+      "design": null,
+      "route": null,
+      "auth": true,
+      "status": "missing",
+      "note": ""
+    },
+    {
+      "key": "compare",
+      "name": "Compare pressings",
+      "story": "4",
+      "phase": 4,
+      "design": "Spindle_mockups_by_section.pdf · p. 11 (mobile), p. 13 (desktop)",
+      "route": null,
+      "auth": false,
+      "status": "later",
+      "note": ""
+    },
+    {
+      "key": "my-orders",
+      "name": "My orders (confirm receipt)",
+      "story": "7",
+      "phase": 4,
+      "design": "Spindle_mockups_by_section.pdf · p. 7/9 (On its way)",
+      "route": null,
+      "auth": false,
+      "status": "later",
+      "note": ""
+    },
+    {
+      "key": "design-homepage-crates",
+      "name": "Homepage crates, promos, best sellers",
+      "story": "—",
+      "phase": 4,
+      "design": "Spindle_mockups_by_section.pdf · p. 2–3",
+      "route": null,
+      "auth": false,
+      "status": "later",
+      "note": "Design only; not in any story"
+    },
+    {
+      "key": "design-search-filters",
+      "name": "Search filters",
+      "story": "—",
+      "phase": 4,
+      "design": "Spindle_mockups_by_section.pdf · p. 15, p. 17",
+      "route": null,
+      "auth": false,
+      "status": "later",
+      "note": "Design only; not in any story"
+    },
+    {
+      "key": "design-public-profile",
+      "name": "Public profile and reviews",
+      "story": "9",
+      "phase": 4,
+      "design": "Spindle_mockups_by_section.pdf · p. 7, p. 9",
+      "route": null,
+      "auth": false,
+      "status": "later",
+      "note": "Out of scope in story 9 (comes with reviews)"
+    },
+    {
+      "key": "design-hamburger-menu",
+      "name": "Mobile hamburger / account menu",
+      "story": "—",
+      "phase": 4,
+      "design": "Spindle_mockups_by_section.pdf · p. 2, p. 4",
+      "route": null,
+      "auth": false,
+      "status": "later",
+      "note": "Design only; not in any story"
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "screens": [
+        "checkout",
+        "order-confirmation"
+      ],
+      "stories": [
+        "7"
+      ],
+      "type": "Missing screen",
+      "severity": "Blocker",
+      "title": "Checkout and order confirmation do not exist yet — the demo flow stops at Buy",
+      "evidence": [
+        {
+          "source": "specs/story-7-checkout.md",
+          "where": "Scope",
+          "quote": "Checkout screen (\"Buy with protection\"), opened from **Buy** on a green or yellow listing"
+        },
+        {
+          "source": "specs/story-7-checkout.md",
+          "where": "Use cases",
+          "quote": "**Pay** → order created, status \"Paid · waiting for the seller\"; confirmation screen"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 15 and p. 19",
+          "quote": "Buy with protection (mobile and desktop)"
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listings-375.png",
+          "quote": ""
+        }
+      ],
+      "proposal": "Build story 7 next (it is in progress): checkout from Buy, Pay, and a confirmation screen. These close the demo flow search → buy.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
+    },
+    {
+      "id": 2,
+      "screens": [
+        "checkout-just-sold"
+      ],
+      "stories": [
+        "7"
+      ],
+      "type": "Missing screen",
+      "severity": "High",
+      "title": "No screen for 'Sorry, this record was just sold'",
+      "evidence": [
+        {
+          "source": "specs/story-7-checkout.md",
+          "where": "Edge cases",
+          "quote": "Listing sold while the buyer is on the checkout → \"Sorry, this record was just sold\" and no order is created"
+        }
+      ],
+      "proposal": "Build it with the checkout: same layout as the error screen, with a way back to the listings.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
+    },
+    {
+      "id": 3,
+      "screens": [
+        "saved-priorities"
+      ],
+      "stories": [
+        "2"
+      ],
+      "type": "Missing screen",
+      "severity": "High",
+      "title": "Saved ranking for signed-in buyers is not built (story 2, phase 2)",
+      "evidence": [
+        {
+          "source": "specs/story-2-priorities.md",
+          "where": "Phase 2 (with accounts)",
+          "quote": "Signed-in buyer **with a saved ranking**: the screen is **skipped**; the recommendation shows \"Based on: Price, Sound · **Change**\""
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Build order",
+          "quote": "**Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)"
+        }
+      ],
+      "proposal": null,
+      "question": "Story 2 phase 2 is in the Purchase phase, after story 7. Keep it before the demo, or move it to 'if time allows'?",
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
+    },
+    {
+      "id": 4,
+      "screens": [
+        "sell-pick-version",
+        "sell-form",
+        "sell-seller-details",
+        "my-listings",
+        "sell-not-in-catalogue",
+        "home"
+      ],
+      "stories": [
+        "8"
+      ],
+      "type": "Missing screen",
+      "severity": "High",
+      "title": "Selling is not built: no 'Sell for free' in the header and none of the five sell screens",
+      "evidence": [
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Scope",
+          "quote": "**\"Sell for free\"** in the header; requires login (story 9)"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 16 and p. 19",
+          "quote": "Sell a record (mobile and desktop)"
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/home-1280.png",
+          "quote": ""
+        }
+      ],
+      "proposal": "Build story 8 after story 7: pick version, form, first-time city/shop, My listings (see, edit, remove), and the 'not in our catalogue' message.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
+    },
+    {
+      "id": 5,
+      "screens": [
+        "home",
+        "search-results",
+        "priorities",
+        "listing-check-yellow",
+        "listing-check-red",
+        "login",
+        "signup",
+        "account"
+      ],
+      "stories": [
+        "1",
+        "2",
+        "5",
+        "9"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "On desktop most screens are a narrow phone column in the middle of a wide empty page",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/search-results-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/priorities-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listing-check-yellow-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 17 (search), p. 18 (priorities), p. 13 (listing)",
+          "quote": "Desktop layouts use two columns: cover beside the options, photos beside the checklist, results in a grid"
+        }
+      ],
+      "proposal": "Use two columns from 1024 px where the design does: priorities (cover left, 2 × 2 options right), listing check (photos left, checklist and Buy right). The recommendation already does this well.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
+    },
+    {
+      "id": 6,
+      "screens": [
+        "home",
+        "recommendation",
+        "listing-check-yellow"
+      ],
+      "stories": [
+        "all"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "Desktop header: logo centred and 'Log in' pinned to the window edge, outside the content width",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/recommendation-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 3–4 (desktop header)",
+          "quote": "Logo left, then search, 'Sell for free' and the account button, all inside the page width"
+        }
+      ],
+      "proposal": "Put the logo on the left and 'Log in' / initials on the right inside the same max width as the content; leave room for 'Sell for free' (story 8).",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
+    },
+    {
+      "id": 7,
+      "screens": [
+        "listings",
+        "recommendation",
+        "listing-check-red"
+      ],
+      "stories": [
+        "5"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "Traffic-light colours are generic bright green, amber and red, not the design palette",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listings-375.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 1 (palette)",
+          "quote": "Match #2F7A45 · Check #E9B44C · No match #A3302A"
+        },
+        {
+          "source": "components/TrafficLight.tsx",
+          "where": "DOT",
+          "quote": "bg-green-600 · bg-amber-400 · bg-red-600"
+        }
+      ],
+      "proposal": "Add the three palette colours to globals.css and use them in TrafficLight; the words stay as they are.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
+    },
+    {
+      "id": 8,
+      "screens": [
+        "listing-check-yellow",
+        "listing-check-red"
+      ],
+      "stories": [
+        "5"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "The listing check verdict is a small chip; the design makes it a dark-brown emphasis card",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listing-check-yellow-375.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 11 and p. 13",
+          "quote": "'Check first' card: dark brown, traffic light, one-line summary"
+        },
+        {
+          "source": "CLAUDE.md",
+          "where": "Visual direction",
+          "quote": "dark brown for emphasis cards"
+        }
+      ],
+      "proposal": "Turn the summary box into the dark-brown card (light + word + summary). It is the answer to the screen's question, so it should be the strongest element.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
+    },
+    {
+      "id": 9,
+      "screens": [
+        "listing-check-yellow",
+        "listing-check-red"
+      ],
+      "stories": [
+        "5"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "Checklist rows read as contradictions: 'Matrix photo matches — Uncertain', 'Country and year match — Doesn't match'",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listing-check-red-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 13",
+          "quote": "The matrix photo **isn't sharp**"
+        }
+      ],
+      "proposal": "Word each row by its result, e.g. ✓ 'Country and year match', ? 'Matrix photo: can't be sure', ✗ 'Country and year don't match'. Would need a small story 5 text change; show current vs proposed first.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
+    },
+    {
+      "id": 10,
+      "screens": [
+        "listing-check-red"
+      ],
+      "stories": [
+        "5"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "A red listing says 'moved to 1990 Reissue' but gives no way to go there",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listing-check-red-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "specs/story-5-listings.md",
+          "where": "Use cases",
+          "quote": "appears here as a warning and also under the **correct version**"
+        }
+      ],
+      "proposal": null,
+      "question": "Should 'moved to 1990 Reissue' link to that version's listings? It is not in story 5 today.",
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
+    },
+    {
+      "id": 11,
+      "screens": [
+        "login",
+        "signup"
+      ],
+      "stories": [
+        "9"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "Log in and sign-up have no back button and no 'Just browsing?' line",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/login-375.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 5",
+          "quote": "back arrow · 'Just browsing? You can search and get recommendations without an account.'"
+        }
+      ],
+      "proposal": "Add the back button used on the other screens and the 'Just browsing?' line under the form. (The 'Show' password button is optional.)",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
+    },
+    {
+      "id": 12,
+      "screens": [
+        "account"
+      ],
+      "stories": [
+        "9"
+      ],
+      "type": "Rule broken",
+      "severity": "Low",
+      "title": "'Your account' has no loading.tsx / error.tsx, unlike the other data screens",
+      "evidence": [
+        {
+          "source": "CLAUDE.md",
+          "where": "Keep it simple",
+          "quote": "Loading and errors always use the shared `LoadingMask` and `ErrorScreen`."
+        },
+        {
+          "source": "app/account/",
+          "where": "files",
+          "quote": "LogOutButton.tsx · actions.ts · page.tsx"
+        }
+      ],
+      "proposal": "Add loading.tsx (LoadingMask) and error.tsx (ErrorScreen with 'Try again') to app/account, as in the other routes.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
+    },
+    {
+      "id": 13,
+      "screens": [
+        "listings",
+        "recommendation"
+      ],
+      "stories": [
+        "5"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "Buy sits on its own row under each listing, leaving an empty column and making rows tall",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/recommendation-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listings-375.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 11 (desktop listings)",
+          "quote": "Buy on the same line as the price and the traffic light"
+        }
+      ],
+      "proposal": "Put Buy on the right of the row, beside the traffic light, on desktop; on phone keep it but reduce the gap.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "finding": 3,
+      "question": "Story 2 phase 2 is in the Purchase phase, after story 7. Keep it before the demo, or move it to 'if time allows'?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q2",
+      "finding": 10,
+      "question": "Should 'moved to 1990 Reissue' link to that version's listings? It is not in story 5 today.",
+      "status": "open",
+      "answer": null
+    }
+  ],
+  "todo": [
+    {
+      "id": "T1",
+      "text": "Not captured: yellow warning dialog, 'Nobody is selling' message, loading and error states, wrong-password state. Check them in the next run.",
+      "finding": null,
+      "done": false
+    }
+  ]
+}
