@@ -1,0 +1,174 @@
+<title>Spindle MVP Progress</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: one column on phone; on desktop the countdown sits beside the summary, then phases as a track, then story cards. Spindle's own palette (app/globals.css). */
+:root {
+  --bg: #f4efe6; --surface: #fbf8f2; --fg: #1d2433; --muted: #5d6270; --line: #e2dacb;
+  --navy: #1d2433; --on-navy: #f4efe6; --brown: #5a3a24; --on-brown: #f4efe6;
+  --ok: #2f6b3a; --ok-bg: #e3efe1; --warn: #8a5a00; --warn-bg: #f6e9c8; --bad: #9b2c2c; --bad-bg: #f5dede; --idle: #6b6f7a; --idle-bg: #ebe6dc;
+  --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --body: "Inter", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #161b26; --surface: #1e2533; --fg: #ede6d8; --muted: #a3a7b2; --line: #2e3647;
+  --navy: #ede6d8; --on-navy: #161b26; --brown: #7a5136; --on-brown: #f4efe6;
+  --ok: #8fd19b; --ok-bg: #1f3a26; --warn: #f0c46a; --warn-bg: #3d3018; --bad: #f19a9a; --bad-bg: #432222; --idle: #a3a7b2; --idle-bg: #262d3b;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #161b26; --surface: #1e2533; --fg: #ede6d8; --muted: #a3a7b2; --line: #2e3647;
+  --navy: #ede6d8; --on-navy: #161b26; --brown: #7a5136; --on-brown: #f4efe6;
+  --ok: #8fd19b; --ok-bg: #1f3a26; --warn: #f0c46a; --warn-bg: #3d3018; --bad: #f19a9a; --bad-bg: #432222; --idle: #a3a7b2; --idle-bg: #262d3b;
+  color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--body); }
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 28px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 36px; }
+h1, h2 { font-family: var(--display); font-weight: 700; letter-spacing: .01em; text-wrap: balance; margin: 0; line-height: 1.05; }
+h1 { font-size: clamp(34px, 6vw, 52px); }
+h2 { font-size: 24px; text-transform: uppercase; letter-spacing: .04em; }
+.eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.top { display: grid; gap: 20px; grid-template-columns: 1fr; }
+@media (min-width: 760px) { .top { grid-template-columns: 240px 1fr; align-items: stretch; } }
+.count { background: var(--brown); color: var(--on-brown); border-radius: 22px; padding: 22px 24px; display: grid; align-content: space-between; gap: 8px; }
+.count b { font-family: var(--display); font-size: 88px; line-height: .9; font-variant-numeric: tabular-nums; }
+.count span { font-size: 14px; opacity: .9; }
+.summary { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.summary li { display: grid; grid-template-columns: 84px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.summary li:last-child { border-bottom: 0; }
+.summary dt, .summary .k { font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); padding-top: 2px; }
+.track { display: grid; gap: 10px; grid-template-columns: 1fr; }
+@media (min-width: 760px) { .track { grid-template-columns: repeat(4, 1fr); } }
+.phase { border: 1px solid var(--line); background: var(--surface); border-radius: 18px; padding: 16px; display: grid; gap: 8px; align-content: start; }
+.phase .n { font-family: var(--display); font-size: 20px; }
+.phase .s { font-size: 13px; color: var(--muted); }
+.phase .bar { height: 6px; border-radius: 99px; background: var(--idle-bg); overflow: hidden; }
+.phase .bar i { display: block; height: 100%; background: var(--navy); }
+.stories { display: grid; gap: 10px; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .stories { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 980px) { .stories { grid-template-columns: repeat(3, 1fr); } }
+.story { border: 1px solid var(--line); background: var(--surface); border-radius: 18px; padding: 16px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.story .head { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
+.story .t { font-weight: 600; }
+.story .t small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+.pill { white-space: nowrap; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 99px; }
+.p-built { background: var(--ok-bg); color: var(--ok); }
+.p-gaps { background: var(--warn-bg); color: var(--warn); }
+.p-progress { background: var(--navy); color: var(--on-navy); }
+.p-none { background: var(--idle-bg); color: var(--idle); }
+.meter { display: flex; gap: 3px; }
+.meter i { flex: 1; height: 8px; border-radius: 3px; background: var(--idle-bg); }
+.meter i.on { background: var(--ok); }
+.meter i.gap { background: var(--warn); }
+.story .m { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.lists { display: grid; gap: 20px; grid-template-columns: 1fr; }
+@media (min-width: 760px) { .lists { grid-template-columns: 1fr 1fr; } }
+.lists ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.foot { font-size: 12px; color: var(--muted); }
+section { display: grid; gap: 14px; }
+.p-bad { background: var(--bad-bg); color: var(--bad); }
+.brief { display: grid; grid-template-columns: 1fr; gap: 0; border: 1px solid var(--line); background: var(--surface); border-radius: 18px; padding: 4px 16px; }
+@media (min-width: 760px) { .brief { grid-template-columns: 1fr 1fr; column-gap: 28px; } }
+.brief .row { display: grid; grid-template-columns: 96px 1fr; gap: 12px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.brief .row .pill { justify-self: start; }
+.brief .t { font-weight: 600; }
+.brief .m { font-size: 13px; color: var(--muted); }
+.todo { background: var(--navy); color: var(--on-navy); border-radius: 18px; padding: 18px 20px; }
+.todo .eyebrow { color: inherit; opacity: .75; }
+.todo ol { margin: 10px 0 0; padding-left: 20px; display: grid; gap: 6px; }
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script>
+// The skill replaces this object on each run, with the same figures as docs/PROGRESS.md.
+const DATA = {
+  updated: "2026-11-08", after: "first report", deadline: "15 Nov 2026", daysLeft: 7,
+  summary: [
+    ["Stories", "5 of 9 MVP stories built (3 with gaps), 1 in progress, 3 not started"],
+    ["Tests", "Unit 207/207 · end-to-end 102/104 (2 desktop-only tests skipped on phone) · all pass"],
+    ["Demo", "Runs from search to listings; breaks at Buy with protection (story 7 not built)"],
+    ["Next", "Story 7: findings decided, designs approved, orders table and Pay function committed; screens next"],
+    ["Risk", "7 days for story 7, the rest of 9, story 2 save to account and story 8 (3 designs missing). Phase 4 is cut first."],
+    ["Brief", "3 of 7 criteria done; missing the core flow end to end, the submission PDF, a manual test record and a demo script"]
+  ],
+  brief: [
+    { c: "1 · Core features end to end", st: "Missing", e: "Flow stops at Buy: no checkout or confirmation (story 7)" },
+    { c: "2 · Data tables", st: "Done", e: "0001_core and 0002_orders committed and documented; story 8 would need its own" },
+    { c: "3 · Testing, automated and manual", st: "Partly", e: "Automated all pass; no record of the manual check of every screen" },
+    { c: "4 · LLM good practices in the repo", st: "Done", e: "SPEC, specs, CLAUDE.md, ARCHITECTURE, DECISIONS, AI_USAGE, tests" },
+    { c: "5 · UX and UI quality", st: "Partly", e: "UX review done; 13 findings open (1 Blocker, 3 High)" },
+    { c: "6 · App online and reachable", st: "Not checked", e: "Vercel address not in the repo; all commits pushed" },
+    { c: "7 · Live demo", st: "Missing", e: "No demo script; not rehearsed" },
+    { c: "S1 · Link to the app", st: "Not checked", e: "Same as criterion 6" },
+    { c: "S2 · PDF with tables and screenshots", st: "Missing", e: "database.md exists; screenshots only for story 9" }
+  ],
+  missing: [
+    "Story 7: checkout and confirmation, including the “just sold” screen",
+    "Demo script and one rehearsal with realistic data",
+    "Submission PDF: data tables and screenshots of every screen",
+    "Manual test record: screen, what was checked, result",
+    "Decide the UX review findings, High first",
+    "Confirm the Vercel address runs the latest version",
+    "Only if time is left: story 2 save to account, story 8. Phase 4: cut"
+  ],
+  phases: [
+    { n: "1 · Core", s: "Stories 1, 2, 3, 5, 6", status: "Done with gaps", done: 5, total: 5 },
+    { n: "2 · Purchase", s: "9 (sign-up, log in), 7, 2 (save to account)", status: "In progress", done: 1, total: 3 },
+    { n: "3 · Seller", s: "Story 8", status: "Not started", done: 0, total: 1 },
+    { n: "4 · If time allows", s: "7 step 3, 4, 9 (reviews)", status: "Not started", done: 0, total: 3 }
+  ],
+  stories: [
+    { id: 1, t: "Search for an album", st: "Built", tested: 5, gaps: 0, total: 5, f: "#36" },
+    { id: 2, t: "Say what matters to me", note: "phase 1 part", st: "Built with gaps", tested: 4, gaps: 1, total: 5, f: "#11" },
+    { id: 3, t: "Get one recommendation", st: "Built with gaps", tested: 8, gaps: 1, total: 9, f: "" },
+    { id: 5, t: "See verified listings", st: "Built with gaps", tested: 9, gaps: 1, total: 10, f: "" },
+    { id: 6, t: "Fair price", st: "Built", tested: 4, gaps: 0, total: 4, f: "" },
+    { id: 9, t: "Sign up, log in", note: "2 rows written with 7 and 8", st: "In progress", tested: 1, gaps: 0, total: 3, f: "#12" },
+    { id: 7, t: "Buy with protection", st: "Not started", tested: 0, gaps: 0, total: 0, f: "#12 (deferred to 8)" },
+    { id: 8, t: "Sell a record for free", st: "Not started", tested: 0, gaps: 0, total: 0, f: "#13, #35, #36" },
+    { id: 4, t: "Compare versions", note: "phase 4", st: "Not started", tested: 0, gaps: 0, total: 0, f: "#14, #26" }
+  ],
+  gaps: [
+    "Story 2: loading mask and error screen with “Try again”",
+    "Story 3: loading mask and error screen with “Try again”",
+    "Story 5: loading mask and error screen with “Try again” on listings and listing check"
+  ],
+  blockers: [
+    "Story 7: nothing blocking (findings #37–#41 decided, designs approved, orders table committed)",
+    "Spec review of built stories in progress: 30 new findings (#42–#71, 6 High) not committed yet, not counted here",
+    "Story 2 save to account: finding #11 open",
+    "Story 8: findings #13, #35, #36 open; no design yet for the version list, first-time city and shop name, My listings"
+  ]
+};
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const pillClass = st => st === "Built" ? "p-built" : st.startsWith("Built with") || st.startsWith("Done with") ? "p-gaps" : st === "In progress" ? "p-progress" : st === "Done" ? "p-built" : "p-none";
+const briefClass = st => ({ "Done": "p-built", "Partly": "p-gaps", "Missing": "p-bad", "Not checked": "p-none" }[st] || "p-none");
+const meter = s => s.total ? Array.from({ length: s.total }, (_, i) => `<i class="${i < s.tested ? "on" : i < s.tested + s.gaps ? "gap" : ""}"></i>`).join("") : "";
+
+document.getElementById("app").innerHTML = `
+  <header class="top">
+    <div class="count"><span class="eyebrow" style="color:inherit;opacity:.8">Until the demo</span><b>${DATA.daysLeft}</b><span>days left · due ${esc(DATA.deadline)}</span></div>
+    <div style="display:grid;gap:12px;min-width:0">
+      <div><div class="eyebrow">Updated ${esc(DATA.updated)} · ${esc(DATA.after)}</div><h1>Spindle MVP progress</h1></div>
+      <ul class="summary">${DATA.summary.map(([k, v]) => `<li><span class="k">${esc(k)}</span><span>${esc(v)}</span></li>`).join("")}</ul>
+    </div>
+  </header>
+  <section><h2>Against the brief</h2>
+    <div class="brief">${DATA.brief.map(b => `<div class="row"><span class="pill ${briefClass(b.st)}">${esc(b.st)}</span><div><div class="t">${esc(b.c)}</div><div class="m">${esc(b.e)}</div></div></div>`).join("")}</div>
+    <div class="todo"><div class="eyebrow">Missing for the brief, by impact on the grade</div><ol>${DATA.missing.map(m => `<li>${esc(m)}</li>`).join("")}</ol></div>
+  </section>
+  <section><h2>Build phases</h2><div class="track">${DATA.phases.map(p => `
+    <div class="phase"><div class="n">${esc(p.n)}</div><div class="s">${esc(p.s)}</div>
+      <div class="bar"><i style="width:${p.total ? Math.round(100 * p.done / p.total) : 0}%"></i></div>
+      <div><span class="pill ${pillClass(p.status)}">${esc(p.status)}</span></div></div>`).join("")}</div></section>
+  <section><h2>Stories</h2><div class="stories">${DATA.stories.map(s => `
+    <div class="story"><div class="head"><div class="t">Story ${s.id} · ${esc(s.t)}${s.note ? `<small>${esc(s.note)}</small>` : ""}</div><span class="pill ${pillClass(s.st)}">${esc(s.st)}</span></div>
+      ${s.total ? `<div class="meter" aria-hidden="true">${meter(s)}</div><div class="m">${s.tested} of ${s.total} requirements with an automated test</div>` : `<div class="m">No requirements traced yet</div>`}
+      <div class="m">Open findings: ${s.f ? esc(s.f) : "none"}</div></div>`).join("")}</div></section>
+  <section class="lists">
+    <div><h2>Not tested automatically</h2><ul>${DATA.gaps.map(g => `<li>${esc(g)}</li>`).join("")}</ul></div>
+    <div><h2>Before the next story</h2><ul>${DATA.blockers.map(g => `<li>${esc(g)}</li>`).join("")}</ul></div>
+  </section>
+  <p class="foot">Built from docs/PROGRESS.md in the Spindle repo: the SPEC's Traceability table, the test runs and the open spec-review findings.</p>`;
+</script>

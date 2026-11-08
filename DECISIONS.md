@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Process (MVP progress)
+
+### MVP progress report after each story (process)
+- **Why:** an overview of what is left for the MVP after each story. `docs/PROGRESS.md` is the record kept in git; a private page shows the same content visually. Both are built in the same run, from the SPEC's Traceability table, the test runs, the open findings and a checklist of the Assignment 2 brief, so they cannot diverge.
+- **Trade-off accepted:** each run takes about a minute because it runs the end-to-end tests. The page is outside the repo, so the evidence is the file, not the page.
+
 ## 2026-11-08 — Process (UX review)
 
 ### UX review as a repeatable skill: missing screens first, heuristics capped at Low (process)

@@ -23,6 +23,7 @@ Spindle helps non-specialist buyers pick the right pressing of a vinyl record an
 3. One flow at a time, in small changes.
 4. Tests in every flow, written with the code: a Vitest decision table for each rule (from the SPEC's acceptance criteria and example data); a Playwright test for each critical flow.
 5. Fill in the story's rows in the SPEC's Traceability table.
+6. Run `/mvp-progress` and commit the updated `docs/PROGRESS.md` with the story.
 
 ## Before I accept any change
 Explain it in plain language, without jargon. I verify by behaviour, not by reading code:
