@@ -11,6 +11,22 @@
 
 ## 2026-11-08 — Story 7 · Checkout (findings)
 
+### The checkout postcode must have the Portuguese format 0000-000 (story 7 · finding #41)
+- **Why:** with MB WAY as the only payment method the app is for Portugal only; the check catches typos before the order is created.
+
+### On a yellow listing, login is asked at "Continue to checkout", after the warning (stories 5, 7, 9 · finding #40)
+- **Why:** the buyer always reads the warning before any account step, and only those who go ahead log in; after login every buyer lands on the checkout, green or yellow.
+- **Trade-off accepted:** story 9's criterion "Tapping Buy while signed out opens login" holds for green listings only; on yellow ones Buy opens the warning first.
+
+### The confirmation screen leads back to search (story 7 · finding #39)
+- **Why:** closes the demo loop in one tap; seeing orders in the account is phase 4 ("My orders").
+
+### Only MB WAY on the checkout, as a label; no card or PayPal (story 7 · finding #38)
+- **Why:** payment is simulated, so a choice between methods shows nothing; one label means less on screen and fewer tests. Replaces "MB WAY is selected by default" (finding #27).
+
+### Buyer protection stays €2.00, not the design's €2.10 (story 7 · finding #37)
+- **Why:** €2 is the assumption Assignment 1 tests ("about €2 per order"), decided on 2026-11-07. Differs from the Assignment 1 design (€2.10, total €35.00) on purpose.
+
 ### A seller buying their own listing waits for story 8 (stories 7 and 9 · finding #12)
 - **Why:** demo sellers have no account, so no signed-in user can own a listing until story 8 (sell) exists. Decide the rule when story 8 is built.
 

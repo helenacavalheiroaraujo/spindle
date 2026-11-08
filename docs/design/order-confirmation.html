@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order confirmation</title>
+<!-- Story 7 · Order confirmation after Pay. Variant B (brown emphasis card + vertical steps), chosen on 2026-11-08. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: Inter, sans-serif; background: #f4efe6; color: #1d2433; font-size: 15px; line-height: 1.4; }
+  .hd { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: -.01em; }
+  header { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid #e2dacb; }
+  .dot { width: 22px; height: 22px; border-radius: 50%; background: #2b2118; border: 6px solid #5a3a24; }
+  main { padding: 20px 16px; display: grid; gap: 16px; }
+  .emph { background: #5a3a24; color: #f4efe6; border-radius: 16px; padding: 22px; }
+  .check { width: 40px; height: 40px; border-radius: 50%; background: #f4efe6; color: #5a3a24; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 18px; margin-bottom: 12px; }
+  h1 { font-size: 40px; line-height: 1; }
+  .paid { font-size: 26px; font-weight: 500; margin: 8px 0 12px; }
+  .pill { display: inline-block; border-radius: 999px; padding: 5px 14px; font-size: 13px; font-weight: 500; background: #f4efe6; color: #5a3a24; }
+  .record { display: flex; gap: 12px; align-items: center; }
+  .thumb { width: 52px; height: 52px; border-radius: 6px; background: #e2dacb; flex: none; }
+  .small { font-size: 13px; color: #6b6457; }
+  .card { background: #faf7f1; border: 1px solid #e2dacb; border-radius: 14px; padding: 12px 16px; }
+  .step { display: flex; gap: 12px; align-items: center; padding: 7px 0; }
+  .n { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #1d2433; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; flex: none; }
+  .done { background: #1d2433; color: #fff; }
+  .btn { display: block; background: #1d2433; color: #fff; border-radius: 999px; text-align: center; padding: 15px; font-weight: 500; text-decoration: none; }
+  .foot { font-size: 12px; color: #6b6457; text-align: center; margin-top: 8px; }
+  .desk-record { display: none; }
+  @media (min-width: 1024px) {
+    header { padding: 22px max(32px, calc((100vw - 1080px) / 2)); }
+    main { grid-template-columns: 1fr 400px; gap: 32px; max-width: 1080px; margin: 0 auto; padding: 48px 0; align-items: start; }
+    .emph { padding: 40px; }
+    h1 { font-size: 72px; }
+    .paid { font-size: 36px; }
+    .desk-record { display: flex; margin-top: 28px; }
+    .desk-record .thumb { background: #7a5a42; }
+    .desk-record .small { color: #e2dacb; }
+    .phone-record { display: none; }
+  }
+</style>
+</head>
+<body>
+<header><span class="dot"></span><span class="hd" style="font-size:22px">SPINDLE</span></header>
+<main>
+  <section class="emph">
+    <div class="check">✓</div>
+    <h1 class="hd">Order placed</h1>
+    <p class="paid">€34.90 paid</p>
+    <span class="pill">Paid · waiting for the seller</span>
+    <div class="record desk-record"><div class="thumb"></div><div><div style="font-weight:500">Ziggy Stardust, 2012 Remaster</div><div class="small">Very good (VG+). Private seller, Porto</div></div></div>
+  </section>
+  <div class="record phone-record"><div class="thumb"></div><div><div style="font-weight:500">Ziggy Stardust, 2012 Remaster</div><div class="small">Very good (VG+). Private seller, Porto</div></div></div>
+  <div>
+    <div class="card">
+      <div class="step"><span class="n done">✓</span><span style="font-weight:500">You pay Spindle</span></div>
+      <div class="step"><span class="n">2</span><span>Seller ships <span class="small">· next</span></span></div>
+      <div class="step"><span class="n">3</span><span>You confirm it's all good</span></div>
+      <div class="step"><span class="n">4</span><span>Seller gets paid</span></div>
+    </div>
+    <a class="btn" href="#" style="margin-top:16px">Back to search</a>
+    <p class="foot">Simulated payment · Illustrative data</p>
+  </div>
+</main>
+</body>
+</html>

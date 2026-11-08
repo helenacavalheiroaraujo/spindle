@@ -4,7 +4,7 @@
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
     "iteration": 4,
-    "updated": "2026-11-08T12:30:00+00:00"
+    "updated": "2026-11-08T18:00:00+00:00"
   },
   "iterations": [
     {
@@ -1286,9 +1286,13 @@
       ],
       "proposal": null,
       "question": "Keep €2.00 and record the difference in DECISIONS, or follow the design (€2.10, total €35.00)?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 4,
-      "resolution": null
+      "resolution": {
+        "iteration": 4,
+        "date": "2026-11-08",
+        "decision": "Option A. Buyer protection stays €2.00 (total €34.90 for a €28 record); differs from the design's €2.10 on purpose. Recorded in DECISIONS.md."
+      }
     },
     {
       "id": 38,
@@ -1317,9 +1321,13 @@
         "proposed": "### PayPal is not offered on the checkout (story 7 · finding #38)\n- **Why:** payment is simulated; two labels (MB WAY, card) are enough to show the choice."
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 4,
-      "resolution": null
+      "resolution": {
+        "iteration": 4,
+        "date": "2026-11-08",
+        "decision": "New option: only MB WAY, as a label (no card, no PayPal). Story 7 updated; replaces the default from #27. Recorded in DECISIONS.md."
+      }
     },
     {
       "id": 39,
@@ -1343,9 +1351,13 @@
         "proposed": "- **Confirmation screen:** heading \"Order placed\", the record, the total paid, the status \"Paid · waiting for the seller\", the four steps with step 1 done, and a button \"Back to search\""
       },
       "question": "What should the confirmation screen show, and where does its button lead?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 4,
-      "resolution": null
+      "resolution": {
+        "iteration": 4,
+        "date": "2026-11-08",
+        "decision": "Proposal accepted with option A: the confirmation shows 'Order placed', the total paid, the status, the record and the four steps; its button 'Back to search' leads to the home page. Design: docs/design/order-confirmation.html (variant B). Added to story 7 and recorded in DECISIONS.md."
+      }
     },
     {
       "id": 40,
@@ -1376,9 +1388,13 @@
         "proposed": "Buyer not signed in → login is asked when going to the checkout (Buy on a green listing; \"Continue to checkout\" after the warning on a yellow one), then the buyer lands on the checkout"
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 4,
-      "resolution": null
+      "resolution": {
+        "iteration": 4,
+        "date": "2026-11-08",
+        "decision": "Option B. Login is asked at 'Continue to checkout' on a yellow listing (at Buy on a green one); after login the buyer lands on the checkout. Story 7 edge case updated; the exception to story 9's criterion is recorded in DECISIONS.md."
+      }
     },
     {
       "id": 41,
@@ -1407,9 +1423,13 @@
         "proposed": "Pay is disabled until name, street, postcode and city are filled in (not empty; the postcode format is not checked in the MVP)"
       },
       "question": "Check the postcode format (0000-000) or only that it is not empty?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 4,
-      "resolution": null
+      "resolution": {
+        "iteration": 4,
+        "date": "2026-11-08",
+        "decision": "Option B. The postcode must have the format 0000-000; otherwise 'Use the format 0000-000' under the field and Pay stays disabled. Story 7 updated and recorded in DECISIONS.md."
+      }
     }
   ],
   "coverage": [
