@@ -1,0 +1,46 @@
+// Home page rules (story 12): crates by genre, the albums of a genre, and the featured album.
+// Covered by tests/unit/home.test.ts.
+import type { AlbumAccess } from "./albumAccess";
+
+// The six genres of the design, in the order the crates are shown. "tone" tells which text colour reads on the crate.
+export const GENRES = [
+  { slug: "rock", name: "Rock", color: "#c9a46a", tone: "dark" },
+  { slug: "jazz", name: "Jazz", color: "#1f2a44", tone: "light" },
+  { slug: "soul-and-funk", name: "Soul and funk", color: "#b08a58", tone: "dark" },
+  { slug: "fado", name: "Fado", color: "#3a2418", tone: "light" },
+  { slug: "electronic", name: "Electronic", color: "#cfb68a", tone: "dark" },
+  { slug: "hip-hop", name: "Hip-hop", color: "#8c7a63", tone: "light" },
+] as const;
+
+export type Genre = (typeof GENRES)[number];
+
+type AlbumFacts = { genre: string | null; releaseYear: number };
+type FeaturedFacts = { releaseYear: number; access: AlbumAccess; activeListingCount: number };
+
+export function genreFromSlug(slug: string): Genre | null {
+  return GENRES.find((g) => g.slug === slug) ?? null;
+}
+
+// One crate per genre that has albums, with the real number of albums; genres with none are not shown.
+export function crates(albums: AlbumFacts[]): { genre: Genre; count: number }[] {
+  return GENRES.map((genre) => ({ genre, count: albums.filter((a) => a.genre === genre.name).length })).filter(
+    (c) => c.count > 0,
+  );
+}
+
+// The albums of one genre, newest first (as in the search results).
+export function albumsInGenre<T extends AlbumFacts>(albums: T[], genre: Genre): T[] {
+  return albums.filter((a) => a.genre === genre.name).sort((a, b) => b.releaseYear - a.releaseYear);
+}
+
+// "This weekend": among the albums that open, the one with the most active listings; the newest on a tie.
+// Null when no album opens (the card is then not shown).
+export function featuredAlbum<T extends FeaturedFacts>(albums: T[]): T | null {
+  const open = albums.filter((a) => a.access === "open");
+  open.sort((a, b) => b.activeListingCount - a.activeListingCount || b.releaseYear - a.releaseYear);
+  return open[0] ?? null;
+}
+
+export function recordsLabel(count: number): string {
+  return `${count} ${count === 1 ? "record" : "records"}`;
+}

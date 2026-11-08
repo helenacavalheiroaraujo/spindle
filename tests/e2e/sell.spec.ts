@@ -6,6 +6,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
 import { screenshot } from "./screenshot";
+import { typeSearch } from "./searchBox";
 
 function env(name: string) {
   if (process.env[name]) return process.env[name]!;
@@ -78,7 +79,8 @@ test("signed out: Sell in the header asks to log in, then returns to the sell se
 test("find an album and pick one version, even when nobody sells it", async ({ page }) => {
   await page.goto(`/login?next=${encodeURIComponent("/sell")}`);
   await logIn(page);
-  await page.getByRole("searchbox").fill("homo");
+  await expect(page).toHaveURL("/sell"); // the log-in page has a header search on desktop too: wait for the sell page
+  await typeSearch(page, "homo");
   const row = page.getByRole("link", { name: /Homogenic/ });
   await expect(row).toContainText("2 versions");
   await expect(row).not.toContainText("No listings");

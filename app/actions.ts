@@ -1,6 +1,7 @@
 "use server";
-// Server actions: the browser never reads the database. Search (story 1), saved priorities (story 2), listings beside the recommendation (story 5).
+// Server actions: the browser never reads the database. Search (story 1), saved priorities (story 2), home page (story 12), listings beside the recommendation (story 5).
 import { listAlbumSummaries, type AlbumSummary } from "@/lib/db/albums";
+import { crates, featuredAlbum, type Genre } from "@/lib/rules/home";
 import { searchAlbums } from "@/lib/rules/albumSearch";
 import { searchSuggestions } from "@/lib/rules/searchSuggestions";
 import { getVersionListings, type ListingDetails } from "@/lib/db/listings";
@@ -36,4 +37,26 @@ export async function savePriorities(value: string): Promise<void> {
   } catch (error) {
     console.error(error);
   }
+}
+
+export type HomeData = {
+  crates: { genre: Genre; count: number }[];
+  featured: { id: string; title: string; artist: string; releaseYear: number; coverUrl: string } | null;
+};
+
+// Crates and the featured album for the home page (story 12): loaded on their own, so a failure only affects
+// those sections and the search stays usable.
+export async function homeData(): Promise<HomeData> {
+  const albums = await listAlbumSummaries();
+  const featured = featuredAlbum(albums);
+  return {
+    crates: crates(albums),
+    featured: featured && {
+      id: featured.id,
+      title: featured.title,
+      artist: featured.artist,
+      releaseYear: featured.releaseYear,
+      coverUrl: featured.coverUrl,
+    },
+  };
 }

@@ -1,6 +1,6 @@
 // Album reads for the search (story 1). Facts only: the rules in lib/rules/ decide.
 import { db } from "./client";
-import { hasActiveListings, type ListingFacts } from "@/lib/rules/activeListings";
+import { countActiveListings, type ListingFacts } from "@/lib/rules/activeListings";
 import { albumAccess, type AlbumAccess } from "@/lib/rules/albumAccess";
 import type { CheckItem, CheckResult } from "@/lib/rules/trafficLight";
 
@@ -12,7 +12,9 @@ export type AlbumSummary = {
   coverUrl: string;
   versionCount: number;
   hasListings: boolean;
+  activeListingCount: number;
   access: AlbumAccess;
+  genre: string | null;
 };
 
 // Every album with its number of versions, whether it has active listings, and whether it opens.
@@ -20,7 +22,7 @@ export type AlbumSummary = {
 export async function listAlbumSummaries(): Promise<AlbumSummary[]> {
   const client = db();
   const [albums, listings, reasons] = await Promise.all([
-    client.from("albums").select("id, title, artist, release_year, cover_url, versions (id)"),
+    client.from("albums").select("id, title, artist, release_year, cover_url, genre, versions (id)"),
     client
       .from("listings")
       .select("status, claimed_version_id, actual_version_id, matrix_photo_url, check_results (item, result)")
@@ -42,7 +44,8 @@ export async function listAlbumSummaries(): Promise<AlbumSummary[]> {
 
   return albums.data.map((a) => {
     const versionIds = a.versions.map((v) => v.id);
-    const hasListings = hasActiveListings(facts, versionIds);
+    const activeListingCount = countActiveListings(facts, versionIds);
+    const hasListings = activeListingCount > 0;
     return {
       id: a.id,
       title: a.title,
@@ -51,6 +54,8 @@ export async function listAlbumSummaries(): Promise<AlbumSummary[]> {
       coverUrl: a.cover_url,
       versionCount: versionIds.length,
       hasListings,
+      activeListingCount,
+      genre: a.genre,
       access: albumAccess(hasListings, versionIds.some((v) => withReasons.has(v))),
     };
   });

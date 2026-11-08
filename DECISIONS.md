@@ -3,6 +3,11 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 12 · MVP scope
+
+### Story 12 (home page) is part of the MVP core, not phase 4 (process)
+- **Why:** it was built before the brief items, the home page is the first screen of the demo, and it is tested and in the progress report. Replaces the earlier decision to keep it in "If time allows". Story 13 (wishlist) stays out of the MVP.
+
 ## 2026-11-08 — Story 12 · Demo data and featured album
 
 ### Genres and more demo albums, so every crate opens an album on sale (story 12)

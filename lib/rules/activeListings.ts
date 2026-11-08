@@ -22,3 +22,8 @@ export function isActiveFor(listing: ListingFacts, versionId: string): boolean {
 export function hasActiveListings(listings: ListingFacts[], versionIds: string[]): boolean {
   return listings.some((l) => versionIds.some((v) => isActiveFor(l, v)));
 }
+
+// How many listings are active for any of the versions (story 12: the featured album has the most).
+export function countActiveListings(listings: ListingFacts[], versionIds: string[]): number {
+  return listings.filter((l) => versionIds.some((v) => isActiveFor(l, v))).length;
+}

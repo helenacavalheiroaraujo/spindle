@@ -1,6 +1,7 @@
 // Story 2 · Say what matters to me — critical flow, run on phone and desktop (playwright.config.ts).
 // Uses the illustrative data in supabase/seed.sql.
 import { expect, test, type Page } from "@playwright/test";
+import { typeSearch } from "./searchBox";
 
 const ZIGGY_ID = "10000000-0000-0000-0000-000000000001";
 const PRIORITIES_URL = `/albums/${ZIGGY_ID}/priorities`;
@@ -24,7 +25,7 @@ async function expectRanks(page: Page, ranks: Record<string, number | null>) {
 
 test("search → tap an album → priorities screen with the album and four options", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("searchbox", { name: "Album or artist" }).fill("ziggy");
+  await typeSearch(page, "ziggy");
   await page.getByRole("listitem").filter({ hasText: "Ziggy Stardust" }).getByRole("link").click();
   await expect(page).toHaveURL(PRIORITIES_URL);
   await expect(page.getByRole("heading", { name: "What matters most to you?" })).toBeVisible();

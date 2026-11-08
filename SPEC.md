@@ -4,10 +4,10 @@ Based on the user stories of Assignment 1 (Product Specification Report).
 Stack and hosting: see `DECISIONS.md`. Assignment 1 stated PHP; the MVP uses Next.js (reasons in `DECISIONS.md`).
 
 ## Build order
-1. **Core:** stories 1, 2, 3, 5, 6
+1. **Core:** stories 1, 2, 3, 5, 6, 12
 2. **Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)
 3. **Seller:** story 8
-4. **If time allows:** story 7 step 3 (confirm receipt), story 4, story 9 (reviews), story 12 (home page)
+4. **If time allows:** story 7 step 3 (confirm receipt), story 4, story 9 (reviews)
 
 Not in this MVP: stories 10, 11, 13
 
@@ -120,3 +120,8 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 8 | A signed-in seller sees "Your listing" instead of Buy and never reaches the checkout of their own listing (finding #12) | `lib/rules/checkoutAccess.ts`, `components/ListingList.tsx`, `components/YourListing.tsx`, `app/listings/[listingId]/page.tsx`, `app/checkout/[listingId]/page.tsx` | `tests/unit/checkoutAccess.test.ts`, `tests/e2e/sell.spec.ts` |
 | 8 | Loading mask and error screen with "Try again"; the sell form keeps what was typed (Shared rules) | `app/sell/albums/[albumId]/loading.tsx`, `app/sell/albums/[albumId]/error.tsx`, `app/sell/versions/[versionId]/loading.tsx`, `app/sell/versions/[versionId]/error.tsx`, `app/my-listings/loading.tsx`, `app/my-listings/error.tsx`, `app/sell/versions/[versionId]/SellForm.tsx` | Not tested automatically |
 | 4 | | | |
+| 12 | Home page: title, search, one crate per genre with the real number of albums; genres with no albums are not shown | `lib/rules/home.ts`, `app/page.tsx`, `app/HomeSections.tsx`, `components/Crate.tsx`, `supabase/migrations/0006_genres.sql` | `tests/unit/home.test.ts`, `tests/e2e/home.spec.ts` |
+| 12 | Genre screen: only that genre's albums, newest first, rows and taps as in search; an unknown or empty genre is not found | `app/genres/[genre]/page.tsx`, `app/genres/[genre]/GenreAlbums.tsx`, `lib/rules/home.ts` | `tests/unit/home.test.ts`, `tests/e2e/home.spec.ts` |
+| 12 | "This weekend" features the album that opens with the most active listings (the newest on a tie; hidden if none opens); "For sellers" opens selling | `lib/rules/home.ts`, `app/HomeSections.tsx` | `tests/unit/home.test.ts`, `tests/e2e/home.spec.ts` |
+| 12 | On desktop the search is in the header of every page (not the sell pages), with the same results as story 1 | `components/HeaderSearch.tsx`, `components/Header.tsx`, `app/page.tsx` | `tests/e2e/home.spec.ts`, `tests/e2e/search.spec.ts` |
+| 12 | Loading mask and error screen with "Try again" (home sections, genre screen) | `app/HomeSections.tsx`, `app/genres/[genre]/loading.tsx`, `app/genres/[genre]/error.tsx` | Home sections: `tests/e2e/home.spec.ts`; genre screen: Not tested automatically |

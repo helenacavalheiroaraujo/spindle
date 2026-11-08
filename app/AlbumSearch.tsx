@@ -18,8 +18,18 @@ type State =
 
 type Mode = "buy" | "sell";
 
-export function AlbumSearch({ mode = "buy" }: { mode?: Mode }) {
-  const [typed, setTyped] = useState("");
+// "initial": a search typed in the header (desktop) arrives as ?q=. "boxOnPhoneOnly": on desktop the box lives in the
+// header (story 12), so the one on the page is hidden there; the results stay.
+export function AlbumSearch({
+  mode = "buy",
+  initial = "",
+  boxOnPhoneOnly = false,
+}: {
+  mode?: Mode;
+  initial?: string;
+  boxOnPhoneOnly?: boolean;
+}) {
+  const [typed, setTyped] = useState(initial);
   const [state, setState] = useState<State>({ kind: "idle" });
   const [attempt, setAttempt] = useState(0);
   const [nobodySelling, setNobodySelling] = useState<AlbumSummary | null>(null);
@@ -45,7 +55,11 @@ export function AlbumSearch({ mode = "buy" }: { mode?: Mode }) {
 
   return (
     <section className="mt-6">
-      <label className="flex min-h-14 items-center gap-3 rounded-full border border-navy/30 bg-white/70 px-5 focus-within:border-navy">
+      <label
+        className={`min-h-14 items-center gap-3 rounded-full border border-navy/30 bg-white/70 px-5 focus-within:border-navy ${
+          boxOnPhoneOnly ? "flex lg:hidden" : "flex"
+        }`}
+      >
         <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="11" cy="11" r="7" />
           <path d="m20 20-3.5-3.5" />
@@ -61,7 +75,7 @@ export function AlbumSearch({ mode = "buy" }: { mode?: Mode }) {
         />
       </label>
 
-      <div className="relative mt-6 min-h-40">
+      <div className={`relative mt-6 ${state.kind === "idle" && !nobodySelling ? "" : "min-h-40"}`}>
         {state.kind === "loading" && <LoadingMask label="Searching…" />}
         {state.kind === "error" && (
           <ErrorScreen message="We couldn't load the albums. Check your connection." onRetry={() => setAttempt((n) => n + 1)} />
@@ -80,7 +94,7 @@ export function AlbumSearch({ mode = "buy" }: { mode?: Mode }) {
   );
 }
 
-type RowProps = { mode: Mode; onNobodySelling: (a: AlbumSummary) => void };
+export type RowProps = { mode: Mode; onNobodySelling: (a: AlbumSummary) => void };
 
 function Results({ response, mode, onNobodySelling }: RowProps & { response: SearchResponse }) {
   const { albums, suggestions } = response;
@@ -90,7 +104,7 @@ function Results({ response, mode, onNobodySelling }: RowProps & { response: Sea
         <p className="mb-2 text-sm text-navy/70">
           {albums.length} {albums.length === 1 ? "album" : "albums"} found · Illustrative data
         </p>
-        <ul className="divide-y divide-line border-y border-line">
+        <ul aria-label="Search results" className="divide-y divide-line border-y border-line">
           {albums.map((a) => (
             <li key={a.id}>
               <AlbumRow album={a} mode={mode} onNobodySelling={onNobodySelling} />
@@ -104,7 +118,7 @@ function Results({ response, mode, onNobodySelling }: RowProps & { response: Sea
     return (
       <div>
         <p className="mb-2 font-medium">Did you mean…?</p>
-        <ul className="divide-y divide-line border-y border-line">
+        <ul aria-label="Search results" className="divide-y divide-line border-y border-line">
           {suggestions.map((a) => (
             <li key={a.id}>
               <AlbumRow album={a} mode={mode} onNobodySelling={onNobodySelling} />
@@ -117,7 +131,7 @@ function Results({ response, mode, onNobodySelling }: RowProps & { response: Sea
   return <p className="font-medium">No albums found</p>;
 }
 
-function AlbumRow({ album, mode, onNobodySelling }: RowProps & { album: AlbumSummary }) {
+export function AlbumRow({ album, mode, onNobodySelling }: RowProps & { album: AlbumSummary }) {
   const content = (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}

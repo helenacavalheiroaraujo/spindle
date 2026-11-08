@@ -18,12 +18,12 @@
 4. **Tap "For sellers"** → sell flow (story 8; log in first if signed out)
 
 ## Acceptance criteria
-- [ ] The home page shows the title, the search, one crate per genre with albums, and the two "This week" cards
-- [ ] Each crate shows the real number of albums in that genre; genres with no albums are not shown
-- [ ] Tapping a crate opens the genre screen with only that genre's albums, newest first
-- [ ] On desktop the search is in the header on every page and gives the same results as story 1
-- [ ] "This weekend" opens the featured album's priorities screen; "For sellers" opens the sell flow
-- [ ] "This weekend" features the album that opens (story 1) with the most active listings, newest first on a tie; if no album opens, the card is not shown
+- [x] The home page shows the title, the search, one crate per genre with albums, and the two "This week" cards
+- [x] Each crate shows the real number of albums in that genre; genres with no albums are not shown
+- [x] Tapping a crate opens the genre screen with only that genre's albums, newest first
+- [x] On desktop the search is in the header on every page and gives the same results as story 1
+- [x] "This weekend" opens the featured album's priorities screen; "For sellers" opens the sell flow
+- [x] "This weekend" features the album that opens (story 1) with the most active listings, newest first on a tie; if no album opens, the card is not shown
 
 ## Edge cases
 - Featured album sells out → the next album that opens takes its place; if none, only "For sellers" is shown
