@@ -92,3 +92,14 @@ export async function getRecommendationData(albumId: string): Promise<Recommenda
     glossary: terms.data,
   };
 }
+
+// The same data for the page of one version (story 4): the album's data plus which version was asked for.
+// Null when there is no such version.
+export async function getVersionPageData(versionId: string): Promise<(RecommendationData & { versionId: string }) | null> {
+  const result = await db().from("versions").select("album_id").eq("id", versionId).maybeSingle();
+  if (result.error?.code === "22P02") return null; // not a valid version id
+  if (result.error) throw result.error;
+  if (!result.data) return null;
+  const data = await getRecommendationData(result.data.album_id);
+  return data ? { ...data, versionId } : null;
+}

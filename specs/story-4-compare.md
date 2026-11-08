@@ -16,7 +16,7 @@
 ## Designs
 | Screen | Design |
 |---|---|
-| Compare pressings | `Spindle_mockups_by_section.pdf` p. 11 (phone) |
+| Compare pressings (phone and desktop) | `docs/design/compare-desktop.html` (approved 2026-11-08): 2 versions on phone, up to 3 on desktop. Phone also in `Spindle_mockups_by_section.pdf` p. 11 |
 | Version page (from a column) | `docs/design/version-page.html` (approved 2026-11-08) |
 
 ## Acceptance criteria

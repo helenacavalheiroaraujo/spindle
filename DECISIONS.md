@@ -3,6 +3,15 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-09 — Story 4 · Compare pressings
+- **Sound word from a rule:** the 1–5 sound score becomes a short word: 5 "Very clean", 4 "Clean", 3 "Balanced", 2 "A bit flat", 1 "Flat". Why: the data only holds the score and the story asks for a word and no numbers. A fixed rule needs no migration. Trade-off: the words are ours, not written per version.
+- **Typical price = the stored range:** the row shows the range of story 6 (e.g. "€28–€36"); a version with no range shows "Not known yet". Why: it is what the row name says. The approved design showed one number (€32) and was updated to the range.
+- **First pressing = the album's oldest version:** "Yes" for the version with the oldest release year, "No" for the others, even when the oldest has no listings. Why: same meaning as story 3 (finding #52). Trade-off: in the demo data no column says "Yes", because the 1972 original has no active listing.
+- **"Original" highlights "First pressing":** the buyer's priority "Original" ("I want the first pressing", story 2) marks the First pressing row; Price, Sound and Condition mark their own rows. "For sale" is never a priority.
+- **Cover only in the top card:** the columns have no cover. Why: an album has one cover (`albums.cover_url`), so three columns would repeat it. If versions get their own covers later, each column can show its own (needs a new field).
+- **Texts chosen by us:** "★ Recommended", "Next best", "Your #1", "Your #2", "See this version", "Back to compare", "Fit with your priorities", "Matches: …" / "Not a match: …", and the footer line. Ties between versions: the cheaper first (same rule as story 3).
+- **Version page:** the page opened from a column is `/versions/<id>?priorities=…`. A listing opened from it goes back to the recommendation, not to the version page (open point, not decided).
+
 ## 2026-11-09 — Story 17 · Search decisions (findings #42–#45, #54)
 - **#42 One heading:** up to 3 suggested albums sit under one heading "Did you mean…?", each with the full album title. Why: one heading is enough for up to 3 items; repeating it adds noise on a phone. The story 17 design shows the same.
 - **#43 Suggestion order:** closest first; on equal distance, newest release first. Why: the spec was silent; it matches the "newest first" rule used for results.

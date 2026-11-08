@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compare pressings</title>
+<!-- Story 4 · Compare pressings. PROPOSAL v3 (approved 2026-11-08; values updated 2026-11-08 to the decisions: typical price = stored range, sound word from the 1-5 score). The album has one cover (albums.cover_url), so it is shown once, in the top card; the columns would only repeat it. Phone (below 1024 px): 2 versions, as in Spindle_mockups_by_section.pdf p. 11. Desktop (1024 px and up): up to 3 versions. Same building blocks as version-page.html. Example: buyer picked 1. Price, 2. Sound. Illustrative data. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: Inter, sans-serif; background: #f4efe6; color: #1d2433; font-size: 15px; line-height: 1.4; }
+  .hd { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: -.01em; }
+  header { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid #e2dacb; }
+  .dot { width: 22px; height: 22px; border-radius: 50%; background: #2b2118; border: 6px solid #5a3a24; }
+  main { padding: 16px; display: grid; gap: 16px; }
+  .back { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 500; color: #1d2433; text-decoration: none; }
+  .back-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(29,36,51,.3); display: flex; align-items: center; justify-content: center; flex: none; }
+  .small { font-size: 13px; color: #6b6457; }
+
+  /* Intro card: cover, title, the buyer's priorities as pills */
+  .intro { background: #ece3d1; border: 1px solid #d9ccb2; border-radius: 16px; padding: 16px; display: flex; gap: 16px; align-items: center; }
+  .intro img { width: 84px; height: 84px; border-radius: 10px; flex: none; border: 1px solid #d9ccb2; }
+  .intro h1 { font-size: 36px; line-height: 1; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .pill { border-radius: 999px; padding: 4px 12px; font-size: 13px; font-weight: 500; background: #1d2433; color: #fff; }
+
+  /* The table: first column is the row label, then one column per version. */
+  .compare { display: grid; grid-template-columns: 84px repeat(2, minmax(0, 1fr)); background: #faf7f1; border: 1px solid #e2dacb; border-radius: 18px; overflow: hidden; }
+  .compare > * { padding: 14px 8px; border-top: 1px solid #e2dacb; }
+  .compare > .third { display: none; }
+
+  /* Column heading = link to the version page */
+  .compare > .h { display: block; border-top: 0; text-decoration: none; color: #1d2433; padding: 0 0 14px; }
+  .compare > .h.third { display: none; }
+  .h .band { display: block; padding: 6px 8px; font-size: 11px; font-weight: 500; letter-spacing: .02em; background: #e2dacb; min-height: 28px; white-space: nowrap; }
+  .h .in { display: block; padding: 12px 8px 0; }
+  .h img { width: 100%; max-width: 72px; aspect-ratio: 1; border-radius: 8px; border: 1px solid #e2dacb; display: block; }
+  .h .year { font-size: 34px; line-height: 1; display: block; }
+  .h .meta { font-size: 12px; color: #6b6457; margin-top: 4px; display: block; }
+  .h .go { font-size: 13px; font-weight: 500; margin-top: 10px; display: inline-flex; align-items: center; gap: 4px; min-height: 24px; border-bottom: 1.5px solid #1d2433; }
+  .h.rec .band { background: #1d2433; color: #fff; }
+
+  /* Recommended column: navy frame all the way down (shape, not only colour) */
+  .compare > .r { background: #fdfbf7; box-shadow: inset 2px 0 0 #1d2433, inset -2px 0 0 #1d2433; }
+  .compare > .r.on { background: #f7ecd6; }
+  .compare > .r.end { box-shadow: inset 2px 0 0 #1d2433, inset -2px 0 0 #1d2433, inset 0 -2px 0 #1d2433; }
+
+  /* Row labels with icon */
+  .lab { font-size: 13px; font-weight: 500; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+  .lab svg { width: 20px; height: 20px; flex: none; }
+  .prio { display: inline-block; align-self: flex-start; background: #1d2433; color: #fff; border-radius: 999px; padding: 1px 9px; font-size: 11px; font-weight: 500; white-space: nowrap; }
+
+  /* Rows of the buyer's priorities: sand fill + left bar + "Your #N" pill (never colour alone) */
+  .on { background: #f1e6d0; }
+  .lab.on { box-shadow: inset 4px 0 0 #1d2433; }
+  .val { display: flex; align-items: center; font-weight: 500; font-size: 15px; }
+  .val.big { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: -.01em; }
+  .yes { display: inline-flex; align-items: center; gap: 6px; }
+  .tick { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #1d2433; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+  .tick.fill { background: #1d2433; color: #fff; }
+  .tick svg { width: 10px; height: 10px; }
+
+  .foot { font-size: 12px; color: #6b6457; text-align: center; }
+
+  @media (min-width: 1024px) {
+    header { padding: 22px max(32px, calc((100vw - 1080px) / 2)); }
+    main { max-width: 1080px; margin: 0 auto; padding: 40px 0; gap: 24px; }
+    .intro { padding: 24px 28px; gap: 28px; }
+    .intro img { width: 120px; height: 120px; border-radius: 12px; }
+    .intro h1 { font-size: 64px; }
+    .compare { grid-template-columns: 180px repeat(3, minmax(0, 1fr)); }
+    .compare > * { padding: 18px 22px; }
+    .compare > .h { padding: 0 0 22px; }
+    .h .band { padding: 8px 22px; font-size: 12px; min-height: 34px; }
+    .h .in { padding: 18px 22px 0; }
+    .h img { max-width: 96px; }
+    .h .year { font-size: 52px; }
+    .h .txt { display: block; }
+    .h .meta { font-size: 13px; }
+    .compare > .third { display: flex; }
+    .compare > .third.h { display: block; }
+    .lab { font-size: 14px; flex-direction: row; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .val { font-size: 17px; }
+    .val.big { font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+<header><span class="dot"></span><span class="hd" style="font-size:22px">SPINDLE</span></header>
+<main>
+  <a class="back" href="#" aria-label="Back to recommendation">
+    <span class="back-btn"><svg aria-hidden viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></span>
+    <span>Your recommendation</span>
+  </a>
+
+  <section class="intro">
+    <img src="../../public/covers/ziggy-stardust.svg" alt="">
+    <div>
+      <p class="small">David Bowie · Ziggy Stardust</p>
+      <h1 class="hd">Compare pressings</h1>
+      <div class="pills" aria-label="Your priorities">
+        <span class="pill">1 · Price</span>
+        <span class="pill">2 · Sound</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare" aria-label="Compare pressings">
+    <!-- Column headings -->
+    <div></div>
+    <a class="h rec r" href="#">
+      <span class="band">★ Recommended</span>
+      <span class="in">
+        <span class="txt">
+          <span class="year hd">2012</span>
+          <span class="meta">UK · Parlophone · 12" vinyl</span>
+        </span>
+        <span class="go">See this version <svg aria-hidden viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 6 6 6-6 6"/></svg></span>
+      </span>
+    </a>
+    <a class="h" href="#">
+      <span class="band">Next best</span>
+      <span class="in">
+        <span class="txt">
+          <span class="year hd">1990</span>
+          <span class="meta">UK · RCA · 12" vinyl</span>
+        </span>
+        <span class="go">See this version <svg aria-hidden viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 6 6 6-6 6"/></svg></span>
+      </span>
+    </a>
+    <a class="h third" href="#">
+      <span class="band">Next best</span>
+      <span class="in">
+        <span class="txt">
+          <span class="year hd">1972</span>
+          <span class="meta">UK · RCA Victor · 12" vinyl</span>
+        </span>
+        <span class="go">See this version <svg aria-hidden viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 6 6 6-6 6"/></svg></span>
+      </span>
+    </a>
+
+    <!-- Priority 1 -->
+    <div class="lab on"><svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.2"/></svg><span>Typical price</span><span class="prio">Your #1</span></div>
+    <div class="val big on r">€28–€36</div>
+    <div class="val big on">€20–€28</div>
+    <div class="val big on third">€150–€220</div>
+
+    <!-- Priority 2 -->
+    <div class="lab on"><svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h2M7 7v10M11 4v16M15 8v8M19 10v4"/></svg><span>Sound</span><span class="prio">Your #2</span></div>
+    <div class="val on r">Very clean</div>
+    <div class="val on">A bit flat</div>
+    <div class="val on third">Clean</div>
+
+    <!-- Other rows, same order for every version -->
+    <div class="lab"><svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M10 9.5 12 8v8"/></svg><span>First pressing</span></div>
+    <div class="val r"><span class="yes"><span class="tick"><svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 6 12 12M18 6 6 18"/></svg></span>No</span></div>
+    <div class="val"><span class="yes"><span class="tick"><svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 6 12 12M18 6 6 18"/></svg></span>No</span></div>
+    <div class="val third"><span class="yes"><span class="tick fill"><svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5 9-10"/></svg></span>Yes</span></div>
+
+    <div class="lab"><svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/></svg><span>Best condition on sale</span></div>
+    <div class="val r">Near mint</div>
+    <div class="val">Near mint</div>
+    <div class="val third">Very good</div>
+
+    <div class="lab"><svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="5" rx="1.5"/><rect x="4" y="11" width="16" height="5" rx="1.5"/><path d="M4 19h16"/></svg><span>For sale</span></div>
+    <div class="val r end">4</div>
+    <div class="val">6</div>
+    <div class="val third">1</div>
+  </section>
+
+  <p class="foot">Typical prices are illustrative data · Tap a version to see its details and verified listings</p>
+</main>
+</body>
+</html>

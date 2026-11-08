@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { getRecommendationData, type VersionDetails } from "@/lib/db/recommendation";
 import { formatPriorities, parsePriorities, PRIORITIES, type Priority } from "@/lib/rules/priorities";
 import { fillReason, formatPrice, recommend, type PriceFacts } from "@/lib/rules/recommendation";
+import { compareColumns } from "@/lib/rules/compare";
 import { Header } from "@/components/Header";
 import { ListingsBeside } from "@/components/ListingsBeside";
 import { GlossaryText } from "./GlossaryText";
@@ -160,6 +161,15 @@ export default async function RecommendationPage({
             >
               See verified listings
             </Link>
+            {/* Story 4: only when at least two versions are on sale. */}
+            {compareColumns(ranking, versions, 3).length >= 2 && (
+              <Link
+                href={`/albums/${albumId}/compare?priorities=${formatPriorities(ranking)}`}
+                className="flex min-h-14 items-center justify-center rounded-full border border-navy px-6 text-lg font-semibold"
+              >
+                Compare pressings
+              </Link>
+            )}
             <p className="flex flex-wrap items-center justify-center gap-x-2 text-sm">
               <span>Based on: {ranking.map((p) => LABEL[p]).join(", ")}</span>
               <span aria-hidden>·</span>

@@ -28,6 +28,8 @@ For each screen: the loading mask says what is loading; the error screen says wh
 | M10 | 12 | Genre screen | Tap a crate on the home page | "Loading the crate…" | "We couldn't load this crate. Check your connection." | Not run |
 | M13 | 7 | Your account (with "On its way") | Tap the initials in the header (signed in) | "Loading your account…" | "We couldn't load your account. Check your connection." | Not run |
 | M14 | 17 | Search results | Search for "bowie" (Search button or Enter) | "Searching…" | "We couldn't load the albums. Check your connection." | Not run |
+| M15 | 4 | Compare pressings | Open a recommendation (e.g. Ziggy Stardust, 1. Price, 2. Sound), tap "Compare pressings" | "Comparing pressings…" | "We couldn't load the comparison. Check your connection." | Not run |
+| M16 | 4 | Version page | On the comparison, tap "See this version" | "Loading this version…" | "We couldn't load this version. Check your connection." | Not run |
 
 ## Other manual checks
 
