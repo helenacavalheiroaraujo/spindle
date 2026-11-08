@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Genre screen: three options</title>
+<!-- Story 12 · use case 1. The screen a crate opens: that genre's albums, with the same rows as the search results (story 1), newest first. Three options to choose from (phone). Texts are proposals. Illustrative data: "Rock" with the four Bowie albums of the seed (genres are not set yet). -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:-.01em}
+.wrap{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+.col{width:375px} .vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px}
+.phone{border:1px solid #1d2433;border-radius:28px;overflow:hidden;background:#f4efe6}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px} .logo{display:flex;gap:8px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em}
+.dot{width:20px;height:20px;border-radius:50%;border:5px solid #1d2433;display:inline-block} .sellpill{border:1.5px solid #1d2433;border-radius:999px;padding:6px 12px;font-weight:600;font-size:13px} .menu{font-size:20px}
+main{padding:4px 16px 20px;display:grid;grid-template-columns:minmax(0,1fr);gap:8px} .res>.tag{flex:none} h1{font-size:34px;line-height:1}
+.back{font-size:13px;font-weight:600} .small{font-size:12px;color:#6f6a60}
+.res{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #e2dacb;min-height:64px}
+.cover{width:52px;height:52px;border-radius:8px;flex:none} .c1{background:#1d2433} .c2{background:#c9a46a} .c3{background:#5a3a24} .c4{background:#8a8f9c}
+.res .meta{min-width:0;flex:1} .res b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tag{background:#dfe3ef;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:600;white-space:nowrap}
+.tag.none{background:transparent;border:1px solid #c8bfae;color:#1d2433;font-weight:500} .st{display:inline-block;margin-top:4px} .res .small{display:block}
+.crate{border-radius:18px;padding:16px;position:relative;overflow:hidden;min-height:120px;color:#f4efe6;background:#c9a46a}
+.crate .rec{position:absolute;right:-26px;top:-26px;width:120px;height:120px;border-radius:50%;background:#1d2433;box-shadow:inset 0 0 0 38px #1d2433,inset 0 0 0 48px #f4efe6}
+.crate .name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:40px;line-height:1;position:absolute;bottom:34px;left:16px}
+.crate .count{position:absolute;bottom:14px;left:16px;font-size:13px}
+.chips{display:flex;gap:6px;flex-wrap:wrap} .chip{border:1.5px solid #1d2433;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;min-height:40px;display:inline-flex;align-items:center} .chip.on{background:#1d2433;color:#f4efe6}
+.ill{border:1px solid #c8bfae;border-radius:999px;padding:3px 9px;font-size:11px;justify-self:start}
+</style></head><body><div class="wrap">
+
+<section class="col"><h2 class="vt">Option A · Plain list</h2><p class="why">The genre as the heading, the count below, then the same rows as the search results. Nothing new to learn: it looks and works like search.</p>
+<div class="phone"><header class="top"><span class="menu">☰</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="sellpill">+ Sell</span></header><main>
+<span class="back">← Back to home</span>
+<h1 class="hd">Rock</h1>
+<p class="small">4 records · newest first</p>
+<div class="res"><i class="cover c4"></i><div class="meta"><b>Blackstar</b><span class="small">David Bowie, 2016</span><span class="tag none st">Not in the demo</span></div><span class="tag">2 versions</span></div>
+<div class="res"><i class="cover c3"></i><div class="meta"><b>Let's Dance</b><span class="small">David Bowie, 1983</span><span class="tag none st">No listings</span></div><span class="tag">1 version</span></div>
+<div class="res"><i class="cover c1"></i><div class="meta"><b>The Rise and Fall of Ziggy Stardust…</b><span class="small">David Bowie, 1972</span></div><span class="tag">3 versions</span></div>
+<div class="res"><i class="cover c2"></i><div class="meta"><b>Hunky Dory</b><span class="small">David Bowie, 1971</span></div><span class="tag">2 versions</span></div>
+<span class="ill">Illustrative data</span>
+</main></div></section>
+
+<section class="col"><h2 class="vt">Option B · Crate on top</h2><p class="why">The crate the buyer tapped is repeated at the top, in the same colour and with the record, so it is clear where they are. Then the same rows as search.</p>
+<div class="phone"><header class="top"><span class="menu">☰</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="sellpill">+ Sell</span></header><main>
+<span class="back">← Back to home</span>
+<div class="crate"><i class="rec"></i><span class="name">Rock</span><span class="count">4 records</span></div>
+<p class="small">Newest first</p>
+<div class="res"><i class="cover c4"></i><div class="meta"><b>Blackstar</b><span class="small">David Bowie, 2016</span><span class="tag none st">Not in the demo</span></div><span class="tag">2 versions</span></div>
+<div class="res"><i class="cover c3"></i><div class="meta"><b>Let's Dance</b><span class="small">David Bowie, 1983</span><span class="tag none st">No listings</span></div><span class="tag">1 version</span></div>
+<div class="res"><i class="cover c1"></i><div class="meta"><b>The Rise and Fall of Ziggy Stardust…</b><span class="small">David Bowie, 1972</span></div><span class="tag">3 versions</span></div>
+<div class="res"><i class="cover c2"></i><div class="meta"><b>Hunky Dory</b><span class="small">David Bowie, 1971</span></div><span class="tag">2 versions</span></div>
+<span class="ill">Illustrative data</span>
+</main></div></section>
+
+<section class="col"><h2 class="vt">Option C · Switch genre</h2><p class="why">A row of genre buttons at the top (only genres with albums), so the buyer can move to another crate without going back home. Then the same rows as search.</p>
+<div class="phone"><header class="top"><span class="menu">☰</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="sellpill">+ Sell</span></header><main>
+<span class="back">← Back to home</span>
+<h1 class="hd">Pick a crate</h1>
+<div class="chips"><span class="chip on">Rock · 4</span><span class="chip">Electronic · 1</span></div>
+<p class="small">Newest first</p>
+<div class="res"><i class="cover c4"></i><div class="meta"><b>Blackstar</b><span class="small">David Bowie, 2016</span><span class="tag none st">Not in the demo</span></div><span class="tag">2 versions</span></div>
+<div class="res"><i class="cover c3"></i><div class="meta"><b>Let's Dance</b><span class="small">David Bowie, 1983</span><span class="tag none st">No listings</span></div><span class="tag">1 version</span></div>
+<div class="res"><i class="cover c1"></i><div class="meta"><b>The Rise and Fall of Ziggy Stardust…</b><span class="small">David Bowie, 1972</span></div><span class="tag">3 versions</span></div>
+<div class="res"><i class="cover c2"></i><div class="meta"><b>Hunky Dory</b><span class="small">David Bowie, 1971</span></div><span class="tag">2 versions</span></div>
+<span class="ill">Illustrative data</span>
+</main></div></section>
+
+</div></body></html>

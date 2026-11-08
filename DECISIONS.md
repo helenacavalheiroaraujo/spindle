@@ -3,6 +3,13 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 12 · Designs
+
+### Genre screen: the tapped crate on top; This week: stacked cards, side by side on desktop (story 12)
+- **Why:** the crate on top repeats the home page's look, so the buyer sees where they are. Stacked cards keep "For sellers" (the way into selling) always visible and are easier to use with a keyboard or screen reader than cards that scroll sideways; on desktop there is room for both in one row.
+- **No price on the featured album:** search shows none either (finding #19).
+- **Desktop header:** search, "+ Sell for free" and the account badge, as in the Assignment 1 desktop flow.
+
 ## 2026-11-08 — Story 12 · Home page (spec)
 
 ### The home page from the design becomes story 12, in phase 4; the wishlist is story 13, not in this MVP (process)

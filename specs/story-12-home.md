@@ -34,6 +34,11 @@
 - Works on phone and desktop; crates large enough to tap
 - All catalogue data is illustrative
 
+## Designs
+- Home page (title, search, crates): Assignment 1 designs, `docs/design/HappyPath.png` (phone) and `docs/design/Spindle_user_flow_desktop.png` (desktop)
+- Genre screen: option B, crate on top — `docs/design/genre-screen-options.html` (phone), `docs/design/genre-screen-desktop.html`
+- This week at the shop: option B, stacked cards — `docs/design/this-week-options.html` (phone), `docs/design/this-week-desktop.html` (side by side)
+
 ## Out of scope
 - "Because you like…" with a wishlist (story 13)
 - "All genres and formats" (needs filters, story 10)

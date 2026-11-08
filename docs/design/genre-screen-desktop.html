@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Genre screen: desktop (option B)</title>
+<!-- Story 12 · use case 1 · desktop version of option B (crate on top). Header with the search, as in the Assignment 1 desktop flow ("Which record are you after?"). Texts are proposals. Illustrative data: "Rock" with the four Bowie albums of the seed (genres are not set yet). -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:15px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:-.01em} .vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;margin:0 0 8px}
+.fr{max-width:1232px;margin:0 auto 36px} .desk{border:1px solid #1d2433;border-radius:20px;overflow:hidden;background:#f4efe6}
+.top{display:flex;align-items:center;gap:24px;padding:16px 48px;border-bottom:1px solid #e2dacb;background:#faf7f1} .logo{display:flex;gap:8px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;letter-spacing:.04em;flex:none}
+.dot{width:22px;height:22px;border-radius:50%;border:6px solid #1d2433;display:inline-block}
+.search{flex:1;display:flex;align-items:center;gap:10px;border:1.5px solid #1d2433;border-radius:999px;padding:6px 6px 6px 18px;background:#fff;color:#6f6a60}
+.search .go{margin-left:auto;background:#1d2433;color:#fff;border-radius:999px;padding:8px 18px;font-weight:600;font-size:14px}
+.right{display:flex;gap:14px;align-items:center;flex:none} .sellpill{border:1.5px solid #1d2433;border-radius:999px;padding:9px 18px;font-weight:600} .avatar{width:42px;height:42px;border-radius:50%;background:#1d2433;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600}
+main{padding:28px 48px 44px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.back{font-size:14px;font-weight:600} .small{font-size:13px;color:#6f6a60}
+.crate{border-radius:22px;padding:24px;position:relative;overflow:hidden;min-height:170px;color:#f4efe6;background:#c9a46a}
+.crate .rec{position:absolute;right:-40px;top:-40px;width:210px;height:210px;border-radius:50%;background:#1d2433;box-shadow:inset 0 0 0 68px #1d2433,inset 0 0 0 86px #f4efe6}
+.crate .name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:64px;line-height:1;position:absolute;bottom:48px;left:28px}
+.crate .count{position:absolute;bottom:22px;left:28px;font-size:15px}
+.list{display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
+.res{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid #e2dacb;min-height:88px}
+.cover{width:64px;height:64px;border-radius:8px;flex:none} .c1{background:#1d2433} .c2{background:#c9a46a} .c3{background:#5a3a24} .c4{background:#8a8f9c}
+.res .meta{min-width:0;flex:1} .res b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .res .small{display:block}
+.tag{background:#dfe3ef;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600;white-space:nowrap;flex:none}
+.tag.none{background:transparent;border:1px solid #c8bfae;font-weight:500;display:inline-block;margin-top:4px}
+.ill{border:1px solid #c8bfae;border-radius:999px;padding:3px 9px;font-size:12px;justify-self:start}
+</style></head><body>
+<section class="fr"><h2 class="vt">Desktop · Rock crate</h2><div class="desk">
+<header class="top"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="search">⌕ Which record are you after?<span class="go">Search</span></span><span class="right"><span class="sellpill">+ Sell for free</span><span class="avatar">AR</span></span></header>
+<main>
+<span class="back">← Back to home</span>
+<div class="crate"><i class="rec"></i><span class="name">Rock</span><span class="count">4 records</span></div>
+<p class="small">Newest first</p>
+<div class="list">
+<div class="res"><i class="cover c4"></i><div class="meta"><b>Blackstar</b><span class="small">David Bowie, 2016</span><span class="tag none">Not in the demo</span></div><span class="tag">2 versions</span></div>
+<div class="res"><i class="cover c3"></i><div class="meta"><b>Let's Dance</b><span class="small">David Bowie, 1983</span><span class="tag none">No listings</span></div><span class="tag">1 version</span></div>
+<div class="res"><i class="cover c1"></i><div class="meta"><b>The Rise and Fall of Ziggy Stardust and the Spiders from Mars</b><span class="small">David Bowie, 1972</span></div><span class="tag">3 versions</span></div>
+<div class="res"><i class="cover c2"></i><div class="meta"><b>Hunky Dory</b><span class="small">David Bowie, 1971</span></div><span class="tag">2 versions</span></div>
+</div>
+<span class="ill">Illustrative data</span>
+</main></div></section>
+</body></html>

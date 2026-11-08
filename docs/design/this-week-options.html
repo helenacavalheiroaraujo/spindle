@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>This week at the shop: three options</title>
+<!-- Story 12 · use cases 3 and 4. The two "This week at the shop" cards at the bottom of the home page: "This weekend" (one featured album, opens its priorities screen) and "For sellers" (opens selling). Three options to choose from (phone). No price on the featured album: search shows none either (DECISIONS · finding #19). Texts are proposals. Illustrative data (seed). -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:-.01em}
+.wrap{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+.col{width:375px} .vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px}
+.phone{border:1px solid #1d2433;border-radius:28px;overflow:hidden;background:#f4efe6}
+main{padding:16px 16px 20px;display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.fade{color:#a39d92;font-size:12px;text-align:center;border-bottom:1px dashed #c8bfae;padding-bottom:10px}
+h2{font-size:26px;line-height:1} .small{font-size:12px;color:#6f6a60}
+.tag{display:inline-block;border-radius:999px;padding:3px 10px;font-size:11px;font-weight:600}
+.cover{width:64px;height:64px;border-radius:10px;flex:none;background:radial-gradient(circle,#d9d4ea 0 7px,#1d2433 8px 26px,#2c3446 27px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;padding:0 18px;font-weight:600;font-size:13px}
+.ill{border:1px solid #c8bfae;border-radius:999px;padding:3px 9px;font-size:11px;justify-self:start}
+/* A */
+.a-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.a-card{border-radius:16px;padding:14px;min-height:190px;display:flex;flex-direction:column;gap:6px}
+.a-week{background:#1d2433;color:#f4efe6} .a-week .tag{background:#f4efe6;color:#1d2433;align-self:flex-start}
+.a-sell{background:#faf7f1;border:1px solid #e2dacb} .a-sell .tag{background:#dfe3ef;align-self:flex-start}
+.a-card b{font-size:15px;line-height:1.2} .a-card .more{margin-top:auto;font-weight:600;font-size:13px;text-decoration:underline}
+/* B */
+.b-week{background:#5a3a24;color:#f4efe6;border-radius:18px;padding:16px;display:grid;gap:10px}
+.b-row{display:flex;gap:12px;align-items:center} .b-week .tag{background:#f4efe6;color:#5a3a24;justify-self:start}
+.b-week .btn{background:#f4efe6;color:#1d2433;justify-self:start}
+.b-sell{border:1.5px solid #1d2433;border-radius:18px;padding:16px;display:grid;gap:8px}
+.b-sell .btn{background:#1d2433;color:#f4efe6;justify-self:start}
+/* C */
+.c-scroll{display:flex;gap:10px;overflow:hidden;margin-right:-16px}
+.c-card{flex:none;width:280px;border-radius:18px;padding:16px;min-height:170px;display:flex;flex-direction:column;gap:8px}
+.c-week{background:#1d2433;color:#f4efe6} .c-week .tag{background:#f4efe6;color:#1d2433;align-self:flex-start}
+.c-sell{background:#c9a46a;color:#1d2433} .c-sell .tag{background:#1d2433;color:#f4efe6;align-self:flex-start}
+.c-card .more{margin-top:auto;font-weight:600;text-decoration:underline}
+.dots{display:flex;gap:6px;justify-content:center} .dots i{width:7px;height:7px;border-radius:50%;background:#c8bfae} .dots i.on{background:#1d2433}
+</style></head><body><div class="wrap">
+
+<section class="col"><h2 class="vt">Option A · Two side by side</h2><p class="why">Two equal cards in one row, as in the desktop design. The featured album on navy, the seller card light. Compact; both visible at once.</p>
+<div class="phone"><main>
+<p class="fade">… search and crates above …</p>
+<h2 class="hd">This week at the shop</h2>
+<div class="a-grid">
+<div class="a-card a-week"><span class="tag">This weekend</span><i class="cover"></i><b>Ziggy Stardust</b><span class="small" style="color:#cfd2da">Verified copies for sale</span><span class="more">See which to buy</span></div>
+<div class="a-card a-sell"><span class="tag">For sellers</span><b>Sell for free</b><span class="small">0% commission: you keep the full price.</span><span class="more">Sell a record</span></div>
+</div>
+<span class="ill">Illustrative data</span>
+</main></div></section>
+
+<section class="col"><h2 class="vt">Option B · Stacked, full width</h2><p class="why">One card under the other. The featured album on dark brown (the design's emphasis colour) with its cover and a clear button; the seller card outlined. More room for text and larger buttons.</p>
+<div class="phone"><main>
+<p class="fade">… search and crates above …</p>
+<h2 class="hd">This week at the shop</h2>
+<div class="b-week"><span class="tag">This weekend</span><div class="b-row"><i class="cover"></i><div><b style="font-size:16px">The Rise and Fall of Ziggy Stardust…</b><div class="small" style="color:#e8dccb">David Bowie, 1972 · verified copies for sale</div></div></div><span class="btn">See which to buy</span></div>
+<div class="b-sell"><span class="tag" style="background:#dfe3ef;justify-self:start">For sellers</span><b style="font-size:16px">Sell for free</b><span class="small">0% commission: you keep the full price.</span><span class="btn">Sell a record</span></div>
+<span class="ill">Illustrative data</span>
+</main></div></section>
+
+<section class="col"><h2 class="vt">Option C · Swipe</h2><p class="why">Wide cards in a row that scrolls sideways, as the phone design hints (a second card peeks in). Leaves room for more cards later; only one is fully visible at a time.</p>
+<div class="phone"><main>
+<p class="fade">… search and crates above …</p>
+<h2 class="hd">This week at the shop</h2>
+<div class="c-scroll">
+<div class="c-card c-week"><span class="tag">This weekend</span><b style="font-size:18px">The Rise and Fall of Ziggy Stardust…</b><span class="small" style="color:#cfd2da">David Bowie, 1972 · verified copies for sale</span><span class="more">See which to buy</span></div>
+<div class="c-card c-sell"><span class="tag">For sellers</span><b style="font-size:18px">Sell for free</b><span>0% commission: you keep the full price.</span><span class="more">Sell a record</span></div>
+</div>
+<div class="dots"><i class="on"></i><i></i></div>
+<span class="ill">Illustrative data</span>
+</main></div></section>
+
+</div></body></html>
