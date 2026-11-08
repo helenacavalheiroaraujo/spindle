@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Process (UX review)
+
+### UX review as a repeatable skill: missing screens first, heuristics capped at Low (process)
+- **Why:** to know which screens are still missing before the demo, and to check the built screens against the Assignment 1 designs and the CLAUDE.md rules, without generic usability advice burying the concrete gaps. Screens are judged from Playwright screenshots at 375 and 1280 px, the same sizes as the critical-flow tests.
+- **Trade-off accepted:** building the skill took a working session one week before the deadline; loading and error states are not captured and are checked by reading the code.
+
 ## 2026-11-08 — Story 7 · Checkout (findings)
 
 ### A seller buying their own listing waits for story 8 (stories 7 and 9 · finding #12)
