@@ -2,6 +2,7 @@
 // The four options and "See recommendation" (story 2). The ranking rule lives in lib/rules/priorities.
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { savePriorities } from "@/app/actions";
 import {
   PRIORITIES, canContinue, formatPriorities, rankOf, togglePriority, type Priority,
 } from "@/lib/rules/priorities";
@@ -9,7 +10,16 @@ import {
 export function PriorityPicker({ albumId, initial }: { albumId: string; initial: Priority[] }) {
   const router = useRouter();
   const [ranking, setRanking] = useState<Priority[]>(initial);
+  const [saving, setSaving] = useState(false);
   const ready = canContinue(ranking);
+
+  // Saved to the account first when signed in (phase 2), then on to the recommendation.
+  async function continueToRecommendation() {
+    setSaving(true);
+    const value = formatPriorities(ranking);
+    await savePriorities(value).catch(() => {});
+    router.push(`/albums/${albumId}/recommendation?priorities=${value}`);
+  }
 
   return (
     <>
@@ -48,8 +58,8 @@ export function PriorityPicker({ albumId, initial }: { albumId: string; initial:
 
       <button
         type="button"
-        disabled={!ready}
-        onClick={() => router.push(`/albums/${albumId}/recommendation?priorities=${formatPriorities(ranking)}`)}
+        disabled={!ready || saving}
+        onClick={continueToRecommendation}
         className="mt-8 min-h-14 w-full rounded-full bg-navy px-6 text-lg font-semibold text-cream disabled:cursor-not-allowed disabled:opacity-40"
       >
         See recommendation

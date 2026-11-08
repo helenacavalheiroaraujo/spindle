@@ -1,11 +1,14 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getAlbumHeader } from "@/lib/db/albums";
-import { parsePriorities } from "@/lib/rules/priorities";
+import { getSavedRanking } from "@/lib/db/preferences";
+import { currentUserId } from "@/lib/db/session";
+import { formatPriorities, parsePriorities, type Priority } from "@/lib/rules/priorities";
 import { Header } from "@/components/Header";
 import { PriorityPicker } from "./PriorityPicker";
 
 // Priorities screen (story 2). "?priorities=price,sound" refills the current ranking ("Change" from story 3).
+// Phase 2: a signed-in buyer with a saved ranking skips this screen, unless they came from "Change".
 export default async function PrioritiesPage({
   params,
   searchParams,
@@ -17,6 +20,12 @@ export default async function PrioritiesPage({
   const { priorities } = await searchParams;
   const album = await getAlbumHeader(albumId);
   if (!album) notFound();
+  const fromAddress = parsePriorities(Array.isArray(priorities) ? priorities[0] : priorities);
+
+  if (fromAddress.length === 0) {
+    const saved = await savedRankingOfViewer();
+    if (saved) redirect(`/albums/${album.id}/recommendation?priorities=${formatPriorities(saved)}`);
+  }
 
   return (
     <main className="mx-auto max-w-2xl px-4 pb-16">
@@ -46,8 +55,19 @@ export default async function PrioritiesPage({
 
       <PriorityPicker
         albumId={album.id}
-        initial={parsePriorities(Array.isArray(priorities) ? priorities[0] : priorities)}
+        initial={fromAddress}
       />
     </main>
   );
+}
+
+// The signed-in buyer's saved ranking, or null. If it cannot be loaded, the screen is shown as for a new buyer.
+async function savedRankingOfViewer(): Promise<Priority[] | null> {
+  try {
+    const userId = await currentUserId();
+    return userId ? await getSavedRanking(userId) : null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }

@@ -14,7 +14,7 @@
 | Phase | Tables | Stories | Migration |
 |---|---|---|---|
 | 1 · Core | `albums`, `versions`, `tracks`, `glossary_terms`, `reason_texts`, `condition_grades`, `profiles`, `listings`, `check_results` | 1, 2, 3, 5, 6 | `0001_core.sql` |
-| 2 · Purchase | `user_preferences` (story 2), `orders` (story 7); story 9 adds no table, the app fills `profiles.user_id` at sign-up | 9, 7, 2 | `0002_orders.sql` (story 7); story 2 gets its own |
+| 2 · Purchase | `user_preferences` (story 2), `orders` (story 7); story 9 adds no table, the app fills `profiles.user_id` at sign-up | 9, 7, 2 | `0002_orders.sql` (story 7), `0004_preferences.sql` (story 2) |
 | 3 · Seller | no new tables: a price limit on `listings`, the `listing-photos` bucket in Storage and `create_listing(...)` | 8 | `0003_sell.sql` |
 
 ## Diagram (phase 1)
@@ -137,7 +137,7 @@ The three-item checklist per listing (story 5). Mock data.
 
 ## Phase 2 tables
 
-### `user_preferences` (planned, not yet created)
+### `user_preferences` (created: `0004_preferences.sql`)
 | Column | Type | Notes |
 |---|---|---|
 | `user_id` | → Supabase Auth user, primary key | |

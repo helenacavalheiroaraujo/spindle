@@ -426,12 +426,12 @@
         "proposed": "When a signed-in buyer changes the ranking, the new ranking replaces the saved one."
       },
       "question": "When a signed-in buyer changes priorities for one album, should that become the saved ranking?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
       "resolution": {
-        "iteration": 3,
-        "date": "2026-11-07",
-        "decision": "Deferred to phase 2 (no saved rankings in phase 1). Stays open; leaning towards: the new ranking replaces the saved one."
+        "iteration": 4,
+        "date": "2026-11-08",
+        "decision": "Approved: when a signed-in buyer changes the ranking, the new ranking replaces the saved one. Recorded in DECISIONS.md (story file not changed: already has tests)."
       }
     },
     {

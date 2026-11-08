@@ -29,8 +29,8 @@
 - [x] Unpicking an option renumbers the others without gaps
 - [x] All four options can be picked
 - [x] The recommendation receives the options in rank order
-- [ ] *(Phase 2)* A signed-in buyer's ranking is saved and reused on the next album
-- [ ] *(Phase 2)* With a saved ranking, the screen is skipped and "Change" is shown on the recommendation
+- [x] *(Phase 2)* A signed-in buyer's ranking is saved and reused on the next album
+- [x] *(Phase 2)* With a saved ranking, the screen is skipped and "Change" is shown on the recommendation
 
 ## Edge cases
 - No option picked → cannot continue

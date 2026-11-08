@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 2 · Save to account
+
+### "Change" replaces the saved ranking (story 2 · finding #11)
+- **Why:** one ranking per account is the simplest rule and matches "saved and reused on the next album". The recommendation always shows "Based on: … · Change", so the buyer sees which ranking is in use and can change it again.
+- **Trade-off accepted:** a one-off change (e.g. a gift where only price matters) carries over to the next albums.
+
 ## 2026-11-08 — Story 8 (sell) · build
 
 ### Wording and behaviour written during the build (story 8)
