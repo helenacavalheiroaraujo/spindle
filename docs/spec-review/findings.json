@@ -522,9 +522,13 @@
       ],
       "proposal": null,
       "question": "Define the version page when phase 4 is reached (or drop the link from the comparison)?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option A: a dedicated version page, design docs/design/version-page.html. Recorded in DECISIONS.md; story 4 updated."
+      }
     },
     {
       "id": 15,
@@ -929,9 +933,13 @@
         "proposed": "sound (short word from the data, e.g. \"Cleaner\"), typical price, first pressing (Yes / No), best condition on sale (grade name), number for sale"
       },
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option B: plain words as in the design, no 1-5 scores. Recorded in DECISIONS.md; story 4 updated."
+      }
     },
     {
       "id": 27,

@@ -128,6 +128,10 @@ const DATA = {
     { id: 8, t: "Sell a record for free", st: "Not started", tested: 0, gaps: 0, total: 0, f: "#13, #35, #36" },
     { id: 4, t: "Compare versions", note: "phase 4", st: "Not started", tested: 0, gaps: 0, total: 0, f: "#14, #26" }
   ],
+  outside: [
+    { id: 14, t: "Desktop footer", kind: "Specified, not in the build order", note: "Spec file exists; no design yet" },
+    { id: 10, t: "No title in the repo", kind: "Not in this MVP", note: "No story file yet" }
+  ],
   gaps: [
     "Story 2: loading mask and error screen with “Try again”",
     "Story 3: loading mask and error screen with “Try again”",
@@ -166,6 +170,9 @@ document.getElementById("app").innerHTML = `
     <div class="story"><div class="head"><div class="t">Story ${s.id} · ${esc(s.t)}${s.note ? `<small>${esc(s.note)}</small>` : ""}</div><span class="pill ${pillClass(s.st)}">${esc(s.st)}</span></div>
       ${s.total ? `<div class="meter" aria-hidden="true">${meter(s)}</div><div class="m">${s.tested} of ${s.total} requirements with an automated test</div>` : `<div class="m">No requirements traced yet</div>`}
       <div class="m">Open findings: ${s.f ? esc(s.f) : "none"}</div></div>`).join("")}</div></section>
+  <section><h2>Outside the MVP</h2><div class="stories">${DATA.outside.map(s => `
+    <div class="story"><div class="head"><div class="t">Story ${s.id} · ${esc(s.t)}</div><span class="pill">${esc(s.kind)}</span></div>
+      <div class="m">${esc(s.note)}</div></div>`).join("")}</div></section>
   <section class="lists">
     <div><h2>Not tested automatically</h2><ul>${DATA.gaps.map(g => `<li>${esc(g)}</li>`).join("")}</ul></div>
     <div><h2>Before the next story</h2><ul>${DATA.blockers.map(g => `<li>${esc(g)}</li>`).join("")}</ul></div>

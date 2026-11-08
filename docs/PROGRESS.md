@@ -53,6 +53,24 @@ Updated 2026-11-08 on request · Deadline 15 Nov 2026 · **7 days left**
 | 12 · Home page | Built with gaps | 4 of 5 | — |
 | 4 · Compare versions | Not started | — | #14, #26 |
 
+## Outside the MVP
+Not counted in the figures above.
+
+### Specified, not in the build order
+| Story | Spec file | Status | Note |
+|---|---|---|---|
+| 14 · Desktop footer | `specs/story-14-footer.md` | Not started | No approved design; open point: which links. Needs a place in the build order |
+| 15 · Menu | `specs/story-15-menu.md` | Not started | No approved design; open points: desktop only or phone too, which items. Needs a place in the build order |
+
+### Not in this MVP
+| Story | Spec file | What the repo says |
+|---|---|---|
+| 10 · No title in the repo | None | Filters (story 1, out of scope); "All genres and formats" (story 12, out of scope); "Ask the seller" messaging (story 5, out of scope) |
+| 11 · No title in the repo | None | 30-second previews (story 3, out of scope); "Spindle Pro" paid plans for shops (story 9, out of scope) |
+| 13 · No title in the repo | None | "Because you like…" with a wishlist (story 12, out of scope) |
+
+Stories 10 and 11 are each mentioned with two different meanings; Assignment 1 is the only source for what they are.
+
 ## Gaps (not tested automatically)
 Every gap below points to a manual check in `docs/manual-tests.md` (none has been run yet). Gaps stay listed here because they are not automated.
 - Story 2: loading mask and error screen of the priorities screen (M1)

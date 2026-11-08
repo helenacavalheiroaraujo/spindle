@@ -23,8 +23,13 @@ export default async function SellFormPage({ params }: { params: Promise<{ versi
         <p role="status" className="mt-6 rounded-2xl border border-line bg-white/60 p-6 text-center font-medium">
           {NOT_IN_CATALOGUE}
         </p>
-        <Link href="/sell" className="mt-4 inline-flex min-h-11 items-center gap-1 text-sm font-semibold">
-          <span aria-hidden>←</span> Back to search
+        <Link href="/sell" className="mt-4 inline-flex items-center gap-3 text-sm font-semibold">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-navy/30">
+            <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </span>
+          Back to search
         </Link>
       </main>
     );

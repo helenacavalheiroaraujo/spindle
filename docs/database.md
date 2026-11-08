@@ -41,7 +41,7 @@ glossary_terms (stand-alone)
 | `title` | text | searched (story 1) |
 | `artist` | text | searched (story 1) |
 | `release_year` | integer | search results: newest first |
-| `cover_url` | text | |
+| `cover_url` | text | link to the real cover on Cover Art Archive (`coverartarchive.org/release-group/<id>/front-500`); required |
 | `genre` | text, optional: Rock, Jazz, Soul and funk, Fado, Electronic or Hip-hop | crates on the home page (story 12, `0006_genres.sql`); empty → in no crate |
 
 ### `versions`

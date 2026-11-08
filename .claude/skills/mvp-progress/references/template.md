@@ -36,6 +36,19 @@ Updated [YYYY-MM-DD] after [story N / "on request"] · Deadline 15 Nov 2026 · *
 | 1 · Search for an album | Built | 5 of 5 | #36 |
 | … | … | … | … |
 
+## Outside the MVP
+Not counted in the figures above.
+
+### Specified, not in the build order
+| Story | Spec file | Status | Note |
+|---|---|---|---|
+| [N] · [title] | `specs/story-N-….md` | [Not started / …] | [open points, missing design; needs a place in the build order] |
+
+### Not in this MVP
+| Story | Spec file | What the repo says |
+|---|---|---|
+| [N] · [title or "No title in the repo"] | [path or "None"] | [where it is mentioned, e.g. "Filters (story 1 out of scope)"] |
+
 ## Gaps (not tested automatically)
 - Story [N]: [requirement]
 

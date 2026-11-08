@@ -25,16 +25,16 @@ truncate table check_results, listings, profiles, tracks, reason_texts, versions
 
 -- Albums -------------------------------------------------------------------
 insert into albums (id, title, artist, release_year, cover_url, genre) values
-  ('10000000-0000-0000-0000-000000000001', 'The Rise and Fall of Ziggy Stardust and the Spiders from Mars', 'David Bowie', 1972, '/covers/ziggy-stardust.svg', 'Rock'),
-  ('10000000-0000-0000-0000-000000000002', 'Hunky Dory', 'David Bowie', 1971, '/covers/hunky-dory.svg', 'Rock'),
-  ('10000000-0000-0000-0000-000000000003', 'Let''s Dance', 'David Bowie', 1983, '/covers/lets-dance.svg', 'Soul and funk'),
-  ('10000000-0000-0000-0000-000000000004', 'Blackstar', 'David Bowie', 2016, '/covers/blackstar.svg', 'Rock'),
-  ('10000000-0000-0000-0000-000000000005', 'Homogenic', 'Björk', 1997, '/covers/homogenic.svg', 'Electronic'),
-  ('10000000-0000-0000-0000-000000000006', 'The Dark Side of the Moon', 'Pink Floyd', 1973, '/covers/dark-side-of-the-moon.svg', 'Rock'),
-  ('10000000-0000-0000-0000-000000000007', 'Megalithic Symphony', 'AWOLNATION', 2011, '/covers/megalithic-symphony.svg', 'Electronic'),
-  ('10000000-0000-0000-0000-000000000008', 'Kind of Blue', 'Miles Davis', 1959, '/covers/kind-of-blue.svg', 'Jazz'),
-  ('10000000-0000-0000-0000-000000000009', 'Com que voz', 'Amália Rodrigues', 1970, '/covers/com-que-voz.svg', 'Fado'),
-  ('10000000-0000-0000-0000-000000000010', 'Illmatic', 'Nas', 1994, '/covers/illmatic.svg', 'Hip-hop');
+  ('10000000-0000-0000-0000-000000000001', 'The Rise and Fall of Ziggy Stardust and the Spiders from Mars', 'David Bowie', 1972, 'https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500', 'Rock'),
+  ('10000000-0000-0000-0000-000000000002', 'Hunky Dory', 'David Bowie', 1971, 'https://coverartarchive.org/release-group/743b0b2e-a23a-3182-950e-232f8cb0dfb7/front-500', 'Rock'),
+  ('10000000-0000-0000-0000-000000000003', 'Let''s Dance', 'David Bowie', 1983, 'https://coverartarchive.org/release-group/75c2bddf-1799-3eda-b6b3-a0cf5189d8ed/front-500', 'Soul and funk'),
+  ('10000000-0000-0000-0000-000000000004', 'Blackstar', 'David Bowie', 2016, 'https://coverartarchive.org/release-group/1fd18f5b-9a92-41fd-a590-da6b5cc60d85/front-500', 'Rock'),
+  ('10000000-0000-0000-0000-000000000005', 'Homogenic', 'Björk', 1997, 'https://coverartarchive.org/release-group/810272e0-aef1-3d85-b2d3-e512e87fc38c/front-500', 'Electronic'),
+  ('10000000-0000-0000-0000-000000000006', 'The Dark Side of the Moon', 'Pink Floyd', 1973, 'https://coverartarchive.org/release-group/f5093c06-23e3-404f-aeaa-40f72885ee3a/front-500', 'Rock'),
+  ('10000000-0000-0000-0000-000000000007', 'Megalithic Symphony', 'AWOLNATION', 2011, 'https://coverartarchive.org/release-group/47bbac51-0fe3-4364-b51a-d7d5cf326096/front-500', 'Electronic'),
+  ('10000000-0000-0000-0000-000000000008', 'Kind of Blue', 'Miles Davis', 1959, 'https://coverartarchive.org/release-group/8e8a594f-2175-38c7-a871-abb68ec363e7/front-500', 'Jazz'),
+  ('10000000-0000-0000-0000-000000000009', 'Com que voz', 'Amália Rodrigues', 1970, 'https://coverartarchive.org/release-group/d0718149-53e4-379f-9e59-50744275676b/front-500', 'Fado'),
+  ('10000000-0000-0000-0000-000000000010', 'Illmatic', 'Nas', 1994, 'https://coverartarchive.org/release-group/28298e2c-4d70-3eed-a0f5-a3280c662b3d/front-500', 'Hip-hop');
 
 -- Versions -----------------------------------------------------------------
 insert into versions (id, album_id, name, release_year, country, label, format, sound_score, original_score, rating_count, typical_price_min, typical_price_max) values

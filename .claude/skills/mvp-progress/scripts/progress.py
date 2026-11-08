@@ -27,6 +27,11 @@ for line in order.splitlines():
         phases.append({"name": m.group(1), "text": m.group(2).strip(),
                        "stories": re.findall(r"\d+", bare)})
 
+# "Not in this MVP: stories 10, 11, 13"
+m_out = re.search(r"Not in this MVP:\s*stories?\s*([\d,\s]+)", spec)
+outside = re.findall(r"\d+", m_out.group(1)) if m_out else []
+in_phases = {s for p in phases for s in p["stories"]}
+
 # Story titles from the Stories table: "Story 1 · Search for an album"
 titles = dict(re.findall(r"\|\s*Story (\d+) · ([^|]+?)\s*\|", spec))
 
@@ -64,10 +69,23 @@ if fpath.exists():
                 open_findings.setdefault(s, []).append(
                     {"id": f["id"], "severity": f["severity"], "title": f["title"]})
 
+# Where each outside story is mentioned in specs/ ("- Filters (story 10)"): the only clue to what it is
+mentions = {}
+for f in sorted((root / "specs").glob("story-*.md")):
+    for line in f.read_text(encoding="utf-8").splitlines():
+        if line.lstrip().startswith("- "):
+            for n in re.findall(r"story (\d+)", line, flags=re.I):
+                if n in outside or n not in in_phases:
+                    mentions.setdefault(n, []).append(f"{f.name}: {line.strip()[2:]}")
+
 stories = {}
-for s in sorted(set(titles) | set(rows), key=lambda x: int(x)):
+for s in sorted(set(titles) | set(rows) | set(outside), key=lambda x: int(x)):
+    scope = ("mvp" if s in in_phases else
+             "outside_mvp" if s in outside else "specified_not_scheduled")
     st, tested, total, untested = status(rows.get(s, []))
-    stories[s] = {"title": titles.get(s, ""), "status": st, "tested_rows": tested,
+    stories[s] = {"title": titles.get(s, ""), "scope": scope,
+                  "has_spec_file": any((root / "specs").glob(f"story-{s}-*.md")),
+                  "mentioned_in": mentions.get(s, []), "status": st, "tested_rows": tested,
                   "total_rows": total, "not_tested_automatically": untested,
                   "pending_rows": [r["requirement"] for r in rows.get(s, [])
                                    if r["requirement"] and (not r["test"] or r["test"].lower().startswith("written with"))],

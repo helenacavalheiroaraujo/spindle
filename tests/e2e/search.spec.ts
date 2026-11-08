@@ -26,7 +26,7 @@ test("'ziggy' finds Ziggy Stardust with cover, title, artist, year and versions"
   await expect(row).toHaveCount(1);
   await expect(row).toContainText("David Bowie, 1972");
   await expect(row).toContainText("3 versions");
-  await expect(row.locator("img")).toHaveAttribute("src", "/covers/ziggy-stardust.svg");
+  await expect(row.locator("img")).toHaveAttribute("src", "https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500");
   await expect(row).not.toContainText("No listings");
 });
 

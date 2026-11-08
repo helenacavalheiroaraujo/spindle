@@ -17,12 +17,14 @@ Give the user an honest overview of what is done and what is left for the MVP, f
 ## Steps
 
 1. **Count:** `python3 .claude/skills/mvp-progress/scripts/progress.py` → JSON with the build phases, each story's status, Traceability rows tested / total, rows "Not tested automatically", rows still pending, open findings, days left.
+   Each story has a `scope`: `mvp` (in a build phase), `specified_not_scheduled` (has a spec file and a row in the Stories table, but is in no phase and not in "Not in this MVP"), or `outside_mvp` (named in SPEC.md's "Not in this MVP" line; may have no spec file). The headline counts ("N of N MVP stories") use `mvp` stories only. `outside_mvp` and `specified_not_scheduled` stories go in their own section, never in the MVP counts or the risk line.
    Story status:
    - *Not started* — no Traceability rows with a requirement
    - *In progress* — some rows have no test yet, or say "Written with story N"
    - *Built with gaps* — every row has a test or says "Not tested automatically"
    - *Built* — every row has an automated test
 2. **Run the tests:** `npm test` (Vitest) and `npm run test:e2e` (Playwright, phone and desktop; run it in the background, it takes ~30 s). Record passed / failed / skipped for each. Any failure is the first line of the report.
+2b. **Outside the MVP section:** for every story with scope `outside_mvp` or `specified_not_scheduled`, give: number, title (or "No title in the repo" when `title` is empty), whether a spec file exists, status, and where it is mentioned (`mentioned_in`). Do not invent titles or content for stories without a spec file; say "No story file yet". For `specified_not_scheduled`, add one line: it needs a place in the build order (the user decides).
 3. **Judge what the numbers cannot see**, reading SPEC.md's build order:
    - Partial parts of a phase written in brackets (e.g. "2 (save to account)", "7 step 3", "9 (reviews)"): say whether that part is done, from the Traceability rows.
    - Open findings that block a story not yet built (they must be decided before it starts — CLAUDE.md step 1).
