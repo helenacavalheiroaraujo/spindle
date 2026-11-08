@@ -7,6 +7,7 @@ import { yellowWarning } from "@/lib/rules/yellowWarning";
 import { priceLabel, type TypicalRange } from "@/lib/rules/fairPrice";
 import { LightLegend, TrafficLight } from "@/components/TrafficLight";
 import { BuyButton } from "@/components/BuyButton";
+import { checkoutPath } from "@/lib/rules/checkoutAccess";
 import { sellerText } from "@/lib/rules/seller";
 import { SellerLine } from "@/components/SellerLine";
 
@@ -83,6 +84,7 @@ export function ListingList({
               {light !== "red" && (
                 <div className="flex w-full justify-end">
                   <BuyButton
+                    href={checkoutPath(l.id, versionId)}
                     listingLabel={label}
                     warning={light === "yellow" ? yellowWarning(l.checks, l.hasMatrixPhoto, movedHere) : null}
                   />

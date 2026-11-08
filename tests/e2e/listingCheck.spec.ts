@@ -26,10 +26,8 @@ test("green: summary, three ✓, photos, condition in plain words, Buy with prot
   await expect(checklist(page)).toHaveText([/Cover and label match the version.*Matches/, /Country and year match.*Matches/, /Matrix photo matches.*Matches/]);
   for (const kind of ["cover", "record", "matrix"]) await expect(page.getByRole("img", { name: `${kind} photo` })).toBeVisible();
   await expect(page.getByText("NM means near mint")).toBeVisible();
-  await page.getByRole("button", { name: /^Buy with protection/ }).click();
-  const before = page.getByRole("group", { name: "Before you buy" });
-  await expect(before.getByRole("button", { name: "Continue to checkout" })).toBeDisabled();
-  await expect(before.getByRole("note")).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /^Buy with protection/ })).toHaveAttribute("href", `/checkout/${GREEN_32}?version=${V2012}`);
+  await expect(page.getByRole("group", { name: "Before you buy" })).toHaveCount(0);
   await expect(page.getByText("Check results and photos are illustrative data")).toBeVisible();
 });
 

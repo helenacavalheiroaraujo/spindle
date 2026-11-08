@@ -85,22 +85,26 @@ test("sellers: a shop shows its name and a Shop tag; others show Private seller;
   await expect(page.getByText(/Ana Sousa|Rui Ferreira|Marta Lopes|João Pinto/)).toHaveCount(0);
 });
 
-test("yellow: Buy first shows what is uncertain; Back closes it; checkout comes in story 7", async ({ page }) => {
+test("yellow: Buy first shows what is uncertain; Back closes it; Continue to checkout leads to the checkout", async ({ page }) => {
   await page.goto(`/versions/${V2012}/listings`);
   await rows(page).nth(1).getByRole("button", { name: /^Buy/ }).click();
   const before = page.getByRole("group", { name: "Before you buy" });
   await expect(before).toContainText("The matrix photo isn't sharp. If it turns out to be another pressing, you get your money back.");
-  await expect(before.getByRole("button", { name: "Continue to checkout" })).toBeDisabled();
+  await expect(before.getByRole("link", { name: "Continue to checkout" })).toHaveAttribute(
+    "href",
+    `/checkout/40000000-0000-0000-0000-000000000006?version=${V2012}`,
+  );
   await before.getByRole("button", { name: "Back" }).click();
   await expect(before).toHaveCount(0);
 });
 
-test("green: Buy shows no warning", async ({ page }) => {
+test("green: Buy goes straight to the checkout, with no warning (finding #57)", async ({ page }) => {
   await page.goto(`/versions/${V2012}/listings`);
-  await rows(page).nth(0).getByRole("button", { name: /^Buy/ }).click();
-  const before = page.getByRole("group", { name: "Before you buy" });
-  await expect(before.getByRole("button", { name: "Continue to checkout" })).toBeVisible();
-  await expect(before.getByRole("note")).toHaveCount(0);
+  await expect(rows(page).nth(0).getByRole("link", { name: /^Buy/ })).toHaveAttribute(
+    "href",
+    `/checkout/40000000-0000-0000-0000-000000000005?version=${V2012}`,
+  );
+  await expect(page.getByRole("group", { name: "Before you buy" })).toHaveCount(0);
 });
 
 test("1990 Reissue: listings moved here are yellow with 'Moved here · check pending'", async ({ page }) => {

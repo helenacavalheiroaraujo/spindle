@@ -9,6 +9,7 @@ import { yellowWarning } from "@/lib/rules/yellowWarning";
 import { Header } from "@/components/Header";
 import { TrafficLight } from "@/components/TrafficLight";
 import { BuyButton } from "@/components/BuyButton";
+import { checkoutPath } from "@/lib/rules/checkoutAccess";
 import { sellerText } from "@/lib/rules/seller";
 import { SellerLine } from "@/components/SellerLine";
 
@@ -138,6 +139,7 @@ export default async function ListingCheckPage({
         ) : (
           <BuyButton
             text="Buy with protection"
+            href={checkoutPath(l.id, versionId)}
             listingLabel={label}
             warning={light === "yellow" ? yellowWarning(l.checks, l.hasMatrixPhoto, movedHere) : null}
           />
