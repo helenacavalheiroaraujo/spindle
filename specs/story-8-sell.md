@@ -18,9 +18,9 @@
 | Screen | Design |
 |---|---|
 | Sell form ("Sell a record") | `Spindle_mockups_by_section.pdf` p. 16 (phone), p. 20 (desktop) |
-| List of versions to pick from | **None yet: Canva design needed before building** |
+| List of versions to pick from | Option B (choose, then "Continue"): `docs/design/sell-versions-options.html` (phone), `docs/design/sell-versions-desktop.html` (desktop) |
 | First time selling: city and shop name | Fields on the sell form, option C (a row "Add your city" that opens them): `docs/design/sell-form-first-time-options.html` (phone), `docs/design/sell-form-first-time-desktop.html` (desktop) |
-| My listings | **None yet: Canva design needed before building** |
+| My listings | Option B (tabs "On sale" / "Sold" and a detail sheet; a panel beside the list on desktop): `docs/design/my-listings-options.html` (phone), `docs/design/my-listings-desktop.html` (desktop) |
 
 ## Traffic light for new listings
 - Automatic checks are out of scope, so every item of a new listing's checklist is **? (uncertain)** → new listings are always **yellow** in the MVP (rule from story 5)
@@ -48,6 +48,7 @@
 - [ ] A price of 0, a negative one, text, more than 2 decimals or above €1000 is refused with its message and the listing is not created
 - [ ] Sold listings can be seen but not edited or removed
 - [ ] The form says "No commission: you receive €[price]"
+- [ ] A signed-in seller sees their own listings without the Buy button: "Your listing" is shown instead
 
 ## Edge cases
 - Version not in the catalogue → message "This version isn't in our catalogue yet"; no listing created

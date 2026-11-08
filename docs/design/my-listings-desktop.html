@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My listings: desktop (option B)</title>
+<!-- Story 8 · finding #74 · desktop version of option B (tabs and a detail panel). On desktop the phone's bottom sheet becomes a panel beside the list. Header as in sell-form-first-time-desktop.html. Texts are proposals. Illustrative data (seed). -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:15px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:-.01em} .vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;margin:0 0 8px}
+.fr{max-width:1232px;margin:0 auto 36px} .desk{border:1px solid #1d2433;border-radius:20px;overflow:hidden;background:#f4efe6;position:relative}
+.top{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid #e2dacb;background:#faf7f1} .logo{display:flex;gap:8px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;letter-spacing:.04em}
+.dot{width:22px;height:22px;border-radius:50%;border:6px solid #1d2433;display:inline-block} .right{display:flex;gap:14px;align-items:center} .sellpill{border:1.5px solid #1d2433;border-radius:999px;padding:9px 18px;font-weight:600} .avatar{width:42px;height:42px;border-radius:50%;background:#1d2433;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600}
+.body{display:grid;grid-template-columns:1fr 420px;gap:40px;padding:32px 48px 44px;align-items:start} main{display:grid;gap:12px} h1{font-size:56px;line-height:1}
+.small{font-size:13px;color:#6f6a60}
+.tabs{display:flex;gap:8px} .tab{border:1.5px solid #1d2433;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:600} .tab.on{background:#1d2433;color:#fff}
+.card{background:#faf7f1;border:1px solid #e2dacb;border-radius:14px;padding:14px 16px} .card.selc{border:2px solid #1d2433;background:#dfe3ef}
+.item{display:flex;gap:14px;align-items:center} .cover{width:60px;height:60px;border-radius:10px;background:#5a3a24;flex:none} .cover.b{background:#8a6a4a}
+.price{margin-left:auto;font-weight:700;font-size:18px;white-space:nowrap}
+.light{display:inline-flex;align-items:center;gap:5px;border:1px solid #e2dacb;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600;background:#fff;margin-top:6px} .light i{width:9px;height:9px;border-radius:50%;background:#e2b23a}
+.panel{background:#faf7f1;border:1px solid #e2dacb;border-radius:20px;padding:24px;display:grid;gap:10px} .panel .head{display:flex;justify-content:space-between;align-items:flex-start}
+.tag{background:#dfe3ef;border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600;white-space:nowrap}
+.pricerow{display:flex;align-items:center;gap:12px;flex-wrap:wrap} .input{background:#fff;border:1.5px solid #1d2433;border-radius:999px;padding:12px 18px;min-width:120px;font-weight:600}
+.btn{background:#1d2433;color:#fff;border-radius:999px;text-align:center;padding:14px;font-weight:600} .pill{border:1.5px solid #1d2433;border-radius:999px;padding:12px 18px;font-weight:600;text-align:center} .pill.danger{border-color:#9a3b2a;color:#9a3b2a}
+.lbl{font-size:14px;font-weight:600;margin-top:6px}
+.shade{position:absolute;inset:0;background:rgba(29,36,51,.45);display:flex;align-items:center;justify-content:center}
+.dialog{background:#faf7f1;border:2px solid #1d2433;border-radius:18px;padding:24px;width:400px} .dialog h3{font-size:30px;margin-bottom:4px} .row2{display:flex;gap:10px;margin-top:16px} .row2>*{flex:1}
+.toast{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);background:#1d2433;color:#fff;border-radius:999px;padding:14px 22px;display:flex;gap:28px;align-items:center} .toast u{font-weight:700}
+</style></head><body>
+
+<section class="fr"><h2 class="vt">Desktop · On sale, one listing open</h2><div class="desk"><header class="top"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="right"><span class="sellpill">+ Sell for free</span><span class="avatar">AR</span></span></header><div class="body"><main>
+<h1 class="hd">My listings</h1>
+<div class="tabs"><span class="tab on">On sale (2)</span><span class="tab">Sold (1)</span></div>
+<div class="card selc"><div class="item"><i class="cover"></i><div><b>Ziggy Stardust</b><div class="small">2012 Remaster · Very good (VG+)</div><span class="light"><i></i>Check</span></div><span class="price">€30 ›</span></div></div>
+<div class="card"><div class="item"><i class="cover b"></i><div><b>Hunky Dory</b><div class="small">2015 Remaster · Near mint (NM)</div><span class="light"><i></i>Check</span></div><span class="price">€32 ›</span></div></div>
+</main>
+<aside class="panel"><div class="head"><div class="item"><i class="cover"></i><div><b>Ziggy Stardust</b><div class="small">2012 Remaster · Very good (VG+)</div></div></div><u>Close</u></div>
+<p class="small">Condition, photos and version can't be changed.</p>
+<p class="lbl">Price</p>
+<div class="pricerow"><span class="input">€34</span><span class="small">Typical for this pressing: €28–€36</span><span class="tag">Typical</span></div>
+<p class="small">No commission: you receive €34</p>
+<div class="btn">Save price</div>
+<div class="pill danger">Remove listing</div>
+</aside></div></div></section>
+
+<section class="fr"><h2 class="vt">Desktop · Sold tab (no panel, rows not clickable)</h2><div class="desk"><header class="top"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="right"><span class="sellpill">+ Sell for free</span><span class="avatar">AR</span></span></header><div class="body"><main>
+<h1 class="hd">My listings</h1>
+<div class="tabs"><span class="tab">On sale (2)</span><span class="tab on">Sold (1)</span></div>
+<div class="card" style="opacity:.75"><div class="item"><i class="cover"></i><div><b>Ziggy Stardust</b><div class="small">1990 Reissue · Good (VG)</div></div><span class="price">€22</span></div></div>
+</main><div></div></div></div></section>
+
+<section class="fr"><h2 class="vt">Desktop · after “Remove listing”: confirmation</h2><div class="desk"><header class="top"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="right"><span class="sellpill">+ Sell for free</span><span class="avatar">AR</span></span></header><div class="body" style="min-height:360px"><main>
+<h1 class="hd">My listings</h1>
+<div class="tabs"><span class="tab on">On sale (2)</span><span class="tab">Sold (1)</span></div>
+</main><div></div></div>
+<div class="shade"><div class="dialog"><h3 class="hd">Remove this listing?</h3><p class="small">Buyers will no longer see it.</p><div class="row2"><span class="pill">Keep it</span><span class="btn" style="background:#9a3b2a">Remove</span></div></div></div></div></section>
+
+<section class="fr"><h2 class="vt">Desktop · removed: panel closes, toast for 5 seconds</h2><div class="desk"><header class="top"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="right"><span class="sellpill">+ Sell for free</span><span class="avatar">AR</span></span></header><div class="body" style="min-height:340px"><main>
+<h1 class="hd">My listings</h1>
+<div class="tabs"><span class="tab on">On sale (1)</span><span class="tab">Sold (1)</span></div>
+<div class="card"><div class="item"><i class="cover b"></i><div><b>Hunky Dory</b><div class="small">2015 Remaster · Near mint (NM)</div><span class="light"><i></i>Check</span></div><span class="price">€32 ›</span></div></div>
+</main><div></div></div>
+<div class="toast">Listing removed <u>Undo</u></div></div></section>
+
+</body></html>

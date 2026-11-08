@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My listings: three options</title>
+<!-- Story 8 · finding #74. My listings: see own listings with status, edit the price, remove with confirmation, toast with Undo (5 s). Three options to choose from (phone). Texts are proposals. Illustrative data (seed). -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:-.01em}
+.wrap{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+.col{width:375px} .vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px}
+.phone{border:1px solid #1d2433;border-radius:28px;overflow:hidden;background:#f4efe6;position:relative}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px} .logo{display:flex;gap:8px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em}
+.dot{width:20px;height:20px;border-radius:50%;border:5px solid #1d2433;display:inline-block} .sellpill{border:1.5px solid #1d2433;border-radius:999px;padding:6px 12px;font-weight:600;font-size:13px} .menu{font-size:20px}
+main{padding:4px 16px 20px;display:grid;gap:8px} h1{font-size:32px;line-height:1} h3{font-size:20px;margin-top:6px}
+.small{font-size:12px;color:#6f6a60} .cap{font-size:12px;color:#4a5163;margin:14px 0 6px;font-weight:600}
+.card{background:#faf7f1;border:1px solid #e2dacb;border-radius:14px;padding:12px} .sold{opacity:.7}
+.item{display:flex;gap:10px;align-items:flex-start} .cover{width:52px;height:52px;border-radius:8px;background:#5a3a24;flex:none} .cover.b{background:#8a6a4a}
+.item .price{margin-left:auto;font-weight:700;font-size:16px;white-space:nowrap}
+.tags{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap} .tag{background:#dfe3ef;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:600;white-space:nowrap}
+.light{display:inline-flex;align-items:center;gap:5px;border:1px solid #e2dacb;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:600;background:#fff} .light i{width:9px;height:9px;border-radius:50%;background:#e2b23a}
+.tag.onsale{background:#dfe3ef} .tag.soldt{background:#e8dfce}
+.actions{display:flex;gap:8px;margin-top:10px} .pill{border:1.5px solid #1d2433;border-radius:999px;padding:9px 14px;font-weight:600;font-size:13px;text-align:center;flex:1} .pill.danger{border-color:#9a3b2a;color:#9a3b2a}
+.btn{background:#1d2433;color:#fff;border-radius:999px;text-align:center;padding:12px;font-weight:600;flex:1}
+.input{background:#fff;border:1.5px solid #1d2433;border-radius:999px;padding:10px 16px;min-width:96px;font-weight:600}
+.pricerow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px}
+.tabs{display:flex;gap:6px} .tab{border:1.5px solid #1d2433;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600} .tab.on{background:#1d2433;color:#fff}
+.more{margin-left:auto;font-size:20px;line-height:1;padding:0 4px}
+.menuPop{background:#fff;border:1px solid #e2dacb;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.12);width:170px;margin-left:auto} .menuPop div{padding:12px 14px;border-bottom:1px solid #eee} .menuPop div:last-child{border:0;color:#9a3b2a}
+.sheet{background:#faf7f1;border:1px solid #e2dacb;border-radius:20px 20px 0 0;padding:16px;border-bottom:0} .grab{width:40px;height:4px;border-radius:4px;background:#cfc6b4;margin:0 auto 10px}
+.dialog{background:#faf7f1;border:2px solid #1d2433;border-radius:18px;padding:16px} .dialog h3{margin:0 0 4px}
+.toast{background:#1d2433;color:#fff;border-radius:999px;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;font-weight:500} .toast u{font-weight:700;color:#f4efe6}
+.emph{background:#5a3a24;color:#f4efe6;border-radius:14px;padding:12px} .emph .small{color:#e8dfce}
+</style></head><body><div class="wrap">
+
+<!-- ============ OPTION A ============ -->
+<section class="col"><h2 class="vt">Option A · Buttons on each card</h2><p class="why">Every listing on sale shows “Edit price” and “Remove” right on its card. Editing opens the price inside the same card. Everything is visible; the list is longer.</p>
+<div class="phone"><header class="top"><span class="menu">☰</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="sellpill">+ Sell</span></header><main>
+<h1 class="hd">My listings</h1>
+<div class="card"><div class="item"><i class="cover"></i><div><b>Ziggy Stardust</b><div class="small">2012 Remaster · Very good (VG+)</div><div class="tags"><span class="tag onsale">On sale</span><span class="light"><i></i>Check</span></div></div><span class="price">€30</span></div>
+<div class="actions"><span class="pill">Edit price</span><span class="pill danger">Remove</span></div></div>
+<div class="card"><div class="item"><i class="cover b"></i><div><b>Hunky Dory</b><div class="small">2015 Remaster · Near mint (NM)</div><div class="tags"><span class="tag onsale">On sale</span><span class="light"><i></i>Check</span></div></div><span class="price">€32</span></div>
+<div class="actions"><span class="pill">Edit price</span><span class="pill danger">Remove</span></div></div>
+<div class="card sold"><div class="item"><i class="cover"></i><div><b>Ziggy Stardust</b><div class="small">1990 Reissue · Good (VG)</div><div class="tags"><span class="tag soldt">Sold</span></div></div><span class="price">€22</span></div></div>
+<p class="cap">Tapping “Edit price” — the card opens in place:</p>
+<div class="card" style="border:2px solid #1d2433"><div class="item"><i class="cover"></i><div><b>Ziggy Stardust</b><div class="small">2012 Remaster · Very good (VG+)</div></div></div>
+<div class="pricerow"><span class="input">€34</span><span class="small">Typical for this pressing: €28–€36</span><span class="tag">Typical</span></div>
+<p class="small" style="margin-top:6px">No commission: you receive €34</p>
+<div class="actions"><span class="pill">Cancel</span><span class="btn">Save price</span></div></div>
+<p class="cap">Tapping “Remove” — confirmation:</p>
+<div class="dialog"><h3 class="hd">Remove this listing?</h3><p class="small">Buyers will no longer see it.</p><div class="actions"><span class="pill">Keep it</span><span class="btn" style="background:#9a3b2a">Remove</span></div></div>
+<p class="cap">After removing — for 5 seconds:</p>
+<div class="toast">Listing removed <u>Undo</u></div>
+</main></div></section>
+
+<!-- ============ OPTION B ============ -->
+<section class="col"><h2 class="vt">Option B · Tabs and a detail sheet</h2><p class="why">Two tabs, “On sale” and “Sold”, keep the list short. Tapping a listing opens a sheet with the price to edit and “Remove listing” at the bottom. Cleaner list; actions are one tap deeper.</p>
+<div class="phone"><header class="top"><span class="menu">☰</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="sellpill">+ Sell</span></header><main>
+<h1 class="hd">My listings</h1>
+<div class="tabs"><span class="tab on">On sale (2)</span><span class="tab">Sold (1)</span></div>
+<div class="card"><div class="item"><i class="cover"></i><div><b>Ziggy Stardust</b><div class="small">2012 Remaster · Very good (VG+)</div><div class="tags"><span class="light"><i></i>Check</span></div></div><span class="price">€30 ›</span></div></div>
+<div class="card"><div class="item"><i class="cover b"></i><div><b>Hunky Dory</b><div class="small">2015 Remaster · Near mint (NM)</div><div class="tags"><span class="light"><i></i>Check</span></div></div><span class="price">€32 ›</span></div></div>
+<p class="small">On “Sold”: the same rows without ›, not tappable.</p>
+<p class="cap">Tapping a listing — sheet from the bottom:</p>
+<div class="sheet"><div class="grab"></div><div class="item"><i class="cover"></i><div><b>Ziggy Stardust</b><div class="small">2012 Remaster · Very good (VG+)</div><div class="small">Condition, photos and version can't be changed.</div></div></div>
+<p class="small" style="margin-top:12px;font-weight:600;color:#1d2433">Price</p>
+<div class="pricerow" style="margin-top:4px"><span class="input">€34</span><span class="small">Typical for this pressing: €28–€36</span><span class="tag">Typical</span></div>
+<p class="small" style="margin-top:6px">No commission: you receive €34</p>
+<div class="actions"><span class="btn">Save price</span></div>
+<div class="actions"><span class="pill danger">Remove listing</span></div></div>
+<p class="cap">Tapping “Remove listing” — confirmation:</p>
+<div class="dialog"><h3 class="hd">Remove this listing?</h3><p class="small">Buyers will no longer see it.</p><div class="actions"><span class="pill">Keep it</span><span class="btn" style="background:#9a3b2a">Remove</span></div></div>
+<p class="cap">After removing — sheet closes, for 5 seconds:</p>
+<div class="toast">Listing removed <u>Undo</u></div>
+</main></div></section>
+
+<!-- ============ OPTION C ============ -->
+<section class="col"><h2 class="vt">Option C · Sections and a “⋯” menu</h2><p class="why">One list in two sections, “On sale” then “Sold”. Each listing on sale has a “⋯” menu with “Edit price” and “Remove”. Compact, and both statuses are visible at once; the actions are hidden behind the menu.</p>
+<div class="phone"><header class="top"><span class="menu">☰</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="sellpill">+ Sell</span></header><main>
+<h1 class="hd">My listings</h1>
+<div class="emph"><b>You keep 100%</b><div class="small">No commission on any of your sales.</div></div>
+<h3 class="hd">On sale · 2</h3>
+<div class="card"><div class="item"><i class="cover"></i><div><b>Ziggy Stardust</b><div class="small">2012 Remaster · VG+ · €30</div><div class="tags"><span class="light"><i></i>Check</span></div></div><span class="more">⋯</span></div></div>
+<div class="menuPop"><div>Edit price</div><div>Remove</div></div>
+<div class="card"><div class="item"><i class="cover b"></i><div><b>Hunky Dory</b><div class="small">2015 Remaster · NM · €32</div><div class="tags"><span class="light"><i></i>Check</span></div></div><span class="more">⋯</span></div></div>
+<h3 class="hd">Sold · 1</h3>
+<div class="card sold"><div class="item"><i class="cover"></i><div><b>Ziggy Stardust</b><div class="small">1990 Reissue · VG · €22</div></div></div></div>
+<p class="cap">“Edit price” — small sheet with only the price:</p>
+<div class="sheet"><div class="grab"></div><b>New price</b>
+<div class="pricerow"><span class="input">€34</span><span class="small">Typical for this pressing: €28–€36</span><span class="tag">Typical</span></div>
+<p class="small" style="margin-top:6px">No commission: you receive €34</p>
+<div class="actions"><span class="pill">Cancel</span><span class="btn">Save price</span></div></div>
+<p class="cap">“Remove” — confirmation, then for 5 seconds:</p>
+<div class="dialog"><h3 class="hd">Remove this listing?</h3><p class="small">Buyers will no longer see it.</p><div class="actions"><span class="pill">Keep it</span><span class="btn" style="background:#9a3b2a">Remove</span></div></div>
+<div class="toast">Listing removed <u>Undo</u></div>
+</main></div></section>
+
+</div></body></html>

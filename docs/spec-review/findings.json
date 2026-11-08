@@ -461,10 +461,14 @@
         "current": "",
         "proposed": "A signed-in seller sees their own listings without the Buy button (\"Your listing\")."
       },
-      "question": "Option B chosen on 2026-11-08: waits for story 8. Decide the rule when story 8 is built (recorded in DECISIONS.md).",
-      "status": "open",
+      "question": null,
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option A: a signed-in seller sees \"Your listing\" instead of Buy on their own listings. Rule for the built stories 5 and 7 recorded in DECISIONS.md; new acceptance criterion in story 8."
+      }
     },
     {
       "id": 13,
@@ -2347,9 +2351,13 @@
         "proposed": "| List of versions to pick from | [link to the approved Canva design, or a page in docs/design/] |"
       },
       "question": "Approve a design for this screen. It also depends on #36 (the list opens even when nobody is selling the album).",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 6,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option B (choose, then \"Continue\"). Phone and desktop designs approved (docs/design/sell-versions-options.html and sell-versions-desktop.html). Story 8 Designs updated and recorded in DECISIONS.md."
+      }
     },
     {
       "id": 73,
@@ -2408,9 +2416,13 @@
         "proposed": "| My listings | [link to the approved Canva design, or a page in docs/design/] |"
       },
       "question": "Approve a design for this screen. It depends on #13 (how to reach it), #35 (which statuses show), #80 (edit) and #81 (remove).",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 6,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-08",
+        "decision": "Option B (tabs \"On sale\" / \"Sold\" and a detail sheet; a panel beside the list on desktop), with remove confirmation, toast with Undo and price-only edit. Phone and desktop designs approved (docs/design/my-listings-options.html and my-listings-desktop.html). Story 8 Designs updated and recorded in DECISIONS.md."
+      }
     },
     {
       "id": 75,
@@ -3298,19 +3310,19 @@
       "id": "T8",
       "text": "When story 8 starts: decide #12 (seller buying their own listing), with #13, #35 and #36",
       "finding": 12,
-      "done": false
+      "done": true
     },
     {
       "id": "T9",
       "text": "Before building story 8: approve the 3 missing designs (#72, #73, #74) and decide #13, #35, #36 and #73's screen-or-fields question",
       "finding": 72,
-      "done": false
+      "done": true
     },
     {
       "id": "T10",
       "text": "Before building story 8: decide #75 (High), then #76-#82; decide #12 with them",
       "finding": 75,
-      "done": false
+      "done": true
     },
     {
       "id": "T11",

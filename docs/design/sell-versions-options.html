@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sell, pick a version: three options</title>
+<!-- Story 8 · finding #72. List of versions the seller picks from, after tapping an album on the sell search. Three options to choose from (phone). Texts are proposals. Illustrative data (seed). -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:-.01em}
+.wrap{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+.col{width:375px} .vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px}
+.phone{border:1px solid #1d2433;border-radius:28px;overflow:hidden;background:#f4efe6}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px} .logo{display:flex;gap:8px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em}
+.dot{width:20px;height:20px;border-radius:50%;border:5px solid #1d2433;display:inline-block} .sellpill{border:1.5px solid #1d2433;border-radius:999px;padding:6px 12px;font-weight:600;font-size:13px} .menu{font-size:20px}
+main{padding:4px 16px 20px;display:grid;gap:8px} h1{font-size:30px;line-height:1}
+.back{font-size:13px;font-weight:600} .small{font-size:12px;color:#6f6a60} .lbl{font-size:12px;color:#4a5163;margin-top:6px;display:block}
+.album{display:flex;gap:12px;align-items:center} .cover{width:56px;height:56px;border-radius:10px;background:#5a3a24;flex:none}
+.card{background:#faf7f1;border:1px solid #e2dacb;border-radius:14px;padding:12px} .row{display:flex;gap:10px;align-items:center;min-height:56px}
+.row .go{margin-left:auto;font-size:18px} .vinyl{width:36px;height:36px;border-radius:50%;background:#1d2433;border:11px solid #1d2433;box-shadow:inset 0 0 0 5px #d9d4ea;flex:none}
+.tag{background:#dfe3ef;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:600;white-space:nowrap;display:inline-block}
+.radio{width:22px;height:22px;border-radius:50%;border:2px solid #1d2433;flex:none} .sel{background:#dfe3ef;border:2px solid #1d2433} .sel .radio{box-shadow:inset 0 0 0 4px #dfe3ef;background:#1d2433}
+.btn{background:#1d2433;color:#fff;border-radius:999px;text-align:center;padding:14px;font-weight:600;margin-top:4px} .btn.off{opacity:.4}
+.foot{font-size:12px;color:#6f6a60;text-align:center} .link{text-decoration:underline;font-weight:600}
+.chips{display:flex;gap:6px;flex-wrap:wrap} .chip{border:1.5px solid #1d2433;border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600} .chip.on{background:#1d2433;color:#fff}
+table{width:100%;border-collapse:collapse;font-size:13px} th{font-size:11px;color:#6f6a60;text-align:left;font-weight:500;padding:6px 4px;border-bottom:1px solid #e2dacb} td{padding:12px 4px;border-bottom:1px solid #e2dacb} td:last-child{text-align:right}
+.tip{background:#5a3a24;color:#f4efe6;border-radius:14px;padding:12px;font-size:13px} .tip b{display:block;margin-bottom:2px}
+.cap{margin-top:6px}
+</style></head><body><div class="wrap">
+
+<section class="col"><h2 class="vt">Option A · Tap a row</h2><p class="why">A plain list, one row per version. Tapping a row goes straight to the sell form with that version filled in (“Change” there brings the seller back). Fewest taps.</p>
+<div class="phone"><header class="top"><span class="menu">☰</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="sellpill">+ Sell</span></header><main>
+<span class="back">← Back to search</span>
+<div class="album"><i class="cover"></i><div><b>The Rise and Fall of Ziggy Stardust…</b><div class="small">David Bowie · 3 versions</div></div></div>
+<h1 class="hd">Which one do you have?</h1>
+<p class="small">Check the year and label on the back cover or on the record.</p>
+<div class="card row"><i class="vinyl"></i><div><b>1972 UK original</b><div class="small">1972 · UK · RCA Victor · LP</div></div><span class="go">›</span></div>
+<div class="card row"><i class="vinyl"></i><div><b>1990 Reissue</b><div class="small">1990 · UK · EMI · LP</div></div><span class="go">›</span></div>
+<div class="card row"><i class="vinyl"></i><div><b>2012 Remaster</b><div class="small">2012 · EU · Parlophone · LP, 180 g</div></div><span class="go">›</span></div>
+<p class="foot cap"><span class="link">My version isn't here</span></p>
+<p class="small">Tapping it shows: “This version isn't in our catalogue yet”.</p>
+</main></div></section>
+
+<section class="col"><h2 class="vt">Option B · Choose, then continue</h2><p class="why">Cards with a round selector; the seller picks one and confirms with “Continue”. One tap more, but a wrong tap is easy to undo before moving on.</p>
+<div class="phone"><header class="top"><span class="menu">☰</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="sellpill">+ Sell</span></header><main>
+<span class="back">← Back to search</span>
+<div class="album"><i class="cover"></i><div><b>The Rise and Fall of Ziggy Stardust…</b><div class="small">David Bowie · 3 versions</div></div></div>
+<h1 class="hd">Which one do you have?</h1>
+<p class="small">Check the year and label on the back cover or on the record.</p>
+<div class="card row"><i class="radio"></i><div><b>1972 UK original</b><div class="small">1972 · UK · RCA Victor · LP</div></div></div>
+<div class="card row"><i class="radio"></i><div><b>1990 Reissue</b><div class="small">1990 · UK · EMI · LP</div></div></div>
+<div class="card row sel"><i class="radio"></i><div><b>2012 Remaster</b><div class="small">2012 · EU · Parlophone · LP, 180 g</div></div></div>
+<div class="btn">Continue</div>
+<p class="foot">Until one is chosen: “Choose a version to continue”</p>
+<p class="foot cap"><span class="link">My version isn't here</span></p>
+</main></div></section>
+
+<section class="col"><h2 class="vt">Option C · Table with a tip</h2><p class="why">The four facts in columns, easy to compare line by line with the record in hand. A dark-brown tip says where to find them. Tapping a row goes to the form, as in A.</p>
+<div class="phone"><header class="top"><span class="menu">☰</span><span class="logo"><i class="dot"></i>SPINDLE</span><span class="sellpill">+ Sell</span></header><main>
+<span class="back">← Back to search</span>
+<div class="album"><i class="cover"></i><div><b>The Rise and Fall of Ziggy Stardust…</b><div class="small">David Bowie · 3 versions</div></div></div>
+<h1 class="hd">Which one do you have?</h1>
+<div class="tip"><b>Where to look</b>The year, country and label are printed on the back cover and on the label in the middle of the record.</div>
+<div class="card"><table><thead><tr><th>Year</th><th>Country</th><th>Label</th><th>Format</th><th></th></tr></thead><tbody>
+<tr><td><b>1972</b></td><td>UK</td><td>RCA Victor</td><td>LP</td><td>›</td></tr>
+<tr><td><b>1990</b></td><td>UK</td><td>EMI</td><td>LP</td><td>›</td></tr>
+<tr><td><b>2012</b></td><td>EU</td><td>Parlophone</td><td>LP, 180 g</td><td>›</td></tr>
+</tbody></table></div>
+<p class="foot cap"><span class="link">My version isn't here</span></p>
+</main></div></section>
+
+</div></body></html>

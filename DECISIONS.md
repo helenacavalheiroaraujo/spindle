@@ -3,6 +3,20 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 8 (sell) · designs and finding #12
+
+### A seller sees "Your listing" instead of Buy on their own listings (stories 5, 7, 8 · finding #12)
+- **Why:** one account buys and sells (story 9), so without a rule a seller could buy their own record and create an order that makes no sense. Showing "Your listing" in place of Buy tells the seller why they cannot buy it, before they tap. It also keeps the demo clean: after publishing, the seller sees their listing under the version without a Buy button.
+- **Trade-off accepted:** the listing screens of stories 5 and 7, already built and tested, now need to know who is signed in, and get one more test. Their story files are not changed; this rule lives here. The text "Your listing" comes from the finding's proposal.
+
+### My listings uses two tabs and a detail sheet (story 8 · finding #74)
+- **Why:** of three options (buttons on each card, tabs and a detail sheet, sections with a "⋯" menu), tabs keep the list short and the sheet holds the whole price edit (range, label, "you receive") and "Remove listing" in one place. On desktop the sheet becomes a panel beside the list.
+- **Trade-off accepted:** editing or removing is one tap deeper than buttons on the card, and sold listings sit in another tab. Sold rows cannot be tapped. The texts "On sale (n)", "Sold (n)", "Condition, photos and version can't be changed.", "Save price", "Remove listing", "Buyers will no longer see it.", "Keep it" and "Close", and the brick-red colour of the remove buttons, were chosen by the AI, not by the story or the visual direction.
+
+### The seller picks a version, then taps "Continue" (story 8 · finding #72)
+- **Why:** of three options (tap a row, choose then continue, table with a tip), choosing first lets the seller fix a wrong tap before going to the form. Each version shows its name with year · country · label · format.
+- **Trade-off accepted:** one tap more than going straight to the form, and one more state to build and test ("Continue" disabled, with "Choose a version to continue"). The texts "Which one do you have?", "Check the year and label on the back cover or on the record.", "Continue", "Choose a version to continue" and "My version isn't here" were written by the AI, not by the story.
+
 ## 2026-11-08 — Story 8 (sell) · findings
 
 ### The city is required to list the first time; city and shop name cannot be changed later (story 8 · finding #82)
