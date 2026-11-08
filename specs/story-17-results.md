@@ -41,5 +41,5 @@
 - Filters and sorting other than newest first; search by artist page
 
 ## Open points
-1. The sell search screen (story 8) is not changed by this story. *(not decided; until decided it stays as built)*
+1. The sell search screen (story 8) is not changed by this story; it gets the suggestion box with story 16.
 2. Message for fewer than 3 characters.

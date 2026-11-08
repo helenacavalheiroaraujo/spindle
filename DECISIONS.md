@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Build order of stories 17, 16 and 15 (process)
+- **Decision:** story 17 (results page) is built first in phase 4, then story 4 and story 9 (reviews). Stories 16 (suggestions) and 15 (menu) are built only if time is left, in that order.
+- **Why:** story 17 fixes the screen that confuses buyers on the demo path. The others are additions. A clear cut line keeps the week before 15 Nov for the demo script and the PDF.
+- **Trade-off accepted:** without story 16, the results page opens only from Search or Enter. Story 16's "See all results" line is not there. Story 15 also has no approved design.
+- **Seller search (story 8):** when story 16 is built, the sell search screen gets the suggestion box too; a suggestion opens the list of versions, not the recommendation. Until then it stays as built.
+
 ## 2026-11-08 — Story 14 outside the MVP (process)
 - **Decision:** the desktop footer (story 14) is not part of the MVP. Its spec file stays.
 - **Why:** it is not on the demo path, it has no approved design, and its links are undecided (there are no About, Terms or Contact pages). The week before the 15 Nov delivery goes to the demo script, the PDF and the stories that fix a real problem (17, 16).
@@ -18,7 +24,7 @@
 - **Decision:** search results move from the home page to a page of their own (story 17); a suggestion box with covers (option B) appears under the search box (story 16). Story 1 stays as built.
 - **Why:** after typing, the home page showed the results above the crates and the featured card, so it was unclear which page the buyer was on. The suggestion box covers "results while typing" and the page covers "all results".
 - **Trade-off accepted:** story 1's "results update as the user types" on the home page is replaced. A decision made in story 1 is reversed, with the owner's approval.
-- **Open:** the sell search screen (story 8) shares the search component; it stays as built until decided.
+- **Sell search (story 8):** decided in "Build order of stories 17, 16 and 15" above: it stays as built until story 16 is built.
 
 ## 2026-11-08 — Stories 14 and 15 in phase 4 (process)
 - **Decision:** the desktop footer (story 14) and the menu (story 15) go in phase 4, "If time allows".
