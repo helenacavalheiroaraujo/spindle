@@ -3,6 +3,16 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 8 (sell) · build
+
+### Publishing is one database function, all or nothing (story 8)
+- **Why:** a listing saved without its three check results would have no traffic light, and a first sale could save the listing but not the seller's city. One function (`create_listing`) does both or neither, the same approach as `place_order` (story 7).
+- **Trade-off accepted:** the steps live in SQL, which Vitest cannot test; the Playwright sell flow covers them, and `lib/db/` turns each error into a plain message.
+
+### Listing photos are public, sent through the app's server, and reduced in the browser first (story 8)
+- **Why:** a public link works like the seed photos and needs no extra request each time a photo is shown. Sending through the server keeps the rule that the browser only talks to the app. Vercel refuses requests above 4.5 MB, so a 5 MB photo would fail online; the browser reduces each photo (longest side 1600 px, JPEG) before sending, and the story's 5 MB limit is checked on the original file.
+- **Trade-off accepted:** anyone with a photo's link can see it, even after the listing is removed; stored photos have less detail than the originals; the sell form has more code. The 1600 px size, the €1000 check in the database and the bucket name were chosen by the AI.
+
 ## 2026-11-08 — Story 8 (sell) · designs and finding #12
 
 ### A seller sees "Your listing" instead of Buy on their own listings (stories 5, 7, 8 · finding #12)
