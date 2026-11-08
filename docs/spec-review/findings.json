@@ -2750,9 +2750,13 @@
       ],
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
-      "status": "open",
+      "status": "resolved",
       "first_seen": 6,
-      "resolution": null
+      "resolution": {
+        "iteration": 4,
+        "date": "2026-11-08",
+        "decision": "Kept as built: Buy on a yellow listing always shows the warning; a direct link to the checkout does not. Recorded in DECISIONS.md."
+      }
     }
   ],
   "coverage": [

@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 7 · Yellow warning
+
+### Opening the checkout address directly does not show the yellow warning (story 7 · finding #83)
+- **Why:** Buy on a yellow listing always shows the warning first, so the normal path is covered. Only someone who opens the checkout address directly (e.g. a shared link) skips it, and they are still covered by the money-back promise. Changing it would mean a new story a week before the deadline.
+- **Trade-off accepted:** a buyer arriving by a direct link can pay without having seen what is uncertain.
+
 ## 2026-11-08 — Story 5 · Condition sentence
 
 ### Condition explanations are written to follow "with" (story 5 · finding #59)
