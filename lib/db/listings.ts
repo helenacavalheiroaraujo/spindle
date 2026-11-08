@@ -3,7 +3,7 @@ import { db } from "./client";
 import type { TypicalRange } from "@/lib/rules/fairPrice";
 import type { ListingForList } from "@/lib/rules/listingOrder";
 import type { ListingFacts } from "@/lib/rules/activeListings";
-import type { CheckItem, CheckResult } from "@/lib/rules/trafficLight";
+import { trafficLight, type CheckItem, type CheckResult, type Light } from "@/lib/rules/trafficLight";
 import { sellerOf, type Seller } from "@/lib/rules/seller";
 
 export const LISTING_FACTS_COLUMNS =
@@ -187,3 +187,89 @@ export async function createListing(l: NewListing): Promise<CreateListingResult>
   }
   return { listingId: data as string };
 }
+
+// --- My listings (story 8) --------------------------------------------------
+
+export type MyListing = {
+  id: string;
+  status: ListingFacts["status"];
+  albumTitle: string;
+  versionId: string;
+  versionName: string;
+  condition: { code: string; name: string };
+  price: number;
+  coverPhoto: string | null;
+  light: Light;
+  typicalRange: TypicalRange; // of the actual version, for the price label (story 6)
+};
+
+// The seller's listings on sale and sold, newest first. Removed listings are not read (finding #35).
+export async function getMyListings(sellerId: string): Promise<MyListing[]> {
+  const { data, error } = await db()
+    .from("listings")
+    .select(
+      `id, price, cover_photo_url, created_at, ${LISTING_FACTS_COLUMNS},
+       condition_grades (code, name),
+       actual:versions!listings_actual_version_id_fkey (id, name, typical_price_min, typical_price_max, albums (title))`,
+    )
+    .eq("seller_id", sellerId)
+    .in("status", ["on_sale", "sold"])
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return data.map((l) => {
+    const facts = toListingFacts(l as unknown as ListingRow);
+    const actual = l.actual as unknown as RangeRow & { id: string; name: string; albums: { title: string } };
+    return {
+      id: l.id,
+      status: facts.status,
+      albumTitle: actual.albums.title,
+      versionId: actual.id,
+      versionName: actual.name,
+      condition: l.condition_grades as unknown as { code: string; name: string },
+      price: Number(l.price),
+      coverPhoto: l.cover_photo_url,
+      light: trafficLight(facts.checks, facts.hasMatrixPhoto),
+      typicalRange: toTypicalRange(actual),
+    };
+  });
+}
+
+// "ok": changed. "sold": bought meanwhile, nothing changed ("This record was just sold").
+// "not_found": not this seller's listing, or not in the status the change needs.
+export type ListingChange = "ok" | "sold" | "not_found";
+
+// Changes one of the seller's listings only if it is in the expected status, in one update,
+// so a purchase at the same moment can never be undone or edited (Edge cases).
+async function changeListing(
+  sellerId: string,
+  listingId: string,
+  expected: ListingFacts["status"],
+  values: { price?: number; status?: ListingFacts["status"] },
+): Promise<ListingChange> {
+  const client = db();
+  const { data, error } = await client
+    .from("listings")
+    .update(values)
+    .eq("id", listingId)
+    .eq("seller_id", sellerId)
+    .eq("status", expected)
+    .select("id");
+  if (error?.code === "22P02") return "not_found";
+  if (error) throw error;
+  if (data.length > 0) return "ok";
+  const now = await client.from("listings").select("status").eq("id", listingId).eq("seller_id", sellerId).maybeSingle();
+  if (now.error) throw now.error;
+  return now.data?.status === "sold" ? "sold" : "not_found";
+}
+
+// Edit the price (use case 4): only the price changes (finding #80); the caller checks the price rule.
+export const updateListingPrice = (sellerId: string, listingId: string, price: number) =>
+  changeListing(sellerId, listingId, "on_sale", { price });
+
+// Remove (use case 5): at once, so no buyer can buy it meanwhile (finding #81).
+export const removeListing = (sellerId: string, listingId: string) =>
+  changeListing(sellerId, listingId, "on_sale", { status: "removed" });
+
+// Undo (use case 6): back on sale as before; price, photos and checks were never touched.
+export const undoRemoveListing = (sellerId: string, listingId: string) =>
+  changeListing(sellerId, listingId, "removed", { status: "on_sale" });

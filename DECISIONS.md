@@ -5,6 +5,15 @@
 
 ## 2026-11-08 — Story 8 (sell) · build
 
+### Wording and behaviour written during the build (story 8)
+- Sell flow: "Which record are you selling?", "Find the album, then pick your exact version. 0% commission.", "Listing your record…", "This photo is larger than 5 MB. Choose a smaller one.", "We couldn't read this photo. Choose a JPEG or PNG.", "We couldn't upload your photos. Nothing was listed; your details are kept.", "We couldn't list your record. Nothing was listed; your details are kept.", "No commission: you receive the full price" (while the price is not valid), "We couldn't load the versions / the sell form. Check your connection."
+- My listings: "Nothing on sale right now. Sell a record", "Nothing sold yet.", "Price saved", "Saving…", "Loading your listings…", "We couldn't save the change. Check your connection.", "We couldn't put your listing back on sale. Check your connection.", "We couldn't load your listings. Check your connection."
+- On a phone, "+ Sell" sits top left (the design's menu slot, not built), so it never covers the centred logo.
+- The price accepts a comma as decimal point ("12,50") and a leading "€". Versions are listed oldest first; My listings newest first. "Save price" is disabled until the price changes.
+- After "Save" in "Your details", the row shows the city (and shop name) with "Change"; "Close" drops what was typed. After "List for sale", the seller sees the version's listings, with no confirmation message.
+- **Why:** the story and the designs give the rules, not these texts or details.
+- **Trade-off accepted:** the wording and behaviour were not in the story; the sell search screen reuses the home layout and has no design of its own.
+
 ### Publishing is one database function, all or nothing (story 8)
 - **Why:** a listing saved without its three check results would have no traffic light, and a first sale could save the listing but not the seller's city. One function (`create_listing`) does both or neither, the same approach as `place_order` (story 7).
 - **Trade-off accepted:** the steps live in SQL, which Vitest cannot test; the Playwright sell flow covers them, and `lib/db/` turns each error into a plain message.
