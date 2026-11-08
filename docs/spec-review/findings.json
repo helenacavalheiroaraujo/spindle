@@ -3,8 +3,8 @@
     "project": "Spindle MVP",
     "spec": "SPEC.md",
     "report_url": "https://claude.ai/artifact/PchuNbupSCnaJLc66G2AMe",
-    "iteration": 4,
-    "updated": "2026-11-08T18:00:00+00:00"
+    "iteration": 5,
+    "updated": "2026-11-08T20:00:00+00:00"
   },
   "iterations": [
     {
@@ -26,6 +26,11 @@
       "n": 4,
       "date": "2026-11-08",
       "note": "Before building story 7: recorded the decisions on #24, #25, #27 (and #12 deferred to story 8); re-checked story 7 against the checkout design (p. 16) and stories 5 and 9; 5 new findings (#37–#41), all Low. Coverage marks stories 1, 2, 3, 5, 6 and 9 as tested."
+    },
+    {
+      "n": 5,
+      "date": "2026-11-08",
+      "note": "Check 6 (audit of built stories 1, 2, 3, 5, 6, 9 against the code), redone after the first audit file was lost. 30 new findings (#42–#71); related small items are grouped; choices that match the design (HappyPath.png) or DECISIONS.md are left out, and issues already in docs/ux-review/findings.json are not repeated."
     }
   ],
   "findings": [
@@ -1430,6 +1435,841 @@
         "date": "2026-11-08",
         "decision": "Option B. The postcode must have the format 0000-000; otherwise 'Use the format 0000-000' under the field and Pay stays disabled. Story 7 updated and recorded in DECISIONS.md."
       }
+    },
+    {
+      "stories": [
+        "1"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
+      "title": "Audit: suggestions sit under one heading \"Did you mean…?\", not one \"Did you mean [title]?\" per suggestion",
+      "evidence": [
+        {
+          "source": "app/AlbumSearch.tsx",
+          "where": "line 100",
+          "quote": "<p className=\"mb-2 font-medium\">Did you mean…?</p>"
+        },
+        {
+          "source": "specs/story-1-search.md",
+          "where": "Acceptance criteria",
+          "quote": "each suggestion shows the full album title (e.g. \"zigy\" → \"Did you mean *The Rise and Fall of Ziggy Stardust…*?\")"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 42,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "1"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: suggestion order (closest first, then newest) was chosen by the AI",
+      "evidence": [
+        {
+          "source": "lib/rules/searchSuggestions.ts",
+          "where": "lines 31–42",
+          "quote": "Closest first; on equal distance, newest release first."
+        },
+        {
+          "source": "specs",
+          "where": "Story 1 · Acceptance criteria",
+          "quote": "none (the spec is silent)"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 43,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "1"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: \"Nobody is selling\" is a dark-brown card above the results, with the album title and artist; the results stay below",
+      "evidence": [
+        {
+          "source": "app/AlbumSearch.tsx",
+          "where": "lines 65–72",
+          "quote": "<p className=\"font-heading text-2xl\">Nobody is selling this album right now</p>"
+        },
+        {
+          "source": "specs",
+          "where": "Story 1 · Use cases 3",
+          "quote": "none (the spec is silent)"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 44,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "1"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: search waits 250 ms after typing; texts \"Searching…\" and \"We couldn't load the albums. Check your connection.\" were invented",
+      "evidence": [
+        {
+          "source": "app/AlbumSearch.tsx",
+          "where": "lines 33, 61, 63",
+          "quote": "message=\"We couldn't load the albums. Check your connection.\""
+        },
+        {
+          "source": "specs",
+          "where": "Shared rules · loading and errors (no texts)",
+          "quote": "none (the spec is silent)"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 45,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "2"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: hint \"Pick at least one to continue.\" under the disabled button was invented",
+      "evidence": [
+        {
+          "source": "app/albums/[albumId]/priorities/PriorityPicker.tsx",
+          "where": "line 57",
+          "quote": "Pick at least one to continue."
+        },
+        {
+          "source": "specs/story-2-priorities.md",
+          "where": "Acceptance criteria",
+          "quote": "\"See recommendation\" is disabled until at least one option is picked"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 46,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "2",
+        "3",
+        "5"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: without a ranking in the address, the recommendation and the Back buttons go to the priorities screen",
+      "evidence": [
+        {
+          "source": "app/albums/[albumId]/recommendation/page.tsx",
+          "where": "line 31",
+          "quote": "if (ranking.length === 0) redirect(changeHref);"
+        },
+        {
+          "source": "specs",
+          "where": "Story 2 / 3 · Use cases",
+          "quote": "none (the spec is silent)"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 47,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "3"
+      ],
+      "type": "Inconsistency",
+      "severity": "High",
+      "title": "Audit: technical terms show their explanation only after a tap; the story says they always come with it",
+      "evidence": [
+        {
+          "source": "app/albums/[albumId]/recommendation/GlossaryText.tsx",
+          "where": "lines 17–31",
+          "quote": "{open && ("
+        },
+        {
+          "source": "specs/story-3-recommendation.md",
+          "where": "What the screen shows",
+          "quote": "**Technical terms** (e.g. \"remaster\", \"first pressing\", \"matrix\") always come with a short plain explanation"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 48,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "3"
+      ],
+      "type": "Inconsistency",
+      "severity": "High",
+      "title": "Audit (defect): condition grades are not in the glossary, so the criterion \"each condition grade shows its plain explanation\" fails",
+      "evidence": [
+        {
+          "source": "supabase/seed.sql",
+          "where": "lines 81–86",
+          "quote": "insert into glossary_terms (term, explanation) values"
+        },
+        {
+          "source": "specs/story-3-recommendation.md",
+          "where": "Acceptance criteria",
+          "quote": "Every term in the glossary (at least: remaster, reissue, first pressing, matrix, and each condition grade) shows its plain explanation wherever it appears"
+        }
+      ],
+      "proposal": {
+        "file": "supabase/seed.sql",
+        "section": "glossary_terms",
+        "current": "pressing, first pressing, reissue, remaster, matrix",
+        "proposed": "Add Near mint, Very good, Good, Fair (and their codes) with the explanations from condition_grades; this is a defect fix, not a spec change"
+      },
+      "question": null,
+      "id": 49,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "3"
+      ],
+      "type": "Gap",
+      "severity": "High",
+      "title": "Audit: Hunky Dory (the only other album that opens) has no reason texts and no tracks: \"Why this one\" is empty and \"Track list (0)\" shows",
+      "evidence": [
+        {
+          "source": "supabase/seed.sql",
+          "where": "line 8",
+          "quote": "Ziggy Stardust is the only album with full story 3/5/6 data (Hunky Dory has one listing, for story 6)"
+        },
+        {
+          "source": "app/albums/[albumId]/recommendation/page.tsx",
+          "where": "line 142",
+          "quote": "Track list ({version.tracks.length})"
+        },
+        {
+          "source": "specs/story-3-recommendation.md",
+          "where": "What the screen shows",
+          "quote": "**Reasons:** one sentence per chosen priority, in rank order (max 3)"
+        }
+      ],
+      "proposal": null,
+      "question": "Add reasons and tracks for Hunky Dory, or keep only Ziggy Stardust openable in the demo?",
+      "id": 50,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "3"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: a reason sentence with no text or no price is silently left out",
+      "evidence": [
+        {
+          "source": "lib/rules/recommendation.ts",
+          "where": "lines 121–122",
+          "quote": "Returns null if a placeholder has no price, so the screen leaves that sentence out."
+        },
+        {
+          "source": "specs",
+          "where": "Story 3 · Reasons",
+          "quote": "none (the spec is silent)"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 51,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "3"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: \"first pressing\" in the reasons means the album's oldest version by release year",
+      "evidence": [
+        {
+          "source": "app/albums/[albumId]/recommendation/page.tsx",
+          "where": "line 52",
+          "quote": "const firstPressing = [...versions].sort((a, b) => a.releaseYear - b.releaseYear)[0];"
+        },
+        {
+          "source": "specs/story-3-recommendation.md",
+          "where": "What the screen shows",
+          "quote": "vs €[first pressing price] for a first pressing"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 52,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "3"
+      ],
+      "type": "Ambiguity",
+      "severity": "Low",
+      "title": "Audit: the \"ideal but unavailable\" note appears only when its total is strictly higher than the recommendation's",
+      "evidence": [
+        {
+          "source": "lib/rules/recommendation.ts",
+          "where": "line 99",
+          "quote": "idealUnavailableId: ideal && ideal.total > pick.total ? ideal.version.id : null,"
+        },
+        {
+          "source": "specs/story-3-recommendation.md",
+          "where": "How the pick is made",
+          "quote": "**Ideal version:** the highest total among all versions of the album, including those with no listings"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 53,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "3"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: an old link to an album with no listings shows a bare page \"Nobody is selling this album right now.\" with \"Back to search\"",
+      "evidence": [
+        {
+          "source": "app/albums/[albumId]/recommendation/page.tsx",
+          "where": "lines 41–47",
+          "quote": "Story 1 stops the buyer before this screen; this covers an old link."
+        },
+        {
+          "source": "specs",
+          "where": "Story 3 · Edge cases",
+          "quote": "none (the spec is silent)"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 54,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "2",
+        "3"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
+      "title": "Audit: the recommendation shows \"Your priorities: 1. Price · 2. Sound · Change\"; story 2 phase 2 says \"Based on: Price, Sound · Change\"",
+      "evidence": [
+        {
+          "source": "app/albums/[albumId]/recommendation/page.tsx",
+          "where": "line 164",
+          "quote": "<span>Your priorities: {ranking.map((p, i) => `${i + 1}. ${LABEL[p]}`).join(\" · \")}</span>"
+        },
+        {
+          "source": "specs/story-2-priorities.md",
+          "where": "Phase 2",
+          "quote": "the recommendation shows \"Based on: Price, Sound · **Change**\""
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 55,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "3"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: version details read \"N for sale · from €X\"; wording invented",
+      "evidence": [
+        {
+          "source": "app/albums/[albumId]/recommendation/page.tsx",
+          "where": "line 98",
+          "quote": "{count} for sale · from {formatPrice(lowest)}"
+        },
+        {
+          "source": "specs/story-3-recommendation.md",
+          "where": "What the screen shows",
+          "quote": "number of listings, lowest price"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 56,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "5",
+        "7"
+      ],
+      "type": "Inconsistency",
+      "severity": "High",
+      "title": "Audit: Buy on a green listing opens a \"Before you buy\" panel with a disabled \"Continue to checkout\" and \"Checkout comes in story 7\"",
+      "evidence": [
+        {
+          "source": "components/BuyButton.tsx",
+          "where": "lines 32, 52",
+          "quote": "<p id={noteId} className=\"text-xs text-navy/70\">Checkout comes in story 7</p>"
+        },
+        {
+          "source": "specs/story-5-listings.md",
+          "where": "What the screens show",
+          "quote": "**Yellow:** Buy (in the list or on the listing check screen) first shows a warning"
+        }
+      ],
+      "proposal": null,
+      "question": "Confirm that story 7 replaces this panel: green Buy goes straight to the checkout (or login).",
+      "id": 57,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "5"
+      ],
+      "type": "Gap",
+      "severity": "High",
+      "title": "Audit: three of the yellow-warning sentences were invented, and every warning ends with \"you get your money back\" while refunds are out of the MVP",
+      "evidence": [
+        {
+          "source": "lib/rules/yellowWarning.ts",
+          "where": "lines 9–14",
+          "quote": "The cover and label photos don't clearly show this pressing."
+        },
+        {
+          "source": "lib/rules/yellowWarning.ts",
+          "where": "line 4",
+          "quote": "export const MONEY_BACK = \"If it turns out to be another pressing, you get your money back.\";"
+        },
+        {
+          "source": "DECISIONS.md",
+          "where": "2026-11-08 · protection text",
+          "quote": "refunds themselves stay out of the MVP"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep the invented sentences (cover/label, country/year, no matrix photo, moved here)? And keep the money-back promise, with a demo answer for how a refund would work?",
+      "id": 58,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "5"
+      ],
+      "type": "Inconsistency",
+      "severity": "Low",
+      "title": "Audit (defect): the condition sentence reads \"NM means near mint, with almost like new, no marks\"",
+      "evidence": [
+        {
+          "source": "app/listings/[listingId]/page.tsx",
+          "where": "line 123",
+          "quote": "{l.condition.code} means {l.condition.name.toLowerCase()}, with {l.condition.explanation.toLowerCase()}"
+        },
+        {
+          "source": "specs/story-5-listings.md",
+          "where": "What the screens show",
+          "quote": "(e.g. \"VG+ means very good, with light signs of wear\")"
+        }
+      ],
+      "proposal": {
+        "file": "supabase/migrations (condition_grades) or app/listings/[listingId]/page.tsx",
+        "section": "condition sentence",
+        "current": "with almost like new, no marks",
+        "proposed": "Explanations written to follow \"with\" (e.g. \"no marks, almost like new\"); defect fix, not a spec change"
+      },
+      "question": null,
+      "id": 59,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "5"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: listing screen wording invented: \"See the checks\", \"Very good (VG+): …\", \"Checklist\", \"The seller's photos\", the illustrative-data lines, \"Checking listings…\"",
+      "evidence": [
+        {
+          "source": "components/ListingList.tsx",
+          "where": "lines 73, 79, 100",
+          "quote": "Check results and typical prices are illustrative data"
+        },
+        {
+          "source": "app/listings/[listingId]/page.tsx",
+          "where": "lines 82, 100, 146",
+          "quote": "Check results and photos are illustrative data"
+        },
+        {
+          "source": "specs",
+          "where": "Story 5 · What the screens show",
+          "quote": "none (the spec is silent)"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 60,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "5",
+        "7"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: a listing that is sold or removed, opened from a link, shows the generic \"not found\" page",
+      "evidence": [
+        {
+          "source": "app/listings/[listingId]/page.tsx",
+          "where": "line 38",
+          "quote": "if (!row) notFound(); // not on sale, or not shown under that version"
+        },
+        {
+          "source": "specs",
+          "where": "Story 5 · Edge cases",
+          "quote": "none (the spec is silent)"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 61,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "5"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: red listings at the end are also sorted cheapest first",
+      "evidence": [
+        {
+          "source": "lib/rules/listingOrder.ts",
+          "where": "line 16",
+          "quote": "Green and yellow mixed, cheapest first; red listings at the end, also cheapest first."
+        },
+        {
+          "source": "specs/story-5-listings.md",
+          "where": "What the screens show",
+          "quote": "red listings at the end"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 62,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "6"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: a red listing's price is shown smaller than green and yellow prices",
+      "evidence": [
+        {
+          "source": "components/ListingList.tsx",
+          "where": "lines 64, 68",
+          "quote": "<Price price={l.price} range={l.actualTypicalRange} big />"
+        },
+        {
+          "source": "specs",
+          "where": "Story 6 · Scope",
+          "quote": "none (the spec is silent)"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 63,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "9"
+      ],
+      "type": "Inconsistency",
+      "severity": "High",
+      "title": "Audit (defect): sellers show their personal name (\"Rui Ferreira\") instead of \"Shop\" / \"Private seller\"",
+      "evidence": [
+        {
+          "source": "components/ListingList.tsx",
+          "where": "line 76",
+          "quote": "{l.sellerName}"
+        },
+        {
+          "source": "lib/db/listings.ts",
+          "where": "line 96",
+          "quote": "sellerName: seller.name,"
+        },
+        {
+          "source": "specs/story-9-accounts.md",
+          "where": "Acceptance criteria",
+          "quote": "On listings, sellers with a shop name show \"Shop\"; others show \"Private seller\""
+        },
+        {
+          "source": "HappyPath.png",
+          "where": "screen 5",
+          "quote": "Near mint. Discos do Bairro, Lisbon"
+        }
+      ],
+      "proposal": null,
+      "question": "Fix the defect: shops show \"Shop\" (story 9) or the shop name, as in the design (\"Discos do Bairro\")? Private sellers show \"Private seller\".",
+      "id": 64,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "9"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: log-in and sign-up texts invented: \"Welcome back. Log in to buy and sell records.\", \"Create your account\", \"One account to buy and sell records.\", \"No account? Create one\"",
+      "evidence": [
+        {
+          "source": "app/login/page.tsx",
+          "where": "line 14",
+          "quote": "Welcome back. Log in to buy and sell records."
+        },
+        {
+          "source": "app/signup/page.tsx",
+          "where": "lines 13–14",
+          "quote": "One account to buy and sell records."
+        },
+        {
+          "source": "specs",
+          "where": "Story 9 · Scope",
+          "quote": "none (the spec is silent)"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 65,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "9"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: form messages invented: \"Enter your name.\", \"Enter your email.\", \"Enter a valid email address.\", \"Use at least 8 characters.\", \"We couldn't log you in.\"",
+      "evidence": [
+        {
+          "source": "lib/rules/signUp.ts",
+          "where": "lines 12–15",
+          "quote": "if (input.name.trim() === \"\") errors.name = \"Enter your name.\";"
+        },
+        {
+          "source": "app/login/LoginForm.tsx",
+          "where": "line 17",
+          "quote": "message=\"We couldn't log you in.\""
+        },
+        {
+          "source": "specs/story-9-accounts.md",
+          "where": "Acceptance criteria",
+          "quote": "Passwords shorter than 8 characters are refused"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 66,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "9"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: with no profile name, the header shows \"Me\" and Your account hides the name row",
+      "evidence": [
+        {
+          "source": "components/AccountBadge.tsx",
+          "where": "line 37",
+          "quote": "{letters || \"Me\"}"
+        },
+        {
+          "source": "app/account/page.tsx",
+          "where": "line 18",
+          "quote": "{name && ("
+        },
+        {
+          "source": "specs",
+          "where": "Story 9 · Scope",
+          "quote": "none (the spec is silent)"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 67,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "9"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: after log-in, only addresses inside Spindle are followed; anything else goes to the home page",
+      "evidence": [
+        {
+          "source": "lib/rules/login.ts",
+          "where": "lines 33–34",
+          "quote": "Only addresses inside Spindle are followed; anything else goes to the home page,"
+        },
+        {
+          "source": "specs/story-9-accounts.md",
+          "where": "Scope",
+          "quote": "after login the user returns to where they were"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 68,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "9"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: \"Log in\" in the header returns to the current page and is hidden on the log-in and sign-up pages",
+      "evidence": [
+        {
+          "source": "components/LogInLink.tsx",
+          "where": "line 11",
+          "quote": "if (path === \"/login\" || path === \"/signup\") return null;"
+        },
+        {
+          "source": "specs/story-9-accounts.md",
+          "where": "Scope",
+          "quote": "Header: \"Log in\" when signed out"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 69,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "all"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: every page has the same browser tab title \"Spindle\"",
+      "evidence": [
+        {
+          "source": "app/layout.tsx",
+          "where": "line 11",
+          "quote": "title: \"Spindle\","
+        },
+        {
+          "source": "specs",
+          "where": "SPEC.md",
+          "quote": "none (the spec is silent)"
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 70,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
+    },
+    {
+      "stories": [
+        "all"
+      ],
+      "type": "Gap",
+      "severity": "Low",
+      "title": "Audit: fonts Barlow Condensed (headings) and Inter (body) were chosen by the AI",
+      "evidence": [
+        {
+          "source": "app/layout.tsx",
+          "where": "lines 7–8",
+          "quote": "const heading = Barlow_Condensed({"
+        },
+        {
+          "source": "CLAUDE.md",
+          "where": "Visual direction",
+          "quote": "Headings in a bold condensed sans-serif; body text in a plain, readable sans-serif."
+        }
+      ],
+      "proposal": null,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "id": 71,
+      "status": "open",
+      "first_seen": 5,
+      "resolution": null
     }
   ],
   "coverage": [
@@ -1667,6 +2507,202 @@
       "id": "Q13",
       "finding": 41,
       "question": "Check the postcode format (0000-000) or only that it is not empty?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q14",
+      "finding": 42,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q15",
+      "finding": 43,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q16",
+      "finding": 44,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q17",
+      "finding": 45,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q18",
+      "finding": 46,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q19",
+      "finding": 47,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q20",
+      "finding": 48,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q21",
+      "finding": 50,
+      "question": "Add reasons and tracks for Hunky Dory, or keep only Ziggy Stardust openable in the demo?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q22",
+      "finding": 51,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q23",
+      "finding": 52,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q24",
+      "finding": 53,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q25",
+      "finding": 54,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q26",
+      "finding": 55,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q27",
+      "finding": 56,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q28",
+      "finding": 57,
+      "question": "Confirm that story 7 replaces this panel: green Buy goes straight to the checkout (or login).",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q29",
+      "finding": 58,
+      "question": "Keep the invented sentences (cover/label, country/year, no matrix photo, moved here)? And keep the money-back promise, with a demo answer for how a refund would work?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q30",
+      "finding": 60,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q31",
+      "finding": 61,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q32",
+      "finding": 62,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q33",
+      "finding": 63,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q34",
+      "finding": 64,
+      "question": "Fix the defect: shops show \"Shop\" (story 9) or the shop name, as in the design (\"Discos do Bairro\")? Private sellers show \"Private seller\".",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q35",
+      "finding": 65,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q36",
+      "finding": 66,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q37",
+      "finding": 67,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q38",
+      "finding": 68,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q39",
+      "finding": 69,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q40",
+      "finding": 70,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
+      "status": "open",
+      "answer": null
+    },
+    {
+      "id": "Q41",
+      "finding": 71,
+      "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "status": "open",
       "answer": null
     }
