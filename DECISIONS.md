@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Process (push)
+
+### Commits are pushed to GitHub at the end of every work session, after asking me (process)
+- **Why:** 31 commits had piled up only on the laptop. A lost or broken laptop would have lost most of the MVP, and the Vercel version was out of date for testing and the demo. Asking first keeps a last check on what goes to GitHub and Vercel.
+- **Trade-off accepted:** the published Vercel version shows unfinished flows between sessions (for example, sign-up before log in exists); if a session ends abruptly, the push can be missed.
+
 ## 2026-11-07 — Process (screenshots)
 
 ### Screenshots for the final PDF are saved by the Playwright tests, only on request (process)
