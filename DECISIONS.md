@@ -3,6 +3,16 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-08 — Story 9 · Log in and log out
+
+### Log out lives on a "Your account" page opened from the initials (story 9)
+- **Why:** one page with name, email and Log out is simple to build and test, and keeps the corner as in the designs.
+- **Trade-off accepted:** a page the SPEC did not list; it is private and is not the public profile (still out of scope).
+
+### Log in and sign-up are two linked pages, not one page with tabs (story 9)
+- **Why:** sign-up was already built and tested; two links keep it as it is, and the return address (`?next=`) travels in each link.
+- **Trade-off accepted:** the return address must be carried between the two pages; only addresses inside Spindle are followed, anything else goes to the home page.
+
 ## 2026-11-08 — Process (push)
 
 ### Commits are pushed to GitHub at the end of every work session, after asking me (process)

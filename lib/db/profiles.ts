@@ -12,3 +12,8 @@ export async function getProfileName(userId: string): Promise<string | null> {
   if (error) throw new Error(`Could not load the profile: ${error.message}`);
   return data?.name ?? null;
 }
+
+// At log-in: recreates the profile if sign-up saved the account but not the profile (DECISIONS · story 9).
+export async function ensureProfile(userId: string, name: string): Promise<void> {
+  if ((await getProfileName(userId)) === null && name) await createProfile(userId, name);
+}

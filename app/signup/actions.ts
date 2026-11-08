@@ -1,6 +1,7 @@
 "use server";
 // Sign-up (story 9 · use case 1): rules in lib/rules/signUp, Supabase access in lib/db.
 import { redirect } from "next/navigation";
+import { returnPath } from "@/lib/rules/login";
 import { checkSignUp, signUpErrorFor, type FieldErrors } from "@/lib/rules/signUp";
 import { signUpWithPassword } from "@/lib/db/session";
 import { createProfile } from "@/lib/db/profiles";
@@ -31,5 +32,5 @@ export async function signUp(_prev: SignUpState, form: FormData): Promise<SignUp
 
   // If this fails, the user is still signed in; the profile is recreated at login or before Buy / Sell.
   await createProfile(result.userId, input.name).catch(() => false);
-  redirect("/");
+  redirect(returnPath(String(form.get("next") ?? "")));
 }

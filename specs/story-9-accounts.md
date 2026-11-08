@@ -9,13 +9,13 @@
 - **One account** for buying and selling
 - Sign up with **name, email and password**; log in; log out
 - Login is asked only when needed: **Buy** (story 7) and **Sell** (story 8); after login the user returns to where they were
-- Header: "Log in" when signed out; the user's initials when signed in (as in the designs)
+- Header: "Log in" when signed out; the user's initials when signed in (as in the designs). Tapping the initials opens **Your account** (name, email, **Log out**)
 - On listings, the seller appears as **"Shop"** or **"Private seller"**, with the city
 
 ## Use cases
 1. **Sign up** → account created, user signed in
 2. **Log in** → user signed in
-3. **Log out** → user signed out, back to the home page
+3. **Log out** (from Your account) → user signed out, back to the home page
 4. **Buy or Sell without an account** → login / sign-up → Buy goes to the checkout for that listing; Sell goes back to the form
 
 ## Acceptance criteria

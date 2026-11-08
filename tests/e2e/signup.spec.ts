@@ -32,7 +32,7 @@ test("a new user signs up with name, email and password and is signed in", async
   await page.getByRole("button", { name: "Create account" }).click();
 
   await expect(page).toHaveURL("/");
-  await expect(page.getByRole("img", { name: "Signed in as Ana Silva" })).toHaveText("AS");
+  await expect(page.getByRole("link", { name: "Your account, signed in as Ana Silva" })).toHaveText("AS");
   await screenshot(page, 9, "signed-in");
 
   const { data } = await admin().from("profiles").select("user_id, name").eq("name", "Ana Silva");

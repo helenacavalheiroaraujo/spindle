@@ -90,7 +90,7 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 6 | Every listing (green, yellow and red) shows its label; red uses its actual version's range | `components/ListingList.tsx`, `lib/db/listings.ts` | `tests/unit/fairPrice.test.ts`, `tests/e2e/fairPrice.spec.ts` |
 | 6 | "Typical price for this pressing: €min–€max" below the list, on phone and beside the recommendation | `components/ListingList.tsx`, `components/ListingsBeside.tsx` | `tests/e2e/fairPrice.spec.ts` |
 | 6 | Version without a range: no label and no range line | `lib/rules/fairPrice.ts`, `components/ListingList.tsx`, `supabase/seed.sql` | `tests/unit/fairPrice.test.ts`, `tests/e2e/fairPrice.spec.ts` |
-| 9 | | | |
+| 9 | Sign up; log in; wrong password message; log out from Your account; return to where the user was | `lib/rules/signUp.ts`, `lib/rules/login.ts`, `lib/db/session.ts`, `lib/db/profiles.ts` | `tests/unit/signUp.test.ts`, `tests/unit/login.test.ts`, `tests/e2e/signup.spec.ts`, `tests/e2e/login.spec.ts` |
 | 7 | | | |
 | 8 | | | |
 | 4 | | | |

@@ -67,3 +67,29 @@ export async function signUpWithPassword(name: string, email: string, password: 
   if (!data.session || !data.user) return { errorCode: data.user?.identities?.length === 0 ? "user_already_exists" : "no_session" };
   return { userId: data.user.id };
 }
+
+export type SignedInUser = { id: string; email: string };
+
+// The signed-in user's id and email, checked by Supabase. Null when signed out.
+export async function currentUser(): Promise<SignedInUser | null> {
+  const supabase = await authClient();
+  const { data } = await supabase.auth.getClaims();
+  if (!data?.claims.sub) return null;
+  return { id: data.claims.sub, email: String(data.claims.email ?? "") };
+}
+
+export type LogInResult = { userId: string; name: string } | { errorCode: string | undefined };
+
+// Supabase Auth checks the password; the app only receives the session (in cookies) or an error code.
+export async function logInWithPassword(email: string, password: string): Promise<LogInResult> {
+  const supabase = await authClient();
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error || !data.user) return { errorCode: error?.code };
+  return { userId: data.user.id, name: String(data.user.user_metadata?.name ?? "") };
+}
+
+// Ends the session in Supabase and removes the cookies.
+export async function logOut(): Promise<void> {
+  const supabase = await authClient();
+  await supabase.auth.signOut();
+}
