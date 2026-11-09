@@ -8,7 +8,7 @@ import { SuggestionList, useSuggestions } from "./SuggestionBox";
 export function SearchBox({ initial = "" }: { initial?: string }) {
   const router = useRouter();
   const [typed, setTyped] = useState(initial);
-  const box = useSuggestions(typed, "buy");
+  const box = useSuggestions(typed);
   return (
     <div ref={box.wrapperRef} className="relative lg:hidden">
     <form

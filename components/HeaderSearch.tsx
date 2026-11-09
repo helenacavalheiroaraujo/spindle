@@ -10,7 +10,7 @@ export function HeaderSearch() {
   const router = useRouter();
   const onSellPage = usePathname().startsWith("/sell");
   const [typed, setTyped] = useState(useSearchParams().get("q") ?? "");
-  const box = useSuggestions(typed, "buy");
+  const box = useSuggestions(typed);
   if (onSellPage) return null;
   return (
     <div ref={box.wrapperRef} className="relative hidden min-w-0 flex-1 lg:block">

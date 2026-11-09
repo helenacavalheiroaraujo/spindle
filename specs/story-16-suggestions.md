@@ -9,7 +9,7 @@
 - Up to 4 albums, newest first. Each row: cover, title, artist, year, "n versions" or "No listings" (same row as story 1)
 - Last line: "See all results for “…”"
 - Matching is the same as story 1 (title and artist, ignoring case and accents)
-- The sell search screen (story 8) gets the same suggestion box. There a suggestion opens the album's list of versions (story 8), not the priorities screen. The sell screen has no results page of its own: it keeps its list under the box.
+- The sell search screen (story 8) has no suggestion box: it already lists the albums under its own search box.
 
 ## Use cases
 1. **Tap a suggestion** → as story 1: priorities screen (story 2), or "Nobody is selling this album right now" / "Not in the demo"

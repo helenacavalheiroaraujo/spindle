@@ -1,7 +1,7 @@
 "use client";
 // Suggestion box under a search box (story 16). useSuggestions holds what the box shows (rule: lib/rules/suggestionBox);
-// SuggestionList draws it. Used by the home page and results page box (SearchBox), the desktop header (HeaderSearch)
-// and the sell search (AlbumSearch, mode "sell": a suggestion opens the album's versions, with no "See all" line).
+// SuggestionList draws it. Used by the home page and results page box (SearchBox) and the desktop header (HeaderSearch).
+// Buyers only: the sell search (story 8) has no suggestion box (DECISIONS · Story 16).
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
@@ -16,21 +16,16 @@ import {
 import { LoadingMask } from "./LoadingMask";
 import { ErrorScreen } from "./ErrorScreen";
 
-export type SuggestMode = "buy" | "sell";
 type State =
   | { kind: "idle" }
   | { kind: "loading"; previous?: BoxContent<AlbumSummary> }
   | { kind: "done"; content: BoxContent<AlbumSummary> }
   | { kind: "error" };
 
-const hrefOf = (a: AlbumSummary, mode: SuggestMode) =>
-  mode === "sell"
-    ? `/sell/albums/${a.id}`
-    : a.access === "open"
-      ? `/albums/${a.id}/priorities`
-      : null;
 
-export function useSuggestions(typed: string, mode: SuggestMode) {
+const hrefOf = (a: AlbumSummary) => (a.access === "open" ? `/albums/${a.id}/priorities` : null);
+
+export function useSuggestions(typed: string) {
   const router = useRouter();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [touched, setTouched] = useState(false); // the box opens only after the buyer types, not for a text put there by the page
@@ -90,7 +85,7 @@ export function useSuggestions(typed: string, mode: SuggestMode) {
     } else if (e.key === "Enter" && highlight !== null) {
       e.preventDefault();
       const album = albums[highlight];
-      const href = hrefOf(album, mode);
+      const href = hrefOf(album);
       if (href) router.push(href);
       else if (album.access === "no_listings") setNobodySelling(album);
     }
@@ -112,7 +107,6 @@ export function useSuggestions(typed: string, mode: SuggestMode) {
       setNobodySelling,
       close: () => setOpen(false),
       retry: () => setAttempt((n) => n + 1),
-      mode,
       typed,
     },
   };
@@ -127,7 +121,6 @@ export function SuggestionList({
   setNobodySelling,
   close,
   retry,
-  mode,
   typed,
 }: ReturnType<typeof useSuggestions>["list"]) {
   if (!visible) return null;
@@ -152,7 +145,7 @@ export function SuggestionList({
         {content && "albums" in content && (
           <ul aria-label="Suggestions">
             {content.albums.map((a, i) => {
-              const href = hrefOf(a, mode);
+              const href = hrefOf(a);
               const inside = (
                 <>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -214,7 +207,7 @@ export function SuggestionList({
             </p>
           </div>
         )}
-        {content?.kind === "albums" && mode === "buy" && (
+        {content?.kind === "albums" && (
           <Link
             href={`/search?q=${encodeURIComponent(typed.trim())}`}
             onClick={close}

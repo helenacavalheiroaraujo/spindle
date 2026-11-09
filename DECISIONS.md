@@ -3,6 +3,17 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-09 — Story 16 (phase 4): search suggestions
+- **Decision:** the suggestion box is for buyers only: the home page, the results page and the desktop header. The sell search (story 8) has no suggestion box.
+- **Why:** on the sell search the box covered the list of albums that screen already shows under its box, with the same albums.
+- **Differs from:** story 16 · Scope, which gave the sell search the same box (changed in the story file, before its Traceability rows had a sell row).
+- **Choices made while building (not in the story or the design):**
+  - The box also opens on the results page, because it is the same search box there.
+  - An album that does not open shows the tag "Not in the demo", as on the results rows of story 1. The design only has "n versions" and "No listings".
+  - Tapping an album with no listings shows "Nobody is selling this album right now" inside the box.
+  - ↑ ↓ stop at the first and last row; ↑ on the first row removes the highlight, so Enter opens the results page.
+  - The typed text is not underlined in the rows (the design underlines it).
+
 ## 2026-11-09 — UX review iteration 5: findings #10, #24–#30 and the glossary
 - **#10 A red listing links to the version it moved to:** on the listing check screen of a red listing ("It's a different pressing · moved to 1990 Reissue"), the words "moved to 1990 Reissue" are a link that opens the verified listings of that version, with the buyer's priorities kept in the address. Same on the red row in the listings (beside a version, or on the phone list). Why: the screen tells the buyer where the record belongs but gave no way to go there. Trade-off: one more path out of a warning screen; the back button still works. Story 5 is not changed (already built with tests); the rule lives here. Open point: if the new version has no active listings, the link still opens its listings page, which then shows its own "Nobody is selling" message (not decided).
 - **#24 Genre screen:** about 12 px of space between the back button and the coloured banner, as on the other screens.
