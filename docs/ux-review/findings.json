@@ -811,9 +811,13 @@
    ],
    "proposal": "Approved 2026-11-09: make 'moved to 1990 Reissue' a link to that version's listings. Story 5 is already built with tests, so per CLAUDE.md the rule goes in DECISIONS.md (text to be shown first), then the change is built and re-captured before this is marked resolved.",
    "question": null,
-   "status": "open",
+   "status": "resolved",
    "first_seen": 1,
-   "resolution": null,
+   "resolution": {
+    "iteration": 6,
+    "date": "2026-11-09",
+    "decision": "Built 2026-11-09 and captured again at 375 and 1280 px: 'moved to 1990 Reissue' is an underlined link to that version's listings. New captures in .ux-review/shots-6/."
+   },
    "notes": [
     "Iteration 5: looked at again on the new capture, unchanged",
     "Built 2026-11-09 and covered by an end-to-end test; stays open until a new capture shows it."
@@ -1412,9 +1416,13 @@
    ],
    "proposal": "Say what is still missing in one line (for example 'Still needed: city, condition, front cover photo, record photo, price'), or list only the next missing step as a hint, as now, but update it as each is filled.",
    "question": null,
-   "status": "open",
+   "status": "resolved",
    "first_seen": 5,
-   "resolution": null,
+   "resolution": {
+    "iteration": 6,
+    "date": "2026-11-09",
+    "decision": "Built 2026-11-09 and captured again at 375 and 1280 px: the disabled 'List for sale' says 'Still needed: city, condition, front cover photo, record photo, price'. New captures in .ux-review/shots-6/."
+   },
    "notes": [
     "Built 2026-11-09 and covered by an end-to-end test; stays open until a new capture shows it."
    ]
@@ -1450,9 +1458,13 @@
    ],
    "proposal": "Add the round back button ('Back to search' / 'Back to versions') to these two screens, as on the version picker.",
    "question": null,
-   "status": "open",
+   "status": "resolved",
    "first_seen": 5,
-   "resolution": null,
+   "resolution": {
+    "iteration": 6,
+    "date": "2026-11-09",
+    "decision": "Built 2026-11-09 and captured again at 375 and 1280 px: the sell search has 'Back to home' and the sell form has 'Back to versions', as on the version picker. New captures in .ux-review/shots-6/."
+   },
    "notes": [
     "Built 2026-11-09 and covered by an end-to-end test; stays open until a new capture shows it."
    ]
