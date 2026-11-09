@@ -5,6 +5,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
+import { signIn } from "./session";
 import { screenshot } from "./screenshot";
 import { typeSearch } from "./searchBox";
 
@@ -59,11 +60,7 @@ test.afterAll(async () => {
   await admin().auth.admin.deleteUser(userId);
 });
 
-async function logIn(page: Page) {
-  await page.getByLabel("Email").fill(email);
-  await page.getByLabel("Password").fill(PASSWORD);
-  await page.getByRole("button", { name: "Log in" }).click();
-}
+const logIn = (page: Page) => signIn(page, email, PASSWORD);
 const visible = (page: Page, text: string | RegExp) => page.getByText(text).and(page.locator(":visible"));
 const listButton = (page: Page) => page.getByRole("button", { name: "List for sale" });
 

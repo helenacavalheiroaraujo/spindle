@@ -5,6 +5,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
 import { screenshot } from "./screenshot";
+import { signIn } from "./session";
 
 function env(name: string) {
   if (process.env[name]) return process.env[name]!;
@@ -103,9 +104,7 @@ test.afterAll(async () => {
 
 async function logInTo(page: Page, account: Account, next: string) {
   await page.goto(`/login?next=${encodeURIComponent(next)}`);
-  await page.getByLabel("Email").fill(account.email);
-  await page.getByLabel("Password").fill(PASSWORD);
-  await page.getByRole("button", { name: "Log in" }).click();
+  await signIn(page, account.email, PASSWORD);
 }
 const status = async () => (await admin().from("orders").select("status").eq("id", orderId).single()).data?.status;
 

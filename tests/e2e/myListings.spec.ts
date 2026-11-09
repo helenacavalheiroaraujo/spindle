@@ -5,6 +5,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
 import { screenshot } from "./screenshot";
+import { signIn } from "./session";
 
 function env(name: string) {
   if (process.env[name]) return process.env[name]!;
@@ -85,9 +86,7 @@ test.afterAll(async () => {
 
 async function openMyListings(page: Page) {
   await page.goto(`/login?next=${encodeURIComponent("/account")}`);
-  await page.getByLabel("Email").fill(email);
-  await page.getByLabel("Password").fill(PASSWORD);
-  await page.getByRole("button", { name: "Log in" }).click();
+  await signIn(page, email, PASSWORD);
   await page.getByRole("link", { name: "My listings" }).click();
   await expect(page).toHaveURL("/my-listings");
 }

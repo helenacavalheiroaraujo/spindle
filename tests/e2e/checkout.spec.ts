@@ -5,6 +5,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
 import { screenshot } from "./screenshot";
+import { signIn } from "./session";
 
 function env(name: string) {
   if (process.env[name]) return process.env[name]!;
@@ -77,11 +78,7 @@ test.afterAll(async () => {
   await admin().auth.admin.deleteUser(userId);
 });
 
-async function logIn(page: Page) {
-  await page.getByLabel("Email").fill(email);
-  await page.getByLabel("Password").fill(PASSWORD);
-  await page.getByRole("button", { name: "Log in" }).click();
-}
+const logIn = (page: Page) => signIn(page, email, PASSWORD);
 
 test("signed out: Buy on a green listing asks to log in, then lands on its checkout", async ({ page }) => {
   await page.goto(`/versions/${V2012}/listings`);

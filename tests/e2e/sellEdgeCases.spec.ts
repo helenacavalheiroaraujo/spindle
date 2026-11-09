@@ -5,6 +5,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
+import { signIn } from "./session";
 
 function env(name: string) {
   if (process.env[name]) return process.env[name]!;
@@ -61,9 +62,7 @@ test.afterAll(async () => {
 
 async function logIn(page: Page, next: string) {
   await page.goto(`/login?next=${encodeURIComponent(next)}`);
-  await page.getByLabel("Email").fill(email);
-  await page.getByLabel("Password").fill(PASSWORD);
-  await page.getByRole("button", { name: "Log in" }).click();
+  await signIn(page, email, PASSWORD);
   await expect(page).toHaveURL(next);
 }
 

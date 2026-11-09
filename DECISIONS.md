@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-09 — End-to-end tests: one real log-in per account
+- **Decision:** specs that only need a signed-in user reuse one real log-in per account per worker (`tests/e2e/session.ts`). `login.spec.ts`, `signup.spec.ts` and `menu.spec.ts` keep using the real form.
+- **Why:** about 200 log-ins per run hit Supabase Auth's rate limit (429); the app showed a generic failure and the suite failed at random (3–9 tests per run at 6 workers; 0–1 after the change).
+- **Trade-off accepted:** a session bug that only shows on a fresh log-in is caught only by the log-in specs. One occasional failure per run remains, cause unknown.
+- **Not done:** the app still shows a generic failure when Supabase answers 429 (a message for it would be a new rule).
+
 ## 2026-11-09 — Story 15 (phase 4): menu
 - **Decision:** desktop: a row of links under the search box. Phone: a ☰ button, top left, that opens a side drawer (option B of `docs/design/menu-options.html`). Items: Home, Sell for free, Your account (Log in when signed out), and two illustrative future features, Artists and All genres and formats, with a "Coming soon" tag and no link.
 - **Why:** the Assignment 1 design has a hamburger on the phone; the Product Owner chose the drawer for its look and use. The future items show where the product is going and cost no screens.
