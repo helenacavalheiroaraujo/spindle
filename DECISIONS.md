@@ -3,6 +3,18 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-09 — UX review iteration 5: findings #10, #24–#30 and the glossary
+- **#10 A red listing links to the version it moved to:** on the listing check screen of a red listing ("It's a different pressing · moved to 1990 Reissue"), the words "moved to 1990 Reissue" are a link that opens the verified listings of that version, with the buyer's priorities kept in the address. Same on the red row in the listings (beside a version, or on the phone list). Why: the screen tells the buyer where the record belongs but gave no way to go there. Trade-off: one more path out of a warning screen; the back button still works. Story 5 is not changed (already built with tests); the rule lives here. Open point: if the new version has no active listings, the link still opens its listings page, which then shows its own "Nobody is selling" message (not decided).
+- **#24 Genre screen:** about 12 px of space between the back button and the coloured banner, as on the other screens.
+- **#25 Compare, phone:** the link under a version reads "See version" so it stays on one line; on desktop it stays "See this version".
+- **#26 Lighter tags:** the priority pills in the top card of the comparison, the "Your #N" labels and the "Matches: …" tags on the version page use a light style (white with a thin border), so they no longer look like buttons. Navy stays for buttons, selected choices and the "★ Recommended" band. The "Matches" tags of the recommendation screen were already light.
+- **#27 Sell form hint:** under the disabled "List for sale", one line lists everything still needed, in the order of the form, and shrinks as it is filled in: "Still needed: city, condition, front cover photo, record photo, price" (the city only the first time). It replaces "Add your city to continue".
+- **#28 Back buttons:** "Back to home" on the sell search and "Back to versions" on the sell form, as on the version picker. (The sell search is the first sell screen, so its back button goes home.)
+- **#29 Crates:** on the small crates of the home page the record sits a little higher and further out, so it never touches the genre name ("Electronic").
+- **#30 Home, desktop:** the sentence "No jargon, no homework…" sits directly under the title, at the normal text size, as on a phone.
+- **Glossary inside a title:** when a term in a title is tapped (e.g. "Reissue"), its explanation uses the normal text font and size, beside the word, not the large title style. Trade-off: in a title it can wrap onto two lines with a wide gap between them.
+- **Code:** the unused "buy" mode was removed from the sell search (`AlbumSearch`); `AlbumRow` stays because the results page and the genre screen use it. New shared `components/BackLink.tsx` for the new back buttons.
+
 ## 2026-11-09 — Story 4 · Compare pressings
 - **Sound word from a rule:** the 1–5 sound score becomes a short word: 5 "Very clean", 4 "Clean", 3 "Balanced", 2 "A bit flat", 1 "Flat". Why: the data only holds the score and the story asks for a word and no numbers. A fixed rule needs no migration. Trade-off: the words are ours, not written per version.
 - **Typical price = the stored range:** the row shows the range of story 6 (e.g. "€28–€36"); a version with no range shows "Not known yet". Why: it is what the row name says. The approved design showed one number (€32) and was updated to the range.

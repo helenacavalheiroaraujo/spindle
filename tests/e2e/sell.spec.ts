@@ -74,6 +74,7 @@ test("signed out: Sell in the header asks to log in, then returns to the sell se
   await logIn(page);
   await expect(page).toHaveURL("/sell");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Which record are you selling?");
+  await expect(page.getByRole("link", { name: "Back to home" })).toHaveAttribute("href", "/"); // finding #28
 });
 
 test("find an album and pick one version, even when nobody sells it", async ({ page }) => {
@@ -102,6 +103,9 @@ test("find an album and pick one version, even when nobody sells it", async ({ p
   await go.click();
   await expect(page).toHaveURL(`/sell/versions/${V_HOMOGENIC_1997}`);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Sell a record");
+  // Finding #28: the form has a way back to the versions.
+  await page.getByRole("link", { name: "Back to versions" }).click();
+  await expect(page).toHaveURL(`/sell/albums/${HOMOGENIC}`);
 });
 
 test("first sale: List for sale waits for every required field and the city; the listing appears yellow", async ({ page }, info) => {
@@ -111,9 +115,12 @@ test("first sale: List for sale waits for every required field and the city; the
   await expect(page.getByText("Homogenic, 1997 UK original")).toBeVisible();
   await expect(page.getByText(/Typical for this pressing/)).toHaveCount(0); // no range → neither range nor label
   await expect(listButton(page)).toBeDisabled();
+  // Finding #27: the hint says everything still needed, and shrinks as the form is filled in.
+  await expect(page.getByText("Still needed: city, condition, front cover photo, record photo, price")).toBeVisible();
 
   await page.getByText("Very good").click();
   await expect(listButton(page)).toBeDisabled();
+  await expect(page.getByText("Still needed: city, front cover photo, record photo, price")).toBeVisible();
   await page.getByLabel("Front cover photo").setInputFiles(photo("cover"));
   await page.getByLabel("Record photo").setInputFiles(photo("record"));
   await expect(page.getByText("Front cover ✓")).toBeVisible();
@@ -122,7 +129,7 @@ test("first sale: List for sale waits for every required field and the city; the
   await page.getByLabel("Price").fill(typed);
   await expect(visible(page, `No commission: you receive €${typed}`)).toBeVisible();
   await expect(listButton(page)).toBeDisabled(); // first time: the city is still missing
-  await expect(page.getByText("Add your city to continue")).toBeVisible();
+  await expect(page.getByText("Still needed: city", { exact: true })).toBeVisible();
   await screenshot(page, 8, "sell-form-first-time");
 
   await page.getByRole("button", { name: "Add" }).click();

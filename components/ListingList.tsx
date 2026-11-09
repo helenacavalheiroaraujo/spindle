@@ -40,6 +40,8 @@ export function ListingList({
     from === "recommendation" ? "&from=recommendation" : ""
   }`;
 
+  const prioritiesQuery = ranking.length ? `?priorities=${formatPriorities(ranking)}` : "";
+
   return (
     <>
       <Heading className="font-heading text-4xl leading-tight">
@@ -56,17 +58,26 @@ export function ListingList({
       )}
 
       <ul aria-label="Verified listings">
-        {rows.map(({ listing: l, light, movedHere }) => {
+        {rows.map(({ listing: l, light, movedHere, movedToVersionId }) => {
           const label = `${formatPrice(l.price)}, ${l.condition.name}, ${sellerText(l.seller)}`;
           return (
             <li key={l.id} aria-label={label} className="flex flex-wrap items-start gap-x-4 gap-y-3 border-b border-line py-4">
               <span aria-hidden className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy">
                 <span className="h-3 w-3 rounded-full bg-cream" />
               </span>
-              <Link href={`/listings/${l.id}?${query}`} aria-label={`Open ${label}`} className="min-w-0 flex-1 rounded-lg text-sm">
+              <div className="min-w-0 flex-1 text-sm">
+              {/* Finding #10 (DECISIONS 2026-11-09): "moved to …" opens the listings of the version it moved to. */}
+              {light === "red" && movedToVersionId && (
+                <p className="font-semibold">
+                  It&apos;s a different pressing ·{" "}
+                  <Link href={`/versions/${movedToVersionId}/listings${prioritiesQuery}`} className="underline underline-offset-4">
+                    moved to {l.actualVersionName}
+                  </Link>
+                </p>
+              )}
+              <Link href={`/listings/${l.id}?${query}`} aria-label={`Open ${label}`} className="block rounded-lg">
                 {light === "red" ? (
                   <>
-                    <p className="font-semibold">It&apos;s a different pressing · moved to {l.actualVersionName}</p>
                     <p className="text-navy/70">Not for sale here</p>
                     <Price price={l.price} range={l.actualTypicalRange} />
                   </>
@@ -84,6 +95,7 @@ export function ListingList({
                 </p>
                 <p className="mt-1 font-semibold underline underline-offset-4">See the checks</p>
               </Link>
+              </div>
               <TrafficLight light={light} />
               {light !== "red" && (
                 <div className="flex w-full justify-end">

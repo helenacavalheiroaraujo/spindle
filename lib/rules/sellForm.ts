@@ -56,8 +56,15 @@ export function canList(f: SellFormInput): boolean {
   );
 }
 
-// The hint under the disabled button (finding #73): only the city has one in the design.
+// The hint under the disabled button (finding #27): everything still needed, in the order of the form
+// (the city comes first, only the first time).
 export function listHint(f: SellFormInput): string | null {
-  if (canList(f)) return null;
-  return f.needsCity && f.city.trim() === "" ? "Add your city to continue" : null;
+  const missing = [
+    f.needsCity && f.city.trim() === "" ? "city" : null,
+    f.condition !== null && isCondition(f.condition) ? null : "condition",
+    f.hasCover ? null : "front cover photo",
+    f.hasRecord ? null : "record photo",
+    checkPrice(f.price).ok ? null : "price",
+  ].filter((item): item is string => item !== null);
+  return missing.length ? `Still needed: ${missing.join(", ")}` : null;
 }

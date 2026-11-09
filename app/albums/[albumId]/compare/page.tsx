@@ -73,7 +73,7 @@ export default async function ComparePage({
           <h1 className="font-heading text-4xl leading-none lg:text-6xl">Compare pressings</h1>
           <ul aria-label="Your priorities" className="mt-3 flex flex-wrap gap-2">
             {ranking.map((p, i) => (
-              <li key={p} className="rounded-full bg-navy px-3 py-1 text-sm font-medium text-cream">
+              <li key={p} className="rounded-full border border-navy/30 bg-white/60 px-3 py-1 text-sm font-medium">
                 {i + 1} · {LABEL[p]}
               </li>
             ))}
@@ -111,7 +111,7 @@ export default async function ComparePage({
                       <RowIcon id={row.id} />
                       <span>{ROW_LABEL[row.id]}</span>
                       {row.rank !== null && (
-                        <span className="self-start whitespace-nowrap rounded-full bg-navy px-2 py-px text-[11px] font-medium text-cream">
+                        <span className="self-start whitespace-nowrap rounded-full border border-navy/40 bg-white/60 px-2 py-px text-[11px] font-medium">
                           Your #{row.rank}
                         </span>
                       )}
@@ -174,7 +174,8 @@ function VersionHead({
             {version.country} · {version.label} · {version.format}
           </span>
           <span className="mt-2.5 inline-flex min-h-6 items-center gap-1 border-b-[1.5px] border-navy text-[13px] font-medium">
-            See this version
+            <span className="lg:hidden">See version</span>
+            <span className="hidden lg:inline">See this version</span>
             <svg aria-hidden viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="m9 6 6 6-6 6" />
             </svg>

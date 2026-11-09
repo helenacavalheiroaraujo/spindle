@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { BackLink } from "@/components/BackLink";
 import { Header } from "@/components/Header";
 import { getVersionToSell } from "@/lib/db/albums";
 import { getSellerProfile } from "@/lib/db/profiles";
@@ -40,6 +41,7 @@ export default async function SellFormPage({ params }: { params: Promise<{ versi
   return (
     <main className="mx-auto max-w-5xl px-4 pb-16">
       <Header />
+      <BackLink href={`/sell/albums/${version.albumId}`}>Back to versions</BackLink>
       <SellForm version={version} needsCity={profile.city === null} />
     </main>
   );

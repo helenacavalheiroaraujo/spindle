@@ -82,7 +82,17 @@ export default async function ListingCheckPage({
 
       <section aria-label="Result" className="mt-4 flex items-center gap-3 rounded-2xl border border-line bg-white/60 p-4">
         <TrafficLight light={light} />
-        <p className="font-semibold">{summary}</p>
+        {light === "red" && row.movedToVersionId ? (
+          // Finding #10 (DECISIONS 2026-11-09): "moved to …" opens the listings of the version it moved to.
+          <p className="font-semibold">
+            It&apos;s a different pressing ·{" "}
+            <Link href={`/versions/${row.movedToVersionId}/listings${prioritiesQuery}`} className="underline underline-offset-4">
+              moved to {l.actualVersionName}
+            </Link>
+          </p>
+        ) : (
+          <p className="font-semibold">{summary}</p>
+        )}
       </section>
 
       <section aria-labelledby="checklist" className="mt-6">

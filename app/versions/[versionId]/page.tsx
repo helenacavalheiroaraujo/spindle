@@ -78,7 +78,7 @@ export default async function VersionPage({
             {lowest !== null && <p className="mt-3 text-[22px] font-medium">From {formatPrice(lowest)}</p>}
             <ul aria-label="Fit with your priorities" className="mt-3 flex flex-wrap gap-2">
               {matches.map((p) => (
-                <li key={p} className="rounded-full bg-navy px-3.5 py-1 text-[13px] font-medium text-cream">
+                <li key={p} className="rounded-full border border-navy/30 bg-white/60 px-3.5 py-1 text-[13px] font-medium">
                   Matches: {LABEL[p].toLowerCase()}
                 </li>
               ))}

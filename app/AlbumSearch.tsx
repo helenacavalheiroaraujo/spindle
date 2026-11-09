@@ -1,7 +1,7 @@
 "use client";
-// Search box and results (story 1). Since story 17 only the sell screen uses it: buyers search on /search. Rules live in lib/rules; this screen only shows what they return.
-// mode "sell" (story 8 · finding #36): same box and matching, but every album opens its list of versions,
-// with no "No listings" or "Not in the demo" tags.
+// Search box and results for the sell screen (story 8 · finding #36). Buyers search on /search (story 17); only AlbumRow,
+// below, is shared with that page and the genre screen. Rules live in lib/rules; this screen only shows what they return.
+// Every album opens its list of versions, with no "No listings" or "Not in the demo" tags.
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { search, type SearchResponse } from "./actions";
@@ -18,15 +18,13 @@ type State =
 
 type Mode = "buy" | "sell";
 
-export function AlbumSearch({ mode = "buy" }: { mode?: Mode }) {
+export function AlbumSearch() {
   const [typed, setTyped] = useState("");
   const [state, setState] = useState<State>({ kind: "idle" });
   const [attempt, setAttempt] = useState(0);
-  const [nobodySelling, setNobodySelling] = useState<AlbumSummary | null>(null);
   const tooShort = normalize(typed).length < MIN_SEARCH_LENGTH;
 
   useEffect(() => {
-    setNobodySelling(null);
     if (tooShort) return setState({ kind: "idle" });
     let current = true;
     setState((s) => ({ kind: "loading", previous: s.kind === "done" ? s.response : undefined }));
@@ -61,20 +59,12 @@ export function AlbumSearch({ mode = "buy" }: { mode?: Mode }) {
         />
       </label>
 
-      <div className={`relative mt-6 ${state.kind === "idle" && !nobodySelling ? "" : "min-h-40"}`}>
+      <div className={`relative mt-6 ${state.kind === "idle" ? "" : "min-h-40"}`}>
         {state.kind === "loading" && <LoadingMask label="Searching…" />}
         {state.kind === "error" && (
           <ErrorScreen message="We couldn't load the albums. Check your connection." onRetry={() => setAttempt((n) => n + 1)} />
         )}
-        {nobodySelling && (
-          <div role="status" className="mb-4 rounded-2xl border border-line bg-sand p-5 text-navy">
-            <p className="font-heading text-2xl">Nobody is selling this album right now</p>
-            <p className="mt-1 text-sm text-navy/80">
-              {nobodySelling.title} · {nobodySelling.artist}
-            </p>
-          </div>
-        )}
-        {response && <Results response={response} mode={mode} onNobodySelling={setNobodySelling} />}
+        {response && <Results response={response} />}
       </div>
     </section>
   );
@@ -82,7 +72,10 @@ export function AlbumSearch({ mode = "buy" }: { mode?: Mode }) {
 
 export type RowProps = { mode: Mode; onNobodySelling: (a: AlbumSummary) => void };
 
-function Results({ response, mode, onNobodySelling }: RowProps & { response: SearchResponse }) {
+// Sell rows never reach the "Nobody is selling" branch of AlbumRow, so there is nothing to call.
+const ignore = () => {};
+
+function Results({ response }: { response: SearchResponse }) {
   const { albums, suggestions } = response;
   if (albums.length > 0) {
     return (
@@ -93,7 +86,7 @@ function Results({ response, mode, onNobodySelling }: RowProps & { response: Sea
         <ul aria-label="Search results" className="divide-y divide-line border-y border-line">
           {albums.map((a) => (
             <li key={a.id}>
-              <AlbumRow album={a} mode={mode} onNobodySelling={onNobodySelling} />
+              <AlbumRow album={a} mode="sell" onNobodySelling={ignore} />
             </li>
           ))}
         </ul>
@@ -107,7 +100,7 @@ function Results({ response, mode, onNobodySelling }: RowProps & { response: Sea
         <ul aria-label="Search results" className="divide-y divide-line border-y border-line">
           {suggestions.map((a) => (
             <li key={a.id}>
-              <AlbumRow album={a} mode={mode} onNobodySelling={onNobodySelling} />
+              <AlbumRow album={a} mode="sell" onNobodySelling={ignore} />
             </li>
           ))}
         </ul>

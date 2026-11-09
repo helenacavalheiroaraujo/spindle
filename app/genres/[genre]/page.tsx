@@ -26,7 +26,9 @@ export default async function GenrePage({ params }: { params: Promise<{ genre: s
         Back to home
       </Link>
       <h1 className="sr-only">{genre.name}</h1>
-      <Crate genre={genre} count={recordsLabel(albums.length)} large />
+      <div className="mt-3">
+        <Crate genre={genre} count={recordsLabel(albums.length)} large />
+      </div>
       <p className="mb-2 mt-4 text-sm text-navy/70">Newest first · Illustrative data</p>
       <GenreAlbums albums={albums} />
     </main>

@@ -45,20 +45,23 @@ const FULL: SellFormInput = { condition: "VG+", price: "30", hasCover: true, has
 
 describe("canList and listHint", () => {
   it.each([
-    // change from a complete form, enabled, hint
+    // change from a complete form, enabled, hint (finding #27: says everything that is still needed)
     [{}, true, null],
-    [{ condition: null }, false, null],
-    [{ condition: "Mint" }, false, null], // not one of the four grades
-    [{ price: "" }, false, null],
-    [{ price: "0" }, false, null],
-    [{ price: "1001" }, false, null],
-    [{ hasCover: false }, false, null],
-    [{ hasRecord: false }, false, null],
-    [{ needsCity: true, city: "" }, false, "Add your city to continue"], // first time, no city
-    [{ needsCity: true, city: "   " }, false, "Add your city to continue"],
+    [{ condition: null }, false, "Still needed: condition"],
+    [{ condition: "Mint" }, false, "Still needed: condition"], // not one of the four grades
+    [{ price: "" }, false, "Still needed: price"],
+    [{ price: "0" }, false, "Still needed: price"],
+    [{ price: "1001" }, false, "Still needed: price"],
+    [{ hasCover: false }, false, "Still needed: front cover photo"],
+    [{ hasRecord: false }, false, "Still needed: record photo"],
+    [{ hasCover: false, hasRecord: false }, false, "Still needed: front cover photo, record photo"],
+    [{ needsCity: true, city: "" }, false, "Still needed: city"], // first time, no city
+    [{ needsCity: true, city: "   " }, false, "Still needed: city"],
     [{ needsCity: true, city: "Porto" }, true, null], // first time, city filled in; shop name optional
     [{ needsCity: false, city: "" }, true, null], // city already saved
-    [{ needsCity: true, city: "", price: "" }, false, "Add your city to continue"],
+    [{ needsCity: true, city: "", price: "" }, false, "Still needed: city, price"],
+    [{ needsCity: true, city: "", condition: null, hasCover: false, hasRecord: false, price: "" }, false, "Still needed: city, condition, front cover photo, record photo, price"],
+    [{ needsCity: false, city: "", condition: null, hasCover: false, hasRecord: false, price: "" }, false, "Still needed: condition, front cover photo, record photo, price"],
   ] as const)("%o → enabled %s, hint %s", (change, enabled, hint) => {
     const form = { ...FULL, ...change } as SellFormInput;
     expect(canList(form)).toBe(enabled);

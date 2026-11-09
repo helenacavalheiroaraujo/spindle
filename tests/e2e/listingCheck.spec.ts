@@ -53,6 +53,22 @@ test("red under its claimed version: shows the failed checks and where it moved,
   await expect(page.getByRole("button", { name: /^Buy/ })).toHaveCount(0);
 });
 
+test("red: 'moved to 1990 Reissue' on the check screen opens the listings of that version (finding #10)", async ({ page }) => {
+  await page.goto(`/versions/${V2012}/listings?priorities=price,sound`);
+  await page.getByRole("link", { name: /^Open €29/ }).click();
+  await page.getByRole("link", { name: "moved to 1990 Reissue" }).click();
+  await expect(page).toHaveURL(`/versions/${V1990}/listings?priorities=price,sound`);
+  await expect(page.getByRole("list", { name: "Verified listings" })).toBeVisible();
+});
+
+test("red: 'moved to 1990 Reissue' on the list opens the listings of that version, keeping the priorities (finding #10)", async ({ page }) => {
+  await page.goto(`/versions/${V2012}/listings?priorities=price,sound`);
+  await expect(page.getByText("It's a different pressing ·")).toBeVisible();
+  await page.getByRole("link", { name: "moved to 1990 Reissue" }).click();
+  await expect(page).toHaveURL(`/versions/${V1990}/listings?priorities=price,sound`);
+  await expect(page.getByRole("link", { name: /^Open €29/ })).toBeVisible(); // there it is yellow ("Moved here")
+});
+
 test("same listing under its actual version: yellow, every check pending, warning before buying", async ({ page }) => {
   await page.goto(`/listings/${RED_29}?version=${V1990}`);
   await expect(result(page)).toContainText("Check");

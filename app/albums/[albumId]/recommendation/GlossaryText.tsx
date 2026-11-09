@@ -26,7 +26,7 @@ function Term({ text, explanation }: { text: string; explanation: string }) {
         {text}
       </button>
       {open && (
-        <span role="note" className="mx-1 rounded-md bg-navy/10 px-1.5 py-0.5 text-[0.85em] font-normal">
+        <span role="note" className="mx-1 rounded-md bg-navy/10 px-1.5 py-0.5 font-body text-sm font-normal leading-snug tracking-normal">
           {explanation}
         </span>
       )}

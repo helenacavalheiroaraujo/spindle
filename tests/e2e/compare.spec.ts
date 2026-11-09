@@ -13,7 +13,7 @@ const compare = (priorities: string) => `/albums/${ZIGGY_ID}/compare?priorities=
 const table = (page: Page) => page.getByRole("table", { name: /Compare pressings of/ });
 const rowLabels = (page: Page) => table(page).getByRole("rowheader").allInnerTexts();
 
-test("recommendation → Compare pressings → recommended version first, then the next best", async ({ page }) => {
+test("recommendation → Compare pressings → recommended version first, then the next best", async ({ page, isMobile }) => {
   await page.goto(recommendation("price,sound"));
   await page.getByRole("link", { name: "Compare pressings" }).click();
   await expect(page).toHaveURL(compare("price,sound"));
@@ -25,6 +25,8 @@ test("recommendation → Compare pressings → recommended version first, then t
   await expect(heads.nth(0)).toContainText("2012");
   await expect(heads.nth(1)).toContainText("Next best");
   await expect(heads.nth(1)).toContainText("1990");
+  // Finding #25: a shorter link text on a phone, so it stays on one line.
+  await expect(heads.nth(1).getByRole("link", { name: isMobile ? /See version/ : /See this version/ })).toBeVisible();
   await screenshot(page, 4, "compare");
 });
 

@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { AlbumSearch } from "../AlbumSearch";
+import { BackLink } from "@/components/BackLink";
 import { Header } from "@/components/Header";
 import { currentUserId } from "@/lib/db/session";
 import { withReturn } from "@/lib/rules/login";
@@ -11,9 +12,10 @@ export default async function SellSearchPage() {
   return (
     <main className="mx-auto max-w-2xl px-4 pb-16">
       <Header />
+      <BackLink href="/">Back to home</BackLink>
       <h1 className="mt-4 font-heading text-4xl leading-tight sm:text-5xl">Which record are you selling?</h1>
       <p className="mt-2 text-base">Find the album, then pick your exact version. 0% commission.</p>
-      <AlbumSearch mode="sell" />
+      <AlbumSearch />
     </main>
   );
 }
