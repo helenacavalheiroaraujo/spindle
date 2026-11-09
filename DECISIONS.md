@@ -3,6 +3,18 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-09 — Story 15 (phase 4): menu
+- **Decision:** desktop: a row of links under the search box. Phone: a ☰ button, top left, that opens a side drawer (option B of `docs/design/menu-options.html`). Items: Home, Sell for free, Your account (Log in when signed out), and two illustrative future features, Artists and All genres and formats, with a "Coming soon" tag and no link.
+- **Why:** the Assignment 1 design has a hamburger on the phone; the Product Owner chose the drawer for its look and use. The future items show where the product is going and cost no screens.
+- **Differs from:** story 15 · Scope (links in the header; open points on devices and items), changed in the story file before it had Traceability rows.
+- **Choices made while building (not in the story or the design):**
+  - "+ Sell" leaves the phone header and lives in the menu. On desktop the "Sell for free" and "Log in" buttons stay on the right, and the same links are also in the row.
+  - "Log in" in the menu returns the user to the page they were on, as the corner link does (story 9).
+  - The row is on every page, including the sell pages, where it sits under the logo because the header search is hidden there.
+  - The drawer keeps the keyboard focus inside while open and returns it to ☰ when it closes.
+  - The signed-in state reaches the menu from the root layout (`components/SignedIn.tsx`), because the header is also used inside client error screens.
+  - Screenshots of the other stories were not regenerated: they show the header without the menu until the final screenshot run for the PDF.
+
 ## 2026-11-09 — Story 16 (phase 4): search suggestions
 - **Decision:** the suggestion box is for buyers only: the home page, the results page and the desktop header. The sell search (story 8) has no suggestion box.
 - **Why:** on the sell search the box covered the list of albums that screen already shows under its box, with the same albums.

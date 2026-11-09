@@ -67,9 +67,14 @@ async function logIn(page: Page) {
 const visible = (page: Page, text: string | RegExp) => page.getByText(text).and(page.locator(":visible"));
 const listButton = (page: Page) => page.getByRole("button", { name: "List for sale" });
 
-test("signed out: Sell in the header asks to log in, then returns to the sell search", async ({ page }) => {
+test("signed out: Sell in the menu asks to log in, then returns to the sell search", async ({ page }, info) => {
   await page.goto("/");
-  await page.getByRole("link", { name: /Sell/ }).click();
+  if (info.project.name === "phone") {
+    await page.getByRole("button", { name: "Open menu" }).click(); // story 15: on a phone "Sell" is in the menu
+    await page.getByRole("dialog", { name: "Menu" }).getByRole("link", { name: "Sell for free" }).click();
+  } else {
+    await page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Sell for free" }).click();
+  }
   await expect(page).toHaveURL(`/login?next=${encodeURIComponent("/sell")}`);
   await logIn(page);
   await expect(page).toHaveURL("/sell");

@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { HeaderSearch } from "./HeaderSearch";
+import { MenuDrawer, MenuRow } from "./MainMenu";
 
 // Shared top bar with the Spindle logo (back to the home page). On desktop (story 12) the logo sits on the left,
 // followed by the search; the account badge and "Sell for free" stay on the right (AccountBadge, in the layout).
@@ -8,13 +9,19 @@ import { HeaderSearch } from "./HeaderSearch";
 // layout, sits at the window edge): the badge is about 270 px wide and the page may reach under it.
 export function Header() {
   return (
-    <header className="flex items-center justify-center py-5 lg:justify-start lg:gap-6 lg:pr-[max(0px,calc(270px_-_(100vw_-_100%)/2))]">
-      <Link href="/" className="flex shrink-0 items-center gap-2 font-heading text-xl tracking-wide">
-        <span aria-hidden className="h-5 w-5 rounded-full border-[5px] border-navy" />
-        SPINDLE
-      </Link>
+    <header className="relative">
+      <div className="flex items-center justify-center py-5 lg:justify-start lg:gap-6 lg:pr-[max(0px,calc(270px_-_(100vw_-_100%)/2))]">
+        <Link href="/" className="flex shrink-0 items-center gap-2 font-heading text-xl tracking-wide">
+          <span aria-hidden className="h-5 w-5 rounded-full border-[5px] border-navy" />
+          SPINDLE
+        </Link>
+        <Suspense>
+          <HeaderSearch />
+        </Suspense>
+      </div>
       <Suspense>
-        <HeaderSearch />
+        <MenuDrawer />
+        <MenuRow />
       </Suspense>
     </header>
   );

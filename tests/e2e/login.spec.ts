@@ -39,9 +39,9 @@ test.afterAll(async () => {
 test("a registered user logs in from the header and logs out", async ({ page }) => {
   await page.goto("/");
   await screenshot(page, 9, "home-signed-out");
-  await page.getByRole("link", { name: "Log in" }).click();
+  await page.locator("body > .pointer-events-none").getByRole("link", { name: "Log in" }).click();
   await expect(page).toHaveURL("/login");
-  await expect(page.getByRole("link", { name: "Log in" })).toHaveCount(0); // not shown on the log-in page itself
+  await expect(page.locator("body > .pointer-events-none").getByRole("link", { name: "Log in" })).toHaveCount(0); // not shown on the log-in page itself
   await screenshot(page, 9, "login");
 
   // Wrong password → message that does not say which one was wrong; no reset link.
@@ -67,7 +67,7 @@ test("a registered user logs in from the header and logs out", async ({ page }) 
 
   await page.getByRole("button", { name: "Log out" }).click();
   await expect(page).toHaveURL("/");
-  await expect(page.getByRole("link", { name: "Log in" })).toBeVisible();
+  await expect(page.locator("body > .pointer-events-none").getByRole("link", { name: "Log in" })).toBeVisible();
 
   // Signed out: Your account sends the user to log in.
   await page.goto("/account");
@@ -86,7 +86,7 @@ test("the return address survives switching between log-in and sign-up", async (
   await page.goto("/login?next=%2Faccount");
   await page.getByRole("link", { name: "Create one" }).click();
   await expect(page).toHaveURL("/signup?next=%2Faccount");
-  await page.getByRole("link", { name: "Log in" }).click();
+  await page.locator("p").getByRole("link", { name: "Log in" }).click();
   await expect(page).toHaveURL("/login?next=%2Faccount");
 });
 

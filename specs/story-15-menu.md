@@ -5,8 +5,8 @@
 **As a buyer or seller, I want a menu with the main places of the app, so I can move around without going back to the home page.**
 
 ## Scope
-- A menu in the header with: Home, Sell, and Your account (Log in if signed out)
-- On desktop: links in the header. On phone: a menu button that opens the list. *(to decide, see open points)*
+- A menu with: Home, Sell, and Your account (Log in if signed out), plus two illustrative future features: **Artists** and **All genres and formats**
+- On desktop: a row of links under the search box. On phone: a ☰ button (top left) that opens a side drawer
 - It replaces the loose "+ Sell" and account links that sit in the header today
 
 ## Use cases
@@ -17,7 +17,8 @@
 
 ## Acceptance criteria
 - [ ] The menu appears on every page and shows the same items everywhere
-- [ ] Each item opens the right page; the current page is marked
+- [ ] Home, Sell and Your account open the right page; the current page is marked
+- [ ] Artists and All genres and formats show "Coming soon" and cannot be tapped
 - [ ] Signed out shows "Log in"; signed in shows "Your account"
 - [ ] On phone the menu opens and closes, and the buttons are large enough to tap
 - [ ] The menu can be used with the keyboard
@@ -26,11 +27,7 @@
 - Signed out and "Sell" → login first, then back to the sell flow
 
 ## Designs
-- *Missing. Needs an approved design before the story starts (CLAUDE.md, step 1b).*
+- `docs/design/menu-options.html`: desktop row, phone **option B** (side drawer), approved 2026-11-09
 
 ## Out of scope
 - Search inside the menu (the header search stays as in story 12); categories and genres in the menu
-
-## Open points
-1. Desktop only, or phone as well?
-2. Which items? Home, Sell and Your account are the minimum that exists today.
