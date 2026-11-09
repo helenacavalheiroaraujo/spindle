@@ -149,13 +149,15 @@ export function SuggestionList({
               const inside = (
                 <>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={a.coverUrl}
-                    alt=""
-                    width={44}
-                    height={44}
-                    className="h-11 w-11 shrink-0 rounded-lg"
-                  />
+                  <span className="h-11 w-11 shrink-0 rounded-lg bg-sand">
+                    <img
+                      src={a.coverUrl}
+                      alt=""
+                      width={44}
+                      height={44}
+                      className="h-11 w-11 rounded-lg"
+                    />
+                  </span>
                   <span className="min-w-0 flex-1">
                     <span className="block truncate font-semibold">
                       {a.title}

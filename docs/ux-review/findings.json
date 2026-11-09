@@ -1,1606 +1,1837 @@
 {
- "meta": {
-  "project": "Spindle MVP",
-  "report_url": "https://claude.ai/artifact/6inbbjVxsF4Hi7Q2cr2n28",
-  "iteration": 5,
-  "updated": "2026-11-09T12:00:00+00:00"
- },
- "iterations": [
-  {
-   "n": 1,
-   "date": "2026-11-08",
-   "note": "First UX review: screen inventory, then every built screen"
-  },
-  {
-   "n": 2,
-   "date": "2026-11-08",
-   "note": "After story 7: checkout, confirmation and 'just sold' built; re-check of open findings"
-  },
-  {
-   "n": 3,
-   "date": "2026-11-08",
-   "note": "After stories 2 (save to account), 8 (sell), 12 (home page): screen inventory updated, all built screens re-captured and reviewed"
-  },
-  {
-   "n": 4,
-   "date": "2026-11-08",
-   "note": "After the sand emphasis cards and the home page redo: all screens re-captured; #18 resolved, #8 updated, new #21–#23"
-  },
-  {
-   "n": 5,
-   "date": "2026-11-09",
-   "note": "After stories 4 (compare, version page), 17 (search results page), 8 and 12: new screens added to the inventory, all screens re-captured at 375 and 1280 px, 17 open findings re-checked (4 resolved), new #24-#30"
-  }
- ],
- "screens": [
-  {
-   "key": "home",
-   "name": "Home with search",
-   "story": "12",
-   "phase": 1,
-   "design": "Spindle_mockups_by_section.pdf · p. 2–3 (homepage), p. 15/17 (search)",
-   "route": "/",
-   "auth": false,
-   "status": "built",
-   "note": "Story 12: title, search, crates by genre, \"This week at the shop\""
-  },
-  {
-   "key": "search-results",
-   "name": "Search results",
-   "story": "17",
-   "phase": 1,
-   "design": "docs/design/search-results-desktop.html",
-   "route": "/search?q=bowie",
-   "auth": false,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "search-no-results",
-   "name": "Search: no albums found",
-   "story": "17",
-   "phase": 1,
-   "design": "docs/design/search-results-desktop.html",
-   "route": "/search?q=xyzq",
-   "auth": false,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "search-no-listings",
-   "name": "Search: album with no listings",
-   "story": "1",
-   "phase": 1,
-   "design": null,
-   "route": "/search?q=let%27s+dance",
-   "auth": false,
-   "status": "built",
-   "note": "Search results page (story 17); the album with no listings is tapped from the list in the review.",
-   "search": "let's dance"
-  },
-  {
-   "key": "priorities",
-   "name": "Priorities",
-   "story": "2",
-   "phase": 1,
-   "design": "Spindle_mockups_by_section.pdf · p. 15 (mobile), p. 18 (desktop)",
-   "route": "/albums/10000000-0000-0000-0000-000000000001/priorities",
-   "auth": false,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "recommendation",
-   "name": "Recommendation",
-   "story": "3",
-   "phase": 1,
-   "design": "Spindle_mockups_by_section.pdf · p. 11 (mobile and desktop)",
-   "route": "/albums/10000000-0000-0000-0000-000000000001/recommendation?priorities=price,sound",
-   "auth": false,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "recommendation-ideal-unavailable",
-   "name": "Recommendation with 'ideal but unavailable' note",
-   "story": "3",
-   "phase": 1,
-   "design": null,
-   "route": "/albums/10000000-0000-0000-0000-000000000001/recommendation?priorities=original,sound",
-   "auth": false,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "listings",
-   "name": "Verified listings (own screen)",
-   "story": "5",
-   "phase": 1,
-   "design": "Spindle_mockups_by_section.pdf · p. 15 (Verified listings, mobile)",
-   "route": "/versions/20000000-0000-0000-0000-000000000003/listings?priorities=price,sound",
-   "auth": false,
-   "status": "built",
-   "note": "On desktop the listings sit beside the recommendation; this screen is the phone layout"
-  },
-  {
-   "key": "listing-check-yellow",
-   "name": "Listing check: yellow (Check)",
-   "story": "5",
-   "phase": 1,
-   "design": "Spindle_mockups_by_section.pdf · p. 11 (mobile), p. 13 (desktop)",
-   "route": "/listings/40000000-0000-0000-0000-000000000006?version=20000000-0000-0000-0000-000000000003",
-   "auth": false,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "listing-check-red",
-   "name": "Listing check: red (No match)",
-   "story": "5",
-   "phase": 1,
-   "design": null,
-   "route": "/listings/40000000-0000-0000-0000-000000000008?version=20000000-0000-0000-0000-000000000003",
-   "auth": false,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "yellow-warning",
-   "name": "Yellow listing warning before checkout",
-   "story": "5",
-   "phase": 1,
-   "design": "Spindle_mockups_by_section.pdf · p. 11/13 (yellow note on the listing)",
-   "route": null,
-   "auth": false,
-   "status": "built",
-   "note": "A dialog after tapping Buy; not captured"
-  },
-  {
-   "key": "signup",
-   "name": "Sign up",
-   "story": "9",
-   "phase": 2,
-   "design": "Spindle_mockups_by_section.pdf · p. 5 (Create account, mobile), p. 7 (desktop)",
-   "route": "/signup",
-   "auth": false,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "login",
-   "name": "Log in",
-   "story": "9",
-   "phase": 2,
-   "design": "Spindle_mockups_by_section.pdf · p. 5 (Sign in, mobile and desktop)",
-   "route": "/login",
-   "auth": false,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "account",
-   "name": "Your account",
-   "story": "9",
-   "phase": 2,
-   "design": "Spindle_mockups_by_section.pdf · p. 7 (mobile), p. 9 (desktop)",
-   "route": "/account",
-   "auth": true,
-   "status": "built",
-   "note": "Deliberately smaller than the design (DECISIONS 2026-11-08)"
-  },
-  {
-   "key": "checkout",
-   "name": "Checkout (Buy with protection)",
-   "story": "7",
-   "phase": 2,
-   "design": "Spindle_mockups_by_section.pdf · p. 16 (mobile), p. 19 (desktop)",
-   "route": "/checkout/40000000-0000-0000-0000-000000000005?version=20000000-0000-0000-0000-000000000003",
-   "auth": true,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "order-confirmation",
-   "name": "Order confirmation",
-   "story": "7",
-   "phase": 2,
-   "design": "order-confirmation.html (order-confirmation-375.png, order-confirmation-1280.png)",
-   "route": null,
-   "auth": true,
-   "status": "built",
-   "note": "Needs an order of the signed-in buyer; screenshot taken from the story 7 e2e run (docs/screenshots/story-7, same commit as the code)"
-  },
-  {
-   "key": "checkout-just-sold",
-   "name": "Checkout: 'Sorry, this record was just sold'",
-   "story": "7",
-   "phase": 2,
-   "design": null,
-   "route": null,
-   "auth": true,
-   "status": "built",
-   "note": "Needs a listing sold during checkout; screenshot taken from the story 7 e2e run (docs/screenshots/story-7)"
-  },
-  {
-   "key": "saved-priorities",
-   "name": "Recommendation with saved ranking ('Based on: … Change')",
-   "story": "2",
-   "phase": 2,
-   "design": null,
-   "route": null,
-   "auth": true,
-   "status": "built",
-   "note": "State with a saved ranking, signed in. Not captured here; screenshot from the story 2 e2e run (docs/screenshots/story-2/saved-ranking-skips-screen-*.png)"
-  },
-  {
-   "key": "sell-pick-version",
-   "name": "Sell: search album and pick the version",
-   "story": "8",
-   "phase": 3,
-   "design": null,
-   "route": "/sell/albums/10000000-0000-0000-0000-000000000005",
-   "auth": true,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "sell-form",
-   "name": "Sell a record (form)",
-   "story": "8",
-   "phase": 3,
-   "design": "Spindle_mockups_by_section.pdf · p. 16 (mobile), p. 19 (desktop)",
-   "route": "/sell/versions/20000000-0000-0000-0000-000000000009",
-   "auth": true,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "sell-seller-details",
-   "name": "Sell: first time, city and shop name",
-   "story": "8",
-   "phase": 3,
-   "design": null,
-   "route": null,
-   "auth": true,
-   "status": "built",
-   "note": "First-time state of the sell form (city and shop name); screenshots from the story 8 e2e run (docs/screenshots/story-8)"
-  },
-  {
-   "key": "my-listings",
-   "name": "My listings (see, edit, remove)",
-   "story": "8",
-   "phase": 3,
-   "design": "Spindle_mockups_by_section.pdf · p. 9 (Your listings, desktop account)",
-   "route": "/my-listings",
-   "auth": true,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "sell-not-in-catalogue",
-   "name": "Sell: 'This version isn't in our catalogue yet'",
-   "story": "8",
-   "phase": 3,
-   "design": null,
-   "route": "/sell/versions/20000000-0000-0000-0000-000000000999",
-   "auth": true,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "compare",
-   "name": "Compare pressings",
-   "story": "4",
-   "phase": 4,
-   "design": "docs/design/compare-desktop.html; Spindle_mockups_by_section.pdf · p. 11",
-   "route": "/albums/10000000-0000-0000-0000-000000000001/compare?priorities=price,sound",
-   "auth": false,
-   "status": "built",
-   "note": "Built 2026-11-09."
-  },
-  {
-   "key": "my-orders",
-   "name": "My orders (confirm receipt)",
-   "story": "7",
-   "phase": 4,
-   "design": "Spindle_mockups_by_section.pdf · p. 7/9 (On its way)",
-   "route": null,
-   "auth": false,
-   "status": "later",
-   "note": ""
-  },
-  {
-   "key": "design-homepage-crates",
-   "name": "Homepage: \"Because you like…\", best sellers, \"All genres and formats\"",
-   "story": "13",
-   "phase": 4,
-   "design": "Spindle_mockups_by_section.pdf · p. 2–3",
-   "route": null,
-   "auth": false,
-   "status": "later",
-   "note": "Crates and \"This week at the shop\" are built (story 12); \"Because you like…\" is story 13, not in the MVP; \"All genres and formats\" needs filters (story 10)"
-  },
-  {
-   "key": "design-search-filters",
-   "name": "Search filters",
-   "story": "—",
-   "phase": 4,
-   "design": "Spindle_mockups_by_section.pdf · p. 15, p. 17",
-   "route": null,
-   "auth": false,
-   "status": "later",
-   "note": "Design only; not in any story"
-  },
-  {
-   "key": "design-public-profile",
-   "name": "Public profile and reviews",
-   "story": "9",
-   "phase": 4,
-   "design": "Spindle_mockups_by_section.pdf · p. 7, p. 9",
-   "route": null,
-   "auth": false,
-   "status": "later",
-   "note": "Out of scope in story 9 (comes with reviews)"
-  },
-  {
-   "key": "design-hamburger-menu",
-   "name": "Mobile hamburger / account menu",
-   "story": "—",
-   "phase": 4,
-   "design": "Spindle_mockups_by_section.pdf · p. 2, p. 4",
-   "route": null,
-   "auth": false,
-   "status": "later",
-   "note": "Design only; not in any story"
-  },
-  {
-   "key": "genre",
-   "name": "Genre screen (a crate)",
-   "story": "12",
-   "phase": 1,
-   "design": "docs/design/genre-screen-options.html (option B), genre-screen-desktop.html",
-   "route": "/genres/rock",
-   "auth": false,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "sell-search",
-   "name": "Sell: search for the album",
-   "story": "8",
-   "phase": 3,
-   "design": "Spindle_mockups_by_section.pdf · p. 16 (mobile), p. 19 (desktop)",
-   "route": "/sell",
-   "auth": true,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "version-page",
-   "name": "Version page",
-   "story": "4",
-   "phase": 4,
-   "design": "docs/design/version-page.html",
-   "route": "/versions/20000000-0000-0000-0000-000000000003?priorities=price,sound",
-   "auth": false,
-   "status": "built",
-   "note": "Built 2026-11-09."
-  },
-  {
-   "key": "search-short",
-   "name": "Search results: fewer than 3 characters",
-   "story": "17",
-   "phase": 4,
-   "design": "docs/design/search-results-desktop.html",
-   "route": "/search?q=zi",
-   "auth": false,
-   "status": "built",
-   "note": ""
-  },
-  {
-   "key": "search-suggestions",
-   "name": "Search results: Did you mean…?",
-   "story": "17",
-   "phase": 4,
-   "design": "docs/design/search-results-desktop.html",
-   "route": "/search?q=zigy",
-   "auth": false,
-   "status": "built",
-   "note": ""
-  }
- ],
- "findings": [
-  {
-   "id": 1,
-   "screens": [
-    "checkout",
-    "order-confirmation"
-   ],
-   "stories": [
-    "7"
-   ],
-   "type": "Missing screen",
-   "severity": "Blocker",
-   "title": "Checkout and order confirmation do not exist yet — the demo flow stops at Buy",
-   "evidence": [
-    {
-     "source": "specs/story-7-checkout.md",
-     "where": "Scope",
-     "quote": "Checkout screen (\"Buy with protection\"), opened from **Buy** on a green or yellow listing"
-    },
-    {
-     "source": "specs/story-7-checkout.md",
-     "where": "Use cases",
-     "quote": "**Pay** → order created, status \"Paid · waiting for the seller\"; confirmation screen"
-    },
-    {
-     "source": "Spindle_mockups_by_section.pdf",
-     "where": "p. 15 and p. 19",
-     "quote": "Buy with protection (mobile and desktop)"
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/listings-375.png",
-     "quote": ""
-    }
-   ],
-   "proposal": "Build story 7 next (it is in progress): checkout from Buy, Pay, and a confirmation screen. These close the demo flow search → buy.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 1,
-   "resolution": {
-    "iteration": 2,
-    "date": "2026-11-08",
-    "decision": "Built in story 7 (d648e9e). Checked on .ux-review/shots/checkout-375/1280.png and order-confirmation-375/1280.png; both match the designs, apart from the recorded decisions (€2.00 fee, address typed, MB WAY label only)."
-   }
-  },
-  {
-   "id": 2,
-   "screens": [
-    "checkout-just-sold"
-   ],
-   "stories": [
-    "7"
-   ],
-   "type": "Missing screen",
-   "severity": "High",
-   "title": "No screen for 'Sorry, this record was just sold'",
-   "evidence": [
-    {
-     "source": "specs/story-7-checkout.md",
-     "where": "Edge cases",
-     "quote": "Listing sold while the buyer is on the checkout → \"Sorry, this record was just sold\" and no order is created"
-    }
-   ],
-   "proposal": "Build it with the checkout: same layout as the error screen, with a way back to the listings.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 1,
-   "resolution": {
-    "iteration": 2,
-    "date": "2026-11-08",
-    "decision": "Built in story 7: the message replaces Pay and offers 'See other listings'; the typed address stays. Checked on .ux-review/shots/checkout-just-sold-375/1280.png."
-   }
-  },
-  {
-   "id": 3,
-   "screens": [
-    "saved-priorities"
-   ],
-   "stories": [
-    "2"
-   ],
-   "type": "Missing screen",
-   "severity": "High",
-   "title": "Saved ranking for signed-in buyers is not built (story 2, phase 2)",
-   "evidence": [
-    {
-     "source": "specs/story-2-priorities.md",
-     "where": "Phase 2 (with accounts)",
-     "quote": "Signed-in buyer **with a saved ranking**: the screen is **skipped**; the recommendation shows \"Based on: Price, Sound · **Change**\""
-    },
-    {
-     "source": "SPEC.md",
-     "where": "Build order",
-     "quote": "**Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)"
-    }
-   ],
-   "proposal": null,
-   "question": "Story 2 phase 2 is in the Purchase phase, after story 7. Keep it before the demo, or move it to 'if time allows'?",
-   "status": "resolved",
-   "first_seen": 1,
-   "resolution": {
-    "iteration": 3,
-    "date": "2026-11-08",
-    "decision": "Built in story 2 (migration 0004, saved ranking, screen skipped, 'Based on … Change'); the screen state was checked from the e2e screenshot docs/screenshots/story-2/saved-ranking-skips-screen-*.png, not from this capture."
-   }
-  },
-  {
-   "id": 4,
-   "screens": [
-    "sell-pick-version",
-    "sell-form",
-    "sell-seller-details",
-    "my-listings",
-    "sell-not-in-catalogue",
-    "home"
-   ],
-   "stories": [
-    "8"
-   ],
-   "type": "Missing screen",
-   "severity": "High",
-   "title": "Selling is not built: no 'Sell for free' in the header and none of the five sell screens",
-   "evidence": [
-    {
-     "source": "specs/story-8-sell.md",
-     "where": "Scope",
-     "quote": "**\"Sell for free\"** in the header; requires login (story 9)"
-    },
-    {
-     "source": "Spindle_mockups_by_section.pdf",
-     "where": "p. 16 and p. 19",
-     "quote": "Sell a record (mobile and desktop)"
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/home-1280.png",
-     "quote": ""
-    },
-    {
-     "source": "specs/story-8-sell.md",
-     "where": "Designs",
-     "quote": "**None yet: Canva design needed before building**"
-    },
-    {
-     "source": "CLAUDE.md",
-     "where": "How we build a story, step 1b",
-     "quote": "Every new screen the story needs has an approved design (in docs/design/ or a Canva link in the story's \"Designs\" section). Without it, the story does not start."
-    }
-   ],
-   "proposal": "Story 8 cannot start yet: three of its screens (pick a version, first-time city/shop, My listings) have no design. Approve those three designs first, then build: pick version, form, first-time details, My listings, and the 'not in our catalogue' message.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 1,
-   "resolution": {
-    "iteration": 3,
-    "date": "2026-11-08",
-    "decision": "Built in story 8: 'Sell for free' in the header, sell search, versions, sell form and My listings are captured in this iteration (.ux-review/shots/sell-*, my-listings)."
-   }
-  },
-  {
-   "id": 5,
-   "screens": [
-    "home",
-    "search-results",
-    "priorities",
-    "listing-check-yellow",
-    "listing-check-red",
-    "login",
-    "signup",
-    "account",
-    "genre",
-    "compare",
-    "sell-search"
-   ],
-   "stories": [
-    "1",
-    "2",
-    "5",
-    "9"
-   ],
-   "type": "Design mismatch",
-   "severity": "Low",
-   "title": "On desktop most screens are a narrow phone column in the middle of a wide empty page",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/search-results-1280.png",
-     "quote": ""
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/priorities-1280.png",
-     "quote": ""
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/listing-check-yellow-1280.png",
-     "quote": ""
-    },
-    {
-     "source": "Spindle_mockups_by_section.pdf",
-     "where": "p. 17 (search), p. 18 (priorities), p. 13 (listing)",
-     "quote": "Desktop layouts use two columns: cover beside the options, photos beside the checklist, results in a grid"
-    }
-   ],
-   "proposal": "Use two columns from 1024 px where the design does: priorities (cover left, 2 × 2 options right), listing check (photos left, checklist and Buy right). The recommendation already does this well.",
-   "question": null,
-   "status": "open",
-   "first_seen": 1,
-   "resolution": null,
-   "notes": [
-    "Iteration 5: looked at again on the new capture, unchanged"
-   ]
-  },
-  {
-   "id": 6,
-   "screens": [
-    "home",
-    "recommendation",
-    "listing-check-yellow",
-    "checkout",
-    "order-confirmation",
-    "search-results",
-    "sell-form",
-    "sell-search",
-    "my-listings",
-    "compare"
-   ],
-   "stories": [
-    "all"
-   ],
-   "type": "Design mismatch",
-   "severity": "Low",
-   "title": "Desktop header: logo centred and 'Log in' pinned to the window edge, outside the content width",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/recommendation-1280.png",
-     "quote": ""
-    },
-    {
-     "source": "Spindle_mockups_by_section.pdf",
-     "where": "p. 3–4 (desktop header)",
-     "quote": "Logo left, then search, 'Sell for free' and the account button, all inside the page width"
-    },
-    {
-     "source": "order-confirmation-1280.png",
-     "where": "docs/design (story 7 design)",
-     "quote": "Logo on the left, inside the page width, with a thin line under the header"
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/order-confirmation-1280.png",
-     "quote": ""
-    }
-   ],
-   "proposal": "Put the logo on the left and 'Log in' / initials on the right inside the same max width as the content; leave room for 'Sell for free' (story 8).",
-   "question": null,
-   "status": "open",
-   "first_seen": 1,
-   "resolution": null,
-   "note": "Iteration 3: the desktop header now has the logo on the left followed by the search (story 12); the account badge and \"Sell for free\" are still pinned to the window edge, outside the content width on narrow pages.",
-   "notes": [
-    "Iteration 5: looked at again on the new capture, unchanged"
-   ]
-  },
-  {
-   "id": 7,
-   "screens": [
-    "listings",
-    "recommendation",
-    "listing-check-red",
-    "version-page"
-   ],
-   "stories": [
-    "5"
-   ],
-   "type": "Design mismatch",
-   "severity": "Low",
-   "title": "Traffic-light colours are generic bright green, amber and red, not the design palette",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/listings-375.png",
-     "quote": ""
-    },
-    {
-     "source": "Spindle_mockups_by_section.pdf",
-     "where": "p. 1 (palette)",
-     "quote": "Match #2F7A45 · Check #E9B44C · No match #A3302A"
-    },
-    {
-     "source": "components/TrafficLight.tsx",
-     "where": "DOT",
-     "quote": "bg-green-600 · bg-amber-400 · bg-red-600"
-    }
-   ],
-   "proposal": "Add the three palette colours to globals.css and use them in TrafficLight; the words stay as they are.",
-   "question": null,
-   "status": "open",
-   "first_seen": 1,
-   "resolution": null,
-   "notes": [
-    "Iteration 5: looked at again on the new capture, unchanged"
-   ]
-  },
-  {
-   "id": 8,
-   "screens": [
-    "listing-check-yellow",
-    "listing-check-red"
-   ],
-   "stories": [
-    "5"
-   ],
-   "type": "Design mismatch",
-   "severity": "Low",
-   "title": "The listing check verdict is a plain light box; the design makes it an emphasis card (now sand, per DECISIONS)",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/listing-check-yellow-375.png",
-     "quote": ""
-    },
-    {
-     "source": "Spindle_mockups_by_section.pdf",
-     "where": "p. 11 and p. 13",
-     "quote": "'Check first' card: traffic light, one-line summary"
-    },
-    {
-     "source": "CLAUDE.md",
-     "where": "Visual direction",
-     "quote": "light sand cards (with a thin border) for emphasis"
-    }
-   ],
-   "proposal": "Make the verdict box a sand card like the Condition card below it (light + word + summary), so the answer to the screen's question is the strongest element. The dark brown of the design is a deliberate difference (DECISIONS 2026-11-08) and is no longer asked for.",
-   "question": null,
-   "status": "open",
-   "first_seen": 1,
-   "resolution": null,
-   "notes": [
-    "Iteration 5: looked at again on the new capture, unchanged"
-   ]
-  },
-  {
-   "id": 9,
-   "screens": [
-    "listing-check-yellow",
-    "listing-check-red"
-   ],
-   "stories": [
-    "5"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "Checklist rows read as contradictions: 'Matrix photo matches — Uncertain', 'Country and year match — Doesn't match'",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/listing-check-red-1280.png",
-     "quote": ""
-    },
-    {
-     "source": "Spindle_mockups_by_section.pdf",
-     "where": "p. 13",
-     "quote": "The matrix photo **isn't sharp**"
-    }
-   ],
-   "proposal": "Word each row by its result, e.g. ✓ 'Country and year match', ? 'Matrix photo: can't be sure', ✗ 'Country and year don't match'. Would need a small story 5 text change; show current vs proposed first.",
-   "question": null,
-   "status": "open",
-   "first_seen": 1,
-   "resolution": null,
-   "notes": [
-    "Iteration 5: looked at again on the new capture, unchanged"
-   ]
-  },
-  {
-   "id": 10,
-   "screens": [
-    "listing-check-red"
-   ],
-   "stories": [
-    "5"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "A red listing says 'moved to 1990 Reissue' but gives no way to go there",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/listing-check-red-1280.png",
-     "quote": ""
-    },
-    {
-     "source": "specs/story-5-listings.md",
-     "where": "Use cases",
-     "quote": "appears here as a warning and also under the **correct version**"
-    }
-   ],
-   "proposal": "Approved 2026-11-09: make 'moved to 1990 Reissue' a link to that version's listings. Story 5 is already built with tests, so per CLAUDE.md the rule goes in DECISIONS.md (text to be shown first), then the change is built and re-captured before this is marked resolved.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 1,
-   "resolution": {
+  "meta": {
+    "project": "Spindle MVP",
+    "report_url": "https://claude.ai/artifact/6inbbjVxsF4Hi7Q2cr2n28",
     "iteration": 6,
-    "date": "2026-11-09",
-    "decision": "Built 2026-11-09 and captured again at 375 and 1280 px: 'moved to 1990 Reissue' is an underlined link to that version's listings. New captures in .ux-review/shots-6/."
-   },
-   "notes": [
-    "Iteration 5: looked at again on the new capture, unchanged",
-    "Built 2026-11-09 and covered by an end-to-end test; stays open until a new capture shows it."
-   ]
+    "updated": "2026-11-09T13:32:01+00:00"
   },
-  {
-   "id": 11,
-   "screens": [
-    "login",
-    "signup"
-   ],
-   "stories": [
-    "9"
-   ],
-   "type": "Design mismatch",
-   "severity": "Low",
-   "title": "Log in and sign-up have no back button and no 'Just browsing?' line",
-   "evidence": [
+  "iterations": [
     {
-     "source": "screenshot",
-     "where": ".ux-review/shots/login-375.png",
-     "quote": ""
+      "n": 1,
+      "date": "2026-11-08",
+      "note": "First UX review: screen inventory, then every built screen"
     },
     {
-     "source": "Spindle_mockups_by_section.pdf",
-     "where": "p. 5",
-     "quote": "back arrow · 'Just browsing? You can search and get recommendations without an account.'"
+      "n": 2,
+      "date": "2026-11-08",
+      "note": "After story 7: checkout, confirmation and 'just sold' built; re-check of open findings"
+    },
+    {
+      "n": 3,
+      "date": "2026-11-08",
+      "note": "After stories 2 (save to account), 8 (sell), 12 (home page): screen inventory updated, all built screens re-captured and reviewed"
+    },
+    {
+      "n": 4,
+      "date": "2026-11-08",
+      "note": "After the sand emphasis cards and the home page redo: all screens re-captured; #18 resolved, #8 updated, new #21–#23"
+    },
+    {
+      "n": 5,
+      "date": "2026-11-09",
+      "note": "After stories 4 (compare, version page), 17 (search results page), 8 and 12: new screens added to the inventory, all screens re-captured at 375 and 1280 px, 17 open findings re-checked (4 resolved), new #24-#30"
+    },
+    {
+      "n": 6,
+      "date": "2026-11-09",
+      "note": "After stories 15 (menu), 16 (suggestions) and 18 (rate the seller): 5 screens added, 48 captures re-taken, open findings re-checked (none resolved), new #32-#35. Menu, suggestion box and story 18 screens come from the e2e screenshots (suggestion box and phone menu re-captured by hand); loading and error states checked by reading code · Decided and built the same day: #32, #33, #34, #36 resolved; #35 kept as the story says; #36 added from the Product Owner"
     }
-   ],
-   "proposal": "Add the back button used on the other screens and the 'Just browsing?' line under the form. (The 'Show' password button is optional.)",
-   "question": null,
-   "status": "open",
-   "first_seen": 1,
-   "resolution": null,
-   "notes": [
-    "Iteration 5: looked at again on the new capture, unchanged"
-   ]
-  },
-  {
-   "id": 12,
-   "screens": [
-    "account"
-   ],
-   "stories": [
-    "9"
-   ],
-   "type": "Rule broken",
-   "severity": "Low",
-   "title": "'Your account' has no loading.tsx / error.tsx, unlike the other data screens",
-   "evidence": [
+  ],
+  "screens": [
     {
-     "source": "CLAUDE.md",
-     "where": "Keep it simple",
-     "quote": "Loading and errors always use the shared `LoadingMask` and `ErrorScreen`."
+      "key": "home",
+      "name": "Home with search",
+      "story": "12",
+      "phase": 1,
+      "design": "Spindle_mockups_by_section.pdf · p. 2–3 (homepage), p. 15/17 (search)",
+      "route": "/",
+      "auth": false,
+      "status": "built",
+      "note": "Story 12: title, search, crates by genre, \"This week at the shop\""
     },
     {
-     "source": "app/account/",
-     "where": "files",
-     "quote": "LogOutButton.tsx · actions.ts · page.tsx"
+      "key": "search-results",
+      "name": "Search results",
+      "story": "17",
+      "phase": 1,
+      "design": "docs/design/search-results-desktop.html",
+      "route": "/search?q=bowie",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "search-no-results",
+      "name": "Search: no albums found",
+      "story": "17",
+      "phase": 1,
+      "design": "docs/design/search-results-desktop.html",
+      "route": "/search?q=xyzq",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "search-no-listings",
+      "name": "Search: album with no listings",
+      "story": "1",
+      "phase": 1,
+      "design": null,
+      "route": "/search?q=let%27s+dance",
+      "auth": false,
+      "status": "built",
+      "note": "Search results page (story 17); the album with no listings is tapped from the list in the review.",
+      "search": "let's dance"
+    },
+    {
+      "key": "priorities",
+      "name": "Priorities",
+      "story": "2",
+      "phase": 1,
+      "design": "Spindle_mockups_by_section.pdf · p. 15 (mobile), p. 18 (desktop)",
+      "route": "/albums/10000000-0000-0000-0000-000000000001/priorities",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "recommendation",
+      "name": "Recommendation",
+      "story": "3",
+      "phase": 1,
+      "design": "Spindle_mockups_by_section.pdf · p. 11 (mobile and desktop)",
+      "route": "/albums/10000000-0000-0000-0000-000000000001/recommendation?priorities=price,sound",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "recommendation-ideal-unavailable",
+      "name": "Recommendation with 'ideal but unavailable' note",
+      "story": "3",
+      "phase": 1,
+      "design": null,
+      "route": "/albums/10000000-0000-0000-0000-000000000001/recommendation?priorities=original,sound",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "listings",
+      "name": "Verified listings (own screen)",
+      "story": "5",
+      "phase": 1,
+      "design": "Spindle_mockups_by_section.pdf · p. 15 (Verified listings, mobile)",
+      "route": "/versions/20000000-0000-0000-0000-000000000003/listings?priorities=price,sound",
+      "auth": false,
+      "status": "built",
+      "note": "On desktop the listings sit beside the recommendation; this screen is the phone layout"
+    },
+    {
+      "key": "listing-check-yellow",
+      "name": "Listing check: yellow (Check)",
+      "story": "5",
+      "phase": 1,
+      "design": "Spindle_mockups_by_section.pdf · p. 11 (mobile), p. 13 (desktop)",
+      "route": "/listings/40000000-0000-0000-0000-000000000006?version=20000000-0000-0000-0000-000000000003",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "listing-check-red",
+      "name": "Listing check: red (No match)",
+      "story": "5",
+      "phase": 1,
+      "design": null,
+      "route": "/listings/40000000-0000-0000-0000-000000000008?version=20000000-0000-0000-0000-000000000003",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "yellow-warning",
+      "name": "Yellow listing warning before checkout",
+      "story": "5",
+      "phase": 1,
+      "design": "Spindle_mockups_by_section.pdf · p. 11/13 (yellow note on the listing)",
+      "route": null,
+      "auth": false,
+      "status": "built",
+      "note": "A dialog after tapping Buy; not captured"
+    },
+    {
+      "key": "signup",
+      "name": "Sign up",
+      "story": "9",
+      "phase": 2,
+      "design": "Spindle_mockups_by_section.pdf · p. 5 (Create account, mobile), p. 7 (desktop)",
+      "route": "/signup",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "login",
+      "name": "Log in",
+      "story": "9",
+      "phase": 2,
+      "design": "Spindle_mockups_by_section.pdf · p. 5 (Sign in, mobile and desktop)",
+      "route": "/login",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "account",
+      "name": "Your account",
+      "story": "9",
+      "phase": 2,
+      "design": "Spindle_mockups_by_section.pdf · p. 7 (mobile), p. 9 (desktop)",
+      "route": "/account",
+      "auth": true,
+      "status": "built",
+      "note": "Deliberately smaller than the design (DECISIONS 2026-11-08)"
+    },
+    {
+      "key": "checkout",
+      "name": "Checkout (Buy with protection)",
+      "story": "7",
+      "phase": 2,
+      "design": "Spindle_mockups_by_section.pdf · p. 16 (mobile), p. 19 (desktop)",
+      "route": "/checkout/40000000-0000-0000-0000-000000000005?version=20000000-0000-0000-0000-000000000003",
+      "auth": true,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "order-confirmation",
+      "name": "Order confirmation",
+      "story": "7",
+      "phase": 2,
+      "design": "order-confirmation.html (order-confirmation-375.png, order-confirmation-1280.png)",
+      "route": null,
+      "auth": true,
+      "status": "built",
+      "note": "Needs an order of the signed-in buyer; screenshot taken from the story 7 e2e run (docs/screenshots/story-7, same commit as the code)"
+    },
+    {
+      "key": "checkout-just-sold",
+      "name": "Checkout: 'Sorry, this record was just sold'",
+      "story": "7",
+      "phase": 2,
+      "design": null,
+      "route": null,
+      "auth": true,
+      "status": "built",
+      "note": "Needs a listing sold during checkout; screenshot taken from the story 7 e2e run (docs/screenshots/story-7)"
+    },
+    {
+      "key": "saved-priorities",
+      "name": "Recommendation with saved ranking ('Based on: … Change')",
+      "story": "2",
+      "phase": 2,
+      "design": null,
+      "route": null,
+      "auth": true,
+      "status": "built",
+      "note": "State with a saved ranking, signed in. Not captured here; screenshot from the story 2 e2e run (docs/screenshots/story-2/saved-ranking-skips-screen-*.png)"
+    },
+    {
+      "key": "sell-pick-version",
+      "name": "Sell: search album and pick the version",
+      "story": "8",
+      "phase": 3,
+      "design": null,
+      "route": "/sell/albums/10000000-0000-0000-0000-000000000005",
+      "auth": true,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "sell-form",
+      "name": "Sell a record (form)",
+      "story": "8",
+      "phase": 3,
+      "design": "Spindle_mockups_by_section.pdf · p. 16 (mobile), p. 19 (desktop)",
+      "route": "/sell/versions/20000000-0000-0000-0000-000000000009",
+      "auth": true,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "sell-seller-details",
+      "name": "Sell: first time, city and shop name",
+      "story": "8",
+      "phase": 3,
+      "design": null,
+      "route": null,
+      "auth": true,
+      "status": "built",
+      "note": "First-time state of the sell form (city and shop name); screenshots from the story 8 e2e run (docs/screenshots/story-8)"
+    },
+    {
+      "key": "my-listings",
+      "name": "My listings (see, edit, remove)",
+      "story": "8",
+      "phase": 3,
+      "design": "Spindle_mockups_by_section.pdf · p. 9 (Your listings, desktop account)",
+      "route": "/my-listings",
+      "auth": true,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "sell-not-in-catalogue",
+      "name": "Sell: 'This version isn't in our catalogue yet'",
+      "story": "8",
+      "phase": 3,
+      "design": null,
+      "route": "/sell/versions/20000000-0000-0000-0000-000000000999",
+      "auth": true,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "compare",
+      "name": "Compare pressings",
+      "story": "4",
+      "phase": 4,
+      "design": "docs/design/compare-desktop.html; Spindle_mockups_by_section.pdf · p. 11",
+      "route": "/albums/10000000-0000-0000-0000-000000000001/compare?priorities=price,sound",
+      "auth": false,
+      "status": "built",
+      "note": "Built 2026-11-09."
+    },
+    {
+      "key": "my-orders",
+      "name": "My orders (confirm receipt)",
+      "story": "7",
+      "phase": 4,
+      "design": "Spindle_mockups_by_section.pdf · p. 7/9 (On its way)",
+      "route": null,
+      "auth": false,
+      "status": "later",
+      "note": ""
+    },
+    {
+      "key": "design-homepage-crates",
+      "name": "Homepage: \"Because you like…\", best sellers, \"All genres and formats\"",
+      "story": "13",
+      "phase": 4,
+      "design": "Spindle_mockups_by_section.pdf · p. 2–3",
+      "route": null,
+      "auth": false,
+      "status": "later",
+      "note": "Crates and \"This week at the shop\" are built (story 12); \"Because you like…\" is story 13, not in the MVP; \"All genres and formats\" needs filters (story 10)"
+    },
+    {
+      "key": "design-search-filters",
+      "name": "Search filters",
+      "story": "—",
+      "phase": 4,
+      "design": "Spindle_mockups_by_section.pdf · p. 15, p. 17",
+      "route": null,
+      "auth": false,
+      "status": "later",
+      "note": "Design only; not in any story"
+    },
+    {
+      "key": "design-public-profile",
+      "name": "Public profile and reviews",
+      "story": "9",
+      "phase": 4,
+      "design": "Spindle_mockups_by_section.pdf · p. 7, p. 9",
+      "route": null,
+      "auth": false,
+      "status": "later",
+      "note": "Out of scope in story 9 (comes with reviews)"
+    },
+    {
+      "key": "design-hamburger-menu",
+      "name": "Mobile hamburger / account menu",
+      "story": "—",
+      "phase": 4,
+      "design": "Spindle_mockups_by_section.pdf · p. 2, p. 4",
+      "route": null,
+      "auth": false,
+      "status": "later",
+      "note": "Design only; not in any story"
+    },
+    {
+      "key": "genre",
+      "name": "Genre screen (a crate)",
+      "story": "12",
+      "phase": 1,
+      "design": "docs/design/genre-screen-options.html (option B), genre-screen-desktop.html",
+      "route": "/genres/rock",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "sell-search",
+      "name": "Sell: search for the album",
+      "story": "8",
+      "phase": 3,
+      "design": "Spindle_mockups_by_section.pdf · p. 16 (mobile), p. 19 (desktop)",
+      "route": "/sell",
+      "auth": true,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "version-page",
+      "name": "Version page",
+      "story": "4",
+      "phase": 4,
+      "design": "docs/design/version-page.html",
+      "route": "/versions/20000000-0000-0000-0000-000000000003?priorities=price,sound",
+      "auth": false,
+      "status": "built",
+      "note": "Built 2026-11-09."
+    },
+    {
+      "key": "search-short",
+      "name": "Search results: fewer than 3 characters",
+      "story": "17",
+      "phase": 4,
+      "design": "docs/design/search-results-desktop.html",
+      "route": "/search?q=zi",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "search-suggestions",
+      "name": "Search results: Did you mean…?",
+      "story": "17",
+      "phase": 4,
+      "design": "docs/design/search-results-desktop.html",
+      "route": "/search?q=zigy",
+      "auth": false,
+      "status": "built",
+      "note": ""
+    },
+    {
+      "key": "menu",
+      "name": "Menu (desktop row, phone drawer)",
+      "story": "15",
+      "phase": 4,
+      "design": "docs/design/menu-options.html (desktop row, phone option B)",
+      "route": null,
+      "auth": false,
+      "status": "built",
+      "note": "Screenshots from the story 15 e2e run (docs/screenshots/story-15): phone shows the open drawer"
+    },
+    {
+      "key": "suggestion-box",
+      "name": "Search suggestions box",
+      "story": "16",
+      "phase": 4,
+      "design": "docs/design/search-autocomplete-options.html (option B)",
+      "route": null,
+      "auth": false,
+      "status": "built",
+      "note": "Screenshots from the story 16 e2e run (docs/screenshots/story-16)"
+    },
+    {
+      "key": "rate-question",
+      "name": "Rate the seller: question",
+      "story": "18",
+      "phase": 4,
+      "design": "docs/design/review-options.html (option A)",
+      "route": null,
+      "auth": true,
+      "status": "built",
+      "note": "Needs a delivered order of the signed-in buyer; screenshots from the story 18 e2e run"
+    },
+    {
+      "key": "rate-this-seller",
+      "name": "Delivered order: Rate this seller",
+      "story": "18",
+      "phase": 4,
+      "design": "docs/design/review-options.html (option A)",
+      "route": null,
+      "auth": true,
+      "status": "built",
+      "note": "Screenshots from the story 18 e2e run"
+    },
+    {
+      "key": "seller-rating-line",
+      "name": "Seller line with rating on listings",
+      "story": "18",
+      "phase": 4,
+      "design": "docs/design/review-options.html (option B)",
+      "route": null,
+      "auth": false,
+      "status": "built",
+      "note": "Screenshots from the story 18 e2e run (listings-rating)"
     }
-   ],
-   "proposal": "Add loading.tsx (LoadingMask) and error.tsx (ErrorScreen with 'Try again') to app/account, as in the other routes.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 1,
-   "resolution": {
-    "iteration": 5,
-    "date": "2026-11-09",
-    "decision": "Re-checked in code: app/account/loading.tsx and error.tsx now exist (LoadingMask and ErrorScreen)."
-   }
-  },
-  {
-   "id": 13,
-   "screens": [
-    "listings",
-    "recommendation",
-    "version-page"
-   ],
-   "stories": [
-    "5"
-   ],
-   "type": "Design mismatch",
-   "severity": "Low",
-   "title": "Buy sits on its own row under each listing, leaving an empty column and making rows tall",
-   "evidence": [
+  ],
+  "findings": [
     {
-     "source": "screenshot",
-     "where": ".ux-review/shots/recommendation-1280.png",
-     "quote": ""
+      "id": 1,
+      "screens": [
+        "checkout",
+        "order-confirmation"
+      ],
+      "stories": [
+        "7"
+      ],
+      "type": "Missing screen",
+      "severity": "Blocker",
+      "title": "Checkout and order confirmation do not exist yet — the demo flow stops at Buy",
+      "evidence": [
+        {
+          "source": "specs/story-7-checkout.md",
+          "where": "Scope",
+          "quote": "Checkout screen (\"Buy with protection\"), opened from **Buy** on a green or yellow listing"
+        },
+        {
+          "source": "specs/story-7-checkout.md",
+          "where": "Use cases",
+          "quote": "**Pay** → order created, status \"Paid · waiting for the seller\"; confirmation screen"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 15 and p. 19",
+          "quote": "Buy with protection (mobile and desktop)"
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listings-375.png",
+          "quote": ""
+        }
+      ],
+      "proposal": "Build story 7 next (it is in progress): checkout from Buy, Pay, and a confirmation screen. These close the demo flow search → buy.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 1,
+      "resolution": {
+        "iteration": 2,
+        "date": "2026-11-08",
+        "decision": "Built in story 7 (d648e9e). Checked on .ux-review/shots/checkout-375/1280.png and order-confirmation-375/1280.png; both match the designs, apart from the recorded decisions (€2.00 fee, address typed, MB WAY label only)."
+      }
     },
     {
-     "source": "screenshot",
-     "where": ".ux-review/shots/listings-375.png",
-     "quote": ""
+      "id": 2,
+      "screens": [
+        "checkout-just-sold"
+      ],
+      "stories": [
+        "7"
+      ],
+      "type": "Missing screen",
+      "severity": "High",
+      "title": "No screen for 'Sorry, this record was just sold'",
+      "evidence": [
+        {
+          "source": "specs/story-7-checkout.md",
+          "where": "Edge cases",
+          "quote": "Listing sold while the buyer is on the checkout → \"Sorry, this record was just sold\" and no order is created"
+        }
+      ],
+      "proposal": "Build it with the checkout: same layout as the error screen, with a way back to the listings.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 1,
+      "resolution": {
+        "iteration": 2,
+        "date": "2026-11-08",
+        "decision": "Built in story 7: the message replaces Pay and offers 'See other listings'; the typed address stays. Checked on .ux-review/shots/checkout-just-sold-375/1280.png."
+      }
     },
     {
-     "source": "Spindle_mockups_by_section.pdf",
-     "where": "p. 11 (desktop listings)",
-     "quote": "Buy on the same line as the price and the traffic light"
+      "id": 3,
+      "screens": [
+        "saved-priorities"
+      ],
+      "stories": [
+        "2"
+      ],
+      "type": "Missing screen",
+      "severity": "High",
+      "title": "Saved ranking for signed-in buyers is not built (story 2, phase 2)",
+      "evidence": [
+        {
+          "source": "specs/story-2-priorities.md",
+          "where": "Phase 2 (with accounts)",
+          "quote": "Signed-in buyer **with a saved ranking**: the screen is **skipped**; the recommendation shows \"Based on: Price, Sound · **Change**\""
+        },
+        {
+          "source": "SPEC.md",
+          "where": "Build order",
+          "quote": "**Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)"
+        }
+      ],
+      "proposal": null,
+      "question": "Story 2 phase 2 is in the Purchase phase, after story 7. Keep it before the demo, or move it to 'if time allows'?",
+      "status": "resolved",
+      "first_seen": 1,
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-08",
+        "decision": "Built in story 2 (migration 0004, saved ranking, screen skipped, 'Based on … Change'); the screen state was checked from the e2e screenshot docs/screenshots/story-2/saved-ranking-skips-screen-*.png, not from this capture."
+      }
+    },
+    {
+      "id": 4,
+      "screens": [
+        "sell-pick-version",
+        "sell-form",
+        "sell-seller-details",
+        "my-listings",
+        "sell-not-in-catalogue",
+        "home"
+      ],
+      "stories": [
+        "8"
+      ],
+      "type": "Missing screen",
+      "severity": "High",
+      "title": "Selling is not built: no 'Sell for free' in the header and none of the five sell screens",
+      "evidence": [
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Scope",
+          "quote": "**\"Sell for free\"** in the header; requires login (story 9)"
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 16 and p. 19",
+          "quote": "Sell a record (mobile and desktop)"
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/home-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "specs/story-8-sell.md",
+          "where": "Designs",
+          "quote": "**None yet: Canva design needed before building**"
+        },
+        {
+          "source": "CLAUDE.md",
+          "where": "How we build a story, step 1b",
+          "quote": "Every new screen the story needs has an approved design (in docs/design/ or a Canva link in the story's \"Designs\" section). Without it, the story does not start."
+        }
+      ],
+      "proposal": "Story 8 cannot start yet: three of its screens (pick a version, first-time city/shop, My listings) have no design. Approve those three designs first, then build: pick version, form, first-time details, My listings, and the 'not in our catalogue' message.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 1,
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-08",
+        "decision": "Built in story 8: 'Sell for free' in the header, sell search, versions, sell form and My listings are captured in this iteration (.ux-review/shots/sell-*, my-listings)."
+      }
+    },
+    {
+      "id": 5,
+      "screens": [
+        "home",
+        "search-results",
+        "priorities",
+        "listing-check-yellow",
+        "listing-check-red",
+        "login",
+        "signup",
+        "account",
+        "genre",
+        "compare",
+        "sell-search"
+      ],
+      "stories": [
+        "1",
+        "2",
+        "5",
+        "9"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "On desktop most screens are a narrow phone column in the middle of a wide empty page",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/search-results-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/priorities-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listing-check-yellow-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 17 (search), p. 18 (priorities), p. 13 (listing)",
+          "quote": "Desktop layouts use two columns: cover beside the options, photos beside the checklist, results in a grid"
+        }
+      ],
+      "proposal": "Use two columns from 1024 px where the design does: priorities (cover left, 2 × 2 options right), listing check (photos left, checklist and Buy right). The recommendation already does this well.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null,
+      "notes": [
+        "Iteration 5: looked at again on the new capture, unchanged"
+      ]
+    },
+    {
+      "id": 6,
+      "screens": [
+        "home",
+        "recommendation",
+        "listing-check-yellow",
+        "checkout",
+        "order-confirmation",
+        "search-results",
+        "sell-form",
+        "sell-search",
+        "my-listings",
+        "compare"
+      ],
+      "stories": [
+        "all"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "Desktop header: logo centred and 'Log in' pinned to the window edge, outside the content width",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/recommendation-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 3–4 (desktop header)",
+          "quote": "Logo left, then search, 'Sell for free' and the account button, all inside the page width"
+        },
+        {
+          "source": "order-confirmation-1280.png",
+          "where": "docs/design (story 7 design)",
+          "quote": "Logo on the left, inside the page width, with a thin line under the header"
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/order-confirmation-1280.png",
+          "quote": ""
+        }
+      ],
+      "proposal": "Put the logo on the left and 'Log in' / initials on the right inside the same max width as the content; leave room for 'Sell for free' (story 8).",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null,
+      "note": "Iteration 3: the desktop header now has the logo on the left followed by the search (story 12); the account badge and \"Sell for free\" are still pinned to the window edge, outside the content width on narrow pages.",
+      "notes": [
+        "Iteration 5: looked at again on the new capture, unchanged"
+      ]
+    },
+    {
+      "id": 7,
+      "screens": [
+        "listings",
+        "recommendation",
+        "listing-check-red",
+        "version-page"
+      ],
+      "stories": [
+        "5"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "Traffic-light colours are generic bright green, amber and red, not the design palette",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listings-375.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 1 (palette)",
+          "quote": "Match #2F7A45 · Check #E9B44C · No match #A3302A"
+        },
+        {
+          "source": "components/TrafficLight.tsx",
+          "where": "DOT",
+          "quote": "bg-green-600 · bg-amber-400 · bg-red-600"
+        }
+      ],
+      "proposal": "Add the three palette colours to globals.css and use them in TrafficLight; the words stay as they are.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null,
+      "notes": [
+        "Iteration 5: looked at again on the new capture, unchanged"
+      ]
+    },
+    {
+      "id": 8,
+      "screens": [
+        "listing-check-yellow",
+        "listing-check-red"
+      ],
+      "stories": [
+        "5"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "The listing check verdict is a plain light box; the design makes it an emphasis card (now sand, per DECISIONS)",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listing-check-yellow-375.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 11 and p. 13",
+          "quote": "'Check first' card: traffic light, one-line summary"
+        },
+        {
+          "source": "CLAUDE.md",
+          "where": "Visual direction",
+          "quote": "light sand cards (with a thin border) for emphasis"
+        }
+      ],
+      "proposal": "Make the verdict box a sand card like the Condition card below it (light + word + summary), so the answer to the screen's question is the strongest element. The dark brown of the design is a deliberate difference (DECISIONS 2026-11-08) and is no longer asked for.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null,
+      "notes": [
+        "Iteration 5: looked at again on the new capture, unchanged"
+      ]
+    },
+    {
+      "id": 9,
+      "screens": [
+        "listing-check-yellow",
+        "listing-check-red"
+      ],
+      "stories": [
+        "5"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "Checklist rows read as contradictions: 'Matrix photo matches — Uncertain', 'Country and year match — Doesn't match'",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listing-check-red-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 13",
+          "quote": "The matrix photo **isn't sharp**"
+        }
+      ],
+      "proposal": "Word each row by its result, e.g. ✓ 'Country and year match', ? 'Matrix photo: can't be sure', ✗ 'Country and year don't match'. Would need a small story 5 text change; show current vs proposed first.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null,
+      "notes": [
+        "Iteration 5: looked at again on the new capture, unchanged"
+      ]
+    },
+    {
+      "id": 10,
+      "screens": [
+        "listing-check-red"
+      ],
+      "stories": [
+        "5"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "A red listing says 'moved to 1990 Reissue' but gives no way to go there",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listing-check-red-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "specs/story-5-listings.md",
+          "where": "Use cases",
+          "quote": "appears here as a warning and also under the **correct version**"
+        }
+      ],
+      "proposal": "Approved 2026-11-09: make 'moved to 1990 Reissue' a link to that version's listings. Story 5 is already built with tests, so per CLAUDE.md the rule goes in DECISIONS.md (text to be shown first), then the change is built and re-captured before this is marked resolved.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 1,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Built 2026-11-09 and captured again at 375 and 1280 px: 'moved to 1990 Reissue' is an underlined link to that version's listings. New captures in .ux-review/shots-6/."
+      },
+      "notes": [
+        "Iteration 5: looked at again on the new capture, unchanged",
+        "Built 2026-11-09 and covered by an end-to-end test; stays open until a new capture shows it."
+      ]
+    },
+    {
+      "id": 11,
+      "screens": [
+        "login",
+        "signup"
+      ],
+      "stories": [
+        "9"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "Log in and sign-up have no back button and no 'Just browsing?' line",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/login-375.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 5",
+          "quote": "back arrow · 'Just browsing? You can search and get recommendations without an account.'"
+        }
+      ],
+      "proposal": "Add the back button used on the other screens and the 'Just browsing?' line under the form. (The 'Show' password button is optional.)",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null,
+      "notes": [
+        "Iteration 5: looked at again on the new capture, unchanged"
+      ]
+    },
+    {
+      "id": 12,
+      "screens": [
+        "account"
+      ],
+      "stories": [
+        "9"
+      ],
+      "type": "Rule broken",
+      "severity": "Low",
+      "title": "'Your account' has no loading.tsx / error.tsx, unlike the other data screens",
+      "evidence": [
+        {
+          "source": "CLAUDE.md",
+          "where": "Keep it simple",
+          "quote": "Loading and errors always use the shared `LoadingMask` and `ErrorScreen`."
+        },
+        {
+          "source": "app/account/",
+          "where": "files",
+          "quote": "LogOutButton.tsx · actions.ts · page.tsx"
+        }
+      ],
+      "proposal": "Add loading.tsx (LoadingMask) and error.tsx (ErrorScreen with 'Try again') to app/account, as in the other routes.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 1,
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "Re-checked in code: app/account/loading.tsx and error.tsx now exist (LoadingMask and ErrorScreen)."
+      }
+    },
+    {
+      "id": 13,
+      "screens": [
+        "listings",
+        "recommendation",
+        "version-page"
+      ],
+      "stories": [
+        "5"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "Buy sits on its own row under each listing, leaving an empty column and making rows tall",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/recommendation-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listings-375.png",
+          "quote": ""
+        },
+        {
+          "source": "Spindle_mockups_by_section.pdf",
+          "where": "p. 11 (desktop listings)",
+          "quote": "Buy on the same line as the price and the traffic light"
+        }
+      ],
+      "proposal": "Put Buy on the right of the row, beside the traffic light, on desktop; on phone keep it but reduce the gap.",
+      "question": null,
+      "status": "open",
+      "first_seen": 1,
+      "resolution": null,
+      "notes": [
+        "Iteration 5: looked at again on the new capture, unchanged"
+      ]
+    },
+    {
+      "id": 14,
+      "screens": [
+        "checkout"
+      ],
+      "stories": [
+        "7"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "Pay is greyed out with no word on what is missing",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/checkout-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/checkout-1280.png",
+          "quote": ""
+        },
+        {
+          "source": ".claude/skills/ux-review/references/checklist.md",
+          "where": "C. Error prevention",
+          "quote": "disabled actions explain why, or what is missing is visible"
+        }
+      ],
+      "proposal": "Under the greyed-out Pay button, show one line until the address is complete, e.g. \"Fill in your address to pay\". The wording is yours to choose; it would go in DECISIONS.md like the other build-time texts.",
+      "question": null,
+      "status": "open",
+      "first_seen": 2,
+      "resolution": null,
+      "notes": [
+        "Iteration 5: looked at again on the new capture, unchanged"
+      ]
+    },
+    {
+      "id": 15,
+      "screens": [
+        "listings",
+        "checkout",
+        "listing-check-yellow",
+        "version-page",
+        "seller-rating-line"
+      ],
+      "stories": [
+        "9"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "The 'Shop' tag drops onto its own line, slightly indented, after the city",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/listings-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/checkout-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/checkout-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "DECISIONS.md",
+          "where": "2026-11-08 · finding #64",
+          "quote": "the \"Shop\" tag keeps story 9's criterion"
+        }
+      ],
+      "proposal": "Put the tag right after the shop name (\"Discos do Rui [Shop], Lisboa\") so it stays on the same line as the name and no longer starts a new line with a gap in front.",
+      "question": null,
+      "status": "open",
+      "first_seen": 2,
+      "resolution": null,
+      "notes": [
+        "Iteration 5: looked at again on the new capture, unchanged"
+      ]
+    },
+    {
+      "id": 16,
+      "screens": [
+        "recommendation",
+        "my-listings",
+        "checkout"
+      ],
+      "stories": [
+        "12"
+      ],
+      "type": "Rule broken",
+      "severity": "High",
+      "title": "On wide desktop pages the header search was covered by 'Sell for free' (the Search button was hidden behind it)",
+      "evidence": [
+        {
+          "source": "CLAUDE.md",
+          "where": "Layout at both widths (checklist A)",
+          "quote": "nothing cut off or overlapping"
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/recommendation-1280.png (before the fix: the Search button sat under the Sell pill)",
+          "quote": ""
+        }
+      ],
+      "proposal": "The header leaves room for the account badge, calculated from the width of the page (components/Header.tsx). Already applied during this review, see the resolution.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 3,
+      "resolution": {
+        "iteration": 3,
+        "date": "2026-11-08",
+        "decision": "Introduced by the story 12 header search and fixed during this review: the header padding on desktop now keeps the search clear of the badge. The change was made by the AI without waiting for a confirmation, which the ux-review skill asks for — to be confirmed or reverted by the Product Owner. Checked in the new capture at 1280 px."
+      }
+    },
+    {
+      "id": 17,
+      "screens": [
+        "search-results",
+        "home"
+      ],
+      "stories": [
+        "12",
+        "1"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "On the home page the crates and 'This week at the shop' stay under the search results, competing with the list",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/search-results-q-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "CLAUDE.md",
+          "where": "Checklist C · Minimalist design",
+          "quote": "nothing on screen competes with the primary action without reason"
+        }
+      ],
+      "proposal": "While a search is active (3 or more letters), show only the results; bring the crates and 'This week' back when the search is cleared.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 3,
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "Story 17: search results are on their own page (/search); the home page no longer shows results above the crates (.ux-review/shots/home-375.png, search-results-375.png)."
+      }
+    },
+    {
+      "id": 18,
+      "screens": [
+        "home"
+      ],
+      "stories": [
+        "12"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "The home page has a heading 'Pick a crate' right below the title 'Pick a crate. We'll pick the pressing.'",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/home-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "HappyPath.png",
+          "where": "screen 1 (Start)",
+          "quote": "the crates have no heading of their own in the design"
+        }
+      ],
+      "proposal": "Remove the heading, or call it 'Browse by genre'.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 3,
+      "resolution": {
+        "iteration": 4,
+        "date": "2026-11-08",
+        "decision": "home-1280.png and home-375.png: the crates have no heading of their own any more"
+      }
+    },
+    {
+      "id": 19,
+      "screens": [
+        "sell-form"
+      ],
+      "stories": [
+        "8"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "On a phone the version name on the sell form is cut ('Homogenic, 1997 UK o…') next to 'Change'",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/sell-form-375.png",
+          "quote": ""
+        }
+      ],
+      "proposal": "Let the name wrap onto two lines instead of cutting it.",
+      "question": null,
+      "status": "open",
+      "first_seen": 3,
+      "resolution": null,
+      "notes": [
+        "Iteration 5: looked at again on the new capture, unchanged"
+      ]
+    },
+    {
+      "id": 20,
+      "screens": [
+        "search-results",
+        "home"
+      ],
+      "stories": [
+        "12",
+        "1"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "The search in the desktop header only searches on Search or Enter, while the box on the phone searches as you type",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/search-results-q-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "specs/story-1-search.md",
+          "where": "Scope",
+          "quote": "results update as the user types, from the 3rd character"
+        }
+      ],
+      "proposal": "Make the header search update the results as you type, as story 1 says.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 3,
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "Header search and home search both go to /search on Enter or the Search button (components/SearchBox.tsx onSubmit). The sell search still searches as you type, as the story says."
+      }
+    },
+    {
+      "id": 21,
+      "screens": [
+        "home",
+        "search-results"
+      ],
+      "stories": [
+        "12"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "Crate text is hard to read on two crates: 'Soul and funk' white on tan 2.8:1, 'Hip-hop' white on grey-brown 3.6:1",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/home-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "checklist",
+          "where": "D · Accessibility",
+          "quote": "WCAG AA: 4.5:1 for body text, 3:1 for large text and controls"
+        }
+      ],
+      "proposal": "Measured on the 1280 px capture. Use navy text on 'Soul and funk' (4.9:1) and darken the 'Hip-hop' background so white text passes 4.5:1 (neither colour passes there today).",
+      "question": null,
+      "status": "open",
+      "first_seen": 4,
+      "resolution": null,
+      "notes": [
+        "Iteration 5: looked at again on the new capture, unchanged"
+      ]
+    },
+    {
+      "id": 22,
+      "screens": [
+        "home",
+        "recommendation",
+        "my-listings",
+        "checkout",
+        "search-results",
+        "sell-search",
+        "sell-form",
+        "compare",
+        "genre"
+      ],
+      "stories": [
+        "all"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "Page content starts at a different left edge on different pages, so the logo and the content jump between screens (home and My listings at 144 px, recommendation at 80 px, at 1280 px)",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/home-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/recommendation-1280.png",
+          "quote": ""
+        },
+        {
+          "source": "checklist",
+          "where": "D · Alignment",
+          "quote": "blocks on a page share one grid and the same left and right edges"
+        }
+      ],
+      "proposal": "Use one page width for all desktop screens, with the header inside it. Related to #5 and #6.",
+      "question": null,
+      "status": "open",
+      "first_seen": 4,
+      "resolution": null,
+      "notes": [
+        "Iteration 5: looked at again on the new capture, unchanged"
+      ]
+    },
+    {
+      "id": 23,
+      "screens": [
+        "genre"
+      ],
+      "stories": [
+        "12"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "The genre screen goes back with a text link 'Back to home'; every other screen uses the round back button",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/genre-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/checkout-375.png",
+          "quote": ""
+        },
+        {
+          "source": "checklist",
+          "where": "D · Consistency",
+          "quote": "the same kind of element looks and behaves the same everywhere (buttons, cards, tags, back buttons"
+        }
+      ],
+      "proposal": "Use the round back button, as on checkout and the listing check.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 4,
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "genre-375.png now shows the round back button ('Back to home'), as on the other screens."
+      }
+    },
+    {
+      "id": 24,
+      "screens": [
+        "genre"
+      ],
+      "stories": [
+        "12"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "On the genre screen the back button touches the coloured banner, with no gap",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/genre-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/genre-1280.png",
+          "quote": ""
+        }
+      ],
+      "proposal": "Add the same space under the back button as on the other screens (for example about 12 px) so the banner starts clearly below it.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 5,
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "Product Owner chose to add the space. Built 2026-11-09 and checked on the genre screen at 375 px: the banner now starts below the back button."
+      }
+    },
+    {
+      "id": 25,
+      "screens": [
+        "compare"
+      ],
+      "stories": [
+        "4"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "On a phone 'See this version' wraps onto two lines and its arrow sits far from the words",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/compare-375.png",
+          "quote": ""
+        }
+      ],
+      "proposal": "Shorten the link on a phone (for example 'See version') or put the arrow right after the words so it stays on one line.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 5,
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "Product Owner chose a shorter text on a phone. Built 2026-11-09 and checked at 375 px: 'See version' stays on one line with the arrow beside it; desktop keeps 'See this version'."
+      }
+    },
+    {
+      "id": 26,
+      "screens": [
+        "version-page",
+        "compare"
+      ],
+      "stories": [
+        "4"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "'Matches: price' and the priority tags are dark navy pills that look like buttons but do nothing",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/version-page-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/compare-375.png",
+          "quote": ""
+        },
+        {
+          "source": "CLAUDE.md",
+          "where": "Visual direction",
+          "quote": "dark navy for primary buttons and selected states"
+        }
+      ],
+      "proposal": "Make these tags a lighter style (sand with a thin border, as 'Typical' and 'Shop') and keep navy for buttons and selected choices. Question: is the navy tag a deliberate choice carried from the recommendation screen?",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 5,
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "Product Owner chose the lighter style. Built 2026-11-09 and checked at 375 px: the priority pills and 'Your #N' are white with a thin border."
+      }
+    },
+    {
+      "id": 27,
+      "screens": [
+        "sell-form"
+      ],
+      "stories": [
+        "8"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "The disabled 'List for sale' only says 'Add your city to continue'; condition, photos and price are empty too",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/sell-form-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/sell-form-1280.png",
+          "quote": ""
+        }
+      ],
+      "proposal": "Say what is still missing in one line (for example 'Still needed: city, condition, front cover photo, record photo, price'), or list only the next missing step as a hint, as now, but update it as each is filled.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 5,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Built 2026-11-09 and captured again at 375 and 1280 px: the disabled 'List for sale' says 'Still needed: city, condition, front cover photo, record photo, price'. New captures in .ux-review/shots-6/."
+      },
+      "notes": [
+        "Built 2026-11-09 and covered by an end-to-end test; stays open until a new capture shows it."
+      ]
+    },
+    {
+      "id": 28,
+      "screens": [
+        "sell-search",
+        "sell-form"
+      ],
+      "stories": [
+        "8"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "The sell search and the sell form have no back button; only the version picker has one",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/sell-search-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/sell-form-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/sell-pick-version-375.png",
+          "quote": ""
+        }
+      ],
+      "proposal": "Add the round back button ('Back to search' / 'Back to versions') to these two screens, as on the version picker.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 5,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Built 2026-11-09 and captured again at 375 and 1280 px: the sell search has 'Back to home' and the sell form has 'Back to versions', as on the version picker. New captures in .ux-review/shots-6/."
+      },
+      "notes": [
+        "Built 2026-11-09 and covered by an end-to-end test; stays open until a new capture shows it."
+      ]
+    },
+    {
+      "id": 29,
+      "screens": [
+        "home"
+      ],
+      "stories": [
+        "12"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "On the 'Electronic' crate the black disc touches the word on a phone",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/home-375.png",
+          "quote": ""
+        },
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/_crop-electronic.png",
+          "quote": ""
+        }
+      ],
+      "proposal": "Move the disc up or the label down on that crate (or make the disc a little smaller) so the label never touches it.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 5,
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "Product Owner chose to move the disc or the word. Built 2026-11-09 and checked on the home page at 375 px: the disc no longer touches 'Electronic'."
+      }
+    },
+    {
+      "id": 30,
+      "screens": [
+        "home"
+      ],
+      "stories": [
+        "12"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "On desktop the tagline 'No jargon, no homework…' is small and pushed to the right, away from the title it explains",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/home-1280.png",
+          "quote": ""
+        }
+      ],
+      "proposal": "Put the tagline directly under the headline, at the body text size used elsewhere, as on a phone.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 5,
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "Product Owner chose to put the tagline under the title. Built 2026-11-09 and checked on the home page at 1280 px."
+      }
+    },
+    {
+      "id": 31,
+      "screens": [
+        "recommendation",
+        "version-page"
+      ],
+      "stories": [
+        "3",
+        "4"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "When a glossary term in a title is tapped, its explanation appears in the large title style beside the word",
+      "evidence": [
+        {
+          "source": "session note",
+          "where": "Demo script and submission PDF session, 2026-11-09",
+          "quote": "Com o glossário aberto, a explicação aparece em estilo de título ao lado de \"Reissue\"."
+        }
+      ],
+      "proposal": "Use the normal text font and size for the explanation.",
+      "question": "Normal size beside the word, on a line below the title, or keep as built?",
+      "status": "resolved",
+      "first_seen": 5,
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "Product Owner chose normal text beside the word. Built 2026-11-09 and checked on the version page at 375 px; in a title it can wrap onto two lines with a wide gap."
+      }
+    },
+    {
+      "id": 32,
+      "screens": [
+        "menu",
+        "home"
+      ],
+      "stories": [
+        "15"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "On desktop the menu row starts at a different left edge from the logo and the page title (row at 264 px, logo and title at 144 px)",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/home-1280.png",
+          "quote": "Menu row \"Home / Sell for free / Log in\" starts under the search box; logo and \"Pick a crate\" start further left"
+        },
+        {
+          "source": "checklist D · Alignment",
+          "where": ".claude/skills/ux-review/references/checklist.md",
+          "quote": "blocks on a page share one grid and the same left and right edges"
+        }
+      ],
+      "proposal": "Align the row with the search box edge on every page, or with the logo and title; today it matches neither. Check against docs/design/menu-options.html desktop.",
+      "question": "Which left edge should the menu row follow: the logo or the search box?",
+      "status": "resolved",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Product Owner chose to align the row with the logo. Row now starts at 144 px, same as logo and title (measured at 1280 px)."
+      }
+    },
+    {
+      "id": 33,
+      "screens": [
+        "menu"
+      ],
+      "stories": [
+        "15"
+      ],
+      "type": "Design mismatch",
+      "severity": "Low",
+      "title": "The phone drawer is pure white (#FFFFFF); the approved design uses the warm off-white of the cards (#fffdf9)",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/menu-375.png",
+          "quote": "Drawer pixel measured at rgb(255, 255, 255)"
+        },
+        {
+          "source": "design",
+          "where": "docs/design/menu-options.html · .drawer",
+          "quote": "background:#fffdf9"
+        }
+      ],
+      "proposal": "Use the same off-white as the cards for the drawer, so it sits in the warm palette.",
+      "question": null,
+      "status": "resolved",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Product Owner chose the design off-white. Drawer measured at rgb(255, 253, 249) at 375 px."
+      }
+    },
+    {
+      "id": 34,
+      "screens": [
+        "suggestion-box"
+      ],
+      "stories": [
+        "16"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "In the suggestion box, rows without a loaded cover keep an empty square, so titles look indented unevenly (only 1 of 4 rows had its cover after 1.5 s)",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/suggestion-box-375.png",
+          "quote": "Blackstar, Let's Dance and Hunky Dory show a blank gutter; Ziggy shows its cover"
+        },
+        {
+          "source": "story",
+          "where": "specs/story-16-suggestions.md",
+          "quote": "Each row: cover, title, artist, year, \"n versions\" or \"No listings\""
+        }
+      ],
+      "proposal": "Show a neutral cover placeholder (same size, sand colour) until the image loads. The covers do load on the results page after about 3 s, so it is a loading delay of the outside cover service, not missing data.",
+      "question": "Add the placeholder, or accept it for the demo?",
+      "status": "resolved",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Product Owner chose a sand placeholder. Rows keep a sand square while the cover loads (checked at 375 px with images hidden)."
+      }
+    },
+    {
+      "id": 35,
+      "screens": [
+        "rate-this-seller"
+      ],
+      "stories": [
+        "18"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "After sending a review the order only says \"Thanks, your review is in.\" and does not show what was given",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/rate-this-seller-375.png",
+          "quote": "Second order card: \"Thanks, your review is in.\" with no stars or number"
+        }
+      ],
+      "proposal": "Say what was given, for example \"You rated this seller 4 of 5\". The story only asks for a thank-you line, so this is your call.",
+      "question": "Keep the thank-you line as in the story, or add the rating given?",
+      "status": "wont-fix",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Product Owner kept the thank-you line as in story 18. Not worth changing a built, tested screen days before the deadline."
+      }
+    },
+    {
+      "id": 36,
+      "screens": [
+        "home",
+        "search-results",
+        "recommendation",
+        "checkout",
+        "my-listings"
+      ],
+      "stories": [
+        "12"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "The logo is very small next to the header search bar (about 90 px wide against 750 px at 1280 px)",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/home-1280.png",
+          "quote": "Logo from 144 to 235 px; search bar from 260 to 1010 px"
+        },
+        {
+          "source": "checklist D · Hierarchy",
+          "where": ".claude/skills/ux-review/references/checklist.md",
+          "quote": "the most important thing on the screen ... is the strongest by size, weight, colour and space"
+        },
+        {
+          "source": "Product Owner",
+          "where": "UX review session, 2026-11-09",
+          "quote": "O Logo parece-me ter muito pouco peso no website. Muito pequeno face à barra de pesquisa"
+        }
+      ],
+      "proposal": "Make the logo larger and heavier in the header on desktop and phone, so the brand holds its own against the search bar.",
+      "question": "Larger logo only on desktop, on both sizes, or narrower search bar instead?",
+      "status": "resolved",
+      "first_seen": 6,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Product Owner chose option A: larger logo on desktop only (about 158 px wide, was 91 px; phone unchanged)."
+      }
     }
-   ],
-   "proposal": "Put Buy on the right of the row, beside the traffic light, on desktop; on phone keep it but reduce the gap.",
-   "question": null,
-   "status": "open",
-   "first_seen": 1,
-   "resolution": null,
-   "notes": [
-    "Iteration 5: looked at again on the new capture, unchanged"
-   ]
-  },
-  {
-   "id": 14,
-   "screens": [
-    "checkout"
-   ],
-   "stories": [
-    "7"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "Pay is greyed out with no word on what is missing",
-   "evidence": [
+  ],
+  "questions": [
     {
-     "source": "screenshot",
-     "where": ".ux-review/shots/checkout-375.png",
-     "quote": ""
+      "id": "Q1",
+      "finding": 3,
+      "question": "Story 2 phase 2 is in the Purchase phase, after story 7. Keep it before the demo, or move it to 'if time allows'?",
+      "status": "answered",
+      "answer": "Keep in the MVP (2026-11-09). Already built in story 2 (finding #3 resolved)."
     },
     {
-     "source": "screenshot",
-     "where": ".ux-review/shots/checkout-1280.png",
-     "quote": ""
-    },
-    {
-     "source": ".claude/skills/ux-review/references/checklist.md",
-     "where": "C. Error prevention",
-     "quote": "disabled actions explain why, or what is missing is visible"
+      "id": "Q2",
+      "finding": 10,
+      "question": "Should 'moved to 1990 Reissue' link to that version's listings? It is not in story 5 today.",
+      "status": "answered",
+      "answer": "Yes: link 'moved to 1990 Reissue' to that version's listings (2026-11-09). It is a specification change: proposed text to be shown to the Product Owner before anything is saved."
     }
-   ],
-   "proposal": "Under the greyed-out Pay button, show one line until the address is complete, e.g. \"Fill in your address to pay\". The wording is yours to choose; it would go in DECISIONS.md like the other build-time texts.",
-   "question": null,
-   "status": "open",
-   "first_seen": 2,
-   "resolution": null,
-   "notes": [
-    "Iteration 5: looked at again on the new capture, unchanged"
-   ]
-  },
-  {
-   "id": 15,
-   "screens": [
-    "listings",
-    "checkout",
-    "listing-check-yellow",
-    "version-page"
-   ],
-   "stories": [
-    "9"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "The 'Shop' tag drops onto its own line, slightly indented, after the city",
-   "evidence": [
+  ],
+  "todo": [
     {
-     "source": "screenshot",
-     "where": ".ux-review/shots/listings-375.png",
-     "quote": ""
+      "id": "T1",
+      "text": "Not captured: yellow warning dialog, 'Nobody is selling' message, wrong-password state, loading and error states (loading.tsx/error.tsx checked by name only: every data route has both). Order confirmation and 'just sold' were last taken from story 7 e2e screenshots.",
+      "finding": null,
+      "done": false
     },
     {
-     "source": "screenshot",
-     "where": ".ux-review/shots/checkout-375.png",
-     "quote": ""
+      "id": "T3",
+      "text": "Iteration 5: the test account has no listings, so My listings was only seen empty (On sale 0 / Sold 0). Populated tabs, the detail sheet and the 5-second Undo were not reviewed. Compare with 3 columns and 'only one version' were not captured (demo data has only two versions with listings on Ziggy). Tap-target sizes and contrast on the new screens were judged by eye, not measured.",
+      "finding": null,
+      "done": false
     },
     {
-     "source": "screenshot",
-     "where": ".ux-review/shots/checkout-1280.png",
-     "quote": ""
+      "id": "T4",
+      "text": "Capture creates one temporary test user (profile + auth), deleted afterwards. Check no 'spindle-uxreview-…@spindle.test' user is left in Supabase.",
+      "finding": null,
+      "done": false
     },
     {
-     "source": "DECISIONS.md",
-     "where": "2026-11-08 · finding #64",
-     "quote": "the \"Shop\" tag keeps story 9's criterion"
+      "id": "T5",
+      "text": "Finding #10: DECISIONS.md text approved by the Product Owner on 2026-11-09; saved as a hand-over note in the shared notes folder (finding-10-moved-to-link.md). Still to do: add it to DECISIONS.md, build the link, add the Playwright check, re-capture.",
+      "finding": 10,
+      "done": false
     }
-   ],
-   "proposal": "Put the tag right after the shop name (\"Discos do Rui [Shop], Lisboa\") so it stays on the same line as the name and no longer starts a new line with a gap in front.",
-   "question": null,
-   "status": "open",
-   "first_seen": 2,
-   "resolution": null,
-   "notes": [
-    "Iteration 5: looked at again on the new capture, unchanged"
-   ]
-  },
-  {
-   "id": 16,
-   "screens": [
-    "recommendation",
-    "my-listings",
-    "checkout"
-   ],
-   "stories": [
-    "12"
-   ],
-   "type": "Rule broken",
-   "severity": "High",
-   "title": "On wide desktop pages the header search was covered by 'Sell for free' (the Search button was hidden behind it)",
-   "evidence": [
-    {
-     "source": "CLAUDE.md",
-     "where": "Layout at both widths (checklist A)",
-     "quote": "nothing cut off or overlapping"
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/recommendation-1280.png (before the fix: the Search button sat under the Sell pill)",
-     "quote": ""
-    }
-   ],
-   "proposal": "The header leaves room for the account badge, calculated from the width of the page (components/Header.tsx). Already applied during this review, see the resolution.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 3,
-   "resolution": {
-    "iteration": 3,
-    "date": "2026-11-08",
-    "decision": "Introduced by the story 12 header search and fixed during this review: the header padding on desktop now keeps the search clear of the badge. The change was made by the AI without waiting for a confirmation, which the ux-review skill asks for — to be confirmed or reverted by the Product Owner. Checked in the new capture at 1280 px."
-   }
-  },
-  {
-   "id": 17,
-   "screens": [
-    "search-results",
-    "home"
-   ],
-   "stories": [
-    "12",
-    "1"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "On the home page the crates and 'This week at the shop' stay under the search results, competing with the list",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/search-results-q-1280.png",
-     "quote": ""
-    },
-    {
-     "source": "CLAUDE.md",
-     "where": "Checklist C · Minimalist design",
-     "quote": "nothing on screen competes with the primary action without reason"
-    }
-   ],
-   "proposal": "While a search is active (3 or more letters), show only the results; bring the crates and 'This week' back when the search is cleared.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 3,
-   "resolution": {
-    "iteration": 5,
-    "date": "2026-11-09",
-    "decision": "Story 17: search results are on their own page (/search); the home page no longer shows results above the crates (.ux-review/shots/home-375.png, search-results-375.png)."
-   }
-  },
-  {
-   "id": 18,
-   "screens": [
-    "home"
-   ],
-   "stories": [
-    "12"
-   ],
-   "type": "Design mismatch",
-   "severity": "Low",
-   "title": "The home page has a heading 'Pick a crate' right below the title 'Pick a crate. We'll pick the pressing.'",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/home-1280.png",
-     "quote": ""
-    },
-    {
-     "source": "HappyPath.png",
-     "where": "screen 1 (Start)",
-     "quote": "the crates have no heading of their own in the design"
-    }
-   ],
-   "proposal": "Remove the heading, or call it 'Browse by genre'.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 3,
-   "resolution": {
-    "iteration": 4,
-    "date": "2026-11-08",
-    "decision": "home-1280.png and home-375.png: the crates have no heading of their own any more"
-   }
-  },
-  {
-   "id": 19,
-   "screens": [
-    "sell-form"
-   ],
-   "stories": [
-    "8"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "On a phone the version name on the sell form is cut ('Homogenic, 1997 UK o…') next to 'Change'",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/sell-form-375.png",
-     "quote": ""
-    }
-   ],
-   "proposal": "Let the name wrap onto two lines instead of cutting it.",
-   "question": null,
-   "status": "open",
-   "first_seen": 3,
-   "resolution": null,
-   "notes": [
-    "Iteration 5: looked at again on the new capture, unchanged"
-   ]
-  },
-  {
-   "id": 20,
-   "screens": [
-    "search-results",
-    "home"
-   ],
-   "stories": [
-    "12",
-    "1"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "The search in the desktop header only searches on Search or Enter, while the box on the phone searches as you type",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/search-results-q-1280.png",
-     "quote": ""
-    },
-    {
-     "source": "specs/story-1-search.md",
-     "where": "Scope",
-     "quote": "results update as the user types, from the 3rd character"
-    }
-   ],
-   "proposal": "Make the header search update the results as you type, as story 1 says.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 3,
-   "resolution": {
-    "iteration": 5,
-    "date": "2026-11-09",
-    "decision": "Header search and home search both go to /search on Enter or the Search button (components/SearchBox.tsx onSubmit). The sell search still searches as you type, as the story says."
-   }
-  },
-  {
-   "id": 21,
-   "screens": [
-    "home",
-    "search-results"
-   ],
-   "stories": [
-    "12"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "Crate text is hard to read on two crates: 'Soul and funk' white on tan 2.8:1, 'Hip-hop' white on grey-brown 3.6:1",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/home-1280.png",
-     "quote": ""
-    },
-    {
-     "source": "checklist",
-     "where": "D · Accessibility",
-     "quote": "WCAG AA: 4.5:1 for body text, 3:1 for large text and controls"
-    }
-   ],
-   "proposal": "Measured on the 1280 px capture. Use navy text on 'Soul and funk' (4.9:1) and darken the 'Hip-hop' background so white text passes 4.5:1 (neither colour passes there today).",
-   "question": null,
-   "status": "open",
-   "first_seen": 4,
-   "resolution": null,
-   "notes": [
-    "Iteration 5: looked at again on the new capture, unchanged"
-   ]
-  },
-  {
-   "id": 22,
-   "screens": [
-    "home",
-    "recommendation",
-    "my-listings",
-    "checkout",
-    "search-results",
-    "sell-search",
-    "sell-form",
-    "compare",
-    "genre"
-   ],
-   "stories": [
-    "all"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "Page content starts at a different left edge on different pages, so the logo and the content jump between screens (home and My listings at 144 px, recommendation at 80 px, at 1280 px)",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/home-1280.png",
-     "quote": ""
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/recommendation-1280.png",
-     "quote": ""
-    },
-    {
-     "source": "checklist",
-     "where": "D · Alignment",
-     "quote": "blocks on a page share one grid and the same left and right edges"
-    }
-   ],
-   "proposal": "Use one page width for all desktop screens, with the header inside it. Related to #5 and #6.",
-   "question": null,
-   "status": "open",
-   "first_seen": 4,
-   "resolution": null,
-   "notes": [
-    "Iteration 5: looked at again on the new capture, unchanged"
-   ]
-  },
-  {
-   "id": 23,
-   "screens": [
-    "genre"
-   ],
-   "stories": [
-    "12"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "The genre screen goes back with a text link 'Back to home'; every other screen uses the round back button",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/genre-375.png",
-     "quote": ""
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/checkout-375.png",
-     "quote": ""
-    },
-    {
-     "source": "checklist",
-     "where": "D · Consistency",
-     "quote": "the same kind of element looks and behaves the same everywhere (buttons, cards, tags, back buttons"
-    }
-   ],
-   "proposal": "Use the round back button, as on checkout and the listing check.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 4,
-   "resolution": {
-    "iteration": 5,
-    "date": "2026-11-09",
-    "decision": "genre-375.png now shows the round back button ('Back to home'), as on the other screens."
-   }
-  },
-  {
-   "id": 24,
-   "screens": [
-    "genre"
-   ],
-   "stories": [
-    "12"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "On the genre screen the back button touches the coloured banner, with no gap",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/genre-375.png",
-     "quote": ""
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/genre-1280.png",
-     "quote": ""
-    }
-   ],
-   "proposal": "Add the same space under the back button as on the other screens (for example about 12 px) so the banner starts clearly below it.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 5,
-   "resolution": {
-    "iteration": 5,
-    "date": "2026-11-09",
-    "decision": "Product Owner chose to add the space. Built 2026-11-09 and checked on the genre screen at 375 px: the banner now starts below the back button."
-   }
-  },
-  {
-   "id": 25,
-   "screens": [
-    "compare"
-   ],
-   "stories": [
-    "4"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "On a phone 'See this version' wraps onto two lines and its arrow sits far from the words",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/compare-375.png",
-     "quote": ""
-    }
-   ],
-   "proposal": "Shorten the link on a phone (for example 'See version') or put the arrow right after the words so it stays on one line.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 5,
-   "resolution": {
-    "iteration": 5,
-    "date": "2026-11-09",
-    "decision": "Product Owner chose a shorter text on a phone. Built 2026-11-09 and checked at 375 px: 'See version' stays on one line with the arrow beside it; desktop keeps 'See this version'."
-   }
-  },
-  {
-   "id": 26,
-   "screens": [
-    "version-page",
-    "compare"
-   ],
-   "stories": [
-    "4"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "'Matches: price' and the priority tags are dark navy pills that look like buttons but do nothing",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/version-page-375.png",
-     "quote": ""
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/compare-375.png",
-     "quote": ""
-    },
-    {
-     "source": "CLAUDE.md",
-     "where": "Visual direction",
-     "quote": "dark navy for primary buttons and selected states"
-    }
-   ],
-   "proposal": "Make these tags a lighter style (sand with a thin border, as 'Typical' and 'Shop') and keep navy for buttons and selected choices. Question: is the navy tag a deliberate choice carried from the recommendation screen?",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 5,
-   "resolution": {
-    "iteration": 5,
-    "date": "2026-11-09",
-    "decision": "Product Owner chose the lighter style. Built 2026-11-09 and checked at 375 px: the priority pills and 'Your #N' are white with a thin border."
-   }
-  },
-  {
-   "id": 27,
-   "screens": [
-    "sell-form"
-   ],
-   "stories": [
-    "8"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "The disabled 'List for sale' only says 'Add your city to continue'; condition, photos and price are empty too",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/sell-form-375.png",
-     "quote": ""
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/sell-form-1280.png",
-     "quote": ""
-    }
-   ],
-   "proposal": "Say what is still missing in one line (for example 'Still needed: city, condition, front cover photo, record photo, price'), or list only the next missing step as a hint, as now, but update it as each is filled.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 5,
-   "resolution": {
-    "iteration": 6,
-    "date": "2026-11-09",
-    "decision": "Built 2026-11-09 and captured again at 375 and 1280 px: the disabled 'List for sale' says 'Still needed: city, condition, front cover photo, record photo, price'. New captures in .ux-review/shots-6/."
-   },
-   "notes": [
-    "Built 2026-11-09 and covered by an end-to-end test; stays open until a new capture shows it."
-   ]
-  },
-  {
-   "id": 28,
-   "screens": [
-    "sell-search",
-    "sell-form"
-   ],
-   "stories": [
-    "8"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "The sell search and the sell form have no back button; only the version picker has one",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/sell-search-375.png",
-     "quote": ""
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/sell-form-375.png",
-     "quote": ""
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/sell-pick-version-375.png",
-     "quote": ""
-    }
-   ],
-   "proposal": "Add the round back button ('Back to search' / 'Back to versions') to these two screens, as on the version picker.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 5,
-   "resolution": {
-    "iteration": 6,
-    "date": "2026-11-09",
-    "decision": "Built 2026-11-09 and captured again at 375 and 1280 px: the sell search has 'Back to home' and the sell form has 'Back to versions', as on the version picker. New captures in .ux-review/shots-6/."
-   },
-   "notes": [
-    "Built 2026-11-09 and covered by an end-to-end test; stays open until a new capture shows it."
-   ]
-  },
-  {
-   "id": 29,
-   "screens": [
-    "home"
-   ],
-   "stories": [
-    "12"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "On the 'Electronic' crate the black disc touches the word on a phone",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/home-375.png",
-     "quote": ""
-    },
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/_crop-electronic.png",
-     "quote": ""
-    }
-   ],
-   "proposal": "Move the disc up or the label down on that crate (or make the disc a little smaller) so the label never touches it.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 5,
-   "resolution": {
-    "iteration": 5,
-    "date": "2026-11-09",
-    "decision": "Product Owner chose to move the disc or the word. Built 2026-11-09 and checked on the home page at 375 px: the disc no longer touches 'Electronic'."
-   }
-  },
-  {
-   "id": 30,
-   "screens": [
-    "home"
-   ],
-   "stories": [
-    "12"
-   ],
-   "type": "Usability",
-   "severity": "Low",
-   "title": "On desktop the tagline 'No jargon, no homework…' is small and pushed to the right, away from the title it explains",
-   "evidence": [
-    {
-     "source": "screenshot",
-     "where": ".ux-review/shots/home-1280.png",
-     "quote": ""
-    }
-   ],
-   "proposal": "Put the tagline directly under the headline, at the body text size used elsewhere, as on a phone.",
-   "question": null,
-   "status": "resolved",
-   "first_seen": 5,
-   "resolution": {
-    "iteration": 5,
-    "date": "2026-11-09",
-    "decision": "Product Owner chose to put the tagline under the title. Built 2026-11-09 and checked on the home page at 1280 px."
-   }
-  },
-  {
-   "id": 31,
-   "screens": [
-    "recommendation",
-    "version-page"
-   ],
-   "stories": [
-    "3",
-    "4"
-   ],
-   "type": "Visual",
-   "severity": "Low",
-   "title": "When a glossary term in a title is tapped, its explanation appears in the large title style beside the word",
-   "evidence": [
-    {
-     "source": "session note",
-     "where": "Demo script and submission PDF session, 2026-11-09",
-     "quote": "Com o glossário aberto, a explicação aparece em estilo de título ao lado de \"Reissue\"."
-    }
-   ],
-   "proposal": "Use the normal text font and size for the explanation.",
-   "question": "Normal size beside the word, on a line below the title, or keep as built?",
-   "status": "resolved",
-   "first_seen": 5,
-   "resolution": {
-    "iteration": 5,
-    "date": "2026-11-09",
-    "decision": "Product Owner chose normal text beside the word. Built 2026-11-09 and checked on the version page at 375 px; in a title it can wrap onto two lines with a wide gap."
-   }
-  }
- ],
- "questions": [
-  {
-   "id": "Q1",
-   "finding": 3,
-   "question": "Story 2 phase 2 is in the Purchase phase, after story 7. Keep it before the demo, or move it to 'if time allows'?",
-   "status": "answered",
-   "answer": "Keep in the MVP (2026-11-09). Already built in story 2 (finding #3 resolved)."
-  },
-  {
-   "id": "Q2",
-   "finding": 10,
-   "question": "Should 'moved to 1990 Reissue' link to that version's listings? It is not in story 5 today.",
-   "status": "answered",
-   "answer": "Yes: link 'moved to 1990 Reissue' to that version's listings (2026-11-09). It is a specification change: proposed text to be shown to the Product Owner before anything is saved."
-  }
- ],
- "todo": [
-  {
-   "id": "T1",
-   "text": "Not captured: yellow warning dialog, 'Nobody is selling' message, wrong-password state, loading and error states (loading.tsx/error.tsx checked by name only: every data route has both). Order confirmation and 'just sold' were last taken from story 7 e2e screenshots.",
-   "finding": null,
-   "done": false
-  },
-  {
-   "id": "T3",
-   "text": "Iteration 5: the test account has no listings, so My listings was only seen empty (On sale 0 / Sold 0). Populated tabs, the detail sheet and the 5-second Undo were not reviewed. Compare with 3 columns and 'only one version' were not captured (demo data has only two versions with listings on Ziggy). Tap-target sizes and contrast on the new screens were judged by eye, not measured.",
-   "finding": null,
-   "done": false
-  },
-  {
-   "id": "T4",
-   "text": "Capture creates one temporary test user (profile + auth), deleted afterwards. Check no 'spindle-uxreview-…@spindle.test' user is left in Supabase.",
-   "finding": null,
-   "done": false
-  },
-  {
-   "id": "T5",
-   "text": "Finding #10: DECISIONS.md text approved by the Product Owner on 2026-11-09; saved as a hand-over note in the shared notes folder (finding-10-moved-to-link.md). Still to do: add it to DECISIONS.md, build the link, add the Playwright check, re-capture.",
-   "finding": 10,
-   "done": false
-  }
- ]
+  ]
 }

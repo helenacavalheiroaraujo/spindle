@@ -11,8 +11,8 @@ export function Header() {
   return (
     <header className="relative">
       <div className="flex items-center justify-center py-5 lg:justify-start lg:gap-6 lg:pr-[max(0px,calc(270px_-_(100vw_-_100%)/2))]">
-        <Link href="/" className="flex shrink-0 items-center gap-2 font-heading text-xl tracking-wide">
-          <span aria-hidden className="h-5 w-5 rounded-full border-[5px] border-navy" />
+        <Link href="/" className="flex shrink-0 items-center gap-2 font-heading text-xl tracking-wide lg:gap-3 lg:text-4xl">
+          <span aria-hidden className="h-5 w-5 rounded-full border-[5px] border-navy lg:h-8 lg:w-8 lg:border-[8px]" />
           SPINDLE
         </Link>
         <Suspense>

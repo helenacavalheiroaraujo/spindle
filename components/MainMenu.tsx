@@ -19,7 +19,7 @@ function ComingSoon({ item, className }: { item: MenuItem; className: string }) 
 export function MenuRow() {
   const items = menuItems(useSignedIn(), usePathname(), useSearchParams().toString());
   return (
-    <nav aria-label="Main" className="mt-1 hidden items-center gap-1.5 pb-3 lg:ml-[7.5rem] lg:flex">
+    <nav aria-label="Main" className="mt-1 hidden items-center gap-1.5 pb-3 lg:flex">
       {items.map((item, i) => (
         <span key={item.label} className="flex items-center gap-1.5">
           {i === 3 && <span aria-hidden className="mx-2 h-5 w-px bg-line" />}
@@ -97,7 +97,7 @@ export function MenuDrawer() {
             role="dialog"
             aria-modal="true"
             aria-label="Menu"
-            className="absolute inset-y-0 left-0 w-72 max-w-[85vw] border-r border-line bg-white p-4 shadow-2xl"
+            className="absolute inset-y-0 left-0 w-72 max-w-[85vw] border-r border-line bg-[#fffdf9] p-4 shadow-2xl"
           >
             <button
               ref={closer}
