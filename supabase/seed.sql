@@ -248,3 +248,12 @@ insert into check_results (listing_id, item, result) values
   ('40000000-0000-0000-0000-000000000020', 'cover_label', 'match'),
   ('40000000-0000-0000-0000-000000000020', 'country_year', 'match'),
   ('40000000-0000-0000-0000-000000000020', 'matrix', 'match');
+
+-- Reviews of sellers (story 18): illustrative, no order behind them -------------
+insert into reviews (seller_id, rating)
+select '30000000-0000-0000-0000-000000000001', r from unnest(array[5, 4, 5, 4, 4]) as r;
+insert into reviews (seller_id, rating)
+select '30000000-0000-0000-0000-000000000002', r from unnest(array[5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4]) as r;
+insert into reviews (seller_id, rating)
+select '30000000-0000-0000-0000-000000000004', r from unnest(array[5]) as r;
+-- Marta Lopes has none: "No reviews yet".

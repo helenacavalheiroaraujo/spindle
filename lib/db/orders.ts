@@ -5,6 +5,7 @@ import type { CheckoutTotal } from "@/lib/rules/checkoutTotal";
 import type { ShippingAddress } from "@/lib/rules/shippingAddress";
 import { sellerOf, type Seller } from "@/lib/rules/seller";
 import type { OrderStatus } from "@/lib/rules/orderProgress";
+import { reviewedOrderIds } from "./reviews";
 
 export type PlaceOrderResult = { orderId: string } | { sold: true };
 
@@ -44,6 +45,7 @@ export type OrderView = {
   seller: Seller;
   city: string | null;
   cover: string | null;
+  reviewed: boolean; // story 18: the buyer already rated the seller of this order
 };
 
 const ORDER_COLUMNS = `id, total, status, profiles!orders_buyer_id_fkey (user_id),
@@ -52,7 +54,7 @@ const ORDER_COLUMNS = `id, total, status, profiles!orders_buyer_id_fkey (user_id
 
 type OrderRow = { id: string; total: number | string; status: OrderStatus; profiles: unknown; listings: unknown };
 
-function toOrderView(data: OrderRow): OrderView {
+function toOrderView(data: OrderRow, reviewed: boolean): OrderView {
   const l = data.listings as {
     cover_photo_url: string | null;
     profiles: { shop_name: string | null; city: string | null };
@@ -69,6 +71,7 @@ function toOrderView(data: OrderRow): OrderView {
     seller: sellerOf(l.profiles.shop_name),
     city: l.profiles.city,
     cover: l.cover_photo_url,
+    reviewed,
   };
 }
 
@@ -81,7 +84,7 @@ export async function getOrderForBuyer(orderId: string, buyerUserId: string): Pr
   if (!data) return null;
   const buyer = data.profiles as unknown as { user_id: string };
   if (buyer.user_id !== buyerUserId) return null;
-  return toOrderView(data as unknown as OrderRow);
+  return toOrderView(data as unknown as OrderRow, (await reviewedOrderIds([data.id])).has(data.id));
 }
 
 // All of the signed-in buyer's orders, newest first (story 7 · step 3: "On its way" on Your account).
@@ -95,7 +98,8 @@ export async function getOrdersForBuyer(buyerUserId: string): Promise<OrderView[
     .eq("buyer_id", profile.data.id)
     .order("created_at", { ascending: false });
   if (error) throw error;
-  return (data ?? []).map((row) => toOrderView(row as unknown as OrderRow));
+  const reviewed = await reviewedOrderIds((data ?? []).map((row) => row.id));
+  return (data ?? []).map((row) => toOrderView(row as unknown as OrderRow, reviewed.has(row.id)));
 }
 
 // "confirmed": the order is now "Seller paid". "not_waiting": it is not this buyer's order, or it was

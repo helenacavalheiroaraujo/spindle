@@ -16,7 +16,7 @@
 | 1 · Core | `albums`, `versions`, `tracks`, `glossary_terms`, `reason_texts`, `condition_grades`, `profiles`, `listings`, `check_results` | 1, 2, 3, 5, 6 | `0001_core.sql` |
 | 2 · Purchase | `user_preferences` (story 2), `orders` (story 7); story 9 adds no table, the app fills `profiles.user_id` at sign-up | 9, 7, 2 | `0002_orders.sql` (story 7), `0004_preferences.sql` (story 2) |
 | 3 · Seller | no new tables: a price limit on `listings`, the `listing-photos` bucket in Storage and `create_listing(...)` | 8 | `0003_sell.sql` |
-| 4 · If time allows | no new tables: `albums.genre` (story 12) | 12 | `0006_genres.sql` |
+| 4 · If time allows | `reviews` (story 18); `albums.genre` (story 12) | 18, 12 | `0007_reviews.sql` (story 18), `0006_genres.sql` (story 12) |
 
 ## Diagram (phase 1)
 
@@ -159,6 +159,17 @@ The three-item checklist per listing (story 5). Mock data.
 No payment method column: MB WAY is the only method (finding #38).
 
 **`place_order(...)`** (same migration): Pay in one step, all or nothing. Marks the listing `sold` only if it is still `on_sale`, then creates the order with the listing's price; otherwise raises `listing_not_on_sale` and changes nothing ("Sorry, this record was just sold"). Only the server key can call it.
+
+### `reviews` (created: `0007_reviews.sql`)
+| Column | Type | Notes |
+|---|---|---|
+| `id` | uuid, primary key | |
+| `order_id` | → `orders`, unique, nullable | one review per order: a second one is refused by the table (story 18). Empty for the illustrative reviews in the seed, which have no real order |
+| `seller_id` | → `profiles` | the seller being rated: taken from the order's listing, never from what the browser sends |
+| `rating` | smallint | 1 to 5; the table refuses anything else |
+| `created_at` | timestamp | |
+
+Who can review is checked in `lib/db/reviews.ts` (`addReview`): only the buyer of the order, and only while it is "Seller paid". The average and the count are never stored: `lib/rules/sellerRating.ts` works them out from the rows. No comment column: comments are a later story.
 
 ## Phase 3 · Seller (`0003_sell.sql`)
 

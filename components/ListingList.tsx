@@ -11,6 +11,7 @@ import { checkoutPath, isOwnListing } from "@/lib/rules/checkoutAccess";
 import { YourListing } from "@/components/YourListing";
 import { sellerText } from "@/lib/rules/seller";
 import { SellerLine } from "@/components/SellerLine";
+import { SellerRating } from "@/components/SellerRating";
 
 // Verified listings for one version (story 5), each with its price label (story 6): on its own screen on phone, beside the recommendation on desktop.
 // "from" tells the listing check screen where its Back button goes. viewerId: the signed-in user's profile id,
@@ -92,6 +93,7 @@ export function ListingList({
                 </p>
                 <p className="text-navy/70">
                   <SellerLine seller={l.seller} city={l.city} />
+                  <SellerRating rating={l.rating} />
                 </p>
                 <p className="mt-1 font-semibold underline underline-offset-4">See the checks</p>
               </Link>

@@ -9,6 +9,25 @@
 - **Trade-off accepted:** a session bug that only shows on a fresh log-in is caught only by the log-in specs. One occasional failure per run remains, cause unknown.
 - **Not done:** the app still shows a generic failure when Supabase answers 429 (a message for it would be a new rule).
 
+## 2026-11-09 — Story 18 (phase 4): rate the seller, and the open findings of story 9
+- **Decision:** the reviews that story 9 left for phase 4 become a new story, **story 18 · Rate the seller**, because story 9 already has Traceability rows with tests and a built story file is not changed (CLAUDE.md). Only the seller is rated, 1 to 5 stars, with no comment yet (a later story). The buyer is asked right after "It arrived, all good" and can answer later from "Rate this seller" on the delivered order. The summary ("★ 4.8 · 12 reviews") shows on the seller line of listings; there is no seller page and no way to read single reviews.
+- **Why:** stars alone are quick to give and to show as an average, and a comment nobody can read adds a field, checks and tests for no visible benefit. Asking after confirming receipt reaches the buyer when they have just seen the record; the second chance on the delivered order adds ratings without changing the confirm step. "Only verified buyers can review" (2026-11-07) holds: only the buyer of a "Seller paid" order can rate.
+- **Differs from:** story 9 · Out of scope ("Public profile page (comes with reviews)", "Reviews (phase 4)"): there is still no public profile page; DECISIONS 2026-11-07 "No public profile page in the MVP" holds. SPEC · build order: "story 9 (reviews)" is now "story 18".
+- **Findings of story 9, kept as built (Product Owner, 2026-11-09):**
+  - **#65:** the log-in and sign-up texts ("Welcome back. Log in to buy and sell records.", "Create your account", "One account to buy and sell records.", "No account? Create one") stay.
+  - **#67:** with no profile name, the header shows "Me" and Your account hides the name row. The name is required at sign-up, so this only happens with a missing profile.
+  - **#68:** after log-in only addresses inside Spindle are followed; any other goes to the home page. It stops a link from taking the user to another site after they log in.
+  - **#69:** "Log in" in the header returns to the current page and is hidden on the log-in and sign-up pages.
+- **Choices made in the story text (not from the Product Owner's answers):** the "Not now" button, the average with 1 decimal, the line "No reviews yet", the texts "How was the seller?", "Send review" and "Rate this seller", and the loading and error states.
+- **Choices made while building (not in the story or the design):**
+  - The question opens by itself only in the tab where the buyer has just confirmed; after a reload the delivered order shows "Rate this seller" instead.
+  - After "Send review" the delivered order says "Thanks, your review is in."; the buyer cannot see or change the stars they gave.
+  - The loading mask says "Sending…" and the error says "We couldn't send your review. Check your connection."
+  - The stars are numbered radio buttons (1 to 5), so the keyboard and screen readers work.
+  - Illustrative reviews in the seed: Ana Sousa 5 reviews (4.4), Rui Ferreira's shop 12 (4.8), João Pinto 1 (5.0), Marta Lopes none. They have no order behind them (`order_id` empty).
+  - The rating line shows on the list of listings and on the listing check screen, not on the checkout or the order screens.
+  - The tests use their own seller, so the seed reviews never change.
+
 ## 2026-11-09 — Story 15 (phase 4): menu
 - **Decision:** desktop: a row of links under the search box. Phone: a ☰ button, top left, that opens a side drawer (option B of `docs/design/menu-options.html`). Items: Home, Sell for free, Your account (Log in when signed out), and two illustrative future features, Artists and All genres and formats, with a "Coming soon" tag and no link.
 - **Why:** the Assignment 1 design has a hamburger on the phone; the Product Owner chose the drawer for its look and use. The future items show where the product is going and cost no screens.

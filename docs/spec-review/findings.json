@@ -2187,9 +2187,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 65,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "Kept as built. Recorded in DECISIONS.md (2026-11-09, story 18 and the open findings of story 9)."
+      }
     },
     {
       "stories": [
@@ -2253,9 +2257,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 67,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "Kept as built. Recorded in DECISIONS.md (2026-11-09, story 18 and the open findings of story 9)."
+      }
     },
     {
       "stories": [
@@ -2279,9 +2287,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 68,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "Kept as built. Recorded in DECISIONS.md (2026-11-09, story 18 and the open findings of story 9)."
+      }
     },
     {
       "stories": [
@@ -2305,9 +2317,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 69,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 5,
+        "date": "2026-11-09",
+        "decision": "Kept as built. Recorded in DECISIONS.md (2026-11-09, story 18 and the open findings of story 9)."
+      }
     },
     {
       "stories": [

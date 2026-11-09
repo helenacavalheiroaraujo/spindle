@@ -7,7 +7,7 @@ Stack and hosting: see `DECISIONS.md`. Assignment 1 stated PHP; the MVP uses Nex
 1. **Core:** stories 1, 2, 3, 5, 6, 12
 2. **Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)
 3. **Seller:** story 8
-4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 9 (reviews). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu)
+4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu)
 
 Not in this MVP: stories 10, 11, 13, 14
 
@@ -53,6 +53,7 @@ In build order. Each story has its own file in `specs/`.
 | Story 17 · Search results page | [`specs/story-17-results.md`](specs/story-17-results.md) |
 | Story 16 · Search suggestions | [`specs/story-16-suggestions.md`](specs/story-16-suggestions.md) |
 | Story 15 · Menu | [`specs/story-15-menu.md`](specs/story-15-menu.md) |
+| Story 18 · Rate the seller | [`specs/story-18-reviews.md`](specs/story-18-reviews.md) |
 
 ---
 
@@ -155,3 +156,7 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 5 | Listings beside the recommendation (desktop): loading mask, and an error screen with "Try again" that recovers while the recommendation stays | `components/ListingsBeside.tsx`, `components/ErrorScreen.tsx` | `tests/e2e/loadingScreens.spec.ts` |
 | 14 | | | |
 | 15 | | | |
+| 18 | After "Yes, release the money" the order card asks "How was the seller?" (1 to 5 stars); "Send review" stays disabled until a star is chosen; one review per order, only by its buyer once it is "Seller paid" | `supabase/migrations/0007_reviews.sql`, `lib/db/reviews.ts`, `app/account/actions.ts`, `app/account/OrderCard.tsx` | `tests/unit/sellerRating.test.ts`, `tests/e2e/reviews.spec.ts` |
+| 18 | "Not now" closes the question and "Rate this seller" stays on the delivered order; after "Send review" it does not come back | `lib/rules/sellerRating.ts`, `app/account/OrderCard.tsx`, `lib/db/orders.ts` | `tests/unit/sellerRating.test.ts`, `tests/e2e/reviews.spec.ts` |
+| 18 | The seller line on listings shows "★ 4.8 · 12 reviews" (1 decimal), "★ 5.0 · 1 review" or "No reviews yet", from one rule | `lib/rules/sellerRating.ts`, `components/SellerRating.tsx`, `components/ListingList.tsx`, `app/listings/[listingId]/page.tsx`, `lib/db/listings.ts` | `tests/unit/sellerRating.test.ts`, `tests/e2e/reviews.spec.ts` |
+| 18 | Loading mask "Sending…" and an error screen with "Try again" that keeps the chosen stars (Shared rules) | `app/account/OrderCard.tsx`, `components/LoadingMask.tsx`, `components/ErrorScreen.tsx` | `tests/e2e/reviews.spec.ts` |

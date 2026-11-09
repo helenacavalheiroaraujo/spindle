@@ -15,6 +15,7 @@ import { currentProfileId } from "@/lib/db/profiles";
 import { YourListing } from "@/components/YourListing";
 import { sellerText } from "@/lib/rules/seller";
 import { SellerLine } from "@/components/SellerLine";
+import { SellerRating } from "@/components/SellerRating";
 
 const one = (v?: string | string[]) => (Array.isArray(v) ? v[0] : v);
 
@@ -146,6 +147,7 @@ export default async function ListingCheckPage({
           <span className="block text-2xl font-bold">{formatPrice(l.price)}</span>
           <span className="text-sm text-navy/70">
             <SellerLine seller={l.seller} city={l.city} />
+            <SellerRating rating={l.rating} />
           </span>
         </p>
         {light === "red" ? (

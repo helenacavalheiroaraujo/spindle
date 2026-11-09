@@ -5,6 +5,8 @@ import type { ListingForList } from "@/lib/rules/listingOrder";
 import type { ListingFacts } from "@/lib/rules/activeListings";
 import { trafficLight, type CheckItem, type CheckResult, type Light } from "@/lib/rules/trafficLight";
 import { sellerOf, type Seller } from "@/lib/rules/seller";
+import type { RatingSummary } from "@/lib/rules/sellerRating";
+import { sellerRatings } from "./reviews";
 
 export const LISTING_FACTS_COLUMNS =
   "status, claimed_version_id, actual_version_id, matrix_photo_url, check_results (item, result)";
@@ -32,6 +34,7 @@ export function toListingFacts(l: ListingRow): ListingFacts {
 export type ListingDetails = ListingForList & {
   sellerId: string; // profile id: the seller sees "Your listing" instead of Buy (finding #12)
   seller: Seller;
+  rating: RatingSummary; // story 18: the seller's reviews
   city: string | null;
   condition: { code: string; name: string; explanation: string };
   claimedVersionName: string;
@@ -78,6 +81,7 @@ export async function getVersionListings(versionId: string): Promise<VersionList
     .eq("status", "on_sale")
     .or(`claimed_version_id.eq.${versionId},actual_version_id.eq.${versionId}`);
   if (listings.error) throw listings.error;
+  const ratings = await sellerRatings(listings.data.map((l) => l.seller_id));
 
   return {
     version: {
@@ -97,6 +101,7 @@ export async function getVersionListings(versionId: string): Promise<VersionList
         price: Number(l.price),
         sellerId: l.seller_id,
         seller: sellerOf(seller.shop_name),
+        rating: ratings.get(l.seller_id)!,
         city: seller.city,
         condition: grade,
         claimedVersionName: (l.claimed as unknown as { name: string }).name,
@@ -135,12 +140,14 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
   if (!l) return null;
   const seller = l.profiles as unknown as { shop_name: string | null; city: string | null };
   const claimed = l.claimed as unknown as { name: string; albums: { id: string; title: string; artist: string } };
+  const ratings = await sellerRatings([l.seller_id]);
   return {
     ...toListingFacts(l as unknown as ListingRow),
     id: l.id,
     price: Number(l.price),
     sellerId: l.seller_id,
     seller: sellerOf(seller.shop_name),
+    rating: ratings.get(l.seller_id)!,
     city: seller.city,
     condition: l.condition_grades as unknown as ListingDetails["condition"],
     claimedVersionName: claimed.name,

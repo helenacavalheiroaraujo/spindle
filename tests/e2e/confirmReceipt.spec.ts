@@ -154,7 +154,8 @@ test("confirming asks 'Are you sure?' first; 'Not yet' changes nothing; 'Yes' ma
     "You confirm (done)",
     "Seller paid (done)",
   ]);
-  await expect(done.getByRole("button")).toHaveCount(0); // a confirmed order cannot be changed
+  await expect(done.getByRole("button", { name: "It arrived, all good" })).toHaveCount(0); // a confirmed order cannot be confirmed again
+  await expect(done.getByRole("group", { name: "How was the seller?" })).toBeVisible(); // story 18: the question opens by itself
   await expect(page.getByRole("region", { name: "On its way" })).toHaveCount(0);
   expect(await status()).toBe("seller_paid");
   await screenshot(page, 7, "account-delivered");
