@@ -37,8 +37,8 @@ export function BuyButton({
 
   return (
     <div role="group" aria-label="Before you buy" className="mt-1 w-full space-y-3">
-      <div role="note" className="flex gap-3 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm">
-        <span aria-hidden className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-400 font-bold">!</span>
+      <div role="note" className="flex gap-3 rounded-2xl border border-light-amber/60 bg-light-amber/10 p-4 text-sm">
+        <span aria-hidden className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-light-amber font-bold">!</span>
         <p>{warning.join(" ")}</p>
       </div>
       <div className="flex flex-wrap items-center gap-3">

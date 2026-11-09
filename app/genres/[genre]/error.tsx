@@ -8,7 +8,7 @@ import { Header } from "@/components/Header";
 export default function GenreError({ reset }: { reset: () => void }) {
   const router = useRouter();
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-16">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <ErrorScreen
         message="We couldn't load this crate. Check your connection."

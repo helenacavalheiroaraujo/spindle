@@ -7,6 +7,10 @@
   --color-brown: #5a3a24;
   --color-sand: #f1e6d0; /* light emphasis cards (DECISIONS · light emphasis cards) */
   --color-line: #e2dacb;
+  /* Traffic light, less vivid than the stock green, amber and red (UX #7). The words always show too. */
+  --color-light-green: #3f7a4b;
+  --color-light-amber: #c8923a;
+  --color-light-red: #a8403a;
   --font-heading: var(--font-heading), "Arial Narrow", sans-serif;
   --font-body: var(--font-body), system-ui, sans-serif;
 }
@@ -14,4 +18,15 @@
 body {
   background: var(--color-cream);
   color: var(--color-navy);
+}
+
+/* One page width on desktop (UX #6, #22): header and content share the same left edge on every page.
+   Phone and tablet keep the 2xl column. Pages with a narrow body add page-narrow / page-mid / page-form:
+   everything under the header becomes a left-aligned column of that width. */
+.page-main { margin-inline: auto; width: 100%; max-width: 42rem; }
+@media (min-width: 1024px) {
+  .page-main { max-width: 72rem; }
+  .page-narrow > :not(header) { max-width: 42rem; }
+  .page-mid > :not(header) { max-width: 48rem; }
+  .page-form > :not(header) { max-width: 28rem; }
 }

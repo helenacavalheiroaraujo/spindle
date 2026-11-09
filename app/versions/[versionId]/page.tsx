@@ -50,7 +50,7 @@ export default async function VersionPage({
     .filter((r): r is { key: Priority; rank: number; text: string } => r !== null);
 
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-16 lg:max-w-6xl">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <Link
         href={`/albums/${album.id}/compare?priorities=${rank}`}

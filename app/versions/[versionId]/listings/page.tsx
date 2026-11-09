@@ -26,7 +26,7 @@ export default async function ListingsPage({
     : `/albums/${version.albumId}/priorities`;
 
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-16">
+    <main className="px-4 pb-16 page-main page-narrow">
       <Header />
       <div className="flex items-center gap-3">
         <Link

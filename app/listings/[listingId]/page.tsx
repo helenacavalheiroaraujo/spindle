@@ -19,11 +19,11 @@ import { SellerRating } from "@/components/SellerRating";
 
 const one = (v?: string | string[]) => (Array.isArray(v) ? v[0] : v);
 
-const MARK: Record<CheckMark, { symbol: string; word: string; className: string }> = {
-  match: { symbol: "✓", word: "Matches", className: "bg-green-600 text-white" },
-  uncertain: { symbol: "?", word: "Uncertain", className: "bg-amber-400 text-navy" },
-  pending: { symbol: "?", word: "Check pending", className: "bg-amber-400 text-navy" },
-  no_match: { symbol: "✗", word: "Doesn't match", className: "bg-red-600 text-white" },
+const MARK: Record<CheckMark, { symbol: string; className: string }> = {
+  match: { symbol: "✓", className: "bg-light-green text-white" },
+  uncertain: { symbol: "?", className: "bg-light-amber text-navy" },
+  pending: { symbol: "?", className: "bg-light-amber text-navy" },
+  no_match: { symbol: "✗", className: "bg-light-red text-white" },
 };
 
 // Listing check screen, "Is it really this one?" (story 5). The version in the address says where the
@@ -61,7 +61,7 @@ export default async function ListingCheckPage({
   const label = `${formatPrice(l.price)}, ${l.condition.name}, ${sellerText(l.seller)}`;
 
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-16">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <div className="flex items-center gap-3">
         <Link
@@ -81,7 +81,8 @@ export default async function ListingCheckPage({
 
       <h1 className="mt-6 font-heading text-4xl leading-tight">Is it really this one?</h1>
 
-      <section aria-label="Result" className="mt-4 flex items-center gap-3 rounded-2xl border border-line bg-white/60 p-4">
+      <div className="lg:grid lg:grid-cols-2 lg:gap-x-12">
+      <section aria-label="Result" className="mt-4 lg:col-start-2 flex items-center gap-3 rounded-2xl border border-line bg-sand p-4 text-navy">
         <TrafficLight light={light} />
         {light === "red" && row.movedToVersionId ? (
           // Finding #10 (DECISIONS 2026-11-09): "moved to …" opens the listings of the version it moved to.
@@ -96,7 +97,7 @@ export default async function ListingCheckPage({
         )}
       </section>
 
-      <section aria-labelledby="checklist" className="mt-6">
+      <section aria-labelledby="checklist" className="mt-6 lg:col-start-2">
         <h2 id="checklist" className="font-heading text-2xl">Checklist</h2>
         <ul aria-label="Checklist" className="mt-2">
           {rows.map((r) => {
@@ -107,14 +108,14 @@ export default async function ListingCheckPage({
                   {m.symbol}
                 </span>
                 <span className="flex-1">{r.label}</span>
-                <span className="text-sm text-navy/70">{r.note ?? m.word}</span>
               </li>
             );
           })}
         </ul>
       </section>
 
-      <section aria-labelledby="photos" className="mt-6">
+      <div className="lg:col-start-1 lg:row-span-3 lg:row-start-1">
+      <section aria-labelledby="photos" className="mt-6 lg:mt-4">
         <h2 id="photos" className="font-heading text-2xl">The seller&apos;s photos</h2>
         <ul className="mt-2 grid grid-cols-3 gap-3">
           {(["cover", "record", "matrix"] as const).map((kind) => {
@@ -141,8 +142,9 @@ export default async function ListingCheckPage({
           {l.condition.code} means {l.condition.name.toLowerCase()}, with {l.condition.explanation.toLowerCase()}
         </p>
       </section>
+      </div>
 
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-3 lg:col-start-2">
         <p>
           <span className="block text-2xl font-bold">{formatPrice(l.price)}</span>
           <span className="text-sm text-navy/70">
@@ -162,6 +164,8 @@ export default async function ListingCheckPage({
             warning={light === "yellow" ? yellowWarning(l.checks, l.hasMatrixPhoto, movedHere) : null}
           />
         )}
+      </div>
+
       </div>
 
       <p className="mt-6 text-sm text-navy/70">Check results and photos are illustrative data</p>

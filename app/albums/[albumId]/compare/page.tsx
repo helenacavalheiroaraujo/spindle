@@ -54,7 +54,7 @@ export default async function ComparePage({
   const rows = compareRows(ranking);
 
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-16 lg:max-w-6xl">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <Link href={backHref} className="inline-flex items-center gap-3 text-sm font-medium">
         <span className="flex h-12 w-12 items-center justify-center rounded-full border border-navy/30">

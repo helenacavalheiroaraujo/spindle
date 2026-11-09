@@ -17,7 +17,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
   const suggestions = albums.length === 0 ? searchSuggestions(all, typed) : [];
 
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-16 lg:max-w-3xl">
+    <main className="px-4 pb-16 page-main page-mid">
       <Header />
       <SearchBox key={typed} initial={typed} />
       <Link href="/" className="mt-4 inline-flex min-h-12 items-center gap-2 text-sm font-semibold">

@@ -100,7 +100,7 @@ export function ListingList({
               </div>
               <TrafficLight light={light} />
               {light !== "red" && (
-                <div className="flex w-full justify-end">
+                <div className="flex w-full justify-end lg:w-auto lg:has-[[role=group]]:w-full">
                   {isOwnListing(l.sellerId, viewerId) ? (
                     <YourListing />
                   ) : (

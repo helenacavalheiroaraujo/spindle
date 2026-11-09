@@ -8,7 +8,7 @@ import { Header } from "@/components/Header";
 export default function CheckoutError({ reset }: { reset: () => void }) {
   const router = useRouter();
   return (
-    <main className="mx-auto max-w-5xl px-4 pb-16">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <ErrorScreen
         message="We couldn't load the checkout. Check your connection."

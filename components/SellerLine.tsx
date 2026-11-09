@@ -6,10 +6,10 @@ export function SellerLine({ seller, city }: { seller: Seller; city: string | nu
   return (
     <>
       {seller.kind === "shop" ? seller.shopName : "Private seller"}
-      {city && `, ${city}`}
       {seller.kind === "shop" && (
-        <span className="ml-2 inline-block rounded-full border border-navy/30 px-2 py-0.5 text-xs">Shop</span>
+        <span className="ml-2 inline-block whitespace-nowrap rounded-full border border-navy/30 px-2 py-0.5 text-xs">Shop</span>
       )}
+      {city && `, ${city}`}
     </>
   );
 }

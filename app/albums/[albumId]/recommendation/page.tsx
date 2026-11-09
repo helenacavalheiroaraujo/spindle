@@ -40,7 +40,7 @@ export default async function RecommendationPage({
   if (!result) {
     // Story 1 stops the buyer before this screen; this covers an old link.
     return (
-      <main className="mx-auto max-w-2xl px-4 pb-16">
+      <main className="px-4 pb-16 page-main page-narrow">
         <Header />
         <p className="mt-8 text-lg font-semibold">Nobody is selling this album right now.</p>
         <Link href="/search" className="mt-4 inline-block underline">Back to search</Link>
@@ -62,7 +62,7 @@ export default async function RecommendationPage({
   const count = version.activePrices.length;
 
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-16 lg:max-w-6xl">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <div className="lg:grid lg:grid-cols-2 lg:gap-12">
         <div>

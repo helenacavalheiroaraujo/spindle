@@ -17,7 +17,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
   if (!order) notFound();
 
   return (
-    <main className="mx-auto max-w-5xl px-4 pb-16">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <div className="mt-4 grid gap-4 lg:grid-cols-[3fr_2fr] lg:items-start">
         <section aria-label="Order" className="rounded-3xl border border-line bg-sand p-6 text-navy lg:p-10">

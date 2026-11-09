@@ -15,7 +15,7 @@ export default async function GenrePage({ params }: { params: Promise<{ genre: s
   if (albums.length === 0) notFound(); // crates are shown only for genres with albums
 
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-16 lg:max-w-5xl">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <Link href="/" className="inline-flex items-center gap-3 text-sm font-semibold">
         <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-navy/30">

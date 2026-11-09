@@ -24,27 +24,29 @@ export async function AccountBadge() {
   const letters = initials(name);
 
   return (
-    <div className="pointer-events-none absolute inset-x-4 top-4 z-20 flex items-center justify-end gap-2 [&>*]:pointer-events-auto">
-      {/* Phone: "Sell" is in the menu (story 15), whose ☰ button takes the top-left slot. */}
-      <Link
-        href="/sell"
-        className="hidden min-h-11 sm:flex items-center rounded-full bg-navy px-4 text-sm font-semibold text-cream"
-      >
-        <span aria-hidden>+&nbsp;</span>Sell&nbsp;for free
-      </Link>
-      {!signedIn ? (
-        <Suspense>
-          <LogInLink />
-        </Suspense>
-      ) : (
+    <div className="pointer-events-none absolute inset-x-0 top-4 z-20">
+      <div className="page-main flex items-center justify-end gap-2 px-4 [&>*]:pointer-events-auto">
+        {/* Phone: "Sell" is in the menu (story 15), whose ☰ button takes the top-left slot. */}
         <Link
-          href="/account"
-          aria-label={name ? `Your account, signed in as ${name}` : "Your account"}
-          className="flex h-11 w-11 items-center justify-center rounded-full bg-navy text-sm font-semibold text-cream"
+          href="/sell"
+          className="hidden min-h-11 sm:flex items-center rounded-full bg-navy px-4 text-sm font-semibold text-cream"
         >
-          {letters || "Me"}
+          <span aria-hidden>+&nbsp;</span>Sell&nbsp;for free
         </Link>
-      )}
+        {!signedIn ? (
+          <Suspense>
+            <LogInLink />
+          </Suspense>
+        ) : (
+          <Link
+            href="/account"
+            aria-label={name ? `Your account, signed in as ${name}` : "Your account"}
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-navy text-sm font-semibold text-cream"
+          >
+            {letters || "Me"}
+          </Link>
+        )}
+      </div>
     </div>
   );
 }

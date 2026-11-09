@@ -1,6 +1,6 @@
 import { LIGHT_WORD, type Light } from "@/lib/rules/trafficLight";
 
-const DOT: Record<Light, string> = { green: "bg-green-600", yellow: "bg-amber-400", red: "bg-red-600" };
+const DOT: Record<Light, string> = { green: "bg-light-green", yellow: "bg-light-amber", red: "bg-light-red" };
 
 // Traffic light pill (story 5): always shows its word, never colour alone (CLAUDE.md).
 export function TrafficLight({ light }: { light: Light }) {

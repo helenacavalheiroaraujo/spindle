@@ -18,14 +18,17 @@ describe("checklist", () => {
     expect(checklist({ cover_label, country_year, matrix }, photo, moved).map((r) => r.mark)).toEqual(marks);
   });
 
-  it("names the items in SPEC order and says when the matrix photo is missing", () => {
-    const rows = checklist({ cover_label: M, country_year: M, matrix: M }, false, false);
-    expect(rows.map((r) => r.label)).toEqual([
-      "Cover and label match the version",
-      "Country and year match",
-      "Matrix photo matches",
-    ]);
-    expect(rows[2].note).toBe("No matrix photo");
+  it("words each row by its result, in SPEC order (UX #9)", () => {
+    const labels = (c: CheckResult[], photo = true, moved = false) =>
+      checklist({ cover_label: c[0], country_year: c[1], matrix: c[2] }, photo, moved).map((r) => r.label);
+    expect(labels([M, M, M])).toEqual(["Cover and label match the version", "Country and year match", "Matrix photo matches"]);
+    expect(labels([U, U, U])).toEqual(["Cover and label: can't be sure", "Country and year: can't be sure", "Matrix photo: can't be sure"]);
+    expect(labels([X, X, X])).toEqual(["Cover and label don't match the version", "Country and year don't match", "Matrix photo doesn't match"]);
+    expect(labels([M, X, X], true, true)).toEqual(["Cover and label: check pending", "Country and year: check pending", "Matrix photo: check pending"]);
+  });
+
+  it("says when the matrix photo is missing", () => {
+    expect(checklist({ cover_label: M, country_year: M, matrix: M }, false, false)[2].label).toBe("Matrix photo: no photo to check");
   });
 });
 

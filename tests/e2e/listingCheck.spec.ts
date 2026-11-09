@@ -23,7 +23,7 @@ test("green: summary, three ✓, photos, condition in plain words, Buy with prot
   await page.goto(`/listings/${GREEN_32}?version=${V2012}`);
   await expect(result(page)).toContainText("Match");
   await expect(result(page)).toContainText("All three checks match this version");
-  await expect(checklist(page)).toHaveText([/Cover and label match the version.*Matches/, /Country and year match.*Matches/, /Matrix photo matches.*Matches/]);
+  await expect(checklist(page)).toHaveText([/Cover and label match the version$/, /Country and year match$/, /Matrix photo matches$/]);
   for (const kind of ["cover", "record", "matrix"]) await expect(page.getByRole("img", { name: `${kind} photo` })).toBeVisible();
   await expect(page.getByText("NM means near mint, with no marks, almost like new")).toBeVisible(); // finding #59
   await expect(page.getByRole("link", { name: /^Buy with protection/ })).toHaveAttribute("href", `/checkout/${GREEN_32}?version=${V2012}`);
@@ -35,7 +35,7 @@ test("yellow without matrix photo: says so in the checklist and the photos, and 
   await page.goto(`/listings/${NO_MATRIX_30}?version=${V1990}`);
   await expect(result(page)).toContainText("Check");
   await expect(result(page)).toContainText("One check is uncertain");
-  await expect(checklist(page).nth(2)).toContainText("No matrix photo");
+  await expect(checklist(page).nth(2)).toContainText("Matrix photo: no photo to check");
   await expect(page.getByText("No matrix photo", { exact: true }).last()).toBeVisible();
   await page.getByRole("button", { name: /^Buy with protection/ }).click();
   await expect(page.getByRole("group", { name: "Before you buy" })).toContainText(
@@ -48,7 +48,7 @@ test("red under its claimed version: shows the failed checks and where it moved,
   await page.getByRole("link", { name: /^Open €29/ }).click();
   await expect(result(page)).toContainText("No match");
   await expect(result(page)).toContainText("It's a different pressing · moved to 1990 Reissue");
-  await expect(checklist(page).nth(1)).toContainText("Doesn't match");
+  await expect(checklist(page).nth(1)).toContainText("Country and year don't match");
   await expect(page.getByText("Not for sale here")).toBeVisible();
   await expect(page.getByRole("button", { name: /^Buy/ })).toHaveCount(0);
 });
@@ -73,7 +73,7 @@ test("same listing under its actual version: yellow, every check pending, warnin
   await page.goto(`/listings/${RED_29}?version=${V1990}`);
   await expect(result(page)).toContainText("Check");
   await expect(result(page)).toContainText("Moved here · check pending");
-  await expect(checklist(page)).toHaveText([/Check pending/, /Check pending/, /Check pending/]);
+  await expect(checklist(page)).toHaveText([/Cover and label: check pending$/, /Country and year: check pending$/, /Matrix photo: check pending$/]);
   await page.getByRole("button", { name: /^Buy with protection/ }).click();
   await expect(page.getByRole("group", { name: "Before you buy" })).toContainText("hasn't been checked against this one yet");
 });

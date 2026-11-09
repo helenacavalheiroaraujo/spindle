@@ -10,7 +10,7 @@ import { withReturn } from "@/lib/rules/login";
 export default async function SellSearchPage() {
   if (!(await currentUserId())) redirect(withReturn("/login", "/sell"));
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-16">
+    <main className="px-4 pb-16 page-main page-narrow">
       <Header />
       <BackLink href="/">Back to home</BackLink>
       <h1 className="mt-4 font-heading text-4xl leading-tight sm:text-5xl">Which record are you selling?</h1>

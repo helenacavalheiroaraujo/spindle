@@ -6,7 +6,7 @@ import { SearchBox } from "@/components/SearchBox";
 // Searching opens the results page /search (story 17); results are never shown here.
 export default function Home() {
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-16 lg:max-w-5xl">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <div className="mt-4">
         <h1 className="font-heading text-4xl leading-none sm:text-5xl lg:text-7xl">Pick a crate. We&apos;ll pick the pressing.</h1>

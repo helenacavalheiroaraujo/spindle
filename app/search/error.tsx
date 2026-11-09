@@ -10,7 +10,7 @@ export default function SearchError({ reset }: { reset: () => void }) {
   const router = useRouter();
   const typed = useSearchParams().get("q") ?? "";
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-16 lg:max-w-3xl">
+    <main className="px-4 pb-16 page-main page-mid">
       <Header />
       <SearchBox initial={typed} />
       <div className="mt-6">

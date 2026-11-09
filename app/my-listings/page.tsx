@@ -16,7 +16,7 @@ export default async function MyListingsPage() {
   const tabs = myListingTabs(await getMyListings(profile.id));
 
   return (
-    <main className="mx-auto max-w-5xl px-4 pb-24">
+    <main className="px-4 pb-24 page-main">
       <Header />
       <h1 className="mt-4 font-heading text-4xl leading-tight lg:text-6xl">My listings</h1>
       <MyListings onSale={tabs.onSale} sold={tabs.sold} />

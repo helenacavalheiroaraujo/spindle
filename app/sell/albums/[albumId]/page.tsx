@@ -15,7 +15,7 @@ export default async function SellVersionsPage({ params }: { params: Promise<{ a
   if (!album) notFound();
 
   return (
-    <main className="mx-auto max-w-5xl px-4 pb-16">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <Link href="/sell" className="inline-flex items-center gap-3 text-sm font-semibold">
         <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-navy/30">

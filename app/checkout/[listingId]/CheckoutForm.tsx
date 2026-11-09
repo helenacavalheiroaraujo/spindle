@@ -134,6 +134,9 @@ export function CheckoutForm({
               Pay {euros(amounts.total)}
             </button>
           )}
+          {!sold && !canPay(address) && (
+            <p className="mt-2 text-center text-sm font-medium">Fill in your address to pay</p>
+          )}
           <p className="mt-2 text-center text-sm text-navy/70">Simulated payment · Illustrative data</p>
         </div>
       </div>

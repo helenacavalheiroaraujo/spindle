@@ -7,10 +7,10 @@ import type { AlbumAccess } from "./albumAccess";
 export const GENRES = [
   { slug: "rock", name: "Rock", color: "#c6a26b", tone: "dark", dot: "#1f2a44" },
   { slug: "jazz", name: "Jazz", color: "#1f2a44", tone: "light", dot: "#c9d2ea" },
-  { slug: "soul-and-funk", name: "Soul and funk", color: "#a98c5f", tone: "light", dot: "#f4efe6" },
+  { slug: "soul-and-funk", name: "Soul and funk", color: "#a98c5f", tone: "dark", dot: "#1f2a44" },
   { slug: "fado", name: "Fado", color: "#3a2a1f", tone: "light", dot: "#f4efe6" },
   { slug: "electronic", name: "Electronic", color: "#d6c6a4", tone: "dark", dot: "#1f2a44" },
-  { slug: "hip-hop", name: "Hip-hop", color: "#8b7b68", tone: "light", dot: "#f4efe6" },
+  { slug: "hip-hop", name: "Hip-hop", color: "#74644f", tone: "light", dot: "#f4efe6" },
 ] as const;
 
 export type Genre = (typeof GENRES)[number];

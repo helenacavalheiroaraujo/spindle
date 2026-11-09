@@ -8,7 +8,7 @@ import { Header } from "@/components/Header";
 export default function PrioritiesError({ reset }: { reset: () => void }) {
   const router = useRouter();
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-16">
+    <main className="px-4 pb-16 page-main page-narrow">
       <Header />
       <ErrorScreen
         message="We couldn't load this album. Check your connection."

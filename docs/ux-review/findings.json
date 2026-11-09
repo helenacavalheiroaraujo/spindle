@@ -34,7 +34,7 @@
     {
       "n": 6,
       "date": "2026-11-09",
-      "note": "After stories 15 (menu), 16 (suggestions) and 18 (rate the seller): 5 screens added, 48 captures re-taken, open findings re-checked (none resolved), new #32-#35. Menu, suggestion box and story 18 screens come from the e2e screenshots (suggestion box and phone menu re-captured by hand); loading and error states checked by reading code · Decided and built the same day: #32, #33, #34, #36 resolved; #35 kept as the story says; #36 added from the Product Owner"
+      "note": "After stories 15 (menu), 16 (suggestions) and 18 (rate the seller): 5 screens added, 48 captures re-taken, open findings re-checked (none resolved), new #32-#35. Menu, suggestion box and story 18 screens come from the e2e screenshots (suggestion box and phone menu re-captured by hand); loading and error states checked by reading code · Decided and built the same day: #32, #33, #34, #36 resolved; #35 kept as the story says; #36 added from the Product Owner · All 12 older open findings decided by the Product Owner (build all) and built the same day; #7 with less vivid colours; #9 wording approved"
     }
   ],
   "screens": [
@@ -676,9 +676,13 @@
       ],
       "proposal": "Use two columns from 1024 px where the design does: priorities (cover left, 2 × 2 options right), listing check (photos left, checklist and Buy right). The recommendation already does this well.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Built as decided: two columns from 1024 px on priorities (cover left, 2×2 options right) and the listing check (photos and condition left, verdict, checklist and Buy right). Phone unchanged. Checked at 1280 and 375 px."
+      },
       "notes": [
         "Iteration 5: looked at again on the new capture, unchanged"
       ]
@@ -727,9 +731,13 @@
       ],
       "proposal": "Put the logo on the left and 'Log in' / initials on the right inside the same max width as the content; leave room for 'Sell for free' (story 8).",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Built with #22: one page width on desktop; \"Sell for free\" and Log in / initials sit inside it. Checked at 1280 px."
+      },
       "note": "Iteration 3: the desktop header now has the logo on the left followed by the search (story 12); the account badge and \"Sell for free\" are still pinned to the window edge, outside the content width on narrow pages.",
       "notes": [
         "Iteration 5: looked at again on the new capture, unchanged"
@@ -768,9 +776,13 @@
       ],
       "proposal": "Add the three palette colours to globals.css and use them in TrafficLight; the words stay as they are.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Product Owner asked for traffic-light colours that are less vivid: green #3f7a4b, amber #c8923a, red #a8403a (tokens in globals.css), used on the light, the checklist marks and the yellow warning. The words stay."
+      },
       "notes": [
         "Iteration 5: looked at again on the new capture, unchanged"
       ]
@@ -806,9 +818,13 @@
       ],
       "proposal": "Make the verdict box a sand card like the Condition card below it (light + word + summary), so the answer to the screen's question is the strongest element. The dark brown of the design is a deliberate difference (DECISIONS 2026-11-08) and is no longer asked for.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Verdict box is now a sand card like the Condition card. Checked at 1280 and 375 px."
+      },
       "notes": [
         "Iteration 5: looked at again on the new capture, unchanged"
       ]
@@ -839,9 +855,13 @@
       ],
       "proposal": "Word each row by its result, e.g. ✓ 'Country and year match', ? 'Matrix photo: can't be sure', ✗ 'Country and year don't match'. Would need a small story 5 text change; show current vs proposed first.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Approved text: each row is worded by its result, no word on the right (e.g. \"Matrix photo: can't be sure\"). Rule in lib/rules/listingCheck.ts; unit and e2e tests updated. DECISIONS entry still to be written."
+      },
       "notes": [
         "Iteration 5: looked at again on the new capture, unchanged"
       ]
@@ -909,9 +929,13 @@
       ],
       "proposal": "Add the back button used on the other screens and the 'Just browsing?' line under the form. (The 'Show' password button is optional.)",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Back button (\"Back to search\") and the design line \"Just browsing? You can search and get recommendations without an account.\" on log in and sign up. Checked at 1280 px (login)."
+      },
       "notes": [
         "Iteration 5: looked at again on the new capture, unchanged"
       ]
@@ -981,9 +1005,13 @@
       ],
       "proposal": "Put Buy on the right of the row, beside the traffic light, on desktop; on phone keep it but reduce the gap.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 1,
-      "resolution": null,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Buy sits to the right of the traffic light from 1024 px; on phone it keeps its own row. Checked at 1280 and 375 px."
+      },
       "notes": [
         "Iteration 5: looked at again on the new capture, unchanged"
       ]
@@ -1018,9 +1046,13 @@
       ],
       "proposal": "Under the greyed-out Pay button, show one line until the address is complete, e.g. \"Fill in your address to pay\". The wording is yours to choose; it would go in DECISIONS.md like the other build-time texts.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 2,
-      "resolution": null,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Line \"Fill in your address to pay\" under Pay until the address is complete. Checked at 1280 px. Wording still to go in DECISIONS."
+      },
       "notes": [
         "Iteration 5: looked at again on the new capture, unchanged"
       ]
@@ -1064,9 +1096,13 @@
       ],
       "proposal": "Put the tag right after the shop name (\"Discos do Rui [Shop], Lisboa\") so it stays on the same line as the name and no longer starts a new line with a gap in front.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 2,
-      "resolution": null,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "The Shop tag now follows the shop name (\"Discos do Rui [Shop], Lisboa\"). The e2e test now expects the tag after the name."
+      },
       "notes": [
         "Iteration 5: looked at again on the new capture, unchanged"
       ]
@@ -1194,9 +1230,13 @@
       ],
       "proposal": "Let the name wrap onto two lines instead of cutting it.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 3,
-      "resolution": null,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "The version name on the sell form wraps instead of being cut (code change; not re-captured at 375 px)."
+      },
       "notes": [
         "Iteration 5: looked at again on the new capture, unchanged"
       ]
@@ -1262,9 +1302,13 @@
       ],
       "proposal": "Measured on the 1280 px capture. Use navy text on 'Soul and funk' (4.9:1) and darken the 'Hip-hop' background so white text passes 4.5:1 (neither colour passes there today).",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 4,
-      "resolution": null,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "Soul and funk now has navy text (4.9:1) and Hip-hop a darker background (#74644f, 4.98:1 with the cream text). Checked on the home page at 1280 px."
+      },
       "notes": [
         "Iteration 5: looked at again on the new capture, unchanged"
       ]
@@ -1307,9 +1351,13 @@
       ],
       "proposal": "Use one page width for all desktop screens, with the header inside it. Related to #5 and #6.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 4,
-      "resolution": null,
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-09",
+        "decision": "One left edge on every desktop page (80 px at 1280): all pages share the 72 rem width; narrow bodies are left-aligned columns under the header."
+      },
       "notes": [
         "Iteration 5: looked at again on the new capture, unchanged"
       ]

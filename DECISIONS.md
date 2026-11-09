@@ -3,6 +3,21 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-09 — UX review round 6: page width, checklist wording and small fixes
+- **Decision:** on desktop every page shares one width (72 rem) and one left edge; "Sell for free" and Log in sit inside it. Pages with a narrow body (account, log in, sign up, search) are left-aligned columns of 42, 48 or 28 rem under the header. Priorities and the listing check use two columns from 1024 px (UX #5, #6, #22).
+- **Why:** the logo and the content started at different edges on different pages, and Log in sat at the window edge, outside the content.
+- **Checklist wording (changes story 5, built):** each row is worded by its result, with nothing on the right: "Matrix photo matches", "Matrix photo: can't be sure", "Matrix photo doesn't match", "Matrix photo: check pending" (same for cover and label, country and year); a missing photo says "Matrix photo: no photo to check". Story 5 keeps its original text (CLAUDE.md); this entry is the rule (UX #9).
+- **Why:** "Matrix photo matches — Uncertain" read as a contradiction.
+- **Choices made while building (not in the story or the design):**
+  - Pay shows "Fill in your address to pay" until the address is complete (#14).
+  - Log in and sign up have a back button labelled "Back to search" and the line from the design, "Just browsing? You can search and get recommendations without an account." (#11).
+  - Traffic-light colours, less vivid at the Product Owner's request: green #3f7a4b, amber #c8923a, red #a8403a; the words stay (#7).
+  - Soul and funk crate: navy text and a navy dot; Hip-hop crate: background #74644f, so the text passes 4.5:1 (#21).
+  - The logo is larger on desktop only (about 158 px wide, was 91 px); phone unchanged (#36).
+  - The menu row starts at the logo's left edge; the phone drawer uses #fffdf9; suggestion rows show a sand square until the cover loads (#32 to #34).
+  - Buy sits to the right of the traffic light from 1024 px; the Shop tag follows the shop name; the version name on the sell form wraps (#13, #15, #19).
+- **Kept as the story says:** after "Send review" the order shows only "Thanks, your review is in." (#35; already in DECISIONS 2026-11-09, story 18).
+
 ## 2026-11-09 — End-to-end tests: one real log-in per account
 - **Decision:** specs that only need a signed-in user reuse one real log-in per account per worker (`tests/e2e/session.ts`). `login.spec.ts`, `signup.spec.ts` and `menu.spec.ts` keep using the real form.
 - **Why:** about 200 log-ins per run hit Supabase Auth's rate limit (429); the app showed a generic failure and the suite failed at random (3–9 tests per run at 6 workers; 0–1 after the change).

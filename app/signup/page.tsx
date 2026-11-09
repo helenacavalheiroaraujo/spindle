@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { BackLink } from "@/components/BackLink";
 import { returnPath, withReturn } from "@/lib/rules/login";
 import { SignUpForm } from "./SignUpForm";
 
@@ -8,8 +9,9 @@ import { SignUpForm } from "./SignUpForm";
 export default async function SignUpPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
   const next = returnPath((await searchParams).next);
   return (
-    <main className="mx-auto max-w-md px-4 pb-16">
+    <main className="px-4 pb-16 page-main page-form">
       <Header />
+      <BackLink href="/">Back to search</BackLink>
       <h1 className="mt-6 font-heading text-4xl leading-tight">Create your account</h1>
       <p className="mt-2">One account to buy and sell records.</p>
       <SignUpForm next={next} />
@@ -18,6 +20,9 @@ export default async function SignUpPage({ searchParams }: { searchParams: Promi
         <Link href={withReturn("/login", next)} className="inline-block min-h-12 py-3 font-semibold underline">
           Log in
         </Link>
+      </p>
+      <p className="mt-2 text-center text-sm text-navy/70">
+        Just browsing? You can search and get recommendations without an account.
       </p>
     </main>
   );

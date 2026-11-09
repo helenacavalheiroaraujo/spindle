@@ -23,7 +23,7 @@ export function PriorityPicker({ albumId, initial }: { albumId: string; initial:
 
   return (
     <>
-      <ul className="mt-6 space-y-3">
+      <ul className="mt-6 space-y-3 lg:grid lg:grid-cols-2 lg:gap-3 lg:space-y-0">
         {PRIORITIES.map((p) => {
           const rank = rankOf(ranking, p.id);
           return (

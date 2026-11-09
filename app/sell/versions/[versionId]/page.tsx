@@ -19,7 +19,7 @@ export default async function SellFormPage({ params }: { params: Promise<{ versi
   if (!version) {
     // Edge case: a version not in the catalogue → message, no listing can be created.
     return (
-      <main className="mx-auto max-w-2xl px-4 pb-16">
+      <main className="px-4 pb-16 page-main page-narrow">
         <Header />
         <p role="status" className="mt-6 rounded-2xl border border-line bg-white/60 p-6 text-center font-medium">
           {NOT_IN_CATALOGUE}
@@ -39,7 +39,7 @@ export default async function SellFormPage({ params }: { params: Promise<{ versi
   if (!profile) throw new Error("No profile for the signed-in user.");
 
   return (
-    <main className="mx-auto max-w-5xl px-4 pb-16">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <BackLink href={`/sell/albums/${version.albumId}`}>Back to versions</BackLink>
       <SellForm version={version} needsCity={profile.city === null} />

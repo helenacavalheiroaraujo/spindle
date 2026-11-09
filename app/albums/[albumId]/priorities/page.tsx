@@ -28,8 +28,10 @@ export default async function PrioritiesPage({
   }
 
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-16">
+    <main className="px-4 pb-16 page-main">
       <Header />
+      <div className="lg:grid lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-x-12">
+      <div>
       <div className="flex items-center gap-3">
         <Link
           href="/"
@@ -41,7 +43,7 @@ export default async function PrioritiesPage({
           </svg>
         </Link>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={album.coverUrl} alt="" width={48} height={48} className="h-12 w-12 shrink-0 rounded-md" />
+        <img src={album.coverUrl} alt="" width={48} height={48} className="h-12 w-12 shrink-0 rounded-md lg:hidden" />
         <p className="min-w-0">
           <span className="block truncate font-semibold">{album.title}</span>
           <span className="block text-sm text-navy/70">
@@ -50,13 +52,20 @@ export default async function PrioritiesPage({
         </p>
       </div>
 
-      <h1 className="mt-8 font-heading text-4xl leading-tight sm:text-5xl">What matters most to you?</h1>
+      {/* Desktop (UX #5): the cover on the left, the options on the right, as in the design. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={album.coverUrl} alt="" width={288} height={288} className="mt-6 hidden aspect-square w-full rounded-2xl lg:block" />
+      </div>
+      <div>
+      <h1 className="mt-8 lg:mt-3 font-heading text-4xl leading-tight sm:text-5xl">What matters most to you?</h1>
       <p className="mt-2">Pick one or more, in order. We&apos;ll handle the rest.</p>
 
       <PriorityPicker
         albumId={album.id}
         initial={fromAddress}
       />
+      </div>
+      </div>
     </main>
   );
 }

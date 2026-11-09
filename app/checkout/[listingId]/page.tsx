@@ -53,7 +53,7 @@ export default async function CheckoutPage({
   );
 
   return (
-    <main className="mx-auto max-w-5xl px-4 pb-16">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <Link
         href={`/listings/${listingId}?version=${versionId}`}
