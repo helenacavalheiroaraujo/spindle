@@ -111,6 +111,9 @@ test("signed in: a red listing never reaches the checkout; the same listing unde
 });
 
 async function fillAddress(page: Page) {
+  // Typing before React has taken over the page loses the text (the Pay button stays off): wait until the form is hydrated.
+  const first = await page.getByLabel("Name").elementHandle();
+  await page.waitForFunction((el) => !!el && Object.keys(el).some((k) => k.startsWith("__reactProps")), first);
   await page.getByLabel("Name").fill("Rui Costa");
   await page.getByLabel("Street").fill("Rua do Almada 120");
   await page.getByLabel("Postcode").fill("4050-031");
