@@ -82,11 +82,15 @@ test("find an album and pick one version, even when nobody sells it", async ({ p
   await logIn(page);
   await expect(page).toHaveURL("/sell"); // the log-in page has a header search on desktop too: wait for the sell page
   await typeSearch(page, "homo");
-  const row = page.getByRole("link", { name: /Homogenic/ });
+  const row = page.getByRole("list", { name: "Search results" }).getByRole("link", { name: /Homogenic/ });
   await expect(row).toContainText("2 versions");
+  // Story 16: the box under the sell search opens the album's versions, with no "See all" line.
+  const suggestion = page.getByRole("list", { name: "Suggestions" }).getByRole("link", { name: /Homogenic/ });
+  await expect(suggestion).toHaveAttribute("href", `/sell/albums/${HOMOGENIC}`);
+  await expect(page.getByRole("link", { name: /See all results/ })).toHaveCount(0);
   await expect(row).not.toContainText("No listings");
   await screenshot(page, 8, "sell-search");
-  await row.click();
+  await suggestion.click();
 
   await expect(page).toHaveURL(`/sell/albums/${HOMOGENIC}`);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Which one do you have?");

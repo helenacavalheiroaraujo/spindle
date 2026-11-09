@@ -9,6 +9,7 @@ import type { AlbumSummary } from "@/lib/db/albums";
 import { MIN_SEARCH_LENGTH, normalize } from "@/lib/rules/albumSearch";
 import { LoadingMask } from "@/components/LoadingMask";
 import { ErrorScreen } from "@/components/ErrorScreen";
+import { SuggestionList, useSuggestions } from "@/components/SuggestionBox";
 
 type State =
   | { kind: "idle" }
@@ -23,6 +24,7 @@ export function AlbumSearch() {
   const [state, setState] = useState<State>({ kind: "idle" });
   const [attempt, setAttempt] = useState(0);
   const tooShort = normalize(typed).length < MIN_SEARCH_LENGTH;
+  const box = useSuggestions(typed, "sell");
 
   useEffect(() => {
     if (tooShort) return setState({ kind: "idle" });
@@ -43,6 +45,7 @@ export function AlbumSearch() {
 
   return (
     <section className="mt-6">
+      <div ref={box.wrapperRef} className="relative">
       <label className="flex min-h-14 items-center gap-3 rounded-full border border-navy/30 bg-white/70 px-5 focus-within:border-navy">
         <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="11" cy="11" r="7" />
@@ -52,12 +55,18 @@ export function AlbumSearch() {
         <input
           type="search"
           value={typed}
-          onChange={(e) => setTyped(e.target.value)}
+          onChange={(e) => {
+            setTyped(e.target.value);
+            box.onTyped();
+          }}
+          {...box.inputProps}
           placeholder="Album or artist"
           autoComplete="off"
           className="w-full bg-transparent text-lg outline-none placeholder:text-navy/50"
         />
       </label>
+      <SuggestionList {...box.list} />
+      </div>
 
       <div className={`relative mt-6 ${state.kind === "idle" ? "" : "min-h-40"}`}>
         {state.kind === "loading" && <LoadingMask label="Searching…" />}

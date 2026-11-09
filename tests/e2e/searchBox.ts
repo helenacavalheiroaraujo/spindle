@@ -10,3 +10,11 @@ export async function typeSearch(page: Page, text: string) {
   await box.fill(text);
   await box.press("Enter");
 }
+
+// Types without pressing Enter, to look at the suggestion box (story 16).
+export async function typeOnly(page: Page, text: string) {
+  const box = page.getByRole("searchbox", { name: "Album or artist" });
+  const handle = await box.elementHandle();
+  await page.waitForFunction((el) => !!el && Object.keys(el).some((k) => k.startsWith("__reactProps")), handle);
+  await box.fill(text);
+}

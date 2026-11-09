@@ -4,16 +4,18 @@
 // (story 8 · finding #36).
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { SuggestionList, useSuggestions } from "./SuggestionBox";
 
 export function HeaderSearch() {
   const router = useRouter();
   const onSellPage = usePathname().startsWith("/sell");
   const [typed, setTyped] = useState(useSearchParams().get("q") ?? "");
+  const box = useSuggestions(typed, "buy");
   if (onSellPage) return null;
   return (
+    <div ref={box.wrapperRef} className="relative hidden min-w-0 flex-1 lg:block">
     <form
       role="search"
-      className="hidden min-w-0 flex-1 lg:block"
       onSubmit={(e) => {
         e.preventDefault();
         router.push(`/search?q=${encodeURIComponent(typed.trim())}`);
@@ -24,7 +26,11 @@ export function HeaderSearch() {
         <input
           type="search"
           value={typed}
-          onChange={(e) => setTyped(e.target.value)}
+          onChange={(e) => {
+            setTyped(e.target.value);
+            box.onTyped();
+          }}
+          {...box.inputProps}
           placeholder="Which record are you after?"
           autoComplete="off"
           className="w-full min-w-0 bg-transparent outline-none placeholder:text-navy/50"
@@ -34,5 +40,7 @@ export function HeaderSearch() {
         </button>
       </label>
     </form>
+    <SuggestionList {...box.list} />
+    </div>
   );
 }

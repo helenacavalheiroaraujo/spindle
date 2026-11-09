@@ -3,14 +3,16 @@
 // On desktop the search lives in the header (HeaderSearch), so this one is hidden there.
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { SuggestionList, useSuggestions } from "./SuggestionBox";
 
 export function SearchBox({ initial = "" }: { initial?: string }) {
   const router = useRouter();
   const [typed, setTyped] = useState(initial);
+  const box = useSuggestions(typed, "buy");
   return (
+    <div ref={box.wrapperRef} className="relative lg:hidden">
     <form
       role="search"
-      className="lg:hidden"
       onSubmit={(e) => {
         e.preventDefault();
         router.push(`/search?q=${encodeURIComponent(typed.trim())}`);
@@ -21,7 +23,11 @@ export function SearchBox({ initial = "" }: { initial?: string }) {
         <input
           type="search"
           value={typed}
-          onChange={(e) => setTyped(e.target.value)}
+          onChange={(e) => {
+            setTyped(e.target.value);
+            box.onTyped();
+          }}
+          {...box.inputProps}
           placeholder="Album or artist"
           autoComplete="off"
           className="w-full min-w-0 bg-transparent text-lg outline-none placeholder:text-navy/50"
@@ -31,5 +37,7 @@ export function SearchBox({ initial = "" }: { initial?: string }) {
         </button>
       </label>
     </form>
+    <SuggestionList {...box.list} />
+    </div>
   );
 }

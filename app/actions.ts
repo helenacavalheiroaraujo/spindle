@@ -4,6 +4,7 @@ import { listAlbumSummaries, type AlbumSummary } from "@/lib/db/albums";
 import { crates, featuredAlbum, type Genre } from "@/lib/rules/home";
 import { searchAlbums } from "@/lib/rules/albumSearch";
 import { searchSuggestions } from "@/lib/rules/searchSuggestions";
+import { boxContent, type BoxContent } from "@/lib/rules/suggestionBox";
 import { getVersionListings, type ListingDetails } from "@/lib/db/listings";
 import { currentProfileId } from "@/lib/db/profiles";
 import { saveRanking } from "@/lib/db/preferences";
@@ -16,6 +17,11 @@ export async function search(typed: string): Promise<SearchResponse> {
   const all = await listAlbumSummaries();
   const albums = searchAlbums(all, typed);
   return { albums, suggestions: albums.length === 0 ? searchSuggestions(all, typed) : [] };
+}
+
+// Suggestion box under the search box (story 16): the rule picks what the box shows.
+export async function suggest(typed: string): Promise<BoxContent<AlbumSummary>> {
+  return boxContent(await listAlbumSummaries(), typed);
 }
 
 // Listings beside the recommendation on desktop (story 5): loaded on their own, so a failure only
