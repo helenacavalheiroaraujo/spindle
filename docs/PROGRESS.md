@@ -1,24 +1,24 @@
 <!-- page: https://claude.ai/artifact/W2xGvu3nfNcfcuxAv3hYsn -->
 # MVP progress
 
-Updated 2026-11-08 after story 4 · Deadline 15 Nov 2026 · **7 days left**
+Updated 2026-11-09 on request · Deadline 15 Nov 2026 · **6 days left**
 
 ## Summary
 - **Stories:** 11 of 13 MVP stories built (8 with gaps), 0 in progress, 2 not started (15 and 16, only if time is left). Story 9 "reviews" is not built and has no story text yet
-- **Tests:** unit 369/369 · end-to-end 191/196 (5 skipped: 4 desktop-only tests on the phone run, and the failed-upload test, which WebKit cannot run) — all pass in a run with 1 worker
+- **Tests:** unit 369/369 · end-to-end 191/196 in the last clean run (5 skipped: 4 desktop-only tests on the phone run, and the failed-upload test, which WebKit cannot run). The runs of this report were not all clean: of the last two full runs after restarting the dev server, one passed 191 and one had 5 time-outs (30 s) on the phone in unrelated tests; those 27 tests pass when run alone. Earlier today, left-over test data in the database (1 test user, 1 listing) also broke tests; it was removed
 - **Demo:** every step from the home page, through the search results page and the comparison, to the order confirmation, and selling, is covered by a passing test; the whole path in one go has not been run as one test or rehearsed
 - **Next:** story 9 (reviews) has no story text, no criteria and no design, so it cannot start; stories 16 and 15 are "only if time is left". The brief items (demo script, submission PDF, manual test run, push and online check) come first by impact on the grade
-- **Risk:** 7 days for the demo script, the submission PDF, the 16 manual checks, the open UX findings and the online check. What is left in phase 4 (story 9 reviews) and stories 16 and 15 are the first things to cut. While the story 4 tests were run, the machine was heavily loaded and 2 workers gave random time-out failures in unrelated tests; with 1 worker everything passed
+- **Risk:** 6 days for the demo script, the submission PDF, the 16 manual checks, the open UX findings and the online check. What is left in phase 4 (story 9 reviews) and stories 16 and 15 are the first things to cut. The end-to-end suite is intermittently slow on the phone (time-outs in unrelated tests, one full run in two); it needs a look before the demo
 
 ## Against the brief
 | Criterion | Status | Evidence / what is missing |
 |---|---|---|
 | 1 · Core features work end to end | Partly | Home page → search results page (story 17) or crate → priorities → recommendation → compare (story 4) → listings → checkout → confirmation, selling (story 8) and "save to account" (story 2) built and tested; not rehearsed as one path |
 | 2 · Data tables | Done | `0001_core.sql` to `0006_genres.sql` committed and described in `docs/database.md`; story 4 needed no new table |
-| 3 · Testing, automated and manual | Partly | Automated: 369 unit and 191 end-to-end, all pass with 1 worker. Manual: the record exists (`docs/manual-tests.md`, 16 checks) but every check still says "Not run" |
+| 3 · Testing, automated and manual | Partly | Automated: 369 unit pass; 191 end-to-end pass in a clean run, but not in every run (see Summary). Manual: the record exists (`docs/manual-tests.md`, 16 checks) but every check still says "Not run" |
 | 4 · LLM good practices in the repo | Done | SPEC.md, `specs/`, CLAUDE.md, ARCHITECTURE.md, DECISIONS.md, `docs/AI_USAGE.md`, tests committed |
 | 5 · UX and UI quality | Partly | UX review register: 17 open (all Low, none High or Blocker), 6 resolved (1 Blocker, 4 High, 1 Low). The story 4 screens (comparison and version page) and story 17 results page were not part of the last review |
-| 6 · App online and reachable | Not checked | The Vercel address is not in the repo, so the page was not opened. 5 commits are not pushed (`git log origin/main..main`), plus story 4 once committed |
+| 6 · App online and reachable | Not checked | The Vercel address is not in the repo, so the page was not opened. all commits are pushed (`origin/main` = `main` since 2026-11-09) |
 | 7 · Live demo | Missing | No demo script in the repo; not rehearsed |
 | S1 · Link to the app | Not checked | Same as criterion 6 |
 | S2 · PDF with tables and screenshots | Partly | `docs/database.md` exists; screenshots in `docs/screenshots/` for stories 2, 4, 7, 8, 9, 12 and 17 only; none for stories 1, 3, 5, 6; no PDF for this submission yet (`docs/design/Spindle_mockups_by_section.pdf` is Assignment 1) |
@@ -27,7 +27,7 @@ Updated 2026-11-08 after story 4 · Deadline 15 Nov 2026 · **7 days left**
 1. Demo script and one rehearsal of the whole path, including selling, with realistic data (criterion 7)
 2. Submission PDF: data tables and screenshots of every screen, including stories 1, 3, 5, 6 (S2)
 3. Run the 16 manual checks in `docs/manual-tests.md` and fill in the results (criterion 3)
-4. Push, give me the Vercel address and confirm it runs the latest version (criterion 6, S1)
+4. Give me the Vercel address and confirm it runs the latest version; everything is pushed (criterion 6, S1)
 5. UX review of the story 4, 8, 12 and 17 screens and decide the 17 open Low findings (criterion 5)
 6. Phase 4: story 9 reviews (needs story text and a design first) and stories 16 and 15: cut
 
