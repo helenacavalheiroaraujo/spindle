@@ -70,7 +70,8 @@ export function AlbumSearch() {
   );
 }
 
-export type RowProps = { mode: Mode; onNobodySelling: (a: AlbumSummary) => void };
+// noListingsHref: where an album with no listings goes (the genre screen, bug 17). Without it, the row shows the card in place.
+export type RowProps = { mode: Mode; onNobodySelling: (a: AlbumSummary) => void; noListingsHref?: (id: string) => string };
 
 // Sell rows never reach the "Nobody is selling" branch of AlbumRow, so there is nothing to call.
 const ignore = () => {};
@@ -110,7 +111,7 @@ function Results({ response }: { response: SearchResponse }) {
   return <p className="font-medium">No albums found</p>;
 }
 
-export function AlbumRow({ album, mode, onNobodySelling }: RowProps & { album: AlbumSummary }) {
+export function AlbumRow({ album, mode, onNobodySelling, noListingsHref }: RowProps & { album: AlbumSummary }) {
   const content = (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -146,6 +147,12 @@ export function AlbumRow({ album, mode, onNobodySelling }: RowProps & { album: A
       </Link>
     );
   if (album.access === "not_in_demo") return <div className={rowClass}>{content}</div>;
+  if (noListingsHref)
+    return (
+      <Link href={noListingsHref(album.id)} className={rowClass}>
+        {content}
+      </Link>
+    );
   return (
     <button type="button" onClick={() => onNobodySelling(album)} className={rowClass}>
       {content}

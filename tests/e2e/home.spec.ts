@@ -42,9 +42,13 @@ test("a crate opens the genre screen: only that genre's albums, newest first, ro
   await expect(page.getByText("Homogenic")).toHaveCount(0);
   await screenshot(page, 12, "genre-rock");
 
-  // Same taps as story 1: no listings → message; opens → priorities; not in the demo → does nothing.
-  await rows.nth(0).getByRole("button").click();
-  await expect(page.getByText("Nobody is selling this album right now")).toBeVisible();
+  // Genre taps: no listings → its own page with the message (bug 17); opens → priorities; not in the demo → does nothing.
+  await rows.nth(0).getByRole("link").click();
+  await expect(page).toHaveURL(/\/albums\/[0-9a-f-]+$/);
+  await expect(page.getByRole("heading", { level: 2, name: "Nobody is selling this album right now" })).toBeVisible();
+  await screenshot(page, 17, "album-no-listings");
+  await page.goBack();
+  await expect(page).toHaveURL("/genres/rock");
   await rows.nth(2).getByRole("link").click();
   await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001\/priorities$/);
 });
@@ -62,8 +66,8 @@ test("showcase genres (Jazz, Fado, Hip-hop) open their album with 'No listings';
     await page.goto(`/genres/${slug}`);
     const row = page.getByRole("listitem").filter({ hasText: album });
     await expect(row).toContainText("No listings");
-    await row.getByRole("button").click();
-    await expect(page.getByText("Nobody is selling this album right now")).toBeVisible();
+    await row.getByRole("link").click();
+    await expect(page.getByRole("heading", { level: 2, name: "Nobody is selling this album right now" })).toBeVisible();
   }
   await page.goto("/genres/polka");
   await expect(page.getByText("This page could not be found.")).toBeVisible();

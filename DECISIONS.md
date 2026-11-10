@@ -3,6 +3,14 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Bug 17: an album with no listings has its own page (genre screen)
+
+### Tapping an album with no listings on the genre screen opens its own page
+- **Decision:** on the genre screen, an album with no listings opens its own page (`/albums/[id]`), which says "Nobody is selling this album right now" and "Check back later, or browse other albums in this genre." The dark card above the results no longer appears on the genre screen. The search results and the home box keep the card (#44).
+- **Replaces**, on the genre screen only: decision #44 and the story 12 wording "the message here".
+- **Why:** bug 17 — tapping an album on the genre screen did nothing.
+- **Choices by the AI:** the second sentence; the page shows the cover, title, artist and year; an album that opens goes to its priorities screen; an album not in the demo has no page. The design was approved on 2026-11-10 (`docs/design/album-no-listings.html`).
+
 ## 2026-11-10 — Recommendation screen, desktop: option C
 
 ### Recommendation screen, desktop: option C (replaces option A's two columns)

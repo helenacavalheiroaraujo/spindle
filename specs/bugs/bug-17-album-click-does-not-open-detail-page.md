@@ -1,6 +1,6 @@
 # Bug 17 · Clicking an album does not open its detail page
 
-> Found in manual testing · 2026-11-10. Status: open.
+> Found in manual testing · 2026-11-10. Status: fixed 2026-11-10 on the genre screen (DECISIONS 2026-11-10, bug 17). The search results and the home box keep the card in place (#44).
 
 ## Description
 In a music category, when the list of records appears, clicking a record should open the record's detail page. The page should say "Nobody is selling this album right now."
