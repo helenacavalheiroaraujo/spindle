@@ -121,3 +121,19 @@ test("fair price bar and Compare pressings: under the listings on desktop; Compa
   await expect(beside.getByRole("link", { name: "Compare pressings" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Compare pressings" })).toHaveCount(1); // not twice
 });
+
+// Design option C (desktop): a large cover anchors the left; the reasons and the listings read down one column on the right.
+test("desktop layout C: large cover on the left; reasons, then listings, in one column on the right", async ({ page, isMobile }) => {
+  test.skip(isMobile, "Option C is the desktop layout; the phone keeps its single column.");
+  await page.goto(url("price,sound"));
+  const cover = page.locator('img[width="400"]');
+  const reasonList = page.getByRole("list", { name: "Why this one" });
+  const beside = page.getByRole("complementary", { name: "Verified listings for this version" });
+  await expect(beside).toBeVisible();
+  const [c, r, l] = await Promise.all([cover.boundingBox(), reasonList.boundingBox(), beside.boundingBox()]);
+  expect(c!.width).toBeGreaterThanOrEqual(380); // a large cover
+  expect(r!.x).toBeGreaterThan(c!.x + c!.width); // reasons to the right of the cover
+  expect(Math.abs(l!.x - r!.x)).toBeLessThan(2); // same column
+  expect(l!.y).toBeGreaterThan(r!.y + r!.height); // listings under the reasons
+  await expect(page.getByRole("link", { name: "Back", exact: false })).toHaveCount(0); // no back button (bug 16)
+});

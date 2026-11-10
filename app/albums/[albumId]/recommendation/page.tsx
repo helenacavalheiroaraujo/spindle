@@ -66,22 +66,31 @@ export default async function RecommendationPage({
   return (
     <main className="px-4 pb-16 page-main">
       <Header />
-      <div className="lg:grid lg:grid-cols-2 lg:gap-12">
-        <div>
-          <div className="flex justify-end">
+      {/* Desktop (design option C): a large cover anchors the left; the whole decision reads down the right. */}
+      <div className="lg:grid lg:grid-cols-[25rem_minmax(0,1fr)] lg:gap-14">
+        <div className="lg:sticky lg:top-6 lg:self-start">
+          <div className="flex justify-end lg:justify-start">
             <span className="rounded-full border border-navy/30 px-3 py-1 text-xs">Illustrative data</span>
           </div>
 
-          <div className="mt-6 flex items-center gap-4">
+          <div className="mt-6 flex items-center gap-4 lg:block">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={album.coverUrl} alt="" width={96} height={96} className="h-24 w-24 shrink-0 rounded-lg" />
-            <p className="text-sm">
-              <span className="block font-semibold">{album.title}</span>
-              <span className="text-navy/70">{album.artist}, {album.releaseYear}</span>
+            <img
+              src={album.coverUrl}
+              alt=""
+              width={400}
+              height={400}
+              className="h-24 w-24 shrink-0 rounded-lg lg:h-auto lg:w-full lg:rounded-2xl"
+            />
+            <p className="text-sm lg:mt-4">
+              <span className="block font-semibold lg:font-heading lg:text-3xl lg:leading-tight">{album.title}</span>
+              <span className="text-navy/70 lg:text-base">{album.artist}, {album.releaseYear}</span>
             </p>
           </div>
+        </div>
 
-          <p className="mt-6 text-sm font-semibold uppercase tracking-wide text-navy/70">Get this one</p>
+        <div className="flex flex-col lg:max-w-[40rem]">
+          <p className="mt-6 text-sm font-semibold uppercase tracking-wide text-navy/70 lg:mt-0">Get this one</p>
           <h1 className="font-heading text-4xl leading-tight sm:text-5xl">
             <GlossaryText text={version.name} terms={glossary} />
           </h1>
@@ -139,6 +148,20 @@ export default async function RecommendationPage({
             </p>
           )}
 
+          {/* Desktop: "Based on … Change" sits under the reasons, before the listings. */}
+          {basedOn()}
+
+          {/* Desktop: the listings, the fair price and Compare pressings continue the same column (story 3 · Scope, finding #21). */}
+          <div className="lg:mt-8">
+            <ListingsBeside
+              versionId={version.id}
+              ranking={ranking}
+              typicalRange={{ min: version.typicalMin, max: version.typicalMax }}
+              compareHref={canCompare ? compareHref : null}
+              priceBar
+            />
+          </div>
+
           {version.tracks.length > 0 && (
           <details className="mt-6 rounded-2xl border border-line">
             <summary className="flex min-h-12 cursor-pointer items-center px-4 font-semibold">
@@ -173,25 +196,22 @@ export default async function RecommendationPage({
                 Compare pressings
               </Link>
             )}
-            <p className="flex flex-wrap items-center justify-center gap-x-2 text-sm">
-              <span>Based on: {ranking.map((p) => LABEL[p]).join(", ")}</span>
-              <span aria-hidden>·</span>
-              <Link href={changeHref} className="inline-flex min-h-12 items-center font-semibold underline">
-                Change
-              </Link>
-            </p>
           </div>
         </div>
-
-        {/* Desktop: the listings sit beside the recommendation (story 3 · Scope, finding #21). */}
-        <ListingsBeside
-          versionId={version.id}
-          ranking={ranking}
-          typicalRange={{ min: version.typicalMin, max: version.typicalMax }}
-          compareHref={canCompare ? compareHref : null}
-          priceBar
-        />
       </div>
     </main>
   );
+
+  // The ranking in use and the way to change it. One element: under the reasons on desktop, last on phone (CSS order).
+  function basedOn() {
+    return (
+      <p className="order-last mt-4 flex flex-wrap items-center justify-center gap-x-2 text-sm lg:order-none lg:justify-start">
+        <span>Based on: {ranking.map((p) => LABEL[p]).join(", ")}</span>
+        <span aria-hidden>·</span>
+        <Link href={changeHref} className="inline-flex min-h-12 items-center font-semibold underline">
+          Change
+        </Link>
+      </p>
+    );
+  }
 }

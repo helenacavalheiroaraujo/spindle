@@ -3,6 +3,15 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Recommendation screen, desktop: option C
+
+### Recommendation screen, desktop: option C (replaces option A's two columns)
+- **Decision:** on desktop (from 1024 px) a large cover (25 rem) with the album title and artist sits on the left and stays in view; everything else reads down one column on the right (max 40 rem): "Get this one", the recommended version, the reasons, "Based on … · Change", then the listings with the fair price bar and "Compare pressings". The phone is unchanged. No back button on either size (bug 16).
+- **Why:** the two columns of option A were out of balance (a short left column against a long list of listings on the right). Design: `docs/design/recommendation-balance-options.html`, option C.
+- **Replaces:** the "listings beside the recommendation" placement on desktop (story 3 · Scope, finding #21); the listings still load on their own with their own loading mask and error screen.
+- **Choices by the AI:** "Based on … · Change" moves under the reasons on desktop (it stays last on the phone); the cover is 25 rem wide; the "Illustrative data" label stays at the top of the left column.
+- **Not decided:** the navigation flow between the album, the priorities and the recommendation.
+
 ## 2026-11-10 — Type weights and recommendation screen
 
 ### Type weights: headings semibold, running text regular
