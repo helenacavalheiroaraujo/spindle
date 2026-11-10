@@ -26,7 +26,7 @@ test("recommended version's listings: own screen on phone, beside the recommenda
     // A listing opened from beside the recommendation goes back to the recommendation.
     await page.getByRole("link", { name: /^Open €36/ }).click();
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Is it really this one?");
-    await page.getByRole("link", { name: "Back to the recommendation" }).click();
+    await page.goBack(); // bug 16: no back button on the check screen; browser Back is used
     await expect(page).toHaveURL(`/albums/${ZIGGY_ID}/recommendation?priorities=price,sound`);
   }
 });

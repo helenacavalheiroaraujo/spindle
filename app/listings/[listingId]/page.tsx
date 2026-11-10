@@ -53,34 +53,16 @@ export default async function ListingCheckPage({
   const versionName = versionId === l.actualVersionId ? l.actualVersionName : l.claimedVersionName;
   const ranking = parsePriorities(one(query.priorities));
   const prioritiesQuery = ranking.length ? `?priorities=${formatPriorities(ranking)}` : "";
-  // Opened beside the recommendation (desktop) → back there; opened from the phone list → back to the list.
-  const fromRecommendation = one(query.from) === "recommendation";
-  const backHref = fromRecommendation
-    ? ranking.length
-      ? `/albums/${l.albumId}/recommendation${prioritiesQuery}`
-      : `/albums/${l.albumId}/priorities`
-    : `/versions/${versionId}/listings${prioritiesQuery}`;
   const notice = listingNotice(one(query.notice));
   const label = `${formatPrice(l.price)}, ${l.condition.name}, ${sellerText(l.seller)}`;
 
   return (
     <main className="px-4 pb-16 page-main">
       <Header />
-      <div className="flex items-center gap-3">
-        <Link
-          href={backHref}
-          aria-label={fromRecommendation ? "Back to the recommendation" : "Back to the listings"}
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-navy/30"
-        >
-          <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="m15 18-6-6 6-6" />
-          </svg>
-        </Link>
-        <p className="text-sm">
-          <span className="block font-semibold">{versionName}</span>
-          <span className="text-navy/70">{l.albumTitle}, {l.artist}</span>
-        </p>
-      </div>
+      <p className="text-sm">
+        <span className="block font-semibold">{versionName}</span>
+        <span className="text-navy/70">{l.albumTitle}, {l.artist}</span>
+      </p>
 
       <h1 className="mt-6 font-heading text-4xl leading-tight">Is it really this one?</h1>
       {notice && (

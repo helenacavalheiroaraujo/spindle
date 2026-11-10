@@ -10,12 +10,13 @@ const RED_29 = "40000000-0000-0000-0000-000000000008"; // claimed 2012 Remaster,
 const checklist = (page: Page) => page.getByRole("list", { name: "Checklist" }).getByRole("listitem");
 const result = (page: Page) => page.getByRole("region", { name: "Result" });
 
-test("tapping a listing opens its check screen; Back returns to the list", async ({ page }) => {
+test("tapping a listing opens its check screen; browser Back returns to the list", async ({ page }) => {
   await page.goto(`/versions/${V2012}/listings?priorities=price,sound`);
   await page.getByRole("link", { name: /^Open €36/ }).click();
   await expect(page).toHaveURL(/\/listings\/40000000-0000-0000-0000-000000000006\?version=.*priorities=price,sound/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Is it really this one?");
-  await page.getByRole("link", { name: "Back to the listings" }).click();
+  await expect(page.getByRole("link", { name: /^Back to the/ })).toHaveCount(0); // bug 16: no back button on the screen
+  await page.goBack();
   await expect(page).toHaveURL(`/versions/${V2012}/listings?priorities=price,sound`);
 });
 
