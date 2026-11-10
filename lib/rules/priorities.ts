@@ -43,3 +43,10 @@ export function parsePriorities(value: string | null | undefined): Priority[] {
 export function formatPriorities(ranking: Priority[]): string {
   return ranking.join(",");
 }
+
+// Account page (story 23): the saved ranking as numbered lines, in saved order.
+// Nothing is listed when no ranking is saved, so the section is hidden.
+export function accountPriorityLines(ranking: Priority[] | null): { rank: number; label: string }[] {
+  if (!ranking || ranking.length === 0) return [];
+  return ranking.map((id, i) => ({ rank: i + 1, label: PRIORITIES.find((p) => p.id === id)!.label }));
+}

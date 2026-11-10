@@ -58,6 +58,7 @@ In build order. Each story has its own file in `specs/stories/` (bugs are in `sp
 | Story 20 · Cart | [`specs/stories/story-20-cart.md`](specs/stories/story-20-cart.md) |
 | Story 21 · Album details without listings | [`specs/stories/story-21-album-details.md`](specs/stories/story-21-album-details.md) |
 | Story 22 · Navy header (desktop) | [`specs/stories/story-22-navy-header.md`](specs/stories/story-22-navy-header.md) |
+| Story 23 · Buying priorities on the account page | [`specs/stories/story-23-account-priorities.md`](specs/stories/story-23-account-priorities.md) |
 
 ---
 
@@ -180,5 +181,9 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 21 | Release date (full date), label and track list from MusicBrainz; the usual track count rule | `lib/rules/albumDetails.ts`, `lib/external/albumDetails.ts`, `app/albums/[albumId]/page.tsx` | `tests/unit/albumDetails.test.ts`, `tests/e2e/albumDetails.spec.ts` |
 | 22 | Desktop: the top row of the header is navy with cream text and icons; the search is in a cream strip under it, on every page except the sell pages | `components/Header.tsx`, `components/HeaderSearch.tsx`, `components/MainMenu.tsx`, `components/CartLink.tsx` | `tests/e2e/navyHeader.spec.ts`, `tests/e2e/menu.spec.ts` |
 | 22 | Phone: the header is unchanged (not navy) | `components/Header.tsx` | `tests/e2e/navyHeader.spec.ts` |
+| 23 | Signed in with a saved ranking: the account page lists "Buying priorities" in saved order, numbered from 1 | `lib/rules/priorities.ts`, `lib/db/preferences.ts`, `app/account/page.tsx` | `tests/unit/accountPriorities.test.ts`, `tests/e2e/accountPriorities.spec.ts` |
+| 23 | Signed in with no saved ranking: the section is not shown | `lib/rules/priorities.ts`, `app/account/page.tsx` | `tests/unit/accountPriorities.test.ts`, `tests/e2e/accountPriorities.spec.ts` |
+| 23 | Signed out: the account page redirects to log in (as today) | `app/account/page.tsx` | Not tested automatically (existing behaviour) |
+| 23 | The section only shows; there is no way to change the ranking from the account page | `app/account/page.tsx` | `tests/e2e/accountPriorities.spec.ts` |
 | 21 | "Source: MusicBrainz · Wikipedia" instead of "Illustrative data"; the message "Nobody is selling this album right now" stays | `app/albums/[albumId]/page.tsx` | `tests/e2e/albumDetails.spec.ts` |
 | 21 | "The details of this album are not available right now." when no source answers | `app/albums/[albumId]/page.tsx` | Not tested automatically (needs the services down) |

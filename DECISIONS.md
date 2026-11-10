@@ -3,6 +3,13 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Story 23: account shows the saved buying priorities
+
+### The account page lists the saved buying priorities, display only
+- **Decision:** the account page lists the signed-in buyer's saved ranking, numbered from 1. It is display only: the ranking is changed on the album's priorities screen (story 2), because that screen belongs to an album and the account has none. The section is hidden when no ranking is saved. Design: `docs/design/account-priorities.html`, approved by the owner.
+- **Why:** the owner chose display only over an editor on the account page.
+- **Chosen by the owner:** display only, no "Change" button.
+
 ## 2026-11-10 — Story 22: navy top row and search strip on desktop (option B)
 
 ### The desktop header is navy in its top row, and the search moves under it

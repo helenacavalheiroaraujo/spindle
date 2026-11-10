@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Account: buying priorities (proposal)</title>
+<!-- Proposal, not approved. Account page with a section for the buyer's saved buying priorities (story 2 · Phase 2: the ranking saved to the account). Shown at 375 px and 1280 px. Texts are proposals. Illustrative data (labelled). -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:-.01em}
+.wrap{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+.cap{font-size:12px;color:#4a5163;margin:0 0 8px;font-weight:600}
+.phone{width:375px;border:1px solid #1d2433;border-radius:28px;overflow:hidden;background:#f4efe6}
+.desk{width:1000px;border:1px solid #1d2433;border-radius:20px;overflow:hidden;background:#f4efe6}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #e2dacb}
+.logo{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em}
+.ini{width:36px;height:36px;border-radius:50%;background:#e9e1cf;display:flex;align-items:center;justify-content:center;font-weight:600}
+main{padding:16px;display:grid;gap:12px}
+h1{font-size:34px;line-height:1} h2{font-size:26px;line-height:1.05}
+.card{background:#faf7f1;border:1px solid #e2dacb;border-radius:14px;padding:14px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.small{font-size:12px;color:#4a5163}
+.pill{border:1.5px solid #1d2433;border-radius:999px;padding:9px 16px;font-weight:600;font-size:13px;background:transparent;white-space:nowrap}
+.pill.navy{background:#1d2433;color:#fff;border-color:#1d2433}
+.rank{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e2dacb;border-radius:999px;padding:8px 14px 8px 8px;margin-top:8px}
+.num{width:30px;height:30px;border-radius:50%;background:#1d2433;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.why{font-size:13px;color:#4a5163}
+.tag{display:inline-block;border:1px solid #e2dacb;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:600;background:#fff}
+.dl{display:grid;gap:14px} .dl div{border-bottom:1px solid #e2dacb;padding-bottom:10px} .dl div:last-child{border:0;padding:0}
+.dl dt{font-size:12px;color:#4a5163} .dl dd{font-weight:600}
+.desk main{grid-template-columns:320px 1fr;padding:24px;gap:20px}
+.deskcol{display:grid;gap:14px;align-content:start}
+</style></head>
+<body>
+<div class="wrap">
+
+  <div>
+    <p class="cap">Phone · 375 px</p>
+    <div class="phone">
+      <div class="top"><span class="logo">SPINDLE</span><span class="ini">H</span></div>
+      <main>
+        <h1 class="hd">Your account</h1>
+        <dl class="card dl">
+          <div><dt>Name</dt><dd>Sample Buyer</dd></div>
+          <div><dt>Email</dt><dd>buyer@example.com</dd></div>
+        </dl>
+
+        <section class="card" aria-label="Buying priorities">
+          <div class="row">
+            <h2 class="hd">Buying priorities</h2>
+          </div>
+          <p class="why">Your order, used for the recommendation when you buy.</p>
+          <ol style="list-style:none;padding:0">
+            <li class="rank"><span class="num">1</span>Sound</li>
+            <li class="rank"><span class="num">2</span>Condition</li>
+            <li class="rank"><span class="num">3</span>Price</li>
+          </ol>
+          <p class="small" style="margin-top:10px">Illustrative data · Saved on your last recommendation</p>
+        </section>
+
+        <button class="pill navy" style="width:100%;padding:13px">Log out</button>
+      </main>
+    </div>
+  </div>
+
+  <div>
+    <p class="cap">Desktop · 1280 px</p>
+    <div class="desk">
+      <div class="top" style="padding:16px 24px"><span class="logo">SPINDLE</span><span class="ini">H</span></div>
+      <main>
+        <div class="deskcol">
+          <h1 class="hd">Your account</h1>
+          <dl class="card dl">
+            <div><dt>Name</dt><dd>Sample Buyer</dd></div>
+            <div><dt>Email</dt><dd>buyer@example.com</dd></div>
+          </dl>
+          <button class="pill navy">Log out</button>
+        </div>
+        <div class="deskcol">
+          <section class="card" aria-label="Buying priorities">
+            <div class="row">
+              <h2 class="hd">Buying priorities</h2>
+              </div>
+            <p class="why">Your order, used for the recommendation when you buy.</p>
+            <ol style="list-style:none;padding:0">
+              <li class="rank"><span class="num">1</span>Sound</li>
+              <li class="rank"><span class="num">2</span>Condition</li>
+              <li class="rank"><span class="num">3</span>Price</li>
+            </ol>
+            <p class="small" style="margin-top:10px">Illustrative data · Saved on your last recommendation</p>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+</div>
+</body></html>
