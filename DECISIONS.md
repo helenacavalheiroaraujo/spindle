@@ -3,6 +3,15 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Album page: details from MusicBrainz and Wikipedia
+
+### The page for an album with no listings shows its details
+- **Decision:** the page `/albums/[id]` for an album with no listings also shows: a short description of the musician (from Wikipedia), the release date (full date), the publisher (label), and the track list (from MusicBrainz). It keeps the message "Nobody is selling this album right now" with the same wording. It does not change the priorities or recommendation screens.
+- **Why:** the buyer asked for more detail on this page.
+- **Sources:** MusicBrainz for the release date, label and tracks; Wikipedia for the musician's description. The page shows "Source: MusicBrainz" and "Source: Wikipedia" instead of "Illustrative data" (this page only).
+- **Replaces:** the approved design `docs/design/album-no-listings.html` for the added fields; a new design must be approved first.
+- **Choices by the AI:** the description is the first 3 sentences of Wikipedia's summary, with a link to the full article; the tracks and date come from the earliest release of the album in MusicBrainz (1959 for Kind of Blue), not from our version names; the data is fetched when the page opens, so no new table or migration; requests name the app generically ("Spindle-MVP"); Wikipedia text is CC BY-SA, so the page links to the article and names the source.
+
 ## 2026-11-10 — Bug 17: an album with no listings has its own page (genre screen)
 
 ### Tapping an album with no listings on the genre screen opens its own page

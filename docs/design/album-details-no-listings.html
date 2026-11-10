@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Album with no listings: details</title>
+<!-- Proposal: the album page with no listings also shows the musician's description, release date, label and track list.
+     Replaces the added fields of docs/design/album-no-listings.html. Shown at 375 px and 1280 px.
+     Example text for the Kind of Blue page. The real text comes from MusicBrainz and Wikipedia. No card or bank details. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:15px;line-height:1.45;padding:24px}
+h1.page{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:34px;text-align:center}
+.sub{text-align:center;color:#4a5163;font-size:14px;margin:4px 0 26px}
+.frames{display:flex;gap:40px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+.frame{border:1px solid #1d2433;border-radius:20px;background:#f4efe6;overflow:hidden}
+.phone{width:375px;padding:20px 16px 32px}
+.desk{width:1040px;padding:28px 32px 36px}
+.label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#4a5163;margin-bottom:14px}
+.cover{background:#8a8f9c;border-radius:16px;color:#fff;font-weight:600;font-size:13px;display:flex;align-items:flex-end;padding:12px}
+.phone .cover{height:220px;margin-top:6px}
+.desk .cover{height:340px;width:340px}
+.title{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:40px;line-height:1.02;margin-top:18px}
+.artist{color:#4a5163;font-size:16px;margin-top:4px}
+.card{background:#f1e6d0;border:1px solid #e2dacb;border-radius:20px;padding:20px;margin-top:22px}
+.card h2{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:26px;line-height:1.1}
+.card p{margin-top:8px;color:#4a5163}
+.facts{margin-top:22px;border:1px solid #e2dacb;border-radius:20px;background:#fbf8f2;padding:4px 20px}
+.facts div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #e2dacb}
+.facts div:last-child{border-bottom:0}
+.facts dt{color:#4a5163}
+.facts dd{font-weight:600;text-align:right}
+h3{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:24px;margin-top:26px}
+.about p{margin-top:8px;color:#1d2433}
+.tracks{margin-top:10px;border:1px solid #e2dacb;border-radius:20px;background:#fbf8f2;padding:6px 20px}
+.tracks li{list-style:none;display:flex;gap:14px;padding:11px 0;border-bottom:1px solid #e2dacb}
+.tracks li:last-child{border-bottom:0}
+.tracks span.n{color:#4a5163;width:22px;font-weight:600}
+.pill{display:inline-block;border:1px solid #e2dacb;border-radius:999px;padding:3px 10px;font-size:12px;color:#4a5163;margin-top:22px}
+.desk .wrap{display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:start}
+.desk .title{margin-top:0}
+.desk .card{margin-top:22px}
+.note{margin-top:18px;font-size:13px;color:#4a5163}
+</style></head><body>
+<h1 class="page">Album with no listings · details added</h1>
+<p class="sub">Same message as before, plus the musician, release date, label and tracks. Sources are named on the page. Example text.</p>
+
+<div class="frames">
+  <section class="frame phone" aria-label="Phone 375 px">
+    <p class="label">Phone · 375 px</p>
+    <div class="cover">Cover</div>
+    <h2 class="title">Kind of Blue</h2>
+    <p class="artist">Miles Davis · 1959</p>
+    <div class="card">
+      <h2>Nobody is selling this album right now</h2>
+      <p>Check back later, or browse other albums in this genre.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Released</dt><dd>17 August 1959</dd></div>
+      <div><dt>Label</dt><dd>Columbia</dd></div>
+    </dl>
+    <div class="about">
+      <h3>About the musician</h3>
+      <p>Miles Davis (1926–1991) was an American jazz trumpeter and bandleader, known for changing the direction of jazz several times.</p>
+    </div>
+    <h3>Track list</h3>
+    <ol class="tracks" style="padding-left:20px">
+      <li><span class="n">1</span>So What</li>
+      <li><span class="n">2</span>Freddie Freeloader</li>
+      <li><span class="n">3</span>Blue in Green</li>
+      <li><span class="n">4</span>All Blues</li>
+      <li><span class="n">5</span>Flamenco Sketches</li>
+    </ol>
+    <span class="pill">Source: MusicBrainz · Wikipedia</span>
+  </section>
+
+  <section class="frame desk" aria-label="Desktop 1280 px">
+    <p class="label">Desktop · 1280 px</p>
+    <div class="wrap">
+      <div><div class="cover">Cover</div></div>
+      <div>
+        <h2 class="title">Kind of Blue</h2>
+        <p class="artist">Miles Davis · 1959</p>
+        <div class="card">
+          <h2>Nobody is selling this album right now</h2>
+          <p>Check back later, or browse other albums in this genre.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>Released</dt><dd>17 August 1959</dd></div>
+          <div><dt>Label</dt><dd>Columbia</dd></div>
+        </dl>
+        <div class="about">
+          <h3>About the musician</h3>
+          <p>Miles Davis (1926–1991) was an American jazz trumpeter and bandleader, known for changing the direction of jazz several times.</p>
+        </div>
+        <h3>Track list</h3>
+        <ol class="tracks" style="padding-left:20px">
+          <li><span class="n">1</span>So What</li>
+          <li><span class="n">2</span>Freddie Freeloader</li>
+          <li><span class="n">3</span>Blue in Green</li>
+          <li><span class="n">4</span>All Blues</li>
+          <li><span class="n">5</span>Flamenco Sketches</li>
+        </ol>
+        <span class="pill">Source: MusicBrainz · Wikipedia</span>
+      </div>
+    </div>
+  </section>
+</div>
+</body></html>
