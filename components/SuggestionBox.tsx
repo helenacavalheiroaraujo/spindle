@@ -122,12 +122,13 @@ export function SuggestionList({
   close,
   retry,
   typed,
-}: ReturnType<typeof useSuggestions>["list"]) {
+  wide = false,
+}: ReturnType<typeof useSuggestions>["list"] & { wide?: boolean }) {
   if (!visible) return null;
   const rowClass = (i: number) =>
     `flex min-h-14 w-full items-center gap-3 border-b border-line px-3.5 py-2 text-left ${highlight === i ? "bg-sand" : ""}`;
   return (
-    <div className="absolute inset-x-0 top-full z-20 mt-2 overflow-hidden rounded-[18px] border border-line bg-white shadow-lg">
+    <div className={`absolute top-full z-20 mt-2 overflow-hidden rounded-[18px] border border-line bg-white shadow-lg ${wide ? "left-0 w-[28rem] max-w-[90vw]" : "inset-x-0"}`}>
       <div className="relative min-h-24">
         {state.kind === "loading" && <LoadingMask label="Searching…" />}
         {state.kind === "error" && (

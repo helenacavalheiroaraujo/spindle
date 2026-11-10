@@ -66,17 +66,28 @@ test("desktop: the menu is in the top row above the search; cells Artists, All g
   await expect(row(page).getByRole("link", { name: "Sell for free" })).toBeVisible();
 });
 
-test("desktop: the header has the same height on every page, with or without the header search", async ({ page }, info) => {
+test("desktop: the search is in the top row between the logo and the menu on every page but the home page, where it has its own row", async ({ page }, info) => {
   desktopOnly(info);
-  const height = async (path: string) => {
+  const header = async (path: string) => {
     await page.goto(path);
-    return Math.round((await page.locator("header").first().boundingBox())!.height);
+    return {
+      height: Math.round((await page.locator("header").first().boundingBox())!.height),
+      logo: await page.getByRole("link", { name: "SPINDLE" }).boundingBox(),
+      search: await page.locator("header").first().getByRole("search").boundingBox().catch(() => null),
+      nav: await row(page).boundingBox(),
+    };
   };
-  const home = await height("/");
-  expect(home).toBeGreaterThan(100);
-  expect(await height("/search?q=bowie")).toBe(home);
-  expect(await height("/login")).toBe(home);
-  expect(await height("/sell/albums/10000000-0000-0000-0000-000000000005")).toBe(home); // no header search on selling pages
+  const home = await header("/");
+  expect(home.search!.y).toBeGreaterThan(home.nav!.y + home.nav!.height - 2); // under the menu
+  const other = await header("/search?q=bowie");
+  expect(other.height).toBeLessThan(home.height); // no second row
+  expect(other.search!.x).toBeGreaterThan(other.logo!.x + other.logo!.width); // between the logo ...
+  expect(other.search!.x + other.search!.width).toBeLessThan(other.nav!.x); // ... and the menu
+  expect(Math.abs(other.search!.y - other.logo!.y)).toBeLessThan(40); // in the same row
+  expect(other.search!.width).toBeGreaterThan(180); // narrowed, not squeezed away
+  expect((await header("/login")).height).toBe(other.height);
+  await page.goto("/search?q=bowie");
+  await screenshot(page, 19, "header-search-top");
 });
 
 test("desktop: the chevron opens a box by hover, click and Enter; Esc and a click outside close it", async ({ page }, info) => {

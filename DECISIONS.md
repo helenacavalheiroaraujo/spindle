@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Story 19: the search moves to the top row on every page but the home page
+- **Decision:** on desktop, from 1280 px, the search sits in the top row between the logo and the menu on every page except the home page; only the home page keeps the search in its own row under it. Under 1280 px the search keeps its own row on every page. On the sell pages there is still no header search.
+- **Why:** the Product Owner asked for it after seeing the recommendation page: the second row took vertical space on every page.
+- **Replaces in story 19** (built, so its file does not change): "the search full width below" and "same header height on every page". The header is now 56 px high on every page but the home page.
+- **Choices made while building (not in the Product Owner's words):** in the top row the Search button is a magnifier icon and the placeholder reads "Search records", because the field is about 225 px wide; the suggestion box is 28 rem wide, wider than the field; under 1280 px the second row stays, because the top row would leave about 80 px for the field at 1024 px.
+
 ## 2026-11-10 — Story 19: menu with chevrons replaces the desktop menu of story 15
 - **Decision:** a new story, because story 15 is built and tested and its file does not change (CLAUDE.md). On desktop the row under the search is replaced by cells with chevrons in the top row; the loose "+ Sell for free" and account badge leave the top-right corner. The phone drawer of story 15 stays and gains chevrons.
 - **Why:** the row under the search box was confusing, and every working item in it already existed elsewhere (logo, Sell button, account badge).

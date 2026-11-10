@@ -3,9 +3,9 @@ import Link from "next/link";
 import { HeaderSearch } from "./HeaderSearch";
 import { MenuDrawer, MenuRow } from "./MainMenu";
 
-// Shared top bar with the Spindle logo (back to the home page). Desktop (story 19): two rows of fixed height, the same
-// on every page. Top row: the logo on the left, the menu (MenuRow) on the right. Second row: the search, full width;
-// on pages without a header search (selling) it stays as empty space so the page does not jump.
+// Shared top bar with the Spindle logo (back to the home page). Desktop (story 19): the top row is 56 px high, with the
+// logo on the left, the menu (MenuRow) on the right and, on every page but the home page, the search between them
+// (as wide as fits). On the home page the search has its own row under it (64 px, full width).
 // Phone: the logo in the middle, the ☰ drawer top left and the account badge (in the layout) top right.
 export function Header() {
   return (
@@ -16,14 +16,15 @@ export function Header() {
           SPINDLE
         </Link>
         <Suspense>
+          <HeaderSearch placement="top" />
+        </Suspense>
+        <Suspense>
           <MenuRow />
         </Suspense>
       </div>
-      <div className="hidden lg:flex lg:h-16 lg:items-center">
-        <Suspense>
-          <HeaderSearch />
-        </Suspense>
-      </div>
+      <Suspense>
+        <HeaderSearch placement="below" />
+      </Suspense>
       <Suspense>
         <MenuDrawer />
       </Suspense>
