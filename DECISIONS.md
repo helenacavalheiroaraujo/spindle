@@ -11,6 +11,13 @@
 - **Why:** bug 17 — tapping an album on the genre screen did nothing.
 - **Choices by the AI:** the second sentence; the page shows the cover, title, artist and year; an album that opens goes to its priorities screen; an album not in the demo has no page. The design was approved on 2026-11-10 (`docs/design/album-no-listings.html`).
 
+## 2026-11-10 — Bug 18: saved priorities keep skipping the screen (not a bug)
+
+### Priorities: a saved ranking is used automatically
+- **Decision:** a signed-in buyer's saved ranking is used for every album, and the priorities screen is skipped. "Change" replaces the ranking. Story 2 phase 2 and the 2026-11-07 decision stand.
+- **Why:** the owner reviewed bug 18 and chose to keep the current behaviour.
+- **Choices by the AI:** none.
+
 ## 2026-11-10 — Recommendation screen, desktop: option C
 
 ### Recommendation screen, desktop: option C (replaces option A's two columns)
