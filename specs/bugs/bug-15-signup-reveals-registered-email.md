@@ -1,6 +1,6 @@
 # Bug 15 · Sign-up reveals which emails are registered
 
-> Found during manual testing · 2026-11-10. Status: partly fixed 2026-11-10: generic message in place; a new email is still signed in at once while email confirmation is off (DECISIONS, accepted risk).
+> Found during manual testing · 2026-11-10. Status: partly fixed 2026-11-10: generic message in place; a new email is still signed in at once while email confirmation is off. The owner accepted this remaining risk on 2026-11-10 (DECISIONS, "Sign-up never says whether an email is registered").
 
 ## Description
 I found a security flaw. On login, with a wrong password or a wrong email, the same message appears ("That email and password don't match. Check them and try again."), so it is not possible to tell which one is incorrect, and that is fine. But when creating an account, the message "This email already has an account" appears, which makes it possible to find out that an email is registered.

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { listAlbumSummaries } from "@/lib/db/albums";
 import { isTooShort, searchAlbums, SHORT_SEARCH_MESSAGE } from "@/lib/rules/albumSearch";
 import { searchSuggestions } from "@/lib/rules/searchSuggestions";
@@ -20,9 +19,6 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
     <main className="px-4 pb-16 page-main page-mid">
       <Header />
       <SearchBox key={typed} initial={typed} />
-      <Link href="/" className="mt-4 inline-flex min-h-12 items-center gap-2 text-sm font-semibold">
-        <span aria-hidden>←</span> Back to home
-      </Link>
 
       {tooShort && (
         <>

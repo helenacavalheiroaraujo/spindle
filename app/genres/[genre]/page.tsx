@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { listAlbumSummaries } from "@/lib/db/albums";
 import { albumsInGenre, genreFromSlug, recordsLabel } from "@/lib/rules/home";
@@ -17,14 +16,6 @@ export default async function GenrePage({ params }: { params: Promise<{ genre: s
   return (
     <main className="px-4 pb-16 page-main">
       <Header />
-      <Link href="/" className="inline-flex items-center gap-3 text-sm font-semibold">
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-navy/30">
-          <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="m15 18-6-6 6-6" />
-          </svg>
-        </span>
-        Back to home
-      </Link>
       <h1 className="sr-only">{genre.name}</h1>
       <div className="mt-3">
         <Crate genre={genre} count={recordsLabel(albums.length)} large />

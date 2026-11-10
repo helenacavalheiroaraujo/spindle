@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Bug 16: no "Back to home" label on any screen
+- **Decision:** the "← Back to home" link is removed from the search results, the sell search and the genre screen. The browser's back arrow is used instead. This supersedes the criterion in story 17 ("← Back to home" returns to the home page) and decision #28 (sell search). The approved design `docs/design/search-results-desktop.html` still shows the label and is not changed.
+- **Why:** the owner's decision for bug 16. The label is not needed, because back and forward are in the browser.
+- **Trade-off accepted:** the results page no longer has a link back to home except the logo in the header.
+- **Links:** bug 16 (`specs/bugs/bug-16-back-home-button-still-shown.md`).
+
 ## 2026-11-10 — Story 14 back in the MVP (process)
 - **Decision:** the desktop footer (story 14) is part of the MVP again. Supersedes "Story 14 outside the MVP" (2026-11-08).
 - **Why:** the owner's decision, 10 Nov 2026.

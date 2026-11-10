@@ -1,6 +1,6 @@
 # Bug 16 · Back button and "Back home" label shown on screens
 
-> Found in manual testing · 2026-11-10. Status: partly fixed 2026-11-10 (not committed yet): the round back button on the listing check screen is removed; the "Back to home" labels on the search, sell and genre pages are kept (SPEC story 17 requires the search one; not yet decided for the others).
+> Found in manual testing · 2026-11-10. Status: fixed 2026-11-10 (not committed yet): the round back button on the listing check screen is removed, and the "Back to home" label is removed from the search, sell and genre pages (DECISIONS 2026-11-10, bug 16).
 
 ## Description
 The back button, with the text "Back home", still appears on the site. It should not appear on any screen.

@@ -76,7 +76,7 @@ test("signed out: Sell in the menu asks to log in, then returns to the sell sear
   await logIn(page);
   await expect(page).toHaveURL("/sell");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Which record are you selling?");
-  await expect(page.getByRole("link", { name: "Back to home" })).toHaveAttribute("href", "/"); // finding #28
+  await expect(page.getByRole("link", { name: "Back to home" })).toHaveCount(0); // bug 16 (was finding #28)
 });
 
 test("find an album and pick one version, even when nobody sells it", async ({ page }) => {

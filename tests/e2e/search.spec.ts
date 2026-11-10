@@ -40,11 +40,9 @@ test("the home page lists no results under the search box", async ({ page }) => 
   await expect(page.getByRole("list", { name: "Search results" })).toHaveCount(0);
 });
 
-test("'← Back to home' returns to the home page", async ({ page }) => {
+test("the results page has no 'Back to home' link (bug 16)", async ({ page }) => {
   await typeSearch(page, "bowie");
-  await page.getByRole("link", { name: "Back to home" }).click();
-  await expect(page).toHaveURL("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Pick a crate");
+  await expect(page.getByRole("link", { name: "Back to home" })).toHaveCount(0);
 });
 
 test("opening the address directly, or reloading, gives the same results with the text in the box", async ({ page }) => {
