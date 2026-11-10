@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recommendation screen, desktop: three small changes to the current layout</title>
+<!-- Desktop (1280 px). The current layout is kept in every option: the same two columns, the same blocks, the same order.
+     Each option changes only a few things. Texts are proposals. Illustrative data. No card or bank details anywhere. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:15px;line-height:1.4;padding:24px}
+h1.page{font-family:'Barlow Condensed',sans-serif;font-size:38px;text-align:center}
+.sub{text-align:center;color:#4a5163;font-size:14px;margin:4px 0 26px}
+.opt{max-width:1280px;margin:0 auto 52px}
+.opt>h2{font-family:'Barlow Condensed',sans-serif;font-size:30px}
+.opt>.why{color:#4a5163;font-size:14px;margin:4px 0 8px;max-width:980px}
+.changes{color:#1d2433;font-size:14px;margin:0 0 14px;padding-left:20px;max-width:980px}
+.screen{border:1px solid #1d2433;border-radius:20px;background:#f4efe6;padding:18px 28px 28px;overflow:hidden}
+.top{display:flex;align-items:center;gap:14px;margin-bottom:18px;font-size:13px;color:#4a5163}
+.logo{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;color:#1d2433}
+.search{flex:0 0 220px;border:1px solid #1d2433;border-radius:999px;padding:7px 14px;background:#fffdf9}
+.grow{flex:1}
+.cta{border:1.5px solid #1d2433;border-radius:999px;padding:8px 16px;font-weight:600;color:#1d2433}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.back{width:40px;height:40px;border:1.5px solid #1d2433;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.tag{border:1px solid #1d2433;border-radius:999px;padding:3px 12px;font-size:12px;color:#1d2433}
+.album{display:flex;gap:14px;align-items:center;margin-bottom:16px}
+.thumb{width:76px;height:76px;border-radius:12px;background:#8a8f9c;flex:none}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#4a5163}
+.h-xl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:64px;line-height:.95}
+.h-l{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:44px;line-height:1}
+.muted{color:#4a5163}
+.meta{font-size:15px;color:#4a5163;margin-top:8px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chip{background:#e6e1d8;border-radius:999px;padding:6px 14px;font-size:14px;color:#1d2433}
+.reasons{list-style:none;padding:0;margin:16px 0 0}
+.reasons li{display:flex;gap:12px;padding:8px 0;font-size:16px}
+.o{flex:none;width:18px;height:18px;border:2.5px solid #1d2433;border-radius:50%;margin-top:3px}
+.tick{flex:none;width:22px;height:22px;border-radius:50%;background:#1d2433;color:#f4efe6;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.dotted{border-bottom:2px dotted #4a5163}
+.src{font-size:13px;color:#4a5163;margin-top:8px}
+.acc{border:1px solid #e2dacb;border-radius:16px;padding:16px 18px;margin-top:18px;font-weight:600;background:rgba(255,255,255,.4)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 26px;border-radius:999px;font-weight:600;font-size:15px}
+.btn.p{background:#1d2433;color:#f4efe6}.btn.g{border:1.5px solid #1d2433;color:#1d2433}.btn.full{width:100%;margin-top:18px}
+.link{font-weight:600;text-decoration:underline;font-size:14px}
+.legend{display:flex;gap:16px;font-size:14px;margin-top:8px}
+.legend span:before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.legend .g:before{background:#3f7a4b}.legend .y:before{background:#c8923a}.legend .r:before{background:#a8403a}
+.listing{display:flex;gap:14px;align-items:flex-start;padding:18px 0;border-top:1px solid #e2dacb;border-bottom:1px solid #e2dacb;margin-top:14px}
+.listing.card{border:1px solid #e2dacb;border-radius:20px;padding:20px;background:rgba(255,255,255,.6)}
+.listing.sand{border:1px solid #e2dacb;border-radius:20px;padding:20px;background:#f1e6d0}
+.disc{width:46px;height:46px;border-radius:50%;background:#1d2433;position:relative;flex:none}
+.disc:after{content:"";position:absolute;inset:18px;border-radius:50%;background:#f4efe6}
+.price{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:32px;line-height:1}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #1d2433;border-radius:999px;padding:2px 11px;font-size:12px;font-weight:600;background:#fffdf9}
+.pill.t{background:#fffdf9;border-color:#e2dacb;font-weight:500}
+.dot{width:9px;height:9px;border-radius:50%;background:#3f7a4b}
+.act{margin-left:auto;text-align:center;flex:none}
+.range{position:relative;height:8px;border-radius:999px;background:#e2dacb;margin:44px 8px 8px}
+.range .band{position:absolute;left:12%;right:12%;top:0;bottom:0;border-radius:999px;background:#c9b896}
+.range .you{position:absolute;top:-6px;width:20px;height:20px;border-radius:50%;background:#1d2433;border:3px solid #f4efe6;margin-left:-10px}
+.range .you i{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-style:normal;font-weight:600;font-size:13px;background:#1d2433;color:#f4efe6;border-radius:999px;padding:1px 9px;white-space:nowrap}
+.ends{display:flex;justify-content:space-between;font-size:13px;color:#4a5163;margin:0 4px}
+.ill{display:inline-block;border:1px solid #e2dacb;border-radius:999px;padding:3px 10px;font-size:12px;color:#4a5163;margin-top:14px}
+.ref{border-style:dashed}
+</style></head><body>
+<h1 class="page">Recommendation screen · desktop · three small changes</h1>
+<p class="sub">The current screen first, then three options. Each keeps the current layout and changes only the listed points. Pick one (or say what to mix). Illustrative data. No card or bank details are shown.</p>
+
+<script>
+const HEAD = `<div class="top"><span class="logo">SPINDLE</span><span class="search">Search records</span><span class="grow"></span><span>Artists</span><span>All genres and formats</span><span>H ⌄</span><span class="cta">Sell for free ⌄</span></div>`;
+const BAR = `<div class="bar"><span class="back">‹</span><span class="tag">Illustrative data</span></div>`;
+const ALBUM = `<div class="album"><div class="thumb"></div><div><b>Let's Dance</b><div class="muted">David Bowie, 1983</div></div></div>`;
+const LEGEND = `<div class="legend"><span class="g">Match</span><span class="y">Check</span><span class="r">No match</span></div><div style="margin-top:6px"><span class="link">▸ What do these mean?</span></div>`;
+const LISTING = (cls) => `<div class="listing ${cls||""}"><div class="disc"></div><div style="flex:1"><div style="display:flex;gap:10px;align-items:center"><span class="price">€19</span><span class="pill t">Typical</span><span class="pill" style="margin-left:auto"><span class="dot"></span>Match</span></div><div class="muted" style="margin-top:4px">Very good (VG+): light signs of wear</div><div class="muted">Private seller, Porto</div><div class="muted">★ 4.4 · 5 reviews</div><div style="margin-top:8px"><span class="link">See the checks</span></div></div><div class="act"><span class="btn p">Buy</span><div style="margin-top:10px"><span class="link">🛒 Add to cart</span></div></div></div>`;
+const BAR_PRICE = `<div class="range"><div class="band"></div><div class="you" style="left:36%"><i>€19</i></div></div><div class="ends"><span>€15</span><span>Typical range for this pressing</span><span>€25</span></div>`;
+const R_OLD = [`A <span class="dotted">first pressing</span> costs €19.`,`The <span class="dotted">first pressing</span>, made in 1983 on the EMI America label.`,`Cut in 1983 from the original tapes: punchy and bright, made for dancing.`].map(t=>`<li><span class="o"></span><span>${t}</span></li>`).join("");
+const R_NEW = [`<b>Price:</b> €19, in the typical range for this pressing.`,`<b>Original:</b> the first pressing, made in 1983 on EMI America.`,`<b>Sound:</b> cut from the original tapes, punchy and bright.`].map(t=>`<li><span class="tick">✓</span><span>${t}</span></li>`).join("");
+const SRC = `<div class="src">Based on 64 collector ratings · Illustrative data</div>`;
+const SRC2 = `<div class="src">Based on 64 collector ratings · Based on: Price, Original, Sound · <span class="link">Change</span></div>`;
+const CHIPS = `<div class="chips"><span class="chip">Matches: price</span><span class="chip">Matches: original</span><span class="chip">Matches: sound</span></div>`;
+const ILL = `<span class="ill">Illustrative data</span>`;
+const sec = (id, title, why, changes, body) => document.write(`<section class="opt"><h2>${title}</h2><p class="why">${why}</p>${changes?`<ul class="changes">${changes.map(c=>`<li>${c}</li>`).join("")}</ul>`:""}<div class="screen ${id==="ref"?"ref":""}">${HEAD}${body}</div></section>`);
+
+// ---------- CURRENT (reference) ----------
+sec("ref","Current screen (reference)","As it is today. What makes it lopsided: the left column is about twice as tall as the right, and two big headings compete.",null,
+`<div class="cols"><div>${BAR}${ALBUM}<div class="eyebrow">Get this one</div><div class="h-xl" style="margin-top:6px">1983 US original</div><div class="meta">1983 · US · EMI America · LP</div><div style="font-weight:600;margin-top:8px">1 for sale · from €19</div>${CHIPS}<ul class="reasons">${R_OLD}</ul>${SRC}<div class="acc">Track list (0)</div><div style="margin-top:18px"><span class="btn g full" style="margin-top:0">Compare pressings</span></div></div>
+<div><div class="h-l" style="margin-top:56px">1 for sale</div>${LEGEND}${LISTING()}<div style="font-weight:600;font-size:18px;margin-top:20px">Typical price for this pressing: €15–€25</div><div class="src">Check results and typical prices are illustrative data</div></div></div>`);
+
+// ---------- A ----------
+sec("A","Option A · Tidy up, and move two blocks to the right column","Smallest change. The two columns keep their places; the right column gets the fair price and the comparison, so both columns end at about the same height.",
+["Removed from the left: the second \"1 for sale\" and the three grey chips (the \"Based on\" line says the same), and the empty \"Track list (0)\" (shown only when there are tracks)",
+ "The three reasons get a tick instead of an empty circle, one reason per theme",
+ "Moved to the right: \"Compare pressings\", and the fair price as a bar under the listing (instead of the text line)"],
+`<div class="cols"><div>${BAR}${ALBUM}<div class="eyebrow">Get this one</div><div class="h-xl" style="margin-top:6px">1983 US original</div><div class="meta">1983 · US · EMI America · LP</div><ul class="reasons" style="margin-top:20px">${R_NEW}</ul>${SRC2}</div>
+<div><div class="h-l" style="margin-top:56px">1 for sale · from €19</div>${LEGEND}${LISTING()}${BAR_PRICE}<div style="margin-top:22px"><span class="btn g full" style="margin-top:0">Compare pressings</span></div>${ILL}</div></div>`);
+
+// ---------- B ----------
+sec("B","Option B · A, plus the two headings made equal and the listing on a sand card","Same as A, with the heading problem fixed too: both columns start on the same line, and the listing gets the light sand card the brief uses for emphasis, so the right side has the same weight as the title.",
+["Everything in option A",
+ "Right column heading becomes a small eyebrow like \"Get this one\": \"For sale · 1 copy, from €19\", on the same line as the left eyebrow",
+ "The title goes from 64 to 52 px so it stops competing with the price",
+ "The listing sits on the light sand card (thin border, rounded), Buy and Add to cart inside it"],
+`<div class="cols"><div>${BAR}${ALBUM}<div class="eyebrow">Get this one</div><div class="h-xl" style="margin-top:6px;font-size:52px">1983 US original</div><div class="meta">1983 · US · EMI America · LP</div><ul class="reasons" style="margin-top:20px">${R_NEW}</ul>${SRC2}</div>
+<div><div style="height:56px"></div><div class="eyebrow" style="margin-top:112px">For sale · 1 copy, from €19</div>${LEGEND}${LISTING("sand")}${BAR_PRICE}<div style="margin-top:22px"><span class="btn g full" style="margin-top:0">Compare pressings</span></div>${ILL}</div></div>`);
+
+// ---------- C ----------
+sec("C","Option C · A, plus the reasons and the listing as two cards of equal weight","Same as A, but the left and right blocks become two cards side by side, each with a thin border: the reasons on the left, the listing on the right. They start on the same line and have the same visual weight.",
+["Everything in option A",
+ "The title and specs stay above on the left; the reasons move into a white card",
+ "The listing and the fair price bar are in a matching white card on the right, starting on the same line as the reasons card",
+ "\"Compare pressings\" sits under the two cards, centred, as the last step"],
+`${BAR}<div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end">
+<div>${ALBUM}<div class="eyebrow">Get this one</div><div class="h-xl" style="margin-top:6px">1983 US original</div><div class="meta">1983 · US · EMI America · LP</div></div>
+<div><div class="eyebrow">For sale · 1 copy, from €19</div>${LEGEND}</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:stretch;margin-top:16px">
+<div class="listing card" style="display:block;margin-top:0"><div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px">Why this pressing</div><ul class="reasons" style="margin-top:6px">${R_NEW}</ul>${SRC2}</div>
+${LISTING("card").replace('class="listing card"','class="listing card" style="margin-top:0;flex-wrap:wrap"').replace(/<\/div>$/,'<div style="flex-basis:100%">'+BAR_PRICE+'</div></div>')}</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:0"><div></div><div style="margin-top:-6px"></div></div>
+<div style="text-align:center;margin-top:22px"><span class="btn g">Compare pressings</span></div><div style="text-align:center">${ILL}</div>`);
+</script>
+</body></html>

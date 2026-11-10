@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { versionListings } from "@/app/actions";
 import type { ListingDetails } from "@/lib/db/listings";
 import type { Priority } from "@/lib/rules/priorities";
@@ -18,10 +19,14 @@ export function ListingsBeside({
   versionId,
   ranking,
   typicalRange,
+  compareHref = null,
+  priceBar = false,
 }: {
   versionId: string;
   ranking: Priority[];
   typicalRange: TypicalRange;
+  compareHref?: string | null; // "Compare pressings" under the listings (recommendation screen, design option A); null = none
+  priceBar?: boolean; // the fair price bar (recommendation screen only)
 }) {
   const [state, setState] = useState<State>({ kind: "loading" });
   const [attempt, setAttempt] = useState(0);
@@ -45,15 +50,23 @@ export function ListingsBeside({
         <ErrorScreen message="We couldn't load the listings. Check your connection." onRetry={() => setAttempt((n) => n + 1)} />
       )}
       {state.kind === "ready" && (
-        <ListingList
-          versionId={versionId}
-          listings={state.listings}
-          typicalRange={typicalRange}
-          ranking={ranking}
-          from="recommendation"
-          Heading="h2"
-          viewerId={state.viewerId}
-        />
+        <>
+          <ListingList
+            versionId={versionId}
+            listings={state.listings}
+            typicalRange={typicalRange}
+            ranking={ranking}
+            from="recommendation"
+            Heading="h2"
+            viewerId={state.viewerId}
+            priceBar={priceBar}
+          />
+          {compareHref && (
+            <Link href={compareHref} className="mt-6 flex min-h-14 items-center justify-center rounded-full border border-navy px-6 text-lg font-semibold">
+              Compare pressings
+            </Link>
+          )}
+        </>
       )}
     </aside>
   );

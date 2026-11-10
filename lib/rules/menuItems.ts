@@ -5,7 +5,8 @@ import { withReturn } from "./login";
 
 export type MenuNote = { title: string; text: string };
 // count: the records in the cart, shown on the Cart cell only (story 20); 0 shows no number.
-export type MenuItem = { label: string; href: string | null; current: boolean; soon: boolean; note: MenuNote; count: number };
+// note: null = a working link with no chevron (Log in, DECISIONS: the chevron box said "Nothing here yet" on a link that works).
+export type MenuItem = { label: string; href: string | null; current: boolean; soon: boolean; note: MenuNote | null; count: number };
 
 const NOTHING_YET: MenuNote = { title: "Nothing here yet", text: "More options will appear here in the future." };
 const COMING_SOON: MenuNote = { title: "Coming soon", text: "This will open more options in the future." };
@@ -21,7 +22,7 @@ export function menuItems(signedIn: boolean, path: string, query = "", cartCount
     { label: "Sell for free", href: "/sell", current: under("/sell"), soon: false, note: NOTHING_YET, count: 0 },
     signedIn
       ? { label: "Your account", href: "/account", current: under("/account") || under("/my-listings"), soon: false, note: NOTHING_YET, count: 0 }
-      : { label: "Log in", href: withReturn("/login", next), current: under("/login") || under("/signup"), soon: false, note: NOTHING_YET, count: 0 },
+      : { label: "Log in", href: withReturn("/login", next), current: under("/login") || under("/signup"), soon: false, note: null, count: 0 },
     { label: "Cart", href: "/cart", current: under("/cart"), soon: false, note: NOTHING_YET, count: cartCount },
     { label: "Artists", href: null, current: false, soon: true, note: COMING_SOON, count: 0 },
     { label: "All genres and formats", href: null, current: false, soon: true, note: COMING_SOON, count: 0 },

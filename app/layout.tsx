@@ -8,7 +8,7 @@ import { getProfileName } from "@/lib/db/profiles";
 import { cartListingIds } from "@/lib/db/cart";
 
 // Headings: bold condensed sans-serif; body: plain readable sans-serif (CLAUDE.md, visual direction).
-const heading = Barlow_Condensed({ subsets: ["latin"], weight: ["700"], variable: "--font-heading" });
+const heading = Barlow_Condensed({ subsets: ["latin"], weight: ["600"], variable: "--font-heading" }); // semibold headings (DECISIONS 2026-11-10, option 2)
 const body = Inter({ subsets: ["latin"], variable: "--font-body" });
 
 export const metadata: Metadata = {

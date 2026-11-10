@@ -44,7 +44,7 @@ Wait for my yes before committing.
 
 ## Visual direction (Assignment 1 designs, `docs/design/`)
 - Warm cream background; dark navy for primary buttons and selected states; light sand cards (with a thin border) for emphasis. Rounded cards with thin borders; pill-shaped buttons and tags.
-- Headings in a bold condensed sans-serif; body text in a plain, readable sans-serif.
+- Headings in a semibold (600) condensed sans-serif; running text in a regular (400) sans-serif. Buttons and links stay semibold; prices and totals stay bold.
 - The traffic light always shows its word (Match / Check / No match), never colour alone; illustrative data is always labelled.
 - Phone first: one column, large tap targets. On desktop, listings sit beside the recommendation.
 

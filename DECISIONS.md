@@ -3,6 +3,23 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Type weights and recommendation screen
+
+### Type weights: headings semibold, running text regular
+- **Decision:** headings in Barlow Condensed at 600 (was 700). Running text in Inter at 400 (was 500 or 600 in many places). Buttons and links keep 600. Prices and totals keep bold.
+- **Why:** the owner found the bold type heavy across the app.
+- **Changes CLAUDE.md:** the visual direction now says "semibold (600) condensed headings; regular (400) running text", not "bold".
+- **Choices by the AI:** the exception for buttons and links (they keep 600); prices and totals stay bold.
+
+### Recommendation screen, desktop: option A, and no back button
+- **Decision:** no back button on the recommendation screen (phone and desktop); "Change" stays. On desktop only: no grey "Matches" tags and no "N for sale · from €X" line on the left (the listings beside it say this); the "Track list" is shown only when there are tracks; the reasons have a tick; the fair price bar and "Compare pressings" sit under the listings in the right column. The "Illustrative data" label stays.
+- **Replaces** two story 3 lines on desktop: the "Matches" tags and the "from €X" count.
+- **Choices by the AI:** the bar runs half a range beyond each end of the typical range, so a price outside it still shows; the bar's wording for screen readers.
+
+### The "Log in" cell has no chevron box
+- **Decision:** "Log in" is a working link, so its menu cell has no chevron and no box. Story 19 asks for a chevron on every cell; this is the one exception.
+- **Why:** the box said "Nothing here yet" on a link that works.
+
 ## 2026-11-10 — Bug round 3: 8, 9, 13
 
 ### The buyer can message the seller from a paid order (bug 8)

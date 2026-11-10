@@ -89,6 +89,7 @@ function Cell({ cell }: { cell: DesktopCell }) {
           <SoonTag />
         </span>
       )}
+      {cell.note && (
       <button
         ref={chevron}
         type="button"
@@ -102,7 +103,8 @@ function Cell({ cell }: { cell: DesktopCell }) {
       >
         <Chevron open={shown} />
       </button>
-      {shown && (
+      )}
+      {shown && cell.note && (
         <div id={boxId} className="absolute right-0 top-full z-30 w-64 pt-2">
           <div className="rounded-2xl border border-line bg-[#fffdf9] p-4 shadow-lg">
             <p className="text-sm font-semibold">{cell.note.title}</p>
@@ -154,18 +156,20 @@ function DrawerRow({ item, open, onToggle, onNavigate }: { item: MenuItem; open:
             <span className="shrink-0 whitespace-nowrap rounded-full border border-line px-2 py-0.5 text-[11px] font-medium text-navy/60">Coming soon</span>
           </span>
         )}
-        <button
-          type="button"
-          aria-label={`More about ${item.label}`}
-          aria-expanded={open}
-          aria-controls={boxId}
-          onClick={onToggle}
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full hover:bg-sand"
-        >
-          <Chevron open={open} />
-        </button>
+        {item.note && (
+          <button
+            type="button"
+            aria-label={`More about ${item.label}`}
+            aria-expanded={open}
+            aria-controls={boxId}
+            onClick={onToggle}
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full hover:bg-sand"
+          >
+            <Chevron open={open} />
+          </button>
+        )}
       </div>
-      {open && (
+      {open && item.note && (
         <div id={boxId} className="mx-3 mb-2 rounded-xl bg-cream p-3 text-[13px] text-navy/70">
           <p className="text-sm font-semibold text-navy">{item.note.title}</p>
           {item.note.text}

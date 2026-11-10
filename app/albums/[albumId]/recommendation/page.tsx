@@ -60,22 +60,15 @@ export default async function RecommendationPage({
   const alternative = result.alternative && byId(result.alternative.versionId);
   const ideal = result.idealUnavailableId && byId(result.idealUnavailableId);
   const count = version.activePrices.length;
+  const compareHref = `/albums/${albumId}/compare?priorities=${formatPriorities(ranking)}`;
+  const canCompare = compareColumns(ranking, versions, 3).length >= 2; // story 4: at least two versions on sale
 
   return (
     <main className="px-4 pb-16 page-main">
       <Header />
       <div className="lg:grid lg:grid-cols-2 lg:gap-12">
         <div>
-          <div className="flex items-center justify-between">
-            <Link
-              href={changeHref}
-              aria-label="Back to priorities"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-navy/30"
-            >
-              <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="m15 18-6-6 6-6" />
-              </svg>
-            </Link>
+          <div className="flex justify-end">
             <span className="rounded-full border border-navy/30 px-3 py-1 text-xs">Illustrative data</span>
           </div>
 
@@ -95,12 +88,12 @@ export default async function RecommendationPage({
           <p className="mt-2 text-navy/80">
             {version.releaseYear} · {version.country} · {version.label} · {version.format}
           </p>
-          <p className="mt-1 font-semibold">
+          <p className="mt-1 font-semibold lg:hidden">
             {count} for sale · from {formatPrice(lowest)}
           </p>
 
           {result.matches.length > 0 && (
-            <ul aria-label="Matches" className="mt-4 flex flex-wrap gap-2">
+            <ul aria-label="Matches" className="mt-4 flex flex-wrap gap-2 lg:hidden">
               {result.matches.map((p) => (
                 <li key={p} className="rounded-full bg-navy/10 px-3 py-1 text-sm font-medium">
                   Matches: {LABEL[p].toLowerCase()}
@@ -112,7 +105,15 @@ export default async function RecommendationPage({
           <ul aria-label="Why this one" className="mt-5 space-y-3">
             {reasons.map((sentence) => (
               <li key={sentence} className="flex gap-3">
-                <span aria-hidden className="mt-1.5 h-3 w-3 shrink-0 rounded-full border-2 border-navy" />
+                {/* Phone: an open circle as before. Desktop (design option A): a tick, so the reasons do not look like tasks. */}
+                <span
+                  aria-hidden
+                  className="mt-1.5 h-3 w-3 shrink-0 rounded-full border-2 border-navy lg:mt-0.5 lg:flex lg:h-[22px] lg:w-[22px] lg:items-center lg:justify-center lg:border-0 lg:bg-navy lg:text-cream"
+                >
+                  <svg viewBox="0 0 24 24" className="hidden h-3.5 w-3.5 lg:block" fill="none" stroke="currentColor" strokeWidth="3">
+                    <path d="m5 12 5 5 9-10" />
+                  </svg>
+                </span>
                 <span><GlossaryText text={sentence} terms={glossary} /></span>
               </li>
             ))}
@@ -138,6 +139,7 @@ export default async function RecommendationPage({
             </p>
           )}
 
+          {version.tracks.length > 0 && (
           <details className="mt-6 rounded-2xl border border-line">
             <summary className="flex min-h-12 cursor-pointer items-center px-4 font-semibold">
               Track list ({version.tracks.length})
@@ -152,6 +154,7 @@ export default async function RecommendationPage({
               ))}
             </ol>
           </details>
+          )}
 
           <div className="mt-8 flex flex-col gap-3">
             {/* Phone: listings open on their own screen (story 5). Desktop: they sit beside this (story 5). */}
@@ -162,10 +165,10 @@ export default async function RecommendationPage({
               See verified listings
             </Link>
             {/* Story 4: only when at least two versions are on sale. */}
-            {compareColumns(ranking, versions, 3).length >= 2 && (
+            {canCompare && (
               <Link
-                href={`/albums/${albumId}/compare?priorities=${formatPriorities(ranking)}`}
-                className="flex min-h-14 items-center justify-center rounded-full border border-navy px-6 text-lg font-semibold"
+                href={compareHref}
+                className="flex min-h-14 items-center justify-center rounded-full border border-navy px-6 text-lg font-semibold lg:hidden"
               >
                 Compare pressings
               </Link>
@@ -185,6 +188,8 @@ export default async function RecommendationPage({
           versionId={version.id}
           ranking={ranking}
           typicalRange={{ min: version.typicalMin, max: version.typicalMax }}
+          compareHref={canCompare ? compareHref : null}
+          priceBar
         />
       </div>
     </main>

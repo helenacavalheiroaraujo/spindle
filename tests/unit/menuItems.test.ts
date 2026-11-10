@@ -47,9 +47,14 @@ describe("menuItems", () => {
 
 describe("every item has a chevron box (story 19)", () => {
   it("working items say 'Nothing here yet'; Artists and All genres and formats say 'Coming soon'", () => {
-    const [home, sell, account, cart, artists, genres] = menuItems(false, "/");
-    for (const item of [home, sell, account, cart]) expect(item.note).toEqual({ title: "Nothing here yet", text: "More options will appear here in the future." });
+    const [home, sell, login, cart, artists, genres] = menuItems(false, "/");
+    for (const item of [home, sell, cart]) expect(item.note).toEqual({ title: "Nothing here yet", text: "More options will appear here in the future." });
     for (const item of [artists, genres]) expect(item.note).toEqual({ title: "Coming soon", text: "This will open more options in the future." });
+    expect(login.label).toBe("Log in");
+    expect(login.note).toBeNull(); // a working link: no chevron box (the box said "Nothing here yet", which was wrong)
+    const [, , account] = menuItems(true, "/");
+    expect(account.label).toBe("Your account");
+    expect(account.note).toEqual({ title: "Nothing here yet", text: "More options will appear here in the future." });
   });
 });
 

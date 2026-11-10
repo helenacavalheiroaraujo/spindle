@@ -4,7 +4,7 @@ import { allRed, listingsForVersion } from "@/lib/rules/listingOrder";
 import { formatPriorities, type Priority } from "@/lib/rules/priorities";
 import { formatPrice } from "@/lib/rules/recommendation";
 import { yellowWarning } from "@/lib/rules/yellowWarning";
-import { priceLabel, type TypicalRange } from "@/lib/rules/fairPrice";
+import { priceBar as barFor, priceLabel, type TypicalRange } from "@/lib/rules/fairPrice";
 import { TrafficLight } from "@/components/TrafficLight";
 import { LightLegendExplained } from "@/components/LightLegendExplained";
 import { BuyButton } from "@/components/BuyButton";
@@ -26,6 +26,7 @@ export function ListingList({
   from,
   Heading,
   viewerId,
+  priceBar = false,
 }: {
   versionId: string;
   listings: ListingDetails[];
@@ -35,6 +36,7 @@ export function ListingList({
   from: "list" | "recommendation";
   Heading: "h1" | "h2";
   viewerId: string | null;
+  priceBar?: boolean; // the fair price bar above the sentence: only next to the recommendation on desktop (design option A)
 }) {
   const rows = listingsForVersion(listings, versionId);
   const forSale = rows.filter((r) => r.light !== "red").length;
@@ -122,6 +124,7 @@ export function ListingList({
         })}
       </ul>
 
+      {priceBar && <FairPriceBar range={typicalRange} lowest={lowestOnSale(rows)} />}
       {typicalRange.min !== null && typicalRange.max !== null && (
         <p className="mt-6 font-semibold">
           Typical price for this pressing: {formatPrice(typicalRange.min)}–{formatPrice(typicalRange.max)}
@@ -145,5 +148,37 @@ function Price({ price, range, big = false }: { price: number; range: TypicalRan
         </span>
       )}
     </p>
+  );
+}
+
+const lowestOnSale = (rows: { listing: { price: number }; light: string }[]): number | null => {
+  const prices = rows.filter((r) => r.light !== "red").map((r) => r.listing.price);
+  return prices.length ? Math.min(...prices) : null;
+};
+
+// Where the lowest price on sale sits against the typical range (design option A, desktop recommendation).
+// The sentence below it still says the range in words.
+function FairPriceBar({ range, lowest }: { range: TypicalRange; lowest: number | null }) {
+  const bar = lowest === null ? null : barFor(lowest, range);
+  if (!bar || range.min === null || range.max === null) return null;
+  return (
+    <div
+      role="img"
+      aria-label={`The lowest price, ${formatPrice(lowest!)}, against the typical range ${formatPrice(range.min)} to ${formatPrice(range.max)}`}
+      className="mt-6 px-3"
+    >
+      <div className="relative mt-8 h-2 rounded-full bg-line">
+        <span className="absolute inset-y-0 rounded-full bg-[#c9b896]" style={{ left: `${bar.bandLeft}%`, width: `${bar.bandRight - bar.bandLeft}%` }} />
+        <span className="absolute -top-1.5 h-5 w-5 -translate-x-1/2 rounded-full border-[3px] border-cream bg-navy" style={{ left: `${bar.marker}%` }}>
+          <span className="absolute bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-navy px-2.5 text-sm font-semibold text-cream">
+            {formatPrice(lowest!)}
+          </span>
+        </span>
+      </div>
+      <div className="relative mt-2 h-5 text-sm text-navy/70">
+        <span className="absolute -translate-x-1/2" style={{ left: `${bar.bandLeft}%` }}>{formatPrice(range.min)}</span>
+        <span className="absolute -translate-x-1/2" style={{ left: `${bar.bandRight}%` }}>{formatPrice(range.max)}</span>
+      </div>
+    </div>
   );
 }

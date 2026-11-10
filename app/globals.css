@@ -20,6 +20,15 @@ body {
   color: var(--color-navy);
 }
 
+/* Type weights (DECISIONS 2026-11-10, option 2): headings semibold (600), running text regular (400).
+   Buttons and links keep their semibold; bold stays for prices and totals (font-bold is not changed). */
+body { font-weight: 400; }
+.font-heading { font-weight: 600; }
+.font-semibold, .font-medium { font-weight: 400; }
+a.font-semibold, a.font-medium, button.font-semibold, button.font-medium, [role="button"].font-semibold, [role="button"].font-medium {
+  font-weight: 600;
+}
+
 /* One page width on desktop (UX #6, #22): header and content share the same left edge on every page.
    Phone and tablet keep the 2xl column. Pages with a narrow body add page-narrow / page-mid / page-form:
    everything under the header becomes a left-aligned column of that width. */
