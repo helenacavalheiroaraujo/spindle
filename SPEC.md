@@ -157,7 +157,8 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 12 | Loading mask and error screen with "Try again" (home sections, genre screen) | `app/HomeSections.tsx`, `app/genres/[genre]/loading.tsx`, `app/genres/[genre]/error.tsx` | Home sections: `tests/e2e/home.spec.ts`, `tests/e2e/loadingScreens.spec.ts`; genre screen: not tested automatically: manual test M10 (`docs/manual-tests.md`) |
 | 1 | Loading mask "Searching…" while the albums load | `app/AlbumSearch.tsx`, `components/LoadingMask.tsx` | `tests/e2e/loadingScreens.spec.ts` |
 | 5 | Listings beside the recommendation (desktop): loading mask, and an error screen with "Try again" that recovers while the recommendation stays | `components/ListingsBeside.tsx`, `components/ErrorScreen.tsx` | `tests/e2e/loadingScreens.spec.ts` |
-| 14 | | | |
+| 14 | Desktop (1280 px and wider): the footer shows at the bottom of every page, after the content; it has the Spindle name, one line and "All catalogue data is illustrative"; no links; on a short page it sits at the bottom of the window | `components/Footer.tsx`, `app/layout.tsx` | `tests/e2e/footer.spec.ts` |
+| 14 | Phone: no footer | `components/Footer.tsx` (hidden below 1280 px) | `tests/e2e/footer.spec.ts` |
 | 15 | | | |
 | 18 | After "Yes, release the money" the order card asks "How was the seller?" (1 to 5 stars); "Send review" stays disabled until a star is chosen; one review per order, only by its buyer once it is "Seller paid" | `supabase/migrations/0007_reviews.sql`, `lib/db/reviews.ts`, `app/account/actions.ts`, `app/account/OrderCard.tsx` | `tests/unit/sellerRating.test.ts`, `tests/e2e/reviews.spec.ts` |
 | 18 | "Not now" closes the question and "Rate this seller" stays on the delivered order; after "Send review" it does not come back | `lib/rules/sellerRating.ts`, `app/account/OrderCard.tsx`, `lib/db/orders.ts` | `tests/unit/sellerRating.test.ts`, `tests/e2e/reviews.spec.ts` |
