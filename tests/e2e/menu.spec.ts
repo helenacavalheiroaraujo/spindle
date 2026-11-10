@@ -1,5 +1,5 @@
-// Story 15 · Menu — critical flow, run on phone and desktop (playwright.config.ts).
-// Desktop: a row of links under the search box. Phone: ☰ opens a side drawer. Uses a real test account for "Your account".
+// Menu — critical flow, run on phone and desktop (playwright.config.ts).
+// Story 15 (phone drawer) and story 19 (desktop cells with chevrons). Desktop: cells in the top row. Phone: ☰ opens a side drawer. Uses a real test account for "Your account".
 import { expect, test, type Page } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
@@ -42,26 +42,71 @@ const openMenu = async (page: Page) => {
   }).toPass();
 };
 
-test("desktop: a row under the search box with the same five items; the current page is marked; Artists and All genres are 'Coming soon'", async ({ page }, info) => {
+test("desktop: the menu is in the top row above the search; cells Artists, All genres, Log in, Sell for free; no link twice; Artists and All genres are 'Soon'", async ({ page }, info) => {
   desktopOnly(info);
   await page.goto("/");
   await expect(page.getByRole("button", { name: "Open menu" })).toBeHidden();
-  await expect(row(page).getByRole("link")).toHaveText(["Home", "Sell for free", "Log in"]);
-  await expect(row(page).getByRole("link", { name: "Home" })).toHaveAttribute("aria-current", "page");
+  await expect(row(page).getByRole("link")).toHaveText(["Log in", "Sell for free"]); // Home is the logo
   await expect(row(page).getByText("Artists")).toBeVisible();
   await expect(row(page).getByText("All genres and formats")).toBeVisible();
-  await expect(row(page).getByText("Coming soon")).toHaveCount(2);
+  await expect(row(page).getByText("Soon", { exact: true })).toHaveCount(2);
   await expect(row(page).getByRole("link", { name: /Artists|All genres/ })).toHaveCount(0); // not tappable
+  await expect(page.getByRole("link", { name: "Sell for free", exact: true })).toHaveCount(1); // not repeated anywhere
+  await expect(page.getByRole("link", { name: "Log in", exact: true })).toHaveCount(1);
   const search = await page.getByRole("searchbox", { name: "Album or artist" }).boundingBox();
   const nav = await row(page).boundingBox();
-  expect(nav!.y).toBeGreaterThan(search!.y + search!.height - 2); // under the search box
+  expect(nav!.y + nav!.height).toBeLessThan(search!.y); // above the search box
   await expect(page.getByText("This week at the shop")).toBeVisible(); // wait for the page to finish loading
-  await screenshot(page, 15, "menu");
+  await screenshot(page, 19, "menu");
   await page.goto("/search?q=bowie");
   await expect(row(page).getByRole("link", { name: "Log in" })).toHaveAttribute("href", "/login?next=%2Fsearch%3Fq%3Dbowie"); // back to this page after logging in
   await page.goto("/sell");
   await expect(page).toHaveURL(/\/login\?next=%2Fsell/);
-  await expect(row(page).getByRole("link", { name: "Log in" })).toHaveAttribute("aria-current", "page");
+  await expect(row(page).getByRole("link", { name: "Log in" })).toHaveCount(0); // not shown on the log-in page
+  await expect(row(page).getByRole("link", { name: "Sell for free" })).toBeVisible();
+});
+
+test("desktop: the header has the same height on every page, with or without the header search", async ({ page }, info) => {
+  desktopOnly(info);
+  const height = async (path: string) => {
+    await page.goto(path);
+    return Math.round((await page.locator("header").first().boundingBox())!.height);
+  };
+  const home = await height("/");
+  expect(home).toBeGreaterThan(100);
+  expect(await height("/search?q=bowie")).toBe(home);
+  expect(await height("/login")).toBe(home);
+  expect(await height("/sell/albums/10000000-0000-0000-0000-000000000005")).toBe(home); // no header search on selling pages
+});
+
+test("desktop: the chevron opens a box by hover, click and Enter; Esc and a click outside close it", async ({ page }, info) => {
+  desktopOnly(info);
+  await page.goto("/");
+  await expect(page.getByText("This week at the shop")).toBeVisible();
+  const artists = page.getByRole("button", { name: "More about Artists" });
+  const sell = page.getByRole("button", { name: "More about Sell for free" });
+  const box = (text: string) => page.getByText(text, { exact: true });
+  const chevronWidth = (await artists.boundingBox())!.width;
+  expect(chevronWidth).toBeGreaterThanOrEqual(40);
+  await artists.hover(); // hover opens it, and it says Coming soon
+  await expect(box("Coming soon")).toBeVisible();
+  await expect(artists).toHaveAttribute("aria-expanded", "true");
+  await screenshot(page, 19, "menu-box");
+  await page.keyboard.press("Escape");
+  await expect(box("Coming soon")).toBeHidden();
+  await page.mouse.move(10, 400); // away from the cell
+  await sell.click(); // click opens it
+  await expect(box("Nothing here yet")).toBeVisible();
+  await page.mouse.move(10, 400);
+  await expect(box("Nothing here yet")).toBeVisible(); // a click keeps it open
+  await page.mouse.click(10, 400); // outside
+  await expect(box("Nothing here yet")).toBeHidden();
+  await sell.focus(); // the keyboard: Enter opens, Esc closes and the focus stays on the chevron
+  await page.keyboard.press("Enter");
+  await expect(box("Nothing here yet")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(box("Nothing here yet")).toBeHidden();
+  await expect(sell).toBeFocused();
 });
 
 test("phone: ☰ opens the drawer; items, current page and 'Coming soon'; a link closes it", async ({ page }, info) => {
@@ -80,6 +125,21 @@ test("phone: ☰ opens the drawer; items, current page and 'Coming soon'; a link
   await drawer(page).getByRole("link", { name: "Sell for free" }).click();
   await expect(page).toHaveURL(/\/login\?next=%2Fsell/); // signed out: log in first (story 8)
   await expect(drawer(page)).toHaveCount(0);
+});
+
+test("phone: the chevron of a row opens the same message under the row, and a second tap closes it", async ({ page }, info) => {
+  phoneOnly(info);
+  await page.goto("/");
+  await openMenu(page);
+  const chevron = drawer(page).getByRole("button", { name: "More about Sell for free" });
+  expect((await chevron.boundingBox())!.width).toBeGreaterThanOrEqual(48);
+  await chevron.click();
+  await expect(drawer(page).getByText("Nothing here yet")).toBeVisible();
+  await screenshot(page, 19, "menu-open-box");
+  await chevron.click();
+  await expect(drawer(page).getByText("Nothing here yet")).toBeHidden();
+  await drawer(page).getByRole("button", { name: "More about Artists" }).click();
+  await expect(drawer(page).getByText("Coming soon", { exact: true }).last()).toBeVisible();
 });
 
 test("phone: Esc, the close button and tapping the dark area close the drawer", async ({ page }, info) => {
@@ -109,7 +169,7 @@ test("keyboard: the focus starts on Close, stays inside the open drawer, and ret
   await expect(drawer(page).getByRole("link", { name: "Home" })).toBeFocused();
   await page.keyboard.press("Shift+Tab");
   await page.keyboard.press("Shift+Tab"); // from the first control back to the last link: the focus does not leave
-  await expect(drawer(page).getByRole("link", { name: "Log in" })).toBeFocused();
+  await expect(drawer(page).getByRole("button", { name: "More about All genres and formats" })).toBeFocused();
   await page.keyboard.press("Tab");
   await expect(page.getByRole("button", { name: "Close menu" })).toBeFocused();
   await page.keyboard.press("Enter");
@@ -125,10 +185,13 @@ test("signed in: 'Your account' replaces 'Log in', on the same pages, and opens 
   await expect(page).toHaveURL("/search?q=bowie");
   const items = info.project.name === "phone" ? drawer(page) : row(page);
   if (info.project.name === "phone") await openMenu(page);
-  await expect(items.getByRole("link")).toHaveText(["Home", "Sell for free", "Your account"]);
+  const phone = info.project.name === "phone";
+  await expect(items.getByRole("link")).toHaveText(phone ? ["Home", "Sell for free", "Your account"] : ["RC", "Sell for free"]); // desktop: the initials
   await expect(items.getByRole("link", { name: "Log in" })).toHaveCount(0);
-  await items.getByRole("link", { name: "Your account" }).click();
+  await items.getByRole("link", { name: /Your account/ }).click();
   await expect(page).toHaveURL("/account");
-  if (info.project.name === "phone") await openMenu(page);
-  await expect(items.getByRole("link", { name: "Your account" })).toHaveAttribute("aria-current", "page");
+  if (phone) {
+    await openMenu(page);
+    await expect(items.getByRole("link", { name: "Your account" })).toHaveAttribute("aria-current", "page");
+  }
 });

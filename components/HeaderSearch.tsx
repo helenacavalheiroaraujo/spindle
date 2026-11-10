@@ -21,7 +21,7 @@ export function HeaderSearch() {
         router.push(`/search?q=${encodeURIComponent(typed.trim())}`);
       }}
     >
-      <label className="flex min-h-12 items-center gap-2 rounded-full border border-navy/40 bg-white/80 py-1 pl-5 pr-1 focus-within:border-navy">
+      <label className="flex min-h-12 items-center gap-2 rounded-full border border-navy/40 lg:min-h-[52px] bg-white/80 py-1 pl-5 pr-1 focus-within:border-navy">
         <span className="sr-only">Album or artist</span>
         <input
           type="search"

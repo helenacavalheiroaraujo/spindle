@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menu with chevrons: three options for desktop, one for phone</title>
+<!-- Proposed replacement for the story 15 menu. Every cell is a link plus a chevron; the chevron (hover on desktop, tap on phone) opens a small box that says there is nothing there yet. The header's loose "+ Sell for free" and avatar move into the bar, so nothing appears twice. Texts are proposals. Illustrative future features: Artists, All genres and formats. Hover any cell below to see the box. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px;max-width:1100px}
+.sec{width:100%;max-width:1100px;margin:0 auto 34px}
+.desk{width:100%;border:1px solid #1d2433;border-radius:14px;background:#f4efe6;overflow:visible;position:relative;min-height:330px}
+.dh{display:flex;align-items:center;gap:24px;padding:16px 24px}
+.logo{display:flex;gap:10px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:34px;letter-spacing:.04em;line-height:1}
+.dot{width:30px;height:30px;border-radius:50%;border:8px solid #1d2433;display:inline-block}
+.box{display:flex;align-items:center;background:#fffdf9;border:1.5px solid #1d2433;border-radius:999px;padding:4px 4px 4px 18px;min-height:46px;gap:8px;flex:1;max-width:760px}
+.box span{flex:1;font-size:16px;color:#6f6a60} .box b{background:#1d2433;color:#f4efe6;border-radius:999px;padding:11px 18px;font-size:14px}
+/* the bar */
+.bar{display:flex;align-items:center;gap:4px;padding:0 24px 10px;position:relative}
+.cell{position:relative;display:flex;align-items:center}
+.cell>a{display:flex;align-items:center;min-height:44px;padding:0 6px 0 14px;font-weight:600;font-size:15px;color:inherit;text-decoration:none;border-radius:999px 0 0 999px}
+.chev{display:flex;align-items:center;justify-content:center;width:34px;min-height:44px;border-radius:0 999px 999px 0}
+.chev svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cell.cur>a,.cell.cur .chev{background:#efe7d6} .cell.soon>a{font-weight:500;color:#6f6a60}
+.cell:hover>a,.cell:hover .chev{background:#ebe2d0}
+.spacer{flex:1}
+.drop{display:none;position:absolute;left:0;top:46px;z-index:5;width:250px;background:#fffdf9;border:1px solid #c8bfae;border-radius:16px;box-shadow:0 8px 24px rgba(29,36,51,.16);padding:14px 16px}
+.cell:hover .drop,.cell.open .drop{display:block} .cell.right .drop{left:auto;right:0}
+.drop b{display:block;font-size:14px} .drop p{font-size:13px;color:#4a5163;margin-top:3px}
+.tag{border:1px solid #c8bfae;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:500;white-space:nowrap;color:#6f6a60;margin-left:8px}
+.body{padding:20px 24px;color:#6f6a60;font-size:13px}
+/* option B: Sell as the one strong button */
+.cell.cta>a{background:#1d2433;color:#f4efe6;padding:0 8px 0 18px}
+.cell.cta .chev{background:#1d2433;color:#f4efe6} .cell.cta:hover>a,.cell.cta:hover .chev{background:#2c3550}
+/* option C: navy bar like the reference */
+.navy{background:#1d2433;color:#f4efe6;padding:0 24px;border-radius:0 0 13px 13px}
+.navy .cell.cur>a,.navy .cell.cur .chev{background:#f4efe6;color:#1d2433}
+.navy .cell:hover>a,.navy .cell:hover .chev{background:#323b52} .navy .cell.cur:hover>a,.navy .cell.cur:hover .chev{background:#efe7d6}
+.navy .cell.soon>a{color:#b9b4a8}
+.navy .cell.cta>a,.navy .cell.cta .chev{background:#f4efe6;color:#1d2433} .navy .cell.cta:hover>a,.navy .cell.cta:hover .chev{background:#efe7d6}
+.vsep{width:1px;height:22px;background:#c8bfae;margin:0 8px} .navy .vsep{background:#5a6278}
+/* phone */
+.cols{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start}
+.phone{position:relative;border:1px solid #1d2433;border-radius:28px;overflow:hidden;background:#f4efe6;height:600px;width:375px}
+.ptop{display:flex;align-items:center;justify-content:space-between;padding:14px 16px}
+.plogo{display:flex;gap:8px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em}
+.pdot{width:20px;height:20px;border-radius:50%;border:5px solid #1d2433;display:inline-block}
+.burger{width:48px;height:48px;border-radius:50%;border:1.5px solid #1d2433;display:flex;align-items:center;justify-content:center;font-size:20px;background:#fffdf9}
+.pill{white-space:nowrap;border:1.5px solid #1d2433;border-radius:999px;padding:12px 16px;font-weight:600;font-size:14px}
+.dim{position:absolute;inset:0;background:rgba(29,36,51,.35);z-index:2}
+.drawer{position:absolute;left:0;top:0;bottom:0;width:300px;background:#fffdf9;border-right:1px solid #c8bfae;box-shadow:8px 0 24px rgba(29,36,51,.18);z-index:3;padding:14px 16px}
+.x{width:48px;height:48px;border-radius:50%;border:1.5px solid #1d2433;display:flex;align-items:center;justify-content:center;margin-bottom:6px;font-size:18px}
+.prow{display:flex;align-items:center;justify-content:space-between;min-height:56px;border-bottom:1px solid #eee6d8;font-weight:600;font-size:16px;padding:0 4px}
+.prow .c{width:48px;height:48px;display:flex;align-items:center;justify-content:center} .prow .c svg{width:18px;height:18px;fill:none;stroke:#1d2433;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.prow.cur span{background:#efe7d6;border-radius:10px;padding:8px 10px;margin-left:-6px} .prow.soon{color:#6f6a60;font-weight:500}
+.acc{background:#f4efe6;border-radius:12px;padding:12px 14px;margin:6px 0 8px;font-size:13px;color:#4a5163}
+.acc b{display:block;color:#1d2433;font-size:14px}
+.pad{padding:8px 16px} h1{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:34px;line-height:1}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><symbol id="ch" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol></svg>
+<p class="why" style="text-align:center;margin:0 auto 22px;font-size:14px">One bar, one set of links. Each cell is a link plus a chevron. On desktop the chevron (or hovering the cell) opens a small box that for now says nothing is there yet; on phone, tapping the chevron opens the same message inside the drawer. The loose “+ Sell for free” and the avatar leave the top-right corner and live in the bar, so nothing appears twice. Hover a cell to see its box.</p>
+
+<section class="sec"><h2 class="vt">Desktop · Option A · Light bar, all cells equal</h2>
+<p class="why">Logo and search on top (search gets the space the buttons had). One bar under it: Home, Sell for free, Artists, All genres and formats on the left; Log in on the right (the initials when signed in). The current page keeps its sand pill and its word. Quietest of the three; “Sell for free” no longer stands out.</p>
+<div class="desk"><div class="dh"><span class="logo"><i class="dot"></i>SPINDLE</span><div class="box"><span>Which record are you after?</span><b>Search</b></div></div>
+<nav class="bar" aria-label="Main">
+<div class="cell cur"><a>Home</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell"><a>Sell for free</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell soon"><a>Artists<span class="tag">Coming soon</span></a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell soon"><a>All genres and formats<span class="tag">Coming soon</span></a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<span class="spacer"></span><div class="cell right"><a>Log in</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+</nav><div class="body">Page content…</div></div></section>
+
+<section class="sec"><h2 class="vt">Desktop · Option B · Light bar, Sell for free as the one strong button</h2>
+<p class="why">Same bar, but “Sell for free” is a navy pill, like the SIGN UP button in your reference: the one thing to do for sellers. The rest stay quiet. Keeps the seller call to action visible without a second button elsewhere.</p>
+<div class="desk"><div class="dh"><span class="logo"><i class="dot"></i>SPINDLE</span><div class="box"><span>Which record are you after?</span><b>Search</b></div></div>
+<nav class="bar" aria-label="Main">
+<div class="cell cur"><a>Home</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell soon"><a>Artists<span class="tag">Coming soon</span></a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell soon"><a>All genres and formats<span class="tag">Coming soon</span></a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<span class="spacer"></span><div class="cell right"><a>Log in</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<span class="vsep"></span><div class="cell cta right"><a>Sell for free</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+</nav><div class="body">Page content…</div></div></section>
+
+<section class="sec"><h2 class="vt">Desktop · Option C · Navy bar, like the reference</h2>
+<p class="why">The bar is a full-width navy strip under the header, cream text, the current page as a cream pill, “Sell for free” as a cream pill on the right. Most like the reference; adds a heavy dark band across every page, which weighs on the cream pages.</p>
+<div class="desk"><div class="dh"><span class="logo"><i class="dot"></i>SPINDLE</span><div class="box"><span>Which record are you after?</span><b>Search</b></div></div>
+<nav class="bar navy" aria-label="Main">
+<div class="cell cur"><a>Home</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop" style="color:#1d2433"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell soon"><a>Artists<span class="tag" style="border-color:#5a6278;color:#b9b4a8">Coming soon</span></a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop" style="color:#1d2433"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell soon"><a>All genres and formats<span class="tag" style="border-color:#5a6278;color:#b9b4a8">Coming soon</span></a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop" style="color:#1d2433"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<span class="spacer"></span><div class="cell right"><a>Log in</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop" style="color:#1d2433"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<span class="vsep"></span><div class="cell cta right"><a>Sell for free</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop" style="color:#1d2433"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+</nav><div class="body">Page content…</div></div></section>
+
+<section class="sec"><h2 class="vt">Phone · side drawer with chevrons</h2>
+<p class="why">Same drawer as today (☰ top left). Each row is a link plus a chevron on the right: tapping the word goes there, tapping the chevron opens the same message under the row (a phone has no hover). The chevron is a 48 px tap target.</p>
+<div class="cols">
+<div class="phone"><div class="dim"></div><div class="drawer"><div class="x">✕</div>
+<div class="prow cur"><span>Home</span><b class="c"><svg><use href="#ch"/></svg></b></div>
+<div class="prow"><span>Sell for free</span><b class="c"><svg><use href="#ch"/></svg></b></div>
+<div class="prow"><span>Log in</span><b class="c"><svg><use href="#ch"/></svg></b></div>
+<div class="prow soon"><span>Artists <span class="tag">Coming soon</span></span><b class="c"><svg><use href="#ch"/></svg></b></div>
+<div class="prow soon"><span>All genres and formats <span class="tag">Coming soon</span></span><b class="c"><svg><use href="#ch"/></svg></b></div></div>
+<header class="ptop"><span class="burger">✕</span><span class="plogo"><i class="pdot"></i>SPINDLE</span><span class="pill">Log in</span></header><div class="pad"><h1>Pick a crate.</h1></div></div>
+<div class="phone"><div class="dim"></div><div class="drawer"><div class="x">✕</div>
+<div class="prow cur"><span>Home</span><b class="c"><svg><use href="#ch"/></svg></b></div>
+<div class="prow"><span>Sell for free</span><b class="c"><svg style="transform:rotate(180deg)"><use href="#ch"/></svg></b></div>
+<div class="acc"><b>Nothing here yet</b>More options will appear here in the future.</div>
+<div class="prow"><span>Log in</span><b class="c"><svg><use href="#ch"/></svg></b></div>
+<div class="prow soon"><span>Artists <span class="tag">Coming soon</span></span><b class="c"><svg><use href="#ch"/></svg></b></div>
+<div class="prow soon"><span>All genres and formats <span class="tag">Coming soon</span></span><b class="c"><svg><use href="#ch"/></svg></b></div></div>
+<header class="ptop"><span class="burger">✕</span><span class="plogo"><i class="pdot"></i>SPINDLE</span><span class="pill">Log in</span></header><div class="pad"><h1>Pick a crate.</h1></div></div>
+</div></section>
+</body></html>

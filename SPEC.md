@@ -7,7 +7,7 @@ Stack and hosting: see `DECISIONS.md`. Assignment 1 stated PHP; the MVP uses Nex
 1. **Core:** stories 1, 2, 3, 5, 6, 12
 2. **Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)
 3. **Seller:** story 8
-4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu)
+4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15)
 
 Not in this MVP: stories 10, 11, 13, 14
 
@@ -54,6 +54,7 @@ In build order. Each story has its own file in `specs/`.
 | Story 16 · Search suggestions | [`specs/story-16-suggestions.md`](specs/story-16-suggestions.md) |
 | Story 15 · Menu | [`specs/story-15-menu.md`](specs/story-15-menu.md) |
 | Story 18 · Rate the seller | [`specs/story-18-reviews.md`](specs/story-18-reviews.md) |
+| Story 19 · Menu with chevrons | [`specs/story-19-menu-chevrons.md`](specs/story-19-menu-chevrons.md) |
 
 ---
 
@@ -160,3 +161,7 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 18 | "Not now" closes the question and "Rate this seller" stays on the delivered order; after "Send review" it does not come back | `lib/rules/sellerRating.ts`, `app/account/OrderCard.tsx`, `lib/db/orders.ts` | `tests/unit/sellerRating.test.ts`, `tests/e2e/reviews.spec.ts` |
 | 18 | The seller line on listings shows "★ 4.8 · 12 reviews" (1 decimal), "★ 5.0 · 1 review" or "No reviews yet", from one rule | `lib/rules/sellerRating.ts`, `components/SellerRating.tsx`, `components/ListingList.tsx`, `app/listings/[listingId]/page.tsx`, `lib/db/listings.ts` | `tests/unit/sellerRating.test.ts`, `tests/e2e/reviews.spec.ts` |
 | 18 | Loading mask "Sending…" and an error screen with "Try again" that keeps the chosen stars (Shared rules) | `app/account/OrderCard.tsx`, `components/LoadingMask.tsx`, `components/ErrorScreen.tsx` | `tests/e2e/reviews.spec.ts` |
+| 19 | Desktop: logo and menu on the top row, the search full width below; same header height on every page; no link appears twice; "Log in" not shown on the log-in and sign-up pages | `lib/rules/menuItems.ts`, `components/Header.tsx`, `components/MainMenu.tsx`, `components/HeaderSearch.tsx`, `components/AccountBadge.tsx`, `app/layout.tsx` | `tests/unit/menuItems.test.ts`, `tests/e2e/menu.spec.ts` |
+| 19 | Artists and All genres and formats are grey with "Soon", not tappable; every cell has a chevron whose box says "Nothing here yet" or "Coming soon" | `lib/rules/menuItems.ts`, `components/MainMenu.tsx` | `tests/unit/menuItems.test.ts`, `tests/e2e/menu.spec.ts` |
+| 19 | The box opens by hover, click, Enter or Space; Esc and a click outside close it; the chevron is at least 40 px (desktop) and 48 px (phone); the focus ring is visible | `components/MainMenu.tsx` | `tests/e2e/menu.spec.ts` (desktop); phone drawer chevrons: checked by hand in Chromium at 375 px, not by an automated test in this run |
+| 19 | Phone: the drawer keeps story 15's behaviour, each row has a chevron that opens the same message; the current page is marked | `components/MainMenu.tsx` | `tests/e2e/menu.spec.ts` (phone tests; see Doubts in the change report) |

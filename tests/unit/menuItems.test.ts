@@ -1,6 +1,6 @@
-// Decision table from SPEC story 15 · Acceptance criteria.
+// Decision tables from SPEC story 15 and story 19 · Acceptance criteria.
 import { describe, expect, it } from "vitest";
-import { menuItems } from "@/lib/rules/menuItems";
+import { desktopMenu, menuItems } from "@/lib/rules/menuItems";
 
 const labels = (signedIn: boolean) => menuItems(signedIn, "/").map((i) => i.label);
 const current = (signedIn: boolean, path: string) => menuItems(signedIn, path).find((i) => i.current)?.label ?? null;
@@ -42,5 +42,54 @@ describe("menuItems", () => {
     ["/login", "", "/login"],
   ] as const)("'Log in' on %s?%s → %s", (path, query, href) => {
     expect(menuItems(false, path, query)[2].href).toBe(href);
+  });
+});
+
+describe("every item has a chevron box (story 19)", () => {
+  it("working items say 'Nothing here yet'; Artists and All genres and formats say 'Coming soon'", () => {
+    const [home, sell, account, artists, genres] = menuItems(false, "/");
+    for (const item of [home, sell, account]) expect(item.note).toEqual({ title: "Nothing here yet", text: "More options will appear here in the future." });
+    for (const item of [artists, genres]) expect(item.note).toEqual({ title: "Coming soon", text: "This will open more options in the future." });
+  });
+});
+
+describe("desktopMenu (story 19)", () => {
+  const labels = (signedIn: boolean, path = "/", initials = "RC") => desktopMenu(signedIn, path, "", initials, "Rui Costa").map((c) => c.label);
+
+  it("Home is the logo, so the cells are Artists, All genres and formats, Log in or the initials, Sell for free", () => {
+    expect(labels(false)).toEqual(["Artists", "All genres and formats", "Log in", "Sell for free"]);
+    expect(labels(true)).toEqual(["Artists", "All genres and formats", "RC", "Sell for free"]);
+  });
+
+  it("no link appears twice: one Sell for free, one Log in or the initials", () => {
+    for (const signedIn of [false, true]) {
+      const l = labels(signedIn);
+      expect(new Set(l).size).toBe(l.length);
+      expect(l.filter((x) => x === "Sell for free")).toHaveLength(1);
+    }
+  });
+
+  it("'Log in' is not shown on the log-in and sign-up pages; the initials always are", () => {
+    expect(labels(false, "/login")).toEqual(["Artists", "All genres and formats", "Sell for free"]);
+    expect(labels(false, "/signup")).toEqual(["Artists", "All genres and formats", "Sell for free"]);
+    expect(labels(true, "/login")).toContain("RC");
+  });
+
+  it("a signed-in user with no name shows 'Me' and their account link says so", () => {
+    const cell = desktopMenu(true, "/", "", "", "")[2];
+    expect(cell).toMatchObject({ label: "Me", accountLabel: "Your account", href: "/account" });
+    expect(desktopMenu(true, "/", "", "RC", "Rui Costa")[2].accountLabel).toBe("Your account, signed in as Rui Costa");
+  });
+
+  it("Artists and All genres and formats are grey 'Soon' cells without a link; Sell for free is the outline cell; one divider before Log in", () => {
+    const cells = desktopMenu(false, "/");
+    expect(cells.slice(0, 2).map((c) => [c.href, c.soon, c.cta])).toEqual([[null, true, false], [null, true, false]]);
+    expect(cells[3]).toMatchObject({ label: "Sell for free", href: "/sell", cta: true, soon: false });
+    expect(cells.filter((c) => c.divider).map((c) => c.label)).toEqual(["Log in"]);
+    expect(desktopMenu(false, "/login").filter((c) => c.divider).map((c) => c.label)).toEqual(["Sell for free"]); // no Log in: the divider moves
+  });
+
+  it("'Log in' keeps the page the user was on", () => {
+    expect(desktopMenu(false, "/search", "q=bowie")[2].href).toBe("/login?next=%2Fsearch%3Fq%3Dbowie");
   });
 });

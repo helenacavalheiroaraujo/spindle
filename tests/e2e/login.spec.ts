@@ -1,6 +1,6 @@
 // Story 9 · Log in and log out — critical flow, run on phone and desktop (playwright.config.ts).
 // Creates a real test account in Supabase (already confirmed) and removes it afterwards.
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
 import { screenshot } from "./screenshot";
@@ -36,12 +36,16 @@ test.afterAll(async () => {
   await admin().auth.admin.deleteUser(userId);
 });
 
-test("a registered user logs in from the header and logs out", async ({ page }) => {
+// Where "Log in" sits: the top-right badge on a phone, the menu in the top row on desktop (story 19).
+const corner = (page: Page, info: { project: { name: string } }) =>
+  info.project.name === "phone" ? page.locator("body > .pointer-events-none") : page.getByRole("navigation", { name: "Main" });
+
+test("a registered user logs in from the header and logs out", async ({ page }, info) => {
   await page.goto("/");
   await screenshot(page, 9, "home-signed-out");
-  await page.locator("body > .pointer-events-none").getByRole("link", { name: "Log in" }).click();
+  await corner(page, info).getByRole("link", { name: "Log in" }).click();
   await expect(page).toHaveURL("/login");
-  await expect(page.locator("body > .pointer-events-none").getByRole("link", { name: "Log in" })).toHaveCount(0); // not shown on the log-in page itself
+  await expect(corner(page, info).getByRole("link", { name: "Log in" })).toHaveCount(0); // not shown on the log-in page itself
   await screenshot(page, 9, "login");
 
   // Wrong password → message that does not say which one was wrong; no reset link.
@@ -67,7 +71,7 @@ test("a registered user logs in from the header and logs out", async ({ page }) 
 
   await page.getByRole("button", { name: "Log out" }).click();
   await expect(page).toHaveURL("/");
-  await expect(page.locator("body > .pointer-events-none").getByRole("link", { name: "Log in" })).toBeVisible();
+  await expect(corner(page, info).getByRole("link", { name: "Log in" })).toBeVisible();
 
   // Signed out: Your account sends the user to log in.
   await page.goto("/account");

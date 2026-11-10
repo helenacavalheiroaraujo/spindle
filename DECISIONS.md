@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Story 19: menu with chevrons replaces the desktop menu of story 15
+- **Decision:** a new story, because story 15 is built and tested and its file does not change (CLAUDE.md). On desktop the row under the search is replaced by cells with chevrons in the top row; the loose "+ Sell for free" and account badge leave the top-right corner. The phone drawer of story 15 stays and gains chevrons.
+- **Why:** the row under the search box was confusing, and every working item in it already existed elsewhere (logo, Sell button, account badge).
+- **Replaces in story 15 (desktop only):** the row under the search; "Home" as an item (the logo is Home); the pill that marks the current page; "Artists" and "All genres and formats" with a "Coming soon" tag (now grey with "Soon" and a chevron box).
+- **Choices made in the design (not in the Product Owner's words):** the texts "Nothing here yet", "Coming soon", "Soon", "Esc closes"; the chevron box on the grey cells (kept, the open point of the design); "Sell for free" as an outline and the Search button as the one solid button; the same header height on every page.
+
 ## 2026-11-09 — UX review round 6: page width, checklist wording and small fixes
 - **Decision:** on desktop every page shares one width (72 rem) and one left edge; "Sell for free" and Log in sit inside it. Pages with a narrow body (account, log in, sign up, search) are left-aligned columns of 42, 48 or 28 rem under the header. Priorities and the listing check use two columns from 1024 px (UX #5, #6, #22).
 - **Why:** the logo and the content started at different edges on different pages, and Log in sat at the window edge, outside the content.

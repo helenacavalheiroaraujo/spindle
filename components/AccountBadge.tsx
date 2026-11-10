@@ -1,30 +1,19 @@
-// Top-right of every page (story 9): "Log in" when signed out; the user's initials when signed in,
+// Top-right of every page below 1024 px (story 9): "Log in" when signed out; the user's initials when signed in,
 // which open Your account (name, email, Log out — DECISIONS · story 9).
 // Lives in the root layout, not in Header, because Header is also used inside client error screens.
 // Also "Sell for free" (story 8; "+ Sell" on a phone, finding #76): signed out, /sell sends to log-in first.
 import { Suspense } from "react";
 import Link from "next/link";
-import { currentUserId } from "@/lib/db/session";
-import { getProfileName } from "@/lib/db/profiles";
 import { initials } from "@/lib/rules/initials";
 import { LogInLink } from "./LogInLink";
 
-export async function AccountBadge() {
-  let signedIn = false;
-  let name = "";
-  try {
-    const userId = await currentUserId();
-    if (userId) {
-      signedIn = true;
-      name = (await getProfileName(userId)) ?? "";
-    }
-  } catch {
-    return null; // the badge never breaks the page under it
-  }
+// Phone and tablet only (story 19): from 1024 px the account and Sell sit in the menu, in the header (MainMenu).
+// The session is read once, in the root layout, and passed in.
+export function AccountBadge({ signedIn, name }: { signedIn: boolean; name: string }) {
   const letters = initials(name);
 
   return (
-    <div className="pointer-events-none absolute inset-x-0 top-4 z-20">
+    <div className="pointer-events-none absolute inset-x-0 top-4 z-20 lg:hidden">
       <div className="page-main flex items-center justify-end gap-2 px-4 [&>*]:pointer-events-auto">
         {/* Phone: "Sell" is in the menu (story 15), whose ☰ button takes the top-left slot. */}
         <Link

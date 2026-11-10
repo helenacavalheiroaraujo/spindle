@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menu with chevrons, not under the search: three options for desktop</title>
+<!-- Second round of the menu with chevrons (first round: menu-chevron-options.html, bar under the search, not liked). Here the menu is never under the search box. Each cell is a link plus a chevron; the chevron (hover) opens a box that says nothing is there yet. "+ Sell for free" and the avatar live in the menu, so nothing appears twice. Home is the logo. Artists and All genres and formats are illustrative future features. Texts are proposals. Hover any cell to see its box. The phone drawer stays as in the first round. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px;max-width:1100px}
+.sec{width:100%;max-width:1152px;margin:0 auto 34px}
+.desk{width:100%;border:1px solid #1d2433;border-radius:14px;background:#f4efe6;position:relative;min-height:300px}
+.row{display:flex;align-items:center;gap:20px;padding:16px 24px;position:relative}
+.logo{display:flex;gap:10px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:34px;letter-spacing:.04em;line-height:1;flex:none}
+.dot{width:30px;height:30px;border-radius:50%;border:8px solid #1d2433;display:inline-block}
+.box{display:flex;align-items:center;background:#fffdf9;border:1.5px solid #1d2433;border-radius:999px;padding:4px 4px 4px 18px;min-height:46px;gap:8px;flex:1;min-width:0}
+.box span{flex:1;font-size:15px;color:#6f6a60;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .box b{background:#1d2433;color:#f4efe6;border-radius:999px;padding:11px 18px;font-size:14px}
+.nav{display:flex;align-items:center;gap:2px;flex:none}
+.cell{position:relative;display:flex;align-items:center}
+.cell>a{display:flex;align-items:center;min-height:44px;padding:0 4px 0 12px;font-weight:600;font-size:15px;white-space:nowrap;border-radius:999px 0 0 999px}
+.chev{display:flex;align-items:center;justify-content:center;width:30px;min-height:44px;border-radius:0 999px 999px 0}
+.chev svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cell.soon>a{font-weight:500;color:#6f6a60} .cell:hover>a,.cell:hover .chev{background:#ebe2d0}
+.cell.cta>a,.cell.cta .chev{background:#1d2433;color:#f4efe6} .cell.cta>a{padding:0 6px 0 18px} .cell.cta:hover>a,.cell.cta:hover .chev{background:#2c3550}
+.drop{display:none;position:absolute;left:0;top:48px;z-index:5;width:250px;background:#fffdf9;border:1px solid #c8bfae;border-radius:16px;box-shadow:0 8px 24px rgba(29,36,51,.16);padding:14px 16px}
+.cell:hover .drop{display:block} .cell.right .drop{left:auto;right:0}
+.drop b{display:block;font-size:14px} .drop p{font-size:13px;color:#4a5163;margin-top:3px}
+.vsep{width:1px;height:22px;background:#c8bfae;margin:0 6px}
+.body{padding:20px 24px;color:#6f6a60;font-size:13px}
+.note{font-size:12px;color:#6f6a60;padding:0 24px 14px}
+.line{border-bottom:1px solid #e2dacb}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><symbol id="ch" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol></svg>
+<p class="why" style="text-align:center;margin:0 auto 22px;font-size:14px">The menu never sits under the search box. Every cell is a link plus a chevron; hovering opens a box that for now says nothing is there yet. “+ Sell for free” and the avatar move into the menu (nothing appears twice); Home is the logo; “Coming soon” is not repeated in the bar (grey cells say it, and the box does too).</p>
+
+<section class="sec"><h2 class="vt">Desktop · Option A · Menu between the logo and the search</h2>
+<p class="why">One row: logo, then the cells, then the search, then Log in. Reads left to right as “where am I, where can I go, what do I look for”. Cost: the search gets narrower (about 365 px here, against about 650 px today).</p>
+<div class="desk"><div class="row">
+<span class="logo"><i class="dot"></i>SPINDLE</span>
+<nav class="nav" aria-label="Main">
+<div class="cell"><a>Sell for free</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell soon"><a>Artists</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell soon"><a>All genres and formats</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+</nav>
+<div class="box"><span>Which record are you after?</span><b>Search</b></div>
+<div class="cell right"><a>Log in</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+</div><div class="body">Page content…</div></div></section>
+
+<section class="sec"><h2 class="vt">Desktop · Option B · Menu to the right of the search</h2>
+<p class="why">One row: logo, search, then the cells, with “Sell for free” as the one navy button at the far right (like SIGN UP in your reference). Same cost as A for the search width (about 360 px).</p>
+<div class="desk"><div class="row">
+<span class="logo"><i class="dot"></i>SPINDLE</span>
+<div class="box"><span>Which record are you after?</span><b>Search</b></div>
+<nav class="nav" aria-label="Main">
+<div class="cell soon"><a>Artists</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell soon"><a>All genres and formats</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<span class="vsep"></span>
+<div class="cell"><a>Log in</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell cta right"><a>Sell for free</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+</nav></div><div class="body">Page content…</div></div></section>
+
+<section class="sec"><h2 class="vt">Desktop · Option C · Menu above the search</h2>
+<p class="why">Two rows, menu first: the top row has the logo on the left and the cells on the right; the search sits full width on its own row underneath, as it is today (about 1100 px wide). Nothing is squeezed, but the header is taller and the search moves down by one row.</p>
+<div class="desk"><div class="row line">
+<span class="logo"><i class="dot"></i>SPINDLE</span><span style="flex:1"></span>
+<nav class="nav" aria-label="Main">
+<div class="cell soon"><a>Artists</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell soon"><a>All genres and formats</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<span class="vsep"></span>
+<div class="cell"><a>Log in</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell cta right"><a>Sell for free</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+</nav></div>
+<div class="row"><div class="box"><span>Which record are you after?</span><b>Search</b></div></div>
+<div class="body">Page content…</div></div></section>
+</body></html>

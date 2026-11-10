@@ -4,6 +4,7 @@ import "./globals.css";
 import { AccountBadge } from "@/components/AccountBadge";
 import { SignedInProvider } from "@/components/SignedIn";
 import { currentUserId } from "@/lib/db/session";
+import { getProfileName } from "@/lib/db/profiles";
 
 // Headings: bold condensed sans-serif; body: plain readable sans-serif (CLAUDE.md, visual direction).
 const heading = Barlow_Condensed({ subsets: ["latin"], weight: ["700"], variable: "--font-heading" });
@@ -15,12 +16,15 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const signedIn = await currentUserId().then(Boolean).catch(() => false); // for the menu (story 15)
+  // For the menu (stories 15, 19) and the phone badge: signed in or not, and the name (its initials).
+  const userId = await currentUserId().catch(() => null);
+  const name = userId ? await getProfileName(userId).catch(() => "") : "";
+  const signedIn = Boolean(userId);
   return (
     <html lang="en" className={`${heading.variable} ${body.variable}`}>
       <body className="relative min-h-screen font-body antialiased">
-        <SignedInProvider signedIn={signedIn}>
-          <AccountBadge />
+        <SignedInProvider signedIn={signedIn} name={name ?? ""}>
+          <AccountBadge signedIn={signedIn} name={name ?? ""} />
           {children}
         </SignedInProvider>
       </body>

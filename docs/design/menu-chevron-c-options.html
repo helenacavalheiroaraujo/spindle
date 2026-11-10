@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menu with chevrons, option C refined</title>
+<!-- Third round of the menu with chevrons: option C of menu-chevron-inline-options.html (menu on top, search full width below), with five adjustments: 1 cells that do nothing yet are grey with a "Soon" tag; 2 the search button is the strongest button, "Sell for free" is an outline; 3 the box opens by hover, click and Enter, closes with Esc, the chevron is 40 px; 4 the top row is compact (56 px, no divider line); 5 the header has the same height on every page. Texts are proposals. Illustrative future features: Artists, All genres and formats. Hover a cell to see its box. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px;max-width:1100px}
+.sec{width:100%;max-width:1152px;margin:0 auto 34px}
+.desk{width:100%;border:1px solid #1d2433;border-radius:14px;background:#f4efe6;position:relative;min-height:330px}
+.r1{display:flex;align-items:center;gap:16px;padding:0 24px;height:56px}
+.r2{padding:0 24px;height:64px;display:flex;align-items:center}
+.logo{display:flex;gap:10px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:34px;letter-spacing:.04em;line-height:1;flex:none}
+.dot{width:30px;height:30px;border-radius:50%;border:8px solid #1d2433;display:inline-block}
+.box{display:flex;align-items:center;background:#fffdf9;border:1.5px solid #1d2433;border-radius:999px;padding:5px 5px 5px 20px;min-height:52px;gap:8px;flex:1}
+.box span{flex:1;font-size:16px;color:#6f6a60} .box b{background:#1d2433;color:#f4efe6;border-radius:999px;padding:13px 24px;font-size:15px}
+.nav{display:flex;align-items:center;gap:2px}
+.cell{position:relative;display:flex;align-items:center}
+.cell>a{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 4px 0 14px;font-weight:600;font-size:15px;white-space:nowrap;border-radius:999px 0 0 999px}
+.chev{display:flex;align-items:center;justify-content:center;width:40px;min-height:44px;border-radius:0 999px 999px 0}
+.chev svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cell:hover>a,.cell:hover .chev{background:#ebe2d0}
+.cell.soon>a,.cell.soon .chev{color:#6f6a60} .cell.soon>a{font-weight:500}
+.tag{border:1px solid #c8bfae;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:500;white-space:nowrap;color:#6f6a60}
+/* Sell for free: outline, so the Search button stays the strongest */
+.cell.cta>a,.cell.cta .chev{border:1.5px solid #1d2433;color:#1d2433;background:transparent} .cell.cta>a{border-right:0;padding:0 4px 0 18px} .cell.cta .chev{border-left:0}
+.cell.cta:hover>a,.cell.cta:hover .chev{background:#efe7d6}
+.focus .chev{outline:3px solid #1d2433;outline-offset:2px;border-radius:999px}
+.drop{display:none;position:absolute;left:0;top:50px;z-index:5;width:260px;background:#fffdf9;border:1px solid #c8bfae;border-radius:16px;box-shadow:0 8px 24px rgba(29,36,51,.16);padding:14px 16px}
+.cell:hover .drop,.cell.open .drop{display:block} .cell.right .drop{left:auto;right:0}
+.drop::before{content:"";position:absolute;left:0;right:0;top:-8px;height:8px} /* keeps the box open while the pointer crosses the gap */
+.drop b{display:block;font-size:14px} .drop p{font-size:13px;color:#4a5163;margin-top:3px} .drop small{display:block;margin-top:8px;font-size:11px;color:#6f6a60}
+.vsep{width:1px;height:22px;background:#c8bfae;margin:0 6px}
+.body{padding:20px 24px;color:#6f6a60;font-size:13px} .spacer{flex:1}
+.gap{height:64px;display:flex;align-items:center;padding:0 24px;color:#9a9486;font-size:12px;border-top:1px dashed #d8cfbd;margin-top:0}
+.legend{font-size:13px;color:#4a5163;max-width:1100px;margin:6px 0 0} .legend li{margin:2px 0 2px 18px}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><symbol id="ch" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol></svg>
+<p class="why" style="text-align:center;margin:0 auto 22px;font-size:14px">Option C, with the five adjustments: menu on top, search full width below, a compact top row, “Sell for free” as an outline, a clear “Soon” on cells that do nothing yet, and the same header height on every page.</p>
+
+<section class="sec"><h2 class="vt">Desktop · Home page</h2>
+<p class="why">Top row 56 px, no divider. Cells that do nothing yet (Artists, All genres and formats) are grey with “Soon” and a muted chevron; their box says so plainly. “Log in” and “Sell for free” work today. “Sell for free” is an outline; the Search button is the one solid button. Hover “Artists”.</p>
+<div class="desk"><div class="r1"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="spacer"></span>
+<nav class="nav" aria-label="Main">
+<div class="cell soon"><a>Artists <span class="tag">Soon</span></a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Coming soon</b><p>This will open more options in the future.</p></div></div>
+<div class="cell soon"><a>All genres and formats <span class="tag">Soon</span></a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Coming soon</b><p>This will open more options in the future.</p></div></div>
+<span class="vsep"></span>
+<div class="cell"><a>Log in</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+<div class="cell cta right"><a>Sell for free</a><span class="chev"><svg><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p></div></div>
+</nav></div>
+<div class="r2"><div class="box"><span>Which record are you after?</span><b>Search</b></div></div>
+<div class="body">Page content…</div></div></section>
+
+<section class="sec"><h2 class="vt">Desktop · Opened with the keyboard</h2>
+<p class="why">Tab reaches the link, then the chevron; Enter or Space on the chevron (or a click) opens the box; Esc closes it and the focus stays on the chevron. The focus ring is a 3 px navy outline. The same box opens by hover with a mouse and stays open while the pointer crosses the small gap to it.</p>
+<div class="desk"><div class="r1"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="spacer"></span>
+<nav class="nav" aria-label="Main">
+<div class="cell soon"><a>Artists <span class="tag">Soon</span></a><span class="chev"><svg><use href="#ch"/></svg></span></div>
+<div class="cell soon"><a>All genres and formats <span class="tag">Soon</span></a><span class="chev"><svg><use href="#ch"/></svg></span></div>
+<span class="vsep"></span>
+<div class="cell"><a>Log in</a><span class="chev"><svg><use href="#ch"/></svg></span></div>
+<div class="cell cta right open focus"><a>Sell for free</a><span class="chev"><svg style="transform:rotate(180deg)"><use href="#ch"/></svg></span><div class="drop"><b>Nothing here yet</b><p>More options will appear here in the future.</p><small>Esc closes</small></div></div>
+</nav></div>
+<div class="r2"><div class="box"><span>Which record are you after?</span><b>Search</b></div></div>
+<div class="body">Page content…</div></div></section>
+
+<section class="sec"><h2 class="vt">Desktop · A page without a header search (selling)</h2>
+<p class="why">The header keeps the same height: the second row stays as a quiet space, so the page content does not jump between pages. The cost is 64 px of empty space on these pages.</p>
+<div class="desk"><div class="r1"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="spacer"></span>
+<nav class="nav" aria-label="Main">
+<div class="cell soon"><a>Artists <span class="tag">Soon</span></a><span class="chev"><svg><use href="#ch"/></svg></span></div>
+<div class="cell soon"><a>All genres and formats <span class="tag">Soon</span></a><span class="chev"><svg><use href="#ch"/></svg></span></div>
+<span class="vsep"></span>
+<div class="cell"><a>H</a><span class="chev"><svg><use href="#ch"/></svg></span></div>
+<div class="cell cta right"><a>Sell for free</a><span class="chev"><svg><use href="#ch"/></svg></span></div>
+</nav></div>
+<div class="gap">same height as the pages with a search</div>
+<div class="body">Page content…</div></div></section>
+
+<section class="sec"><h2 class="vt">What changed from option C</h2>
+<ul class="legend">
+<li><b>1</b> Cells that do nothing yet: grey, “Soon” tag, muted chevron, box says “Coming soon”.</li>
+<li><b>2</b> “Sell for free” is an outline; “Search” is the one solid button, a little bigger (52 px).</li>
+<li><b>3</b> Box by hover, click and Enter; Esc closes; the chevron is 40 px wide; visible focus ring.</li>
+<li><b>4</b> Top row 56 px high, no divider line.</li>
+<li><b>5</b> Same header height on every page.</li>
+</ul>
+<p class="legend" style="margin-top:10px"><b>Open for you:</b> keep the “Coming soon” box on the grey cells (shown here) or make those cells plain, with no box.</p></section>
+</body></html>
