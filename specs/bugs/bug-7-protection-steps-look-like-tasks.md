@@ -1,6 +1,6 @@
 # Bug 7 · Protection steps look like tasks for the user
 
-> Found in feedback on the app · 2026-11-10. Status: open.
+> Found in feedback on the app · 2026-11-10. Status: fixed 2026-11-10 (not committed yet).
 
 ## Description
 On the checkout page, the "What protection covers" block shows four numbered steps. Users who do not read the text think they have to do four things and get confused about whether they need to do anything there.

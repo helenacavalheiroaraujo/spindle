@@ -1,6 +1,6 @@
 # Bug 13 · Images cannot be viewed in more detail
 
-> Found during manual testing · 2026-11-10. Status: open.
+> Found during manual testing · 2026-11-10. Status: design approved 2026-11-10 (option A), not built yet.
 
 ## Description
 When I click on the images, I cannot see them in more detail. It should be possible, for example with a zoom.

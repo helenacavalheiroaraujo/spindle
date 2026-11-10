@@ -1,6 +1,6 @@
 # Bug 11 · "Selling from" no longer shown when listing another item
 
-> Found during manual testing · 2026-11-10. Status: open.
+> Found during manual testing · 2026-11-10. Status: fixed 2026-11-10 (not committed yet).
 
 ## Description
 When I list another item for sale, the screen no longer shows "Selling from". If I have two shops in different locations, I cannot say where I am selling from.

@@ -1,6 +1,6 @@
 # Bug 9 · Account screen: no password change and no saved addresses
 
-> Found during manual testing · 2026-11-10. Status: open.
+> Found during manual testing · 2026-11-10. Status: design approved 2026-11-10 (option A), not built yet.
 
 ## Description
 On the "Your account" screen I cannot change my password. It should also have my addresses saved, as suggested before: one for delivery and one for billing, which can be different.

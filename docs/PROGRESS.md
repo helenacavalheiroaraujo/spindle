@@ -1,35 +1,36 @@
 <!-- page: https://claude.ai/artifact/W2xGvu3nfNcfcuxAv3hYsn -->
 # MVP progress
 
-Updated 2026-11-10 after story 20 (cart) · Deadline 15 Nov 2026 · **5 days left**
+Updated 2026-11-10 after the second bug round (bugs 10, 11, 12, 14, 15 and the protection steps) · Deadline 15 Nov 2026 · **5 days left**
 
 ## Summary
-- **Stories:** 16 of 16 MVP stories built (9 with gaps), 0 in progress, 0 not started. Story 20 (cart) and the 7 bug fixes in `specs/bugs/` are built but not committed or pushed yet
-- **Tests:** unit 488/488 · end-to-end 260 passed, 13 skipped on purpose, at least 3 failed in the last full run (the home-page tests, see below). In the run before, 4 other tests failed (`myListings` ×2, `signup`, `sell` phone); three passed again on a rerun, and the `sell` phone test failed once more alone and then passed. Run on their own, the home and cart tests pass
-- **Why the home tests fail:** "This week at the shop" shows the album with the most active listings (Ziggy Stardust, 6). While `cart.spec.ts` and `checkout.spec.ts` run in parallel, each project adds test listings to Homogenic (seed: 2), which can pass Ziggy for a while. This is a test-isolation weakness, not a product bug; it needs a decision (run those specs one at a time, or give the home test a fixed album)
-- **Demo:** every step from the home page to the order confirmation, the rating, selling and now the cart is covered by a passing test; the whole path in one go has not been run as one test or rehearsed, and the draft script (`docs/demo-script.md`) predates stories 15, 16, 18, 19 and 20 and the bug fixes
-- **Next:** commit story 20, then the demo script and rehearsal, the submission PDF and the manual checks (none for the cart yet); push so the online app has the cart
-- **Risk:** 5 days for the demo rehearsal, the PDF (screenshots must be regenerated after the layout changes) and the manual checks. All stories are built, so nothing is left to cut except extra polish. The WebKit phone tests are slow and intermittent in this environment
+- **Stories:** 16 of 16 MVP stories built (9 with gaps), 0 in progress, 0 not started. Story 20 (cart) and this round's bug fixes are in the working tree but not committed yet
+- **Bugs (`specs/bugs/`, 15 reports):** fixed and tested: 10 (edit condition and photos), 11 ("Selling from" per listing), 12 (own checkout goes back to the listing), 14 (fake drag bar removed), "bug 7" protection steps (one line that opens). Partly fixed: 15 (sign-up message is generic, but while email confirmation is off a new email is still signed in at once; accepted risk, DECISIONS 2026-11-10). Designs approved, not built: 8 (message the seller, and where the seller reads it), 9 (password and addresses), 13 (photo viewer). Bugs 1-7 of the first round are fixed in commit `33e57f4`; their files still say "open"
+- **Tests:** unit 521/521 (29 files) · end-to-end 262 passed, 13 skipped on purpose, 1 failed: the "price: typical range" test in `sell.spec.ts` (phone) failed in the full run and, in one rerun on its own, failed on desktop; the next rerun passed on both sizes, so it is intermittent under load, not a product bug. Run on the working tree with the cart and this round's fixes together
+- **Demo:** every step from the home page to the order confirmation, the rating, selling and the cart is covered by a passing test; the whole path in one go has not been run as one test or rehearsed, and the draft script (`docs/demo-script.md`) predates stories 15, 16, 18, 19 and 20 and the bug fixes
+- **Next:** commit the cart and the bug fixes together or in two commits, then build bugs 13, 9 and 8 (designs approved, option A each), then the demo script and rehearsal, the submission PDF and the manual checks
+- **Risk:** 5 days for the demo rehearsal, the PDF (screenshots must be regenerated after the layout changes) and the manual checks. Bugs 8, 9 and 13 are P4/P5 and not on the demo path: they are the first thing to cut, before any rehearsal time. The migration history and the database disagree about the cart (see Before the next story)
 
 ## Against the brief
 | Criterion | Status | Evidence / what is missing |
 |---|---|---|
-| 1 · Core features work end to end | Partly | Home page → search → priorities → recommendation → compare → listings → checkout → confirmation → rate the seller, selling and "save to account" are built and tested; not rehearsed as one path |
-| 2 · Data tables | Done | `0001_core.sql` to `0008_cart.sql` (0008 not committed yet) and described in `docs/database.md` |
-| 3 · Testing, automated and manual | Partly | Automated: 488 unit tests pass; end-to-end 260 pass with intermittent failures (see Summary). Manual: the record exists (`docs/manual-tests.md`, 16 checks) but every check still says "Not run" |
-| 4 · LLM good practices in the repo | Done | SPEC.md, `specs/` (stories 19 and 20), CLAUDE.md, ARCHITECTURE.md, DECISIONS.md, `docs/AI_USAGE.md`, tests committed |
-| 5 · UX and UI quality | Partly | UX review register: 1 open finding (Low, #37: 'Soul and funk' on the phone crate) and 1 won't-fix (#35); 35 resolved or closed. Story 20 (cart, the header icon and the "Cart" cell) was built after the last review and not reviewed. The story 19 header and menu, the search in the top row and the 7 bug fixes (hover states, whole-card links, loading under the header, the legend, the wider list) were built after the last review and not re-reviewed |
-| 6 · App online and reachable | Done | `https://spindle-three.vercel.app` opens without a Vercel login and runs the latest pushed commit `33e57f4`; the cart and migration 0008 are only on this machine and the linked database until you push. Walked online on 2026-11-10 without buying or signing up: search → priorities → recommendation with listings → listing check; home, login and sign-up load. Checkout, selling and sign-up were not tried online |
+| 1 · Core features work end to end | Partly | Home page → search → priorities → recommendation → compare → listings → checkout → confirmation → rate the seller, selling, editing a listing and "save to account" are built and tested; not rehearsed as one path |
+| 2 · Data tables | Partly | `0001_core.sql` to `0007_reviews.sql`, `0008_listing_place.sql` (bug 11, applied to the shared database today) and `0009_cart.sql` (renamed from 0008 today to avoid a clash; the table `cart_items` already exists in the database, created by hand and not in the migration history). All described in `docs/database.md`. Neither 0008 nor 0009 is committed yet |
+| 3 · Testing, automated and manual | Partly | Automated: 521 unit tests pass; end-to-end 262 pass, 1 intermittent failure (see Summary). Manual: the record exists (`docs/manual-tests.md`, 16 checks) but every check still says "Not run" |
+| 4 · LLM good practices in the repo | Done | SPEC.md, `specs/` (stories 19 and 20), CLAUDE.md, ARCHITECTURE.md, DECISIONS.md (bug round entry today), `docs/AI_USAGE.md`, tests. The bug reports and this round's DECISIONS entry are not committed yet |
+| 5 · UX and UI quality | Partly | UX review register: 1 open finding (Low, #37) and 1 won't-fix (#35); 35 resolved or closed. Not re-reviewed since: the story 19 header and menu, the search in the top row, the cart (story 20), the first bug round, and this round's screens (sign-up message, protection line, own-listing notice, My listings edit with photos, "Selling from") |
+| 6 · App online and reachable | Done | `https://spindle-three.vercel.app` opened without a Vercel login on 2026-11-10 and ran the then latest pushed commit `33e57f4` (not re-checked in this run). It does not have the cart or today's fixes until you push. Because the database is shared, the online app now reads the `listings.seller_city` columns only after the code is pushed; the old code ignores them |
 | 7 · Live demo | Partly | A draft script exists (`docs/demo-script.md`) but it is not rehearsed and does not cover the menu, the suggestions, the rating, the cart or the new header |
 | S1 · Link to the app | Done | `https://spindle-three.vercel.app`; confirm in Settings → Domains that it is the Production address before submitting |
-| S2 · PDF with tables and screenshots | Partly | `docs/database.md`, a submission source (`docs/submission/spindle-submission.md`) and screenshots for every built story in `docs/screenshots/`; most of them predate today's layout and header changes; no PDF for this submission yet |
+| S2 · PDF with tables and screenshots | Partly | `docs/database.md`, a submission source (`docs/submission/spindle-submission.md`) and screenshots for every built story in `docs/screenshots/`; most predate the recent layout changes; no PDF for this submission yet |
 
 ### Missing for the brief, by impact on the grade
-1. Try checkout, selling and sign-up online with a test account, and re-check the address before submitting (criterion 6, S1)
-2. Update the demo script for stories 15, 16, 18 and 19 and the bug fixes and rehearse the whole path including selling, with realistic data (criterion 7)
+1. Try checkout, selling and sign-up online with a test account after pushing, and re-check the address before submitting (criterion 6, S1)
+2. Update the demo script for stories 15, 16, 18, 19, 20 and the bug fixes and rehearse the whole path including selling, with realistic data (criterion 7)
 3. Regenerate the screenshots (`npm run screenshots`) and build the submission PDF: data tables and a screenshot of every screen (S2)
 4. Run the 16 manual checks in `docs/manual-tests.md` and fill in the results (criterion 3)
-5. Re-review the screens changed today (header, menu, search in the top row, hover states, loading, listings list) with the UX review (criterion 5)
+5. Re-review the screens changed since the last UX review with the UX review (criterion 5)
+6. Settle the migration history for the cart before anyone runs `db push` (criterion 2)
 
 ## Build phases
 | Phase | Stories | Status |
@@ -59,6 +60,8 @@ Updated 2026-11-10 after story 20 (cart) · Deadline 15 Nov 2026 · **5 days lef
 | 19 · Menu with chevrons | Built | 4 of 4 | — |
 | 20 · Cart | Built | 7 of 7 | — |
 
+Some built stories now differ from their files because of this round's bug fixes (stories 7, 8 and 9: protection steps, editing a listing, the sign-up message). The story files stay unchanged and the rules are in DECISIONS.md (2026-11-10).
+
 ## Outside the MVP
 Not counted in the figures above.
 
@@ -69,7 +72,7 @@ None: story 14 (desktop footer) is outside the MVP (DECISIONS 2026-11-08).
 | Story | Spec file | What the repo says |
 |---|---|---|
 | 14 · Desktop footer | `specs/stories/story-14-footer.md` | Outside the MVP (DECISIONS 2026-11-08); no approved design, links undecided |
-| 10 · No title in the repo | None | Filters (story 1, out of scope); "All genres and formats" (story 12, out of scope; the menu shows it as "Soon"); "Ask the seller" messaging (story 5, out of scope) |
+| 10 · No title in the repo | None | Filters (story 1, out of scope); "All genres and formats" (story 12, out of scope; the menu shows it as "Soon"); "Ask the seller" messaging (story 5, out of scope). Bug 8 now adds a one-way message to the seller as a bug fix |
 | 11 · No title in the repo | None | 30-second previews (story 3, out of scope); "Spindle Pro" paid plans for shops (story 9, out of scope) |
 | 13 · No title in the repo | None | "Because you like…" with a wishlist (story 12, out of scope) |
 
@@ -86,12 +89,16 @@ Every gap below points to a manual check in `docs/manual-tests.md` (none has bee
 - Story 12: loading mask and error screen of the genre screen (M10)
 - Story 16: the loading mask "Searching…" of the suggestion box (too short to catch automatically); the error screen is tested
 - Story 17: loading mask and error screen of the results page (M14)
-- Story 20: loading masks and error screens of the cart and its checkout (no manual check in `docs/manual-tests.md` yet); the cart is not listed in the automated loading-screen tests
+- Story 20: loading masks and error screens of the cart and its checkout (no manual check in `docs/manual-tests.md` yet)
 - Story 4: "exactly one version on sale" is tested by a unit test only
+- Bug round: the hover colour of the protection line (written in the styles, not checked); a real finger tap to close the listing sheet; the replaced-photo cleanup in Storage after editing a listing
 
 ## Before the next story can start
-- No story is left to build. Before the demo: commit and push story 20 (migration 0008 is already applied to the linked database) and the 7 bug fixes.
-- Decide how to stop the home-page tests failing when the checkout and cart specs run in parallel (see Summary).
-- Add manual checks for the cart screens to `docs/manual-tests.md`; update the demo script for the cart.
+- No story is left to build. Before the demo: commit and push story 20 and the bug fixes of this round, with `docs/AI_USAGE.md` and the DECISIONS entry.
+- **Migration history (decision needed):** `cart_items` exists in the database but its migration is not in the history, and the history now has `0008` = `listing_place`. The renamed `0009_cart.sql` would fail on `db push` because the table exists. Marking 0009 as applied (`supabase migration repair --status applied 0009`) changes the shared database's metadata and waits for your yes.
+- SPEC.md traceability rows for story 20 still say `0008_cart.sql` (lines 169 and 173): proposed change to `0009_cart.sql`, waiting for your yes.
+- Bugs 13, 9 and 8 have approved designs (`docs/design/bug-fixes-options.html`, option A each) and are not built. Bug 8's seller side lives in the "Sold" row of My listings. Bug 9: the saved delivery address wins over the last order's address (bug 6).
+- Bug 15: the sign-up leak is only reduced while email confirmation is off.
+- Add manual checks for the cart screens and for this round's screens to `docs/manual-tests.md`; update the demo script.
 - Bug 6 (checkout address pre-filled from the last order) has no automated test.
 - Story 4 left open: a listing opened from the version page goes back to the recommendation, not to the version page (DECISIONS 2026-11-09).
