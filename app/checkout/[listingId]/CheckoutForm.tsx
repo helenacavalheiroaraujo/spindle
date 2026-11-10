@@ -7,7 +7,7 @@ import { useActionState, useState } from "react";
 import { pay, type PayState } from "./actions";
 import { euros, type CheckoutTotal } from "@/lib/rules/checkoutTotal";
 import { PROTECTION_STEPS } from "@/lib/rules/protectionSteps";
-import { canPay, postcodeError, type ShippingAddress } from "@/lib/rules/shippingAddress";
+import { canPay, maskPostcode, postcodeError, type ShippingAddress } from "@/lib/rules/shippingAddress";
 import { ErrorScreen } from "@/components/ErrorScreen";
 import { Field } from "@/components/Field";
 import { LoadingMask } from "@/components/LoadingMask";
@@ -19,15 +19,17 @@ export function CheckoutForm({
   versionId,
   record,
   amounts,
+  initialAddress,
 }: {
   listingId: string;
   versionId: string;
   record: React.ReactNode; // version, condition, seller and city
   amounts: CheckoutTotal;
+  initialAddress: ShippingAddress | null; // address of the most recent order (bug 6)
 }) {
   const [state, action, pending] = useActionState(pay.bind(null, listingId, versionId), { status: "ready" } as PayState);
   // The address lives here, so it is kept after "Try again" (SPEC · Shared rules).
-  const [address, setAddress] = useState(EMPTY);
+  const [address, setAddress] = useState(initialAddress ?? EMPTY);
   const [dismissed, setDismissed] = useState<PayState | null>(null);
   const set = (field: keyof ShippingAddress) => (value: string) => setAddress((a) => ({ ...a, [field]: value }));
   const sold = state.status === "sold";
@@ -56,7 +58,7 @@ export function CheckoutForm({
               label="Postcode"
               autoComplete="postal-code"
               value={address.postcode}
-              onChange={set("postcode")}
+              onChange={(v) => set("postcode")(maskPostcode(v))}
               error={postcodeError(address.postcode) ?? undefined}
             />
             <Field name="city" label="City" autoComplete="address-level2" value={address.city} onChange={set("city")} />

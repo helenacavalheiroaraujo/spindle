@@ -141,7 +141,7 @@ test("checkout: fee and total before paying; Pay waits for a full address; no ca
   await page.getByLabel("Street").fill("Rua do Almada 120");
   await page.getByLabel("City").fill("Porto");
   await expect(payButton).toBeDisabled(); // postcode still missing
-  await page.getByLabel("Postcode").fill("4050031");
+  await page.getByLabel("Postcode").fill("40500"); // incomplete: the mask makes 4050031 a valid 4050-031 (bug 7)
   await expect(page.getByText("Use the format 0000-000")).toBeVisible();
   await expect(payButton).toBeDisabled();
   await page.getByLabel("Postcode").fill("4050-031");

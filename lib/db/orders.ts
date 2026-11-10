@@ -120,3 +120,21 @@ export async function confirmReceipt(orderId: string, buyerUserId: string): Prom
   if (error) throw error;
   return data.length > 0 ? "confirmed" : "not_waiting";
 }
+
+// The shipping address of the buyer's most recent order (bug 6: the checkout starts with it).
+// Null when there are no orders.
+export async function getLastShippingAddress(buyerUserId: string): Promise<ShippingAddress | null> {
+  const profile = await db().from("profiles").select("id").eq("user_id", buyerUserId).maybeSingle();
+  if (profile.error) throw profile.error;
+  if (!profile.data) return null;
+  const { data, error } = await db()
+    .from("orders")
+    .select("ship_name, ship_street, ship_postcode, ship_city")
+    .eq("buyer_id", profile.data.id)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (error) throw error;
+  if (!data) return null;
+  return { name: data.ship_name, street: data.ship_street, postcode: data.ship_postcode, city: data.ship_city };
+}

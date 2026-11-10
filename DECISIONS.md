@@ -3,6 +3,54 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Bug 7: the postcode field has an input mask
+- **Decision:** while typing, the Postcode field keeps digits only (at most 7) and adds the hyphen by itself once the fifth digit is typed (4050262 becomes 4050-262). Letters and spaces are dropped, also when pasted.
+- **Why:** the format 0000-000 is already known, so the buyer should not type the hyphen. The hyphen only appears with the fifth digit so that deleting backwards is not blocked by a hyphen that comes back.
+- **Not changed:** the check stays in `postcodeError` and `canPay` (finding #41); the mask only shapes the typing (`maskPostcode` in `lib/rules/shippingAddress.ts`, with a decision table). Story 7 is not changed.
+- **Changed test:** the checkout test typed `4050031` and expected the format message; with the mask that is a valid 4050-031, so it now types `40500` (incomplete).
+- **Trade-off accepted:** with the cursor in the middle of the field, the cursor can jump to the end after the mask runs. No package installed.
+
+## 2026-11-10 — Bug 6: the checkout starts with the address of the most recent order
+- **Decision:** the "Ship to" fields start filled with the shipping address of the buyer's most recent order, read from `orders` (`getLastShippingAddress` in `lib/db/orders.ts`). The buyer can still edit every field. A buyer with no earlier order sees empty fields, as before.
+- **Why:** buyers had to type the same address on every purchase. The Product Owner chose "last order" over saving the address on the profile, which would need a migration and keep personal data outside the order.
+- **Replaces** the 2026-11 decision "Checkout address is typed for each order" (finding #24) and the line "typed for each order, not saved" in story 7 (built, so its file does not change). Still no personal data is stored beyond the order.
+- **Set aside:** saving on the profile (migration, risk close to the deadline); "most used address" (the Product Owner first chose it, then changed to "most recent", which is simpler).
+- **Trade-off accepted:** it only works after a first purchase, and the address cannot be edited outside the checkout.
+
+## 2026-11-10 — Bug 4: the Match / Check / No match words are explained
+- **Decision:** under the legend on the list of copies for sale there is a "What do these mean?" disclosure (`components/LightLegendExplained.tsx`), closed by default. Match: "All three checks match this version". Check: "At least one check is uncertain". No match: "It's a different pressing".
+- **Why:** buyers did not know what the words meant. Match and No match reuse the story 5 summary wording; the Check line is the general form of "One check is uncertain". The word still shows, never colour alone.
+- **Choices made while building (not in the bug):** the title "What do these mean?", the Check text, and closed by default.
+- **Trade-off accepted:** closed by default keeps the list short, but it may go unnoticed. The explanation is not on the listing check screen, which has its own summary.
+
+## 2026-11-10 — Bugs 2 and 3: hover states and whole-card links
+- **Decision:** every interactive button and link has a hover state, defined once in `app/globals.css`: navy pills turn a slightly lighter navy (#323d57); outlined pills, round icon buttons and selectable cards fill with sand; underlined links get a thicker underline; enabled buttons show a pointer cursor. List rows and cards that are links use `hover:bg-sand` with opacity. A card that is one big link uses `.card-link`: it lifts 2 px with a shadow, has a navy focus ring and no motion if the user prefers reduced motion.
+- **Home page:** on "This week at the shop" each card ("See which to buy", "Sell a record") is one link; the pill inside is a visual span, never a nested link or button. The genre crates use the same class.
+- **Why:** bug 2 (no hover) and bug 3 (only the button was clickable). One link per card keeps one tab stop, visible focus and no nested interactive elements.
+- **Choices made while building (not in the bugs):** the colour #323d57, the 2 px lift with shadow, sand at 40% or 60% on list rows, the 3 px focus ring, and hover on the genre crates.
+- **Trade-off accepted:** the global rules match Tailwind class names (for example `bg-navy`), so renaming a class removes its hover silently. A screen reader reads each card as one link with all its text.
+
+## 2026-11-10 — Bugs 1 and 5: loading under the header; the list of copies uses the full width
+- **Decision:** every `loading.tsx`, including the checkout, shows the header (logo, search, menu) and puts the shared LoadingMask only over the content below it. On desktop the list of copies for one version ("N for sale") uses the shared 72 rem width and shows its rows in two columns from 1024 px; on phone it stays one column. The list beside the recommendation does not change.
+- **Why:** a full-screen loading state cleared the header and search on every navigation (bug 1), and the list of copies filled only a 42 rem left column (bug 5). Same width rule as 2026-11-09 (one page width).
+- **Not changed (Product Owner's choice):** Your account, sell, log in, sign up and search keep their narrow body.
+- **Choices made while building (not in the bugs):** two columns with a 2 rem gap from 1024 px; `pb-16` on the loading pages; a mask height of 24 rem.
+- **Also changed:** `supabase/seed.sql` now ends its `truncate` with `cascade`, so running it again works once orders exist.
+
+## 2026-11-10 — Stories and bugs in separate folders of `specs/`
+- **Decision:** `specs/stories/` holds the story files (`story-<n>-<name>.md`); `specs/bugs/` holds the bug files (`bug-<n>-<title>.md`). Files were moved with `git mv`, so history is kept.
+- **Why:** a bug is not a story (the log-bug skill already says so); with both in one folder, the list of stories mixed with bug reports and the progress script and the reviews had to filter by file name.
+- **Changed:** paths in SPEC.md, CLAUDE.md, the skills (log-bug, mvp-progress incl. `progress.py`, spec-review, ux-review), `docs/PROGRESS.md` and both findings registers (old evidence paths updated so the links work).
+- **Not changed:** the 2026-11-07 entry below, which describes the first layout.
+- **Trade-off accepted:** the findings registers of closed reviews were edited (paths only, no text).
+
+## 2026-11-10 — Story 20: one cart per account, one order per record
+- **Decision:** the cart belongs to the account (new table) and adding needs login. Records from several sellers can be in it. Shipping (€4.90) and protection (€2.00) are charged for each record, as in story 7. Pay creates one order per record. A record sold to someone else leaves the cart with a message. "Buy" stays and "Add to cart" is a second button. The cart opens from a "Cart" cell in the menu, with the count.
+- **Why:** it keeps the order table and "Your account" as they are, and the €34.90 total of story 7 does not change.
+- **Changed from the first answers:** "fees once per order" and "add while signed out" were set aside because they clashed with "one order per record" and "cart in the account".
+- **Trade-off accepted:** fees add up quickly with several records; a "Cart" cell changes the menu of stories 15 and 19, already built.
+- **Choices made in the story text (not in the Product Owner's words):** the texts "Add to cart", "Remove", "Go to checkout", "Cart" and "Your cart is empty"; nothing is paid if one record was already sold; the €71.80 example. The cart screen, the "Cart" cell and the "Add to cart" button need an approved design before the story starts.
+
 ## 2026-11-10 — Story 19: the search moves to the top row on every page but the home page
 - **Decision:** on desktop, from 1280 px, the search sits in the top row between the logo and the menu on every page except the home page; only the home page keeps the search in its own row under it. Under 1280 px the search keeps its own row on every page. On the sell pages there is still no header search.
 - **Why:** the Product Owner asked for it after seeing the recommendation page: the second row took vertical space on every page.

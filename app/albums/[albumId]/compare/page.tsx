@@ -160,7 +160,7 @@ function VersionHead({
 }) {
   return (
     <th scope="col" className={`p-0 align-top font-normal ${className} ${recommended ? `bg-[#fdfbf7] ${frameTop}` : ""}`}>
-      <Link href={href} className="block pb-3.5 lg:pb-[22px]">
+      <Link href={href} className="block pb-3.5 hover:bg-sand/40 lg:pb-[22px]">
         <span
           className={`block min-h-7 whitespace-nowrap px-2 py-1.5 text-[11px] font-medium tracking-wide lg:min-h-[34px] lg:px-[22px] lg:py-2 lg:text-xs ${
             recommended ? "bg-navy text-cream" : "bg-[#e2dacb]"

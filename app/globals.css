@@ -30,3 +30,25 @@ body {
   .page-mid > :not(header) { max-width: 48rem; }
   .page-form > :not(header) { max-width: 28rem; }
 }
+
+/* Hover states for every interactive button and link (bug 2). One place, so screens do not repeat them.
+   Unlayered rules win over the Tailwind utilities; disabled buttons never react. */
+button:not(:disabled), [role="button"] { cursor: pointer; }
+/* Navy pills (primary buttons, header actions): a slightly lighter navy. */
+:is(a, button)[class~="bg-navy"]:not(:disabled):hover { background-color: #323d57; }
+/* Outlined pills and round icon buttons: fill with sand. */
+:is(a, button)[class*="border-navy"]:is([class~="rounded-full"], [class~="rounded-r-full"]):not(:disabled):not([class*="hover:"]):hover {
+  background-color: var(--color-sand);
+}
+/* Selectable cards (priorities): sand fill. */
+button[class~="rounded-2xl"][class~="border"]:not(:disabled):hover { background-color: var(--color-sand); }
+/* Text links and text buttons: thicker underline. */
+:is(a, button)[class~="underline"]:hover { text-decoration-thickness: 2px; }
+
+/* A whole card that is one link (bug 3): lifts a little on hover, keeps a clear focus ring. */
+.card-link { display: block; border-radius: 1.5rem; transition: transform 120ms ease, box-shadow 120ms ease; }
+.card-link:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgb(29 36 51 / 0.18); }
+.card-link:focus-visible { outline: 3px solid var(--color-navy); outline-offset: 3px; }
+.card-link:hover [data-card-cta] { background-color: var(--color-sand); }
+.card-link:hover [data-card-cta-navy] { background-color: #323d57; }
+@media (prefers-reduced-motion: reduce) { .card-link { transition: none; } .card-link:hover { transform: none; } }

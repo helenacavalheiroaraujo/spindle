@@ -126,7 +126,7 @@ export function SuggestionList({
 }: ReturnType<typeof useSuggestions>["list"] & { wide?: boolean }) {
   if (!visible) return null;
   const rowClass = (i: number) =>
-    `flex min-h-14 w-full items-center gap-3 border-b border-line px-3.5 py-2 text-left ${highlight === i ? "bg-sand" : ""}`;
+    `flex min-h-14 w-full items-center gap-3 border-b border-line px-3.5 py-2 text-left hover:bg-sand ${highlight === i ? "bg-sand" : ""}`;
   return (
     <div className={`absolute top-full z-20 mt-2 overflow-hidden rounded-[18px] border border-line bg-white shadow-lg ${wide ? "left-0 w-[28rem] max-w-[90vw]" : "inset-x-0"}`}>
       <div className="relative min-h-24">
@@ -214,7 +214,7 @@ export function SuggestionList({
           <Link
             href={`/search?q=${encodeURIComponent(typed.trim())}`}
             onClick={close}
-            className="flex min-h-12 items-center justify-between bg-cream px-3.5 text-sm font-semibold"
+            className="flex min-h-12 items-center justify-between bg-cream px-3.5 text-sm font-semibold hover:bg-sand"
           >
             <span>See all results for “{typed.trim()}”</span>
             <span aria-hidden>→</span>

@@ -131,7 +131,7 @@ export function AlbumRow({ album, mode, onNobodySelling }: RowProps & { album: A
       </span>
     </>
   );
-  const rowClass = "flex min-h-20 w-full items-center gap-3 py-3 text-left";
+  const rowClass = "flex min-h-20 w-full items-center gap-3 py-3 text-left hover:bg-sand/60";
   if (mode === "sell")
     return (
       <Link href={`/sell/albums/${album.id}`} className={rowClass}>

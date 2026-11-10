@@ -5,7 +5,8 @@ import { formatPriorities, type Priority } from "@/lib/rules/priorities";
 import { formatPrice } from "@/lib/rules/recommendation";
 import { yellowWarning } from "@/lib/rules/yellowWarning";
 import { priceLabel, type TypicalRange } from "@/lib/rules/fairPrice";
-import { LightLegend, TrafficLight } from "@/components/TrafficLight";
+import { TrafficLight } from "@/components/TrafficLight";
+import { LightLegendExplained } from "@/components/LightLegendExplained";
 import { BuyButton } from "@/components/BuyButton";
 import { checkoutPath, isOwnListing } from "@/lib/rules/checkoutAccess";
 import { YourListing } from "@/components/YourListing";
@@ -49,7 +50,7 @@ export function ListingList({
         {forSale} for sale{moved > 0 && ` · ${moved} moved`}
       </Heading>
       <div className="mt-3 border-b border-line pb-3">
-        <LightLegend />
+        <LightLegendExplained />
       </div>
 
       {allRed(rows) && (
@@ -58,7 +59,7 @@ export function ListingList({
         </p>
       )}
 
-      <ul aria-label="Verified listings">
+      <ul aria-label="Verified listings" className={from === "list" ? "lg:grid lg:grid-cols-2 lg:gap-x-8" : undefined}>
         {rows.map(({ listing: l, light, movedHere, movedToVersionId }) => {
           const label = `${formatPrice(l.price)}, ${l.condition.name}, ${sellerText(l.seller)}`;
           return (
@@ -76,7 +77,7 @@ export function ListingList({
                   </Link>
                 </p>
               )}
-              <Link href={`/listings/${l.id}?${query}`} aria-label={`Open ${label}`} className="block rounded-lg">
+              <Link href={`/listings/${l.id}?${query}`} aria-label={`Open ${label}`} className="block rounded-lg hover:bg-sand/60">
                 {light === "red" ? (
                   <>
                     <p className="text-navy/70">Not for sale here</p>

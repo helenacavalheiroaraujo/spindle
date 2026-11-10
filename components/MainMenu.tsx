@@ -139,7 +139,7 @@ function DrawerRow({ item, open, onToggle, onNavigate }: { item: MenuItem; open:
             href={item.href}
             onClick={onNavigate}
             aria-current={item.current ? "page" : undefined}
-            className={`flex min-h-14 flex-1 items-center rounded-xl px-3 text-base font-semibold ${item.current ? "bg-sand" : ""}`}
+            className={`flex min-h-14 flex-1 items-center rounded-xl px-3 text-base font-semibold hover:bg-sand ${item.current ? "bg-sand" : ""}`}
           >
             {item.label}
           </Link>
@@ -155,7 +155,7 @@ function DrawerRow({ item, open, onToggle, onNavigate }: { item: MenuItem; open:
           aria-expanded={open}
           aria-controls={boxId}
           onClick={onToggle}
-          className="flex h-12 w-12 shrink-0 items-center justify-center"
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full hover:bg-sand"
         >
           <Chevron open={open} />
         </button>

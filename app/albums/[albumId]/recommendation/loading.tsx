@@ -1,10 +1,14 @@
+import { Header } from "@/components/Header";
 import { LoadingMask } from "@/components/LoadingMask";
 
 // While the recommendation loads (SPEC · Shared rules).
 export default function Loading() {
   return (
-    <main className="relative min-h-96 px-4 page-main">
-      <LoadingMask label="Finding your pressing…" />
+    <main className="px-4 pb-16 page-main">
+      <Header />
+      <div className="relative min-h-96">
+        <LoadingMask label="Finding your pressing…" />
+      </div>
     </main>
   );
 }

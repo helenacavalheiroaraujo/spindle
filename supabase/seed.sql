@@ -21,7 +21,7 @@
 --     and Illmatic are showcase albums (versions only, no listings) so Jazz, Fado and Hip-hop have a crate: "No listings". Ziggy Stardust keeps the most active
 --     listings (5), so it is the featured album ("This weekend").
 
-truncate table check_results, listings, profiles, tracks, reason_texts, versions, albums, glossary_terms;
+truncate table check_results, listings, profiles, tracks, reason_texts, versions, albums, glossary_terms cascade;
 
 -- Albums -------------------------------------------------------------------
 insert into albums (id, title, artist, release_year, cover_url, genre) values

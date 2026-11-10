@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { getListingCheck } from "@/lib/db/listings";
 import { currentUserId } from "@/lib/db/session";
+import { getLastShippingAddress } from "@/lib/db/orders";
 import { currentProfileId } from "@/lib/db/profiles";
 import { canCheckout, checkoutPath, isNoLongerAvailable } from "@/lib/rules/checkoutAccess";
 import { ListingUnavailable } from "@/components/ListingUnavailable";
@@ -28,9 +29,12 @@ export default async function CheckoutPage({
   if (isNoLongerAvailable(l.status)) return <ListingUnavailable />; // sold or removed (finding #61)
   const versionId = one((await searchParams).version) ?? l.claimedVersionId;
 
-  if (!(await currentUserId())) redirect(withReturn("/login", checkoutPath(listingId, versionId)));
+  const userId = await currentUserId();
+  if (!userId) redirect(withReturn("/login", checkoutPath(listingId, versionId)));
   // Red, sold or removed, or the seller's own listing (finding #12): never reaches the checkout.
   if (!canCheckout(l, versionId, await currentProfileId())) notFound();
+
+  const initialAddress = await getLastShippingAddress(userId);
 
   const versionName = versionId === l.actualVersionId ? l.actualVersionName : l.claimedVersionName;
 
@@ -66,7 +70,7 @@ export default async function CheckoutPage({
       </Link>
       <h1 className="mt-4 font-heading text-4xl leading-tight lg:text-6xl">Buy with protection</h1>
 
-      <CheckoutForm listingId={listingId} versionId={versionId} record={record} amounts={checkoutTotal(l.price)} />
+      <CheckoutForm listingId={listingId} versionId={versionId} record={record} amounts={checkoutTotal(l.price)} initialAddress={initialAddress} />
     </main>
   );
 }
