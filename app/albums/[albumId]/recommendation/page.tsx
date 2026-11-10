@@ -69,11 +69,11 @@ export default async function RecommendationPage({
       {/* Desktop (design option C): a large cover anchors the left; the whole decision reads down the right. */}
       <div className="lg:grid lg:grid-cols-[25rem_minmax(0,1fr)] lg:gap-14">
         <div className="lg:sticky lg:top-6 lg:self-start">
-          <div className="flex justify-end lg:justify-start">
+          <div className="flex justify-end lg:h-14 lg:items-center lg:justify-start">
             <span className="rounded-full border border-navy/30 px-3 py-1 text-xs">Illustrative data</span>
           </div>
 
-          <div className="mt-6 flex items-center gap-4 lg:block">
+          <div className="mt-6 flex items-center gap-4 lg:mt-0 lg:block">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={album.coverUrl}
@@ -89,7 +89,7 @@ export default async function RecommendationPage({
           </div>
         </div>
 
-        <div className="flex flex-col lg:max-w-[40rem]">
+        <div className="flex flex-col lg:max-w-[40rem] lg:pt-14">
           <p className="mt-6 text-sm font-semibold uppercase tracking-wide text-navy/70 lg:mt-0">Get this one</p>
           <h1 className="font-heading text-4xl leading-tight sm:text-5xl">
             <GlossaryText text={version.name} terms={glossary} />
