@@ -66,28 +66,24 @@ test("desktop: the menu is in the top row above the search; cells Artists, All g
   await expect(row(page).getByRole("link", { name: "Sell for free" })).toBeVisible();
 });
 
-test("desktop: the search is in the top row between the logo and the menu on every page but the home page, where it has its own row", async ({ page }, info) => {
+test("desktop: the search is in a cream strip under the menu row on every page, and the header is the same height everywhere (story 22)", async ({ page }, info) => {
   desktopOnly(info);
   const header = async (path: string) => {
     await page.goto(path);
     return {
       height: Math.round((await page.locator("header").first().boundingBox())!.height),
-      logo: await page.getByRole("link", { name: "SPINDLE" }).boundingBox(),
-      search: await page.locator("header").first().getByRole("search").boundingBox().catch(() => null),
+      search: await page.locator("header").first().getByRole("search").boundingBox(),
       nav: await row(page).boundingBox(),
     };
   };
   const home = await header("/");
-  expect(home.search!.y).toBeGreaterThan(home.nav!.y + home.nav!.height - 2); // under the menu
+  expect(home.search!.y).toBeGreaterThan(home.nav!.y + home.nav!.height - 2); // under the menu row
   const other = await header("/search?q=bowie");
-  expect(other.height).toBeLessThan(home.height); // no second row
-  expect(other.search!.x).toBeGreaterThan(other.logo!.x + other.logo!.width); // between the logo ...
-  expect(other.search!.x + other.search!.width).toBeLessThan(other.nav!.x); // ... and the menu
-  expect(Math.abs(other.search!.y - other.logo!.y)).toBeLessThan(40); // in the same row
-  expect(other.search!.width).toBeGreaterThan(150); // narrowed (the cart icon of story 20 takes 44 px), not squeezed away
-  expect((await header("/login")).height).toBe(other.height);
+  expect(other.search!.y).toBeGreaterThan(other.nav!.y + other.nav!.height - 2); // under the menu row, not beside it
+  expect(other.height).toBe(home.height); // one strip on every page
+  expect((await header("/login")).height).toBe(home.height);
   await page.goto("/search?q=bowie");
-  await screenshot(page, 19, "header-search-top");
+  await screenshot(page, 22, "header-search-strip");
 });
 
 test("desktop: the chevron opens a box by hover, click and Enter; Esc and a click outside close it", async ({ page }, info) => {

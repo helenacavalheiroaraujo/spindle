@@ -34,7 +34,9 @@ test("desktop: on a short page the footer sits at the bottom of the window", asy
   await expect(footer(page)).toBeVisible();
   const box = await footer(page).boundingBox();
   const viewport = page.viewportSize()!;
-  expect(box!.y + box!.height).toBeCloseTo(viewport.height, 0); // flush with the bottom, not floating in the middle
+  const documentHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+  expect(box!.y + box!.height).toBeGreaterThanOrEqual(viewport.height - 1); // at least the bottom of the window
+  expect(box!.y + box!.height).toBeCloseTo(documentHeight, 0); // and nothing sits below it: no gap, not floating in the middle
 });
 
 test("phone: the footer is not shown", async ({ page }, info) => {

@@ -3,6 +3,16 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Story 22: navy top row and search strip on desktop (option B)
+
+### The desktop header is navy in its top row, and the search moves under it
+- **Decision:** on desktop (1280 px and wider) the top row of the header is navy with cream text and icons, the same navy as the footer (story 14). The search is a cream strip under the navy row, on every page except the sell pages. Its dark letters stay dark. Option B of `docs/design/header-navy-options.html`, chosen by the owner.
+- **Why:** the owner liked the footer's navy and asked for the same in the header. Option B keeps the search as the clearest control on the page.
+- **Replaces:** story 19's rule that the search sits in the top row between the logo and the menu on every page but the home page. The home page's own search row is now the same strip on every page.
+- **Exception:** CLAUDE.md's visual direction gives cream backgrounds and navy only for primary buttons and selected states. A navy top row on every desktop page is an exception, as the footer already is.
+- **Trade-off accepted:** the search takes a second band (64 px), so the header is taller than in story 19. Option A (inverting the search too) was not chosen.
+- **Phone:** unchanged (cream). Story 22 is desktop only.
+
 ## 2026-11-10 — Bug 16: no "Back to home" label on any screen
 - **Decision:** the "← Back to home" link is removed from the search results, the sell search and the genre screen. The browser's back arrow is used instead. This supersedes the criterion in story 17 ("← Back to home" returns to the home page) and decision #28 (sell search). The approved design `docs/design/search-results-desktop.html` still shows the label and is not changed.
 - **Why:** the owner's decision for bug 16. The label is not needed, because back and forward are in the browser.

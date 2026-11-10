@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Navy header: three options (desktop)</title>
+<!-- Story 22 · desktop header in navy, three options for the owner to choose from. Same navy as the footer (story 14). No recommendation: see the trade-offs under each option. Illustrative data. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:15px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:-.01em}
+.vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;margin:0 0 8px}
+.fr{max-width:1232px;margin:0 auto 40px}
+.desk{border:1px solid #1d2433;border-radius:20px;overflow:hidden;background:#f4efe6}
+.bar{display:flex;align-items:center;gap:24px;padding:16px 48px;background:#1d2433;color:#f4efe6}
+.logo{display:flex;gap:10px;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;letter-spacing:.04em;flex:none}
+.dot{width:22px;height:22px;border-radius:50%;border:6px solid #f4efe6;display:inline-block}
+.links{display:flex;gap:22px;align-items:center;font-weight:600;flex:none}
+.links .soon{font-size:12px;border:1px solid rgba(244,239,230,.5);border-radius:999px;padding:1px 8px;font-weight:500;margin-left:6px;color:#e2dacb}
+.search{flex:1;display:flex;align-items:center;gap:10px;border-radius:999px;padding:6px 6px 6px 18px;font-size:15px}
+.search .go{margin-left:auto;border-radius:999px;padding:8px 18px;font-weight:600;font-size:14px}
+.pill{border-radius:999px;padding:9px 18px;font-weight:600;flex:none}
+.cart{width:22px;height:22px;flex:none}
+/* Option A: literal inversion, navy search field with cream text and border */
+.a .search{border:1.5px solid #f4efe6;color:#f4efe6;background:#1d2433} .a .search .go{background:#f4efe6;color:#1d2433}
+.a .pill{border:1.5px solid #f4efe6;color:#f4efe6}
+/* Option B: navy top row only, search on a cream strip under it */
+.b .strip{background:#f4efe6;padding:14px 48px;border-bottom:1px solid #e2dacb}
+.b .search{border:1.5px solid #1d2433;color:#6f6a60;background:#fff} .b .search .go{background:#1d2433;color:#f4efe6}
+.b .pill{border:1.5px solid #f4efe6;color:#f4efe6}
+/* Option C: navy bar, search kept as a light field with dark text */
+.c .search{background:#faf7f1;color:#6f6a60;border:1.5px solid #faf7f1} .c .search .go{background:#1d2433;color:#f4efe6}
+.c .pill{background:#f4efe6;color:#1d2433;border:1.5px solid #f4efe6}
+main{padding:32px 48px 40px;display:grid;gap:22px}
+h1{font-size:64px;line-height:.95} .line{font-size:16px;margin-top:10px} .small{font-size:13px;color:#6f6a60}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.crate{border-radius:20px;position:relative;overflow:hidden;padding:16px;min-height:110px}
+.crate b{font-family:'Barlow Condensed',sans-serif;font-size:30px;line-height:1;position:absolute;left:16px;bottom:38px} .crate span{position:absolute;left:16px;bottom:16px;font-size:14px}
+.rock{background:#c9a46a} .soul{background:#b08a58} .elec{background:#cfb68a}
+.ftr{background:#1d2433;color:#f4efe6;padding:22px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.ftr p{font-size:14px;color:#e2dacb} .ftr .note{font-size:13px;border:1px solid rgba(244,239,230,.45);border-radius:999px;padding:6px 14px;white-space:nowrap}
+.ill{border:1px solid #c8bfae;border-radius:999px;padding:3px 9px;font-size:12px;justify-self:start}
+.opt{display:grid;gap:10px;background:#fbf8f2;border:1px solid #e2dacb;border-radius:18px;padding:18px 20px}
+.opt h3{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700}
+.opt ul{padding-left:18px;display:grid;gap:4px;font-size:14px}
+.opt .tag{font-size:12px;font-weight:600;color:#5a3a24;text-transform:uppercase;letter-spacing:.05em}
+.note-box{font-size:13px;color:#6f6a60;margin-top:8px}
+</style></head><body>
+
+<section class="fr"><h2 class="vt">Option A · Full navy header, literal inversion</h2><div class="desk a">
+<header class="bar"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="search">⌕ Which record are you after?<span class="go">Search</span></span><span class="links">Artists <span class="soon">Soon</span></span><span class="pill">Log in</span><span class="pill">+ Sell for free</span></header>
+<main>
+<div><h1 class="hd">Pick a crate. We'll pick the pressing.</h1><p class="line">No jargon, no homework. We tell you which version to buy and check every listing.</p></div>
+<div class="grid3"><div class="crate rock"><b>Rock</b><span>4 records</span></div><div class="crate soul"><b>Soul and funk</b><span>1 record</span></div><div class="crate elec"><b>Electronic</b><span>2 records</span></div></div>
+<span class="ill">Illustrative data</span>
+</main>
+<footer class="ftr"><div><span class="logo"><i class="dot"></i>SPINDLE</span><p style="margin-top:8px">We help you pick the right pressing of a vinyl record and buy a verified copy safely.</p></div><span class="note">All catalogue data is illustrative</span></footer>
+</div>
+<div class="opt" style="margin-top:14px"><span class="tag">Trade-offs</span><ul>
+<li>Most literal reading of "invert all dark letters": every header element is light on navy.</li>
+<li>The search field is navy too, so it blends in; its cream border is what shows it is a field.</li>
+<li>The header and footer frame the page in navy: the strongest version of the look.</li>
+</ul></div>
+</section>
+
+<section class="fr"><h2 class="vt">Option B · Navy top row, search on a cream strip</h2><div class="desk b">
+<header><div class="bar"><span class="logo"><i class="dot"></i>SPINDLE</span><span style="flex:1"></span><span class="links">Artists <span class="soon">Soon</span> &nbsp; All genres and formats <span class="soon">Soon</span> &nbsp; Log in</span><span class="pill">+ Sell for free</span></div>
+<div class="strip"><span class="search">⌕ Which record are you after?<span class="go">Search</span></span></div></header>
+<main>
+<div><h1 class="hd">Pick a crate. We'll pick the pressing.</h1><p class="line">No jargon, no homework. We tell you which version to buy and check every listing.</p></div>
+<div class="grid3"><div class="crate rock"><b>Rock</b><span>4 records</span></div><div class="crate soul"><b>Soul and funk</b><span>1 record</span></div><div class="crate elec"><b>Electronic</b><span>2 records</span></div></div>
+<span class="ill">Illustrative data</span>
+</main>
+<footer class="ftr"><div><span class="logo"><i class="dot"></i>SPINDLE</span><p style="margin-top:8px">We help you pick the right pressing of a vinyl record and buy a verified copy safely.</p></div><span class="note">All catalogue data is illustrative</span></footer>
+</div>
+<div class="opt" style="margin-top:14px"><span class="tag">Trade-offs</span><ul>
+<li>The search keeps its dark text on a light field, so the search stays the clearest control on the page.</li>
+<li>The navy is only the top row; the strip is cream, which is closer to the cream page of the design.</li>
+<li>Two bands at the top (navy, then cream) take more height than option A or C.</li>
+</ul><p class="note-box">Not literal: the search box keeps its dark letters. Needs the owner's OK for that part.</p></div>
+</section>
+
+<section class="fr"><h2 class="vt">Option C · Navy bar, light search field</h2><div class="desk c">
+<header class="bar"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="search">⌕ Which record are you after?<span class="go">Search</span></span><span class="links">Artists <span class="soon">Soon</span></span><span class="pill">Log in</span><span class="pill">+ Sell for free</span></header>
+<main>
+<div><h1 class="hd">Pick a crate. We'll pick the pressing.</h1><p class="line">No jargon, no homework. We tell you which version to buy and check every listing.</p></div>
+<div class="grid3"><div class="crate rock"><b>Rock</b><span>4 records</span></div><div class="crate soul"><b>Soul and funk</b><span>1 record</span></div><div class="crate elec"><b>Electronic</b><span>2 records</span></div></div>
+<span class="ill">Illustrative data</span>
+</main>
+<footer class="ftr"><div><span class="logo"><i class="dot"></i>SPINDLE</span><p style="margin-top:8px">We help you pick the right pressing of a vinyl record and buy a verified copy safely.</p></div><span class="note">All catalogue data is illustrative</span></footer>
+</div>
+<div class="opt" style="margin-top:14px"><span class="tag">Trade-offs</span><ul>
+<li>One bar, one row: the same height as the current header, with the search in the middle.</li>
+<li>The search is a light field with dark text, so it reads as a field on navy; the "Log in" and "Sell" buttons are cream pills.</li>
+<li>Not literal for the search box, the same as option B. Needs the owner's OK for that part.</li>
+</ul></div>
+</section>
+
+</body></html>

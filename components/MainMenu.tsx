@@ -29,7 +29,7 @@ function Chevron({ open }: { open: boolean }) {
 }
 
 function SoonTag() {
-  return <span className="rounded-full border border-line px-2 py-0.5 text-[11px] font-medium text-navy/60">Soon</span>;
+  return <span className="rounded-full border border-cream/40 px-2 py-0.5 text-[11px] font-medium text-cream/70">Soon</span>;
 }
 
 // One desktop cell: the link, and a chevron that opens a small box by hover, click or Enter; Esc and a click outside
@@ -65,14 +65,14 @@ function Cell({ cell }: { cell: DesktopCell }) {
   }, [shown]);
 
   const text = `flex min-h-11 items-center gap-2 rounded-l-full pl-3.5 pr-1 text-[15px] ${
-    cell.soon ? "font-medium text-navy/60" : "font-semibold"
+    cell.soon ? "font-medium text-cream/70" : "font-semibold"
   }`;
   return (
     <div
       ref={ref}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className={`relative flex items-center rounded-full hover:bg-[#ebe2d0] ${cell.cta ? "border-[1.5px] border-navy hover:bg-sand" : ""}`}
+      className={`relative flex items-center rounded-full hover:bg-white/10 ${cell.cta ? "border-[1.5px] border-cream hover:bg-white/10" : ""}`}
     >
       {cell.href ? (
         <Link
@@ -97,8 +97,8 @@ function Cell({ cell }: { cell: DesktopCell }) {
         aria-expanded={shown}
         aria-controls={boxId}
         onClick={() => setOpen((o) => !o)}
-        className={`flex min-h-11 w-10 items-center justify-center rounded-r-full focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-navy ${
-          cell.soon ? "text-navy/60" : ""
+        className={`flex min-h-11 w-10 items-center justify-center rounded-r-full focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-cream ${
+          cell.soon ? "text-cream/70" : ""
         }`}
       >
         <Chevron open={shown} />
@@ -106,7 +106,7 @@ function Cell({ cell }: { cell: DesktopCell }) {
       )}
       {shown && cell.note && (
         <div id={boxId} className="absolute right-0 top-full z-30 w-64 pt-2">
-          <div className="rounded-2xl border border-line bg-[#fffdf9] p-4 shadow-lg">
+          <div className="rounded-2xl border border-line bg-[#fffdf9] p-4 text-navy shadow-lg">
             <p className="text-sm font-semibold">{cell.note.title}</p>
             <p className="mt-0.5 text-[13px] text-navy/70">{cell.note.text}</p>
           </div>
@@ -124,7 +124,7 @@ export function MenuRow() {
     <nav aria-label="Main" className="hidden items-center gap-0.5 lg:flex">
       {cells.map((cell) => (
         <div key={cell.label} className="flex items-center gap-0.5">
-          {cell.divider && <span aria-hidden className="mx-2 h-5 w-px bg-line" />}
+          {cell.divider && <span aria-hidden className="mx-2 h-5 w-px bg-cream/30" />}
           <Cell cell={cell} />
         </div>
       ))}

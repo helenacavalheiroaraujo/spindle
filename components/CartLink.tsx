@@ -12,13 +12,13 @@ export function CartLink() {
     <Link
       href="/cart"
       aria-label={count > 0 ? `Cart, ${recordCount(count)}` : "Cart"}
-      className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full hover:bg-[#ebe2d0]"
+      className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full hover:bg-[#ebe2d0] lg:hover:bg-white/10"
     >
       <CartIcon />
       {count > 0 && (
         <span
           aria-hidden
-          className="absolute right-0 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-navy px-1 text-[11px] font-semibold text-cream"
+          className="absolute right-0 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-navy px-1 text-[11px] font-semibold text-cream lg:bg-cream lg:text-navy"
         >
           {count}
         </span>

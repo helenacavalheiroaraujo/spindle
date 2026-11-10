@@ -7,7 +7,7 @@ Stack and hosting: see `DECISIONS.md`. Assignment 1 stated PHP; the MVP uses Nex
 1. **Core:** stories 1, 2, 3, 5, 6, 12
 2. **Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)
 3. **Seller:** story 8
-4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15), then story 20 (cart), **story 14 (desktop footer)**
+4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15), then story 20 (cart), **story 14 (desktop footer), story 22 (navy header)**
 
 Not in this MVP: stories 10, 11, 13
 
@@ -57,6 +57,7 @@ In build order. Each story has its own file in `specs/stories/` (bugs are in `sp
 | Story 19 · Menu with chevrons | [`specs/stories/story-19-menu-chevrons.md`](specs/stories/story-19-menu-chevrons.md) |
 | Story 20 · Cart | [`specs/stories/story-20-cart.md`](specs/stories/story-20-cart.md) |
 | Story 21 · Album details without listings | [`specs/stories/story-21-album-details.md`](specs/stories/story-21-album-details.md) |
+| Story 22 · Navy header (desktop) | [`specs/stories/story-22-navy-header.md`](specs/stories/story-22-navy-header.md) |
 
 ---
 
@@ -177,5 +178,7 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 20 | Empty cart: "Your cart is empty" and a link to search; loading mask and error screen with "Try again" (Shared rules) | `app/cart/page.tsx`, `app/cart/loading.tsx`, `app/cart/error.tsx`, `app/cart/checkout/loading.tsx`, `app/cart/checkout/error.tsx` | `tests/e2e/cart.spec.ts` (error screens: not run automatically in this run) |
 | 21 | Musician's description (first 3 sentences, Wikipedia) with a link to the article | `lib/external/albumDetails.ts`, `lib/rules/albumDetails.ts`, `app/albums/[albumId]/page.tsx` | `tests/unit/albumDetails.test.ts`, `tests/e2e/albumDetails.spec.ts` |
 | 21 | Release date (full date), label and track list from MusicBrainz; the usual track count rule | `lib/rules/albumDetails.ts`, `lib/external/albumDetails.ts`, `app/albums/[albumId]/page.tsx` | `tests/unit/albumDetails.test.ts`, `tests/e2e/albumDetails.spec.ts` |
+| 22 | Desktop: the top row of the header is navy with cream text and icons; the search is in a cream strip under it, on every page except the sell pages | `components/Header.tsx`, `components/HeaderSearch.tsx`, `components/MainMenu.tsx`, `components/CartLink.tsx` | `tests/e2e/navyHeader.spec.ts`, `tests/e2e/menu.spec.ts` |
+| 22 | Phone: the header is unchanged (not navy) | `components/Header.tsx` | `tests/e2e/navyHeader.spec.ts` |
 | 21 | "Source: MusicBrainz · Wikipedia" instead of "Illustrative data"; the message "Nobody is selling this album right now" stays | `app/albums/[albumId]/page.tsx` | `tests/e2e/albumDetails.spec.ts` |
 | 21 | "The details of this album are not available right now." when no source answers | `app/albums/[albumId]/page.tsx` | Not tested automatically (needs the services down) |
