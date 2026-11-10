@@ -6,6 +6,11 @@ import { Header } from "@/components/Header";
 // Album with no listings (bug 17, DECISIONS 2026-11-10): the genre screen opens it. It says nobody is selling it.
 // Also shows the musician, release date, label and tracks (DECISIONS 2026-11-10, album page), from MusicBrainz and Wikipedia.
 // An album that opens goes to its priorities screen; one not in the demo has no page.
+//
+// Layout (option A of docs/design/album-page-desktop-options.html, approved): on desktop the cover and the release
+// facts sit on the left and the title, the status and the text on the right, so both columns end at about the same
+// height. On phone it is one column in this order: cover, title, status, facts, text. The two groups are "contents"
+// on phone and columns on desktop; the `order` classes keep the phone order.
 export default async function AlbumNoListingsPage({ params }: { params: Promise<{ albumId: string }> }) {
   const { albumId } = await params;
   const album = (await listAlbumSummaries()).find((a) => a.id === albumId);
@@ -19,42 +24,47 @@ export default async function AlbumNoListingsPage({ params }: { params: Promise<
     (details.releaseDate !== null || details.label !== null || details.tracks.length > 0 || details.musician !== null);
 
   return (
-    <main className="px-4 pb-16 page-main page-narrow">
+    <main className="px-4 pb-16 page-main">
       <Header />
-      <div className="lg:grid lg:grid-cols-[340px_1fr] lg:gap-12">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={album.coverUrl} alt="" width={340} height={340} className="h-auto w-full rounded-2xl" />
-        <div>
-          <h1 className="mt-6 font-heading text-4xl leading-tight lg:mt-0">{album.title}</h1>
-          <p className="mt-1 text-navy/70">
-            {album.artist} · {album.releaseYear}
-          </p>
-          <section role="status" className="mt-6 rounded-2xl border border-line bg-sand p-5 text-navy">
+      <div className="flex flex-col lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start lg:gap-x-12">
+        <div className="contents lg:flex lg:flex-col lg:gap-6">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={album.coverUrl} alt="" width={340} height={340} className="order-1 h-auto w-full rounded-2xl" />
+          {hasDetails && (details.releaseDate || details.label) && (
+            <dl className="order-4 mt-6 divide-y divide-line rounded-2xl border border-line bg-sand px-5 lg:mt-0">
+              {details.releaseDate && (
+                <div className="flex justify-between gap-4 py-3">
+                  <dt className="text-navy/70">Released</dt>
+                  <dd className="font-semibold">{details.releaseDate}</dd>
+                </div>
+              )}
+              {details.label && (
+                <div className="flex justify-between gap-4 py-3">
+                  <dt className="text-navy/70">Label</dt>
+                  <dd className="font-semibold">{details.label}</dd>
+                </div>
+              )}
+            </dl>
+          )}
+        </div>
+
+        <div className="contents lg:flex lg:flex-col lg:gap-6">
+          <div className="order-2 mt-6 lg:mt-0">
+            <h1 className="font-heading text-4xl leading-tight">{album.title}</h1>
+            <p className="mt-1 text-navy/70">
+              {album.artist} · {album.releaseYear}
+            </p>
+          </div>
+
+          <section role="status" className="order-3 mt-6 rounded-2xl border border-line bg-sand p-5 text-navy lg:mt-0">
             <h2 className="font-heading text-2xl">Nobody is selling this album right now</h2>
             <p className="mt-2 text-navy/80">Check back later, or browse other albums in this genre.</p>
           </section>
 
           {hasDetails ? (
-            <>
-              {(details.releaseDate || details.label) && (
-                <dl className="mt-6 divide-y divide-line rounded-2xl border border-line bg-sand px-5">
-                  {details.releaseDate && (
-                    <div className="flex justify-between gap-4 py-3">
-                      <dt className="text-navy/70">Released</dt>
-                      <dd className="font-semibold">{details.releaseDate}</dd>
-                    </div>
-                  )}
-                  {details.label && (
-                    <div className="flex justify-between gap-4 py-3">
-                      <dt className="text-navy/70">Label</dt>
-                      <dd className="font-semibold">{details.label}</dd>
-                    </div>
-                  )}
-                </dl>
-              )}
-
+            <div className="order-5">
               {details.musician && (
-                <section className="mt-8">
+                <section className="mt-8 lg:mt-0">
                   <h2 className="font-heading text-2xl">About {details.musician.name}</h2>
                   <p className="mt-2 text-navy/80">{details.musician.text}</p>
                   <a
@@ -85,9 +95,9 @@ export default async function AlbumNoListingsPage({ params }: { params: Promise<
               <p className="mt-6 inline-block rounded-full border border-line px-3 py-1 text-sm text-navy/70">
                 Source: MusicBrainz · Wikipedia
               </p>
-            </>
+            </div>
           ) : (
-            <p className="mt-6 text-sm text-navy/70">The details of this album are not available right now.</p>
+            <p className="order-5 mt-6 text-sm text-navy/70">The details of this album are not available right now.</p>
           )}
         </div>
       </div>

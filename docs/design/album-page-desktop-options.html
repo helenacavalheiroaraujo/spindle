@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Album page, desktop: three layouts</title>
+<!-- Album page with no listings, desktop (1280 px). Three layout options to choose from; nothing is built.
+     Covers the page shown in the owner's screenshot: cover top left, narrow text column, large empty right side. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:16px;line-height:1.45;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:-.01em}
+.opt{max-width:1280px;margin:0 auto 40px;border:1px solid #1d2433;border-radius:20px;background:#f4efe6;overflow:hidden}
+.label{padding:14px 28px;font-size:14px;font-weight:600;border-bottom:1px solid #e2dacb;background:#faf7f1}
+.page{padding:32px 48px 48px}
+.cover{border-radius:16px;overflow:hidden;background:#5a3a24;aspect-ratio:1/1;border:1px solid rgba(29,36,51,.2)}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+h1{font-size:64px;line-height:.95}
+.artist{color:#6f6a60;font-size:18px;margin-top:8px}
+.panel{background:#ebdcc4;border-radius:20px;padding:26px 28px}
+.panel h2{font-size:34px;line-height:1.05}
+.panel p{margin-top:10px;color:#3d4454}
+.card{border:1px solid #d9cfbd;border-radius:20px;padding:22px 26px;background:#faf7f1}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:12px 24px}
+.facts dt{color:#6f6a60} .facts dd{text-align:right;font-weight:500}
+.about h2{font-size:30px;line-height:1.05;margin-bottom:10px}
+.about p{max-width:68ch;color:#3d4454}
+.link{display:inline-block;margin-top:14px;font-weight:600;text-decoration:underline}
+.genre{font-size:13px;color:#6f6a60;margin-top:14px}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px}
+.strip div{height:72px;border-radius:14px;background:#e6dccb}
+.note{font-size:13px;color:#6f6a60;margin-top:14px}
+.illus{border:1px solid #c8bfae;border-radius:999px;padding:3px 9px;font-size:12px;display:inline-block;margin-top:14px}
+.a{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:start}
+.b-top{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:48px;align-items:center}
+.b-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+.c{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:48px}
+.stack{display:grid;gap:20px;align-content:start}
+</style></head><body>
+
+<!-- OPTION A -->
+<section class="opt">
+  <div class="label">Option A · Two columns, same height: cover and facts on the left, the status panel and the text on the right, filling the width</div>
+  <div class="page a">
+    <div>
+      <div class="cover"><img src="https://coverartarchive.org/release-group/28298e2c-4d70-3eed-a0f5-a3280c662b3d/front-500" alt=""></div>
+      <div class="card" style="margin-top:20px">
+        <dl class="facts"><dt>Released</dt><dd>15 April 1994</dd><dt>Label</dt><dd>Columbia</dd></dl>
+      </div>
+    </div>
+    <div class="stack">
+      <div>
+        <h1 class="hd">Illmatic</h1>
+        <p class="artist">Nas · 1994</p>
+      </div>
+      <div class="panel">
+        <h2 class="hd">Nobody is selling this album right now</h2>
+        <p>Check back later, or browse other albums in this genre.</p>
+      </div>
+      <div class="card about">
+        <h2 class="hd">About Nas</h2>
+        <p>Nasir bin Olu Dara Jones, known mononymously as Nas, is an American rapper, entrepreneur and record producer. Rooted in East Coast hip-hop, he is regarded as one of the greatest rappers of all time.</p>
+        <a class="link" href="#">Read more on Wikipedia</a>
+      </div>
+      <span class="illus">Illustrative data</span>
+    </div>
+  </div>
+</section>
+
+<!-- OPTION B -->
+<section class="opt">
+  <div class="label">Option B · Header band, then two cards: the cover and the title sit side by side across the top, the status and the facts sit under them</div>
+  <div class="page">
+    <div class="b-top">
+      <div class="cover"><img src="https://coverartarchive.org/release-group/28298e2c-4d70-3eed-a0f5-a3280c662b3d/front-500" alt=""></div>
+      <div>
+        <h1 class="hd">Illmatic</h1>
+        <p class="artist">Nas · 1994</p>
+        <div class="panel" style="margin-top:28px;max-width:560px">
+          <h2 class="hd">Nobody is selling this album right now</h2>
+          <p>Check back later, or browse other albums in this genre.</p>
+        </div>
+        <div class="card" style="margin-top:20px;max-width:560px">
+          <dl class="facts"><dt>Released</dt><dd>15 April 1994</dd><dt>Label</dt><dd>Columbia</dd></dl>
+        </div>
+      </div>
+    </div>
+    <div class="b-row">
+      <div class="card about">
+        <h2 class="hd">About Nas</h2>
+        <p>Nasir bin Olu Dara Jones, known mononymously as Nas, is an American rapper, entrepreneur and record producer. Rooted in East Coast hip-hop, he is regarded as one of the greatest rappers of all time.</p>
+        <a class="link" href="#">Read more on Wikipedia</a>
+      </div>
+      <div class="card">
+        <h2 class="hd" style="font-size:30px">Other albums in Hip-hop</h2>
+        <p class="genre">Shown as the row of the genre screen, so the empty space has a next step.</p>
+        <div class="strip"><div></div><div></div><div></div><div></div></div>
+      </div>
+    </div>
+    <span class="illus">Illustrative data</span>
+  </div>
+</section>
+
+<!-- OPTION C -->
+<section class="opt">
+  <div class="label">Option C · Large cover on the left, a full-width text block under the title; the status panel is set as a wide banner that uses the whole right column</div>
+  <div class="page c">
+    <div>
+      <div class="cover" style="max-width:520px"><img src="https://coverartarchive.org/release-group/28298e2c-4d70-3eed-a0f5-a3280c662b3d/front-500" alt=""></div>
+    </div>
+    <div class="stack">
+      <div>
+        <h1 class="hd">Illmatic</h1>
+        <p class="artist">Nas · 1994 · Hip-hop</p>
+      </div>
+      <div class="panel" style="padding:32px">
+        <h2 class="hd" style="font-size:40px">Nobody is selling this album right now</h2>
+        <p>Check back later, or browse other albums in this genre.</p>
+      </div>
+      <div class="facts card" style="grid-template-columns:repeat(2,1fr);gap:0">
+        <div style="padding:14px 0;border-bottom:1px solid #e2dacb"><span style="color:#6f6a60">Released</span><br><strong>15 April 1994</strong></div>
+        <div style="padding:14px 0;border-bottom:1px solid #e2dacb"><span style="color:#6f6a60">Label</span><br><strong>Columbia</strong></div>
+      </div>
+      <div class="about">
+        <h2 class="hd">About Nas</h2>
+        <p>Nasir bin Olu Dara Jones, known mononymously as Nas, is an American rapper, entrepreneur and record producer. Rooted in East Coast hip-hop, he is regarded as one of the greatest rappers of all time.</p>
+        <a class="link" href="#">Read more on Wikipedia</a>
+      </div>
+      <span class="illus">Illustrative data</span>
+    </div>
+  </div>
+</section>
+
+</body></html>
