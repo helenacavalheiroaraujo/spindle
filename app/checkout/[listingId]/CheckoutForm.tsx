@@ -4,8 +4,8 @@
 // the record, the price breakdown and Pay in a card on the right (p. 19).
 import Link from "next/link";
 import { useActionState, useState } from "react";
-import { pay, type PayState } from "./actions";
-import { euros, type CheckoutTotal } from "@/lib/rules/checkoutTotal";
+import type { PayState } from "./actions";
+import { euros } from "@/lib/rules/checkoutTotal";
 import { PROTECTION_STEPS } from "@/lib/rules/protectionSteps";
 import { canPay, maskPostcode, postcodeError, type ShippingAddress } from "@/lib/rules/shippingAddress";
 import { ErrorScreen } from "@/components/ErrorScreen";
@@ -14,20 +14,24 @@ import { LoadingMask } from "@/components/LoadingMask";
 
 const EMPTY: ShippingAddress = { name: "", street: "", postcode: "", city: "" };
 
+// Used by the checkout of one record (story 7) and by the checkout of the cart (story 20): the same form, address and
+// Pay button. `pay` is the action that creates the order(s); `rows` and `total` are what the rules calculated.
 export function CheckoutForm({
-  listingId,
-  versionId,
+  pay,
+  soldHref,
   record,
-  amounts,
+  rows,
+  total,
   initialAddress,
 }: {
-  listingId: string;
-  versionId: string;
-  record: React.ReactNode; // version, condition, seller and city
-  amounts: CheckoutTotal;
+  pay: (prev: PayState, form: FormData) => Promise<PayState>;
+  soldHref: string; // "See other listings" when the record was just sold
+  record: React.ReactNode; // version, condition, seller and city (one block for each record)
+  rows: [label: string, amount: number][]; // the lines before the total
+  total: number;
   initialAddress: ShippingAddress | null; // address of the most recent order (bug 6)
 }) {
-  const [state, action, pending] = useActionState(pay.bind(null, listingId, versionId), { status: "ready" } as PayState);
+  const [state, action, pending] = useActionState(pay, { status: "ready" } as PayState);
   // The address lives here, so it is kept after "Try again" (SPEC · Shared rules).
   const [address, setAddress] = useState(initialAddress ?? EMPTY);
   const [dismissed, setDismissed] = useState<PayState | null>(null);
@@ -78,24 +82,26 @@ export function CheckoutForm({
           </p>
         </section>
 
-        <section aria-labelledby="covers" className="order-5">
-          <h2 id="covers" className="text-sm font-semibold">What protection covers</h2>
-          <p className="mt-1 lg:text-lg">Pressing check, payment held until delivery, and a refund if the record isn&apos;t as listed.</p>
-          <ol aria-label="How protection works" className="mt-4 grid grid-cols-4 gap-2 text-center text-sm lg:text-left">
-            {PROTECTION_STEPS.map((step, i) => (
-              <li key={step} className="flex flex-col items-center gap-2 lg:items-start">
-                <span
-                  aria-hidden
-                  className={`flex h-9 w-9 items-center justify-center rounded-full border font-semibold ${
-                    i === 0 ? "border-navy bg-navy text-cream" : "border-navy"
-                  }`}
-                >
-                  {i + 1}
-                </span>
-                {step}
-              </li>
-            ))}
-          </ol>
+        <section aria-label="Protection" className="order-5">
+          <details className="group rounded-2xl border border-line bg-white/60">
+            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-4 font-semibold hover:bg-sand focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy [&::-webkit-details-marker]:hidden">
+              How protection works
+              <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </summary>
+            <p className="px-4 pt-2 lg:text-lg">Pressing check, payment held until delivery, and a refund if the record isn&apos;t as listed.</p>
+            <ol aria-label="Protection steps" className="grid grid-cols-4 gap-2 px-4 pb-4 pt-4 text-center text-sm lg:text-left">
+              {PROTECTION_STEPS.map((step, i) => (
+                <li key={step} className="flex flex-col items-center gap-2 lg:items-start">
+                  <span aria-hidden className="flex h-9 w-9 items-center justify-center rounded-full border border-navy font-semibold">
+                    {i + 1}
+                  </span>
+                  {step}
+                </li>
+              ))}
+            </ol>
+          </details>
         </section>
       </div>
 
@@ -103,19 +109,15 @@ export function CheckoutForm({
         <div className="order-1 lg:mb-4">{record}</div>
 
         <dl aria-label="Price" className="order-4 rounded-2xl border border-line bg-white/60 px-4 lg:border-0 lg:bg-transparent lg:px-0">
-          {[
-            ["Record", amounts.recordPrice],
-            ["Insured shipping", amounts.shipping],
-            ["Buyer protection", amounts.protectionFee],
-          ].map(([label, amount]) => (
-            <div key={label} className="flex justify-between border-b border-line py-3">
+          {rows.map(([label, amount]) => (
+            <div key={label} className="flex justify-between gap-4 border-b border-line py-3">
               <dt>{label}</dt>
-              <dd>{euros(amount as number)}</dd>
+              <dd>{euros(amount)}</dd>
             </div>
           ))}
           <div className="flex justify-between py-3 text-lg font-bold">
             <dt>Total</dt>
-            <dd>{euros(amounts.total)}</dd>
+            <dd>{euros(total)}</dd>
           </div>
         </dl>
 
@@ -123,7 +125,7 @@ export function CheckoutForm({
           {sold ? (
             <div role="alert" className="rounded-2xl border border-red-700 bg-white/70 p-4">
               <p className="font-semibold text-red-800">Sorry, this record was just sold</p>
-              <Link href={`/versions/${versionId}/listings`} className="mt-2 inline-block min-h-12 py-3 font-semibold underline">
+              <Link href={soldHref} className="mt-2 inline-block min-h-12 py-3 font-semibold underline">
                 See other listings
               </Link>
             </div>
@@ -133,7 +135,7 @@ export function CheckoutForm({
               disabled={!canPay(address) || pending}
               className="min-h-14 w-full rounded-full bg-navy px-6 text-lg font-semibold text-cream disabled:cursor-not-allowed disabled:bg-navy/40"
             >
-              Pay {euros(amounts.total)}
+              Pay {euros(total)}
             </button>
           )}
           {!sold && !canPay(address) && (

@@ -172,10 +172,11 @@ test("first sale: List for sale waits for every required field and the city; the
   });
   expect(data!.check_results.map((c) => c.result)).toEqual(["uncertain", "uncertain", "uncertain"]);
 
-  // Never the checkout for the seller's own listing, even from its address.
+  // Never the checkout for the seller's own listing, even from its address: back to the listing with a notice (bug 12).
   const own = await admin().from("listings").select("id").eq("seller_id", profileId).single();
   await page.goto(`/checkout/${own.data!.id}?version=${V_HOMOGENIC_1997}`);
-  await expect(page.getByText("This page could not be found.")).toBeVisible();
+  await expect(page).toHaveURL(`/listings/${own.data!.id}?version=${V_HOMOGENIC_1997}&notice=own`);
+  await expect(page.getByText("This listing is yours, you can't buy it")).toBeVisible();
 });
 
 test("price: typical range and label while typing; invalid prices refused; photos above 5 MB refused", async ({ page }) => {

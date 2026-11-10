@@ -16,14 +16,18 @@ export function checkSignUp(input: SignUpInput): FieldErrors {
   return errors;
 }
 
-export const EMAIL_IN_USE = "This email already has an account";
+// Shown for a registered email, so the screen never says that the email has an account (bug 15).
+// It promises no email: email confirmation is off in the MVP, so none would be sent.
+export const ACCOUNT_NOT_CREATED = "We couldn't create an account with these details.";
+
+// Supabase Auth error code → true when the answer must be the generic "couldn't create" screen.
+export function isAccountNotCreated(code: string | undefined): boolean {
+  return code === "user_already_exists" || code === "email_exists";
+}
 
 // Supabase Auth error code → message on the field it belongs to. Null = unexpected: the shared error screen.
 export function signUpErrorFor(code: string | undefined): FieldErrors | null {
   switch (code) {
-    case "user_already_exists":
-    case "email_exists":
-      return { email: EMAIL_IN_USE };
     case "email_address_invalid":
     case "validation_failed":
       return { email: "Enter a valid email address." };

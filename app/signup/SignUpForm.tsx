@@ -4,9 +4,12 @@ import { useActionState, useState } from "react";
 import { signUp, type SignUpState } from "./actions";
 import { LoadingMask } from "@/components/LoadingMask";
 import { ErrorScreen } from "@/components/ErrorScreen";
+import { ACCOUNT_NOT_CREATED } from "@/lib/rules/signUp";
 import { Field } from "@/components/Field";
+import Link from "next/link";
+import { withReturn } from "@/lib/rules/login";
 
-const initial: SignUpState = { errors: {}, failed: false, values: { name: "", email: "" } };
+const initial: SignUpState = { errors: {}, failed: false, checkEmail: false, values: { name: "", email: "" } };
 
 export function SignUpForm({ next }: { next: string }) {
   const [state, action, pending] = useActionState(signUp, initial);
@@ -15,6 +18,23 @@ export function SignUpForm({ next }: { next: string }) {
 
   if (state.failed && dismissed !== state) {
     return <ErrorScreen message="We couldn't create your account." onRetry={() => setDismissed(state)} />;
+  }
+
+  if (state.checkEmail && dismissed !== state) {
+    return (
+      <div role="status" className="mt-8 space-y-5 rounded-2xl border border-navy/15 bg-sand p-5">
+        <h2 className="font-heading text-2xl">{ACCOUNT_NOT_CREATED}</h2>
+        <p>
+          Already registered?{" "}
+          <Link href={withReturn("/login", next)} className="font-semibold underline">
+            Log in
+          </Link>
+        </p>
+        <button type="button" onClick={() => setDismissed(state)} className="min-h-12 rounded-full border border-navy px-6 font-semibold">
+          Back to sign up
+        </button>
+      </div>
+    );
   }
 
   return (

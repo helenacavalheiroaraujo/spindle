@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { BackLink } from "@/components/BackLink";
 import { Header } from "@/components/Header";
 import { getVersionToSell } from "@/lib/db/albums";
+import { getSellingPlace } from "@/lib/db/listings";
 import { getSellerProfile } from "@/lib/db/profiles";
 import { currentUser } from "@/lib/db/session";
 import { withReturn } from "@/lib/rules/login";
@@ -38,11 +39,14 @@ export default async function SellFormPage({ params }: { params: Promise<{ versi
   const profile = await getSellerProfile(user.id, user.name);
   if (!profile) throw new Error("No profile for the signed-in user.");
 
+  // Bug 11: the place is always on the form, pre-filled with where the last listing was sold from.
+  const place = await getSellingPlace(profile.id, { city: profile.city, shopName: profile.shopName });
+
   return (
     <main className="px-4 pb-16 page-main">
       <Header />
       <BackLink href={`/sell/albums/${version.albumId}`}>Back to versions</BackLink>
-      <SellForm version={version} needsCity={profile.city === null} />
+      <SellForm version={version} place={place} />
     </main>
   );
 }

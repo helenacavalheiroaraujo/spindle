@@ -1,7 +1,7 @@
 // Decision table from story 7 · Acceptance criteria: red listings cannot reach the checkout;
 // a sold listing cannot be bought again. Green and yellow can (use case 1).
 import { describe, expect, it } from "vitest";
-import { canCheckout, checkoutPath, isNoLongerAvailable, isOwnListing } from "@/lib/rules/checkoutAccess";
+import { canCheckout, checkoutPath, isNoLongerAvailable, isOwnListing, listingNotice, ownListingPath, OWN_LISTING_NOTICE } from "@/lib/rules/checkoutAccess";
 import type { ListingForList } from "@/lib/rules/listingOrder";
 
 const allMatch = { cover_label: "match", country_year: "match", matrix: "match" } as const;
@@ -62,5 +62,20 @@ describe("isNoLongerAvailable", () => {
     ["removed", true],
   ] as const)("%s → %s", (status, expected) => {
     expect(isNoLongerAvailable(status)).toBe(expected);
+  });
+});
+
+// Bug 12 (DECISIONS 2026-11-10): the seller who opens the checkout of their own listing goes back to its page, with a notice.
+describe("ownListingPath and listingNotice", () => {
+  it("sends the seller back to the listing under the same version, asking for the notice", () => {
+    expect(ownListingPath("l1", "v1990")).toBe("/listings/l1?version=v1990&notice=own");
+  });
+  it.each([
+    ["own", OWN_LISTING_NOTICE],
+    [undefined, null],
+    ["", null],
+    ["anything else", null],
+  ] as const)("notice=%s → %s", (param, expected) => {
+    expect(listingNotice(param)).toBe(expected);
   });
 });

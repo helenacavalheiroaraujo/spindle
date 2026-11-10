@@ -71,7 +71,7 @@ if fpath.exists():
 
 # Where each outside story is mentioned in specs/ ("- Filters (story 10)"): the only clue to what it is
 mentions = {}
-for f in sorted((root / "specs").glob("story-*.md")):
+for f in sorted((root / "specs" / "stories").glob("story-*.md")):
     for line in f.read_text(encoding="utf-8").splitlines():
         if line.lstrip().startswith("- "):
             for n in re.findall(r"story (\d+)", line, flags=re.I):
@@ -84,7 +84,7 @@ for s in sorted(set(titles) | set(rows) | set(outside), key=lambda x: int(x)):
              "outside_mvp" if s in outside else "specified_not_scheduled")
     st, tested, total, untested = status(rows.get(s, []))
     stories[s] = {"title": titles.get(s, ""), "scope": scope,
-                  "has_spec_file": any((root / "specs").glob(f"story-{s}-*.md")),
+                  "has_spec_file": any((root / "specs" / "stories").glob(f"story-{s}-*.md")),
                   "mentioned_in": mentions.get(s, []), "status": st, "tested_rows": tested,
                   "total_rows": total, "not_tested_automatically": untested,
                   "pending_rows": [r["requirement"] for r in rows.get(s, [])

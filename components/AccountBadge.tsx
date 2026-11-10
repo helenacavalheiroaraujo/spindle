@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { initials } from "@/lib/rules/initials";
 import { LogInLink } from "./LogInLink";
+import { CartLink } from "./CartLink";
 
 // Phone and tablet only (story 19): from 1024 px the account and Sell sit in the menu, in the header (MainMenu).
 // The session is read once, in the root layout, and passed in.
@@ -22,6 +23,7 @@ export function AccountBadge({ signedIn, name }: { signedIn: boolean; name: stri
         >
           <span aria-hidden>+&nbsp;</span>Sell&nbsp;for free
         </Link>
+        <CartLink />
         {!signedIn ? (
           <Suspense>
             <LogInLink />

@@ -41,15 +41,20 @@ test("a new user signs up with name, email and password and is signed in", async
   created.push(user.id);
   expect(data?.some((p) => p.user_id === user.id)).toBe(true); // profile created by the app (DECISIONS · story 9)
 
-  // Same email again → clear message, no second account.
+  // Same email again → the generic message, never "already has an account" (bug 15); no second account, not signed in.
   await page.context().clearCookies();
   await page.goto("/signup");
   await page.getByLabel("Name").fill("Ana Silva");
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("vinyl-test-123");
   await page.getByRole("button", { name: "Create account" }).click();
-  await expect(page.getByText("This email already has an account")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "We couldn't create an account with these details." })).toBeVisible();
+  await expect(page.getByText(/already has an account/i)).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /signed in as/ })).toHaveCount(0);
+  await expect(page.getByRole("status").getByRole("link", { name: "Log in" })).toBeVisible();
   await screenshot(page, 9, "signup-email-in-use");
+  await page.getByRole("button", { name: "Back to sign up" }).click();
+  await expect(page.getByLabel("Email")).toHaveValue(email);
 });
 
 test("passwords shorter than 8 characters are refused", async ({ page }) => {

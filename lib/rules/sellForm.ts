@@ -34,33 +34,34 @@ export const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
 export const PHOTO_TOO_BIG_MESSAGE = "This photo is larger than 5 MB. Choose a smaller one.";
 export const photoTooBig = (bytes: number) => bytes > MAX_PHOTO_BYTES;
 
-export type SellFormInput = {
+export type EditInput = {
   condition: string | null;
   price: string;
-  hasCover: boolean;
+  hasCover: boolean; // a photo already saved or a new one chosen
   hasRecord: boolean;
-  needsCity: boolean; // first time selling (finding #73)
-  city: string;
 };
 
-// "List for sale" is enabled only when condition, price, cover and record photo are filled in and,
-// the first time, the city. The matrix photo and the shop name are optional.
+// What a listing must meet, new or edited (bug 10): a valid condition and price, and the cover and record
+// photos (the matrix photo is optional). Used by the sell form and by the edit in My listings.
+export function canSaveEdit(f: EditInput): boolean {
+  return f.condition !== null && isCondition(f.condition) && checkPrice(f.price).ok && f.hasCover && f.hasRecord;
+}
+
+export type SellFormInput = EditInput & {
+  city: string; // where the seller sells from: always filled in (bug 11); the last place used is pre-filled
+};
+
+// "List for sale" is enabled only when condition, price, cover and record photo and the city are filled in.
+// The matrix photo and the shop name are optional.
 export function canList(f: SellFormInput): boolean {
-  return (
-    f.condition !== null &&
-    isCondition(f.condition) &&
-    checkPrice(f.price).ok &&
-    f.hasCover &&
-    f.hasRecord &&
-    (!f.needsCity || f.city.trim() !== "")
-  );
+  return canSaveEdit(f) && f.city.trim() !== "";
 }
 
 // The hint under the disabled button (finding #27): everything still needed, in the order of the form
-// (the city comes first, only the first time).
+// (the city comes first; it is blank only the first time, or when the seller clears it).
 export function listHint(f: SellFormInput): string | null {
   const missing = [
-    f.needsCity && f.city.trim() === "" ? "city" : null,
+    f.city.trim() === "" ? "city" : null,
     f.condition !== null && isCondition(f.condition) ? null : "condition",
     f.hasCover ? null : "front cover photo",
     f.hasRecord ? null : "record photo",

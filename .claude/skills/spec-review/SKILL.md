@@ -21,7 +21,7 @@ The user is the Product Owner. The value of this review is that every finding is
 ## Inputs
 
 - `SPEC.md` — index: build order, out of scope, shared rules, traceability
-- `specs/story-*.md` — one file per story (source of truth for *what*)
+- `specs/stories/story-*.md` — one file per story (source of truth for *what*)
 - `DECISIONS.md` — decisions and their reasons (source of truth for *why*)
 - `docs/design/` — Assignment 1 designs: `HappyPath.png` (mobile flow), `Spindle_user_flow_desktop.png` (desktop flow), `Spindle_mockups_by_section.pdf` (all screens)
   - To look at the PDF pages, render them to PNG first:
@@ -86,7 +86,7 @@ Check every story in `specs/` (and the shared rules in `SPEC.md`), then the stor
 
 ## How to run a review
 
-1. Read `SPEC.md`, every file in `specs/`, `DECISIONS.md` and the register (if it exists). Look at the design images.
+1. Read `SPEC.md`, every file in `specs/stories/`, `DECISIONS.md` and the register (if it exists). Look at the design images.
 2. Re-check the open findings: if the text that caused one has changed, mark it resolved (with the iteration) only if the problem is really gone.
 3. Look for new findings with the checklist above. Before adding one, check that it is not already in the register (open or resolved).
 4. For each finding, write: stories, type, severity, a one-line title, the evidence (quotes with their location), and a proposal (current vs. proposed text). If the decision is the user's to make, add a **question** instead of guessing.

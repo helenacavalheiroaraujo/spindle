@@ -12,3 +12,11 @@ export function sellerOf(shopName: string | null): Seller {
 export function sellerText(seller: Seller): string {
   return seller.kind === "shop" ? `${seller.shopName} (Shop)` : "Private seller";
 }
+
+// Where a listing is sold from (bug 11). A listing made since the seller could choose its place keeps its own
+// city and shop name; an older listing has none and shows the seller's profile, as before.
+export type Place = { city: string | null; shopName: string | null };
+
+export function listingPlace(listing: { sellerCity: string | null; sellerShopName: string | null }, profile: Place): Place {
+  return listing.sellerCity !== null ? { city: listing.sellerCity, shopName: listing.sellerShopName } : profile;
+}

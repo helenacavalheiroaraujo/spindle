@@ -5,13 +5,15 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
-import { remove, savePrice, undoRemove, type ChangeResult } from "./actions";
+import { remove, saveChanges, undoRemove, type ChangeResult } from "./actions";
 import type { MyListing } from "@/lib/db/listings";
 import { priceLabel } from "@/lib/rules/fairPrice";
-import { JUST_SOLD_MESSAGE, UNDO_SECONDS } from "@/lib/rules/myListings";
+import { JUST_SOLD_MESSAGE, UNDO_SECONDS, hasChanges } from "@/lib/rules/myListings";
 import { formatPrice } from "@/lib/rules/recommendation";
-import { checkPrice } from "@/lib/rules/sellForm";
+import { canSaveEdit, checkPrice } from "@/lib/rules/sellForm";
+import { ConditionPicker } from "@/components/ConditionPicker";
 import { ErrorScreen } from "@/components/ErrorScreen";
+import { PHOTO_SLOTS, PhotoSlot, preparePhoto, type PhotoKind } from "@/components/PhotoSlot";
 import { LoadingMask } from "@/components/LoadingMask";
 import { TrafficLight } from "@/components/TrafficLight";
 
@@ -167,7 +169,8 @@ function Row({ listing: l, chevron = false }: { listing: MyListing; chevron?: bo
   );
 }
 
-// Detail sheet (phone: from the bottom; desktop: panel beside the list). Edit the price (finding #80) or remove.
+// Detail sheet (phone: from the bottom; desktop: panel beside the list). Edit the condition, price (finding #80)
+// and photos (bug 10), or remove. The version cannot be changed. The rules come from lib/rules/sellForm.
 function Sheet({
   listing: l,
   onClose,
@@ -180,6 +183,9 @@ function Sheet({
   onRemoved: () => void;
 }) {
   const [typed, setTyped] = useState(String(l.price));
+  const [condition, setCondition] = useState<string>(l.condition.code);
+  const [photos, setPhotos] = useState<Partial<Record<PhotoKind, File>>>({});
+  const [photoErrors, setPhotoErrors] = useState<Partial<Record<PhotoKind, string>>>({});
   const [confirming, setConfirming] = useState(false);
   const [result, setResult] = useState<ChangeResult | null>(null);
   const [retry, setRetry] = useState<(() => void) | null>(null);
@@ -187,13 +193,43 @@ function Sheet({
   const checked = checkPrice(typed);
   const label = checked.ok ? priceLabel(checked.price, l.typicalRange) : null;
   const hasRange = l.typicalRange.min !== null && l.typicalRange.max !== null;
-  const unchanged = checked.ok && checked.price === l.price;
+  const saved: Record<PhotoKind, string | null> = { cover: l.coverPhoto, record: l.recordPhoto, matrix: l.matrixPhoto };
+  const valid = canSaveEdit({ condition, price: typed, hasCover: !!photos.cover || !!saved.cover, hasRecord: !!photos.record || !!saved.record });
+  const changed = hasChanges({
+    conditionBefore: l.condition.code,
+    conditionNow: condition,
+    priceBefore: l.price,
+    priceNow: checked.ok ? checked.price : null,
+    newPhotos: Object.keys(photos).length,
+  });
+
+  async function pick(kind: PhotoKind, file: File | undefined) {
+    if (!file) return;
+    const prepared = await preparePhoto(file);
+    if ("error" in prepared) return setPhotoErrors((e) => ({ ...e, [kind]: prepared.error }));
+    setPhotos((p) => ({ ...p, [kind]: prepared.file }));
+    setPhotoErrors((e) => ({ ...e, [kind]: undefined }));
+    setResult(null);
+  }
+
+  // Escape closes the sheet, unless the "Remove this listing?" question is open on top of it.
+  useEffect(() => {
+    if (confirming) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [confirming, onClose]);
 
   function save() {
+    const form = new FormData();
+    form.set("condition", condition);
+    form.set("price", typed);
+    for (const { kind } of PHOTO_SLOTS) if (photos[kind]) form.set(kind, photos[kind]!);
     startTransition(async () => {
-      const r = await savePrice(l.id, typed);
+      const r = await saveChanges(l.id, form);
       setResult(r);
       setRetry(() => (r === "failed" ? save : null));
+      if (r === "ok") setPhotos({});
       if (r === "ok" || r === "sold") onChanged();
     });
   }
@@ -216,7 +252,6 @@ function Sheet({
         className="fixed inset-x-0 bottom-0 z-30 max-h-[85vh] overflow-y-auto rounded-t-3xl border border-line bg-cream p-5 shadow-2xl lg:sticky lg:top-6 lg:z-0 lg:max-h-none lg:rounded-3xl lg:bg-white/60 lg:shadow-none"
       >
         {pending && <LoadingMask label="Saving…" />}
-        <span aria-hidden className="mx-auto mb-3 block h-1.5 w-12 rounded-full bg-navy/20 lg:hidden" />
         <div className="flex items-start gap-3">
           <span className="min-w-0 flex-1">
             <span className="block font-semibold">{l.albumTitle}</span>
@@ -228,7 +263,7 @@ function Sheet({
             Close
           </button>
         </div>
-        <p className="mt-2 text-sm text-navy/70">Condition, photos and version can&apos;t be changed.</p>
+        <p className="mt-2 text-sm text-navy/70">The version can&apos;t be changed.</p>
 
         {result === "failed" && retry ? (
           <div className="mt-4">
@@ -243,7 +278,33 @@ function Sheet({
           </p>
         ) : (
           <>
-            <label htmlFor="edit-price" className="mt-4 block text-sm font-semibold">
+            <ConditionPicker name="edit-condition" value={condition} onChange={(c) => (setCondition(c), setResult(null))} columns="grid-cols-2" />
+
+            <fieldset className="mt-6">
+              <legend className="text-sm font-semibold">Photos</legend>
+              <div className="mt-2 grid grid-cols-3 gap-3">
+                {PHOTO_SLOTS.map((s) => (
+                  <PhotoSlot
+                    key={s.kind}
+                    {...s}
+                    file={photos[s.kind]}
+                    currentUrl={saved[s.kind]}
+                    error={photoErrors[s.kind]}
+                    onPick={(f) => pick(s.kind, f)}
+                  />
+                ))}
+              </div>
+              {PHOTO_SLOTS.map(
+                (s) =>
+                  photoErrors[s.kind] && (
+                    <p key={s.kind} role="alert" className="mt-2 text-sm font-medium text-red-800">
+                      {s.label}: {photoErrors[s.kind]}
+                    </p>
+                  ),
+              )}
+            </fieldset>
+
+            <label htmlFor="edit-price" className="mt-6 block text-sm font-semibold">
               Price
             </label>
             <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2">
@@ -279,16 +340,21 @@ function Sheet({
             </p>
             {result === "ok" && (
               <p role="status" className="mt-2 text-sm font-semibold">
-                Price saved
+                Changes saved
+              </p>
+            )}
+            {result === "invalid" && (
+              <p role="alert" className="mt-2 text-sm font-medium text-red-800">
+                Check the condition, price and photos, then save again.
               </p>
             )}
             <button
               type="button"
               onClick={save}
-              disabled={!checked.ok || unchanged || pending}
+              disabled={!valid || !changed || pending}
               className="mt-4 min-h-12 w-full rounded-full bg-navy px-6 font-semibold text-cream disabled:cursor-not-allowed disabled:bg-navy/40"
             >
-              Save price
+              Save changes
             </button>
             <button
               type="button"

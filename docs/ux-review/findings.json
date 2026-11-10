@@ -2,8 +2,8 @@
   "meta": {
     "project": "Spindle MVP",
     "report_url": "https://claude.ai/artifact/6inbbjVxsF4Hi7Q2cr2n28",
-    "iteration": 6,
-    "updated": "2026-11-09T13:32:01+00:00"
+    "iteration": 7,
+    "updated": "2026-11-10T15:43:13.635427+00:00"
   },
   "iterations": [
     {
@@ -35,6 +35,11 @@
       "n": 6,
       "date": "2026-11-09",
       "note": "After stories 15 (menu), 16 (suggestions) and 18 (rate the seller): 5 screens added, 48 captures re-taken, open findings re-checked (none resolved), new #32-#35. Menu, suggestion box and story 18 screens come from the e2e screenshots (suggestion box and phone menu re-captured by hand); loading and error states checked by reading code · Decided and built the same day: #32, #33, #34, #36 resolved; #35 kept as the story says; #36 added from the Product Owner · All 12 older open findings decided by the Product Owner (build all) and built the same day; #7 with less vivid colours; #9 wording approved"
+    },
+    {
+      "n": 7,
+      "date": "2026-11-10",
+      "note": "Re-capture after the home page as in the design (six crates, navy featured card), the light emphasis cards and the header of story 19: 48 captures, all earlier findings were already closed; one new finding (#37). Caveat: seed listings …05 (€32) and …06 (€36) were sold by hand today (3 orders), so the listing check capture shows 'This record is no longer available' and the recommendation may show another pressing."
     }
   ],
   "screens": [
@@ -484,12 +489,12 @@
       "title": "Checkout and order confirmation do not exist yet — the demo flow stops at Buy",
       "evidence": [
         {
-          "source": "specs/story-7-checkout.md",
+          "source": "specs/stories/story-7-checkout.md",
           "where": "Scope",
           "quote": "Checkout screen (\"Buy with protection\"), opened from **Buy** on a green or yellow listing"
         },
         {
-          "source": "specs/story-7-checkout.md",
+          "source": "specs/stories/story-7-checkout.md",
           "where": "Use cases",
           "quote": "**Pay** → order created, status \"Paid · waiting for the seller\"; confirmation screen"
         },
@@ -527,7 +532,7 @@
       "title": "No screen for 'Sorry, this record was just sold'",
       "evidence": [
         {
-          "source": "specs/story-7-checkout.md",
+          "source": "specs/stories/story-7-checkout.md",
           "where": "Edge cases",
           "quote": "Listing sold while the buyer is on the checkout → \"Sorry, this record was just sold\" and no order is created"
         }
@@ -555,7 +560,7 @@
       "title": "Saved ranking for signed-in buyers is not built (story 2, phase 2)",
       "evidence": [
         {
-          "source": "specs/story-2-priorities.md",
+          "source": "specs/stories/story-2-priorities.md",
           "where": "Phase 2 (with accounts)",
           "quote": "Signed-in buyer **with a saved ranking**: the screen is **skipped**; the recommendation shows \"Based on: Price, Sound · **Change**\""
         },
@@ -593,7 +598,7 @@
       "title": "Selling is not built: no 'Sell for free' in the header and none of the five sell screens",
       "evidence": [
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Scope",
           "quote": "**\"Sell for free\"** in the header; requires login (story 9)"
         },
@@ -608,7 +613,7 @@
           "quote": ""
         },
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Designs",
           "quote": "**None yet: Canva design needed before building**"
         },
@@ -884,7 +889,7 @@
           "quote": ""
         },
         {
-          "source": "specs/story-5-listings.md",
+          "source": "specs/stories/story-5-listings.md",
           "where": "Use cases",
           "quote": "appears here as a warning and also under the **correct version**"
         }
@@ -1261,7 +1266,7 @@
           "quote": ""
         },
         {
-          "source": "specs/story-1-search.md",
+          "source": "specs/stories/story-1-search.md",
           "where": "Scope",
           "quote": "results update as the user types, from the 3rd character"
         }
@@ -1755,7 +1760,7 @@
         },
         {
           "source": "story",
-          "where": "specs/story-16-suggestions.md",
+          "where": "specs/stories/story-16-suggestions.md",
           "quote": "Each row: cover, title, artist, year, \"n versions\" or \"No listings\""
         }
       ],
@@ -1838,6 +1843,35 @@
         "date": "2026-11-09",
         "decision": "Product Owner chose option A: larger logo on desktop only (about 158 px wide, was 91 px; phone unchanged)."
       }
+    },
+    {
+      "id": 37,
+      "screens": [
+        "home"
+      ],
+      "stories": [
+        "12"
+      ],
+      "type": "Rule broken",
+      "severity": "Low",
+      "title": "On the phone the crate name 'Soul and funk' runs into the record: the first line is partly hidden",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": ".ux-review/shots/home-375.png",
+          "quote": ""
+        },
+        {
+          "source": "CLAUDE.md",
+          "where": "Layout at both widths (checklist A)",
+          "quote": "nothing cut off or overlapping"
+        }
+      ],
+      "proposal": "On the phone make the record in each crate smaller (about half the width) or the name one size smaller, so a two-line name stays clear of it.",
+      "question": null,
+      "status": "open",
+      "first_seen": 7,
+      "resolution": null
     }
   ],
   "questions": [
@@ -1865,7 +1899,7 @@
     },
     {
       "id": "T3",
-      "text": "Iteration 5: the test account has no listings, so My listings was only seen empty (On sale 0 / Sold 0). Populated tabs, the detail sheet and the 5-second Undo were not reviewed. Compare with 3 columns and 'only one version' were not captured (demo data has only two versions with listings on Ziggy). Tap-target sizes and contrast on the new screens were judged by eye, not measured.",
+      "text": "Iteration 7: demo data was changed by hand today: seed listings …0005 (€32) and …0006 (€36) are sold (orders of 10 Nov, 13:57 and 14:17) and a €1 listing by a private seller in Porto is on sale. Because of that listing-check-yellow and checkout show 'This record is no longer available' (not reviewed) and the recommendation shows 'from €1'. Restore the demo data before the demo and capture again. Reviewed from the captures this time: home, genre, sell form, search results, recommendation (layout only); not reviewed: account, listings, priorities, sign-up, log-in, my-listings, compare, version page, suggestions.",
       "finding": null,
       "done": false
     },
@@ -1879,6 +1913,12 @@
       "id": "T5",
       "text": "Finding #10: DECISIONS.md text approved by the Product Owner on 2026-11-09; saved as a hand-over note in the shared notes folder (finding-10-moved-to-link.md). Still to do: add it to DECISIONS.md, build the link, add the Playwright check, re-capture.",
       "finding": 10,
+      "done": false
+    },
+    {
+      "id": "T3",
+      "text": "Iteration 7: demo data was changed by hand today: seed listings …0005 (€32) and …0006 (€36) are sold (orders of 10 Nov, 13:57 and 14:17) and a €1 listing by a private seller in Porto is on sale. Because of that listing-check-yellow and checkout show 'This record is no longer available' (not reviewed) and the recommendation shows 'from €1'. Restore the demo data before the demo and capture again. Reviewed from the captures this time: home, genre, sell form, search results, recommendation (layout only); not reviewed: account, listings, priorities, sign-up, log-in, my-listings, compare, version page, suggestions.",
+      "finding": null,
       "done": false
     }
   ]

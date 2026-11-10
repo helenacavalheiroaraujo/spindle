@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bugs 8, 9, 13: options</title>
+<!-- Bug 8: message the seller after paying. Bug 9: password change and saved addresses on "Your account". Bug 13: view the images in more detail. Two options each (phone). Texts are proposals. Illustrative data. No card or bank details anywhere. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.wrap{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;justify-content:center;margin-bottom:34px}
+.col{width:375px;flex:none} h2{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px}
+.big{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:34px;text-align:center;margin:10px 0 6px}
+.sub{text-align:center;color:#4a5163;font-size:13px;margin-bottom:16px}
+.lbl{font-size:12px;font-weight:600;color:#6f6a60;margin:14px 0 6px}
+.phone{position:relative;border:1px solid #1d2433;border-radius:28px;overflow:hidden;background:#f4efe6;padding:16px}
+h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:30px;margin:4px 0 10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;font-weight:600;font-size:14px;text-align:center;width:100%} .btn.p{background:#1d2433;color:#f4efe6} .btn.g{border:1.5px solid #1d2433}
+.card{background:rgba(255,255,255,.6);border:1px solid #e2dacb;border-radius:16px;padding:14px;margin-bottom:12px}
+.sand{background:#f1e6d0;border:1px solid #e2dacb;border-radius:14px;padding:14px;margin-bottom:12px}
+.pill{display:inline-block;border:1px solid #1d2433;border-radius:999px;padding:1px 9px;font-size:11px;font-weight:600}
+.cell{display:flex;align-items:center;justify-content:space-between;padding:14px 4px;border-bottom:1px solid #e2dacb;font-weight:600;font-size:16px;min-height:48px}
+.field{border:1px solid #1d2433;background:#fffdf9;border-radius:12px;padding:12px;min-height:48px;margin:4px 0 12px;color:#6f6a60}
+.fl{font-size:13px;font-weight:600}
+.bub{border-radius:14px;padding:10px 12px;font-size:13px;max-width:82%;margin-bottom:8px} .bub.me{background:#1d2433;color:#f4efe6;margin-left:auto} .bub.them{background:#fffdf9;border:1px solid #e2dacb}
+.bub small{display:block;opacity:.7;font-size:11px;margin-top:3px}
+.ill{display:inline-block;border:1px solid #e2dacb;border-radius:999px;padding:3px 9px;font-size:11px;margin-top:10px}
+.cover{height:120px;border-radius:10px;background:#8a8f9c;display:flex;align-items:flex-end;padding:8px;color:#fff;font-size:12px;font-weight:600}
+.thumbs{display:flex;gap:8px;margin-top:8px}.thumbs .t{flex:1;height:64px;border-radius:8px;background:#a5a9b4;display:flex;align-items:flex-end;padding:4px 6px;font-size:11px;color:#fff;font-weight:600}
+.dark{background:#10141f;color:#f4efe6;border-radius:28px;padding:16px;min-height:440px;position:relative;border:1px solid #1d2433}
+.x{position:absolute;top:14px;right:14px;width:48px;height:48px;border-radius:50%;border:1.5px solid #f4efe6;display:flex;align-items:center;justify-content:center;font-size:20px}
+.big-img{margin:64px 0 12px;height:260px;border-radius:12px;background:#8a8f9c;display:flex;align-items:flex-end;padding:10px;font-size:13px;font-weight:600}
+.dots{text-align:center;letter-spacing:6px;font-size:18px}
+.hint{font-size:12px;opacity:.75;text-align:center;margin-top:8px}
+</style></head><body>
+<p class="sub" style="font-size:14px">Bugs 8, 9 and 13 · each needs a screen that is not in the designs yet. Pick one option per part (or say what to mix). Illustrative data. No card or bank details are shown.</p>
+
+<p class="big">1 · Message the seller after paying (bug 8)</p>
+<p class="sub">On the order screen, status “Paid”. Today the only action is “It arrived, all good”.</p>
+<div class="wrap">
+<section class="col"><h2>Option A · One message, sent from a form</h2><p class="why">A “Message the seller” button opens a small form (one text box, “Send”). The message is shown on the order as sent. The seller sees it on their side. No back and forth: simple to build, but the buyer cannot read a reply on the screen.</p>
+<div class="phone"><h3>Your order</h3><div class="card"><b>Homogenic, 1997 UK original</b><div class="why" style="margin:2px 0 8px">Discos do Bairro, Porto · €34.90</div><span class="pill">Paid</span></div>
+<span class="btn p" style="margin-bottom:10px">It arrived, all good</span><span class="btn g">Message the seller</span>
+<p class="lbl">After tapping “Message the seller”</p><div class="sand"><div class="fl">Your message to Discos do Bairro</div><div class="field">Write your message…</div><span class="btn p">Send message</span></div>
+<p class="lbl">After sending</p><div class="card" style="margin:0"><b>You wrote</b><div class="why" style="margin:2px 0 0">“Hi, could you send it with tracking?”</div></div><span class="ill">Illustrative data</span></div></section>
+
+<section class="col"><h2>Option B · A small conversation on the order</h2><p class="why">The order shows the messages between buyer and seller, newest at the bottom, with a text box under them. Both sides can answer, so it works as a real conversation. More to build and to test (two users, unread state).</p>
+<div class="phone"><h3>Your order</h3><div class="card"><b>Homogenic, 1997 UK original</b><div class="why" style="margin:2px 0 8px">Discos do Bairro, Porto · €34.90</div><span class="pill">Paid</span></div>
+<span class="btn p" style="margin-bottom:12px">It arrived, all good</span>
+<div class="lbl">Messages with the seller</div>
+<div class="bub me">Hi, could you send it with tracking?<small>You · 10 Nov, 14:02</small></div>
+<div class="bub them">Of course, I will add the tracking number today.<small>Discos do Bairro · 10 Nov, 15:40</small></div>
+<div class="field" style="margin-bottom:8px">Write a message…</div><span class="btn g">Send</span><span class="ill">Illustrative data</span></div></section>
+</div>
+
+<p class="big">2 · Your account: password and addresses (bug 9)</p>
+<p class="sub">Today the screen shows only the name and the email. Delivery and billing addresses can be different.</p>
+<div class="wrap">
+<section class="col"><h2>Option A · One screen, three blocks</h2><p class="why">“Your account” keeps everything on one page: Details, Password, Addresses (delivery and billing, with “Billing is the same as delivery” ticked by default). Each block has its own “Save”. Everything in view, but a long page on a phone.</p>
+<div class="phone"><h3>Your account</h3>
+<div class="card"><b>Details</b><div class="why" style="margin:2px 0 0">Ana Silva · ana@example.com</div></div>
+<div class="card"><b>Password</b><div class="fl" style="margin-top:8px">Current password</div><div class="field">••••••••</div><div class="fl">New password</div><div class="field">At least 8 characters</div><span class="btn p">Save password</span></div>
+<div class="card"><b>Delivery address</b><div class="field">Rua das Flores 12, 4050-262 Porto</div><label class="fl" style="display:block;margin-bottom:10px">☑ Billing is the same as delivery</label><span class="btn p">Save addresses</span></div>
+<span class="ill">Illustrative data</span></div></section>
+
+<section class="col"><h2>Option B · Account menu with sub-screens</h2><p class="why">“Your account” is a short list of cells (Details, Password, Addresses). Each opens its own short screen with one form. Easy on a phone and one task per screen, but one extra tap to reach each.</p>
+<div class="phone"><h3>Your account</h3>
+<div class="cell">Details<span>›</span></div><div class="cell">Password<span>›</span></div><div class="cell" style="border:0">Addresses<span>›</span></div>
+<p class="lbl" style="margin-top:14px">“Addresses” screen</p>
+<div class="card"><b>Delivery address</b><div class="field">Rua das Flores 12, 4050-262 Porto</div><b>Billing address</b><div class="field">Same as delivery</div><div class="why" style="margin:-4px 0 10px">Tap to enter a different billing address</div><span class="btn p">Save addresses</span></div><span class="ill">Illustrative data</span></div></section>
+</div>
+
+<p class="big">3 · See the images in more detail (bug 13)</p>
+<p class="sub">Cover, record and matrix photos on a listing. Today a tap does nothing.</p>
+<div class="wrap">
+<section class="col"><h2>Option A · Full-screen viewer, swipe between photos</h2><p class="why">Tapping a photo opens it full screen on a dark background with a large “Close” button (also Escape). Swipe or use the arrows to move between cover, record and matrix. Double-tap zooms in on a phone. Most familiar, a bit more to build.</p>
+<div class="phone"><b>Photos of this copy</b><div class="cover">Cover</div><div class="thumbs"><div class="t">Cover</div><div class="t">Record</div><div class="t">Matrix</div></div></div>
+<p class="lbl">After tapping a photo</p>
+<div class="dark"><div class="x" aria-label="Close">✕</div><div class="big-img">Record · 1 of 3</div><div class="dots">● ○ ○</div><div class="hint">Swipe for the next photo · double-tap to zoom</div></div><span class="ill">Illustrative data</span></section>
+
+<section class="col"><h2>Option B · Enlarge in place, one photo</h2><p class="why">Tapping a photo opens it larger in a window over the page (not full screen), with “Close”. One photo at a time: to see another, close and tap the next. Simplest to build; no swiping and no pinch zoom.</p>
+<div class="phone"><b>Photos of this copy</b><div class="cover">Cover</div><div class="thumbs"><div class="t">Cover</div><div class="t">Record</div><div class="t">Matrix</div></div></div>
+<p class="lbl">After tapping a photo</p>
+<div class="phone" style="background:rgba(29,36,51,.55);padding:28px 16px"><div class="sand" style="margin:0"><div class="big-img" style="margin:0 0 12px;height:200px">Record</div><span class="btn p">Close</span></div></div><span class="ill">Illustrative data</span></section>
+</div>
+<p class="big">4 · Where the seller reads the buyer's message (bug 8)</p>
+<p class="sub">Decided: in the MVP the seller only reads, there is no reply. Today the “Sold” tab of My listings has rows that cannot be tapped.</p>
+<div class="wrap">
+<section class="col"><h2>Option A · Inside the “Sold” row</h2><p class="why">The sold row shows a line “Message from the buyer” with the text, and a small “New” tag until it is opened. No new screen and no new menu item. Only sold records carry messages, which is where they belong. A long message is cut with “Show more”.</p>
+<div class="phone"><h3>My listings</h3><div style="display:flex;gap:8px;margin-bottom:12px"><span class="pill" style="padding:8px 14px;font-size:13px">On sale (2)</span><span class="pill" style="padding:8px 14px;font-size:13px;background:#1d2433;color:#f4efe6">Sold (1)</span></div>
+<div class="card"><div style="display:flex;justify-content:space-between"><b>Homogenic, 1997 UK original</b><b>€28</b></div><div class="why" style="margin:2px 0 8px">VG+ · Sold 10 Nov</div><div class="sand" style="margin:0"><span class="pill" style="background:#1d2433;color:#f4efe6;margin-bottom:6px">New</span><div class="fl">Message from the buyer</div><div class="why" style="margin:2px 0 0">“Hi, could you send it with tracking?”</div></div></div><span class="ill">Illustrative data</span></div></section>
+
+<section class="col"><h2>Option B · A “Messages” cell in the menu</h2><p class="why">The menu gets a “Messages” cell with a count, which opens a list of messages, each naming the record. Easy to find from anywhere, but it adds a menu item (story 19's menu changes) and one more screen to build.</p>
+<div class="phone"><h3>Messages</h3>
+<div class="card"><div style="display:flex;justify-content:space-between"><b>Homogenic, 1997 UK original</b><span class="pill" style="background:#1d2433;color:#f4efe6">New</span></div><div class="why" style="margin:2px 0 8px">From a buyer · 10 Nov, 14:02</div><div>“Hi, could you send it with tracking?”</div></div>
+<p class="lbl">Empty</p><div class="sand">No messages yet.</div>
+<p class="lbl">In the menu</p><div class="cell" style="border:0">Messages<span><span class="pill" style="background:#1d2433;color:#f4efe6">1</span> ›</span></div><span class="ill">Illustrative data</span></div></section>
+</div>
+</body></html>

@@ -25,7 +25,7 @@ The user is the Product Owner and verifies by behaviour, not by reading code. Ev
 
 ## Inputs
 
-- `specs/story-*.md` and `SPEC.md` (build order, phases, shared rules, traceability) — what screens should exist
+- `specs/stories/story-*.md` and `SPEC.md` (build order, phases, shared rules, traceability) — what screens should exist
 - `DECISIONS.md` — deliberate differences from the design
 - `CLAUDE.md` — visual direction and rules (see `references/checklist.md`)
 - `docs/design/` — `HappyPath.png` (mobile flow), `Spindle_user_flow_desktop.png` (desktop flow), `Spindle_mockups_by_section.pdf` (all screens). Render the PDF once per run:

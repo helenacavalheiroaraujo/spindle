@@ -5,23 +5,19 @@
 import Link from "next/link";
 import { startTransition, useActionState, useEffect, useState } from "react";
 import { publish, type PublishState } from "./actions";
-import { reducePhoto } from "./reducePhoto";
 import type { VersionToSell } from "@/lib/db/albums";
 import { priceLabel } from "@/lib/rules/fairPrice";
 import { formatPrice } from "@/lib/rules/recommendation";
-import { CONDITIONS, PHOTO_TOO_BIG_MESSAGE, canList, checkPrice, listHint, photoTooBig } from "@/lib/rules/sellForm";
+import type { Place } from "@/lib/rules/seller";
+import { canList, checkPrice, listHint } from "@/lib/rules/sellForm";
+import { ConditionPicker } from "@/components/ConditionPicker";
 import { NOT_IN_CATALOGUE } from "@/app/sell/albums/[albumId]/VersionPicker";
 import { ErrorScreen } from "@/components/ErrorScreen";
 import { LoadingMask } from "@/components/LoadingMask";
+import { PHOTO_SLOTS as SLOTS, PhotoSlot, preparePhoto, type PhotoKind as Kind } from "@/components/PhotoSlot";
 
-type Kind = "cover" | "record" | "matrix";
-const SLOTS: { kind: Kind; label: string; optional?: boolean }[] = [
-  { kind: "cover", label: "Front cover" },
-  { kind: "record", label: "Record" },
-  { kind: "matrix", label: "Matrix", optional: true },
-];
-
-export function SellForm({ version, needsCity }: { version: VersionToSell; needsCity: boolean }) {
+// `place` is where the seller sells from, pre-filled from the last listing (or the profile); empty the first time.
+export function SellForm({ version, place }: { version: VersionToSell; place: Place }) {
   const [state, action, pending] = useActionState(publish.bind(null, version.id), { status: "ready" } as PublishState);
   const [dismissed, setDismissed] = useState<PublishState | null>(null);
 
@@ -29,25 +25,21 @@ export function SellForm({ version, needsCity }: { version: VersionToSell; needs
   const [price, setPrice] = useState("");
   const [photos, setPhotos] = useState<Partial<Record<Kind, File>>>({});
   const [photoErrors, setPhotoErrors] = useState<Partial<Record<Kind, string>>>({});
-  const [city, setCity] = useState("");
-  const [shopName, setShopName] = useState("");
+  const [city, setCity] = useState(place.city ?? "");
+  const [shopName, setShopName] = useState(place.shopName ?? "");
 
   const checked = checkPrice(price);
-  const input = { condition, price, hasCover: !!photos.cover, hasRecord: !!photos.record, needsCity, city };
+  const input = { condition, price, hasCover: !!photos.cover, hasRecord: !!photos.record, city };
   const label = checked.ok ? priceLabel(checked.price, version.typicalRange) : null;
   const hasRange = version.typicalRange.min !== null && version.typicalRange.max !== null;
   const youReceive = checked.ok ? `No commission: you receive ${formatPrice(checked.price)}` : "No commission: you receive the full price";
 
   async function pick(kind: Kind, file: File | undefined) {
     if (!file) return;
-    if (photoTooBig(file.size)) return setPhotoErrors((e) => ({ ...e, [kind]: PHOTO_TOO_BIG_MESSAGE }));
-    try {
-      const reduced = await reducePhoto(file);
-      setPhotos((p) => ({ ...p, [kind]: reduced }));
-      setPhotoErrors((e) => ({ ...e, [kind]: undefined }));
-    } catch {
-      setPhotoErrors((e) => ({ ...e, [kind]: "We couldn't read this photo. Choose a JPEG or PNG." }));
-    }
+    const prepared = await preparePhoto(file);
+    if ("error" in prepared) return setPhotoErrors((e) => ({ ...e, [kind]: prepared.error }));
+    setPhotos((p) => ({ ...p, [kind]: prepared.file }));
+    setPhotoErrors((e) => ({ ...e, [kind]: undefined }));
   }
 
   function submit(e: React.FormEvent) {
@@ -87,9 +79,7 @@ export function SellForm({ version, needsCity }: { version: VersionToSell; needs
           <span className="rounded-full border border-navy px-3 py-1 text-sm font-semibold lg:hidden">0% commission</span>
         </div>
 
-        {needsCity && (
-          <CityRow city={city} shopName={shopName} onSave={(c, s) => (setCity(c), setShopName(s))} />
-        )}
+        <CityRow city={city} shopName={shopName} onSave={(c, s) => (setCity(c), setShopName(s))} />
 
         <h2 className="mt-6 text-sm font-semibold">Pressing</h2>
         <div className="mt-2 flex items-center gap-3 rounded-2xl border border-line bg-white/60 p-4">
@@ -105,35 +95,7 @@ export function SellForm({ version, needsCity }: { version: VersionToSell; needs
           </Link>
         </div>
 
-        <fieldset className="mt-6">
-          <legend className="text-sm font-semibold">Condition</legend>
-          <div className="mt-2 grid grid-cols-2 gap-3 lg:grid-cols-4">
-            {CONDITIONS.map((c) => {
-              const selected = condition === c.code;
-              return (
-                <label
-                  key={c.code}
-                  className={`flex min-h-16 cursor-pointer flex-col justify-center rounded-2xl border p-3 ${
-                    selected ? "border-navy bg-navy text-cream" : "border-line bg-white/60"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="condition"
-                    value={c.code}
-                    checked={selected}
-                    onChange={() => setCondition(c.code)}
-                    className="sr-only"
-                  />
-                  <span className="font-semibold">{c.name}</span>
-                  <span className={`text-sm ${selected ? "text-cream/80" : "text-navy/70"}`}>
-                    {c.code}. {c.short}
-                  </span>
-                </label>
-              );
-            })}
-          </div>
-        </fieldset>
+        <ConditionPicker value={condition} onChange={setCondition} />
 
         <fieldset className="mt-6">
           <legend className="text-sm font-semibold">Photos</legend>
@@ -217,7 +179,8 @@ export function SellForm({ version, needsCity }: { version: VersionToSell; needs
   );
 }
 
-// "Selling from · Add your city" (finding #73, option C): opens "Your details" in place. Shown only the first time.
+// "Selling from · Add your city" (finding #73, option C): opens "Your details" in place. Shown on every sell form
+// (bug 11): pre-filled with the last place used, and "Change" lets the seller pick another for this listing.
 function CityRow({ city, shopName, onSave }: { city: string; shopName: string; onSave: (city: string, shop: string) => void }) {
   const [open, setOpen] = useState(false);
   const [draftCity, setDraftCity] = useState(city);
@@ -286,60 +249,5 @@ function CityRow({ city, shopName, onSave }: { city: string; shopName: string; o
         Save
       </button>
     </section>
-  );
-}
-
-// One photo slot: tap to choose or take a photo (on a phone the browser offers the camera); shows the photo once chosen.
-function PhotoSlot({
-  kind,
-  label,
-  optional,
-  file,
-  error,
-  onPick,
-}: {
-  kind: Kind;
-  label: string;
-  optional?: boolean;
-  file?: File;
-  error?: string;
-  onPick: (file: File | undefined) => void;
-}) {
-  const [preview, setPreview] = useState<string | null>(null);
-  useEffect(() => {
-    if (!file) return setPreview(null);
-    const url = URL.createObjectURL(file);
-    setPreview(url);
-    return () => URL.revokeObjectURL(url);
-  }, [file]);
-
-  return (
-    <label
-      className={`relative flex aspect-square cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl border text-center text-sm ${
-        error ? "border-red-700" : file ? "border-navy" : optional ? "border-dashed border-navy/40" : "border-line bg-white/60"
-      }`}
-    >
-      <input
-        type="file"
-        name={kind}
-        accept="image/*"
-        aria-label={`${label} photo${optional ? " (optional)" : ""}`}
-        onChange={(e) => onPick(e.target.files?.[0])}
-        className="sr-only"
-      />
-      {preview ? (
-        <>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={preview} alt="" className="absolute inset-0 h-full w-full object-cover" />
-          <span className="absolute inset-x-0 bottom-0 bg-navy/80 py-1 text-xs font-semibold text-cream">{label} ✓</span>
-        </>
-      ) : (
-        <>
-          <span aria-hidden className="text-2xl leading-none">+</span>
-          <span className="font-semibold">{label}</span>
-          {optional && <span className="text-xs text-navy/70">optional</span>}
-        </>
-      )}
-    </label>
   );
 }

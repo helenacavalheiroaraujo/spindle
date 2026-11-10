@@ -7,7 +7,7 @@ Stack and hosting: see `DECISIONS.md`. Assignment 1 stated PHP; the MVP uses Nex
 1. **Core:** stories 1, 2, 3, 5, 6, 12
 2. **Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)
 3. **Seller:** story 8
-4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15)
+4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15), then story 20 (cart)
 
 Not in this MVP: stories 10, 11, 13, 14
 
@@ -35,26 +35,27 @@ Not in this MVP: stories 10, 11, 13, 14
 
 ## Stories
 
-In build order. Each story has its own file in `specs/`.
+In build order. Each story has its own file in `specs/stories/` (bugs are in `specs/bugs/`).
 
 | Story | File |
 |---|---|
-| Story 1 · Search for an album | [`specs/story-1-search.md`](specs/story-1-search.md) |
-| Story 2 · Say what matters to me | [`specs/story-2-priorities.md`](specs/story-2-priorities.md) |
-| Story 3 · Get one recommendation | [`specs/story-3-recommendation.md`](specs/story-3-recommendation.md) |
-| Story 5 · See verified listings | [`specs/story-5-listings.md`](specs/story-5-listings.md) |
-| Story 6 · Fair price | [`specs/story-6-fair-price.md`](specs/story-6-fair-price.md) |
-| Story 9 · Sign up, log in (reviews in phase 4) | [`specs/story-9-accounts.md`](specs/story-9-accounts.md) |
-| Story 7 · Buy with protection | [`specs/story-7-checkout.md`](specs/story-7-checkout.md) |
-| Story 8 · Sell a record for free (phase 3) | [`specs/story-8-sell.md`](specs/story-8-sell.md) |
-| Story 4 · Compare versions (phase 4) | [`specs/story-4-compare.md`](specs/story-4-compare.md) |
-| Story 12 · Home page | [`specs/story-12-home.md`](specs/story-12-home.md) |
-| Story 14 · Desktop footer | [`specs/story-14-footer.md`](specs/story-14-footer.md) |
-| Story 17 · Search results page | [`specs/story-17-results.md`](specs/story-17-results.md) |
-| Story 16 · Search suggestions | [`specs/story-16-suggestions.md`](specs/story-16-suggestions.md) |
-| Story 15 · Menu | [`specs/story-15-menu.md`](specs/story-15-menu.md) |
-| Story 18 · Rate the seller | [`specs/story-18-reviews.md`](specs/story-18-reviews.md) |
-| Story 19 · Menu with chevrons | [`specs/story-19-menu-chevrons.md`](specs/story-19-menu-chevrons.md) |
+| Story 1 · Search for an album | [`specs/stories/story-1-search.md`](specs/stories/story-1-search.md) |
+| Story 2 · Say what matters to me | [`specs/stories/story-2-priorities.md`](specs/stories/story-2-priorities.md) |
+| Story 3 · Get one recommendation | [`specs/stories/story-3-recommendation.md`](specs/stories/story-3-recommendation.md) |
+| Story 5 · See verified listings | [`specs/stories/story-5-listings.md`](specs/stories/story-5-listings.md) |
+| Story 6 · Fair price | [`specs/stories/story-6-fair-price.md`](specs/stories/story-6-fair-price.md) |
+| Story 9 · Sign up, log in (reviews in phase 4) | [`specs/stories/story-9-accounts.md`](specs/stories/story-9-accounts.md) |
+| Story 7 · Buy with protection | [`specs/stories/story-7-checkout.md`](specs/stories/story-7-checkout.md) |
+| Story 8 · Sell a record for free (phase 3) | [`specs/stories/story-8-sell.md`](specs/stories/story-8-sell.md) |
+| Story 4 · Compare versions (phase 4) | [`specs/stories/story-4-compare.md`](specs/stories/story-4-compare.md) |
+| Story 12 · Home page | [`specs/stories/story-12-home.md`](specs/stories/story-12-home.md) |
+| Story 14 · Desktop footer | [`specs/stories/story-14-footer.md`](specs/stories/story-14-footer.md) |
+| Story 17 · Search results page | [`specs/stories/story-17-results.md`](specs/stories/story-17-results.md) |
+| Story 16 · Search suggestions | [`specs/stories/story-16-suggestions.md`](specs/stories/story-16-suggestions.md) |
+| Story 15 · Menu | [`specs/stories/story-15-menu.md`](specs/stories/story-15-menu.md) |
+| Story 18 · Rate the seller | [`specs/stories/story-18-reviews.md`](specs/stories/story-18-reviews.md) |
+| Story 19 · Menu with chevrons | [`specs/stories/story-19-menu-chevrons.md`](specs/stories/story-19-menu-chevrons.md) |
+| Story 20 · Cart | [`specs/stories/story-20-cart.md`](specs/stories/story-20-cart.md) |
 
 ---
 
@@ -165,3 +166,10 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 19 | Artists and All genres and formats are grey with "Soon", not tappable; every cell has a chevron whose box says "Nothing here yet" or "Coming soon" | `lib/rules/menuItems.ts`, `components/MainMenu.tsx` | `tests/unit/menuItems.test.ts`, `tests/e2e/menu.spec.ts` |
 | 19 | The box opens by hover, click, Enter or Space; Esc and a click outside close it; the chevron is at least 40 px (desktop) and 48 px (phone); the focus ring is visible | `components/MainMenu.tsx` | `tests/e2e/menu.spec.ts` (desktop); phone drawer chevrons: checked by hand in Chromium at 375 px, not by an automated test in this run |
 | 19 | Phone: the drawer keeps story 15's behaviour, each row has a chevron that opens the same message; the current page is marked | `components/MainMenu.tsx` | `tests/e2e/menu.spec.ts` (phone tests; see Doubts in the change report) |
+| 20 | "Add to cart" on green and yellow listings, next to "Buy" (text link with a cart icon); "Added to your cart" + "View cart", "In your cart · View cart"; a red or sold listing, and the seller's own listing, cannot be added; the same listing cannot be in the cart twice | `lib/rules/cartAccess.ts`, `lib/db/cart.ts`, `components/AddToCart.tsx`, `components/ListingList.tsx`, `app/listings/[listingId]/page.tsx`, `app/cart/actions.ts`, `supabase/migrations/0008_cart.sql` | `tests/unit/cartAccess.test.ts`, `tests/e2e/cart.spec.ts` |
+| 20 | Signed out, "Add to cart" asks to log in and then adds the record | `components/AddToCart.tsx`, `app/cart/add/[listingId]/page.tsx` | `tests/e2e/cart.spec.ts` |
+| 20 | The cart total is calculated in one function: €34.90 for one €28 record; €71.80 for €28 and €30; "Remove" updates it | `lib/rules/cartTotal.ts`, `app/cart/page.tsx`, `app/cart/CartSummary.tsx`, `app/cart/RemoveButton.tsx` | `tests/unit/cartTotal.test.ts`, `tests/e2e/cart.spec.ts` |
+| 20 | The menu shows the number of records in the cart: icon in the header (phone and desktop) and a "Cart" cell in the drawer; an empty cart shows no number | `lib/rules/menuItems.ts`, `components/CartLink.tsx`, `components/MainMenu.tsx`, `components/AccountBadge.tsx`, `components/SignedIn.tsx`, `app/layout.tsx` | `tests/unit/menuItems.test.ts`, `tests/e2e/cart.spec.ts` |
+| 20 | A record sold while in the cart (or between opening the checkout and paying) leaves the cart with a message and the total is recalculated; nothing is paid | `lib/rules/cartAccess.ts`, `lib/db/cart.ts`, `app/cart/page.tsx`, `app/cart/checkout/actions.ts`, `supabase/migrations/0008_cart.sql` (`place_orders`) | `tests/unit/cartAccess.test.ts`, `tests/e2e/cart.spec.ts` |
+| 20 | One checkout for the cart: the address is typed once; Pay creates one order for each record ("Paid · waiting for the seller"), the listings are sold, "Your account" shows the orders; no card or bank details | `app/cart/checkout/page.tsx`, `app/cart/checkout/actions.ts`, `app/checkout/[listingId]/CheckoutForm.tsx`, `lib/db/cart.ts` | `tests/e2e/cart.spec.ts` |
+| 20 | Empty cart: "Your cart is empty" and a link to search; loading mask and error screen with "Try again" (Shared rules) | `app/cart/page.tsx`, `app/cart/loading.tsx`, `app/cart/error.tsx`, `app/cart/checkout/loading.tsx`, `app/cart/checkout/error.tsx` | `tests/e2e/cart.spec.ts` (error screens: not run automatically in this run) |

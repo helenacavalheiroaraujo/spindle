@@ -42,7 +42,7 @@ Not counted in the figures above.
 ### Specified, not in the build order
 | Story | Spec file | Status | Note |
 |---|---|---|---|
-| [N] · [title] | `specs/story-N-….md` | [Not started / …] | [open points, missing design; needs a place in the build order] |
+| [N] · [title] | `specs/stories/story-N-….md` | [Not started / …] | [open points, missing design; needs a place in the build order] |
 
 ### Not in this MVP
 | Story | Spec file | What the repo says |

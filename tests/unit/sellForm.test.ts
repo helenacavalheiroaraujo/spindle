@@ -4,8 +4,10 @@ import {
   PRICE_FORMAT_MESSAGE as FORMAT,
   PRICE_MAX_MESSAGE as MAX,
   canList,
+  canSaveEdit,
   checkPrice,
   listHint,
+  type EditInput,
   photoTooBig,
   type SellFormInput,
 } from "@/lib/rules/sellForm";
@@ -41,7 +43,7 @@ describe("checkPrice", () => {
   });
 });
 
-const FULL: SellFormInput = { condition: "VG+", price: "30", hasCover: true, hasRecord: true, needsCity: false, city: "" };
+const FULL: SellFormInput = { condition: "VG+", price: "30", hasCover: true, hasRecord: true, city: "Porto" };
 
 describe("canList and listHint", () => {
   it.each([
@@ -55,17 +57,35 @@ describe("canList and listHint", () => {
     [{ hasCover: false }, false, "Still needed: front cover photo"],
     [{ hasRecord: false }, false, "Still needed: record photo"],
     [{ hasCover: false, hasRecord: false }, false, "Still needed: front cover photo, record photo"],
-    [{ needsCity: true, city: "" }, false, "Still needed: city"], // first time, no city
-    [{ needsCity: true, city: "   " }, false, "Still needed: city"],
-    [{ needsCity: true, city: "Porto" }, true, null], // first time, city filled in; shop name optional
-    [{ needsCity: false, city: "" }, true, null], // city already saved
-    [{ needsCity: true, city: "", price: "" }, false, "Still needed: city, price"],
-    [{ needsCity: true, city: "", condition: null, hasCover: false, hasRecord: false, price: "" }, false, "Still needed: city, condition, front cover photo, record photo, price"],
-    [{ needsCity: false, city: "", condition: null, hasCover: false, hasRecord: false, price: "" }, false, "Still needed: condition, front cover photo, record photo, price"],
+    [{ city: "" }, false, "Still needed: city"], // no place yet (first time) or cleared (bug 11)
+    [{ city: "   " }, false, "Still needed: city"],
+    [{ city: "Lisbon" }, true, null], // a place other than the saved one is fine; shop name is optional
+    [{ city: "", price: "" }, false, "Still needed: city, price"],
+    [{ city: "", condition: null, hasCover: false, hasRecord: false, price: "" }, false, "Still needed: city, condition, front cover photo, record photo, price"],
+    [{ condition: null, hasCover: false, hasRecord: false, price: "" }, false, "Still needed: condition, front cover photo, record photo, price"],
   ] as const)("%o → enabled %s, hint %s", (change, enabled, hint) => {
     const form = { ...FULL, ...change } as SellFormInput;
     expect(canList(form)).toBe(enabled);
     expect(listHint(form)).toBe(hint);
+  });
+});
+
+// Bug 10: the same rules for a listing that is edited (no city; the photos are the saved ones or new ones).
+describe("canSaveEdit", () => {
+  const EDIT: EditInput = { condition: "VG+", price: "30", hasCover: true, hasRecord: true };
+  it.each([
+    [{}, true],
+    [{ condition: "NM" }, true], // another of the four grades
+    [{ condition: "G" }, true],
+    [{ condition: "Mint" }, false], // not one of the four grades
+    [{ condition: null }, false],
+    [{ price: "1001" }, false], // the price rule still applies
+    [{ price: "0" }, false],
+    [{ price: "12.345" }, false],
+    [{ hasCover: false }, false], // cover and record photo stay required
+    [{ hasRecord: false }, false],
+  ] as const)("%o → %s", (change, ok) => {
+    expect(canSaveEdit({ ...EDIT, ...change } as EditInput)).toBe(ok);
   });
 });
 

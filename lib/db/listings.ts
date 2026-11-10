@@ -4,7 +4,7 @@ import type { TypicalRange } from "@/lib/rules/fairPrice";
 import type { ListingForList } from "@/lib/rules/listingOrder";
 import type { ListingFacts } from "@/lib/rules/activeListings";
 import { trafficLight, type CheckItem, type CheckResult, type Light } from "@/lib/rules/trafficLight";
-import { sellerOf, type Seller } from "@/lib/rules/seller";
+import { listingPlace, sellerOf, type Place, type Seller } from "@/lib/rules/seller";
 import type { RatingSummary } from "@/lib/rules/sellerRating";
 import { sellerRatings } from "./reviews";
 
@@ -72,7 +72,7 @@ export async function getVersionListings(versionId: string): Promise<VersionList
   const listings = await client
     .from("listings")
     .select(
-      `id, price, seller_id, ${LISTING_FACTS_COLUMNS},
+      `id, price, seller_id, seller_city, seller_shop_name, ${LISTING_FACTS_COLUMNS},
        profiles (shop_name, city),
        condition_grades (code, name, explanation),
        claimed:versions!listings_claimed_version_id_fkey (name),
@@ -93,16 +93,20 @@ export async function getVersionListings(versionId: string): Promise<VersionList
       typicalRange: toTypicalRange(v),
     },
     listings: listings.data.map((l) => {
-      const seller = l.profiles as unknown as { shop_name: string | null; city: string | null };
+      const profile = l.profiles as unknown as { shop_name: string | null; city: string | null };
+      const place = listingPlace(
+        { sellerCity: l.seller_city, sellerShopName: l.seller_shop_name },
+        { city: profile.city, shopName: profile.shop_name },
+      );
       const grade = l.condition_grades as unknown as ListingDetails["condition"];
       return {
         ...toListingFacts(l as unknown as ListingRow),
         id: l.id,
         price: Number(l.price),
         sellerId: l.seller_id,
-        seller: sellerOf(seller.shop_name),
+        seller: sellerOf(place.shopName),
         rating: ratings.get(l.seller_id)!,
-        city: seller.city,
+        city: place.city,
         condition: grade,
         claimedVersionName: (l.claimed as unknown as { name: string }).name,
         actualVersionName: (l.actual as unknown as { name: string }).name,
@@ -126,7 +130,7 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
   const result = await db()
     .from("listings")
     .select(
-      `id, price, seller_id, cover_photo_url, record_photo_url, ${LISTING_FACTS_COLUMNS},
+      `id, price, seller_id, seller_city, seller_shop_name, cover_photo_url, record_photo_url, ${LISTING_FACTS_COLUMNS},
        profiles (shop_name, city),
        condition_grades (code, name, explanation),
        claimed:versions!listings_claimed_version_id_fkey (name, albums (id, title, artist)),
@@ -138,7 +142,11 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
   if (result.error) throw result.error;
   const l = result.data;
   if (!l) return null;
-  const seller = l.profiles as unknown as { shop_name: string | null; city: string | null };
+  const profile = l.profiles as unknown as { shop_name: string | null; city: string | null };
+  const place = listingPlace(
+    { sellerCity: l.seller_city, sellerShopName: l.seller_shop_name },
+    { city: profile.city, shopName: profile.shop_name },
+  );
   const claimed = l.claimed as unknown as { name: string; albums: { id: string; title: string; artist: string } };
   const ratings = await sellerRatings([l.seller_id]);
   return {
@@ -146,9 +154,9 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
     id: l.id,
     price: Number(l.price),
     sellerId: l.seller_id,
-    seller: sellerOf(seller.shop_name),
+    seller: sellerOf(place.shopName),
     rating: ratings.get(l.seller_id)!,
-    city: seller.city,
+    city: place.city,
     condition: l.condition_grades as unknown as ListingDetails["condition"],
     claimedVersionName: claimed.name,
     actualVersionName: (l.actual as unknown as { name: string }).name,
@@ -168,7 +176,7 @@ export type NewListing = {
   conditionCode: string;
   price: number;
   photos: { cover: string; record: string; matrix: string | null };
-  city: string | null; // first time only (finding #73)
+  city: string; // where this listing is sold from (bug 11)
   shopName: string | null;
 };
 
@@ -198,6 +206,22 @@ export async function createListing(l: NewListing): Promise<CreateListingResult>
   return { listingId: data as string };
 }
 
+// The place the sell form pre-fills (bug 11): where the seller's latest listing was sold from, or the profile's
+// city and shop name if no listing has its own place yet (first time, or only older listings). The seller can
+// change it for each listing.
+export async function getSellingPlace(sellerId: string, profile: Place): Promise<Place> {
+  const { data, error } = await db()
+    .from("listings")
+    .select("seller_city, seller_shop_name")
+    .eq("seller_id", sellerId)
+    .not("seller_city", "is", null)
+    .order("created_at", { ascending: false })
+    .limit(1);
+  if (error) throw error;
+  const last = data[0];
+  return last ? { city: last.seller_city, shopName: last.seller_shop_name } : profile;
+}
+
 // --- My listings (story 8) --------------------------------------------------
 
 export type MyListing = {
@@ -209,6 +233,8 @@ export type MyListing = {
   condition: { code: string; name: string };
   price: number;
   coverPhoto: string | null;
+  recordPhoto: string | null;
+  matrixPhoto: string | null;
   light: Light;
   typicalRange: TypicalRange; // of the actual version, for the price label (story 6)
 };
@@ -218,7 +244,7 @@ export async function getMyListings(sellerId: string): Promise<MyListing[]> {
   const { data, error } = await db()
     .from("listings")
     .select(
-      `id, price, cover_photo_url, created_at, ${LISTING_FACTS_COLUMNS},
+      `id, price, cover_photo_url, record_photo_url, created_at, ${LISTING_FACTS_COLUMNS},
        condition_grades (code, name),
        actual:versions!listings_actual_version_id_fkey (id, name, typical_price_min, typical_price_max, albums (title))`,
     )
@@ -238,6 +264,8 @@ export async function getMyListings(sellerId: string): Promise<MyListing[]> {
       condition: l.condition_grades as unknown as { code: string; name: string },
       price: Number(l.price),
       coverPhoto: l.cover_photo_url,
+      recordPhoto: l.record_photo_url,
+      matrixPhoto: l.matrix_photo_url,
       light: trafficLight(facts.checks, facts.hasMatrixPhoto),
       typicalRange: toTypicalRange(actual),
     };
@@ -254,7 +282,14 @@ async function changeListing(
   sellerId: string,
   listingId: string,
   expected: ListingFacts["status"],
-  values: { price?: number; status?: ListingFacts["status"] },
+  values: {
+    price?: number;
+    status?: ListingFacts["status"];
+    condition_code?: string;
+    cover_photo_url?: string;
+    record_photo_url?: string;
+    matrix_photo_url?: string;
+  },
 ): Promise<ListingChange> {
   const client = db();
   const { data, error } = await client
@@ -272,9 +307,41 @@ async function changeListing(
   return now.data?.status === "sold" ? "sold" : "not_found";
 }
 
-// Edit the price (use case 4): only the price changes (finding #80); the caller checks the price rule.
-export const updateListingPrice = (sellerId: string, listingId: string, price: number) =>
-  changeListing(sellerId, listingId, "on_sale", { price });
+// Edit a listing on sale (use case 4, bug 10): price, condition and photos change; the version never does.
+// The caller checks the rules first.
+export const updateListingDetails = (
+  sellerId: string,
+  listingId: string,
+  values: {
+    price: number;
+    conditionCode: string;
+    photos: { cover?: string; record?: string; matrix?: string };
+  },
+) =>
+  changeListing(sellerId, listingId, "on_sale", {
+    price: values.price,
+    condition_code: values.conditionCode,
+    ...(values.photos.cover && { cover_photo_url: values.photos.cover }),
+    ...(values.photos.record && { record_photo_url: values.photos.record }),
+    ...(values.photos.matrix && { matrix_photo_url: values.photos.matrix }),
+  });
+
+// The photo links saved on one of the seller's listings (to know which photos stay, and which files to delete
+// when a photo is replaced). Null when it is not this seller's listing.
+export async function getListingPhotos(
+  sellerId: string,
+  listingId: string,
+): Promise<{ cover: string | null; record: string | null; matrix: string | null } | null> {
+  const { data, error } = await db()
+    .from("listings")
+    .select("cover_photo_url, record_photo_url, matrix_photo_url")
+    .eq("id", listingId)
+    .eq("seller_id", sellerId)
+    .maybeSingle();
+  if (error?.code === "22P02") return null;
+  if (error) throw error;
+  return data ? { cover: data.cover_photo_url, record: data.record_photo_url, matrix: data.matrix_photo_url } : null;
+}
 
 // Remove (use case 5): at once, so no buyer can buy it meanwhile (finding #81).
 export const removeListing = (sellerId: string, listingId: string) =>

@@ -5,6 +5,7 @@ import { AccountBadge } from "@/components/AccountBadge";
 import { SignedInProvider } from "@/components/SignedIn";
 import { currentUserId } from "@/lib/db/session";
 import { getProfileName } from "@/lib/db/profiles";
+import { cartListingIds } from "@/lib/db/cart";
 
 // Headings: bold condensed sans-serif; body: plain readable sans-serif (CLAUDE.md, visual direction).
 const heading = Barlow_Condensed({ subsets: ["latin"], weight: ["700"], variable: "--font-heading" });
@@ -20,10 +21,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const userId = await currentUserId().catch(() => null);
   const name = userId ? await getProfileName(userId).catch(() => "") : "";
   const signedIn = Boolean(userId);
+  const cartIds = userId ? await cartListingIds(userId).catch(() => []) : []; // story 20: the count in the header
   return (
     <html lang="en" className={`${heading.variable} ${body.variable}`}>
       <body className="relative min-h-screen font-body antialiased">
-        <SignedInProvider signedIn={signedIn} name={name ?? ""}>
+        <SignedInProvider signedIn={signedIn} name={name ?? ""} cartIds={cartIds}>
           <AccountBadge signedIn={signedIn} name={name ?? ""} />
           {children}
         </SignedInProvider>

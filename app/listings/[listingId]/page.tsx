@@ -9,7 +9,8 @@ import { yellowWarning } from "@/lib/rules/yellowWarning";
 import { Header } from "@/components/Header";
 import { TrafficLight } from "@/components/TrafficLight";
 import { BuyButton } from "@/components/BuyButton";
-import { checkoutPath, isNoLongerAvailable, isOwnListing } from "@/lib/rules/checkoutAccess";
+import { AddToCart } from "@/components/AddToCart";
+import { checkoutPath, isNoLongerAvailable, isOwnListing, listingNotice } from "@/lib/rules/checkoutAccess";
 import { ListingUnavailable } from "@/components/ListingUnavailable";
 import { currentProfileId } from "@/lib/db/profiles";
 import { YourListing } from "@/components/YourListing";
@@ -33,7 +34,7 @@ export default async function ListingCheckPage({
   searchParams,
 }: {
   params: Promise<{ listingId: string }>;
-  searchParams: Promise<{ version?: string | string[]; priorities?: string | string[]; from?: string | string[] }>;
+  searchParams: Promise<{ version?: string | string[]; priorities?: string | string[]; from?: string | string[]; notice?: string | string[] }>;
 }) {
   const { listingId } = await params;
   const query = await searchParams;
@@ -58,6 +59,7 @@ export default async function ListingCheckPage({
       ? `/albums/${l.albumId}/recommendation${prioritiesQuery}`
       : `/albums/${l.albumId}/priorities`
     : `/versions/${versionId}/listings${prioritiesQuery}`;
+  const notice = listingNotice(one(query.notice));
   const label = `${formatPrice(l.price)}, ${l.condition.name}, ${sellerText(l.seller)}`;
 
   return (
@@ -80,6 +82,11 @@ export default async function ListingCheckPage({
       </div>
 
       <h1 className="mt-6 font-heading text-4xl leading-tight">Is it really this one?</h1>
+      {notice && (
+        <p role="status" className="mt-4 rounded-2xl border border-line bg-sand p-4 font-semibold text-navy">
+          {notice}
+        </p>
+      )}
 
       <div className="lg:grid lg:grid-cols-2 lg:gap-x-12">
       <section aria-label="Result" className="mt-4 lg:col-start-2 flex items-center gap-3 rounded-2xl border border-line bg-sand p-4 text-navy">
@@ -157,12 +164,15 @@ export default async function ListingCheckPage({
         ) : isOwnListing(l.sellerId, viewerId) ? (
           <YourListing />
         ) : (
-          <BuyButton
-            text="Buy with protection"
-            href={checkoutPath(l.id, versionId)}
-            listingLabel={label}
-            warning={light === "yellow" ? yellowWarning(l.checks, l.hasMatrixPhoto, movedHere) : null}
-          />
+          <div className="flex flex-col items-end">
+            <BuyButton
+              text="Buy with protection"
+              href={checkoutPath(l.id, versionId)}
+              listingLabel={label}
+              warning={light === "yellow" ? yellowWarning(l.checks, l.hasMatrixPhoto, movedHere) : null}
+            />
+            <AddToCart listingId={l.id} listingLabel={label} />
+          </div>
         )}
       </div>
 

@@ -19,3 +19,20 @@ export const UNDO_SECONDS = 5;
 
 // A listing bought while the seller edits or removes it (Edge cases).
 export const JUST_SOLD_MESSAGE = "This record was just sold";
+
+// "Save changes" in the edit sheet is enabled only when something changed (bug 10): the condition, the
+// price or at least one new photo. A price that is not valid counts as no change (the price rule blocks it).
+export type ListingEdit = {
+  conditionBefore: string;
+  conditionNow: string | null;
+  priceBefore: number;
+  priceNow: number | null; // null when the typed price is not valid
+  newPhotos: number;
+};
+export function hasChanges(e: ListingEdit): boolean {
+  return (
+    (e.conditionNow !== null && e.conditionNow !== e.conditionBefore) ||
+    (e.priceNow !== null && e.priceNow !== e.priceBefore) ||
+    e.newPhotos > 0
+  );
+}

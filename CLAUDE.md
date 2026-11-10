@@ -4,7 +4,7 @@ Spindle helps non-specialist buyers pick the right pressing of a vinyl record an
 
 ## Read first
 - `SPEC.md` — what to build: build order, out of scope, shared rules, traceability, and links to each story
-- `specs/story-*.md` — one file per story. The source of truth for scope and acceptance criteria.
+- `specs/stories/story-*.md` — one file per story. The source of truth for scope and acceptance criteria.
 - `ARCHITECTURE.md` — parts, folder structure, where each kind of code goes
 - `DECISIONS.md` — why things are as they are. Never reverse a decision without asking me.
 - `docs/spec-review/findings.json` — review findings still open

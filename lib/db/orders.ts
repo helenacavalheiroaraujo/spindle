@@ -3,7 +3,7 @@
 import { db } from "./client";
 import type { CheckoutTotal } from "@/lib/rules/checkoutTotal";
 import type { ShippingAddress } from "@/lib/rules/shippingAddress";
-import { sellerOf, type Seller } from "@/lib/rules/seller";
+import { listingPlace, sellerOf, type Seller } from "@/lib/rules/seller";
 import type { OrderStatus } from "@/lib/rules/orderProgress";
 import { reviewedOrderIds } from "./reviews";
 
@@ -49,7 +49,7 @@ export type OrderView = {
 };
 
 const ORDER_COLUMNS = `id, total, status, profiles!orders_buyer_id_fkey (user_id),
-  listings (cover_photo_url, profiles (shop_name, city), condition_grades (code, name),
+  listings (cover_photo_url, seller_city, seller_shop_name, profiles (shop_name, city), condition_grades (code, name),
     actual:versions!listings_actual_version_id_fkey (name, albums (title)))`;
 
 type OrderRow = { id: string; total: number | string; status: OrderStatus; profiles: unknown; listings: unknown };
@@ -57,10 +57,16 @@ type OrderRow = { id: string; total: number | string; status: OrderStatus; profi
 function toOrderView(data: OrderRow, reviewed: boolean): OrderView {
   const l = data.listings as {
     cover_photo_url: string | null;
+    seller_city: string | null;
+    seller_shop_name: string | null;
     profiles: { shop_name: string | null; city: string | null };
     condition_grades: { code: string; name: string };
     actual: { name: string; albums: { title: string } };
   };
+  const place = listingPlace(
+    { sellerCity: l.seller_city, sellerShopName: l.seller_shop_name },
+    { city: l.profiles.city, shopName: l.profiles.shop_name },
+  );
   return {
     id: data.id,
     total: Number(data.total),
@@ -68,8 +74,8 @@ function toOrderView(data: OrderRow, reviewed: boolean): OrderView {
     albumTitle: l.actual.albums.title,
     versionName: l.actual.name,
     condition: l.condition_grades,
-    seller: sellerOf(l.profiles.shop_name),
-    city: l.profiles.city,
+    seller: sellerOf(place.shopName),
+    city: place.city,
     cover: l.cover_photo_url,
     reviewed,
   };

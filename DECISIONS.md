@@ -3,6 +3,64 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Bug round: 15, 12, 7 (protection steps), 14, 10, 11
+
+### Sign-up never says whether an email is registered; email confirmation stays off (bug 15)
+- **Decision:** a registered email shows "We couldn't create an account with these details." with "Already registered? Log in" and "Back to sign up". The text "This email already has an account" is removed. The screen promises no email, because email confirmation stays off in the MVP, as already decided.
+- **Known risk, accepted:** while confirmation is off, a new email is signed in at once and a registered one is not, so a person can still tell them apart (and the answer takes about 116 ms against 255 ms). The bug is only partly closed.
+- **Why not fixed fully now:** it needs email confirmation on, which means reliable email delivery during the 5-minute live demo and reworking about ten end-to-end tests that create accounts through the form.
+- **How to close it later:** turn on "Confirm email" in Supabase, create test users through the admin API instead of the form, redo this screen (a new email would then need the same screen) and re-run the sign-up tests.
+- **Replaces** the story 9 criterion "Signing up with an email already in use shows 'This email already has an account'" (story file not changed, it is built).
+- **Choices by the AI:** the wording of the heading, "Already registered? Log in" and "Back to sign up"; the sand card.
+
+### The checkout of your own listing goes back to the listing with a notice (bug 12, finding #12)
+- **Why:** the seller's own listing already shows "Your listing" instead of Buy. A typed or saved checkout address showed a "not found" page, which does not say what happened. Now it lands on the listing page with "This listing is yours, you can't buy it".
+- **Trade-off accepted:** the notice travels in the address (`?notice=own`), so it also shows if that link is copied.
+- **Choices by the AI:** the text of the notice; the sand card under the title "Is it really this one?".
+
+### The checkout shows one line, "How protection works"; the four steps open on click (bug 7, protection steps)
+- **Why:** four numbered steps with step 1 highlighted looked like four things the buyer has to do.
+- **Detail:** the sentence "Pressing check, payment held until delivery, and a refund if the record isn't as listed." is inside the opened block, above the steps. The confirmation screen is unchanged.
+- **Replaces** in story 7 (built): "The four steps are explained on the screen" and "What protection covers: …" as always-visible text.
+- **Choices by the AI:** the bordered card with a chevron, hover colour and keyboard focus outline; the label "Protection steps" for screen readers.
+
+### The grey bar on the listing sheet is removed (bug 14)
+- **Why:** it looked draggable but did nothing, and we do not build dragging for the MVP.
+- **Detail:** the sheet closes with Close, with Escape (new) and, on a phone, by tapping the dimmed page. Escape is ignored while "Remove this listing?" is open.
+- **Choice by the AI:** Escape to close.
+
+### A listing on sale can change its condition, photos and price (bug 10)
+- **Decision:** "Save changes" in My listings saves condition, photos and price in one step, only while the listing is still on sale. The version still cannot be changed. The same rules apply as when listing (price rule, four conditions, cover and record photo required). The matrix photo can be replaced or added, never removed. Replaced photo files are deleted from Storage, with no undo.
+- **Replaces** story 8 use case 4 and the criterion "Editing a listing changes only its price" (built, file not changed).
+- **Choices by the AI:** "Changes saved", "Save changes", "Check the condition, price and photos, then save again.", "The version can't be changed.", the "Change" label on saved photos.
+
+### "Selling from" is chosen for each listing (bug 11)
+- **Decision:** the sell form always shows "Selling from", pre-filled with the place of the seller's last listing (or the profile's), and "Change" lets the seller pick another for this listing. The place is stored on the listing (migration 0008: `seller_city`, `seller_shop_name`). Older listings show the profile's place. The profile keeps only the first place.
+- **Why:** a seller with two shops in different cities must say where each record is sold from.
+- **Alternatives not chosen:** pre-fill from the profile only; pick from a list of past places; change the profile's place (would change old listings).
+- **Applied:** migration 0008 was applied to the shared database on 2026-11-10 (two new nullable columns and a replaced `create_listing` with the same arguments).
+
+### Designs approved for bugs 8, 9 and 13 (option A each)
+- **Bug 8:** a "Message the seller" button on the order opens a form with one text box; one message, no thread and no reply in the MVP: the seller only reads it. The seller reads it inside the "Sold" row of My listings: a line "Message from the buyer" with the text and a "New" tag until opened (part 4, option A of the design file). No new screen and no menu item.
+- **Bug 9:** "Your account" keeps one screen with three blocks: Details, Password, Addresses (delivery, and billing "same as delivery" by default). The saved delivery address is the default at checkout and wins over the address of the last order (bug 6).
+- **Bug 13:** full-screen photo viewer with Close, swipe between cover, record and matrix, and double-tap zoom on a phone.
+- **Trade-off accepted:** the viewer (13) is the heaviest option for a P5 bug, kept complete on purpose.
+- The designs are in `docs/design/bug-fixes-options.html`.
+
+## 2026-11-10 — Story 20: how the cart was built
+- **Decision:** the cart is the table `cart_items` (buyer, listing), unique per buyer and listing. "Add to cart" uses the same rule as the checkout (`canAddToCart`): red, sold and the seller's own listing are refused by the server. Pay for the cart is one database function (`place_orders`): one order per record, all or nothing, and the paid records leave the cart in the same step.
+- **Records that leave the cart:** the cart screen removes a record that was sold or removed and shows a message once. If it happens between opening the checkout and paying, nothing is paid and the buyer returns to the cart.
+- **After paying** the buyer goes to "Your account", where the orders are; story 7's confirmation screen is for one order only.
+- **Header:** the cart icon with the count sits at the right of the header (phone and desktop); the desktop search is slightly narrower (min. 150 px, was 180).
+- **Choices made while building (not in the story):** the redirect to "Your account"; "is no longer available and left your cart" for a removed record; the title "Album, version" in the cart; "This record is no longer available" if adding is refused by the rule; the cart icon also shown when signed out.
+- **Trade-off accepted:** the message for a record that left the cart shows only once, and the cart count in the header is read on every page for signed-in buyers.
+
+## 2026-11-10 — Story 20: cart design approved (1B, 2A, 3A)
+- **Decision:** "Add to cart" is a text link with a cart icon under "Buy" (option 1B), 48 px high. The cart is a classic cart icon with a count in the header, plus a "Cart" cell in the drawer (2A). The cart screen is a list plus a summary card (3A). The designs are in `docs/design/cart-options.html`.
+- **Why:** the Product Owner chose these options and asked for the usual e-commerce cart icon.
+- **Trade-off accepted:** the header of story 19 changes (one new icon at the right), and "Add to cart" looks less prominent than "Buy".
+- **Choices made in the design (not in the Product Owner's words):** the texts "Added to your cart", "View cart", "In your cart", "Log in to add this record to your cart"; the icon also in the "Add to cart" link; no number when the cart is empty; the 48 px height of the link.
+
 ## 2026-11-10 — Bug 7: the postcode field has an input mask
 - **Decision:** while typing, the Postcode field keeps digits only (at most 7) and adds the hyphen by itself once the fifth digit is typed (4050262 becomes 4050-262). Letters and spaces are dropped, also when pasted.
 - **Why:** the format 0000-000 is already known, so the buyer should not type the hyphen. The hyphen only appears with the fifth digit so that deleting backwards is not blocked by a hyphen that comes back.

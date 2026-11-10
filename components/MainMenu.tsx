@@ -7,7 +7,9 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { desktopMenu, menuItems, type DesktopCell, type MenuItem } from "@/lib/rules/menuItems";
 import { initials } from "@/lib/rules/initials";
-import { useAccountName, useSignedIn } from "./SignedIn";
+import { CartLink } from "./CartLink";
+import { CartIcon } from "./CartIcon";
+import { useAccountName, useCartCount, useSignedIn } from "./SignedIn";
 
 function Chevron({ open }: { open: boolean }) {
   return (
@@ -124,6 +126,7 @@ export function MenuRow() {
           <Cell cell={cell} />
         </div>
       ))}
+      <CartLink />
     </nav>
   );
 }
@@ -141,7 +144,9 @@ function DrawerRow({ item, open, onToggle, onNavigate }: { item: MenuItem; open:
             aria-current={item.current ? "page" : undefined}
             className={`flex min-h-14 flex-1 items-center rounded-xl px-3 text-base font-semibold hover:bg-sand ${item.current ? "bg-sand" : ""}`}
           >
+            {item.label === "Cart" && <CartIcon className="mr-2 h-5 w-5" />}
             {item.label}
+            {item.count > 0 && <span className="ml-auto mr-2 rounded-full bg-navy px-2 text-sm font-semibold text-cream">{item.count}</span>}
           </Link>
         ) : (
           <span aria-disabled="true" className="flex min-h-14 flex-1 items-center justify-between gap-2 px-3 text-base text-navy/60">
@@ -171,7 +176,7 @@ function DrawerRow({ item, open, onToggle, onNavigate }: { item: MenuItem; open:
 }
 
 export function MenuDrawer() {
-  const items = menuItems(useSignedIn(), usePathname(), useSearchParams().toString());
+  const items = menuItems(useSignedIn(), usePathname(), useSearchParams().toString(), useCartCount());
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const opener = useRef<HTMLButtonElement>(null);
@@ -242,7 +247,7 @@ export function MenuDrawer() {
             </button>
             <ul>
               {items.map((item, i) => (
-                <li key={item.label} className={i === 3 ? "mt-2 border-t border-line pt-2" : ""}>
+                <li key={item.label} className={i === 4 ? "mt-2 border-t border-line pt-2" : ""}>
                   <DrawerRow
                     item={item}
                     open={expanded === item.label}

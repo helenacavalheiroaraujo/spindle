@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cart: options</title>
+<!-- Proposed story 20 · cart. Part 1: "Add to cart" next to "Buy" (two options). Part 2: the "Cart" cell in the menu (two options). Part 3: the cart screen (two options). Texts are proposals. Illustrative data. Prices: €28 record = 28.00 + 4.90 shipping + 2.00 protection = €34.90; €30 record = €36.90; total €71.80. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.wrap{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;justify-content:center;margin-bottom:34px}
+.col{width:375px;flex:none} h2{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px}
+.big{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:34px;text-align:center;margin:10px 0 18px}
+.lbl{font-size:12px;font-weight:600;color:#6f6a60;margin:14px 0 6px}
+.phone{position:relative;border:1px solid #1d2433;border-radius:28px;overflow:hidden;background:#f4efe6;padding:16px;min-height:420px}
+.top{display:flex;align-items:center;justify-content:space-between;padding:6px 0 14px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em}
+.top .logo{display:flex;align-items:center;gap:8px} .dot{width:20px;height:20px;border-radius:50%;border:5px solid #1d2433;display:inline-block}
+.bag{display:inline-flex;align-items:center;gap:6px;font-family:Inter,sans-serif;font-size:13px;font-weight:600;letter-spacing:0}
+.ic{width:24px;height:24px;vertical-align:middle;margin-right:4px}.bag .ic{margin:0}.cl{display:inline-flex;align-items:center;gap:10px}.cl .ic{margin:0}
+.badge{min-width:22px;height:22px;border-radius:999px;background:#1d2433;color:#f4efe6;font-size:12px;display:inline-flex;align-items:center;justify-content:center;padding:0 6px}
+h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:30px;margin:4px 0 10px}
+.li{border-bottom:1px solid #e2dacb;padding:12px 0;display:flex;gap:10px;align-items:flex-start} .li .m{flex:1;font-size:13px} .li .pr{font-weight:700;font-size:18px} .li .sl{color:#4a5163}
+.tag{border:1px solid #1d2433;border-radius:999px;padding:1px 8px;font-size:11px;margin-left:6px}
+.light{display:inline-block;border-radius:999px;padding:1px 9px;font-size:11px;font-weight:600;border:1px solid #1d2433;background:#d9ead3}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;font-weight:600;font-size:14px;text-align:center} .btn.p{background:#1d2433;color:#f4efe6} .btn.g{border:1.5px solid #1d2433}
+.row{display:flex;gap:8px;margin-top:10px} .row .btn{flex:1;padding:0 10px}
+.card{background:rgba(255,255,255,.6);border:1px solid #e2dacb;border-radius:16px;padding:14px;margin-bottom:12px}
+.sand{background:#f1e6d0;border:1px solid #e2dacb;border-radius:14px;padding:14px;margin-top:12px}
+.cover{width:56px;height:56px;border-radius:8px;background:#8a8f9c;flex:none}
+.rm{font-size:13px;font-weight:600;text-decoration:underline;color:#1d2433;display:inline-block;margin-top:6px;padding:8px 0}
+.sum{display:flex;justify-content:space-between;font-size:13px;padding:3px 0} .sum.t{font-weight:700;font-size:18px;border-top:1px solid #1d2433;margin-top:6px;padding-top:8px}
+.msg{background:#fffdf9;border:1px solid #1d2433;border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:10px}
+.cell{display:flex;align-items:center;justify-content:space-between;padding:14px 4px;border-bottom:1px solid #e2dacb;font-weight:600;font-size:16px}
+.ill{display:inline-block;border:1px solid #e2dacb;border-radius:999px;padding:3px 9px;font-size:11px;margin-top:10px}
+.toast{margin-top:10px;background:#1d2433;color:#f4efe6;border-radius:14px;padding:12px 14px;font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+</style></head><body>
+<p class="why" style="text-align:center;font-size:14px;margin-bottom:6px">Story 20 · “Buy” keeps going straight to checkout; “Add to cart” is a second button. The cart belongs to the account; the menu shows how many records are in it. Fees (€4.90 shipping + €2.00 protection) are charged for each record. Illustrative data.</p>
+
+<p class="big">1 · “Add to cart” next to “Buy”</p>
+<div class="wrap">
+<section class="col"><h2>Option A · Two buttons side by side</h2><p class="why">“Buy” (dark) and “Add to cart” (outline) share one row under each listing. Both are large tap targets; the dark button stays the main action.</p>
+<div class="phone" style="min-height:0"><div class="li" style="display:block"><div style="display:flex;justify-content:space-between"><div class="m"><b>VG+ · 2017 Reissue</b><div class="sl">Discos do Bairro, Porto <span class="tag">Shop</span></div><span class="light">Match</span></div><div class="pr">€28</div></div>
+<div class="row"><span class="btn p">Buy</span><span class="btn g">Add to cart</span></div></div>
+<div class="toast" style="margin-top:14px"><span>Added to your cart · 1 record</span><b style="text-decoration:underline">View cart</b></div><span class="ill">Illustrative data</span></div>
+<p class="lbl">Signed out</p><div class="phone" style="min-height:0"><div class="msg" style="margin:0">Log in to add this record to your cart. <b style="text-decoration:underline">Log in</b></div></div></section>
+
+<section class="col"><h2>Option B · “Add to cart” as a quiet link</h2><p class="why">“Buy” is the only button; “Add to cart” is a text link beneath it. Less clutter on a list of many listings, but the link is a smaller target and easy to miss.</p>
+<div class="phone" style="min-height:0"><div class="li" style="display:block"><div style="display:flex;justify-content:space-between"><div class="m"><b>VG+ · 2017 Reissue</b><div class="sl">Discos do Bairro, Porto <span class="tag">Shop</span></div><span class="light">Match</span></div><div class="pr">€28</div></div>
+<div class="row" style="flex-direction:column;align-items:stretch"><span class="btn p">Buy</span><span class="rm" style="text-align:center"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L21 7H6"/></svg> Add to cart</span></div></div>
+<div class="toast" style="margin-top:14px"><span>Added to your cart · 1 record</span><b style="text-decoration:underline">View cart</b></div><span class="ill">Illustrative data</span></div>
+<p class="lbl">Already in the cart</p><div class="phone" style="min-height:0"><div class="li" style="display:block;border:0"><div class="row" style="flex-direction:column;align-items:stretch;margin:0"><span class="btn p">Buy</span><span class="rm" style="text-align:center">In your cart · View cart</span></div></div></div></section>
+</div>
+
+<p class="big">2 · The “Cart” cell in the menu</p>
+<div class="wrap">
+<section class="col"><h2>Option A · Cell in the drawer, plus a header shortcut</h2><p class="why">In the phone drawer, “Cart” is a cell with the count on the right. The header also shows a small cart with the count, so the cart is one tap away without opening the drawer. On desktop the same cart sits at the right of the header.</p>
+<div class="phone" style="min-height:0"><div class="top"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="bag" aria-label="Cart, 2 records"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L21 7H6"/></svg><span class="badge">2</span></span></div>
+<div class="cell">Search<span>›</span></div><div class="cell">Sell a record<span>›</span></div><div class="cell">Your account<span>›</span></div><div class="cell" style="border:0"><span class="cl"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L21 7H6"/></svg>Cart</span><span class="badge">2</span></div></div></section>
+
+<section class="col"><h2>Option B · Cell in the drawer only</h2><p class="why">The cart is a cell in the drawer (and in the desktop menu), with the count. Nothing new in the header, so story 19's header stays exactly as built; the cart takes two taps.</p>
+<div class="phone" style="min-height:0"><div class="top"><span class="logo"><i class="dot"></i>SPINDLE</span><span>☰</span></div>
+<div class="cell">Search<span>›</span></div><div class="cell">Sell a record<span>›</span></div><div class="cell">Your account<span>›</span></div><div class="cell" style="border:0"><span class="cl"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L21 7H6"/></svg>Cart</span><span><span class="badge">2</span> ›</span></div>
+<p class="lbl" style="margin-top:14px">Empty cart: no count shown</p><div class="cell" style="border:0"><span class="cl"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L21 7H6"/></svg>Cart</span><span>›</span></div></div></section>
+</div>
+
+<p class="big">3 · The cart screen</p>
+<div class="wrap">
+<section class="col"><h2>Option A · List, then summary card</h2><p class="why">Each record is a row with its price and “Remove”. Under the list a sand card shows what is added to the total, then “Go to checkout”. On desktop the summary card sits beside the list.</p>
+<div class="phone"><div class="top"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="bag" aria-label="Cart, 2 records"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L21 7H6"/></svg><span class="badge">2</span></span></div><h3>Your cart</h3>
+<div class="msg">“Homogenic, 1997” was just sold to someone else and left your cart. The total is updated.</div>
+<div class="li"><i class="cover"></i><div class="m"><b>Homogenic, 2017 Reissue</b><div>VG+ · Private seller, Braga</div><div class="sl">Porto</div><span class="rm">Remove</span></div><div class="pr">€28</div></div>
+<div class="li"><i class="cover"></i><div class="m"><b>Vespertine, 2001</b><div>NM · Shop, Discos do Bairro</div><div class="sl">Porto</div><span class="rm">Remove</span></div><div class="pr">€30</div></div>
+<div class="sand"><div class="sum"><span>Records</span><span>€58.00</span></div><div class="sum"><span>Insured shipping · 2 × €4.90</span><span>€9.80</span></div><div class="sum"><span>Buyer protection · 2 × €2.00</span><span>€4.00</span></div><div class="sum t"><span>Total</span><span>€71.80</span></div></div>
+<span class="btn p" style="width:100%;margin-top:12px">Go to checkout</span><span class="ill">Simulated payment · Illustrative data</span></div>
+<p class="lbl">Empty cart</p><div class="phone" style="min-height:0"><h3>Your cart is empty</h3><span class="btn g">Search for an album</span></div></section>
+
+<section class="col"><h2>Option B · Price per record, total at the bottom</h2><p class="why">Each row shows its own full price (record + shipping + protection: €34.90, €36.90), so the buyer sees what each record really costs. The total sticks to the bottom of the screen with the button.</p>
+<div class="phone" style="padding-bottom:110px"><div class="top"><span class="logo"><i class="dot"></i>SPINDLE</span><span class="bag" aria-label="Cart, 2 records"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L21 7H6"/></svg><span class="badge">2</span></span></div><h3>Your cart</h3>
+<div class="card"><div style="display:flex;gap:10px"><i class="cover"></i><div class="m" style="flex:1;font-size:13px"><b>Homogenic, 2017 Reissue</b><div>VG+ · Private seller, Braga · Porto</div><div class="sl">€28.00 + €4.90 shipping + €2.00 protection</div></div></div><div style="display:flex;justify-content:space-between;align-items:center"><span class="rm">Remove</span><b style="font-size:18px">€34.90</b></div></div>
+<div class="card"><div style="display:flex;gap:10px"><i class="cover"></i><div class="m" style="flex:1;font-size:13px"><b>Vespertine, 2001</b><div>NM · Shop, Discos do Bairro · Porto</div><div class="sl">€30.00 + €4.90 shipping + €2.00 protection</div></div></div><div style="display:flex;justify-content:space-between;align-items:center"><span class="rm">Remove</span><b style="font-size:18px">€36.90</b></div></div>
+<span class="ill">Simulated payment · Illustrative data</span>
+<div style="position:absolute;left:0;right:0;bottom:0;background:#fffdf9;border-top:1px solid #e2dacb;padding:12px 16px"><div class="sum t" style="border:0;margin:0;padding:0 0 8px"><span>Total · 2 records</span><span>€71.80</span></div><span class="btn p" style="width:100%">Go to checkout</span></div></div></section>
+</div>
+</body></html>

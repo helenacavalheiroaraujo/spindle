@@ -26,6 +26,17 @@ export function checkoutPath(listingId: string, versionId: string): string {
   return `/checkout/${listingId}?version=${versionId}`;
 }
 
+// The seller who opens the checkout address of their own listing is sent to the listing's page, with a notice
+// (bug 12, DECISIONS 2026-11-10), instead of a "not found" page.
+export const OWN_LISTING_NOTICE = "This listing is yours, you can't buy it";
+export function ownListingPath(listingId: string, versionId: string): string {
+  return `/listings/${listingId}?version=${versionId}&notice=own`;
+}
+// The listing page shows the notice only for this exact value in the address.
+export function listingNotice(param: string | undefined): string | null {
+  return param === "own" ? OWN_LISTING_NOTICE : null;
+}
+
 // A listing opened from a link after it was sold or removed (story 7 / story 5 · finding #61, DECISIONS 2026-11-08):
 // "This record is no longer available" instead of the generic "not found".
 export function isNoLongerAvailable(status: "on_sale" | "sold" | "removed"): boolean {

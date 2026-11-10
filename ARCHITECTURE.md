@@ -26,16 +26,18 @@ app/                                ← screens (one folder per route)
   listings/[listingId]/             ← listing check (story 5)
   checkout/[listingId]/             ← story 7
   orders/[orderId]/                 ← order confirmation (story 7)
+  cart/ · cart/checkout/            ← story 20 (cart/add/[listingId] adds after a log-in)
   login/                            ← sign in / create account (story 9)
   sell/ · my-listings/              ← story 8 (phase 3)
   compare/[albumId]/                ← story 4 (phase 4)
 components/                         ← shared UI: Header, LoadingMask, ErrorScreen, TrafficLight, PriceLabel,
-                                      ListingList, ListingsBeside, BuyButton
+                                      ListingList, ListingsBeside, BuyButton, AddToCart, CartLink
 lib/rules/                          ← business rules, pure functions, no database
   recommendation.ts                 ← scores, weights, tie, alternative, ideal (story 3)
   trafficLight.ts                   ← checklist → green / yellow / red (story 5)
   fairPrice.ts                      ← below / typical / above (story 6)
   checkoutTotal.ts                  ← record + €4.90 + €2.00 (story 7)
+  cartTotal.ts · cartAccess.ts      ← the cart total; who can add, which records stay (story 20)
   albumSearch.ts                    ← title/artist match, newest first (story 1)
   searchSuggestions.ts              ← up to 3 albums, tolerance by typed length (story 1)
   activeListings.ts                 ← which listings count (Shared rules)

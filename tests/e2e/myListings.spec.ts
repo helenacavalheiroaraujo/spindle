@@ -21,7 +21,11 @@ let email = "";
 let userId = "";
 let profileId = "";
 let versionId = "";
-const ids: Record<"edit" | "remove" | "lost" | "sold" | "gone", string> = { edit: "", remove: "", lost: "", sold: "", gone: "" };
+const ids: Record<"edit" | "remove" | "lost" | "sold" | "gone" | "photo", string> = { edit: "", remove: "", lost: "", sold: "", gone: "", photo: "" };
+
+// A real 1×1 PNG, so the browser can read and reduce it like a camera photo.
+const PNG = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==", "base64");
+const photo = (name: string) => ({ name: `${name}.png`, mimeType: "image/png", buffer: PNG });
 
 async function addListing(price: number, status: "on_sale" | "sold" | "removed" = "on_sale"): Promise<string> {
   const { data, error } = await admin().rpc("create_listing", {
@@ -75,7 +79,9 @@ test.beforeAll(async ({}, info) => {
 });
 
 test.afterAll(async () => {
-  for (const id of Object.values(ids)) {
+  const { data: files } = await admin().storage.from("listing-photos").list(profileId);
+  if (files?.length) await admin().storage.from("listing-photos").remove(files.map((f) => `${profileId}/${f.name}`));
+  for (const id of Object.values(ids).filter(Boolean)) {
     await admin().from("check_results").delete().eq("listing_id", id);
     await admin().from("listings").delete().eq("id", id);
   }
@@ -112,10 +118,10 @@ test("My listings from Your account: on sale and sold tabs with status; removed 
 test("edit the price: the label follows; only the price changes; the price rule applies", async ({ page }) => {
   await openMyListings(page);
   await row(page, "€25").getByRole("button").click();
-  await expect(sheet(page)).toContainText("Condition, photos and version can't be changed.");
+  await expect(sheet(page)).toContainText("The version can't be changed.");
   await expect(sheet(page)).toContainText("Typical for this pressing: €20–€30");
   await expect(sheet(page).getByText("Typical", { exact: true })).toBeVisible();
-  const save = sheet(page).getByRole("button", { name: "Save price" });
+  const save = sheet(page).getByRole("button", { name: "Save changes" });
   await expect(save).toBeDisabled(); // nothing changed yet
 
   const price = sheet(page).getByLabel("Price");
@@ -131,7 +137,7 @@ test("edit the price: the label follows; only the price changes; the price rule 
   await expect(sheet(page)).toContainText("No commission: you receive €35");
   await screenshot(page, 8, "my-listings-edit");
   await save.click();
-  await expect(sheet(page).getByText("Price saved")).toBeVisible();
+  await expect(sheet(page).getByText("Changes saved")).toBeVisible();
   await expect(row(page, "€35")).toBeVisible();
   const after = await admin().from("listings").select("price, status, condition_code, cover_photo_url, claimed_version_id").eq("id", ids.edit).single();
   expect(after.data).toEqual({
@@ -141,6 +147,32 @@ test("edit the price: the label follows; only the price changes; the price rule 
     cover_photo_url: "/photos/cover.svg",
     claimed_version_id: versionId,
   });
+});
+
+test("the listing sheet has no fake drag bar and closes with Close, Escape and (on a phone) a tap outside", async ({ page }) => {
+  await openMyListings(page);
+  const open = () => onSale(page).first().getByRole("button").click();
+  await open();
+  await expect(sheet(page)).toBeVisible();
+  // The old bar was an empty decorative span before the title row; the sheet now starts with the title row.
+  await expect(sheet(page).locator("> span")).toHaveCount(0);
+  if (process.env.SCREENSHOTS === "1") {
+    await page.addStyleTag({ content: "nextjs-portal { display: none !important; }" });
+    await page.screenshot({ path: `docs/screenshots/bug-14/sheet-open-${page.viewportSize()?.width}.png` });
+  }
+
+  await sheet(page).getByRole("button", { name: "Close" }).click();
+  await expect(sheet(page)).toHaveCount(0);
+
+  await open();
+  await page.keyboard.press("Escape");
+  await expect(sheet(page)).toHaveCount(0);
+
+  if ((page.viewportSize()?.width ?? 0) < 1024) {
+    await open();
+    await page.mouse.click(180, 60); // on the dimmed page above the sheet
+    await expect(sheet(page)).toHaveCount(0);
+  }
 });
 
 test("remove asks first; then 'Listing removed' with Undo puts it back on sale as before", async ({ page }) => {
@@ -193,7 +225,7 @@ test("bought while the seller edits or removes it: 'This record was just sold'",
   await row(page, "€29").getByRole("button").click();
   await admin().from("listings").update({ status: "sold" }).eq("id", ids.lost); // a buyer pays meanwhile
   await sheet(page).getByLabel("Price").fill("31");
-  await sheet(page).getByRole("button", { name: "Save price" }).click();
+  await sheet(page).getByRole("button", { name: "Save changes" }).click();
   await expect(sheet(page).getByRole("alert")).toHaveText("This record was just sold");
   expect(await status(ids.lost)).toEqual({ status: "sold", price: 29 });
 
@@ -206,3 +238,43 @@ test("bought while the seller edits or removes it: 'This record was just sold'",
   await expect(sheet(page).getByRole("alert")).toHaveText("This record was just sold");
   expect((await status(ids.lost)).status).toBe("sold");
 });
+
+// Bug 10: the condition and the photos can be changed too; the version cannot; the photo rules still apply.
+test("edit the condition and a photo: saved on the same listing; version and other photos stay", async ({ page }) => {
+  ids.photo = await addListing(26);
+  await openMyListings(page);
+  await row(page, "€26").getByRole("button").click();
+  await expect(sheet(page)).toContainText("The version can't be changed.");
+  const save = sheet(page).getByRole("button", { name: "Save changes" });
+  await expect(save).toBeDisabled(); // nothing changed yet
+  await expect(sheet(page).getByText("Change", { exact: true })).toHaveCount(2); // the saved cover and record photos are shown
+
+  await sheet(page).getByText("Near mint").click();
+  await expect(save).toBeEnabled();
+  await sheet(page).getByLabel("Front cover photo").setInputFiles(photo("new-cover"));
+  await expect(sheet(page).getByText("Front cover ✓", { exact: true })).toBeVisible(); // the new one, not yet saved
+  await sheet(page).getByLabel("Price").fill("1001"); // the price rule still applies
+  await expect(save).toBeDisabled();
+  await sheet(page).getByLabel("Price").fill("26");
+  await expect(save).toBeEnabled();
+  await screenshot(page, "bug-10", "my-listings-edit");
+  await save.click();
+  await expect(sheet(page).getByText("Changes saved")).toBeVisible();
+  await expect(row(page, "€26")).toContainText("Near mint (NM)");
+
+  const after = await admin()
+    .from("listings")
+    .select("price, status, condition_code, cover_photo_url, record_photo_url, claimed_version_id, actual_version_id")
+    .eq("id", ids.photo)
+    .single();
+  expect(after.data).toMatchObject({
+    price: 26,
+    status: "on_sale",
+    condition_code: "NM",
+    record_photo_url: "/photos/record.svg", // not touched
+    claimed_version_id: versionId,
+    actual_version_id: versionId,
+  });
+  expect(after.data!.cover_photo_url).toContain("/listing-photos/"); // the new photo, in Storage
+});
+

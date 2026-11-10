@@ -6,9 +6,9 @@ const labels = (signedIn: boolean) => menuItems(signedIn, "/").map((i) => i.labe
 const current = (signedIn: boolean, path: string) => menuItems(signedIn, path).find((i) => i.current)?.label ?? null;
 
 describe("menuItems", () => {
-  it("shows the same five items everywhere; signed out says Log in, signed in says Your account", () => {
-    expect(labels(false)).toEqual(["Home", "Sell for free", "Log in", "Artists", "All genres and formats"]);
-    expect(labels(true)).toEqual(["Home", "Sell for free", "Your account", "Artists", "All genres and formats"]);
+  it("shows the same six items everywhere; signed out says Log in, signed in says Your account", () => {
+    expect(labels(false)).toEqual(["Home", "Sell for free", "Log in", "Cart", "Artists", "All genres and formats"]);
+    expect(labels(true)).toEqual(["Home", "Sell for free", "Your account", "Cart", "Artists", "All genres and formats"]);
   });
 
   it.each([
@@ -26,12 +26,12 @@ describe("menuItems", () => {
   });
 
   it("Artists and All genres and formats are 'Coming soon': no link, never current", () => {
-    for (const item of menuItems(true, "/").slice(3)) expect(item).toMatchObject({ href: null, soon: true, current: false });
-    for (const item of menuItems(true, "/").slice(0, 3)) expect(item).toMatchObject({ soon: false });
+    for (const item of menuItems(true, "/").slice(4)) expect(item).toMatchObject({ href: null, soon: true, current: false });
+    for (const item of menuItems(true, "/").slice(0, 4)) expect(item).toMatchObject({ soon: false });
   });
 
-  it("the three working items have a link", () => {
-    expect(menuItems(false, "/").slice(0, 3).map((i) => i.href)).toEqual(["/", "/sell", "/login"]);
+  it("the four working items have a link", () => {
+    expect(menuItems(false, "/").slice(0, 4).map((i) => i.href)).toEqual(["/", "/sell", "/login", "/cart"]);
   });
 
   it.each([
@@ -47,9 +47,35 @@ describe("menuItems", () => {
 
 describe("every item has a chevron box (story 19)", () => {
   it("working items say 'Nothing here yet'; Artists and All genres and formats say 'Coming soon'", () => {
-    const [home, sell, account, artists, genres] = menuItems(false, "/");
-    for (const item of [home, sell, account]) expect(item.note).toEqual({ title: "Nothing here yet", text: "More options will appear here in the future." });
+    const [home, sell, account, cart, artists, genres] = menuItems(false, "/");
+    for (const item of [home, sell, account, cart]) expect(item.note).toEqual({ title: "Nothing here yet", text: "More options will appear here in the future." });
     for (const item of [artists, genres]) expect(item.note).toEqual({ title: "Coming soon", text: "This will open more options in the future." });
+  });
+});
+
+describe("the Cart cell (story 20)", () => {
+  const cart = (path: string, count?: number) => menuItems(true, path, "", count)[3];
+
+  it("sits after the account and shows the number of records; an empty cart shows none", () => {
+    expect(cart("/", 2)).toMatchObject({ label: "Cart", href: "/cart", count: 2 });
+    expect(cart("/")).toMatchObject({ count: 0 });
+  });
+
+  it.each([
+    ["/cart", true],
+    ["/cart/checkout", true],
+    ["/cartoon", false], // a prefix is not a match
+    ["/", false],
+  ] as const)("on %s → current: %s", (path, expected) => {
+    expect(cart(path).current).toBe(expected);
+  });
+
+  it("no other item shows a number", () => {
+    expect(menuItems(true, "/", "", 3).filter((i) => i.count > 0).map((i) => i.label)).toEqual(["Cart"]);
+  });
+
+  it("the desktop cells do not repeat it: the cart is the icon at the right of the header", () => {
+    expect(desktopMenu(true, "/").map((c) => c.label)).not.toContain("Cart");
   });
 });
 

@@ -46,7 +46,7 @@ test("desktop: the menu is in the top row above the search; cells Artists, All g
   desktopOnly(info);
   await page.goto("/");
   await expect(page.getByRole("button", { name: "Open menu" })).toBeHidden();
-  await expect(row(page).getByRole("link")).toHaveText(["Log in", "Sell for free"]); // Home is the logo
+  await expect(row(page).getByRole("link")).toHaveText(["Log in", "Sell for free", ""]); // Home is the logo; the last link is the cart icon (story 20), which has no text
   await expect(row(page).getByText("Artists")).toBeVisible();
   await expect(row(page).getByText("All genres and formats")).toBeVisible();
   await expect(row(page).getByText("Soon", { exact: true })).toHaveCount(2);
@@ -84,7 +84,7 @@ test("desktop: the search is in the top row between the logo and the menu on eve
   expect(other.search!.x).toBeGreaterThan(other.logo!.x + other.logo!.width); // between the logo ...
   expect(other.search!.x + other.search!.width).toBeLessThan(other.nav!.x); // ... and the menu
   expect(Math.abs(other.search!.y - other.logo!.y)).toBeLessThan(40); // in the same row
-  expect(other.search!.width).toBeGreaterThan(180); // narrowed, not squeezed away
+  expect(other.search!.width).toBeGreaterThan(150); // narrowed (the cart icon of story 20 takes 44 px), not squeezed away
   expect((await header("/login")).height).toBe(other.height);
   await page.goto("/search?q=bowie");
   await screenshot(page, 19, "header-search-top");
@@ -126,7 +126,7 @@ test("phone: ☰ opens the drawer; items, current page and 'Coming soon'; a link
   await expect(row(page)).toBeHidden();
   await expect(drawer(page)).toHaveCount(0);
   await openMenu(page);
-  await expect(drawer(page).getByRole("link")).toHaveText(["Home", "Sell for free", "Log in"]);
+  await expect(drawer(page).getByRole("link")).toHaveText(["Home", "Sell for free", "Log in", "Cart"]); // story 20: the Cart cell
   await expect(drawer(page).getByRole("link", { name: "Home" })).toHaveAttribute("aria-current", "page");
   await expect(drawer(page).getByText("Coming soon")).toHaveCount(2);
   await expect(drawer(page).getByRole("link", { name: /Artists|All genres/ })).toHaveCount(0);
@@ -197,7 +197,7 @@ test("signed in: 'Your account' replaces 'Log in', on the same pages, and opens 
   const items = info.project.name === "phone" ? drawer(page) : row(page);
   if (info.project.name === "phone") await openMenu(page);
   const phone = info.project.name === "phone";
-  await expect(items.getByRole("link")).toHaveText(phone ? ["Home", "Sell for free", "Your account"] : ["RC", "Sell for free"]); // desktop: the initials
+  await expect(items.getByRole("link")).toHaveText(phone ? ["Home", "Sell for free", "Your account", "Cart"] : ["RC", "Sell for free", ""]); // desktop: the initials, and the cart icon (no text)
   await expect(items.getByRole("link", { name: "Log in" })).toHaveCount(0);
   await items.getByRole("link", { name: /Your account/ }).click();
   await expect(page).toHaveURL("/account");

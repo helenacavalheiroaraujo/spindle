@@ -8,6 +8,7 @@ import { priceLabel, type TypicalRange } from "@/lib/rules/fairPrice";
 import { TrafficLight } from "@/components/TrafficLight";
 import { LightLegendExplained } from "@/components/LightLegendExplained";
 import { BuyButton } from "@/components/BuyButton";
+import { AddToCart } from "@/components/AddToCart";
 import { checkoutPath, isOwnListing } from "@/lib/rules/checkoutAccess";
 import { YourListing } from "@/components/YourListing";
 import { sellerText } from "@/lib/rules/seller";
@@ -105,11 +106,14 @@ export function ListingList({
                   {isOwnListing(l.sellerId, viewerId) ? (
                     <YourListing />
                   ) : (
-                    <BuyButton
-                      href={checkoutPath(l.id, versionId)}
-                      listingLabel={label}
-                      warning={light === "yellow" ? yellowWarning(l.checks, l.hasMatrixPhoto, movedHere) : null}
-                    />
+                    <div className="flex w-full flex-col items-end">
+                      <BuyButton
+                        href={checkoutPath(l.id, versionId)}
+                        listingLabel={label}
+                        warning={light === "yellow" ? yellowWarning(l.checks, l.hasMatrixPhoto, movedHere) : null}
+                      />
+                      <AddToCart listingId={l.id} listingLabel={label} />
+                    </div>
                   )}
                 </div>
               )}

@@ -3,20 +3,15 @@
 // the browser could send anything.
 import { redirect } from "next/navigation";
 import { createListing } from "@/lib/db/listings";
-import { removeListingPhotos, uploadListingPhoto } from "@/lib/db/photos";
+import { photoFromForm, removeListingPhotos, uploadListingPhoto } from "@/lib/db/photos";
 import { getSellerProfile } from "@/lib/db/profiles";
 import { currentUser } from "@/lib/db/session";
 import { withReturn } from "@/lib/rules/login";
-import { canList, checkPrice, isCondition, photoTooBig } from "@/lib/rules/sellForm";
+import { canList, checkPrice, isCondition } from "@/lib/rules/sellForm";
 
 // "not_in_catalogue": "This version isn't in our catalogue yet". "upload_failed": the photos could not be saved.
 // "failed": anything else. In every case nothing was created and the form keeps what was typed.
 export type PublishState = { status: "ready" | "not_in_catalogue" | "upload_failed" | "failed" };
-
-const photo = (form: FormData, name: string): File | null => {
-  const value = form.get(name);
-  return value instanceof File && value.size > 0 && value.type.startsWith("image/") && !photoTooBig(value.size) ? value : null;
-};
 
 export async function publish(versionId: string, _prev: PublishState, form: FormData): Promise<PublishState> {
   const user = await currentUser().catch(() => undefined);
@@ -27,17 +22,16 @@ export async function publish(versionId: string, _prev: PublishState, form: Form
   const price = checkPrice(String(form.get("price") ?? ""));
   const city = String(form.get("city") ?? "");
   const shopName = String(form.get("shopName") ?? "");
-  const cover = photo(form, "cover");
-  const record = photo(form, "record");
-  const matrix = photo(form, "matrix");
+  const cover = photoFromForm(form, "cover");
+  const record = photoFromForm(form, "record");
+  const matrix = photoFromForm(form, "matrix");
 
   const uploaded: string[] = [];
   let ok = false;
   try {
     const profile = await getSellerProfile(user.id, user.name);
     if (!profile) return { status: "failed" };
-    const needsCity = profile.city === null;
-    const input = { condition, price: String(form.get("price") ?? ""), hasCover: !!cover, hasRecord: !!record, needsCity, city };
+    const input = { condition, price: String(form.get("price") ?? ""), hasCover: !!cover, hasRecord: !!record, city };
     if (!canList(input) || !price.ok || !isCondition(condition) || !cover || !record) return { status: "failed" };
 
     let photos: { cover: string; record: string; matrix: string | null };
@@ -62,8 +56,8 @@ export async function publish(versionId: string, _prev: PublishState, form: Form
       conditionCode: condition,
       price: price.price,
       photos,
-      city: needsCity ? city : null,
-      shopName: needsCity ? shopName : null,
+      city, // where this listing is sold from (bug 11); the profile keeps only the first one
+      shopName,
     });
     if ("error" in result) return { status: result.error === "version_not_found" ? "not_in_catalogue" : "failed" };
     ok = true;

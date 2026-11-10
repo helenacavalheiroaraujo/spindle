@@ -21,24 +21,31 @@ const GREEN_32 = "40000000-0000-0000-0000-000000000005";
 const YELLOW_36 = "40000000-0000-0000-0000-000000000006";
 const RED_29 = "40000000-0000-0000-0000-000000000008"; // claimed 2012 Remaster, actually 1990 Reissue
 const V_HOMOGENIC_2017 = "20000000-0000-0000-0000-000000000010"; // the Pay tests add their own €28 listings (the seed has €34 and €31 here)
+// Screenshots for bug reports (saved only when BUGSHOTS=1): docs/screenshots/<folder>/<name>-<width>.png
+async function shot(page: Page, folder: string, name: string) {
+  if (process.env.BUGSHOTS !== "1") return;
+  await page.addStyleTag({ content: "nextjs-portal { display: none !important; }" });
+  await page.screenshot({ path: `docs/screenshots/${folder}/${name}-${page.viewportSize()?.width}.png`, fullPage: true });
+}
 const rows = (page: Page) => page.getByRole("list", { name: "Verified listings" }).getByRole("listitem");
 
 const PASSWORD = "vinyl-test-123";
 let email = "";
 let userId = "";
 let toBuy = ""; // green €28 listing, bought in the test
+let own = ""; // green €28 listing sold by the buyer himself (bug 12)
 let toLose = ""; // green €28 listing, sold to someone else while the buyer is on the checkout
 
 // A green €28 listing of its own for each run, so paying never changes the demo data.
-async function addListing(): Promise<string> {
+async function addListing(sellerId = "30000000-0000-0000-0000-000000000001", price = 28): Promise<string> {
   const { data, error } = await admin()
     .from("listings")
     .insert({
-      seller_id: "30000000-0000-0000-0000-000000000001",
+      seller_id: sellerId,
       claimed_version_id: V_HOMOGENIC_2017,
       actual_version_id: V_HOMOGENIC_2017,
       condition_code: "VG+",
-      price: 28,
+      price,
       status: "on_sale",
       cover_photo_url: "/photos/cover.svg",
       record_photo_url: "/photos/record.svg",
@@ -66,10 +73,12 @@ test.beforeAll(async ({}, info) => {
   await admin().from("profiles").insert({ user_id: userId, name: "Rui Costa" });
   toBuy = await addListing();
   toLose = await addListing();
+  const { data: profile } = await admin().from("profiles").select("id").eq("user_id", userId).single();
+  own = await addListing(profile!.id, 27); // €27, so the buyer's own listing is not counted among the €28 ones the Pay test checks
 });
 
 test.afterAll(async () => {
-  for (const id of [toBuy, toLose]) {
+  for (const id of [toBuy, toLose, own]) {
     await admin().from("orders").delete().eq("listing_id", id);
     await admin().from("check_results").delete().eq("listing_id", id);
     await admin().from("listings").delete().eq("id", id);
@@ -110,6 +119,21 @@ test("signed in: a red listing never reaches the checkout; the same listing unde
   await expect(page.getByRole("region", { name: "The record" })).toContainText("Spiders from Mars, 1990 Reissue");
 });
 
+test("signed in: the checkout of my own listing goes back to the listing with a notice, and has no Buy button (bug 12)", async ({ page }) => {
+  await page.goto("/login");
+  await logIn(page);
+  await expect(page).toHaveURL("/");
+  await page.goto(`/checkout/${own}?version=${V_HOMOGENIC_2017}`);
+  await expect(page).toHaveURL(`/listings/${own}?version=${V_HOMOGENIC_2017}&notice=own`);
+  await expect(page.getByText("This page could not be found.")).toHaveCount(0);
+  await expect(page.getByRole("status").filter({ hasText: "This listing is yours, you can't buy it" })).toBeVisible();
+  await expect(page.getByText("Your listing")).toBeVisible(); // same as in the list: no Buy button, no path to the checkout
+  await expect(page.locator(`a[href^="/checkout/"]`)).toHaveCount(0);
+  await shot(page, "bug-12", "own-listing-notice");
+  await page.goto(`/listings/${own}?version=${V_HOMOGENIC_2017}`); // without the address's notice: no notice
+  await expect(page.getByRole("status")).toHaveCount(0);
+});
+
 async function fillAddress(page: Page) {
   // Typing before React has taken over the page loses the text (the Pay button stays off): wait until the form is hydrated.
   const first = await page.getByLabel("Name").elementHandle();
@@ -126,13 +150,23 @@ test("checkout: fee and total before paying; Pay waits for a full address; no ca
   const price = page.getByRole("definition");
   await expect(price).toHaveText(["€28.00", "€4.90", "€2.00", "€34.90"]); // record, insured shipping, buyer protection, total
   await expect(page.getByText("MB WAY")).toBeVisible();
-  await expect(page.getByRole("list", { name: "How protection works" }).getByRole("listitem")).toHaveText([
-    "1You pay Spindle",
-    "2Seller ships",
-    "3You confirm it's all good",
-    "4Seller gets paid",
-  ]);
+  // Bug 7: only one line "How protection works"; the four steps stay hidden until it is opened.
+  const steps = page.getByRole("list", { name: "Protection steps" });
+  await expect(page.getByText("How protection works")).toBeVisible();
+  await expect(steps).toBeHidden();
+  await expect(page.getByText("What protection covers")).toHaveCount(0);
+  await shot(page, "bug-7b", "closed");
+  await page.getByText("How protection works").click(); // mouse
+  await expect(steps.getByRole("listitem")).toHaveText(["1You pay Spindle", "2Seller ships", "3You confirm it's all good", "4Seller gets paid"]);
   await expect(page.getByText("Pressing check, payment held until delivery, and a refund if the record isn't as listed.")).toBeVisible();
+  await shot(page, "bug-7b", "open");
+  await page.getByText("How protection works").click();
+  await expect(steps).toBeHidden();
+  await page.getByText("How protection works").focus(); // keyboard: Enter opens, Enter closes
+  await page.keyboard.press("Enter");
+  await expect(steps).toBeVisible();
+  await page.keyboard.press("Enter");
+  await expect(steps).toBeHidden();
   await expect(page.getByText("Simulated payment · Illustrative data")).toBeVisible();
 
   const payButton = page.getByRole("button", { name: "Pay €34.90" });

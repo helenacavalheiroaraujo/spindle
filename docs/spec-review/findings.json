@@ -1313,7 +1313,7 @@
       "title": "Buyer protection is €2.00 (total €34.90) in the story, €2.10 (total €35.00) in the design — not recorded in DECISIONS",
       "evidence": [
         {
-          "source": "specs/story-7-checkout.md",
+          "source": "specs/stories/story-7-checkout.md",
           "where": "Story 7 · Acceptance criteria",
           "quote": "For a €28 record, the total is €34.90 (28 + 4.90 + 2.00)"
         },
@@ -1343,7 +1343,7 @@
       "title": "Design offers card and PayPal besides MB WAY; the story offers MB WAY or card only",
       "evidence": [
         {
-          "source": "specs/story-7-checkout.md",
+          "source": "specs/stories/story-7-checkout.md",
           "where": "Story 7 · What the checkout shows",
           "quote": "choice of MB WAY or card, as a label only; MB WAY is selected by default"
         },
@@ -1378,13 +1378,13 @@
       "title": "The confirmation screen after Pay is not described (texts, what it shows, where the buyer goes next)",
       "evidence": [
         {
-          "source": "specs/story-7-checkout.md",
+          "source": "specs/stories/story-7-checkout.md",
           "where": "Story 7 · Use cases",
           "quote": "Pay → order created, status \"Paid · waiting for the seller\"; confirmation screen"
         }
       ],
       "proposal": {
-        "file": "specs/story-7-checkout.md",
+        "file": "specs/stories/story-7-checkout.md",
         "section": "Story 7 · What the checkout shows (new sub-list: confirmation screen)",
         "current": "",
         "proposed": "- **Confirmation screen:** heading \"Order placed\", the record, the total paid, the status \"Paid · waiting for the seller\", the four steps with step 1 done, and a button \"Back to search\""
@@ -1410,18 +1410,18 @@
       "title": "On a yellow listing, is login asked when tapping Buy (story 9) or after the warning's \"Continue to checkout\" (story 5)?",
       "evidence": [
         {
-          "source": "specs/story-9-accounts.md",
+          "source": "specs/stories/story-9-accounts.md",
           "where": "Story 9 · Acceptance criteria",
           "quote": "Tapping Buy while signed out opens login and, after login, goes to the checkout for that listing"
         },
         {
-          "source": "specs/story-5-listings.md",
+          "source": "specs/stories/story-5-listings.md",
           "where": "Story 5 · What the screens show",
           "quote": "Buy (in the list or on the listing check screen) first shows a warning that says what is uncertain"
         }
       ],
       "proposal": {
-        "file": "specs/story-7-checkout.md",
+        "file": "specs/stories/story-7-checkout.md",
         "section": "Story 7 · Edge cases",
         "current": "Buyer not signed in → login first (story 9), then back to the checkout",
         "proposed": "Buyer not signed in → login is asked when going to the checkout (Buy on a green listing; \"Continue to checkout\" after the warning on a yellow one), then the buyer lands on the checkout"
@@ -1445,18 +1445,18 @@
       "title": "\"Address fields filled in\" has no rule for the postcode (any text, or the Portuguese format 0000-000?)",
       "evidence": [
         {
-          "source": "specs/story-7-checkout.md",
+          "source": "specs/stories/story-7-checkout.md",
           "where": "Story 7 · Acceptance criteria",
           "quote": "Pay is disabled until the address fields are filled in"
         },
         {
-          "source": "specs/story-7-checkout.md",
+          "source": "specs/stories/story-7-checkout.md",
           "where": "Story 7 · What the checkout shows",
           "quote": "Shipping address: name, street, postcode, city"
         }
       ],
       "proposal": {
-        "file": "specs/story-7-checkout.md",
+        "file": "specs/stories/story-7-checkout.md",
         "section": "Story 7 · Acceptance criteria",
         "current": "Pay is disabled until the address fields are filled in",
         "proposed": "Pay is disabled until name, street, postcode and city are filled in (not empty; the postcode format is not checked in the MVP)"
@@ -1484,7 +1484,7 @@
           "quote": "<p className=\"mb-2 font-medium\">Did you mean…?</p>"
         },
         {
-          "source": "specs/story-1-search.md",
+          "source": "specs/stories/story-1-search.md",
           "where": "Acceptance criteria",
           "quote": "each suggestion shows the full album title (e.g. \"zigy\" → \"Did you mean *The Rise and Fall of Ziggy Stardust…*?\")"
         }
@@ -1604,7 +1604,7 @@
           "quote": "Pick at least one to continue."
         },
         {
-          "source": "specs/story-2-priorities.md",
+          "source": "specs/stories/story-2-priorities.md",
           "where": "Acceptance criteria",
           "quote": "\"See recommendation\" is disabled until at least one option is picked"
         }
@@ -1658,7 +1658,7 @@
           "quote": "{open && ("
         },
         {
-          "source": "specs/story-3-recommendation.md",
+          "source": "specs/stories/story-3-recommendation.md",
           "where": "What the screen shows",
           "quote": "**Technical terms** (e.g. \"remaster\", \"first pressing\", \"matrix\") always come with a short plain explanation"
         }
@@ -1688,7 +1688,7 @@
           "quote": "insert into glossary_terms (term, explanation) values"
         },
         {
-          "source": "specs/story-3-recommendation.md",
+          "source": "specs/stories/story-3-recommendation.md",
           "where": "Acceptance criteria",
           "quote": "Every term in the glossary (at least: remaster, reissue, first pressing, matrix, and each condition grade) shows its plain explanation wherever it appears"
         }
@@ -1728,7 +1728,7 @@
           "quote": "Track list ({version.tracks.length})"
         },
         {
-          "source": "specs/story-3-recommendation.md",
+          "source": "specs/stories/story-3-recommendation.md",
           "where": "What the screen shows",
           "quote": "**Reasons:** one sentence per chosen priority, in rank order (max 3)"
         }
@@ -1784,7 +1784,7 @@
           "quote": "const firstPressing = [...versions].sort((a, b) => a.releaseYear - b.releaseYear)[0];"
         },
         {
-          "source": "specs/story-3-recommendation.md",
+          "source": "specs/stories/story-3-recommendation.md",
           "where": "What the screen shows",
           "quote": "vs €[first pressing price] for a first pressing"
         }
@@ -1810,7 +1810,7 @@
           "quote": "idealUnavailableId: ideal && ideal.total > pick.total ? ideal.version.id : null,"
         },
         {
-          "source": "specs/story-3-recommendation.md",
+          "source": "specs/stories/story-3-recommendation.md",
           "where": "How the pick is made",
           "quote": "**Ideal version:** the highest total among all versions of the album, including those with no listings"
         }
@@ -1867,7 +1867,7 @@
           "quote": "<span>Your priorities: {ranking.map((p, i) => `${i + 1}. ${LABEL[p]}`).join(\" · \")}</span>"
         },
         {
-          "source": "specs/story-2-priorities.md",
+          "source": "specs/stories/story-2-priorities.md",
           "where": "Phase 2",
           "quote": "the recommendation shows \"Based on: Price, Sound · **Change**\""
         }
@@ -1897,7 +1897,7 @@
           "quote": "{count} for sale · from {formatPrice(lowest)}"
         },
         {
-          "source": "specs/story-3-recommendation.md",
+          "source": "specs/stories/story-3-recommendation.md",
           "where": "What the screen shows",
           "quote": "number of listings, lowest price"
         }
@@ -1924,7 +1924,7 @@
           "quote": "<p id={noteId} className=\"text-xs text-navy/70\">Checkout comes in story 7</p>"
         },
         {
-          "source": "specs/story-5-listings.md",
+          "source": "specs/stories/story-5-listings.md",
           "where": "What the screens show",
           "quote": "**Yellow:** Buy (in the list or on the listing check screen) first shows a warning"
         }
@@ -1989,7 +1989,7 @@
           "quote": "{l.condition.code} means {l.condition.name.toLowerCase()}, with {l.condition.explanation.toLowerCase()}"
         },
         {
-          "source": "specs/story-5-listings.md",
+          "source": "specs/stories/story-5-listings.md",
           "where": "What the screens show",
           "quote": "(e.g. \"VG+ means very good, with light signs of wear\")"
         }
@@ -2064,9 +2064,9 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 61,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {"iteration": 6, "date": "2026-11-10", "decision": "Already built: DECISIONS 2026-11-08 (\"This record is no longer available\", with Back to search). Status updated while building story 20."}
     },
     {
       "stories": [
@@ -2082,7 +2082,7 @@
           "quote": "Green and yellow mixed, cheapest first; red listings at the end, also cheapest first."
         },
         {
-          "source": "specs/story-5-listings.md",
+          "source": "specs/stories/story-5-listings.md",
           "where": "What the screens show",
           "quote": "red listings at the end"
         }
@@ -2139,7 +2139,7 @@
           "quote": "sellerName: seller.name,"
         },
         {
-          "source": "specs/story-9-accounts.md",
+          "source": "specs/stories/story-9-accounts.md",
           "where": "Acceptance criteria",
           "quote": "On listings, sellers with a shop name show \"Shop\"; others show \"Private seller\""
         },
@@ -2214,7 +2214,7 @@
           "quote": "message=\"We couldn't log you in.\""
         },
         {
-          "source": "specs/story-9-accounts.md",
+          "source": "specs/stories/story-9-accounts.md",
           "where": "Acceptance criteria",
           "quote": "Passwords shorter than 8 characters are refused"
         }
@@ -2279,7 +2279,7 @@
           "quote": "Only addresses inside Spindle are followed; anything else goes to the home page,"
         },
         {
-          "source": "specs/story-9-accounts.md",
+          "source": "specs/stories/story-9-accounts.md",
           "where": "Scope",
           "quote": "after login the user returns to where they were"
         }
@@ -2309,7 +2309,7 @@
           "quote": "if (path === \"/login\" || path === \"/signup\") return null;"
         },
         {
-          "source": "specs/story-9-accounts.md",
+          "source": "specs/stories/story-9-accounts.md",
           "where": "Scope",
           "quote": "Header: \"Log in\" when signed out"
         }
@@ -2387,18 +2387,18 @@
       "title": "The list of versions the seller picks from has no design",
       "evidence": [
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Designs",
           "quote": "| List of versions to pick from | **None yet: Canva design needed before building** |"
         },
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Scope",
           "quote": "sees the **list of versions** (year, country, label, format) → picks the exact one"
         }
       ],
       "proposal": {
-        "file": "specs/story-8-sell.md",
+        "file": "specs/stories/story-8-sell.md",
         "section": "Designs",
         "current": "| List of versions to pick from | **None yet: Canva design needed before building** |",
         "proposed": "| List of versions to pick from | [link to the approved Canva design, or a page in docs/design/] |"
@@ -2422,7 +2422,7 @@
       "title": "First-time selling (city and shop name) has no design, and the story does not say if it is its own screen or fields on the sell form",
       "evidence": [
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Designs",
           "quote": "| First time selling: city and shop name | **None yet: Canva design needed before building** (or fields on the sell form: to decide) |"
         },
@@ -2452,18 +2452,18 @@
       "title": "\"My listings\" has no design",
       "evidence": [
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Designs",
           "quote": "| My listings | **None yet: Canva design needed before building** |"
         },
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Scope",
           "quote": "**\"My listings\":** see, edit and remove own listings"
         }
       ],
       "proposal": {
-        "file": "specs/story-8-sell.md",
+        "file": "specs/stories/story-8-sell.md",
         "section": "Designs",
         "current": "| My listings | **None yet: Canva design needed before building** |",
         "proposed": "| My listings | [link to the approved Canva design, or a page in docs/design/] |"
@@ -2488,7 +2488,7 @@
       "title": "Matrix photo: optional in the story, required in the sell design",
       "evidence": [
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Scope",
           "quote": "**photos** (cover and record required; matrix optional)"
         },
@@ -2523,7 +2523,7 @@
       "title": "Button text: the story says \"Publish\", the design says \"List for sale\"; the phone header says \"+ Sell\", the story \"Sell for free\"",
       "evidence": [
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Acceptance criteria",
           "quote": "Publish is disabled until condition, price, cover photo and record photo are filled in"
         },
@@ -2533,7 +2533,7 @@
           "quote": "List for sale"
         },
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Scope",
           "quote": "**\"Sell for free\"** in the header; requires login (story 9)"
         },
@@ -2544,7 +2544,7 @@
         }
       ],
       "proposal": {
-        "file": "specs/story-8-sell.md",
+        "file": "specs/stories/story-8-sell.md",
         "section": "Acceptance criteria",
         "current": "Publish is disabled until condition, price, cover photo and record photo are filled in",
         "proposed": "\"List for sale\" is disabled until condition, price, cover photo and record photo are filled in"
@@ -2579,12 +2579,12 @@
           "quote": "You get paid as soon as the buyer confirms the record arrived as listed."
         },
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Traffic light for new listings",
           "quote": "Automatic checks are out of scope, so every item of a new listing's checklist is **? (uncertain)**"
         },
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Acceptance criteria",
           "quote": "The form says \"No commission: you receive €[price]\""
         }
@@ -2610,7 +2610,7 @@
       "title": "The sell form shows the typical range but not the label the listing will get, and no rule for a version without a range",
       "evidence": [
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Scope",
           "quote": "While typing the price, the seller sees the **typical range** for that version and the label the listing will get (story 6)"
         },
@@ -2620,13 +2620,13 @@
           "quote": "Typical for this pressing: €24–34"
         },
         {
-          "source": "specs/story-6-fair-price.md",
+          "source": "specs/stories/story-6-fair-price.md",
           "where": "What the screens show",
           "quote": "Below the list: \"Typical price for this pressing: €28–€36\""
         }
       ],
       "proposal": {
-        "file": "specs/story-8-sell.md",
+        "file": "specs/stories/story-8-sell.md",
         "section": "Scope",
         "current": "While typing the price, the seller sees the **typical range** for that version and the label the listing will get (story 6)",
         "proposed": "While typing the price, the seller sees \"Typical for this pressing: €min–€max\" and, next to it, the label the listing will get (\"Below typical\", \"Typical\" or \"Above typical\"). A version without a range shows neither (story 6)."
@@ -2650,12 +2650,12 @@
       "title": "Which prices are valid? Only \"0 or negative\" is refused",
       "evidence": [
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Edge cases",
           "quote": "Price of 0 or negative → refused"
         },
         {
-          "source": "specs/story-7-checkout.md",
+          "source": "specs/stories/story-7-checkout.md",
           "where": "What the checkout shows",
           "quote": "record price + insured shipping **€4.90** + buyer protection **€2.00** = total"
         }
@@ -2680,12 +2680,12 @@
       "title": "Edit a listing: which fields can change, and on which screen?",
       "evidence": [
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Use cases",
           "quote": "**Edit** a listing on sale → changes saved; price label updated"
         },
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Acceptance criteria",
           "quote": "Editing the price of a listing updates its label"
         }
@@ -2710,18 +2710,18 @@
       "title": "Remove a listing: no confirmation, and no rule for a listing bought at the same moment",
       "evidence": [
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Use cases",
           "quote": "**Remove** a listing on sale → it no longer appears to buyers"
         },
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Edge cases",
           "quote": "Listing bought while the seller is editing it → edit refused: \"This record was just sold\""
         }
       ],
       "proposal": {
-        "file": "specs/story-8-sell.md",
+        "file": "specs/stories/story-8-sell.md",
         "section": "Edge cases",
         "current": "",
         "proposed": "Listing bought while the seller is removing it → removal refused: \"This record was just sold\""
@@ -2746,23 +2746,23 @@
       "title": "City is asked the first time, but publishing does not depend on it; no way to change city or shop name later",
       "evidence": [
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Scope",
           "quote": "First time selling: the seller adds their **city** and, optionally, a **shop name**"
         },
         {
-          "source": "specs/story-8-sell.md",
+          "source": "specs/stories/story-8-sell.md",
           "where": "Acceptance criteria",
           "quote": "Publish is disabled until condition, price, cover photo and record photo are filled in"
         },
         {
-          "source": "specs/story-9-accounts.md",
+          "source": "specs/stories/story-9-accounts.md",
           "where": "Scope",
           "quote": "On listings, the seller appears as **\"Shop\"** or **\"Private seller\"**, with the city"
         }
       ],
       "proposal": {
-        "file": "specs/story-8-sell.md",
+        "file": "specs/stories/story-8-sell.md",
         "section": "Acceptance criteria",
         "current": "Publish is disabled until condition, price, cover photo and record photo are filled in",
         "proposed": "Publish is disabled until condition, price, cover photo and record photo are filled in and, the first time, the city"
@@ -2787,7 +2787,7 @@
       "title": "Audit: opening the checkout address directly skips the yellow warning",
       "evidence": [
         {
-          "source": "specs/story-7-checkout.md",
+          "source": "specs/stories/story-7-checkout.md",
           "where": "Use cases",
           "quote": "**Yellow listing** → the warning from story 5 is shown before the checkout"
         },

@@ -4,13 +4,14 @@ import { getListingCheck } from "@/lib/db/listings";
 import { currentUserId } from "@/lib/db/session";
 import { getLastShippingAddress } from "@/lib/db/orders";
 import { currentProfileId } from "@/lib/db/profiles";
-import { canCheckout, checkoutPath, isNoLongerAvailable } from "@/lib/rules/checkoutAccess";
+import { canCheckout, checkoutPath, isNoLongerAvailable, isOwnListing, ownListingPath } from "@/lib/rules/checkoutAccess";
 import { ListingUnavailable } from "@/components/ListingUnavailable";
 import { withReturn } from "@/lib/rules/login";
 import { Header } from "@/components/Header";
 import { SellerLine } from "@/components/SellerLine";
 import { checkoutTotal } from "@/lib/rules/checkoutTotal";
 import { CheckoutForm } from "./CheckoutForm";
+import { pay } from "./actions";
 
 const one = (v?: string | string[]) => (Array.isArray(v) ? v[0] : v);
 
@@ -31,12 +32,17 @@ export default async function CheckoutPage({
 
   const userId = await currentUserId();
   if (!userId) redirect(withReturn("/login", checkoutPath(listingId, versionId)));
-  // Red, sold or removed, or the seller's own listing (finding #12): never reaches the checkout.
-  if (!canCheckout(l, versionId, await currentProfileId())) notFound();
+  // The seller's own listing (finding #12, bug 12): back to the listing's page with a notice, never "not found".
+  const profileId = await currentProfileId();
+  if (isOwnListing(l.sellerId, profileId)) redirect(ownListingPath(listingId, versionId));
+  // Red, sold or removed: never reaches the checkout.
+  if (!canCheckout(l, versionId, profileId)) notFound();
 
   const initialAddress = await getLastShippingAddress(userId);
 
   const versionName = versionId === l.actualVersionId ? l.actualVersionName : l.claimedVersionName;
+
+  const amounts = checkoutTotal(l.price);
 
   const record = (
     <section aria-label="The record" className="flex items-center gap-3">
@@ -70,7 +76,18 @@ export default async function CheckoutPage({
       </Link>
       <h1 className="mt-4 font-heading text-4xl leading-tight lg:text-6xl">Buy with protection</h1>
 
-      <CheckoutForm listingId={listingId} versionId={versionId} record={record} amounts={checkoutTotal(l.price)} initialAddress={initialAddress} />
+      <CheckoutForm
+        pay={pay.bind(null, listingId, versionId)}
+        soldHref={`/versions/${versionId}/listings`}
+        record={record}
+        rows={[
+          ["Record", amounts.recordPrice],
+          ["Insured shipping", amounts.shipping],
+          ["Buyer protection", amounts.protectionFee],
+        ]}
+        total={amounts.total}
+        initialAddress={initialAddress}
+      />
     </main>
   );
 }
