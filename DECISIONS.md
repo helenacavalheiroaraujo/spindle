@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Story 14 back in the MVP (process)
+- **Decision:** the desktop footer (story 14) is part of the MVP again. Supersedes "Story 14 outside the MVP" (2026-11-08).
+- **Why:** the owner's decision, 10 Nov 2026.
+- **Trade-off accepted:** the footer takes time from the week before 15 Nov, which was meant for the demo script and the PDF.
+- **Links:** none. The footer has no links, so there are no new pages.
+
 ## 2026-11-10 — Album page: details from MusicBrainz and Wikipedia
 
 ### The page for an album with no listings shows its details

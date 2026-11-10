@@ -6,6 +6,7 @@ import { SignedInProvider } from "@/components/SignedIn";
 import { currentUserId } from "@/lib/db/session";
 import { getProfileName } from "@/lib/db/profiles";
 import { cartListingIds } from "@/lib/db/cart";
+import { Footer } from "@/components/Footer";
 
 // Headings: bold condensed sans-serif; body: plain readable sans-serif (CLAUDE.md, visual direction).
 const heading = Barlow_Condensed({ subsets: ["latin"], weight: ["600"], variable: "--font-heading" }); // semibold headings (DECISIONS 2026-11-10, option 2)
@@ -24,10 +25,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const cartIds = userId ? await cartListingIds(userId).catch(() => []) : []; // story 20: the count in the header
   return (
     <html lang="en" className={`${heading.variable} ${body.variable}`}>
-      <body className="relative min-h-screen font-body antialiased">
+      <body className="relative flex min-h-screen flex-col font-body antialiased">
         <SignedInProvider signedIn={signedIn} name={name ?? ""} cartIds={cartIds}>
           <AccountBadge signedIn={signedIn} name={name ?? ""} />
-          {children}
+          {/* Story 14: the footer sits below the content, at the bottom of the window on short pages. */}
+          <div className="flex flex-1 flex-col">{children}</div>
+          <Footer />
         </SignedInProvider>
       </body>
     </html>

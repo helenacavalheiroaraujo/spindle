@@ -66,12 +66,11 @@ Some built stories now differ from their files because of this round's bug fixes
 Not counted in the figures above.
 
 ### Specified, not in the build order
-None: story 14 (desktop footer) is outside the MVP (DECISIONS 2026-11-08).
+Story 14 (desktop footer) is in the MVP again, in "If time allows" (DECISIONS 2026-11-10). Design approved, not built yet.
 
 ### Not in this MVP
 | Story | Spec file | What the repo says |
 |---|---|---|
-| 14 · Desktop footer | `specs/stories/story-14-footer.md` | Outside the MVP (DECISIONS 2026-11-08); no approved design, links undecided |
 | 10 · No title in the repo | None | Filters (story 1, out of scope); "All genres and formats" (story 12, out of scope; the menu shows it as "Soon"); "Ask the seller" messaging (story 5, out of scope). Bug 8 now adds a one-way message to the seller as a bug fix |
 | 11 · No title in the repo | None | 30-second previews (story 3, out of scope); "Spindle Pro" paid plans for shops (story 9, out of scope) |
 | 13 · No title in the repo | None | "Because you like…" with a wishlist (story 12, out of scope) |
