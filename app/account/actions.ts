@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { changePassword, currentUser, currentUserId, logOut } from "@/lib/db/session";
 import { saveAddresses } from "@/lib/db/addresses";
+import { sendOrderMessage } from "@/lib/db/messages";
+import { checkMessage } from "@/lib/rules/orderMessage";
 import { checkAddresses, checkPasswordChange, passwordErrorFor, type AddressesErrors, type PasswordErrors } from "@/lib/rules/accountSettings";
 import type { ShippingAddress } from "@/lib/rules/shippingAddress";
 import { confirmReceipt } from "@/lib/db/orders";
@@ -98,4 +100,24 @@ export async function saveAddressesAction(_prev: AddressesState, form: FormData)
   }
   revalidatePath("/account");
   return { status: "done", errors: {} };
+}
+
+// "Send message" (bug 8): the buyer writes once to the seller of a "Paid" order, without cancelling it.
+// "done": saved now, or already sent (nothing to retry). "ready" with `error`: the text is not valid.
+export type MessageState = { status: "ready" | "done" | "failed"; error?: string; text?: string };
+
+export async function sendMessageAction(orderId: string, _prev: MessageState, form: FormData): Promise<MessageState> {
+  const checked = checkMessage(String(form.get("message") ?? ""));
+  if ("error" in checked) return { status: "ready", error: checked.error };
+  try {
+    const userId = await currentUserId();
+    if (!userId) return { status: "failed" };
+    const result = await sendOrderMessage(orderId, userId, checked.text);
+    if (result === "not_allowed") return { status: "failed" };
+  } catch {
+    return { status: "failed" };
+  }
+  revalidatePath("/account");
+  revalidatePath("/my-listings");
+  return { status: "done", text: checked.text };
 }

@@ -16,7 +16,7 @@
 | 1 · Core | `albums`, `versions`, `tracks`, `glossary_terms`, `reason_texts`, `condition_grades`, `profiles`, `listings`, `check_results` | 1, 2, 3, 5, 6 | `0001_core.sql` |
 | 2 · Purchase | `user_preferences` (story 2), `orders` (story 7); story 9 adds no table, the app fills `profiles.user_id` at sign-up | 9, 7, 2 | `0002_orders.sql` (story 7), `0004_preferences.sql` (story 2) |
 | 3 · Seller | no new tables: a price limit on `listings`, the `listing-photos` bucket in Storage and `create_listing(...)` | 8 | `0003_sell.sql` |
-| 4 · If time allows | `reviews` (story 18); `albums.genre` (story 12); `cart_items` (story 20); `addresses` (bug 9) | 18, 12, 20 | `0007_reviews.sql` (story 18), `0006_genres.sql` (story 12), `0009_cart.sql` (story 20), `0010_addresses.sql` (bug 9) |
+| 4 · If time allows | `reviews` (story 18); `albums.genre` (story 12); `cart_items` (story 20); `addresses` (bug 9); `order_messages` (bug 8) | 18, 12, 20 | `0007_reviews.sql` (story 18), `0006_genres.sql` (story 12), `0009_cart.sql` (story 20), `0010_addresses.sql` (bug 9), `0011_order_messages.sql` (bug 8) |
 
 ## Diagram (phase 1)
 
@@ -195,6 +195,16 @@ Who can add (not red, not sold, not the seller's own: `lib/rules/cartAccess.ts`)
 | `updated_at` | timestamp | |
 
 No `billing` row means "billing is the same as delivery". The browser never reads the table: `lib/db/addresses.ts` does, with the server key, for the signed-in user only. The checkout starts with the saved delivery address, otherwise the address of the last order (`lib/rules/shippingAddress.ts`, `startingAddress`). The billing address is only stored and shown on "Your account": orders keep only the shipping address.
+
+### `order_messages` (created: `0011_order_messages.sql`, bug 8)
+| Column | Type | Notes |
+|---|---|---|
+| `id` | uuid, primary key | |
+| `order_id` | → `orders` | `unique`: one message per order. Deleted with the order |
+| `body` | text | not empty, at most 500 characters |
+| `created_at` | timestamp | |
+
+The buyer writes it on the order ("Message the seller"); the seller reads it under the sold record in My listings. Who can send (the buyer of the order, only while it is "Paid") is checked in `lib/db/messages.ts`, never trusted from the browser. There are no replies and no unread state.
 
 ## Phase 3 · Seller (`0003_sell.sql`)
 

@@ -3,7 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
-## 2026-11-10 — Bug round 3: 9, 13
+## 2026-11-10 — Bug round 3: 8, 9, 13
+
+### The buyer can message the seller from a paid order (bug 8)
+- **Decision:** the message lives in a new table `order_messages` (`0011_order_messages.sql`): one per order, only while the order is Paid, 500 characters at most. The seller reads it under the sold record on the Sold tab of My listings. No replies, no unread state, no email.
+- **Why:** design option A, with the seller side, the single message and the Paid-only rule chosen by the owner. A written message stays visible on the order after delivery.
+- **Choices by the AI:** the 500-character limit; the texts "Write a message first.", "Use at most 500 characters.", "Your message to the seller", "Not now" and "Message from {name}"; the label says "the seller" and not the shop name.
 
 ### Saved addresses and password change on "Your account" (bug 9)
 - **Decision:** saved addresses live in a new table `addresses` (`0010_addresses.sql`): one delivery row and, only when different, one billing row. No billing row means "billing is the same as delivery". The billing address is only stored and shown; orders keep the shipping address only.

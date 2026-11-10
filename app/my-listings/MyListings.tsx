@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { remove, saveChanges, undoRemove, type ChangeResult } from "./actions";
 import type { MyListing } from "@/lib/db/listings";
+import type { ReceivedMessage } from "@/lib/db/messages";
 import { priceLabel } from "@/lib/rules/fairPrice";
 import { JUST_SOLD_MESSAGE, UNDO_SECONDS, hasChanges } from "@/lib/rules/myListings";
 import { formatPrice } from "@/lib/rules/recommendation";
@@ -19,7 +20,7 @@ import { TrafficLight } from "@/components/TrafficLight";
 
 type Tab = "on_sale" | "sold";
 
-export function MyListings({ onSale, sold }: { onSale: MyListing[]; sold: MyListing[] }) {
+export function MyListings({ onSale, sold, messages }: { onSale: MyListing[]; sold: MyListing[]; messages: Record<string, ReceivedMessage> }) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("on_sale");
   const [openId, setOpenId] = useState<string | null>(null);
@@ -94,8 +95,15 @@ export function MyListings({ onSale, sold }: { onSale: MyListing[]; sold: MyList
                 </button>
               </li>
             ) : (
-              <li key={l.id} className="rounded-2xl border border-line bg-white/40 p-4 opacity-80">
-                <Row listing={l} />
+              <li key={l.id} className="rounded-2xl border border-line bg-white/40 p-4">
+                <div className="opacity-80">
+                  <Row listing={l} />
+                </div>
+                {messages[l.id] && (
+                  <p className="mt-3 whitespace-pre-line rounded-xl border border-line bg-sand p-3 text-sm">
+                    <span className="block font-semibold">Message from {messages[l.id].from}</span>“{messages[l.id].body}”
+                  </p>
+                )}
               </li>
             ),
           )}

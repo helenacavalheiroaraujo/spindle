@@ -6,6 +6,7 @@ import type { ShippingAddress } from "@/lib/rules/shippingAddress";
 import { listingPlace, sellerOf, type Seller } from "@/lib/rules/seller";
 import type { OrderStatus } from "@/lib/rules/orderProgress";
 import { reviewedOrderIds } from "./reviews";
+import { messagesForOrders } from "./messages";
 
 export type PlaceOrderResult = { orderId: string } | { sold: true };
 
@@ -46,6 +47,7 @@ export type OrderView = {
   city: string | null;
   cover: string | null;
   reviewed: boolean; // story 18: the buyer already rated the seller of this order
+  message: string | null; // bug 8: what the buyer wrote to the seller (one per order)
 };
 
 const ORDER_COLUMNS = `id, total, status, profiles!orders_buyer_id_fkey (user_id),
@@ -54,7 +56,7 @@ const ORDER_COLUMNS = `id, total, status, profiles!orders_buyer_id_fkey (user_id
 
 type OrderRow = { id: string; total: number | string; status: OrderStatus; profiles: unknown; listings: unknown };
 
-function toOrderView(data: OrderRow, reviewed: boolean): OrderView {
+function toOrderView(data: OrderRow, reviewed: boolean, message: string | null): OrderView {
   const l = data.listings as {
     cover_photo_url: string | null;
     seller_city: string | null;
@@ -78,6 +80,7 @@ function toOrderView(data: OrderRow, reviewed: boolean): OrderView {
     city: place.city,
     cover: l.cover_photo_url,
     reviewed,
+    message,
   };
 }
 
@@ -90,7 +93,8 @@ export async function getOrderForBuyer(orderId: string, buyerUserId: string): Pr
   if (!data) return null;
   const buyer = data.profiles as unknown as { user_id: string };
   if (buyer.user_id !== buyerUserId) return null;
-  return toOrderView(data as unknown as OrderRow, (await reviewedOrderIds([data.id])).has(data.id));
+  const [reviewed, messages] = await Promise.all([reviewedOrderIds([data.id]), messagesForOrders([data.id])]);
+  return toOrderView(data as unknown as OrderRow, reviewed.has(data.id), messages.get(data.id) ?? null);
 }
 
 // All of the signed-in buyer's orders, newest first (story 7 · step 3: "On its way" on Your account).
@@ -104,8 +108,9 @@ export async function getOrdersForBuyer(buyerUserId: string): Promise<OrderView[
     .eq("buyer_id", profile.data.id)
     .order("created_at", { ascending: false });
   if (error) throw error;
-  const reviewed = await reviewedOrderIds((data ?? []).map((row) => row.id));
-  return (data ?? []).map((row) => toOrderView(row as unknown as OrderRow, reviewed.has(row.id)));
+  const ids = (data ?? []).map((row) => row.id);
+  const [reviewed, messages] = await Promise.all([reviewedOrderIds(ids), messagesForOrders(ids)]);
+  return (data ?? []).map((row) => toOrderView(row as unknown as OrderRow, reviewed.has(row.id), messages.get(row.id) ?? null));
 }
 
 // "confirmed": the order is now "Seller paid". "not_waiting": it is not this buyer's order, or it was
