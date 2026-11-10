@@ -27,3 +27,9 @@ export function canPay(address: ShippingAddress): boolean {
   const { name, street, postcode, city } = address;
   return [name, street, city].every((field) => field.trim() !== "") && POSTCODE.test(postcode.trim());
 }
+
+// The address the checkout form starts with (bug 9, then bug 6): the delivery address saved on "Your account",
+// otherwise the address of the buyer's most recent order, otherwise empty (null). It can still be edited.
+export function startingAddress(saved: ShippingAddress | null, lastOrder: ShippingAddress | null): ShippingAddress | null {
+  return saved ?? lastOrder;
+}

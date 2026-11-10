@@ -3,18 +3,25 @@ import { redirect } from "next/navigation";
 import { Header } from "@/components/Header";
 import { currentUser } from "@/lib/db/session";
 import { getProfileName } from "@/lib/db/profiles";
+import { getSavedAddresses } from "@/lib/db/addresses";
 import { getOrdersForBuyer } from "@/lib/db/orders";
 import { splitOrders } from "@/lib/rules/orderProgress";
 import { LogOutButton } from "./LogOutButton";
 import { OrderCard } from "./OrderCard";
+import { PasswordForm } from "./PasswordForm";
+import { AddressesForm } from "./AddressesForm";
 
 // Your account (story 9 · use case 3): name, email and Log out. Private; not the public profile (out of scope).
-// "My listings" is reached from here (story 8 · finding #13).
+// Password and saved addresses (bug 9). "My listings" is reached from here (story 8 · finding #13).
 // "On its way" and "Delivered": the buyer's orders, with "It arrived, all good" (story 7 · step 3).
 export default async function AccountPage() {
   const user = await currentUser();
   if (!user) redirect("/login?next=%2Faccount");
-  const [name, orders] = await Promise.all([getProfileName(user.id).catch(() => null), getOrdersForBuyer(user.id)]);
+  const [name, orders, saved] = await Promise.all([
+    getProfileName(user.id).catch(() => null),
+    getOrdersForBuyer(user.id),
+    getSavedAddresses(user.id),
+  ]);
   const { onItsWay, delivered } = splitOrders(orders);
 
   return (
@@ -33,6 +40,8 @@ export default async function AccountPage() {
           <dd className="break-all font-medium">{user.email}</dd>
         </div>
       </dl>
+      <PasswordForm />
+      <AddressesForm saved={saved} />
       {onItsWay.length > 0 && (
         <section aria-label="On its way" className="mt-8">
           <h2 className="font-heading text-3xl leading-tight">On its way</h2>

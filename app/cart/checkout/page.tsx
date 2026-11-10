@@ -5,6 +5,8 @@ import { Header } from "@/components/Header";
 import { SellerLine } from "@/components/SellerLine";
 import { getCart } from "@/lib/db/cart";
 import { getLastShippingAddress } from "@/lib/db/orders";
+import { getSavedAddresses } from "@/lib/db/addresses";
+import { startingAddress } from "@/lib/rules/shippingAddress";
 import { currentUserId } from "@/lib/db/session";
 import { withReturn } from "@/lib/rules/login";
 import { cartSummaryRows, cartTotal } from "@/lib/rules/cartTotal";
@@ -18,7 +20,8 @@ export default async function CartCheckoutPage() {
   const { items, messages } = await getCart(userId, false);
   if (items.length === 0 || messages.length > 0) redirect("/cart");
 
-  const initialAddress = await getLastShippingAddress(userId);
+  const [saved, last] = await Promise.all([getSavedAddresses(userId), getLastShippingAddress(userId)]);
+  const initialAddress = startingAddress(saved.delivery, last); // saved address first (bug 9), then the last order (bug 6)
   const amounts = cartTotal(items.map((i) => i.price));
 
   const records = (

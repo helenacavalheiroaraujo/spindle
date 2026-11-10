@@ -16,7 +16,7 @@
 | 1 · Core | `albums`, `versions`, `tracks`, `glossary_terms`, `reason_texts`, `condition_grades`, `profiles`, `listings`, `check_results` | 1, 2, 3, 5, 6 | `0001_core.sql` |
 | 2 · Purchase | `user_preferences` (story 2), `orders` (story 7); story 9 adds no table, the app fills `profiles.user_id` at sign-up | 9, 7, 2 | `0002_orders.sql` (story 7), `0004_preferences.sql` (story 2) |
 | 3 · Seller | no new tables: a price limit on `listings`, the `listing-photos` bucket in Storage and `create_listing(...)` | 8 | `0003_sell.sql` |
-| 4 · If time allows | `reviews` (story 18); `albums.genre` (story 12); `cart_items` (story 20) | 18, 12, 20 | `0007_reviews.sql` (story 18), `0006_genres.sql` (story 12), `0009_cart.sql` (story 20) |
+| 4 · If time allows | `reviews` (story 18); `albums.genre` (story 12); `cart_items` (story 20); `addresses` (bug 9) | 18, 12, 20 | `0007_reviews.sql` (story 18), `0006_genres.sql` (story 12), `0009_cart.sql` (story 20), `0010_addresses.sql` (bug 9) |
 
 ## Diagram (phase 1)
 
@@ -183,6 +183,18 @@ Who can review is checked in `lib/db/reviews.ts` (`addReview`): only the buyer o
 Who can add (not red, not sold, not the seller's own: `lib/rules/cartAccess.ts`) is checked in `lib/db/cart.ts` (`addToCart`), never trusted from the browser. A record that can no longer be bought is deleted from the cart by `getCart`, which returns the message for it once. The total is never stored: `lib/rules/cartTotal.ts` works it out from the listings' prices.
 
 **`place_orders(...)`** (same migration): Pay for the whole cart in one step, all or nothing. For each record it marks the listing `sold` only if it is still `on_sale` and creates its order (with the listing's price and the total calculated in `lib/rules/`); if any listing is no longer on sale it raises `listing_not_on_sale` and changes nothing. The paid records leave the buyer's cart in the same step. Only the server key can call it.
+
+### `addresses` (created: `0010_addresses.sql`, bug 9)
+| Column | Type | Notes |
+|---|---|---|
+| `id` | uuid, primary key | |
+| `profile_id` | → `profiles` | deleted with the profile |
+| `kind` | text | `delivery` or `billing`; `unique (profile_id, kind)`: at most one of each |
+| `name`, `street`, `city` | text | not empty |
+| `postcode` | text | `0000-000`, the same check as `orders.ship_postcode` |
+| `updated_at` | timestamp | |
+
+No `billing` row means "billing is the same as delivery". The browser never reads the table: `lib/db/addresses.ts` does, with the server key, for the signed-in user only. The checkout starts with the saved delivery address, otherwise the address of the last order (`lib/rules/shippingAddress.ts`, `startingAddress`). The billing address is only stored and shown on "Your account": orders keep only the shipping address.
 
 ## Phase 3 · Seller (`0003_sell.sql`)
 

@@ -3,7 +3,14 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
-## 2026-11-10 — Bug round 3: 13
+## 2026-11-10 — Bug round 3: 9, 13
+
+### Saved addresses and password change on "Your account" (bug 9)
+- **Decision:** saved addresses live in a new table `addresses` (`0010_addresses.sql`): one delivery row and, only when different, one billing row. No billing row means "billing is the same as delivery". The billing address is only stored and shown; orders keep the shipping address only.
+- **Checkout:** it starts with the saved delivery address, then the address of the last order, then empty. This replaces bug 6's "last order only".
+- **Password:** changing it asks for the current one, checked by Supabase Auth with a fresh log-in; a new password must be at least 8 characters and different from the current one.
+- **Choices by the AI:** the texts of the messages ("That isn't your current password.", "Password changed.", "Addresses saved." and the others); four address fields (name, street, postcode, city) as in the checkout; refusing a new password equal to the current one.
+
 
 ### The photo viewer stops at the first and the last photo (bug 13)
 - **Decision:** on the listing check screen, a photo opens full screen (design option A). The arrows and the swipe stop at the first and the last photo, with no wrap-around; the previous or next arrow is disabled at the ends.

@@ -3,6 +3,8 @@ import { notFound, redirect } from "next/navigation";
 import { getListingCheck } from "@/lib/db/listings";
 import { currentUserId } from "@/lib/db/session";
 import { getLastShippingAddress } from "@/lib/db/orders";
+import { getSavedAddresses } from "@/lib/db/addresses";
+import { startingAddress } from "@/lib/rules/shippingAddress";
 import { currentProfileId } from "@/lib/db/profiles";
 import { canCheckout, checkoutPath, isNoLongerAvailable, isOwnListing, ownListingPath } from "@/lib/rules/checkoutAccess";
 import { ListingUnavailable } from "@/components/ListingUnavailable";
@@ -38,7 +40,8 @@ export default async function CheckoutPage({
   // Red, sold or removed: never reaches the checkout.
   if (!canCheckout(l, versionId, profileId)) notFound();
 
-  const initialAddress = await getLastShippingAddress(userId);
+  const [saved, last] = await Promise.all([getSavedAddresses(userId), getLastShippingAddress(userId)]);
+  const initialAddress = startingAddress(saved.delivery, last); // saved address first (bug 9), then the last order (bug 6)
 
   const versionName = versionId === l.actualVersionId ? l.actualVersionName : l.claimedVersionName;
 

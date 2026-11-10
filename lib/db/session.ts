@@ -94,3 +94,15 @@ export async function logOut(): Promise<void> {
   const supabase = await authClient();
   await supabase.auth.signOut();
 }
+
+export type ChangePasswordResult = { ok: true } | { errorCode: string | undefined };
+
+// Change password (bug 9). Supabase Auth checks the current password first (a fresh log-in with it), then sets the
+// new one; the app never stores either. The session cookies are renewed by the log-in.
+export async function changePassword(email: string, current: string, next: string): Promise<ChangePasswordResult> {
+  const supabase = await authClient();
+  const check = await supabase.auth.signInWithPassword({ email, password: current });
+  if (check.error) return { errorCode: check.error.code };
+  const { error } = await supabase.auth.updateUser({ password: next });
+  return error ? { errorCode: error.code } : { ok: true };
+}
