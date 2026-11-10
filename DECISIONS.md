@@ -12,6 +12,15 @@
 - **Replaces:** the approved design `docs/design/album-no-listings.html` for the added fields; a new design must be approved first.
 - **Choices by the AI:** the description is the first 3 sentences of Wikipedia's summary, with a link to the full article; the tracks and date come from the earliest release of the album in MusicBrainz (1959 for Kind of Blue), not from our version names; the data is fetched when the page opens, so no new table or migration; requests name the app generically ("Spindle-MVP"); Wikipedia text is CC BY-SA, so the page links to the article and names the source.
 
+## 2026-11-10 — Album page: which release gives the label and tracks
+
+### The usual track count, earliest release (replaces "earliest release")
+- **Decision:** the label and the track list come from the release that has the usual track count of the album's releases in MusicBrainz (the most common count; on a tie, the larger one). Among those releases, the earliest one is used. The release date is the album's first release date (full date), not the date of that release.
+- **Why:** the first edition in MusicBrainz for Kind of Blue is a reel-to-reel with 3 tracks, and a 2009 reissue has 12 tracks with alternate takes. Neither is the album people know.
+- **Replaces:** the rule "the earliest release" in the album page entry above.
+- **Choices by the AI:** the tie rule (larger count); for old albums the release date comes from the album, since MusicBrainz often gives only the year for early releases.
+- **Story:** story 21.
+
 ## 2026-11-10 — Bug 17: an album with no listings has its own page (genre screen)
 
 ### Tapping an album with no listings on the genre screen opens its own page

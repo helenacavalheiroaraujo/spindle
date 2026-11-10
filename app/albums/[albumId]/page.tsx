@@ -1,8 +1,10 @@
 import { notFound, redirect } from "next/navigation";
 import { listAlbumSummaries } from "@/lib/db/albums";
+import { loadAlbumDetails } from "@/lib/external/albumDetails";
 import { Header } from "@/components/Header";
 
 // Album with no listings (bug 17, DECISIONS 2026-11-10): the genre screen opens it. It says nobody is selling it.
+// Also shows the musician, release date, label and tracks (DECISIONS 2026-11-10, album page), from MusicBrainz and Wikipedia.
 // An album that opens goes to its priorities screen; one not in the demo has no page.
 export default async function AlbumNoListingsPage({ params }: { params: Promise<{ albumId: string }> }) {
   const { albumId } = await params;
@@ -10,6 +12,11 @@ export default async function AlbumNoListingsPage({ params }: { params: Promise<
   if (!album) notFound();
   if (album.access === "open") redirect(`/albums/${album.id}/priorities`);
   if (album.access !== "no_listings") notFound();
+
+  const details = await loadAlbumDetails(album.title, album.artist).catch(() => null);
+  const hasDetails =
+    details !== null &&
+    (details.releaseDate !== null || details.label !== null || details.tracks.length > 0 || details.musician !== null);
 
   return (
     <main className="px-4 pb-16 page-main page-narrow">
@@ -20,13 +27,68 @@ export default async function AlbumNoListingsPage({ params }: { params: Promise<
         <div>
           <h1 className="mt-6 font-heading text-4xl leading-tight lg:mt-0">{album.title}</h1>
           <p className="mt-1 text-navy/70">
-            {album.artist}, {album.releaseYear}
+            {album.artist} · {album.releaseYear}
           </p>
           <section role="status" className="mt-6 rounded-2xl border border-line bg-sand p-5 text-navy">
             <h2 className="font-heading text-2xl">Nobody is selling this album right now</h2>
             <p className="mt-2 text-navy/80">Check back later, or browse other albums in this genre.</p>
           </section>
-          <p className="mt-6 text-sm text-navy/70">Illustrative data</p>
+
+          {hasDetails ? (
+            <>
+              {(details.releaseDate || details.label) && (
+                <dl className="mt-6 divide-y divide-line rounded-2xl border border-line bg-sand px-5">
+                  {details.releaseDate && (
+                    <div className="flex justify-between gap-4 py-3">
+                      <dt className="text-navy/70">Released</dt>
+                      <dd className="font-semibold">{details.releaseDate}</dd>
+                    </div>
+                  )}
+                  {details.label && (
+                    <div className="flex justify-between gap-4 py-3">
+                      <dt className="text-navy/70">Label</dt>
+                      <dd className="font-semibold">{details.label}</dd>
+                    </div>
+                  )}
+                </dl>
+              )}
+
+              {details.musician && (
+                <section className="mt-8">
+                  <h2 className="font-heading text-2xl">About {details.musician.name}</h2>
+                  <p className="mt-2 text-navy/80">{details.musician.text}</p>
+                  <a
+                    href={details.musician.url}
+                    className="mt-2 inline-block font-semibold text-navy underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Read more on Wikipedia
+                  </a>
+                </section>
+              )}
+
+              {details.tracks.length > 0 && (
+                <section className="mt-8">
+                  <h2 className="font-heading text-2xl">Track list</h2>
+                  <ol className="mt-2 divide-y divide-line rounded-2xl border border-line bg-sand px-5">
+                    {details.tracks.map((track, i) => (
+                      <li key={`${i}-${track}`} className="flex gap-4 py-3">
+                        <span className="w-6 font-semibold text-navy/70">{i + 1}</span>
+                        <span>{track}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              )}
+
+              <p className="mt-6 inline-block rounded-full border border-line px-3 py-1 text-sm text-navy/70">
+                Source: MusicBrainz · Wikipedia
+              </p>
+            </>
+          ) : (
+            <p className="mt-6 text-sm text-navy/70">The details of this album are not available right now.</p>
+          )}
         </div>
       </div>
     </main>

@@ -56,6 +56,7 @@ In build order. Each story has its own file in `specs/stories/` (bugs are in `sp
 | Story 18 · Rate the seller | [`specs/stories/story-18-reviews.md`](specs/stories/story-18-reviews.md) |
 | Story 19 · Menu with chevrons | [`specs/stories/story-19-menu-chevrons.md`](specs/stories/story-19-menu-chevrons.md) |
 | Story 20 · Cart | [`specs/stories/story-20-cart.md`](specs/stories/story-20-cart.md) |
+| Story 21 · Album details without listings | [`specs/stories/story-21-album-details.md`](specs/stories/story-21-album-details.md) |
 
 ---
 
@@ -173,3 +174,7 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 20 | A record sold while in the cart (or between opening the checkout and paying) leaves the cart with a message and the total is recalculated; nothing is paid | `lib/rules/cartAccess.ts`, `lib/db/cart.ts`, `app/cart/page.tsx`, `app/cart/checkout/actions.ts`, `supabase/migrations/0009_cart.sql` (`place_orders`) | `tests/unit/cartAccess.test.ts`, `tests/e2e/cart.spec.ts` |
 | 20 | One checkout for the cart: the address is typed once; Pay creates one order for each record ("Paid · waiting for the seller"), the listings are sold, "Your account" shows the orders; no card or bank details | `app/cart/checkout/page.tsx`, `app/cart/checkout/actions.ts`, `app/checkout/[listingId]/CheckoutForm.tsx`, `lib/db/cart.ts` | `tests/e2e/cart.spec.ts` |
 | 20 | Empty cart: "Your cart is empty" and a link to search; loading mask and error screen with "Try again" (Shared rules) | `app/cart/page.tsx`, `app/cart/loading.tsx`, `app/cart/error.tsx`, `app/cart/checkout/loading.tsx`, `app/cart/checkout/error.tsx` | `tests/e2e/cart.spec.ts` (error screens: not run automatically in this run) |
+| 21 | Musician's description (first 3 sentences, Wikipedia) with a link to the article | `lib/external/albumDetails.ts`, `lib/rules/albumDetails.ts`, `app/albums/[albumId]/page.tsx` | `tests/unit/albumDetails.test.ts`, `tests/e2e/albumDetails.spec.ts` |
+| 21 | Release date (full date), label and track list from MusicBrainz; the usual track count rule | `lib/rules/albumDetails.ts`, `lib/external/albumDetails.ts`, `app/albums/[albumId]/page.tsx` | `tests/unit/albumDetails.test.ts`, `tests/e2e/albumDetails.spec.ts` |
+| 21 | "Source: MusicBrainz · Wikipedia" instead of "Illustrative data"; the message "Nobody is selling this album right now" stays | `app/albums/[albumId]/page.tsx` | `tests/e2e/albumDetails.spec.ts` |
+| 21 | "The details of this album are not available right now." when no source answers | `app/albums/[albumId]/page.tsx` | Not tested automatically (needs the services down) |

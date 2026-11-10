@@ -32,6 +32,7 @@ app/                                ← screens (one folder per route)
   compare/[albumId]/                ← story 4 (phase 4)
 components/                         ← shared UI: Header, LoadingMask, ErrorScreen, TrafficLight, PriceLabel,
                                       ListingList, ListingsBeside, BuyButton, AddToCart, CartLink
+lib/external/                       ← fetches from outside services (MusicBrainz, Wikipedia); server only, nothing stored (story 21)
 lib/rules/                          ← business rules, pure functions, no database
   recommendation.ts                 ← scores, weights, tie, alternative, ideal (story 3)
   trafficLight.ts                   ← checklist → green / yellow / red (story 5)
