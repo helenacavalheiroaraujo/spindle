@@ -17,6 +17,7 @@ import { YourListing } from "@/components/YourListing";
 import { sellerText } from "@/lib/rules/seller";
 import { SellerLine } from "@/components/SellerLine";
 import { SellerRating } from "@/components/SellerRating";
+import { PhotoGallery } from "@/components/PhotoGallery";
 
 const one = (v?: string | string[]) => (Array.isArray(v) ? v[0] : v);
 
@@ -124,23 +125,7 @@ export default async function ListingCheckPage({
       <div className="lg:col-start-1 lg:row-span-3 lg:row-start-1">
       <section aria-labelledby="photos" className="mt-6 lg:mt-4">
         <h2 id="photos" className="font-heading text-2xl">The seller&apos;s photos</h2>
-        <ul className="mt-2 grid grid-cols-3 gap-3">
-          {(["cover", "record", "matrix"] as const).map((kind) => {
-            const src = l.photos[kind];
-            return (
-              <li key={kind} className="text-center text-xs">
-                {src ? (
-                  <img src={src} alt={`${kind} photo`} className="aspect-square w-full rounded-xl border border-line object-cover" />
-                ) : (
-                  <span className="flex aspect-square w-full items-center justify-center rounded-xl border border-dashed border-navy/30 p-2 text-navy/70">
-                    No {kind} photo
-                  </span>
-                )}
-                <span className="mt-1 block capitalize">{kind}</span>
-              </li>
-            );
-          })}
-        </ul>
+        <PhotoGallery photos={l.photos} />
       </section>
 
       <section aria-labelledby="condition" className="mt-6 rounded-2xl border border-line bg-sand p-4 text-navy">

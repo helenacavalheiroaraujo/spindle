@@ -1,6 +1,6 @@
 # Bug 7 · The postcode field has no input mask
 
-> Found in feedback on the app · 2026-11-10. Status: open.
+> Found in feedback on the app · 2026-11-10. Status: fixed 2026-11-10 (commit 33e57f4).
 
 ## Description
 The "Postcode" field has no input mask: I have to type the "-" by hand, even though it is a format the system already knows.

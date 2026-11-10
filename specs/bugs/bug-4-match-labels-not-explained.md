@@ -1,6 +1,6 @@
 # Bug 4 · The Match / Check / No match labels are not explained
 
-> Found in feedback on the app · 2026-11-10. Status: open.
+> Found in feedback on the app · 2026-11-10. Status: fixed 2026-11-10 (commit 33e57f4).
 
 ## Description
 Nothing on the page explains what the labels "Match", "Check" and "No match" mean.

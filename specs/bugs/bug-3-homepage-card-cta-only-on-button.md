@@ -1,6 +1,6 @@
 # Bug 3 · Homepage cards are clickable only through their button
 
-> Found in feedback on the app · 2026-11-10. Status: open.
+> Found in feedback on the app · 2026-11-10. Status: fixed 2026-11-10 (commit 33e57f4).
 
 ## Description
 On the "This week at the shop" cards ("See which to buy" and "Sell a record"), only the button can be clicked. The whole card should be the call to action (CTA).

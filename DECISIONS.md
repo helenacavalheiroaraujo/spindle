@@ -3,6 +3,13 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Bug round 3: 13
+
+### The photo viewer stops at the first and the last photo (bug 13)
+- **Decision:** on the listing check screen, a photo opens full screen (design option A). The arrows and the swipe stop at the first and the last photo, with no wrap-around; the previous or next arrow is disabled at the ends.
+- **Why:** simpler, and the dots and "Record · 2 of 3" already show where you are. Only photos that exist are in the viewer.
+- **Choices by the AI:** zoom 2.5 times; a swipe needs 50 px; a double tap is two taps within 350 ms; the texts "Enlarge cover photo", "Photo viewer", "Previous photo", "Next photo".
+
 ## 2026-11-10 — Bug round: 15, 12, 7 (protection steps), 14, 10, 11
 
 ### Sign-up never says whether an email is registered; email confirmation stays off (bug 15)

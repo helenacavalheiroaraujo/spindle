@@ -1,6 +1,6 @@
 # Bug 2 · Missing hover state on interactive buttons
 
-> Found in feedback on the app · 2026-11-10. Status: open.
+> Found in feedback on the app · 2026-11-10. Status: fixed 2026-11-10 (commit 33e57f4).
 
 ## Description
 The hover state is missing on all interactive buttons.

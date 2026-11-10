@@ -1,6 +1,6 @@
 # Bug 1 · Full-page loading clears the whole screen
 
-> Found in feedback on the app · 2026-11-10. Status: open.
+> Found in feedback on the app · 2026-11-10. Status: fixed 2026-11-10 (commit 33e57f4).
 
 ## Description
 On many pages, a loading state clears the whole screen while the content loads. The header and the search do not change; only the content does, so a full-page loading is not needed.

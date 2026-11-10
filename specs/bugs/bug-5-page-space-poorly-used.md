@@ -1,6 +1,6 @@
 # Bug 5 · Page space is poorly used
 
-> Found in feedback on the app · 2026-11-10. Status: open.
+> Found in feedback on the app · 2026-11-10. Status: fixed 2026-11-10 (commit 33e57f4).
 
 ## Description
 The page spacing is poorly used.

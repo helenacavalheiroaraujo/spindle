@@ -1,6 +1,6 @@
 # Bug 6 · Shipping address is not remembered between purchases
 
-> Found in feedback on the app · 2026-11-10. Status: open.
+> Found in feedback on the app · 2026-11-10. Status: fixed 2026-11-10 (commit 33e57f4).
 
 ## Description
 After I have already made a purchase, I have to fill in the shipping address again when I want to buy again.
