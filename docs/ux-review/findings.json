@@ -1980,9 +1980,12 @@
       ],
       "proposal": "Repeat the label next to '1 for sale' (the check results and prices are illustrative there), or confirm that the label at the top covers the whole page.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 8,
-      "resolution": null
+      "resolution": {
+        "date": "2026-11-11",
+        "decision": "Kept at the top of the page, by owner decision. Story 25 is unchanged. See DECISIONS.md, 2026-11-11, 'UX finding 41: the Illustrative data label stays at the top'."
+      }
     },
     {
       "id": 42,

@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — UX finding 41: the Illustrative data label stays at the top
+
+- **Decision:** the "Illustrative data" label stays at the top of the recommendation page. It is not moved next to the offer. Story 25 is unchanged.
+- **Why:** story 25 says the top label covers the whole page and no extra label is added (finding 41). The owner chose to keep it there.
+- **Links:** `docs/ux-review/findings.json`, finding 41; story 25.
+
 ## 2026-11-11 — Crate name on phone: smaller disc
 
 - **Decision:** the decorative disc on a genre crate is 55% of the crate, placed at the top right, so it no longer runs into the genre name at 375 px.
