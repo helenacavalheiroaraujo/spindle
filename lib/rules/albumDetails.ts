@@ -66,28 +66,6 @@ export function firstSentences(text: string, count = 3): string {
   return sentences.slice(0, count).join(" ");
 }
 
-// How a source went: "ok" = answered with data for this album; "none" = answered, nothing for this album;
-// "failed" = did not answer (network, timeout, service error).
-export type SourceStatus = "ok" | "none" | "failed";
-
-// The notice in place of the release facts and the track list when MusicBrainz did not answer. Null otherwise.
-export function catalogueNotice(status: SourceStatus): string | null {
-  return status === "failed" ? "The release date, label and tracks are not available right now." : null;
-}
-
-// The notice in place of the musician's description when Wikipedia did not answer. Null otherwise.
-export function musicianNotice(status: SourceStatus): string | null {
-  return status === "failed" ? "The description of the musician is not available right now." : null;
-}
-
-// The source line names only the sources that gave data for this album. Null when neither did.
-export function sourcesLine(catalogue: SourceStatus, musician: SourceStatus): string | null {
-  const names = [catalogue === "ok" ? "MusicBrainz" : null, musician === "ok" ? "Wikipedia" : null].filter(
-    (n): n is string => n !== null,
-  );
-  return names.length > 0 ? `Source: ${names.join(" · ")}` : null;
-}
-
 // Dated items first, earliest first; undated items last; equal dates keep their order.
 function sortByDate<T>(items: T[], dateOf: (item: T) => string | null): T[] {
   return [...items].sort((a, b) => {

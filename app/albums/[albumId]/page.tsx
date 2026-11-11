@@ -1,7 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import { listAlbumSummaries } from "@/lib/db/albums";
 import { loadAlbumDetails } from "@/lib/external/albumDetails";
-import { catalogueNotice, musicianNotice, sourcesLine } from "@/lib/rules/albumDetails";
 import { Header } from "@/components/Header";
 
 // Album with no listings (bug 17, DECISIONS 2026-11-10): the genre screen opens it. It says nobody is selling it.
@@ -23,9 +22,6 @@ export default async function AlbumNoListingsPage({ params }: { params: Promise<
   const hasDetails =
     details !== null &&
     (details.releaseDate !== null || details.label !== null || details.tracks.length > 0 || details.musician !== null);
-  const catalogueMissing = details && catalogueNotice(details.catalogueStatus);
-  const musicianMissing = details && musicianNotice(details.musicianStatus);
-  const sources = details && sourcesLine(details.catalogueStatus, details.musicianStatus);
 
   return (
     <main className="px-4 pb-16 page-main">
@@ -50,7 +46,6 @@ export default async function AlbumNoListingsPage({ params }: { params: Promise<
               )}
             </dl>
           )}
-          {hasDetails && catalogueMissing && <p className="order-4 mt-6 text-sm text-navy/70 lg:mt-0">{catalogueMissing}</p>}
 
           {hasDetails && details.tracks.length > 0 && (
             <div className="order-6 mt-8 lg:mt-0">
@@ -98,11 +93,10 @@ export default async function AlbumNoListingsPage({ params }: { params: Promise<
                   </a>
                 </section>
               )}
-              {!details.musician && musicianMissing && <p className="mt-8 text-sm text-navy/70 lg:mt-0">{musicianMissing}</p>}
 
-              {sources && (
-                <p className="mt-6 inline-block rounded-full border border-line px-3 py-1 text-sm text-navy/70">{sources}</p>
-              )}
+              <p className="mt-6 inline-block rounded-full border border-line px-3 py-1 text-sm text-navy/70">
+                Source: MusicBrainz · Wikipedia
+              </p>
             </div>
           ) : (
             <p className="order-5 mt-6 text-sm text-navy/70">The details of this album are not available right now.</p>

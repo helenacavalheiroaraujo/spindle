@@ -4,14 +4,9 @@
 > Most recent first.
 
 ## 2026-11-11 — Album test: MusicBrainz is replaced by a local stub
-- **Decision:** the e2e tests answer the MusicBrainz requests from a local stub (tests/e2e/musicbrainzStub.mjs, port 4010). The dev server reads its address from MUSICBRAINZ_URL, which only the test setup sets. Without the variable the app calls MusicBrainz as before.
-- **Why:** the album test failed in full runs when MusicBrainz did not answer. A test should not depend on a service it does not control.
+- **Decision:** the e2e album test answers the MusicBrainz requests from a local stub (tests/e2e/musicbrainzStub.mjs, port 4010). The dev server reads its address from MUSICBRAINZ_URL, which only the test setup sets. Without the variable the app calls MusicBrainz as before.
+- **Why:** the album test failed in full runs when MusicBrainz did not answer. The test no longer depends on MusicBrainz; it still depends on Wikipedia, which is called live.
 - **Choices by the AI:** a fixed answer for Kind of Blue only; Wikipedia is still called live; the stub starts only with Playwright's own server, because a server already running on port 3000 does not get the variable.
-
-## 2026-11-11 — Album page: say when MusicBrainz or Wikipedia does not answer
-- **Decision:** when MusicBrainz does not answer, the page shows "The release date, label and tracks are not available right now." in place of those facts. When Wikipedia does not answer, it shows "The description of the musician is not available right now." The source line names only the sources that gave data for that album.
-- **Why:** in the full e2e run of 11 Nov, MusicBrainz did not answer for Kind of Blue. The page showed the musician and "Source: MusicBrainz · Wikipedia" with no date, label or tracks and no sign of the failure. A failed request now looks different from an album with nothing in MusicBrainz.
-- **Choices by the AI:** the wording, in the same tone as "not available right now"; a plain line, not ErrorScreen, which replaces a whole section and has a "Try again" button that would do nothing here; the source line leaves out a source that gave no data (it used to list both always).
 
 ## 2026-11-11 — Recommendation page (desktop): track list under the cover, reasons as cards
 
