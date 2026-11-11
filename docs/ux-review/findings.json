@@ -2,8 +2,8 @@
   "meta": {
     "project": "Spindle MVP",
     "report_url": "https://claude.ai/artifact/6inbbjVxsF4Hi7Q2cr2n28",
-    "iteration": 7,
-    "updated": "2026-11-10T15:43:13.635427+00:00"
+    "iteration": 8,
+    "updated": "2026-11-11T09:45:58.785043+00:00"
   },
   "iterations": [
     {
@@ -40,6 +40,11 @@
       "n": 7,
       "date": "2026-11-10",
       "note": "Re-capture after the home page as in the design (six crates, navy featured card), the light emphasis cards and the header of story 19: 48 captures, all earlier findings were already closed; one new finding (#37). Caveat: seed listings …05 (€32) and …06 (€36) were sold by hand today (3 orders), so the listing check capture shows 'This record is no longer available' and the recommendation may show another pressing."
+    },
+    {
+      "n": 8,
+      "date": "2026-11-11",
+      "note": "Owner's suggestions on the recommendation page as tickets (findings 38–43)"
     }
   ],
   "screens": [
@@ -1871,6 +1876,160 @@
       "question": null,
       "status": "open",
       "first_seen": 7,
+      "resolution": null
+    },
+    {
+      "id": 38,
+      "screens": [
+        "recommendation"
+      ],
+      "stories": [
+        "3"
+      ],
+      "type": "Usability",
+      "severity": "Medium",
+      "title": "Left column is empty below the title on the recommendation page",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": "user capture 2026-11-11, recommendation page at 1280 px (images/5.png)",
+          "quote": ""
+        }
+      ],
+      "proposal": "Use the empty space under the cover in the left column (for example the track list, as in bug 20), or keep the left column in view while the right column scrolls. Changing the layout needs an approved design first.",
+      "question": null,
+      "status": "open",
+      "first_seen": 8,
+      "resolution": null
+    },
+    {
+      "id": 39,
+      "screens": [
+        "recommendation"
+      ],
+      "stories": [
+        "3"
+      ],
+      "type": "Usability",
+      "severity": "Medium",
+      "title": "The price slider does not show that it can be moved, and the typical range is repeated",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": "user capture 2026-11-11, recommendation page at 1280 px (images/5.png)",
+          "quote": ""
+        },
+        {
+          "source": "CLAUDE.md",
+          "where": "Visual direction",
+          "quote": "illustrative data is always labelled"
+        }
+      ],
+      "proposal": "Keep one of the two: the slider with a short hint, or the sentence 'Typical price for this pressing: €20–€32'. Explain the slider in one line if it stays.",
+      "question": null,
+      "status": "open",
+      "first_seen": 8,
+      "resolution": null
+    },
+    {
+      "id": 40,
+      "screens": [
+        "recommendation"
+      ],
+      "stories": [
+        "3"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "Dotted underlines on 'Reissue', 'first pressing' and 'reissue' do not say what they do",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": "user capture 2026-11-11, recommendation page at 1280 px (images/5.png)",
+          "quote": ""
+        }
+      ],
+      "proposal": "Either make these terms real links with a clear link style and an explanation, or remove the dotted underline.",
+      "question": null,
+      "status": "open",
+      "first_seen": 8,
+      "resolution": null
+    },
+    {
+      "id": 41,
+      "screens": [
+        "recommendation"
+      ],
+      "stories": [
+        "3"
+      ],
+      "type": "Rule broken",
+      "severity": "Low",
+      "title": "The 'Illustrative data' label is far from the offer it describes",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": "user capture 2026-11-11, recommendation page at 1280 px (images/5.png)",
+          "quote": ""
+        },
+        {
+          "source": "CLAUDE.md",
+          "where": "Visual direction",
+          "quote": "illustrative data is always labelled"
+        }
+      ],
+      "proposal": "Repeat the label next to '1 for sale' (the check results and prices are illustrative there), or confirm that the label at the top covers the whole page.",
+      "question": null,
+      "status": "open",
+      "first_seen": 8,
+      "resolution": null
+    },
+    {
+      "id": 42,
+      "screens": [
+        "recommendation"
+      ],
+      "stories": [
+        "3"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "The word 'Shop' next to the seller name is not clear",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": "user capture 2026-11-11, recommendation page at 1280 px (images/5.png)",
+          "quote": ""
+        }
+      ],
+      "proposal": "Explain what 'Shop' means in the seller line, or remove the tag.",
+      "question": null,
+      "status": "open",
+      "first_seen": 8,
+      "resolution": null
+    },
+    {
+      "id": 43,
+      "screens": [
+        "recommendation"
+      ],
+      "stories": [
+        "3"
+      ],
+      "type": "Usability",
+      "severity": "Low",
+      "title": "'Add to cart' sits too close to the 'Buy' button",
+      "evidence": [
+        {
+          "source": "screenshot",
+          "where": "user capture 2026-11-11, recommendation page at 1280 px (images/5.png)",
+          "quote": ""
+        }
+      ],
+      "proposal": "Add some space between 'Buy' and 'Add to cart', so that 'Buy' is the main action and the link is clearly separate.",
+      "question": null,
+      "status": "open",
+      "first_seen": 8,
       "resolution": null
     }
   ],
