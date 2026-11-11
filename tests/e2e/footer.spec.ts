@@ -46,3 +46,13 @@ test("phone: the footer is not shown", async ({ page }, info) => {
   await expect(footer(page)).toBeHidden();
   await screenshot(page, 14, "footer");
 });
+
+// Bug 25: the footer text starts at the same left edge as the header text (desktop).
+test("desktop: the footer text and the header text share the same left edge (bug 25)", async ({ page }, info) => {
+  desktopOnly(info);
+  await page.goto("/");
+  const headerName = page.locator("header").getByRole("link", { name: "SPINDLE", exact: true }).first();
+  const footerName = footer(page).getByText("SPINDLE", { exact: true });
+  const [h, f] = await Promise.all([headerName.boundingBox(), footerName.boundingBox()]);
+  expect(Math.abs(h!.x - f!.x)).toBeLessThan(2);
+});

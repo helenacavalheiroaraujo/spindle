@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — Bug 22: the home sentence is one line from 1024 px; two lines on phone
+
+- **Decision:** the sentence "No jargon, no homework. We tell you which version to buy and check every listing." is on one line from 1024 px. On a phone (375 px) it wraps onto two lines at normal size.
+- **Why:** on a phone it cannot fit on one line at a readable size. The owner chose two lines over smaller text.
+- **Links:** `specs/bugs/bug-22-homepage-sentence-line-break.md`.
+
 ## 2026-11-11 — UX finding 41: the Illustrative data label stays at the top
 
 - **Decision:** the "Illustrative data" label stays at the top of the recommendation page. It is not moved next to the offer. Story 25 is unchanged.

@@ -3,7 +3,7 @@
 export function Footer() {
   return (
     <footer className="hidden bg-navy text-cream xl:block">
-      <div className="page-main flex items-center justify-between gap-8 px-12 py-7">
+      <div className="flex items-center justify-between gap-8 px-[max(1rem,calc(50vw-35rem))] py-7">
         <div>
           <p className="flex items-center gap-3 font-heading text-2xl tracking-wide">
             <span aria-hidden className="h-6 w-6 rounded-full border-[6px] border-cream" />
