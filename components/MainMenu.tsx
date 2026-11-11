@@ -121,7 +121,7 @@ export function MenuRow() {
   const name = useAccountName();
   const cells = desktopMenu(signedIn, usePathname(), useSearchParams().toString(), initials(name), name);
   return (
-    <nav aria-label="Main" className="hidden items-center gap-0.5 lg:flex">
+    <nav aria-label="Main" className="hidden items-center gap-4 lg:flex">
       {cells.map((cell) => (
         <div key={cell.label} className="flex items-center gap-0.5">
           {cell.divider && <span aria-hidden className="mx-2 h-5 w-px bg-cream/30" />}
