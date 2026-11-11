@@ -1,6 +1,14 @@
 // Decision tables for lib/rules/albumDetails.ts. Example data: Kind of Blue (seed album 8) as MusicBrainz returned it.
 import { describe, expect, it } from "vitest";
-import { firstSentences, formatReleaseDate, pickRelease, pickReleaseGroup } from "@/lib/rules/albumDetails";
+import {
+  catalogueNotice,
+  firstSentences,
+  formatReleaseDate,
+  musicianNotice,
+  pickRelease,
+  pickReleaseGroup,
+  sourcesLine,
+} from "@/lib/rules/albumDetails";
 
 describe("formatReleaseDate", () => {
   it.each([
@@ -102,5 +110,32 @@ describe("firstSentences", () => {
 
   it("trims surrounding spaces and does not split inside a sentence", () => {
     expect(firstSentences("  A short note with 3.5 minutes in it. Then more.  ", 1)).toBe("A short note with 3.5 minutes in it.");
+  });
+});
+
+describe("notices and source line when a source does not answer", () => {
+  it.each([
+    ["ok", "Source: MusicBrainz · Wikipedia"], // Kind of Blue: both answered
+    ["none", "Source: Wikipedia"], // MusicBrainz answered, nothing for this album
+  ] as const)("musician ok, catalogue %s → %s", (catalogue, expected) => {
+    expect(sourcesLine(catalogue, "ok")).toBe(expected);
+  });
+  it("MusicBrainz down, Wikipedia answered: the notice for MusicBrainz, and the source line names only Wikipedia", () => {
+    expect(catalogueNotice("failed")).toBe("The release date, label and tracks are not available right now.");
+    expect(sourcesLine("failed", "ok")).toBe("Source: Wikipedia");
+  });
+  it("Wikipedia down, MusicBrainz answered: the notice for the musician, and the source line names only MusicBrainz", () => {
+    expect(musicianNotice("failed")).toBe("The description of the musician is not available right now.");
+    expect(sourcesLine("ok", "failed")).toBe("Source: MusicBrainz");
+  });
+  it("both down or both empty: no source line", () => {
+    expect(sourcesLine("failed", "failed")).toBeNull();
+    expect(sourcesLine("none", "none")).toBeNull();
+  });
+  it("no notice when the source answered, even with nothing for the album", () => {
+    expect(catalogueNotice("ok")).toBeNull();
+    expect(catalogueNotice("none")).toBeNull();
+    expect(musicianNotice("ok")).toBeNull();
+    expect(musicianNotice("none")).toBeNull();
   });
 });

@@ -3,6 +3,11 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — Album page: say when MusicBrainz or Wikipedia does not answer
+- **Decision:** when MusicBrainz does not answer, the page shows "The release date, label and tracks are not available right now." in place of those facts. When Wikipedia does not answer, it shows "The description of the musician is not available right now." The source line names only the sources that gave data for that album.
+- **Why:** in the full e2e run of 11 Nov, MusicBrainz did not answer for Kind of Blue. The page showed the musician and "Source: MusicBrainz · Wikipedia" with no date, label or tracks and no sign of the failure. A failed request now looks different from an album with nothing in MusicBrainz.
+- **Choices by the AI:** the wording, in the same tone as "not available right now"; a plain line, not ErrorScreen, which replaces a whole section and has a "Try again" button that would do nothing here; the source line leaves out a source that gave no data (it used to list both always).
+
 ## 2026-11-11 — Recommendation page (desktop): track list under the cover, reasons as cards
 
 ### Layout A4

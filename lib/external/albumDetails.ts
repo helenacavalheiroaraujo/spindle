@@ -6,6 +6,7 @@ import {
   pickRelease,
   pickReleaseGroup,
   type ReleaseCandidate,
+  type SourceStatus,
 } from "@/lib/rules/albumDetails";
 
 // MusicBrainz asks for an identifying User-Agent. Generic on purpose: no personal details.
@@ -17,6 +18,8 @@ export type AlbumDetails = {
   label: string | null;
   tracks: string[];
   musician: { name: string; text: string; url: string } | null;
+  catalogueStatus: SourceStatus; // MusicBrainz
+  musicianStatus: SourceStatus; // Wikipedia
 };
 
 type RawGroup = {
@@ -40,17 +43,29 @@ async function getJson(url: string): Promise<unknown> {
   return response.json();
 }
 
-// MusicBrainz and Wikipedia are independent: if one fails, the other still shows.
+type Loaded<T> = { status: SourceStatus; data: T | null };
+
+// A source that does not answer ("failed") is different from one that answers with nothing ("none").
+function loaded<T>(promise: Promise<T | null>): Promise<Loaded<T>> {
+  return promise.then(
+    (data) => ({ status: data ? "ok" : "none", data }),
+    () => ({ status: "failed", data: null }),
+  );
+}
+
+// MusicBrainz and Wikipedia are independent: if one fails, the other still shows, and the page says which one failed.
 export async function loadAlbumDetails(title: string, artist: string): Promise<AlbumDetails> {
   const [catalogue, musician] = await Promise.all([
-    loadCatalogue(title, artist).catch(() => null),
-    loadMusician(artist).catch(() => null),
+    loaded(loadCatalogue(title, artist)),
+    loaded(loadMusician(artist)),
   ]);
   return {
-    releaseDate: catalogue?.releaseDate ?? null,
-    label: catalogue?.label ?? null,
-    tracks: catalogue?.tracks ?? [],
-    musician,
+    releaseDate: catalogue.data?.releaseDate ?? null,
+    label: catalogue.data?.label ?? null,
+    tracks: catalogue.data?.tracks ?? [],
+    musician: musician.data,
+    catalogueStatus: catalogue.status,
+    musicianStatus: musician.status,
   };
 }
 

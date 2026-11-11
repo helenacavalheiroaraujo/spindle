@@ -8,6 +8,7 @@ import { readFileSync } from "node:fs";
 import { signIn } from "./session";
 import { screenshot } from "./screenshot";
 import { typeSearch } from "./searchBox";
+import { waitUntilHydrated } from "./hydration";
 
 function env(name: string) {
   if (process.env[name]) return process.env[name]!;
@@ -185,6 +186,8 @@ test("price: typical range and label while typing; invalid prices refused; photo
   await logIn(page);
   await expect(page.getByText(/Spiders from Mars, 2012 Remaster/)).toBeVisible();
   const price = page.getByLabel("Price");
+  // Typing before the price field is hydrated keeps the text in the box but not in the form's state.
+  await waitUntilHydrated(price);
 
   for (const [typed, label] of [["24", "Below typical"], ["30", "Typical"], ["40", "Above typical"]]) {
     await price.fill(typed);
@@ -202,7 +205,7 @@ test("price: typical range and label while typing; invalid prices refused; photo
     ["1001", "The maximum price is €1000"],
   ]) {
     await price.fill(typed);
-    await expect(page.getByRole("alert").filter({ hasText: /\S/ })).toHaveText(message);
+    await expect(page.getByRole("alert").filter({ hasText: message })).toHaveText(message);
     await expect(listButton(page)).toBeDisabled();
   }
 
