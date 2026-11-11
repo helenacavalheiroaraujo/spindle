@@ -3,6 +3,11 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — Album test: MusicBrainz is replaced by a local stub
+- **Decision:** the e2e album test answers the MusicBrainz requests from a local stub (tests/e2e/musicbrainzStub.mjs, port 4010). The dev server reads its address from MUSICBRAINZ_URL, which only the test setup sets. Without the variable the app calls MusicBrainz as before.
+- **Why:** the album test failed in full runs when MusicBrainz did not answer. The test no longer depends on MusicBrainz; it still depends on Wikipedia, which is called live.
+- **Choices by the AI:** a fixed answer for Kind of Blue only; Wikipedia is still called live; the stub starts only with Playwright's own server, because a server already running on port 3000 does not get the variable.
+
 ## 2026-11-11 — Story 24: the crate row moves by mouse drag
 
 ### A mouse drag moves the crate row
@@ -14,6 +19,7 @@
 - **Decision:** with 7 or more crates, the label reads the crates actually on screen, e.g. "Showing 1 to 2 of 7 genres" on a phone. The story's "1 to 4" applies where four crates are visible.
 - **Why:** a fixed "1 to 4" would be wrong on a phone, where about two crates fit.
 - **Links:** Story 24, option C in `docs/design/crate-carousel-options.html`.
+
 
 ## 2026-11-11 — Recommendation page (desktop): track list under the cover, reasons as cards
 

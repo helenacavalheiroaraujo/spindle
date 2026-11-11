@@ -10,5 +10,14 @@ export default defineConfig({
     { name: "phone", use: { ...devices["iPhone 13"], viewport: { width: 375, height: 812 } } },
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1280, height: 800 } } },
   ],
-  webServer: { command: "npm run dev", url: "http://localhost:3000", reuseExistingServer: true },
+  webServer: [
+    // Fixed MusicBrainz answers for the album test (no network needed). The dev server below is pointed at it.
+    { command: "node tests/e2e/musicbrainzStub.mjs", url: "http://localhost:4010/ws/2/release-group/", reuseExistingServer: true },
+    {
+      command: "npm run dev",
+      url: "http://localhost:3000",
+      reuseExistingServer: true,
+      env: { MUSICBRAINZ_URL: "http://localhost:4010/ws/2" },
+    },
+  ],
 });

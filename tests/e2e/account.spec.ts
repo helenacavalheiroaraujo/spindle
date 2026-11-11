@@ -5,6 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
 import { screenshot } from "./screenshot";
 import { signIn } from "./session";
+import { waitUntilHydrated } from "./hydration";
 
 function env(name: string) {
   if (process.env[name]) return process.env[name]!;
@@ -52,6 +53,8 @@ async function openAccount(page: Page) {
   await page.goto("/login?next=%2Faccount");
   await signIn(page, email, PASSWORD);
   await expect(page.getByRole("heading", { name: "Your account" })).toBeVisible();
+  // The address form is a client component: typing before it is hydrated loses the first field.
+  await waitUntilHydrated(page.locator("#delivery-name"));
 }
 
 test.describe.configure({ mode: "serial" });
