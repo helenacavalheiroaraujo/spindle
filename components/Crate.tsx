@@ -12,7 +12,7 @@ export function Crate({ genre, count, large = false }: { genre: Genre; count: st
     >
       <span
         aria-hidden
-        className={`absolute rounded-full bg-[#15171d] ${large ? "-right-12 -top-12 h-44 w-44 lg:h-56 lg:w-56" : "-right-[20%] -top-[20%] h-[72%] w-[72%]"}`}
+        className={`absolute rounded-full bg-[#15171d] ${large ? "-right-12 -top-12 h-44 w-44 lg:h-56 lg:w-56" : "-right-[25%] -top-[25%] h-[55%] w-[55%]"}`}
       >
         <span style={{ backgroundColor: genre.dot }} className="absolute inset-[32%] rounded-full" />
       </span>

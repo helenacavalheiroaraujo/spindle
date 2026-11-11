@@ -1612,9 +1612,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 46,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-11",
+        "decision": "Kept as built, by owner decision on 11 Nov 2026. See DECISIONS.md, 2026-11-11, 'Spec review findings 46 to 71: kept as built'."
+      }
     },
     {
       "stories": [
@@ -1640,9 +1644,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 47,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-11",
+        "decision": "Kept as built, by owner decision on 11 Nov 2026. See DECISIONS.md, 2026-11-11, 'Spec review findings 46 to 71: kept as built'."
+      }
     },
     {
       "stories": [
@@ -1766,9 +1774,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 51,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-11",
+        "decision": "Kept as built, by owner decision on 11 Nov 2026. See DECISIONS.md, 2026-11-11, 'Spec review findings 46 to 71: kept as built'."
+      }
     },
     {
       "stories": [
@@ -1792,9 +1804,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 52,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-11",
+        "decision": "Kept as built, by owner decision on 11 Nov 2026. See DECISIONS.md, 2026-11-11, 'Spec review findings 46 to 71: kept as built'."
+      }
     },
     {
       "stories": [
@@ -1818,9 +1834,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 53,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-11",
+        "decision": "Kept as built, by owner decision on 11 Nov 2026. See DECISIONS.md, 2026-11-11, 'Spec review findings 46 to 71: kept as built'."
+      }
     },
     {
       "stories": [
@@ -1905,9 +1925,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 56,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-11",
+        "decision": "Kept as built, by owner decision on 11 Nov 2026. See DECISIONS.md, 2026-11-11, 'Spec review findings 46 to 71: kept as built'."
+      }
     },
     {
       "stories": [
@@ -2037,9 +2061,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 60,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-11",
+        "decision": "Kept as built, by owner decision on 11 Nov 2026. See DECISIONS.md, 2026-11-11, 'Spec review findings 46 to 71: kept as built'."
+      }
     },
     {
       "stories": [
@@ -2066,7 +2094,11 @@
       "id": 61,
       "status": "resolved",
       "first_seen": 5,
-      "resolution": {"iteration": 6, "date": "2026-11-10", "decision": "Already built: DECISIONS 2026-11-08 (\"This record is no longer available\", with Back to search). Status updated while building story 20."}
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-10",
+        "decision": "Already built: DECISIONS 2026-11-08 (\"This record is no longer available\", with Back to search). Status updated while building story 20."
+      }
     },
     {
       "stories": [
@@ -2090,9 +2122,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 62,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-11",
+        "decision": "Kept as built, by owner decision on 11 Nov 2026. See DECISIONS.md, 2026-11-11, 'Spec review findings 46 to 71: kept as built'."
+      }
     },
     {
       "stories": [
@@ -2116,9 +2152,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 63,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-11",
+        "decision": "Kept as built, by owner decision on 11 Nov 2026. See DECISIONS.md, 2026-11-11, 'Spec review findings 46 to 71: kept as built'."
+      }
     },
     {
       "stories": [
@@ -2347,9 +2387,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 70,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-11",
+        "decision": "Kept as built, by owner decision on 11 Nov 2026. See DECISIONS.md, 2026-11-11, 'Spec review findings 46 to 71: kept as built'."
+      }
     },
     {
       "stories": [
@@ -2373,9 +2417,13 @@
       "proposal": null,
       "question": "Keep as built (entry in DECISIONS.md) or change it (new story)?",
       "id": 71,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 5,
-      "resolution": null
+      "resolution": {
+        "iteration": 6,
+        "date": "2026-11-11",
+        "decision": "Kept as built, by owner decision on 11 Nov 2026. See DECISIONS.md, 2026-11-11, 'Spec review findings 46 to 71: kept as built'."
+      }
     },
     {
       "id": 72,

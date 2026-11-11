@@ -3,6 +3,18 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — Crate name on phone: smaller disc
+
+- **Decision:** the decorative disc on a genre crate is 55% of the crate, placed at the top right, so it no longer runs into the genre name at 375 px.
+- **Why:** UX finding 37 (the owner chose "fix it now").
+- **Links:** `components/Crate.tsx`; checked at 375 px.
+
+## 2026-11-11 — Spec review findings 46 to 71: kept as built
+
+- **Decision:** the behaviour and wording flagged in findings 46, 47, 51, 52, 53, 56, 60, 62, 63, 70 and 71 stay as built. No new story changes them.
+- **Why:** the owner reviewed each finding on 11 Nov 2026 and chose "keep as built".
+- **Links:** `docs/spec-review/findings.json`.
+
 ## 2026-11-11 — Story 25: no "Shop" tag, plain glossary words and one label
 
 - **Decision:** on listings the "Shop" tag is removed; the shop name stays. On the recommendation page "Reissue", "first pressing", "reissue" and "pressing" are plain text, with no underline and no tap explanation. The second "Illustrative data" next to the ratings line is removed; the label at the top stays.
