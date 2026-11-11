@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crate carousel (story 23)</title>
+<!-- Story 23 · crate carousel. Desktop (1280 px): arrows show only with 7 or more crates. Phone (375 px): no arrows, the row scrolls sideways by swipe. Proposal for approval; not built. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:15px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:-.01em}
+.vt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;margin:0 0 8px}
+.small{font-size:13px;color:#6f6a60}
+.frame{border:1px solid #1d2433;border-radius:20px;background:#f4efe6;padding:32px;margin-bottom:36px}
+.desk{max-width:1232px;margin:0 auto}
+.head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+.head h2{font-size:34px;line-height:1}
+.arrows{display:flex;gap:10px}
+.arrow{width:48px;height:48px;border-radius:50%;border:1.5px solid #1d2433;background:#faf7f1;color:#1d2433;font-size:20px;display:flex;align-items:center;justify-content:center;font-weight:600}
+.arrow[disabled]{opacity:.35;border-color:#8a8476}
+.track{display:flex;gap:16px;overflow:hidden}
+.crate{flex:0 0 calc((100% - 48px)/4);border-radius:22px;position:relative;overflow:hidden;padding:18px;min-height:150px;color:#1d2433}
+.crate .rec{position:absolute;right:-24px;top:-24px;width:96px;height:96px;border-radius:50%;background:#1d2433;box-shadow:inset 0 0 0 30px #1d2433,inset 0 0 0 38px #f4efe6}
+.crate b{font-family:'Barlow Condensed',sans-serif;font-size:34px;line-height:1;position:absolute;left:18px;bottom:40px}
+.crate span{position:absolute;left:18px;bottom:18px;font-size:14px}
+.c1{background:#c9a46a}.c2{background:#323d57;color:#f4efe6}.c3{background:#5a3a24;color:#f4efe6}.c4{background:#faf7f1}.c5{background:#b08a58}.c6{background:#cfb68a}.c7{background:#d8d2c6}
+.note{margin-top:14px;font-size:13px;color:#6f6a60}
+/* phone */
+.phone{width:375px;margin:0 auto;border:1px solid #1d2433;border-radius:28px;background:#f4efe6;padding:20px 16px 24px;overflow:hidden}
+.phone h2{font-size:30px;line-height:1;margin-bottom:12px}
+.swipe{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 8px;scrollbar-width:none}
+.swipe::-webkit-scrollbar{display:none}
+.swipe .crate{flex:0 0 150px;min-height:130px;scroll-snap-align:start}
+.swipe .crate b{font-size:28px;bottom:36px}
+.hint{font-size:13px;color:#6f6a60;margin-top:10px}
+.illus{border:1px solid #c8bfae;border-radius:999px;padding:3px 9px;font-size:12px;display:inline-block;margin-top:14px}
+</style></head><body>
+
+<section class="frame desk">
+  <p class="small" style="margin-bottom:6px">Desktop · 1280 px · 7 crates (4 visible, 3 off-screen, so the arrows show)</p>
+  <div class="head">
+    <h2 class="hd">Crates by genre</h2>
+    <div class="arrows">
+      <button class="arrow" disabled aria-label="Previous genres">&larr;</button>
+      <button class="arrow" aria-label="Next genres">&rarr;</button>
+    </div>
+  </div>
+  <div class="track">
+    <div class="crate c1"><i class="rec"></i><b>Classical</b><span>8 records</span></div>
+    <div class="crate c2"><i class="rec"></i><b>Electronic</b><span>2 records</span></div>
+    <div class="crate c3"><i class="rec"></i><b>Fado</b><span>1 record</span></div>
+    <div class="crate c4"><i class="rec"></i><b>Hip-hop</b><span>1 record</span></div>
+    <div class="crate c5"><i class="rec"></i><b>Jazz</b><span>1 record</span></div>
+    <div class="crate c6"><i class="rec"></i><b>Rock</b><span>4 records</span></div>
+    <div class="crate c7"><i class="rec"></i><b>Soul and funk</b><span>1 record</span></div>
+  </div>
+  <p class="note">The arrows move the row one crate per tap. The left arrow is disabled at the first crate. Counts and names are illustrative.</p>
+  <span class="illus">Illustrative data</span>
+</section>
+
+<section class="frame">
+  <p class="small" style="margin-bottom:6px">Phone · 375 px · 7 crates: no arrows, the row scrolls sideways by swipe</p>
+  <div class="phone">
+    <h2 class="hd">Crates by genre</h2>
+    <div class="swipe">
+      <div class="crate c1"><i class="rec"></i><b>Classical</b><span>8 records</span></div>
+      <div class="crate c2"><i class="rec"></i><b>Electronic</b><span>2 records</span></div>
+      <div class="crate c3"><i class="rec"></i><b>Fado</b><span>1 record</span></div>
+      <div class="crate c4"><i class="rec"></i><b>Hip-hop</b><span>1 record</span></div>
+      <div class="crate c5"><i class="rec"></i><b>Jazz</b><span>1 record</span></div>
+      <div class="crate c6"><i class="rec"></i><b>Rock</b><span>4 records</span></div>
+      <div class="crate c7"><i class="rec"></i><b>Soul and funk</b><span>1 record</span></div>
+    </div>
+    <p class="hint">Swipe to see more genres.</p>
+    <span class="illus">Illustrative data</span>
+  </div>
+</section>
+
+</body></html>

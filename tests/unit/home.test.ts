@@ -1,7 +1,24 @@
 // Decision tables from story 12: crates only for genres with albums (real counts), the genre screen newest
 // first, and the featured album (most active listings among albums that open; newest on a tie; none → null).
 import { describe, expect, it } from "vitest";
-import { albumsInGenre, crates, featuredAlbum, genreFromSlug, recordsLabel } from "@/lib/rules/home";
+import { albumsInGenre, crates, featuredAlbum, genreFromSlug, isCrateRow, recordsLabel, showingLabel } from "@/lib/rules/home";
+
+// Story 24 decision table: six or fewer crates is a grid; seven or more is a row with a progress line and a label.
+describe("isCrateRow", () => {
+  it.each([
+    [0, false],
+    [6, false],
+    [7, true],
+    [8, true],
+  ])("%i crates → row? %s", (count, row) => expect(isCrateRow(count)).toBe(row));
+});
+
+describe("showingLabel", () => {
+  it("shows the visible range and the total", () => {
+    expect(showingLabel(1, 4, 7)).toBe("Showing 1 to 4 of 7 genres");
+    expect(showingLabel(4, 7, 7)).toBe("Showing 4 to 7 of 7 genres");
+  });
+});
 
 const albums = [
   { id: "ziggy", genre: "Rock", releaseYear: 1972 },
@@ -13,12 +30,15 @@ const albums = [
 ];
 
 describe("crates", () => {
-  it("one crate per genre with albums, in the design's order, with real counts", () => {
+  it("one crate per genre with albums, in alphabetical order (story 24), with real counts", () => {
     expect(crates(albums).map((c) => [c.genre.name, c.count])).toEqual([
+      ["Electronic", 1],
       ["Rock", 3],
       ["Soul and funk", 1],
-      ["Electronic", 1],
     ]);
+  });
+  it("Classical has its own crate when it has albums", () => {
+    expect(crates([{ genre: "Classical", releaseYear: 1999 }]).map((c) => c.genre.name)).toEqual(["Classical"]);
   });
   it("an album without a genre is in no crate", () => {
     expect(crates([{ genre: null, releaseYear: 2000 }])).toEqual([]);

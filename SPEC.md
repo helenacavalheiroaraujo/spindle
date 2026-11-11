@@ -7,7 +7,7 @@ Stack and hosting: see `DECISIONS.md`. Assignment 1 stated PHP; the MVP uses Nex
 1. **Core:** stories 1, 2, 3, 5, 6, 12
 2. **Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)
 3. **Seller:** story 8
-4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15), then story 20 (cart), **story 14 (desktop footer), story 22 (navy header)**
+4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15), then story 20 (cart), **story 14 (desktop footer), story 22 (navy header), story 24 (more genres and crate row)**
 
 Not in this MVP: stories 10, 11, 13
 
@@ -59,6 +59,7 @@ In build order. Each story has its own file in `specs/stories/` (bugs are in `sp
 | Story 21 · Album details without listings | [`specs/stories/story-21-album-details.md`](specs/stories/story-21-album-details.md) |
 | Story 22 · Navy header (desktop) | [`specs/stories/story-22-navy-header.md`](specs/stories/story-22-navy-header.md) |
 | Story 23 · Buying priorities on the account page | [`specs/stories/story-23-account-priorities.md`](specs/stories/story-23-account-priorities.md) |
+| Story 24 · More genres and a crate row | [`specs/stories/story-24-genres-crate-row.md`](specs/stories/story-24-genres-crate-row.md) |
 
 ---
 

@@ -3,6 +3,17 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-10 — Story 24: more genres and a crate row for 7+ genres
+
+### Seven or more genres: progress line, no arrows; Classical and more albums
+- **Decision:** a Classical genre is added (8 albums by Ludovico Einaudi). Rock gets 4 Kaleo, 3 Pink Floyd, 4 Arctic Monkeys and 4 Radiohead albums. Crates are sorted alphabetically. From 7 crates, the row shows a progress line and "Showing 1 to 4 of N genres", with no arrows. The row moves by drag, trackpad or swipe; on phone it swipes sideways.
+- **Replaces, on the home page:** the six-genre rule of the Assignment 1 design (the "six crates" decision), and the arrows of the first proposal.
+- **Why:** the owner asked for more categories and does not like arrows. Option C was chosen from the three in `docs/design/crate-carousel-options.html`.
+- **Numbering:** this story is 24, not 23: story 23 is already the account priorities story (`specs/stories/story-23-account-priorities.md`).
+- **Chosen by the owner:** full demo data for all 23 albums; option C; Classical as the new genre.
+- **Chosen by the assistant (not confirmed by the owner):** which four albums of each band are "the most popular" (Pink Floyd: Wish You Were Here, Animals, The Wall besides Dark Side; Arctic Monkeys: Whatever People Say I Am, Favourite Worst Nightmare, AM, Tranquility Base Hotel & Casino; Radiohead: The Bends, OK Computer, Kid A, In Rainbows).
+- **Years not yet confirmed in a discography:** Wish You Were Here (1975) and Animals (1977); Divenire (2006 or 2007); Una Mattina (2004).
+
 ## 2026-11-10 — Story 23: account shows the saved buying priorities
 
 ### The account page lists the saved buying priorities, display only

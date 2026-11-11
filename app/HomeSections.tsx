@@ -4,10 +4,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { homeData, type HomeData } from "./actions";
-import { Crate } from "@/components/Crate";
+import { CrateRow } from "@/components/CrateRow";
 import { ErrorScreen } from "@/components/ErrorScreen";
 import { LoadingMask } from "@/components/LoadingMask";
-import { recordsLabel } from "@/lib/rules/home";
 
 type State = { kind: "loading" } | { kind: "error" } | { kind: "ready"; data: HomeData };
 
@@ -43,15 +42,7 @@ function Sections({ data }: { data: HomeData }) {
     <>
       {data.crates.length > 0 && (
         <section aria-label="Pick a crate">
-          <ul className="grid grid-cols-3 gap-3 lg:grid-cols-6">
-            {data.crates.map(({ genre, count }) => (
-              <li key={genre.slug}>
-                <Link href={`/genres/${genre.slug}`} aria-label={`${genre.name}, ${recordsLabel(count)}`} className="card-link" style={{ borderRadius: "1rem" }}>
-                  <Crate genre={genre} count={recordsLabel(count)} />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <CrateRow crates={data.crates} />
           <p className="mt-2 text-xs text-navy/70">Illustrative data</p>
         </section>
       )}

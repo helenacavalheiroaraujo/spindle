@@ -19,7 +19,7 @@ test("home sections: 'Loading the shop…' while they load, then the crates", as
   await expect(page.getByRole("status").filter({ hasText: "Loading the shop…" })).toBeVisible();
   await expect(page.getByRole("searchbox", { name: "Album or artist" })).toBeVisible(); // the search stays usable
   release();
-  await expect(page.getByRole("link", { name: "Rock, 4 records" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Rock, 19 records" })).toBeVisible();
   await expect(page.getByRole("status").filter({ hasText: "Loading the shop…" })).toHaveCount(0);
 });
 

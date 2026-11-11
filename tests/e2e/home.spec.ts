@@ -13,10 +13,14 @@ test("home page: title, search, one crate per genre with real counts, and two 'T
   await expect(page.getByRole("searchbox", { name: "Album or artist" })).toBeVisible();
 
   const crates = page.getByRole("region", { name: "Pick a crate" }).getByRole("link");
-  await expect(crates).toHaveCount(6); // the six genres of the design, each with its real number of albums
-  for (const name of ["Rock, 4 records", "Jazz, 1 record", "Soul and funk, 1 record", "Fado, 1 record", "Electronic, 2 records", "Hip-hop, 1 record"]) {
+  await expect(crates).toHaveCount(7); // seven genres with albums (story 24), each with its real number of albums
+  for (const name of ["Classical, 8 records", "Electronic, 2 records", "Fado, 1 record", "Hip-hop, 1 record", "Jazz, 1 record", "Rock, 19 records", "Soul and funk, 1 record"]) {
     await expect(page.getByRole("link", { name })).toBeVisible();
   }
+  // Story 24: seven crates → a row with a progress line and the label; no arrows. On phone fewer crates fit, so the
+  // visible range is shorter ("Showing 1 to 2 of 7 genres").
+  await expect(page.getByText(/^Showing 1 to \d of 7 genres$/)).toBeVisible();
+  await expect(page.getByRole("region", { name: "Pick a crate" }).getByRole("button")).toHaveCount(0);
 
   const week = page.getByRole("region", { name: "This week at the shop" });
   await expect(week.getByText("This weekend")).toBeVisible();
@@ -28,28 +32,30 @@ test("home page: title, search, one crate per genre with real counts, and two 'T
 
 test("a crate opens the genre screen: only that genre's albums, newest first, rows as in search", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: "Rock, 4 records" }).click();
+  await page.getByRole("link", { name: "Rock, 19 records" }).click();
   await expect(page).toHaveURL("/genres/rock");
-  await expect(page.getByText("4 records")).toBeVisible();
+  await expect(page.getByText("19 records")).toBeVisible();
   const rows = page.getByRole("listitem");
-  await expect(rows).toHaveCount(4);
-  await expect(rows.nth(0)).toContainText("Blackstar"); // 2016
-  await expect(rows.nth(1)).toContainText("The Dark Side of the Moon"); // 1973
-  await expect(rows.nth(2)).toContainText(ZIGGY); // 1972
-  await expect(rows.nth(3)).toContainText("Hunky Dory"); // 1971
-  await expect(rows.nth(0)).toContainText("No listings");
-  await expect(rows.nth(3)).toContainText("Not in the demo");
+  await expect(rows).toHaveCount(19);
+  // Newest first: Mixed Emotions (2025) at the top, Hunky Dory (1971) at the bottom (see story 24).
+  await expect(rows.nth(0)).toContainText("Mixed Emotions");
+  await expect(rows.nth(18)).toContainText("Hunky Dory");
+  const blackstar = rows.filter({ hasText: "Blackstar" });
+  const hunky = rows.filter({ hasText: "Hunky Dory" });
+  const ziggyRow = rows.filter({ hasText: ZIGGY });
+  await expect(blackstar).toContainText("No listings");
+  await expect(hunky).toContainText("Not in the demo");
   await expect(page.getByText("Homogenic")).toHaveCount(0);
   await screenshot(page, 12, "genre-rock");
 
   // Genre taps: no listings → its own page with the message (bug 17); opens → priorities; not in the demo → does nothing.
-  await rows.nth(0).getByRole("link").click();
+  await blackstar.getByRole("link").click();
   await expect(page).toHaveURL(/\/albums\/[0-9a-f-]+$/);
   await expect(page.getByRole("heading", { level: 2, name: "Nobody is selling this album right now" })).toBeVisible();
   await screenshot(page, 17, "album-no-listings");
   await page.goBack();
   await expect(page).toHaveURL("/genres/rock");
-  await rows.nth(2).getByRole("link").click();
+  await ziggyRow.getByRole("link").click();
   await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001\/priorities$/);
 });
 
@@ -111,6 +117,6 @@ test("if the shop sections fail to load, an error screen with 'Try again' recove
   await expect(page.getByRole("searchbox", { name: "Album or artist" })).toBeVisible();
   fail = false;
   await alert.getByRole("button", { name: "Try again" }).click();
-  await expect(page.getByRole("link", { name: "Rock, 4 records" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Rock, 19 records" })).toBeVisible();
   await expect(alert).toHaveCount(0);
 });
