@@ -195,3 +195,9 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 24 | 7+ crates: the row moves by mouse drag, trackpad and swipe | `components/CrateRow.tsx` | `tests/e2e/home.spec.ts` (mouse drag); trackpad: manual test needed |
 | 24 | 6 or fewer crates: grid, no line and no label | `lib/rules/home.ts`, `components/CrateRow.tsx` | `tests/unit/home.test.ts` (isCrateRow) |
 | 24 | On phone the row swipes sideways | `components/CrateRow.tsx` | manual test needed (not automated) |
+| 25 | Desktop: the track list sits under the cover; phone keeps it in the right column | `app/albums/[albumId]/recommendation/page.tsx` | `tests/e2e/recommendationPolish.spec.ts` |
+| 25 | Desktop: the three reasons are cards side by side; "Get this one" starts level with the cover | `app/albums/[albumId]/recommendation/page.tsx` | `tests/e2e/recommendationPolish.spec.ts` |
+| 25 | No price slider; "Typical price for this pressing" is labelled "Illustrative data" | `components/ListingList.tsx`, `app/albums/[albumId]/recommendation/page.tsx` | `tests/e2e/recommendationPolish.spec.ts` |
+| 25 | "Reissue", "first pressing" and "reissue" are plain text; the ratings line has no second label | `app/albums/[albumId]/recommendation/page.tsx` | `tests/e2e/recommendationPolish.spec.ts` |
+| 25 | No "Shop" tag next to the seller name | `components/SellerLine.tsx` | `tests/e2e/listings.spec.ts` |
+| 25 | Visible space between "Buy" and "Add to cart" | `components/ListingList.tsx` | Not tested automatically |
