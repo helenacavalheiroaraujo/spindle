@@ -3,6 +3,13 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — Recommendation page: no slider, no "Shop" tag, no dotted underlines
+
+### Slider, seller tag and underlines removed
+- **Decision:** on the recommendation page, the price slider is removed and the typical-price sentence stays, labelled "Illustrative data". The "Shop" tag next to the seller name is removed. The dotted underlines on "Reissue", "first pressing" and "reissue" are removed. The "Illustrative data" label at the top of the page covers the whole page.
+- **Why:** the owner's UX review, iteration 8 (findings 39 to 42). The slider does not show it can be moved, the word "Shop" is unclear, and the dotted underlines do not say what they do.
+- **Not decided here:** the track list under the cover in the left column (finding 38). It is a layout change and needs an approved design first. See Story 25.
+
 ## 2026-11-11 — Spacing: inner padding and edge margins for cards, buttons and covers
 
 ### Padding follows the mockups in docs/design

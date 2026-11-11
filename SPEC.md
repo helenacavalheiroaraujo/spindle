@@ -60,6 +60,7 @@ In build order. Each story has its own file in `specs/stories/` (bugs are in `sp
 | Story 22 · Navy header (desktop) | [`specs/stories/story-22-navy-header.md`](specs/stories/story-22-navy-header.md) |
 | Story 23 · Buying priorities on the account page | [`specs/stories/story-23-account-priorities.md`](specs/stories/story-23-account-priorities.md) |
 | Story 24 · More genres and a crate row | [`specs/stories/story-24-genres-crate-row.md`](specs/stories/story-24-genres-crate-row.md) |
+| Story 25 · Recommendation page polish | [`specs/stories/story-25-recommendation-polish.md`](specs/stories/story-25-recommendation-polish.md) |
 
 ---
 
