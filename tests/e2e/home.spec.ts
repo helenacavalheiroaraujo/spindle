@@ -30,6 +30,25 @@ test("home page: title, search, one crate per genre with real counts, and two 'T
   await screenshot(page, 12, "home");
 });
 
+// Story 24: the crate row moves by drag; the drag does not open a crate. Phone swipes are native touch scrolling,
+// which Playwright cannot send; the same row (overflow scrolling) is checked here with a mouse drag at both sizes.
+test("with 7 genres the crate row moves by drag, shows its progress line, and a drag opens no crate", async ({ page }) => {
+  await page.goto("/");
+  const row = page.getByRole("region", { name: /Crates by genre/ });
+  const label = page.getByText(/^Showing 1 to \d of 7 genres$/);
+  await expect(label).toBeVisible();
+  const box = await row.boundingBox();
+  if (!box) throw new Error("the crate row has no size");
+  await page.mouse.move(box.x + box.width * 0.8, box.y + 60);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width * 0.2, box.y + 60, { steps: 12 });
+  await page.mouse.up();
+  await expect.poll(() => row.evaluate((el) => el.scrollLeft)).toBeGreaterThan(0);
+  await expect(page.getByText(/^Showing [2-9] to \d of 7 genres$/)).toBeVisible(); // the label follows the row
+  await expect(page).toHaveURL("/");
+  await screenshot(page, 24, "crate-row");
+});
+
 test("a crate opens the genre screen: only that genre's albums, newest first, rows as in search", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("link", { name: "Rock, 19 records" }).click();

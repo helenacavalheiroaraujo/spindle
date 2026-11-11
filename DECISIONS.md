@@ -8,6 +8,19 @@
 - **Why:** the album test failed in full runs when MusicBrainz did not answer. The test no longer depends on MusicBrainz; it still depends on Wikipedia, which is called live.
 - **Choices by the AI:** a fixed answer for Kind of Blue only; Wikipedia is still called live; the stub starts only with Playwright's own server, because a server already running on port 3000 does not get the variable.
 
+## 2026-11-11 — Story 24: the crate row moves by mouse drag
+
+### A mouse drag moves the crate row
+- **Decision:** with 7 or more crates, a mouse drag moves the row. A drag of 5 px or more does not open a crate under the pointer. Trackpad and touch swipe stay native. Snapping is off during the drag and returns on release.
+- **Why:** story 24 and option C say the row moves by drag; a mouse did not move the row.
+- **Choices made while building (not in the story):** the 5 px threshold; mouse only.
+
+### The phone label shows the real visible range
+- **Decision:** with 7 or more crates, the label reads the crates actually on screen, e.g. "Showing 1 to 2 of 7 genres" on a phone. The story's "1 to 4" applies where four crates are visible.
+- **Why:** a fixed "1 to 4" would be wrong on a phone, where about two crates fit.
+- **Links:** Story 24, option C in `docs/design/crate-carousel-options.html`.
+
+
 ## 2026-11-11 — Recommendation page (desktop): track list under the cover, reasons as cards
 
 ### Layout A4
