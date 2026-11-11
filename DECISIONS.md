@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — Stories 10, 11 and 13 move to the next delivery
+
+- **Decision:** stories 10 (filters, messaging the seller), 11 (30-second previews, Spindle Pro) and 13 (wishlist, "Because you like…") are not built in this MVP. They have no story file and stay under "Not in this MVP" in SPEC.md.
+- **Why:** the deadline is 15 Nov 2026. The remaining MVP work (story 24, the test gaps, the submission PDF, the manual checks and the demo rehearsal) needs the time. Specifying them now would mean inventing behaviour and designs.
+- **Links:** SPEC.md, "Not in this MVP"; DECISIONS.md, 2026-11-07, "Left out of the MVP".
+
 ## 2026-11-11 — Album test: MusicBrainz is replaced by a local stub
 - **Decision:** the e2e album test answers the MusicBrainz requests from a local stub (tests/e2e/musicbrainzStub.mjs, port 4010). The dev server reads its address from MUSICBRAINZ_URL, which only the test setup sets. Without the variable the app calls MusicBrainz as before.
 - **Why:** the album test failed in full runs when MusicBrainz did not answer. The test no longer depends on MusicBrainz; it still depends on Wikipedia, which is called live.
