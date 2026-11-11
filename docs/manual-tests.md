@@ -30,6 +30,10 @@ For each screen: the loading mask says what is loading; the error screen says wh
 | M14 | 17 | Search results | Search for "bowie" (Search button or Enter) | "Searching…" | "We couldn't load the albums. Check your connection." | Not run |
 | M15 | 4 | Compare pressings | Open a recommendation (e.g. Ziggy Stardust, 1. Price, 2. Sound), tap "Compare pressings" | "Comparing pressings…" | "We couldn't load the comparison. Check your connection." | Not run |
 | M16 | 4 | Version page | On the comparison, tap "See this version" | "Loading this version…" | "We couldn't load this version. Check your connection." | Not run |
+| M17 | 24 | Crate row, desktop | Home page with 7 or more crates: drag the row with the trackpad | The row moves with the trackpad; a drag opens no crate | | Not run |
+| M18 | 24 | Crate row, phone | Home page on a phone: swipe the crate row sideways | The row moves sideways; the progress line follows | | Not run |
+| M19 | 25 | Buy and Add to cart | A green listing on the recommendation page (desktop) and the listings screen (phone) | There is visible space between "Buy" and "Add to cart" | | Not run |
+| M20 | 25 | Recommendation page, desktop | Open a recommendation at 1280 px | The track list is under the cover; the three reasons are cards side by side; "Get this one" starts level with the cover | | Not run |
 
 ## Other manual checks
 
