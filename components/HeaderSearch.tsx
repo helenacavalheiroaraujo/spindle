@@ -13,7 +13,7 @@ export function HeaderSearch() {
   const box = useSuggestions(typed);
   if (path.startsWith("/sell")) return null;
   return (
-    <div data-testid="header-search-strip" className="hidden border-b border-line bg-cream lg:flex lg:h-16 lg:items-center">
+    <div data-testid="header-search-strip" className="hidden border-b border-line bg-cream lg:flex lg:h-16 lg:items-center lg:px-[max(1rem,calc(50vw-35rem))]">
       <div ref={box.wrapperRef} className="relative min-w-0 flex-1 lg:block">
         <form
           role="search"
