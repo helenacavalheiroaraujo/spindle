@@ -1,6 +1,6 @@
 # Bug 23 · Account page content does not use the full width
 
-> Status: open. Found 2026-11-10.
+> Status: fixed 2026-11-11 (the account page uses the full page width, 72 rem on desktop). Found 2026-11-10.
 
 ## Description
 On the account page, the content is aligned to the left and leaves empty space on the right. It looks odd.

@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <div className="mt-4">
         <h1 className="font-heading text-4xl leading-none sm:text-5xl lg:text-7xl">Pick a crate. We&apos;ll pick the pressing.</h1>
-        <p className="mt-3 max-w-xl text-base">
+        <p className="mt-3 max-w-xl text-base lg:max-w-none">
           No jargon, no homework. We tell you which version to buy and check every listing.
         </p>
       </div>

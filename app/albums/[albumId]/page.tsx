@@ -7,10 +7,10 @@ import { Header } from "@/components/Header";
 // Also shows the musician, release date, label and tracks (DECISIONS 2026-11-10, album page), from MusicBrainz and Wikipedia.
 // An album that opens goes to its priorities screen; one not in the demo has no page.
 //
-// Layout (option A of docs/design/album-page-desktop-options.html, approved): on desktop the cover and the release
-// facts sit on the left and the title, the status and the text on the right, so both columns end at about the same
-// height. On phone it is one column in this order: cover, title, status, facts, text. The two groups are "contents"
-// on phone and columns on desktop; the `order` classes keep the phone order.
+// Layout (bug 20, owner's request 2026-11-11): on desktop the cover, the release facts and the track list sit on the left;
+// the title, the status and the musician's text sit on the right. On phone it is one column in this order: cover, title,
+// status, facts, musician, source, track list. The two groups are "contents" on phone and columns on desktop; the `order`
+// classes keep the phone order.
 export default async function AlbumNoListingsPage({ params }: { params: Promise<{ albumId: string }> }) {
   const { albumId } = await params;
   const album = (await listAlbumSummaries()).find((a) => a.id === albumId);
@@ -46,6 +46,22 @@ export default async function AlbumNoListingsPage({ params }: { params: Promise<
               )}
             </dl>
           )}
+
+          {hasDetails && details.tracks.length > 0 && (
+            <div className="order-6 mt-8 lg:mt-0">
+              <section>
+                <h2 className="font-heading text-2xl">Track list</h2>
+                <ol className="mt-2 divide-y divide-line rounded-2xl border border-line bg-sand px-5">
+                  {details.tracks.map((track, i) => (
+                    <li key={`${i}-${track}`} className="flex gap-4 py-3">
+                      <span className="w-6 font-semibold text-navy/70">{i + 1}</span>
+                      <span>{track}</span>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            </div>
+          )}
         </div>
 
         <div className="contents lg:flex lg:flex-col lg:gap-6">
@@ -75,20 +91,6 @@ export default async function AlbumNoListingsPage({ params }: { params: Promise<
                   >
                     Read more on Wikipedia
                   </a>
-                </section>
-              )}
-
-              {details.tracks.length > 0 && (
-                <section className="mt-8">
-                  <h2 className="font-heading text-2xl">Track list</h2>
-                  <ol className="mt-2 divide-y divide-line rounded-2xl border border-line bg-sand px-5">
-                    {details.tracks.map((track, i) => (
-                      <li key={`${i}-${track}`} className="flex gap-4 py-3">
-                        <span className="w-6 font-semibold text-navy/70">{i + 1}</span>
-                        <span>{track}</span>
-                      </li>
-                    ))}
-                  </ol>
                 </section>
               )}
 

@@ -1,6 +1,6 @@
 # Bug 22 · Home page sentence breaks onto two lines
 
-> Status: open. Found 2026-11-10.
+> Status: fixed 2026-11-11 on desktop (one line from 1024 px). On phone (375 px) the sentence still wraps: it does not fit on one line there. Found 2026-11-10.
 
 ## Description
 On the home page, the sentence "No jargon, no homework. We tell you which version to buy and check every listing." is split over two lines.

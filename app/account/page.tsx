@@ -30,7 +30,7 @@ export default async function AccountPage() {
   const priorityLines = accountPriorityLines(ranking);
 
   return (
-    <main className="px-4 pb-16 page-main page-narrow">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <h1 className="mt-6 font-heading text-4xl leading-tight">Your account</h1>
       <dl className="mt-6 space-y-4 rounded-2xl border border-line bg-white/60 p-5">

@@ -21,7 +21,7 @@ export function menuItems(signedIn: boolean, path: string, query = "", cartCount
     { label: "Home", href: "/", current: path === "/", soon: false, note: NOTHING_YET, count: 0 },
     { label: "Sell for free", href: "/sell", current: under("/sell"), soon: false, note: NOTHING_YET, count: 0 },
     signedIn
-      ? { label: "Your account", href: "/account", current: under("/account") || under("/my-listings"), soon: false, note: NOTHING_YET, count: 0 }
+      ? { label: "Your account", href: "/account", current: under("/account") || under("/my-listings"), soon: false, note: null, count: 0 }
       : { label: "Log in", href: withReturn("/login", next), current: under("/login") || under("/signup"), soon: false, note: null, count: 0 },
     { label: "Cart", href: "/cart", current: under("/cart"), soon: false, note: NOTHING_YET, count: cartCount },
     { label: "Artists", href: null, current: false, soon: true, note: COMING_SOON, count: 0 },

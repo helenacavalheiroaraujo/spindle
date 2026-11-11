@@ -8,7 +8,7 @@ import { Header } from "@/components/Header";
 export default function AccountError({ reset }: { reset: () => void }) {
   const router = useRouter();
   return (
-    <main className="px-4 pb-16 page-main page-narrow">
+    <main className="px-4 pb-16 page-main">
       <Header />
       <ErrorScreen
         message="We couldn't load your account. Check your connection."

@@ -54,7 +54,7 @@ describe("every item has a chevron box (story 19)", () => {
     expect(login.note).toBeNull(); // a working link: no chevron box (the box said "Nothing here yet", which was wrong)
     const [, , account] = menuItems(true, "/");
     expect(account.label).toBe("Your account");
-    expect(account.note).toEqual({ title: "Nothing here yet", text: "More options will appear here in the future." });
+    expect(account.note).toBeNull(); // a working link like Log in: no chevron box (bug 24)
   });
 });
 

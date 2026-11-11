@@ -3,6 +3,23 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — Bug 20: track list on the left of the album page
+
+### The track list sits under the cover on desktop
+- **Decision:** on desktop, the album page shows the track list on the left, under the cover and the release facts. The musician's text stays on the right. On phone, the track list comes after the musician's text and the source line.
+- **Replaces:** the placement of the track list in `docs/design/album-details-no-listings.html` (story 21), which had it on the right under the musician's text. Approved 2026-11-10.
+- **Why:** the owner asked for it (bug 20), against the approved design.
+- **Story:** story 21, album page (bug 20).
+
+## 2026-11-11 — Bug 24: the account cell has no chevron box
+
+### The signed-in account cell is a working link, like "Log in"
+- **Decision:** when signed in, the account cell of the desktop menu (the initials) is a working link with no chevron box. It no longer says "Nothing here yet" on hover.
+- **Replaces:** the rule of story 19 that every menu cell has a chevron box, for the account cell only. "Log in" was already the exception (2026-11-10).
+- **Open:** "Home", "Sell for free" and "Cart" also say "Nothing here yet" on hover. Not changed, because the bug names only the account.
+- **Why:** the owner's bug 24: the box should not appear.
+- **Links:** bug 24 (`specs/bugs/bug-24-account-hover-empty-box.md`), story 19.
+
 ## 2026-11-10 — Story 24: more genres and a crate row for 7+ genres
 
 ### Seven or more genres: progress line, no arrows; Classical and more albums
