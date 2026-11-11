@@ -30,10 +30,6 @@ For each screen: the loading mask says what is loading; the error screen says wh
 | M14 | 17 | Search results | Search for "bowie" (Search button or Enter) | "Searching…" | "We couldn't load the albums. Check your connection." | Not run |
 | M15 | 4 | Compare pressings | Open a recommendation (e.g. Ziggy Stardust, 1. Price, 2. Sound), tap "Compare pressings" | "Comparing pressings…" | "We couldn't load the comparison. Check your connection." | Not run |
 | M16 | 4 | Version page | On the comparison, tap "See this version" | "Loading this version…" | "We couldn't load this version. Check your connection." | Not run |
-| M17 | 24 | Crate row, desktop | Home page with 7 or more crates: drag the row with the trackpad | The row moves with the trackpad; a drag opens no crate | | Not run |
-| M18 | 24 | Crate row, phone | Home page on a phone: swipe the crate row sideways | The row moves sideways; the progress line follows | | Not run |
-| M19 | 25 | Buy and Add to cart | A green listing on the recommendation page (desktop) and the listings screen (phone) | There is visible space between "Buy" and "Add to cart" | | Not run |
-| M20 | 25 | Recommendation page, desktop | Open a recommendation at 1280 px | The track list is under the cover; the three reasons are cards side by side; "Get this one" starts level with the cover | | Not run |
 
 ## Other manual checks
 
@@ -41,3 +37,7 @@ For each screen: the loading mask says what is loading; the error screen says wh
 |---|---|---|---|---|
 | M11 | 8 | **Failed photo upload on a phone.** In `lib/db/photos.ts` change `BUCKET` to a name that does not exist, restart, and fill in the sell form with two photos → List for sale. Undo the change afterwards | "We couldn't upload your photos. Nothing was listed; your details are kept."; no listing is created; "Try again" brings back the form with the price, condition and photos as typed. (Automated on desktop only: WebKit cannot rewrite a request that carries files) | Not run |
 | M12 | 8 | **The sell form keeps what was typed** after "We couldn't list your record": with the wrong key, fill in the form and List for sale | The message is shown; "Try again" brings back the form with everything as typed | Not run |
+| M17 | 24 | Crate row, desktop: Home page with 7 or more crates: drag the row with the trackpad | The row moves with the trackpad; a drag opens no crate | Not run |
+| M18 | 24 | Crate row, phone: Home page on a phone: swipe the crate row sideways | The row moves sideways; the progress line follows | Not run |
+| M19 | 25 | Buy and Add to cart: A green listing on the recommendation page (desktop) and the listings screen (phone) | There is visible space between "Buy" and "Add to cart" | Not run |
+| M20 | 25 | Recommendation page, desktop: Open a recommendation at 1280 px | The track list is under the cover; the three reasons are cards side by side; "Get this one" starts level with the cover | Not run |
