@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Account: change buying priorities (three options)</title>
+<!-- Proposal, not approved. Story 26 (proposed): the buyer changes the saved buying priorities from the account page.
+     Three options, each at 375 px (phone). Texts are proposals for the owner to choose from. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:-.01em}
+.wrap{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+.cap{font-size:12px;color:#4a5163;margin:0 0 8px;font-weight:600;max-width:375px}
+.why2{font-size:12px;color:#4a5163;margin:8px 0 0;max-width:375px}
+.phone{width:375px;border:1px solid #1d2433;border-radius:28px;overflow:hidden;background:#f4efe6}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #e2dacb}
+.logo{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em}
+.ini{width:36px;height:36px;border-radius:50%;background:#e9e1cf;display:flex;align-items:center;justify-content:center;font-weight:600}
+main{padding:16px;display:grid;gap:12px}
+h2{font-size:26px;line-height:1.05}
+.card{background:#faf7f1;border:1px solid #e2dacb;border-radius:14px;padding:14px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.small{font-size:12px;color:#4a5163}
+.pill{border:1.5px solid #1d2433;border-radius:999px;padding:9px 16px;font-weight:600;font-size:13px;background:transparent;white-space:nowrap}
+.pill.navy{background:#1d2433;color:#fff;border-color:#1d2433}
+.pill.ghost{border-color:#e2dacb;color:#4a5163}
+.rank{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e2dacb;border-radius:999px;padding:8px 14px 8px 8px;margin-top:8px}
+.rank.empty{border-style:dashed;color:#4a5163}
+.num{width:30px;height:30px;border-radius:50%;background:#1d2433;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.num.off{background:#e9e1cf;color:#1d2433}
+.arrows{margin-left:auto;display:flex;gap:6px}
+.arrows span{width:34px;height:34px;border-radius:50%;border:1px solid #1d2433;display:flex;align-items:center;justify-content:center;font-weight:700;background:#fff}
+.arrows span.dis{border-color:#e2dacb;color:#b3ab98;background:#faf7f1}
+.chip{border:1.5px solid #1d2433;border-radius:999px;padding:10px 16px;font-weight:600;font-size:13px;background:#fff;display:inline-flex;gap:8px;align-items:center}
+.chip b{width:22px;height:22px;border-radius:50%;background:#1d2433;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.foot{display:flex;gap:8px;margin-top:12px}
+.foot .pill{flex:1;text-align:center}
+</style></head>
+<body>
+<div class="wrap">
+
+  <!-- Option A: change in place, pick by tap (same rule as the priorities screen) -->
+  <div>
+    <p class="cap">Option A · Change in place: pick the order by tapping</p>
+    <div class="phone">
+      <div class="top"><span class="logo">SPINDLE</span><span class="ini">H</span></div>
+      <main>
+        <section class="card" aria-label="Buying priorities">
+          <div class="row"><h2 class="hd">Buying priorities</h2><span class="pill ghost" style="padding:6px 12px">Cancel</span></div>
+          <p class="small" style="margin-top:6px">Tap in the order you care about. Tap again to remove.</p>
+          <div class="chips">
+            <span class="chip"><b>1</b>Price</span>
+            <span class="chip"><b>2</b>Original</span>
+            <span class="chip"><b>3</b>Sound</span>
+            <span class="chip" style="border-style:dashed;background:transparent">Condition</span>
+          </div>
+          <div class="foot"><span class="pill navy">Save my order</span></div>
+        </section>
+        <p class="small">Saving replaces the order you had. Sign-in and the rest of the account do not change.</p>
+      </main>
+    </div>
+  </div>
+
+  <!-- Option B: move rows up and down -->
+  <div>
+    <p class="cap">Option B · Change in place: move rows up and down</p>
+    <div class="phone">
+      <div class="top"><span class="logo">SPINDLE</span><span class="ini">H</span></div>
+      <main>
+        <section class="card" aria-label="Buying priorities">
+          <div class="row"><h2 class="hd">Buying priorities</h2><span class="pill ghost" style="padding:6px 12px">Edit</span></div>
+          <p class="small" style="margin-top:6px">Your order, used for the recommendation when you buy.</p>
+          <div class="rank"><span class="num">1</span>Price<span class="arrows"><span class="dis">↑</span><span>↓</span></span></div>
+          <div class="rank"><span class="num">2</span>Original<span class="arrows"><span>↑</span><span>↓</span></span></div>
+          <div class="rank"><span class="num">3</span>Sound<span class="arrows"><span>↑</span><span class="dis">↓</span></span></div>
+          <div class="rank empty"><span class="num off">4</span>Add a fourth option<span class="arrows"></span></div>
+          <div class="foot"><span class="pill ghost">Cancel</span><span class="pill navy">Save my order</span></div>
+        </section>
+        <p class="small">Each row moves one place. A fourth option can be added from the list of the four.</p>
+      </main>
+    </div>
+  </div>
+
+  <!-- Option C: a separate screen, the same as the priorities screen of story 2 -->
+  <div>
+    <p class="cap">Option C · Separate screen: the priorities screen with the order filled in</p>
+    <div class="phone">
+      <div class="top"><span class="logo">SPINDLE</span><span class="ini">H</span></div>
+      <main>
+        <p class="small">‹ Your account</p>
+        <h2 class="hd">Change your priorities</h2>
+        <p class="small">The screen you use before a recommendation, with your order already in place.</p>
+        <div class="card">
+          <div class="rank"><span class="num">1</span>Price</div>
+          <div class="rank"><span class="num">2</span>Original</div>
+          <div class="rank"><span class="num">3</span>Sound</div>
+          <div class="rank empty"><span class="num off">·</span>Condition: not picked</div>
+        </div>
+        <div class="foot"><span class="pill ghost">Cancel</span><span class="pill navy">Save my order</span></div>
+        <p class="small">Save returns to Your account with the new order. Cancel returns with the old one.</p>
+      </main>
+    </div>
+  </div>
+
+</div>
+</body></html>

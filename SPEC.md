@@ -7,7 +7,7 @@ Stack and hosting: see `DECISIONS.md`. Assignment 1 stated PHP; the MVP uses Nex
 1. **Core:** stories 1, 2, 3, 5, 6, 12
 2. **Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)
 3. **Seller:** story 8
-4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15), then story 20 (cart), **story 14 (desktop footer), story 22 (navy header), story 24 (more genres and crate row), story 21 (album details), story 23 (buying priorities on the account page), story 25 (recommendation page polish)**
+4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15), then story 20 (cart), **story 14 (desktop footer), story 22 (navy header), story 24 (more genres and crate row), story 21 (album details), story 23 (buying priorities on the account page), story 25 (recommendation page polish), story 26 (change buying priorities)**
 
 Not in this MVP: stories 10, 11, 13
 
@@ -61,6 +61,7 @@ In build order. Each story has its own file in `specs/stories/` (bugs are in `sp
 | Story 23 · Buying priorities on the account page | [`specs/stories/story-23-account-priorities.md`](specs/stories/story-23-account-priorities.md) |
 | Story 24 · More genres and a crate row | [`specs/stories/story-24-genres-crate-row.md`](specs/stories/story-24-genres-crate-row.md) |
 | Story 25 · Recommendation page polish | [`specs/stories/story-25-recommendation-polish.md`](specs/stories/story-25-recommendation-polish.md) |
+| Story 26 · Change buying priorities | [`specs/stories/story-26-change-priorities.md`](specs/stories/story-26-change-priorities.md) |
 
 ---
 

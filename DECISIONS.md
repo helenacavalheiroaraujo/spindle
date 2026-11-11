@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — Story 26: the buyer changes the buying order from the account page
+
+- **Decision:** a signed-in buyer with a saved order can change it on the account page (design option B: up and down arrows per row, and "Add a fourth option"). "Save my order" replaces the saved order; "Cancel" keeps it. This supersedes the story 23 line "there is no way to change the ranking from the account page".
+- **Why:** the owner asked for it. The order is used for the recommendation, so the buyer must be able to update it.
+- **Links:** story 26; story 23; `docs/design/account-change-priorities-options.html` (option B).
+
 ## 2026-11-11 — Bug 22: the home sentence is one line from 1024 px; two lines on phone
 
 - **Decision:** the sentence "No jargon, no homework. We tell you which version to buy and check every listing." is on one line from 1024 px. On a phone (375 px) it wraps onto two lines at normal size.

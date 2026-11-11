@@ -95,20 +95,23 @@ export default async function VersionPage({
             </p>
           </section>
 
-          <details className="rounded-2xl border border-line bg-[#faf7f1]">
-            <summary className="flex min-h-12 cursor-pointer items-center px-4 font-semibold">
-              Track list ({version.tracks.length})
-            </summary>
-            <ol className="px-4 pb-4">
-              {version.tracks.map((t) => (
-                <li key={t.position} className="flex items-center gap-3 border-t border-line py-2 text-sm">
-                  <span className="w-8 text-navy/60">{t.position}</span>
-                  <span className="flex-1">{t.title}</span>
-                  {t.isExtra && <span className="rounded-full bg-brown px-2 py-0.5 text-xs text-cream">Bonus</span>}
-                </li>
-              ))}
-            </ol>
-          </details>
+          {/* No track list when the version has no tracks (same rule as the recommendation page). */}
+          {version.tracks.length > 0 && (
+            <details className="rounded-2xl border border-line bg-[#faf7f1]">
+              <summary className="flex min-h-12 cursor-pointer items-center px-4 font-semibold">
+                Track list ({version.tracks.length})
+              </summary>
+              <ol className="px-4 pb-4">
+                {version.tracks.map((t) => (
+                  <li key={t.position} className="flex items-center gap-3 border-t border-line py-2 text-sm">
+                    <span className="w-8 text-navy/60">{t.position}</span>
+                    <span className="flex-1">{t.title}</span>
+                    {t.isExtra && <span className="rounded-full bg-brown px-2 py-0.5 text-xs text-cream">Bonus</span>}
+                  </li>
+                ))}
+              </ol>
+            </details>
+          )}
 
           {count > 0 && (
             <div className="lg:hidden">
