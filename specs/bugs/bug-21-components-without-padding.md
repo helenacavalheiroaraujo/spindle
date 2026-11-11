@@ -3,7 +3,7 @@
 > 2026-11-10. Status: open.
 
 ## Description
-Elements and components have no padding. They should have padding.
+Some covers and some buttons have no internal padding and no space around them.
 
 ## Steps to reproduce
 To be completed
