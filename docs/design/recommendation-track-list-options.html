@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recommendation screen, desktop: three balanced variants of A</title>
+<!-- Desktop (1280 px) variants of option A (track list under the cover, finding 38a), to balance the elements.
+     Common to all three: "Get this one" is level with the top of the cover; the track list sits under the cover; no back button; no price slider.
+     Proposals for approval. Illustrative data: track titles and prices are placeholders; the label is shown. No card or bank details. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:15px;line-height:1.4;padding:24px}
+h1.page{font-family:'Barlow Condensed',sans-serif;font-size:38px;text-align:center}
+.sub{text-align:center;color:#4a5163;font-size:14px;margin:4px 0 26px}
+.opt{max-width:1280px;margin:0 auto 56px}
+.opt>h2{font-family:'Barlow Condensed',sans-serif;font-size:30px}
+.why{color:#4a5163;font-size:14px;margin:4px 0 14px;max-width:900px}
+.screen{border:1px solid #1d2433;border-radius:20px;background:#f4efe6;padding:18px 28px 28px;overflow:hidden}
+.top{display:flex;align-items:center;gap:14px;margin-bottom:22px;font-size:13px;color:#4a5163}
+.logo{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;color:#1d2433;letter-spacing:.5px}
+.search{flex:0 0 220px;border:1px solid #1d2433;border-radius:999px;padding:7px 14px;background:#fffdf9}
+.grow{flex:1}
+.cta{border:1.5px solid #1d2433;border-radius:999px;padding:8px 16px;font-weight:600;color:#1d2433}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#4a5163}
+.h-xl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:64px;line-height:.95}
+.h-l{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:30px;line-height:1.05}
+.muted{color:#4a5163}
+.meta{font-size:15px;color:#4a5163;margin-top:8px}
+.reasons{list-style:none;padding:0;margin:0}
+.reasons li{display:flex;gap:12px;padding:11px 0;border-top:1px solid #e2dacb;font-size:16px}
+.reasons li:first-child{border-top:0}
+.tick{flex:none;width:22px;height:22px;border-radius:50%;background:#1d2433;color:#f4efe6;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.reasons b{font-weight:600}
+.src{font-size:13px;color:#4a5163;margin-top:6px}
+.sand{background:#f1e6d0;border:1px solid #e2dacb;border-radius:20px;padding:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 26px;border-radius:999px;font-weight:600;font-size:15px}
+.btn.p{background:#1d2433;color:#f4efe6}.btn.g{border:1.5px solid #1d2433;color:#1d2433}
+.link{font-weight:600;text-decoration:underline;font-size:14px;color:#1d2433}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #1d2433;border-radius:999px;padding:2px 11px;font-size:12px;font-weight:600;background:#fffdf9}
+.dot{width:9px;height:9px;border-radius:50%;background:#3f7a4b}
+.price{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:44px;line-height:1}
+.cover{background:#8a8f9c;border-radius:16px;display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:600;font-size:13px}
+.disc{width:46px;height:46px;border-radius:50%;background:#1d2433;position:relative;flex:none}
+.disc:after{content:"";position:absolute;inset:18px;border-radius:50%;background:#f4efe6}
+.row{display:flex;gap:14px;align-items:center}
+.ill{display:inline-block;border:1px solid #e2dacb;border-radius:999px;padding:3px 10px;font-size:12px;color:#4a5163;margin-top:14px}
+.tracks{list-style:none;padding:0;margin:0;border:1px solid #e2dacb;border-radius:16px;background:rgba(255,255,255,.6)}
+.tracks li{display:flex;gap:12px;padding:10px 16px;border-top:1px solid #e2dacb;font-size:15px}
+.tracks li:first-child{border-top:0}
+.tracks .n{width:22px;color:#4a5163;font-weight:600}
+.legend{display:flex;gap:16px;font-size:13px;margin-top:8px;color:#4a5163}
+.legend span:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.legend .g:before{background:#3f7a4b}.legend .y:before{background:#c8923a}.legend .r:before{background:#a8403a}
+details.l{font-size:14px;color:#1d2433}details.l summary{font-weight:600;text-decoration:underline;cursor:pointer}
+</style></head><body>
+<h1 class="page">Recommendation screen · desktop · three balanced variants of A</h1>
+<p class="sub">Story 25, finding 38a: track list under the cover. Illustrative data.</p>
+
+<!-- ============ VARIANT 1 ============ -->
+<section class="opt">
+<h2>A1 · Buying band across the bottom</h2>
+<p class="why">The two columns above hold the same amount of content: the cover, title and track list on the left; "Get this one" and the reasons on the right. The buying band (price, Match, Buy, Add to cart, typical price, checks) runs full width underneath, so the decision is read last, after the evidence, and both columns end level.</p>
+<div class="screen">
+  <div class="top"><span class="logo">SPINDLE</span><span class="search">Search records</span><span class="grow"></span><span>Artists</span><span>All genres and formats</span><span>H ⌄</span><span class="cta">Sell for free ⌄</span></div>
+  <div style="display:grid;grid-template-columns:340px minmax(0,1fr);gap:56px;align-items:start">
+    <div>
+      <div class="cover" style="height:340px">Let's Dance · cover</div>
+      <div class="h-l" style="margin-top:14px">Let's Dance</div><div class="muted">David Bowie, 1983</div>
+      <div class="eyebrow" style="margin-top:20px">Track list</div>
+      <ul class="tracks" style="margin-top:8px">
+        <li><span class="n">1</span><span>Let's Dance</span></li>
+        <li><span class="n">2</span><span>China Girl</span></li>
+        <li><span class="n">3</span><span>Modern Love</span></li>
+        <li><span class="n">4</span><span>Cat People (Putting Out Fire)</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="eyebrow">Get this one</div><div class="h-xl" style="margin-top:6px">1983 US original</div><div class="meta">1983 · US · EMI America · LP · 1 for sale</div>
+      <ul class="reasons" style="margin-top:18px">
+        <li><span class="tick">✓</span><span><b>Price:</b> €19, in the typical range for this pressing.</span></li>
+        <li><span class="tick">✓</span><span><b>Original:</b> the first pressing, made in 1983 on EMI America.</span></li>
+        <li><span class="tick">✓</span><span><b>Sound:</b> cut from the original tapes, punchy and bright.</span></li></ul>
+      <div class="src">Based on 64 collector ratings · Based on: Price, Original, Sound · <span class="link">Change</span></div>
+    </div>
+  </div>
+  <div class="sand" style="margin-top:28px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center">
+    <div class="row" style="align-items:center"><div class="disc"></div>
+      <div><div class="row" style="gap:10px"><span class="price">€19</span><span class="pill"><span class="dot"></span>Match</span></div>
+      <div class="muted" style="margin-top:4px">Very good (VG+): light signs of wear · Private seller, Porto · ★ 4.4 · 5 reviews</div>
+      <div class="muted">Typical price for this pressing: €15–€25 · <span class="link">See the checks</span></div></div></div>
+    <div class="row" style="gap:18px"><span class="link">Add to cart</span><span class="btn p" style="min-width:200px">Buy</span></div>
+  </div>
+  <div style="margin-top:16px"><span class="btn g">Compare pressings</span></div>
+  <span class="ill">Illustrative data</span>
+</div></section>
+
+<!-- ============ VARIANT 2 ============ -->
+<section class="opt">
+<h2>A2 · Equal columns, smaller cover</h2>
+<p class="why">The cover is smaller (300 px), so the left column (cover, title, track list) ends at about the same height as the right column (reasons, buying card, Compare pressings). Nothing sits alone at the bottom of one side. The buying card keeps its place on the right, with Buy beside the reasons it answers.</p>
+<div class="screen">
+  <div class="top"><span class="logo">SPINDLE</span><span class="search">Search records</span><span class="grow"></span><span>Artists</span><span>All genres and formats</span><span>H ⌄</span><span class="cta">Sell for free ⌄</span></div>
+  <div style="display:grid;grid-template-columns:300px minmax(0,1fr);gap:56px;align-items:start">
+    <div>
+      <div class="cover" style="height:300px">Let's Dance · cover</div>
+      <div class="h-l" style="margin-top:14px">Let's Dance</div><div class="muted">David Bowie, 1983</div>
+      <div class="eyebrow" style="margin-top:20px">Track list</div>
+      <ul class="tracks" style="margin-top:8px">
+        <li><span class="n">1</span><span>Let's Dance</span></li>
+        <li><span class="n">2</span><span>China Girl</span></li>
+        <li><span class="n">3</span><span>Modern Love</span></li>
+        <li><span class="n">4</span><span>Cat People (Putting Out Fire)</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="eyebrow">Get this one</div><div class="h-xl" style="margin-top:6px">1983 US original</div><div class="meta">1983 · US · EMI America · LP · 1 for sale</div>
+      <ul class="reasons" style="margin-top:18px">
+        <li><span class="tick">✓</span><span><b>Price:</b> €19, in the typical range for this pressing.</span></li>
+        <li><span class="tick">✓</span><span><b>Original:</b> the first pressing, made in 1983 on EMI America.</span></li>
+        <li><span class="tick">✓</span><span><b>Sound:</b> cut from the original tapes, punchy and bright.</span></li></ul>
+      <div class="src">Based on 64 collector ratings · Based on: Price, Original, Sound · <span class="link">Change</span></div>
+      <div class="sand" style="margin-top:20px">
+        <div class="row" style="align-items:flex-start"><div class="disc"></div>
+          <div style="flex:1"><div class="row" style="gap:10px"><span class="price">€19</span><span class="pill"><span class="dot"></span>Match</span></div>
+          <div class="muted" style="margin-top:4px">Very good (VG+): light signs of wear · Private seller, Porto</div></div>
+          <div style="text-align:center"><span class="btn p">Buy</span><div style="margin-top:8px"><span class="link">Add to cart</span></div></div></div>
+        <div class="muted" style="margin-top:18px">Typical price for this pressing: €15–€25 · <span class="link">See the checks</span></div>
+      </div>
+      <div style="margin-top:16px"><span class="btn g">Compare pressings</span></div>
+    </div>
+  </div>
+  <span class="ill">Illustrative data</span>
+</div></section>
+
+<!-- ============ VARIANT 3 ============ -->
+<section class="opt">
+<h2>A3 · Price facts on the left, decision on the right</h2>
+<p class="why">The left column carries the price facts under the track list: the typical price with its range, and "See the checks" with the Match, Check and No match legend. The right column carries the decision: "Get this one", the reasons, the buying card, and Compare pressings. Both columns end level.</p>
+<div class="screen">
+  <div class="top"><span class="logo">SPINDLE</span><span class="search">Search records</span><span class="grow"></span><span>Artists</span><span>All genres and formats</span><span>H ⌄</span><span class="cta">Sell for free ⌄</span></div>
+  <div style="display:grid;grid-template-columns:340px minmax(0,1fr);gap:56px;align-items:start">
+    <div>
+      <div class="cover" style="height:340px">Let's Dance · cover</div>
+      <div class="h-l" style="margin-top:14px">Let's Dance</div><div class="muted">David Bowie, 1983</div>
+      <div class="eyebrow" style="margin-top:20px">Track list</div>
+      <ul class="tracks" style="margin-top:8px">
+        <li><span class="n">1</span><span>Let's Dance</span></li>
+        <li><span class="n">2</span><span>China Girl</span></li>
+        <li><span class="n">3</span><span>Modern Love</span></li>
+        <li><span class="n">4</span><span>Cat People (Putting Out Fire)</span></li>
+      </ul>
+      <div class="sand" style="margin-top:20px">
+        <div class="eyebrow">Price for this pressing</div>
+        <div class="h-l" style="margin-top:6px">Typical €15–€25</div>
+        <div class="muted" style="margin-top:6px">Illustrative data. €19 is inside this range.</div>
+        <details class="l" style="margin-top:12px"><summary>What do Match, Check and No match mean?</summary><div class="legend"><span class="g">Match</span><span class="y">Check</span><span class="r">No match</span></div></details>
+      </div>
+    </div>
+    <div>
+      <div class="eyebrow">Get this one</div><div class="h-xl" style="margin-top:6px">1983 US original</div><div class="meta">1983 · US · EMI America · LP · 1 for sale</div>
+      <ul class="reasons" style="margin-top:18px">
+        <li><span class="tick">✓</span><span><b>Price:</b> €19, in the typical range for this pressing.</span></li>
+        <li><span class="tick">✓</span><span><b>Original:</b> the first pressing, made in 1983 on EMI America.</span></li>
+        <li><span class="tick">✓</span><span><b>Sound:</b> cut from the original tapes, punchy and bright.</span></li></ul>
+      <div class="src">Based on 64 collector ratings · Based on: Price, Original, Sound · <span class="link">Change</span></div>
+      <div class="sand" style="margin-top:20px">
+        <div class="row" style="align-items:flex-start"><div class="disc"></div>
+          <div style="flex:1"><div class="row" style="gap:10px"><span class="price">€19</span><span class="pill"><span class="dot"></span>Match</span></div>
+          <div class="muted" style="margin-top:4px">Very good (VG+): light signs of wear · Private seller, Porto · ★ 4.4 · 5 reviews</div></div></div>
+        <div class="row" style="margin-top:14px;gap:12px"><span class="btn p" style="flex:1">Buy</span><span class="link">Add to cart</span></div>
+      </div>
+      <div style="margin-top:16px"><span class="btn g">Compare pressings</span></div>
+    </div>
+  </div>
+  <span class="ill">Illustrative data</span>
+</div></section>
+<!-- ============ VARIANT 4 ============ -->
+<section class="opt">
+<h2>A4 · Reasons as three cards</h2>
+<p class="why">The three reasons (Price, Original, Sound) sit side by side as three equal cards across the right column, instead of one stacked list. The right column gets wider in use and no longer runs long and thin, so it matches the height of the left column. The buying card sits underneath, full width of that column.</p>
+<div class="screen">
+  <div class="top"><span class="logo">SPINDLE</span><span class="search">Search records</span><span class="grow"></span><span>Artists</span><span>All genres and formats</span><span>H ⌄</span><span class="cta">Sell for free ⌄</span></div>
+  <div style="display:grid;grid-template-columns:340px minmax(0,1fr);gap:56px;align-items:start">
+    <div>
+      <div class="cover" style="height:340px">Let's Dance · cover</div>
+      <div class="h-l" style="margin-top:14px">Let's Dance</div><div class="muted">David Bowie, 1983</div>
+      <div class="eyebrow" style="margin-top:20px">Track list</div>
+      <ul class="tracks" style="margin-top:8px">
+        <li><span class="n">1</span><span>Let's Dance</span></li>
+        <li><span class="n">2</span><span>China Girl</span></li>
+        <li><span class="n">3</span><span>Modern Love</span></li>
+        <li><span class="n">4</span><span>Cat People (Putting Out Fire)</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="eyebrow">Get this one</div><div class="h-xl" style="margin-top:6px">1983 US original</div><div class="meta">1983 · US · EMI America · LP · 1 for sale</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px">
+        <div style="padding:16px;border:1px solid #e2dacb;border-radius:20px;background:#f1e6d0"><div class="tick">✓</div><p style="margin-top:10px"><b>Price</b></p><p class="muted" style="margin-top:4px">€19, in the typical range for this pressing.</p></div>
+        <div style="padding:16px;border:1px solid #e2dacb;border-radius:20px;background:#e2dacb"><div class="tick">✓</div><p style="margin-top:10px"><b>Original</b></p><p class="muted" style="margin-top:4px">The first pressing, made in 1983 on EMI America.</p></div>
+        <div style="padding:16px;border:1px solid #e2dacb;border-radius:20px;background:#f4efe6"><div class="tick">✓</div><p style="margin-top:10px"><b>Sound</b></p><p class="muted" style="margin-top:4px">Cut from the original tapes, punchy and bright.</p></div>
+      </div>
+      <div class="src">Based on 64 collector ratings · Based on: Price, Original, Sound · <span class="link">Change</span></div>
+      <div class="sand" style="margin-top:20px">
+        <div class="row" style="align-items:flex-start"><div class="disc"></div>
+          <div style="flex:1"><div class="row" style="gap:10px"><span class="price">€19</span><span class="pill"><span class="dot"></span>Match</span></div>
+          <div class="muted" style="margin-top:4px">Very good (VG+): light signs of wear · Private seller, Porto · ★ 4.4 · 5 reviews</div></div></div>
+        <div class="row" style="margin-top:14px;gap:12px"><span class="btn p" style="flex:1">Buy</span><span class="link">Add to cart</span></div>
+        <div class="muted" style="margin-top:14px">Typical price for this pressing: €15–€25 · <span class="link">See the checks</span></div>
+      </div>
+      <div style="margin-top:16px"><span class="btn g">Compare pressings</span></div>
+    </div>
+  </div>
+  <span class="ill">Illustrative data</span>
+</div></section>
+
+<!-- ============ VARIANT 5 ============ -->
+<section class="opt">
+<h2>A5 · Tracks in two columns, the facts under them</h2>
+<p class="why">The track list is split into two columns of two, so it takes less height on the left. The "Based on … Change" line and the typical price move under it, which fills the left column. The right column keeps the reasons, the buying card and Compare pressings. Both columns end at about the same height.</p>
+<div class="screen">
+  <div class="top"><span class="logo">SPINDLE</span><span class="search">Search records</span><span class="grow"></span><span>Artists</span><span>All genres and formats</span><span>H ⌄</span><span class="cta">Sell for free ⌄</span></div>
+  <div style="display:grid;grid-template-columns:340px minmax(0,1fr);gap:56px;align-items:start">
+    <div>
+      <div class="cover" style="height:340px">Let's Dance · cover</div>
+      <div class="h-l" style="margin-top:14px">Let's Dance</div><div class="muted">David Bowie, 1983</div>
+      <div class="eyebrow" style="margin-top:20px">Track list</div>
+      <ul class="tracks" style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr">
+        <li style="border-top:0"><span class="n">1</span><span>Let's Dance</span></li>
+        <li style="border-top:0"><span class="n">3</span><span>Modern Love</span></li>
+        <li><span class="n">2</span><span>China Girl</span></li>
+        <li><span class="n">4</span><span>Cat People (Putting Out Fire)</span></li>
+      </ul>
+      <div class="src" style="margin-top:14px">Based on 64 collector ratings · Based on: Price, Original, Sound · <span class="link">Change</span></div>
+      <div class="muted" style="margin-top:8px">Typical price for this pressing: €15–€25 · <span class="link">See the checks</span></div>
+    </div>
+    <div>
+      <div class="eyebrow">Get this one</div><div class="h-xl" style="margin-top:6px">1983 US original</div><div class="meta">1983 · US · EMI America · LP · 1 for sale</div>
+      <ul class="reasons" style="margin-top:18px">
+        <li><span class="tick">✓</span><span><b>Price:</b> €19, in the typical range for this pressing.</span></li>
+        <li><span class="tick">✓</span><span><b>Original:</b> the first pressing, made in 1983 on EMI America.</span></li>
+        <li><span class="tick">✓</span><span><b>Sound:</b> cut from the original tapes, punchy and bright.</span></li></ul>
+      <div class="sand" style="margin-top:20px">
+        <div class="row" style="align-items:flex-start"><div class="disc"></div>
+          <div style="flex:1"><div class="row" style="gap:10px"><span class="price">€19</span><span class="pill"><span class="dot"></span>Match</span></div>
+          <div class="muted" style="margin-top:4px">Very good (VG+): light signs of wear · Private seller, Porto · ★ 4.4 · 5 reviews</div></div></div>
+        <div class="row" style="margin-top:14px;gap:12px"><span class="btn p" style="flex:1">Buy</span><span class="link">Add to cart</span></div>
+      </div>
+      <div style="margin-top:16px"><span class="btn g">Compare pressings</span></div>
+    </div>
+  </div>
+  <span class="ill">Illustrative data</span>
+</div></section>
+
+<!-- ============ VARIANT 6 ============ -->
+<section class="opt">
+<h2>A6 · Bottoms level: buying card ends with the track list</h2>
+<p class="why">The right column is a tall flex column: the reasons sit at the top and the buying card at the bottom. The buying card's bottom edge lines up with the bottom of the track list on the left, so the two columns share both a top and a bottom edge.</p>
+<div class="screen">
+  <div class="top"><span class="logo">SPINDLE</span><span class="search">Search records</span><span class="grow"></span><span>Artists</span><span>All genres and formats</span><span>H ⌄</span><span class="cta">Sell for free ⌄</span></div>
+  <div style="display:grid;grid-template-columns:340px minmax(0,1fr);gap:56px;align-items:stretch">
+    <div>
+      <div class="cover" style="height:340px">Let's Dance · cover</div>
+      <div class="h-l" style="margin-top:14px">Let's Dance</div><div class="muted">David Bowie, 1983</div>
+      <div class="eyebrow" style="margin-top:20px">Track list</div>
+      <ul class="tracks" style="margin-top:8px">
+        <li><span class="n">1</span><span>Let's Dance</span></li>
+        <li><span class="n">2</span><span>China Girl</span></li>
+        <li><span class="n">3</span><span>Modern Love</span></li>
+        <li><span class="n">4</span><span>Cat People (Putting Out Fire)</span></li>
+      </ul>
+    </div>
+    <div style="display:flex;flex-direction:column;justify-content:space-between;gap:20px">
+      <div>
+        <div class="eyebrow">Get this one</div><div class="h-xl" style="margin-top:6px">1983 US original</div><div class="meta">1983 · US · EMI America · LP · 1 for sale</div>
+        <ul class="reasons" style="margin-top:18px">
+          <li><span class="tick">✓</span><span><b>Price:</b> €19, in the typical range for this pressing.</span></li>
+          <li><span class="tick">✓</span><span><b>Original:</b> the first pressing, made in 1983 on EMI America.</span></li>
+          <li><span class="tick">✓</span><span><b>Sound:</b> cut from the original tapes, punchy and bright.</span></li></ul>
+        <div class="src">Based on 64 collector ratings · Based on: Price, Original, Sound · <span class="link">Change</span></div>
+      </div>
+      <div>
+        <div class="sand">
+          <div class="row" style="align-items:flex-start"><div class="disc"></div>
+            <div style="flex:1"><div class="row" style="gap:10px"><span class="price">€19</span><span class="pill"><span class="dot"></span>Match</span></div>
+            <div class="muted" style="margin-top:4px">Very good (VG+): light signs of wear · Private seller, Porto</div></div></div>
+          <div class="row" style="margin-top:14px;gap:12px"><span class="btn p" style="flex:1">Buy</span><span class="link">Add to cart</span></div>
+          <div class="muted" style="margin-top:14px">Typical price for this pressing: €15–€25 · <span class="link">See the checks</span></div>
+        </div>
+        <div style="margin-top:16px"><span class="btn g">Compare pressings</span></div>
+      </div>
+    </div>
+  </div>
+  <span class="ill">Illustrative data</span>
+</div></section>
+</body></html>

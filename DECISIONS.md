@@ -3,6 +3,14 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — Recommendation page (desktop): track list under the cover, reasons as cards
+
+### Layout A4
+- **Decision:** on desktop, the left column holds the cover (340 px), the title, the artist and the track list. The right column holds "Get this one", the three reasons as cards (Price, Original, Sound) in the palette tones sand, line and cream, the "Based on … Change" line, the buying card and Compare pressings. "Get this one" starts level with the top of the cover.
+- **Why:** the owner chose option A4 from the variants of the track-list layout (finding 38, option a). The cards balance the right column with the left.
+- **Not decided here:** the cover size of 340 px and the card padding are design values, not rules. Phone is unchanged.
+- **Links:** Story 25, `docs/design/recommendation-track-list-options.html` (A4).
+
 ## 2026-11-11 — No back button on any screen
 
 ### Rule

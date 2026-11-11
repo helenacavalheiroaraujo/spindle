@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recommendation screen, desktop: two left-column alternatives</title>
+<!-- Desktop (1280 px) alternatives for story 25, finding 38: what fills the left column under the title.
+     Both keep the screen free of a back button and of the price slider.
+     Option C is shown with the top-right and bottom-left blocks swapped: the buying card sits beside the cover, and "Get this one" with the reasons sits below the cover.
+     Proposals for approval. Illustrative data: track titles and prices are placeholders; the label is shown. No card or bank details. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:15px;line-height:1.4;padding:24px}
+h1.page{font-family:'Barlow Condensed',sans-serif;font-size:38px;text-align:center}
+.sub{text-align:center;color:#4a5163;font-size:14px;margin:4px 0 26px}
+.opt{max-width:1280px;margin:0 auto 56px}
+.opt>h2{font-family:'Barlow Condensed',sans-serif;font-size:30px}
+.why{color:#4a5163;font-size:14px;margin:4px 0 14px;max-width:900px}
+.screen{border:1px solid #1d2433;border-radius:20px;background:#f4efe6;padding:18px 28px 28px;overflow:hidden}
+.top{display:flex;align-items:center;gap:14px;margin-bottom:22px;font-size:13px;color:#4a5163}
+.logo{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;color:#1d2433;letter-spacing:.5px}
+.search{flex:0 0 220px;border:1px solid #1d2433;border-radius:999px;padding:7px 14px;background:#fffdf9}
+.grow{flex:1}
+.cta{border:1.5px solid #1d2433;border-radius:999px;padding:8px 16px;font-weight:600;color:#1d2433}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#4a5163}
+.h-xl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:64px;line-height:.95}
+.h-l{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:30px;line-height:1.05}
+.muted{color:#4a5163}
+.meta{font-size:15px;color:#4a5163;margin-top:8px}
+.reasons{list-style:none;padding:0;margin:0}
+.reasons li{display:flex;gap:12px;padding:11px 0;border-top:1px solid #e2dacb;font-size:16px}
+.reasons li:first-child{border-top:0}
+.tick{flex:none;width:22px;height:22px;border-radius:50%;background:#1d2433;color:#f4efe6;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.reasons b{font-weight:600}
+.src{font-size:13px;color:#4a5163;margin-top:6px}
+.sand{background:#f1e6d0;border:1px solid #e2dacb;border-radius:20px;padding:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 26px;border-radius:999px;font-weight:600;font-size:15px}
+.btn.p{background:#1d2433;color:#f4efe6}.btn.g{border:1.5px solid #1d2433;color:#1d2433}
+.link{font-weight:600;text-decoration:underline;font-size:14px;color:#1d2433}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #1d2433;border-radius:999px;padding:2px 11px;font-size:12px;font-weight:600;background:#fffdf9}
+.dot{width:9px;height:9px;border-radius:50%;background:#3f7a4b}
+.price{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:44px;line-height:1}
+.cover{background:#8a8f9c;border-radius:16px;display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:600;font-size:13px;height:400px}
+.disc{width:46px;height:46px;border-radius:50%;background:#1d2433;position:relative;flex:none}
+.disc:after{content:"";position:absolute;inset:18px;border-radius:50%;background:#f4efe6}
+.row{display:flex;gap:14px;align-items:center}
+.ill{display:inline-block;border:1px solid #e2dacb;border-radius:999px;padding:3px 10px;font-size:12px;color:#4a5163;margin-top:14px}
+.tracks{list-style:none;padding:0;margin:0;border:1px solid #e2dacb;border-radius:16px;background:rgba(255,255,255,.6)}
+.tracks li{display:flex;gap:12px;padding:10px 16px;border-top:1px solid #e2dacb;font-size:15px}
+.tracks li:first-child{border-top:0}
+.tracks .n{width:22px;color:#4a5163;font-weight:600}
+details.tl{border:1px solid #e2dacb;border-radius:16px;background:rgba(255,255,255,.6);margin-top:20px}
+details.tl summary{min-height:48px;display:flex;align-items:center;padding:0 16px;font-weight:600;cursor:pointer}
+details.tl ol{list-style:none;padding:0 16px 8px;margin:0}
+details.tl li{display:flex;gap:12px;padding:8px 0;border-top:1px solid #e2dacb;font-size:15px}
+details.tl li span:first-child{width:22px;color:#4a5163;font-weight:600}
+.legend{display:flex;gap:16px;font-size:13px;margin-top:8px;color:#4a5163}
+.legend span:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.legend .g:before{background:#3f7a4b}.legend .y:before{background:#c8923a}.legend .r:before{background:#a8403a}
+details.l{font-size:14px;color:#1d2433}details.l summary{font-weight:600;text-decoration:underline;cursor:pointer}
+</style></head><body>
+<h1 class="page">Recommendation screen · desktop · two left-column alternatives</h1>
+<p class="sub">Story 25, finding 38. Illustrative data.</p>
+
+<!-- ============ OPTION B ============ -->
+<section class="opt">
+<h2>Option B · Track list collapsed under the cover</h2>
+<p class="why">The left column holds the cover, the title and the artist, then the track list as a collapsed "Track list (4)" that opens on tap. The column is no longer empty, and the page stays short. The right column is the same as the approved layout. Trade-off: the tracks are hidden until tapped.</p>
+<div class="screen">
+  <div class="top"><span class="logo">SPINDLE</span><span class="search">Search records</span><span class="grow"></span><span>Artists</span><span>All genres and formats</span><span>H ⌄</span><span class="cta">Sell for free ⌄</span></div>
+  <div style="display:grid;grid-template-columns:400px 1fr;gap:56px;align-items:start">
+    <div>
+      <div class="cover">Let's Dance · cover</div>
+      <div class="h-l" style="margin-top:14px">Let's Dance</div><div class="muted">David Bowie, 1983</div>
+      <details class="tl">
+        <summary>Track list (4)</summary>
+        <ol>
+          <li><span>1</span><span>Let's Dance</span></li>
+          <li><span>2</span><span>China Girl</span></li>
+          <li><span>3</span><span>Modern Love</span></li>
+          <li><span>4</span><span>Cat People (Putting Out Fire)</span></li>
+        </ol>
+      </details>
+    </div>
+    <div style="max-width:640px">
+      <div class="eyebrow">Get this one</div><div class="h-xl" style="margin-top:6px">1983 US original</div><div class="meta">1983 · US · EMI America · LP · 1 for sale</div>
+      <ul class="reasons" style="margin-top:18px">
+        <li><span class="tick">✓</span><span><b>Price:</b> €19, in the typical range for this pressing.</span></li>
+        <li><span class="tick">✓</span><span><b>Original:</b> the first pressing, made in 1983 on EMI America.</span></li>
+        <li><span class="tick">✓</span><span><b>Sound:</b> cut from the original tapes, punchy and bright.</span></li></ul>
+      <div class="src">Based on 64 collector ratings · Based on: Price, Original, Sound · <span class="link">Change</span></div>
+      <div class="sand" style="margin-top:20px">
+        <div class="row" style="align-items:flex-start"><div class="disc"></div>
+          <div style="flex:1"><div class="row" style="gap:10px"><span class="price">€19</span><span class="pill"><span class="dot"></span>Match</span></div>
+          <div class="muted" style="margin-top:4px">Very good (VG+): light signs of wear · Private seller, Porto · ★ 4.4 · 5 reviews</div></div>
+          <div style="text-align:center"><span class="btn p">Buy</span><div style="margin-top:8px"><span class="link">Add to cart</span></div></div></div>
+        <div class="muted" style="margin-top:22px">Typical price for this pressing: €15–€25</div>
+        <div class="row" style="margin-top:14px;justify-content:space-between"><span class="link">See the checks</span>
+        <details class="l" style="margin:0"><summary>What do Match, Check and No match mean?</summary><div class="legend"><span class="g">Match</span><span class="y">Check</span><span class="r">No match</span></div></details></div>
+      </div>
+      <div style="margin-top:16px"><span class="btn g">Compare pressings</span></div>
+    </div>
+  </div>
+  <span class="ill">Illustrative data</span>
+</div></section>
+
+<!-- ============ OPTION C (top-right and bottom-left swapped) ============ -->
+<section class="opt">
+<h2>Option C · The buying card sits beside the cover</h2>
+<p class="why">Two rows. Top: the cover and title on the left, the buying card (price, Match, Buy, Add to cart) on the right, so Buy is level with the cover. Bottom: "Get this one" and the reasons on the left, the track list and Compare pressings on the right. Trade-off: "Get this one" and the reasons now start below the cover, not beside it.</p>
+<div class="screen">
+  <div class="top"><span class="logo">SPINDLE</span><span class="search">Search records</span><span class="grow"></span><span>Artists</span><span>All genres and formats</span><span>H ⌄</span><span class="cta">Sell for free ⌄</span></div>
+  <div style="display:grid;grid-template-columns:400px minmax(0,1fr);column-gap:56px;row-gap:28px;align-items:start">
+    <div>
+      <div class="cover">Let's Dance · cover</div>
+      <div class="h-l" style="margin-top:14px">Let's Dance</div><div class="muted">David Bowie, 1983</div>
+    </div>
+    <div class="sand">
+      <div class="row" style="align-items:flex-start"><div class="disc"></div>
+        <div style="flex:1"><div class="row" style="gap:10px"><span class="price">€19</span><span class="pill"><span class="dot"></span>Match</span></div>
+        <div class="muted" style="margin-top:4px">Very good (VG+): light signs of wear</div><div class="muted">Private seller, Porto · ★ 4.4 · 5 reviews</div></div></div>
+      <div class="row" style="margin-top:14px;gap:12px"><span class="btn p" style="flex:1">Buy</span><span class="link">Add to cart</span></div>
+      <div class="muted" style="margin-top:14px">Typical price for this pressing: €15–€25</div>
+      <div style="margin-top:10px"><span class="link">See the checks</span></div>
+    </div>
+    <div>
+      <div class="eyebrow">Get this one</div><div class="h-xl" style="margin-top:6px">1983 US original</div><div class="meta">1983 · US · EMI America · LP · 1 for sale</div>
+      <ul class="reasons" style="margin-top:18px">
+        <li><span class="tick">✓</span><span><b>Price:</b> €19, in the typical range for this pressing.</span></li>
+        <li><span class="tick">✓</span><span><b>Original:</b> the first pressing, made in 1983 on EMI America.</span></li>
+        <li><span class="tick">✓</span><span><b>Sound:</b> cut from the original tapes, punchy and bright.</span></li></ul>
+      <div class="src">Based on 64 collector ratings · Based on: Price, Original, Sound · <span class="link">Change</span></div>
+    </div>
+    <div>
+      <details class="tl" style="margin-top:0">
+        <summary>Track list (4)</summary>
+        <ol>
+          <li><span>1</span><span>Let's Dance</span></li>
+          <li><span>2</span><span>China Girl</span></li>
+          <li><span>3</span><span>Modern Love</span></li>
+          <li><span>4</span><span>Cat People (Putting Out Fire)</span></li>
+        </ol>
+      </details>
+      <div style="margin-top:16px"><span class="btn g">Compare pressings</span></div>
+    </div>
+  </div>
+  <span class="ill">Illustrative data</span>
+</div></section>
+</body></html>

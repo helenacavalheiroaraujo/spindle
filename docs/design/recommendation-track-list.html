@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recommendation screen, desktop: track list under the cover</title>
+<!-- Desktop (1280 px) layout for story 25, finding 38: the left column under the title holds the track list under the cover.
+     Proposal for approval. Illustrative data: track titles and the price are placeholders from the seed; the label is shown. No card or bank details. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:15px;line-height:1.4;padding:24px}
+h1.page{font-family:'Barlow Condensed',sans-serif;font-size:38px;text-align:center}
+.sub{text-align:center;color:#4a5163;font-size:14px;margin:4px 0 26px}
+.opt{max-width:1280px;margin:0 auto 56px}
+.why{color:#4a5163;font-size:14px;margin:4px 0 14px;max-width:900px}
+.screen{border:1px solid #1d2433;border-radius:20px;background:#f4efe6;padding:18px 28px 28px;overflow:hidden}
+.top{display:flex;align-items:center;gap:14px;margin-bottom:22px;font-size:13px;color:#4a5163}
+.logo{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;color:#1d2433;letter-spacing:.5px}
+.search{flex:0 0 220px;border:1px solid #1d2433;border-radius:999px;padding:7px 14px;background:#fffdf9}
+.grow{flex:1}
+.cta{border:1.5px solid #1d2433;border-radius:999px;padding:8px 16px;font-weight:600;color:#1d2433}
+.back{width:40px;height:40px;border:1.5px solid #1d2433;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:600;color:#1d2433}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#4a5163}
+.h-xl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:64px;line-height:.95}
+.h-l{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:30px;line-height:1.05}
+.muted{color:#4a5163}
+.meta{font-size:15px;color:#4a5163;margin-top:8px}
+.reasons{list-style:none;padding:0;margin:0}
+.reasons li{display:flex;gap:12px;padding:11px 0;border-top:1px solid #e2dacb;font-size:16px}
+.reasons li:first-child{border-top:0}
+.tick{flex:none;width:22px;height:22px;border-radius:50%;background:#1d2433;color:#f4efe6;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.reasons b{font-weight:600}
+.src{font-size:13px;color:#4a5163;margin-top:6px}
+.card{background:rgba(255,255,255,.6);border:1px solid #e2dacb;border-radius:20px;padding:20px}
+.sand{background:#f1e6d0;border:1px solid #e2dacb;border-radius:20px;padding:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 26px;border-radius:999px;font-weight:600;font-size:15px}
+.btn.p{background:#1d2433;color:#f4efe6}.btn.g{border:1.5px solid #1d2433;color:#1d2433}
+.link{font-weight:600;text-decoration:underline;font-size:14px;color:#1d2433}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #1d2433;border-radius:999px;padding:2px 11px;font-size:12px;font-weight:600;background:#fffdf9}
+.dot{width:9px;height:9px;border-radius:50%;background:#3f7a4b}
+.price{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:44px;line-height:1}
+.range{position:relative;height:8px;border-radius:999px;background:#e2dacb;margin:44px 8px 8px}
+.range .band{position:absolute;left:12%;right:12%;top:0;bottom:0;border-radius:999px;background:#c9b896}
+.range .you{position:absolute;top:-6px;width:20px;height:20px;border-radius:50%;background:#1d2433;border:3px solid #f4efe6;margin-left:-10px}
+.ends{display:flex;justify-content:space-between;font-size:13px;color:#4a5163;margin:0 4px}
+.cover{background:#8a8f9c;border-radius:16px;display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:600;font-size:13px}
+.disc{width:46px;height:46px;border-radius:50%;background:#1d2433;position:relative;flex:none}
+.disc:after{content:"";position:absolute;inset:18px;border-radius:50%;background:#f4efe6}
+.row{display:flex;gap:14px;align-items:center}
+.ill{display:inline-block;border:1px solid #e2dacb;border-radius:999px;padding:3px 10px;font-size:12px;color:#4a5163;margin-top:14px}
+.tracks{list-style:none;padding:0;margin:0;border:1px solid #e2dacb;border-radius:16px;background:rgba(255,255,255,.6)}
+.tracks li{display:flex;gap:12px;padding:10px 16px;border-top:1px solid #e2dacb;font-size:15px}
+.tracks li:first-child{border-top:0}
+.tracks .n{width:22px;color:#4a5163;font-weight:600}
+details.l{font-size:14px;color:#1d2433;margin-top:10px}details.l summary{font-weight:600;text-decoration:underline;cursor:pointer}
+.legend{display:flex;gap:16px;font-size:13px;margin-top:8px;color:#4a5163}
+.legend span:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.legend .g:before{background:#3f7a4b}.legend .y:before{background:#c8923a}.legend .r:before{background:#a8403a}
+</style></head><body>
+<h1 class="page">Recommendation screen · desktop · track list under the cover</h1>
+<p class="sub">Story 25, finding 38. Proposal for approval. Illustrative data.</p>
+
+<section class="opt">
+<h2 class="h-l" style="font-size:30px;margin-bottom:4px">Left column: cover, then track list</h2>
+<p class="why">The left column under the title holds the track list under the cover, so the column is no longer empty below the title. The right column is unchanged: the decision, the reasons and the buying card. The price slider is removed (story 25, finding 39); the typical-price sentence stays, labelled as illustrative data.</p>
+<div class="screen">
+  <div class="top"><span class="logo">SPINDLE</span><span class="search">Search records</span><span class="grow"></span><span>Artists</span><span>All genres and formats</span><span>H ⌄</span><span class="cta">Sell for free ⌄</span></div>
+  <div style="display:grid;grid-template-columns:400px 1fr;gap:56px;align-items:start">
+    <div>
+      <div class="cover" style="height:400px">Let's Dance · cover</div>
+      <div class="h-l" style="margin-top:14px">Let's Dance</div><div class="muted">David Bowie, 1983</div>
+      <div class="eyebrow" style="margin-top:20px">Track list</div>
+      <ul class="tracks" style="margin-top:8px">
+        <li><span class="n">1</span><span>Let's Dance</span></li>
+        <li><span class="n">2</span><span>China Girl</span></li>
+        <li><span class="n">3</span><span>Modern Love</span></li>
+        <li><span class="n">4</span><span>Cat People (Putting Out Fire)</span></li>
+      </ul>
+    </div>
+    <div style="max-width:640px">
+      <div class="eyebrow">Get this one</div><div class="h-xl" style="margin-top:6px">1983 US original</div><div class="meta">1983 · US · EMI America · LP · 1 for sale</div>
+      <ul class="reasons" style="margin-top:18px">
+        <li><span class="tick">✓</span><span><b>Price:</b> €19, in the typical range for this pressing.</span></li>
+        <li><span class="tick">✓</span><span><b>Original:</b> the first pressing, made in 1983 on EMI America.</span></li>
+        <li><span class="tick">✓</span><span><b>Sound:</b> cut from the original tapes, punchy and bright.</span></li></ul>
+      <div class="src">Based on 64 collector ratings · Based on: Price, Original, Sound · <span class="link">Change</span></div>
+      <div class="sand" style="margin-top:20px">
+        <div class="row" style="align-items:flex-start"><div class="disc"></div>
+          <div style="flex:1"><div class="row" style="gap:10px"><span class="price">€19</span><span class="pill"><span class="dot"></span>Match</span></div>
+          <div class="muted" style="margin-top:4px">Very good (VG+): light signs of wear · Private seller, Porto · ★ 4.4 · 5 reviews</div></div>
+          <div style="text-align:center"><span class="btn p">Buy</span><div style="margin-top:8px"><span class="link">Add to cart</span></div></div></div>
+        <div class="muted" style="margin-top:22px">Typical price for this pressing: €15–€25</div>
+        <div class="row" style="margin-top:14px;justify-content:space-between"><span class="link">See the checks</span>
+        <details class="l" style="margin:0"><summary>What do Match, Check and No match mean?</summary><div class="legend"><span class="g">Match</span><span class="y">Check</span><span class="r">No match</span></div></details></div>
+      </div>
+      <div style="margin-top:16px"><span class="btn g">Compare pressings</span></div>
+    </div>
+  </div>
+  <span class="ill">Illustrative data</span>
+</div></section>
+</body></html>
