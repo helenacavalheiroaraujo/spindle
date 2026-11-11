@@ -27,7 +27,7 @@ test("priorities → See recommendation → 1. Price, 2. Sound recommends the 20
     await expect(matches(page)).toHaveCount(0);
   }
   await expect(page.getByText("Cheapest option: 1990 Reissue, €24")).toBeVisible();
-  await expect(page.getByText("Based on 305 collector ratings · Illustrative data")).toBeVisible();
+  await expect(page.getByText("Based on 305 collector ratings")).toBeVisible();
   await expect(page.getByText(/The ideal pressing/)).toHaveCount(0);
 });
 
@@ -58,7 +58,6 @@ test("glossary terms show their plain explanation when tapped", async ({ page })
   await page.goto(url("sound,price"));
   for (const [term, explanation] of [
     ["Remaster", "A new version of the sound, cleaned up from the original recordings."],
-    ["first pressing", "The very first batch of a record, made when the album came out."],
   ]) {
     const button = page.getByRole("button", { name: term, exact: true }).first();
     await expect(button).toHaveAttribute("aria-expanded", "false");
@@ -66,13 +65,16 @@ test("glossary terms show their plain explanation when tapped", async ({ page })
     await expect(button).toHaveAttribute("aria-expanded", "true");
     await expect(page.getByRole("note").filter({ hasText: explanation }).first()).toBeVisible();
   }
+  // Story 25: "first pressing" is plain text on this page.
+  await expect(page.getByRole("button", { name: "first pressing", exact: true })).toHaveCount(0);
 });
 
 test("track list is collapsed until tapped; extra tracks show Bonus", async ({ page }) => {
   await page.goto(url("price"));
-  const firstTrack = page.getByText("Five Years");
+  // Desktop shows the track list under the cover and phone in the right column: only the visible copy counts.
+  const firstTrack = page.getByText("Five Years").and(page.locator(":visible"));
   await expect(firstTrack).toBeHidden();
-  await page.getByText(/^Track list/).click();
+  await page.getByText(/^Track list/).and(page.locator(":visible")).click();
   await expect(firstTrack).toBeVisible();
   await expect(page.getByRole("listitem").filter({ hasText: "Velvet Goldmine" })).toContainText("Bonus");
   await expect(page.getByRole("listitem").filter({ hasText: "Starman" })).not.toContainText("Bonus");

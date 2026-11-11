@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — Story 25: no "Shop" tag, plain glossary words and one label
+
+- **Decision:** on listings the "Shop" tag is removed; the shop name stays. On the recommendation page "Reissue", "first pressing", "reissue" and "pressing" are plain text, with no underline and no tap explanation. The second "Illustrative data" next to the ratings line is removed; the label at the top stays.
+- **Why:** story 25, findings 40 to 42.
+- **Links:** story 25; story 9 (the row for sellers in SPEC.md no longer names the tag).
+
 ## 2026-11-11 — Stories 10, 11 and 13 move to the next delivery
 
 - **Decision:** stories 10 (filters, messaging the seller), 11 (30-second previews, Spindle Pro) and 13 (wishlist, "Because you like…") are not built in this MVP. They have no story file and stay under "Not in this MVP" in SPEC.md.

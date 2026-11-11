@@ -18,6 +18,8 @@ const priceFacts = (v: VersionDetails): PriceFacts => ({
 });
 
 // Recommendation screen (story 3). The ranking comes from the address: "?priorities=price,sound".
+const PLAIN_HERE = new Set(["first pressing", "reissue", "pressing"]);
+
 export default async function RecommendationPage({
   params,
   searchParams,
@@ -33,7 +35,9 @@ export default async function RecommendationPage({
 
   const data = await getRecommendationData(albumId);
   if (!data) notFound();
-  const { album, versions, glossary } = data;
+  const { album, versions } = data;
+  // Story 25: on this page these words are plain text: no dotted underline and no tap explanation.
+  const glossary = data.glossary.filter((t) => !PLAIN_HERE.has(t.term.toLowerCase()));
   const byId = (id: string) => versions.find((v) => v.id === id)!;
 
   const result = recommend(ranking, versions);
@@ -86,6 +90,13 @@ export default async function RecommendationPage({
               <span className="text-navy/70 lg:text-base">{album.artist}, {album.releaseYear}</span>
             </p>
           </div>
+
+          {/* Desktop (story 25): the track list sits under the cover. Phone keeps it in the right column. */}
+          {version.tracks.length > 0 && (
+            <div className="hidden lg:mt-6 lg:block">
+              <TrackList tracks={version.tracks} className="rounded-2xl border border-line" />
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col lg:max-w-[40rem] lg:pt-14">
@@ -110,9 +121,13 @@ export default async function RecommendationPage({
             </ul>
           )}
 
-          <ul aria-label="Why this one" className="mt-5 space-y-3">
-            {reasons.map((sentence) => (
-              <li key={sentence} className="flex gap-3">
+          {/* Desktop (story 25, option A4): the three reasons are cards side by side, in sand, line and cream. */}
+          <ul aria-label="Why this one" className="mt-5 space-y-3 lg:grid lg:grid-cols-3 lg:gap-4 lg:space-y-0">
+            {reasons.map((sentence, i) => (
+              <li
+                key={sentence}
+                className={`flex gap-3 lg:flex-col lg:gap-0 lg:rounded-[20px] lg:border lg:border-line lg:p-5 ${["lg:bg-sand", "lg:bg-line", "lg:bg-cream"][i % 3]}`}
+              >
                 {/* Phone: an open circle as before. Desktop (design option A): a tick, so the reasons do not look like tasks. */}
                 <span
                   aria-hidden
@@ -128,7 +143,7 @@ export default async function RecommendationPage({
           </ul>
 
           <p className="mt-5 text-sm text-navy/70">
-            Based on {version.ratingCount} collector ratings · Illustrative data
+            Based on {version.ratingCount} collector ratings
           </p>
 
           {alternative && (
@@ -162,20 +177,9 @@ export default async function RecommendationPage({
           </div>
 
           {version.tracks.length > 0 && (
-          <details className="mt-6 rounded-2xl border border-line">
-            <summary className="flex min-h-12 cursor-pointer items-center px-4 font-semibold">
-              Track list ({version.tracks.length})
-            </summary>
-            <ol className="px-4 pb-4">
-              {version.tracks.map((t) => (
-                <li key={t.position} className="flex items-center gap-3 border-t border-line py-2 text-sm">
-                  <span className="w-8 text-navy/60">{t.position}</span>
-                  <span className="flex-1">{t.title}</span>
-                  {t.isExtra && <span className="rounded-full bg-brown px-2 py-0.5 text-xs text-cream">Bonus</span>}
-                </li>
-              ))}
-            </ol>
-          </details>
+            <div className="lg:hidden">
+              <TrackList tracks={version.tracks} className="mt-6 rounded-2xl border border-line" />
+            </div>
           )}
 
           <div className="mt-8 flex flex-col gap-3">
@@ -213,4 +217,24 @@ export default async function RecommendationPage({
       </p>
     );
   }
+}
+
+// The track list, collapsed, with "Bonus" marked. Used under the cover on desktop and in the right column on phone.
+function TrackList({ tracks, className }: { tracks: { position: string; title: string; isExtra: boolean }[]; className: string }) {
+  return (
+    <details className={className}>
+      <summary className="flex min-h-12 cursor-pointer items-center px-4 font-semibold">
+        Track list ({tracks.length})
+      </summary>
+      <ol className="px-4 pb-4">
+        {tracks.map((t) => (
+          <li key={t.position} className="flex items-center gap-3 border-t border-line py-2 text-sm">
+            <span className="w-8 text-navy/60">{t.position}</span>
+            <span className="flex-1">{t.title}</span>
+            {t.isExtra && <span className="rounded-full bg-brown px-2 py-0.5 text-xs text-cream">Bonus</span>}
+          </li>
+        ))}
+      </ol>
+    </details>
+  );
 }

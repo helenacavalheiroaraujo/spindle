@@ -77,11 +77,11 @@ test("the condition is shown in plain words", async ({ page }) => {
   await expect(rows(page).nth(1)).toContainText("Very good (VG+): light signs of wear");
 });
 
-test("sellers: a shop shows its name and a Shop tag; others show Private seller; no personal names (story 9 · #64)", async ({ page }) => {
+test("sellers: a shop shows its name, no Shop tag (story 25); others show Private seller; no personal names (story 9 · #64)", async ({ page }) => {
   await page.goto(`/versions/${V1990}/listings`);
   const shop = rows(page).filter({ hasText: "€30" });
-  await expect(shop).toContainText(/Discos do Rui\s*Shop, Lisboa/); // the tag follows the name (UX #15)
-  await expect(shop.getByText("Shop", { exact: true })).toBeVisible();
+  await expect(shop).toContainText(/Discos do Rui, Lisboa/); // no Shop tag (story 25, finding 42)
+  await expect(shop.getByText("Shop", { exact: true })).toHaveCount(0);
   await expect(rows(page).filter({ hasText: "€24" })).toContainText("Private seller, Porto");
   await expect(page.getByText(/Ana Sousa|Rui Ferreira|Marta Lopes|João Pinto/)).toHaveCount(0);
 });
