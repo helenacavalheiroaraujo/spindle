@@ -3,6 +3,18 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — Story 24: the crate row moves by mouse drag
+
+### A mouse drag moves the crate row
+- **Decision:** with 7 or more crates, a mouse drag moves the row. A drag of 5 px or more does not open a crate under the pointer. Trackpad and touch swipe stay native. Snapping is off during the drag and returns on release.
+- **Why:** story 24 and option C say the row moves by drag; a mouse did not move the row.
+- **Choices made while building (not in the story):** the 5 px threshold; mouse only.
+
+### The phone label shows the real visible range
+- **Decision:** with 7 or more crates, the label reads the crates actually on screen, e.g. "Showing 1 to 2 of 7 genres" on a phone. The story's "1 to 4" applies where four crates are visible.
+- **Why:** a fixed "1 to 4" would be wrong on a phone, where about two crates fit.
+- **Links:** Story 24, option C in `docs/design/crate-carousel-options.html`.
+
 ## 2026-11-11 — Recommendation page (desktop): track list under the cover, reasons as cards
 
 ### Layout A4

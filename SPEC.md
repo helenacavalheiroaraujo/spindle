@@ -189,3 +189,9 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 23 | The section only shows; there is no way to change the ranking from the account page | `app/account/page.tsx` | `tests/e2e/accountPriorities.spec.ts` |
 | 21 | "Source: MusicBrainz · Wikipedia" instead of "Illustrative data"; the message "Nobody is selling this album right now" stays | `app/albums/[albumId]/page.tsx` | `tests/e2e/albumDetails.spec.ts` |
 | 21 | "The details of this album are not available right now." when no source answers | `app/albums/[albumId]/page.tsx` | Not tested automatically (needs the services down) |
+| 24 | Classical is a genre in the database and has its own crate | `supabase/migrations/0012_classical_genre.sql`, `supabase/seed.sql`, `lib/rules/home.ts` | `tests/unit/home.test.ts`, `tests/e2e/home.spec.ts` |
+| 24 | Crates in alphabetical order; a genre with no albums has no crate | `lib/rules/home.ts` | `tests/unit/home.test.ts` |
+| 24 | 7+ crates: progress line and "Showing 1 to N of N genres", no arrows | `lib/rules/home.ts`, `components/CrateRow.tsx` | `tests/unit/home.test.ts` (isCrateRow, showingLabel); `tests/e2e/home.spec.ts` |
+| 24 | 7+ crates: the row moves by mouse drag, trackpad and swipe | `components/CrateRow.tsx` | `tests/e2e/home.spec.ts` (mouse drag); trackpad: manual test needed |
+| 24 | 6 or fewer crates: grid, no line and no label | `lib/rules/home.ts`, `components/CrateRow.tsx` | `tests/unit/home.test.ts` (isCrateRow) |
+| 24 | On phone the row swipes sideways | `components/CrateRow.tsx` | manual test needed (not automated) |

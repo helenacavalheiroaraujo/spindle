@@ -37,6 +37,46 @@ export function CrateRow({ crates }: { crates: CrateItem[] }) {
 function CrateScroller({ crates }: { crates: CrateItem[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [view, setView] = useState({ first: 1, last: 1, thumbWidth: 100, thumbLeft: 0 });
+  // Mouse drag (story 24): trackpad and touch swipe scroll natively; a mouse does not, so the row follows the pointer.
+  const drag = useRef({ active: false, startX: 0, startLeft: 0, moved: false });
+
+  function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    const el = trackRef.current;
+    if (!el || e.pointerType !== "mouse" || e.button !== 0) return;
+    drag.current = { active: true, startX: e.clientX, startLeft: el.scrollLeft, moved: false };
+  }
+
+  function onPointerMove(e: React.PointerEvent<HTMLDivElement>) {
+    const el = trackRef.current;
+    const d = drag.current;
+    if (!el || !d.active) return;
+    const dx = e.clientX - d.startX;
+    if (!d.moved) {
+      if (Math.abs(dx) < 5) return; // a small wobble is still a tap
+      d.moved = true;
+      el.style.scrollSnapType = "none"; // no snapping while the pointer moves the row
+      el.setPointerCapture(e.pointerId);
+    }
+    el.scrollLeft = d.startLeft - dx;
+  }
+
+  function endDrag() {
+    const el = trackRef.current;
+    if (!el || !drag.current.active) return;
+    drag.current.active = false;
+    if (drag.current.moved) {
+      el.style.scrollSnapType = ""; // snapping returns and settles on the nearest crate
+    }
+  }
+
+  // A drag must not also open the crate under the pointer when the mouse is released.
+  function onClickCapture(e: React.MouseEvent<HTMLDivElement>) {
+    if (drag.current.moved) {
+      e.preventDefault();
+      e.stopPropagation();
+      drag.current.moved = false;
+    }
+  }
 
   // Where the row is now: which crates are visible, and where the progress line sits.
   function measure() {
@@ -67,10 +107,17 @@ function CrateScroller({ crates }: { crates: CrateItem[] }) {
       <div
         ref={trackRef}
         onScroll={measure}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        onPointerLeave={endDrag}
+        onClickCapture={onClickCapture}
+        onDragStart={(e) => e.preventDefault()}
         role="region"
         aria-label="Crates by genre, scroll to see more"
         tabIndex={0}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex snap-x snap-mandatory select-none gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {crates.map((item) => (
           <div key={item.genre.slug} className="w-[42%] shrink-0 snap-start lg:w-[calc((100%-3rem)/4)]">
