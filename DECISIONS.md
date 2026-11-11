@@ -3,6 +3,18 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — Spacing: inner padding and edge margins for cards, buttons and covers
+
+### Padding follows the mockups in docs/design
+- **Decision:** the padding of the screens follows the values used in the mockups in `docs/design/`:
+  - Cards: 12–16 px inside, with a thin border and rounded corners.
+  - Pill buttons: 9–14 px vertically and 14–26 px horizontally; the main button has a minimum height of 48 px.
+  - Covers and images inside a card: the same inside padding as the card, so they do not touch its edge.
+  - Page margins: 16 px on each side on phone.
+- **Why:** bug 21 (components without padding). The repository had no written rule for padding, so the mockup values are the reference.
+- **Not decided here:** the exact value for each element. Each element picks a value in the range above when it is built.
+- **Links:** bug 21 (`specs/bugs/bug-21-components-without-padding.md`).
+
 ## 2026-11-11 — Bug 20: track list on the left of the album page
 
 ### The track list sits under the cover on desktop
