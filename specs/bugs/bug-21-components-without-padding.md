@@ -6,11 +6,11 @@
 Some covers and some buttons have no internal padding and no space around them.
 
 ## Steps to reproduce
-To be completed
+No reproduction steps. Find the covers and buttons that have no internal padding and no space around them.
 
 ## Current vs expected behaviour
-**Current:** To be completed
-**Expected:** To be completed
+**Current:** Some covers and buttons have no internal padding and no space around them.
+**Expected:** Padding that follows the spacing rule in `DECISIONS.md` (2026-11-11, "Padding follows the mockups in docs/design").
 
 ## Customer impact
 Poor user experience
