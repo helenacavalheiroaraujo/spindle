@@ -224,8 +224,7 @@ test("a sold or removed listing opened from a link says 'This record is no longe
     await expect(page.getByRole("button", { name: /^Buy/ })).toHaveCount(0);
   }
   await screenshot(page, 7, "no-longer-available");
-  await page.getByRole("link", { name: "Back to search" }).click();
-  await expect(page).toHaveURL("/", { timeout: 15000 }); // the home page may still be compiling in development
+  await expect(page.getByRole("link", { name: "Back to search" })).toHaveCount(0); // no back link (DECISIONS 2026-11-11)
   await page.goto(`/listings/00000000-0000-0000-0000-00000000dead`); // a listing that never existed stays "not found"
   await expect(page.getByText("This page could not be found.")).toBeVisible();
 });

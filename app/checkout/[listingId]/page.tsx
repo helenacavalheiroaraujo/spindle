@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { getListingCheck } from "@/lib/db/listings";
 import { currentUserId } from "@/lib/db/session";
@@ -68,15 +67,6 @@ export default async function CheckoutPage({
   return (
     <main className="px-4 pb-16 page-main">
       <Header />
-      <Link
-        href={`/listings/${listingId}?version=${versionId}`}
-        aria-label="Back to the listing"
-        className="flex h-12 w-12 items-center justify-center rounded-full border border-navy/30"
-      >
-        <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="m15 18-6-6 6-6" />
-        </svg>
-      </Link>
       <h1 className="mt-4 font-heading text-4xl leading-tight lg:text-6xl">Buy with protection</h1>
 
       <CheckoutForm

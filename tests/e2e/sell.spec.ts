@@ -105,8 +105,9 @@ test("find an album and pick one version, even when nobody sells it", async ({ p
   await go.click();
   await expect(page).toHaveURL(`/sell/versions/${V_HOMOGENIC_1997}`);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Sell a record");
-  // Finding #28: the form has a way back to the versions.
-  await page.getByRole("link", { name: "Back to versions" }).click();
+  // No back link (DECISIONS 2026-11-11): the browser's Back returns to the versions.
+  await expect(page.getByRole("link", { name: "Back to versions" })).toHaveCount(0);
+  await page.goBack();
   await expect(page).toHaveURL(`/sell/albums/${HOMOGENIC}`);
 });
 

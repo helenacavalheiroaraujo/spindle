@@ -213,8 +213,7 @@ test("Pay: the order is created as 'Paid · waiting for the seller'; the listing
   await expect(page).toHaveURL(/\/login/);
   await logIn(page);
   await expect(page.getByRole("heading", { name: "Order placed" })).toBeVisible();
-  await page.getByRole("link", { name: "Back to search" }).click();
-  await expect(page).toHaveURL("/");
+  await expect(page.getByRole("link", { name: "Back to search" })).toHaveCount(0); // no back link (DECISIONS 2026-11-11)
 
   const { data: order } = await admin().from("orders").select("*").eq("listing_id", toBuy).single();
   const { data: profile } = await admin().from("profiles").select("id").eq("user_id", userId).single();

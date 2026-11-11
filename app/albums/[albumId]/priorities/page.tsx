@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { getAlbumHeader } from "@/lib/db/albums";
 import { getSavedRanking } from "@/lib/db/preferences";
@@ -33,15 +32,6 @@ export default async function PrioritiesPage({
       <div className="lg:mt-8 lg:grid lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-x-12">
       <div>
       <div className="flex items-center gap-3">
-        <Link
-          href="/"
-          aria-label="Back to search"
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-navy/30"
-        >
-          <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="m15 18-6-6 6-6" />
-          </svg>
-        </Link>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={album.coverUrl} alt="" width={48} height={48} className="h-12 w-12 shrink-0 rounded-md lg:hidden" />
         <p className="min-w-0">

@@ -14,7 +14,8 @@ test("recommended version's listings: own screen on phone, beside the recommenda
     await page.getByRole("link", { name: "See verified listings" }).click();
     await expect(page).toHaveURL(`/versions/${V2012}/listings?priorities=price,sound`);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("2 for sale · 1 moved");
-    await page.getByRole("link", { name: "Back to the recommendation" }).click();
+    await expect(page.getByRole("link", { name: "Back to the recommendation" })).toHaveCount(0); // no back link (DECISIONS 2026-11-11)
+    await page.goBack();
     await expect(page).toHaveURL(`/albums/${ZIGGY_ID}/recommendation?priorities=price,sound`);
   } else {
     await expect(page).toHaveURL(`/albums/${ZIGGY_ID}/recommendation?priorities=price,sound`);

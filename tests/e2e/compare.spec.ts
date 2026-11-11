@@ -64,7 +64,7 @@ test("a different ranking changes the order of the rows and of the columns", asy
   await expect(heads.nth(0)).toContainText("2012"); // Near mint wins
 });
 
-test("tapping a version opens its page with its priorities and listings; Back to compare returns", async ({ page, isMobile }) => {
+test("tapping a version opens its page with its priorities and listings; browser Back returns to compare", async ({ page, isMobile }) => {
   await page.goto(compare("price,sound"));
   await table(page).getByRole("link", { name: /1990/ }).click();
   await expect(page).toHaveURL(`/versions/${V1990}?priorities=price,sound`);
@@ -81,7 +81,8 @@ test("tapping a version opens its page with its priorities and listings; Back to
   }
   await screenshot(page, 4, "version");
 
-  await page.getByRole("link", { name: "Back to compare" }).click();
+  await expect(page.getByRole("link", { name: "Back to compare" })).toHaveCount(0); // no back link (DECISIONS 2026-11-11)
+  await page.goBack();
   await expect(page).toHaveURL(compare("price,sound"));
 });
 

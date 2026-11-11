@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
-import { BackLink } from "@/components/BackLink";
 import { returnPath, withReturn } from "@/lib/rules/login";
 import { LoginForm } from "./LoginForm";
 
@@ -11,7 +10,6 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   return (
     <main className="px-4 pb-16 page-main page-form">
       <Header />
-      <BackLink href="/">Back to search</BackLink>
       <h1 className="mt-6 font-heading text-4xl leading-tight">Log in</h1>
       <p className="mt-2">Welcome back. Log in to buy and sell records.</p>
       <LoginForm next={next} />

@@ -43,7 +43,6 @@ export default async function RecommendationPage({
       <main className="px-4 pb-16 page-main page-narrow">
         <Header />
         <p className="mt-8 text-lg font-semibold">Nobody is selling this album right now.</p>
-        <Link href="/search" className="mt-4 inline-block underline">Back to search</Link>
       </main>
     );
   }

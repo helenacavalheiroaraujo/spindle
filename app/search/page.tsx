@@ -23,7 +23,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
       {tooShort && (
         <>
           <h1 className="sr-only">Search</h1>
-          <p role="status" className="mt-4 text-lg font-medium">
+          <p role="status" className="mt-4 text-base font-normal">
             {SHORT_SEARCH_MESSAGE}
           </p>
         </>

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { getOrderForBuyer } from "@/lib/db/orders";
 import { currentUserId } from "@/lib/db/session";
@@ -51,9 +50,6 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
               </li>
             ))}
           </ol>
-          <Link href="/" className="flex min-h-12 items-center justify-center rounded-full bg-navy px-6 font-semibold text-cream">
-            Back to search
-          </Link>
           <p className="text-center text-sm text-navy/70">Simulated payment · Illustrative data</p>
         </div>
       </div>

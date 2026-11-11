@@ -3,6 +3,16 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — No back button on any screen
+
+### Rule
+- **Decision:** no screen has a back button or a "Back to …" link. This covers the round back arrow and text links such as "Back to search", "Back to versions", "Back to the recommendation", "Back to the listing", "Back to your cart", "Back to compare" and "Back to sign up". Navigation is the header (logo, menu, search) and the browser's back arrow.
+- **Why:** the owner's decision for bug 16 (expected: no back button and no "Back home" label on any screen). Back and forward are in the browser.
+- **Trade-off accepted:** a screen with no other link (for example "This record is no longer available" or the order confirmation) keeps only the header's links.
+- **Not changed:** approved designs in `docs/design/` that still show a back button are not edited. The code follows this rule.
+- **Supersedes:** the back-link criteria in the stories (for example story 7 "Back to search", story 17 "← Back to home", story 4 "Back to compare") and the back-button parts of the 2026-11-10 decisions for bug 16 and the recommendation screen.
+- **Not covered:** the "Back" button inside the yellow warning dialog (story 5). It is a choice in a dialog, not a screen.
+
 ## 2026-11-11 — Recommendation page: no slider, no "Shop" tag, no dotted underlines
 
 ### Slider, seller tag and underlines removed

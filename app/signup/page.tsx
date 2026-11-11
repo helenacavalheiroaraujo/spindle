@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
-import { BackLink } from "@/components/BackLink";
 import { returnPath, withReturn } from "@/lib/rules/login";
 import { SignUpForm } from "./SignUpForm";
 
@@ -11,7 +10,6 @@ export default async function SignUpPage({ searchParams }: { searchParams: Promi
   return (
     <main className="px-4 pb-16 page-main page-form">
       <Header />
-      <BackLink href="/">Back to search</BackLink>
       <h1 className="mt-6 font-heading text-4xl leading-tight">Create your account</h1>
       <p className="mt-2">One account to buy and sell records.</p>
       <SignUpForm next={next} />

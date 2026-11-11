@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
-import { BackLink } from "@/components/BackLink";
 import { Header } from "@/components/Header";
 import { getVersionToSell } from "@/lib/db/albums";
 import { getSellingPlace } from "@/lib/db/listings";
@@ -25,14 +23,6 @@ export default async function SellFormPage({ params }: { params: Promise<{ versi
         <p role="status" className="mt-6 rounded-2xl border border-line bg-white/60 p-6 text-center font-medium">
           {NOT_IN_CATALOGUE}
         </p>
-        <Link href="/sell" className="mt-4 inline-flex items-center gap-3 text-sm font-semibold">
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-navy/30">
-            <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="m15 18-6-6 6-6" />
-            </svg>
-          </span>
-          Back to search
-        </Link>
       </main>
     );
   }
@@ -45,7 +35,6 @@ export default async function SellFormPage({ params }: { params: Promise<{ versi
   return (
     <main className="px-4 pb-16 page-main">
       <Header />
-      <BackLink href={`/sell/albums/${version.albumId}`}>Back to versions</BackLink>
       <SellForm version={version} place={place} />
     </main>
   );

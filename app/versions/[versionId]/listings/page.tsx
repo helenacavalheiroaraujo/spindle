@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getVersionListings } from "@/lib/db/listings";
 import { currentProfileId } from "@/lib/db/profiles";
-import { parsePriorities, formatPriorities } from "@/lib/rules/priorities";
+import { parsePriorities } from "@/lib/rules/priorities";
 import { Header } from "@/components/Header";
 import { ListingList } from "@/components/ListingList";
 
@@ -21,23 +20,11 @@ export default async function ListingsPage({
   const { version, listings } = data;
 
   const ranking = parsePriorities(Array.isArray(priorities) ? priorities[0] : priorities);
-  const backHref = ranking.length
-    ? `/albums/${version.albumId}/recommendation?priorities=${formatPriorities(ranking)}`
-    : `/albums/${version.albumId}/priorities`;
 
   return (
     <main className="px-4 pb-16 page-main">
       <Header />
       <div className="flex items-center gap-3">
-        <Link
-          href={backHref}
-          aria-label="Back to the recommendation"
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-navy/30"
-        >
-          <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="m15 18-6-6 6-6" />
-          </svg>
-        </Link>
         <p className="text-sm">
           <span className="block font-semibold">{version.name}</span>
           <span className="text-navy/70">{version.albumTitle}, {version.artist}</span>
