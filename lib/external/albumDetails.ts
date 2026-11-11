@@ -11,7 +11,8 @@ import {
 
 // MusicBrainz asks for an identifying User-Agent. Generic on purpose: no personal details.
 const USER_AGENT = "Spindle-MVP/0.1 (student project)";
-const MUSICBRAINZ = "https://musicbrainz.org/ws/2";
+// MUSICBRAINZ_URL is set only by the e2e tests, to a local stub (tests/e2e/musicbrainzStub.mjs). Live use has no variable.
+const MUSICBRAINZ = process.env.MUSICBRAINZ_URL ?? "https://musicbrainz.org/ws/2";
 
 export type AlbumDetails = {
   releaseDate: string | null; // formatted, e.g. "17 August 1959"

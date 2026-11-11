@@ -3,6 +3,11 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-11 — Album test: MusicBrainz is replaced by a local stub
+- **Decision:** the e2e tests answer the MusicBrainz requests from a local stub (tests/e2e/musicbrainzStub.mjs, port 4010). The dev server reads its address from MUSICBRAINZ_URL, which only the test setup sets. Without the variable the app calls MusicBrainz as before.
+- **Why:** the album test failed in full runs when MusicBrainz did not answer. A test should not depend on a service it does not control.
+- **Choices by the AI:** a fixed answer for Kind of Blue only; Wikipedia is still called live; the stub starts only with Playwright's own server, because a server already running on port 3000 does not get the variable.
+
 ## 2026-11-11 — Album page: say when MusicBrainz or Wikipedia does not answer
 - **Decision:** when MusicBrainz does not answer, the page shows "The release date, label and tracks are not available right now." in place of those facts. When Wikipedia does not answer, it shows "The description of the musician is not available right now." The source line names only the sources that gave data for that album.
 - **Why:** in the full e2e run of 11 Nov, MusicBrainz did not answer for Kind of Blue. The page showed the musician and "Source: MusicBrainz · Wikipedia" with no date, label or tracks and no sign of the failure. A failed request now looks different from an album with nothing in MusicBrainz.
