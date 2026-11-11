@@ -26,7 +26,7 @@ export default async function AlbumNoListingsPage({ params }: { params: Promise<
   return (
     <main className="px-4 pb-16 page-main">
       <Header />
-      <div className="flex flex-col lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start lg:gap-x-12">
+      <div className="flex flex-col lg:mt-8 lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start lg:gap-x-12">
         <div className="contents lg:flex lg:flex-col lg:gap-6">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={album.coverUrl} alt="" width={340} height={340} className="order-1 h-auto w-full rounded-2xl" />

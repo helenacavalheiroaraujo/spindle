@@ -30,7 +30,7 @@ export default async function PrioritiesPage({
   return (
     <main className="px-4 pb-16 page-main">
       <Header />
-      <div className="lg:grid lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-x-12">
+      <div className="lg:mt-8 lg:grid lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-x-12">
       <div>
       <div className="flex items-center gap-3">
         <Link
