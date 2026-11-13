@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-13 — Deadline moved to 23 Nov 2026
+
+- **Decision:** the MVP delivery and the 5-minute demo are on 23 Nov 2026, not 15 Nov. CLAUDE.md and the progress script use the new date. Earlier entries that mention 15 Nov are kept as they were: they record the reasoning at the time.
+- **Why:** the course moved the delivery date.
+- **Links:** `CLAUDE.md`; `.claude/skills/mvp-progress/scripts/progress.py`; `docs/PROGRESS.md`.
+
 ## 2026-11-13 — Bug 26: the suggestion box says why nothing is found under 3 characters
 
 - **Decision:** when a buyer has typed 1 or 2 characters in a search box (spaces and accents do not count), the suggestion box opens under the field with only "Type at least 3 characters to search." (the story 17 text). With nothing typed, no box is shown. No search runs and nothing can be highlighted with the arrow keys. This applies to every search box with suggestions: home, results page and the desktop header. It supersedes the story 16 criterion "With fewer than 3 characters, no box is shown"; the story 16 file is not changed.

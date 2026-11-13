@@ -10,7 +10,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-DEADLINE = date(2026, 11, 15)
+DEADLINE = date(2026, 11, 23)
 NOT_TESTED = "not tested automatically"
 
 root = Path(sys.argv[1] if len(sys.argv) > 1 else ".")

@@ -1,6 +1,6 @@
 # CLAUDE.md — Spindle MVP
 
-Spindle helps non-specialist buyers pick the right pressing of a vinyl record and buy a verified copy safely. MVP for Assignment 2 (ASI, MESG/FEUP): due 15 Nov 2026, 5-minute live demo.
+Spindle helps non-specialist buyers pick the right pressing of a vinyl record and buy a verified copy safely. MVP for Assignment 2 (ASI, MESG/FEUP): due 23 Nov 2026 (moved from 15 Nov), 5-minute live demo.
 
 ## Read first
 - `SPEC.md` — what to build: build order, out of scope, shared rules, traceability, and links to each story
