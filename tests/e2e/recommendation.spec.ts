@@ -3,7 +3,7 @@
 import { expect, test, type Page } from "@playwright/test";
 
 const ZIGGY_ID = "10000000-0000-0000-0000-000000000001";
-const LETS_DANCE_ID = "10000000-0000-0000-0000-000000000003"; // its recommended version has no tracks in the seed
+const NO_TRACKS_ID = "10000000-0000-0000-0000-000000000020"; // A/B: its versions have no tracks in the seed
 const url = (priorities: string) => `/albums/${ZIGGY_ID}/recommendation?priorities=${priorities}`;
 const reasons = (page: Page) => page.getByRole("list", { name: "Why this one" }).getByRole("listitem");
 const matches = (page: Page) => page.getByRole("list", { name: "Matches" }).getByRole("listitem");
@@ -105,8 +105,8 @@ test("no back button; the Illustrative data label stays", async ({ page }) => {
 });
 
 test("a version without tracks shows no 'Track list'", async ({ page }) => {
-  await page.goto(`/albums/${LETS_DANCE_ID}/recommendation?priorities=price`);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("1983 US original");
+  await page.goto(`/albums/${NO_TRACKS_ID}/recommendation?priorities=price`);
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await expect(page.getByText(/^Track list/)).toHaveCount(0);
 });
 

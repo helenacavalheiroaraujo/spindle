@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log-in window: options</title>
+<!-- Proposed story 27 · log in without leaving the page. Three options for the window that opens when a signed-out user taps Buy, Add to cart or Sell. Each option shows desktop (1280 px) and phone (375 px). Texts are proposals. Sign-up fields (Name, Email, Password) are the ones on the current /signup page. Illustrative data. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.4;padding:24px}
+h1,h2,h3{font-family:'Barlow Condensed',sans-serif;font-weight:600}
+.intro{max-width:900px;margin:0 auto 28px;text-align:center;color:#4a5163}
+.opt{margin:0 auto 54px;max-width:1280px}
+.opt>h2{font-size:32px;margin-bottom:4px;text-align:center}
+.why{max-width:760px;margin:0 auto 16px;text-align:center;color:#4a5163;font-size:13px}
+.frames{display:flex;gap:28px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+.lbl{font-size:12px;font-weight:600;color:#6f6a60;margin-bottom:6px}
+.desk{width:640px;height:420px;border:1px solid #1d2433;border-radius:14px;overflow:hidden;position:relative;background:#f4efe6}
+.phone{width:375px;height:640px;border:1px solid #1d2433;border-radius:28px;overflow:hidden;position:relative;background:#f4efe6}
+.dim{position:absolute;inset:0;background:rgba(29,36,51,.55)}
+.hdr{background:#1d2433;color:#f4efe6;padding:10px 16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:.04em;font-size:18px;display:flex;align-items:center;gap:8px}
+.dot{width:16px;height:16px;border-radius:50%;border:4px solid #f4efe6;display:inline-block}
+.page{padding:14px 16px}.page .t{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:24px}
+.li{border:1px solid #e2dacb;border-radius:14px;padding:10px 12px;margin-top:10px;background:rgba(255,255,255,.6);font-size:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:999px;font-weight:600;font-size:14px}
+.btn.p{background:#1d2433;color:#f4efe6}.btn.o{border:1px solid #1d2433}.btn.w{width:100%}
+.field{margin-top:10px}.field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.field i{display:block;height:42px;border:1px solid #e2dacb;border-radius:999px;background:#fbf8f2}
+.sand{background:#f1e6d0;border:1px solid #e2dacb;border-radius:14px;padding:10px 12px;font-size:12px}
+.sand b{font-weight:700}
+.modal{position:absolute;background:#f4efe6;border:1px solid #e2dacb;padding:20px}
+.modal h3{font-size:28px;line-height:1.05;margin-bottom:6px}
+.sub{font-size:13px;color:#4a5163}
+.x{position:absolute;top:10px;right:12px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.lnk{font-weight:600;text-decoration:underline}
+.tabs{display:flex;gap:6px;margin:10px 0 4px}.tabs span{flex:1;text-align:center;min-height:40px;display:flex;align-items:center;justify-content:center;border:1px solid #1d2433;border-radius:999px;font-weight:600;font-size:13px}.tabs .on{background:#1d2433;color:#f4efe6}
+.ill{display:inline-block;border:1px solid #e2dacb;border-radius:999px;padding:2px 9px;font-size:11px;margin-top:8px}
+.grab{width:40px;height:4px;border-radius:99px;background:#1d2433;opacity:.3;margin:0 auto 10px}
+.note{font-size:12px;color:#4a5163;margin-top:8px}
+</style></head><body>
+
+<p class="intro"><b>Story 27 · Log in without leaving the page.</b> Today, Buy, Add to cart and Sell open a separate log-in screen. In all three options a window opens on top of the page the user was on. After logging in or creating an account, the original action goes on (checkout, add to cart, sell flow), as it does today. Closing the window returns to the page exactly as it was, with nothing bought or added.</p>
+
+<!-- OPTION A -->
+<section class="opt">
+<h2>Option A · Centred window, log in first</h2>
+<p class="why">A small window with the record the user was buying and the log-in form. “Create an account” is a link under the button that swaps the form in the same window. On phone the window is a sheet that rises from the bottom.</p>
+<div class="frames">
+<div><p class="lbl">Desktop 1280 px (scaled to 640)</p>
+<div class="desk"><div class="hdr"><i class="dot"></i>SPINDLE</div>
+<div class="page"><div class="t">Ziggy Stardust · Verified listings</div><div class="li">VG+ · 2012 Remaster · Discos do Bairro, Porto · <b>€28</b></div><div class="li">VG · 2012 Remaster · Private seller · <b>€31</b></div></div>
+<div class="dim"></div>
+<div class="modal" style="left:170px;top:36px;width:300px;border-radius:20px"><span class="x">×</span>
+<h3>Log in to buy</h3><p class="sub">You are buying:</p><div class="sand" style="margin-top:6px"><b>Ziggy Stardust</b> · 2012 Remaster · VG+<br>Discos do Bairro, Porto · <b>€28</b></div>
+<div class="field"><label>Email</label><i></i></div><div class="field"><label>Password</label><i></i></div>
+<div style="margin-top:12px"><span class="btn p w">Log in</span></div>
+<p class="note" style="text-align:center">No account? <span class="lnk">Create one</span></p></div></div></div>
+<div><p class="lbl">Phone 375 px</p>
+<div class="phone"><div class="hdr"><i class="dot"></i>SPINDLE</div>
+<div class="page"><div class="t">Ziggy Stardust</div><div class="li">VG+ · 2012 Remaster · Discos do Bairro, Porto · <b>€28</b></div><div class="li">VG · 2012 Remaster · Private seller · <b>€31</b></div></div>
+<div class="dim"></div>
+<div class="modal" style="left:0;right:0;bottom:0;border-radius:24px 24px 0 0;border-bottom:0"><div class="grab"></div><span class="x" style="top:6px">×</span>
+<h3>Log in to buy</h3><div class="sand" style="margin-top:6px"><b>Ziggy Stardust</b> · 2012 Remaster · VG+<br>Discos do Bairro, Porto · <b>€28</b></div>
+<div class="field"><label>Email</label><i></i></div><div class="field"><label>Password</label><i></i></div>
+<div style="margin-top:12px"><span class="btn p w">Log in</span></div>
+<p class="note" style="text-align:center">No account? <span class="lnk">Create one</span></p></div></div></div>
+</div><p class="why" style="margin-top:10px"><span class="ill">Illustrative data</span></p></section>
+
+<!-- OPTION B -->
+<section class="opt">
+<h2>Option B · Window with “Log in | Create account” tabs</h2>
+<p class="why">Same window, but both choices are visible from the start as two tabs, so a new buyer sees “Create account” at once. The sign-up tab has the three fields of today’s sign-up page: Name, Email, Password.</p>
+<div class="frames">
+<div><p class="lbl">Desktop 1280 px · “Create account” tab selected</p>
+<div class="desk"><div class="hdr"><i class="dot"></i>SPINDLE</div>
+<div class="page"><div class="t">Ziggy Stardust · Verified listings</div><div class="li">VG+ · 2012 Remaster · Discos do Bairro, Porto · <b>€28</b></div></div>
+<div class="dim"></div>
+<div class="modal" style="left:170px;top:10px;width:300px;border-radius:20px"><span class="x">×</span>
+<h3>Continue to buy</h3><p class="sub">Spindle protects your payment: you need an account.</p>
+<div class="tabs"><span>Log in</span><span class="on">Create account</span></div>
+<div class="field" style="margin-top:6px"><label>Name</label><i></i></div><div class="field"><label>Email</label><i></i></div><div class="field"><label>Password</label><i></i></div>
+<div style="margin-top:12px"><span class="btn p w">Create account</span></div></div></div></div>
+<div><p class="lbl">Phone 375 px · “Log in” tab selected</p>
+<div class="phone"><div class="hdr"><i class="dot"></i>SPINDLE</div>
+<div class="page"><div class="t">Ziggy Stardust</div><div class="li">VG+ · 2012 Remaster · Discos do Bairro, Porto · <b>€28</b></div></div>
+<div class="dim"></div>
+<div class="modal" style="left:0;right:0;bottom:0;border-radius:24px 24px 0 0;border-bottom:0"><div class="grab"></div><span class="x" style="top:6px">×</span>
+<h3>Continue to buy</h3><p class="sub">Spindle protects your payment: you need an account.</p>
+<div class="tabs"><span class="on">Log in</span><span>Create account</span></div>
+<div class="field" style="margin-top:6px"><label>Email</label><i></i></div><div class="field"><label>Password</label><i></i></div>
+<div style="margin-top:12px"><span class="btn p w">Log in</span></div></div></div></div>
+</div><p class="why" style="margin-top:10px"><span class="ill">Illustrative data</span></p></section>
+
+<!-- OPTION C -->
+<section class="opt">
+<h2>Option C · Side panel with the order summary</h2>
+<p class="why">On desktop a panel slides in from the right, the page stays visible on the left. It shows the record and the total before the form. On phone it is a full-height sheet with a “Back to the record” button instead of a ×.</p>
+<div class="frames">
+<div><p class="lbl">Desktop 1280 px</p>
+<div class="desk"><div class="hdr"><i class="dot"></i>SPINDLE</div>
+<div class="page"><div class="t">Ziggy Stardust · Verified listings</div><div class="li">VG+ · 2012 Remaster · Discos do Bairro, Porto · <b>€28</b></div><div class="li">VG · 2012 Remaster · Private seller · <b>€31</b></div></div>
+<div class="dim" style="right:280px"></div>
+<div class="modal" style="right:0;top:0;bottom:0;width:280px;border-radius:0;border-right:0"><span class="x">×</span>
+<h3 style="margin-top:20px">Log in to buy</h3>
+<div class="sand" style="margin-top:6px"><b>Ziggy Stardust</b> · 2012 Remaster · VG+<br>Record €28.00 · Protection €4.90 · Shipping €2.00<br><b>Total €34.90</b></div>
+<div class="field"><label>Email</label><i></i></div><div class="field"><label>Password</label><i></i></div>
+<div style="margin-top:12px"><span class="btn p w">Log in and continue</span></div>
+<p class="note" style="text-align:center">No account? <span class="lnk">Create one</span></p></div></div></div>
+<div><p class="lbl">Phone 375 px</p>
+<div class="phone"><div class="modal" style="inset:0;border:0;border-radius:0;padding:16px">
+<h3 style="margin-top:6px">Log in to buy</h3>
+<div class="sand" style="margin-top:6px"><b>Ziggy Stardust</b> · 2012 Remaster · VG+<br>Record €28.00 · Protection €4.90 · Shipping €2.00<br><b>Total €34.90</b></div>
+<div class="field"><label>Email</label><i></i></div><div class="field"><label>Password</label><i></i></div>
+<div style="margin-top:12px"><span class="btn p w">Log in and continue</span></div>
+<p class="note" style="text-align:center">No account? <span class="lnk">Create one</span></p>
+<div style="margin-top:14px"><span class="btn o w">Back to the record</span></div></div></div></div>
+</div><p class="why" style="margin-top:10px"><span class="ill">Illustrative data</span></p></section>
+
+<!-- OPTION A · sign-up state -->
+<section class="opt">
+<h2>Option A · the “Create one” state</h2>
+<p class="why">Tapping “Create one” swaps the form inside the same window; the record summary stays. “Log in” brings the first state back. Fields are those of today’s sign-up page.</p>
+<div class="frames">
+<div><p class="lbl">Desktop 1280 px (scaled to 640)</p>
+<div class="desk"><div class="hdr"><i class="dot"></i>SPINDLE</div>
+<div class="page"><div class="t">Ziggy Stardust · Verified listings</div><div class="li">VG+ · 2012 Remaster · Discos do Bairro, Porto · <b>€28</b></div></div>
+<div class="dim"></div>
+<div class="modal" style="left:170px;top:10px;width:300px;border-radius:20px"><span class="x">×</span>
+<h3>Create an account to buy</h3><div class="sand" style="margin-top:6px"><b>Ziggy Stardust</b> · 2012 Remaster · VG+<br>Discos do Bairro, Porto · <b>€28</b></div>
+<div class="field"><label>Name</label><i></i></div><div class="field"><label>Email</label><i></i></div><div class="field"><label>Password</label><i></i></div>
+<div style="margin-top:12px"><span class="btn p w">Create account</span></div>
+<p class="note" style="text-align:center">Already have an account? <span class="lnk">Log in</span></p></div></div></div>
+<div><p class="lbl">Phone 375 px</p>
+<div class="phone"><div class="hdr"><i class="dot"></i>SPINDLE</div>
+<div class="page"><div class="t">Ziggy Stardust</div><div class="li">VG+ · 2012 Remaster · Discos do Bairro, Porto · <b>€28</b></div></div>
+<div class="dim"></div>
+<div class="modal" style="left:0;right:0;bottom:0;border-radius:24px 24px 0 0;border-bottom:0"><div class="grab"></div><span class="x" style="top:6px">×</span>
+<h3>Create an account to buy</h3><div class="sand" style="margin-top:6px"><b>Ziggy Stardust</b> · 2012 Remaster · VG+<br>Discos do Bairro, Porto · <b>€28</b></div>
+<div class="field"><label>Name</label><i></i></div><div class="field"><label>Email</label><i></i></div><div class="field"><label>Password</label><i></i></div>
+<div style="margin-top:12px"><span class="btn p w">Create account</span></div>
+<p class="note" style="text-align:center">Already have an account? <span class="lnk">Log in</span></p></div></div></div>
+</div><p class="why" style="margin-top:10px"><span class="ill">Illustrative data</span></p></section>
+
+<!-- OPTION A · state without a record (menu "Log in" and Sell) -->
+<section class="opt">
+<h2>Option A · state without a record</h2>
+<p class="why">Opened from the menu “Log in” link or from “Sell”: there is no record to show, so no summary. The title is “Log in” (menu) or “Log in to sell” (Sell). “Create one” swaps the form as in the other states. After logging in from the menu, the user stays on the page they were on.</p>
+<div class="frames">
+<div><p class="lbl">Desktop 1280 px (scaled to 640) · opened from the menu</p>
+<div class="desk"><div class="hdr"><i class="dot"></i>SPINDLE<span style="margin-left:auto;font-family:Inter,sans-serif;font-size:13px;font-weight:600;letter-spacing:0">Log in</span></div>
+<div class="page"><div class="t">Ziggy Stardust · Verified listings</div><div class="li">VG+ · 2012 Remaster · Discos do Bairro, Porto · <b>€28</b></div></div>
+<div class="dim"></div>
+<div class="modal" style="left:170px;top:60px;width:300px;border-radius:20px"><span class="x">×</span>
+<h3>Log in</h3><p class="sub">Welcome back.</p>
+<div class="field"><label>Email</label><i></i></div><div class="field"><label>Password</label><i></i></div>
+<div style="margin-top:12px"><span class="btn p w">Log in</span></div>
+<p class="note" style="text-align:center">No account? <span class="lnk">Create one</span></p></div></div></div>
+<div><p class="lbl">Phone 375 px · opened from Sell</p>
+<div class="phone"><div class="hdr"><i class="dot"></i>SPINDLE</div>
+<div class="page"><div class="t">Sell a record</div><div class="li">Search for the album you want to sell</div></div>
+<div class="dim"></div>
+<div class="modal" style="left:0;right:0;bottom:0;border-radius:24px 24px 0 0;border-bottom:0"><div class="grab"></div><span class="x" style="top:6px">×</span>
+<h3>Log in to sell</h3><p class="sub">Selling is free. You need an account.</p>
+<div class="field"><label>Email</label><i></i></div><div class="field"><label>Password</label><i></i></div>
+<div style="margin-top:12px"><span class="btn p w">Log in</span></div>
+<p class="note" style="text-align:center">No account? <span class="lnk">Create one</span></p></div></div></div>
+</div><p class="why" style="margin-top:10px"><span class="ill">Illustrative data</span></p></section>
+
+<p class="why">Same in all three: Esc, the × and a tap on the dimmed area close the window (not in C on phone, where “Back to the record” closes it). Wrong password shows the same message as today’s log-in page. While logging in, the shared loading mask covers the window; if it fails, the shared error screen with “Try again” keeps what was typed.</p>
+</body></html>

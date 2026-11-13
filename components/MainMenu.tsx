@@ -64,7 +64,8 @@ function Cell({ cell }: { cell: DesktopCell }) {
     return () => document.removeEventListener("keydown", onEsc);
   }, [shown]);
 
-  const text = `flex min-h-11 items-center gap-2 rounded-l-full pl-3.5 pr-1 text-[15px] ${
+  // A cell without a chevron (Log in, the signed-in initials) gets the same padding on both sides.
+  const text = `flex min-h-11 items-center gap-2 pl-3.5 text-[15px] ${cell.note ? "rounded-l-full pr-1" : "rounded-full pr-3.5"} ${
     cell.soon ? "font-medium text-cream/70" : "font-semibold"
   }`;
   return (

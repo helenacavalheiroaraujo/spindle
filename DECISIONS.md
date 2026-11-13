@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-13 — Story 27: log in in a window on the page, not on a separate page
+
+- **Decision:** when a signed-out user taps Buy, Continue to checkout, Add to cart, Sell or the menu "Log in" link, a window opens on the current page (design option A). The separate log-in and sign-up pages stay for a direct address and for Your account when signed out. This replaces the "separate log-in screen" step of story 9 for these actions.
+- **Why:** the owner found the extra navigation step confusing: the user leaves the record to see a generic screen. The window keeps the record visible.
+- **Links:** story 27; story 9; `docs/design/login-sheet-options.html` (option A).
+
 ## 2026-11-11 — Story 26: the buyer changes the buying order from the account page
 
 - **Decision:** a signed-in buyer with a saved order can change it on the account page (design option B: up and down arrows per row, and "Add a fourth option"). "Save my order" replaces the saved order; "Cancel" keeps it. This supersedes the story 23 line "there is no way to change the ranking from the account page".

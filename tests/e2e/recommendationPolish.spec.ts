@@ -60,7 +60,7 @@ test("reissue and first pressing are plain text; the ratings line has no second 
 
 // Version page: a version with no tracks shows no empty "Track list (0)" (bug, found on the version page).
 test("the version page shows no track list when the version has no tracks", async ({ page }) => {
-  await page.goto("/versions/20000000-0000-0000-0000-000000000036?priorities=price");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("First pressing");
+  await page.goto("/versions/20000000-0000-0000-0000-000000000007?priorities=price");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("2016");
   await expect(page.getByText(/^Track list/)).toHaveCount(0);
 });
