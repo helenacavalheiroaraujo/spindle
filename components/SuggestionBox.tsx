@@ -7,8 +7,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { suggest } from "@/app/actions";
 import type { AlbumSummary } from "@/lib/db/albums";
-import { isTooShort } from "@/lib/rules/albumSearch";
+import { isTooShort, SHORT_SEARCH_MESSAGE } from "@/lib/rules/albumSearch";
 import {
+  boxContent,
   moveHighlight,
   suggestionTag,
   type BoxContent,
@@ -39,7 +40,9 @@ export function useSuggestions(typed: string) {
   useEffect(() => {
     setHighlight(null);
     setNobodySelling(null);
-    if (!touched || short) return setState({ kind: "idle" });
+    if (!touched) return setState({ kind: "idle" });
+    // Under 3 characters no search runs: the rule says at once whether the box shows nothing or the hint (bug 26).
+    if (short) return setState({ kind: "done", content: boxContent<AlbumSummary>([], typed) });
     let current = true; // the box always shows the result of the last text typed
     setState((s) => ({
       kind: "loading",
@@ -72,7 +75,7 @@ export function useSuggestions(typed: string) {
         ? state.previous
         : undefined;
   const albums = content && "albums" in content ? content.albums : [];
-  const visible = touched && open && !short && state.kind !== "idle";
+  const visible = touched && open && state.kind !== "idle" && content?.kind !== "none";
 
   function onKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Escape") return setOpen(false);
@@ -136,6 +139,9 @@ export function SuggestionList({
             message="We couldn't load the albums. Check your connection."
             onRetry={retry}
           />
+        )}
+        {content?.kind === "tooShort" && (
+          <p className="p-4 font-medium">{SHORT_SEARCH_MESSAGE}</p>
         )}
         {content?.kind === "empty" && (
           <p className="p-4 font-medium">No albums found</p>

@@ -14,12 +14,12 @@
 1. **Account → Buying priorities → Change → move Sound up → Save my order** → the account shows the new order, and the next recommendation uses it.
 
 ## Acceptance criteria
-- [ ] Signed in with a saved order: the account page shows "Change" in the Buying priorities section
-- [ ] The arrows move a row one place up or down; the top row has no up arrow and the bottom row has no down arrow
-- [ ] "Add a fourth option" adds the missing option at the end of the order
-- [ ] "Save my order" replaces the saved order; the next recommendation uses it
-- [ ] "Cancel" keeps the saved order as it was
-- [ ] Checked at 375 px and 1280 px
+- [x] Signed in with a saved order: the account page shows "Change" in the Buying priorities section
+- [x] The arrows move a row one place up or down; the top row has no up arrow and the bottom row has no down arrow
+- [x] "Add a fourth option" adds the missing option at the end of the order
+- [x] "Save my order" replaces the saved order; the next recommendation uses it
+- [x] "Cancel" keeps the saved order as it was
+- [x] Checked at 375 px and 1280 px
 
 ## Out of scope
 - Changing the order from the recommendation page (story 3 "Change" stays as it is)

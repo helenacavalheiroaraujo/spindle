@@ -11,6 +11,8 @@ import type { ShippingAddress } from "@/lib/rules/shippingAddress";
 import { confirmReceipt } from "@/lib/db/orders";
 import { addReview } from "@/lib/db/reviews";
 import { isValidRating } from "@/lib/rules/sellerRating";
+import { saveRanking } from "@/lib/db/preferences";
+import { parsePriorities } from "@/lib/rules/priorities";
 
 export type LogOutState = { failed: boolean };
 
@@ -120,4 +122,22 @@ export async function sendMessageAction(orderId: string, _prev: MessageState, fo
   revalidatePath("/account");
   revalidatePath("/my-listings");
   return { status: "done", text: checked.text };
+}
+
+// "Save my order" (story 26): replaces the saved buying order. The order is read through the same rule as the address.
+// "ready" without a change: nothing valid was sent. "failed": anything unexpected (the error screen offers "Try again").
+export type RankingState = { status: "ready" | "done" | "failed" };
+
+export async function saveRankingAction(_prev: RankingState, form: FormData): Promise<RankingState> {
+  const ranking = parsePriorities(String(form.get("ranking") ?? ""));
+  if (ranking.length === 0) return { status: "ready" };
+  try {
+    const userId = await currentUserId();
+    if (!userId) return { status: "failed" };
+    await saveRanking(userId, ranking);
+  } catch {
+    return { status: "failed" };
+  }
+  revalidatePath("/account");
+  return { status: "done" };
 }

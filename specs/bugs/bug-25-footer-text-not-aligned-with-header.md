@@ -1,6 +1,6 @@
 # Bug 25 · Footer text not aligned with header text
 
-> Found 2026-11-11. Status: open.
+> Found 2026-11-11. Status: fixed 2026-11-11 (commit 60c958b).
 
 ## Description
 The left edge of the text in the footer is not aligned with the left edge of the text in the header.

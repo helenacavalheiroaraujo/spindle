@@ -1,6 +1,6 @@
 # Bug 26 · No hint when the search text is under 3 characters
 
-> Found in manual testing · 2026-11-13. Status: open.
+> Found in manual testing · 2026-11-13. Status: fixed 2026-11-13 (hint inside the suggestion box; DECISIONS 2026-11-13, bug 26).
 
 ## Description
 When the user types in the search bar and has not yet typed 3 characters, no message says that at least 3 characters are needed. The user cannot tell why no albums appear.

@@ -13,11 +13,23 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
-test("fewer than 3 characters: no box", async ({ page }) => {
+test("fewer than 3 characters: the box says to type at least 3, with no albums (bug 26)", async ({ page }) => {
   await typeOnly(page, "bo");
-  await page.waitForTimeout(600); // longer than the typing pause: a box would have appeared by now
+  await expect(page.getByText("Type at least 3 characters to search.")).toBeVisible();
   await expect(list(page)).toHaveCount(0);
   await expect(page.getByText("No albums found")).toHaveCount(0);
+  await box(page).press("ArrowDown"); // nothing to highlight; Enter still opens the results page as before
+  await expect(page.locator("[aria-current=true]")).toHaveCount(0);
+  await typeOnly(page, "bow");
+  await expect(page.getByText("Type at least 3 characters to search.")).toHaveCount(0);
+  await expect(rows(page).first()).toBeVisible();
+});
+
+test("search text cleared: no box", async ({ page }) => {
+  await typeOnly(page, "b");
+  await expect(page.getByText("Type at least 3 characters to search.")).toBeVisible();
+  await typeOnly(page, "");
+  await expect(page.getByText("Type at least 3 characters to search.")).toHaveCount(0);
 });
 
 test("'bowie': up to 4 albums newest first, with cover, artist, year and tag, and the 'See all' line", async ({ page }) => {
@@ -115,4 +127,11 @@ test("a failed load shows the error screen with 'Try again', and keeps the typed
   fail = false;
   await alert.getByRole("button", { name: "Try again" }).click();
   await expect(rows(page)).toHaveCount(4);
+});
+
+test("on the results page the search box also says to type at least 3 (header on desktop, page box on phone · bug 26)", async ({ page }) => {
+  await page.goto("/search?q=bowie");
+  await typeOnly(page, "zi");
+  await expect(page.getByText("Type at least 3 characters to search.")).toBeVisible();
+  await expect(list(page)).toHaveCount(0);
 });

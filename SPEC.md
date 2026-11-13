@@ -203,3 +203,9 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 25 | "Reissue", "first pressing" and "reissue" are plain text; the ratings line has no second label | `app/albums/[albumId]/recommendation/page.tsx` | `tests/e2e/recommendationPolish.spec.ts` |
 | 25 | No "Shop" tag next to the seller name | `components/SellerLine.tsx` | `tests/e2e/listings.spec.ts` |
 | 25 | Visible space between "Buy" and "Add to cart" | `components/ListingList.tsx` | Not tested automatically |
+| 26 | Signed in with a saved order: the account page shows "Change" in Buying priorities | `app/account/PrioritiesSection.tsx`, `app/account/page.tsx` | `tests/e2e/changePriorities.spec.ts`, `tests/e2e/accountPriorities.spec.ts` |
+| 26 | The arrows move a row one place; no up arrow on the top row, no down arrow on the bottom row | `lib/rules/priorities.ts`, `app/account/PrioritiesSection.tsx` | `tests/unit/changePriorities.test.ts`, `tests/e2e/changePriorities.spec.ts` |
+| 26 | One "Add …" line per missing option adds it at the end of the order (DECISIONS 2026-11-13) | `lib/rules/priorities.ts`, `app/account/PrioritiesSection.tsx` | `tests/unit/changePriorities.test.ts`, `tests/e2e/changePriorities.spec.ts` |
+| 26 | "Save my order" replaces the saved order; the next recommendation uses it | `app/account/actions.ts`, `lib/db/preferences.ts` | `tests/e2e/changePriorities.spec.ts` |
+| 26 | "Cancel" keeps the saved order as it was | `app/account/PrioritiesSection.tsx` | `tests/e2e/changePriorities.spec.ts` |
+| 26 | Checked at 375 px and 1280 px; loading mask "Saving…" and error screen with "Try again" | `app/account/PrioritiesSection.tsx` | `tests/e2e/changePriorities.spec.ts` (both sizes; mask and error screen not tested automatically) |

@@ -68,6 +68,7 @@ test("a saved ranking is listed on the account page in saved order, numbered fro
   await expect(items.nth(0)).toContainText("Condition");
   await expect(items.nth(1)).toContainText("Sound");
   await expect(items.nth(2)).toContainText("Price");
-  await expect(section(page).getByRole("button")).toHaveCount(0);
+  // Story 26: the only button is "Change" (DECISIONS 2026-11-11).
+  await expect(section(page).getByRole("button")).toHaveText(["Change"]);
   await screenshot(page, 23, "account-priorities");
 });

@@ -50,3 +50,31 @@ export function accountPriorityLines(ranking: Priority[] | null): { rank: number
   if (!ranking || ranking.length === 0) return [];
   return ranking.map((id, i) => ({ rank: i + 1, label: PRIORITIES.find((p) => p.id === id)!.label }));
 }
+
+// "Change" on the account page (story 26, design option B): each row moves one place up or down.
+// The top row cannot go up and the bottom row cannot go down; the order is returned unchanged then.
+export function movePriority(ranking: Priority[], priority: Priority, direction: "up" | "down"): Priority[] {
+  const i = ranking.indexOf(priority);
+  const j = direction === "up" ? i - 1 : i + 1;
+  if (i === -1 || j < 0 || j >= ranking.length) return ranking;
+  const moved = [...ranking];
+  [moved[i], moved[j]] = [moved[j], moved[i]];
+  return moved;
+}
+
+// Which arrows a row shows: no up arrow on the top row, no down arrow on the bottom row (story 26).
+export function rowArrows(ranking: Priority[], priority: Priority): { up: boolean; down: boolean } {
+  const i = ranking.indexOf(priority);
+  if (i === -1) return { up: false, down: false };
+  return { up: i > 0, down: i < ranking.length - 1 };
+}
+
+// The options not yet in the order, each shown as its own "Add …" line (story 26 · DECISIONS 2026-11-13).
+// Adding one puts it at the end of the order.
+export function missingPriorities(ranking: Priority[]): { id: Priority; label: string }[] {
+  return PRIORITIES.filter((p) => !ranking.includes(p.id)).map(({ id, label }) => ({ id, label }));
+}
+
+export function addPriority(ranking: Priority[], priority: Priority): Priority[] {
+  return ranking.includes(priority) ? ranking : [...ranking, priority];
+}

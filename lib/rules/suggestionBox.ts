@@ -1,19 +1,20 @@
 // Suggestion box under the search box (story 16): one place, covered by tests/unit/suggestionBox.test.ts.
 // Same matching as story 1: searchAlbums for the albums, searchSuggestions for "Did you mean…?".
-import { isTooShort, searchAlbums, type SearchableAlbum } from "./albumSearch";
+import { isTooShort, normalize, searchAlbums, type SearchableAlbum } from "./albumSearch";
 import { searchSuggestions } from "./searchSuggestions";
 import type { AlbumAccess } from "./albumAccess";
 
 export const MAX_BOX_ALBUMS = 4;
 
 export type BoxContent<T> =
-  | { kind: "none" } // fewer than 3 characters: no box
+  | { kind: "none" } // nothing typed (spaces do not count): no box
+  | { kind: "tooShort" } // 1 or 2 characters: the box says "Type at least 3 characters to search." (bug 26)
   | { kind: "albums"; albums: T[] } // up to 4, newest first, then "See all results"
   | { kind: "didYouMean"; albums: T[] } // a typo: up to 3 close albums
   | { kind: "empty" }; // "No albums found"
 
 export function boxContent<T extends SearchableAlbum>(all: T[], typed: string): BoxContent<T> {
-  if (isTooShort(typed)) return { kind: "none" };
+  if (isTooShort(typed)) return normalize(typed).length === 0 ? { kind: "none" } : { kind: "tooShort" };
   const found = searchAlbums(all, typed);
   if (found.length > 0) return { kind: "albums", albums: found.slice(0, MAX_BOX_ALBUMS) };
   const close = searchSuggestions(all, typed);

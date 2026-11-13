@@ -10,9 +10,13 @@ const content = (typed: string) => {
 
 describe("boxContent", () => {
   it.each([
-    ["", "none", []],
-    ["bo", "none", []], // fewer than 3 characters: no box
-    ["  b ", "none", []],
+    ["", "none", []], // nothing typed: no box
+    ["   ", "none", []], // spaces only count as nothing
+    ["b", "tooShort", []], // 1 or 2 characters: the box says to type at least 3 (bug 26)
+    ["bo", "tooShort", []],
+    ["  b ", "tooShort", []], // spaces do not count
+    ["bj", "tooShort", []],
+    ["bjö", "albums", ["Homogenic"]], // accents do not count either: 3 characters
     ["bowie", "albums", ["Blackstar", "Let's Dance", ZIGGY, "Hunky Dory"]],
     ["BOWIE", "albums", ["Blackstar", "Let's Dance", ZIGGY, "Hunky Dory"]],
     ["bjork", "albums", ["Homogenic"]], // accents ignored

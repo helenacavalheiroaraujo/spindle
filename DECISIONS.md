@@ -3,6 +3,18 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-13 — Bug 26: the suggestion box says why nothing is found under 3 characters
+
+- **Decision:** when a buyer has typed 1 or 2 characters in a search box (spaces and accents do not count), the suggestion box opens under the field with only "Type at least 3 characters to search." (the story 17 text). With nothing typed, no box is shown. No search runs and nothing can be highlighted with the arrow keys. This applies to every search box with suggestions: home, results page and the desktop header. It supersedes the story 16 criterion "With fewer than 3 characters, no box is shown"; the story 16 file is not changed.
+- **Why:** in manual testing the buyer could not tell why no albums appeared while typing (bug 26). The owner chose the hint inside the suggestion box over a fixed line under the field or a hint only on Enter.
+- **Links:** bug 26; story 16; story 17; `lib/rules/suggestionBox.ts`; `tests/unit/suggestionBox.test.ts`; `tests/e2e/suggestions.spec.ts`.
+
+## 2026-11-13 — Story 26: one "Add …" line per missing option
+
+- **Decision:** in "Change", each option not yet in the saved order has its own line, "Add Sound", "Add Condition", and so on. Each one adds that option at the end. With 3 options saved there is one line, which names the option instead of "Add a fourth option" as in the design. The top row has no up arrow and the bottom row has no down arrow: the space stays empty, with no greyed arrow. The button is "Change", as in the story; the design said "Edit".
+- **Why:** a saved order can have 1 to 4 options, so "a fourth option" did not fit every case. Chosen by the owner.
+- **Links:** story 26; `docs/design/account-change-priorities-options.html` (option B); `lib/rules/priorities.ts`; `tests/unit/changePriorities.test.ts`; `tests/e2e/changePriorities.spec.ts`.
+
 ## 2026-11-13 — Story 27: log in in a window on the page, not on a separate page
 
 - **Decision:** when a signed-out user taps Buy, Continue to checkout, Add to cart, Sell or the menu "Log in" link, a window opens on the current page (design option A). The separate log-in and sign-up pages stay for a direct address and for Your account when signed out. This replaces the "separate log-in screen" step of story 9 for these actions.
