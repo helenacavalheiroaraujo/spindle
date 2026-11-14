@@ -67,7 +67,7 @@ test("a crate opens the genre screen: only that genre's albums, newest first, ro
   await expect(page.getByText("Homogenic")).toHaveCount(0);
   await screenshot(page, 12, "genre-rock");
 
-  // Genre taps: no listings → its own page with the message (bug 17); opens → priorities; not in the demo → does nothing.
+  // Genre taps: every album opens its album page (bug 17, story 28); not in the demo → does nothing.
   await blackstar.getByRole("link").click();
   await expect(page).toHaveURL(/\/albums\/[0-9a-f-]+$/);
   await expect(page.getByRole("heading", { level: 2, name: "Nobody is selling this album right now" })).toBeVisible();
@@ -75,14 +75,14 @@ test("a crate opens the genre screen: only that genre's albums, newest first, ro
   await page.goBack();
   await expect(page).toHaveURL("/genres/rock");
   await ziggyRow.getByRole("link").click();
-  await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001\/priorities$/);
+  await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001$/);
 });
 
 test("Rock, Soul and funk and Electronic open at least one album on sale", async ({ page }) => {
   for (const [slug, album] of [["soul-and-funk", "Let's Dance"], ["electronic", "Megalithic Symphony"]]) {
     await page.goto(`/genres/${slug}`);
     await page.getByRole("listitem").filter({ hasText: album }).getByRole("link").click();
-    await expect(page.getByRole("heading", { name: "What matters most to you?" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Help me choose a version" })).toBeVisible();
   }
 });
 
@@ -101,7 +101,7 @@ test("showcase genres (Jazz, Fado, Hip-hop) open their album with 'No listings';
 test("'This weekend' opens the featured album; 'For sellers' opens selling", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("link", { name: "See which to buy" }).click();
-  await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001\/priorities$/);
+  await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001$/);
   await page.goto("/");
   await page.getByRole("link", { name: "Sell a record" }).click();
   // Signed out: the log-in window opens on the page (story 27).

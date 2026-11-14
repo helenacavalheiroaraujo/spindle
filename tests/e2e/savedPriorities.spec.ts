@@ -67,6 +67,15 @@ test("a signed-in buyer's ranking is saved, reused on the next album, and replac
   await page.waitForURL(`**/albums/${ZIGGY_ID}/recommendation?priorities=price,sound`);
   expect(await savedRanking()).toEqual(["price", "sound"]);
 
+  // Album page with a saved ranking (story 28): "See your recommendation · Based on: Price, Sound · Change".
+  await page.goto(`/albums/${ZIGGY_ID}`);
+  await expect(page.getByRole("link", { name: "Help me choose a version" })).toHaveCount(0);
+  await expect(page.getByText("Based on: Price, Sound")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Change" })).toHaveAttribute("href", `/albums/${ZIGGY_ID}/priorities?priorities=price,sound`);
+  await screenshot(page, 28, "album-page-saved-ranking");
+  await page.getByRole("link", { name: "See your recommendation" }).click();
+  await page.waitForURL(`**/albums/${ZIGGY_ID}/recommendation?priorities=price,sound`);
+
   // Next album → the screen is skipped; the recommendation shows the saved ranking and "Change".
   await page.goto(`/albums/${HUNKY_DORY_ID}/priorities`);
   await page.waitForURL(`**/albums/${HUNKY_DORY_ID}/recommendation?priorities=price,sound`);

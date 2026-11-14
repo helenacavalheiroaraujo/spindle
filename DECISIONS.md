@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-14 — Story 28: tapping an album always opens its album page
+
+- **Decision:** every album tap opens `/albums/[id]`. Only the action card changes: "Help me choose a version" (no saved ranking), "See your recommendation · Based on: … · Change" (saved ranking; "Change" opens the priorities screen with the ranking filled in, as story 3), "Nobody is selling this album right now" (no listings). On phone the album cover is 60% of the width on every album page, including the story 21 page, so the action button shows without scrolling. If MusicBrainz fails, the track list comes from the album's earliest version in the database, without "Bonus" tracks. This supersedes the tap rules of stories 1, 2, 12, 16 and 17 ("tap an album → priorities screen"); their files are not changed.
+- **Why:** in manual tests, signed in and out, the same tap led to three different places, so navigation felt incoherent. The buyer wants to be sure what they are buying before choosing. Option A of the brainstorm (one album page) was chosen over keeping three destinations. The smaller cover (A′) was chosen because with option A the button fell below the first screen on phone.
+- **Links:** story 28; story 21; `docs/design/album-page-with-listings-options.html` (option A′).
+
 ## 2026-11-14 — Bug 28: an album with no listings opens its own page from search too
 
 - **Decision:** in the search suggestion box (home, results page and desktop header) and on the search results page (`/search`), clicking an album with no listings opens its own page (`/albums/[id]`), the same page used on the genre screen since bug 17. The dark "Nobody is selling" card above the results is removed everywhere. On hover, and when the row is highlighted with the arrow keys, the "No listings" tag on that row reads "Nobody is selling this album right now". On a touch screen there is no hover: a tap opens the album's page, which already shows the message.

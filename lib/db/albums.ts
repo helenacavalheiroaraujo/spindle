@@ -76,6 +76,23 @@ export async function getAlbumHeader(albumId: string): Promise<AlbumHeader | nul
   return { id: data.id, title: data.title, artist: data.artist, coverUrl: data.cover_url, versionCount: data.versions.length };
 }
 
+// Every version's year and tracks, sorted by position, for the album page's fallback track list (story 28).
+export async function getVersionTracks(
+  albumId: string,
+): Promise<{ releaseYear: number; tracks: { position: string; title: string; isExtra: boolean }[] }[]> {
+  const { data, error } = await db()
+    .from("versions")
+    .select("release_year, tracks (position, title, is_extra)")
+    .eq("album_id", albumId);
+  if (error) throw error;
+  return data.map((v) => ({
+    releaseYear: v.release_year,
+    tracks: [...v.tracks]
+      .sort((a, b) => a.position.localeCompare(b.position, "en", { numeric: true }))
+      .map((t) => ({ position: t.position, title: t.title, isExtra: t.is_extra })),
+  }));
+}
+
 // --- Sell (story 8) ---------------------------------------------------------
 
 export type SellVersion = { id: string; name: string; releaseYear: number; country: string; label: string; format: string };

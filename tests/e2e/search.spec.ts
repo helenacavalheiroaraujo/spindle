@@ -120,10 +120,11 @@ test("3 letters with no match, or nothing close, shows only 'No albums found'", 
   }
 });
 
-test("tapping an album with active listings opens the priorities screen", async ({ page }) => {
+test("tapping an album with active listings opens its album page (story 28)", async ({ page }) => {
   await typeSearch(page, "ziggy");
   await rows(page).filter({ hasText: ZIGGY }).getByRole("link").click();
-  await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001\/priorities$/);
+  await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001$/);
+  await expect(page.getByRole("link", { name: "Help me choose a version" })).toBeVisible();
 });
 
 test("tapping an album with no listings opens its own page (bug 28)", async ({ page }) => {

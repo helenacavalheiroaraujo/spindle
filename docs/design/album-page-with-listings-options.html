@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Album page with listings: three options</title>
+<!-- Proposal (2026-11-14, option A of the brainstorm): tapping an album always opens its album page.
+     Only the action block changes: no saved ranking -> "Help me choose a version"; saved ranking ->
+     "See your recommendation · Based on: Price, Sound"; no listings -> "Nobody is selling this album right now" (story 21, unchanged).
+     Three layouts for the album WITH listings, each at 375 px (both states) and 1280 px. Nothing is built.
+     Example text for Ziggy Stardust; the real details come from MusicBrainz and Wikipedia. No card or bank details. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:#e9e3d8;color:#1d2433;font-size:15px;line-height:1.45;padding:32px}
+.hd{font-family:'Barlow Condensed',sans-serif;font-weight:600}
+h1.page{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:36px}
+.sub{color:#4a5163;font-size:15px;margin:6px 0 28px;max-width:90ch}
+.opt{background:#faf7f1;border:1px solid #1d2433;border-radius:24px;padding:24px 28px 32px;margin-bottom:48px}
+.opt > h2{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:30px}
+.opt > p.why{color:#4a5163;margin:4px 0 20px;max-width:100ch}
+.row{display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap}
+.label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#4a5163;margin-bottom:10px}
+.frame{border:1px solid #1d2433;border-radius:22px;background:#f4efe6;overflow:hidden;position:relative}
+.phone{width:375px;min-height:760px}
+.phone .in{padding:0 16px 28px}
+.desk{width:1280px;margin-top:28px}
+.desk .in{padding:0 48px 48px}
+/* header */
+.bar{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid #e2dacb;margin-bottom:16px}
+.desk .bar{background:#1d2433;color:#f4efe6;padding:16px 48px;border:0;margin-bottom:32px}
+.logo{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px}
+.icons{display:flex;gap:10px}
+.icons span{width:30px;height:30px;border-radius:999px;border:1px solid currentColor;opacity:.6}
+.back{font-weight:600;font-size:14px;text-decoration:underline;display:inline-block;margin-bottom:12px}
+/* pieces */
+.cover{border-radius:16px;overflow:hidden;background:#5a3a24;aspect-ratio:1/1;border:1px solid rgba(29,36,51,.2)}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.title{font-size:36px;line-height:1.02}
+.artist{color:#4a5163;font-size:16px;margin-top:4px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;background:#1d2433;color:#f4efe6;border-radius:999px;font-weight:600;font-size:17px;min-height:56px;padding:0 24px;text-align:center}
+.btn.out{background:transparent;color:#1d2433;border:1.5px solid #1d2433}
+.based{font-size:14px;color:#4a5163;margin-top:10px;text-align:center}
+.based a{color:#1d2433;font-weight:600;text-decoration:underline}
+.act{background:#f1e6d0;border:1px solid #e2dacb;border-radius:20px;padding:20px}
+.act h3{font-size:26px;line-height:1.08}
+.act p{color:#4a5163;margin:6px 0 16px}
+.facts{border:1px solid #e2dacb;border-radius:20px;background:#fbf8f2;padding:2px 20px}
+.facts div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid #e2dacb}
+.facts div:last-child{border-bottom:0}
+.facts dt{color:#4a5163} .facts dd{font-weight:600;text-align:right}
+.sec{font-size:24px;margin-top:24px}
+.about p{margin-top:6px}
+.link{display:inline-block;margin-top:6px;font-weight:600;text-decoration:underline}
+.tracks{margin-top:8px;border:1px solid #e2dacb;border-radius:20px;background:#fbf8f2;padding:2px 20px;list-style:none}
+.tracks li{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid #e2dacb}
+.tracks li:last-child{border-bottom:0}
+.tracks .n{color:#4a5163;width:22px;font-weight:600}
+.pill{display:inline-block;border:1px solid #e2dacb;border-radius:999px;padding:3px 10px;font-size:12px;color:#4a5163;margin-top:20px}
+.fade{color:#4a5163;font-size:14px;margin-top:8px}
+.mt16{margin-top:16px}.mt20{margin-top:20px}.mt24{margin-top:24px}
+/* option B: sticky bar */
+.sticky{position:absolute;left:0;right:0;bottom:0;background:#f4efe6;border-top:1px solid #e2dacb;padding:12px 16px 16px;box-shadow:0 -6px 16px rgba(29,36,51,.08)}
+.sticky .based{margin-top:6px}
+.dsticky{position:sticky;top:24px}
+/* option C: compact head */
+.head{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center}
+.head .title{font-size:30px}
+.disc{border:1px solid #e2dacb;border-radius:20px;background:#fbf8f2;margin-top:12px}
+.disc summary{list-style:none;display:flex;justify-content:space-between;padding:16px 20px;font-weight:600}
+.disc summary::after{content:"⌄";font-size:18px;line-height:1}
+.disc.open summary::after{content:"⌃"}
+.disc .body{padding:0 20px 16px;color:#1d2433}
+.note{font-size:13px;color:#4a5163;margin-top:14px}
+.tag{display:inline-block;background:#1d2433;color:#f4efe6;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;margin-left:8px;vertical-align:middle}
+/* option A′: smaller cover on phone, so the action button is on the first screen */
+.cover.small{width:60%;margin:0 auto}
+.phone .title.ap{font-size:30px;margin-top:16px}
+.fold{position:absolute;left:0;right:0;top:680px;border-top:2px dashed #a8403a}
+.fold span{position:absolute;right:8px;top:-20px;font-size:11px;font-weight:600;color:#a8403a;background:#f4efe6;padding:0 4px}
+</style></head><body>
+
+<h1 class="page">Album page with listings · three options</h1>
+<p class="sub">Tapping an album always opens this page. Only the action block changes. Each option shows the phone in both states (no saved priorities / saved priorities) and the desktop. Example album: Ziggy Stardust. Example text, real details come from MusicBrainz and Wikipedia.</p>
+
+<!-- ============================ OPTION A ============================ -->
+<section class="opt">
+  <h2>Option A · Action card right under the title</h2>
+  <p class="why">Same order as the approved page without listings (story 21): the sand card that now says "Nobody is selling…" becomes the action card, with a large navy button. Details follow below. Desktop: cover and facts left, title and action card right, as in the current album page.</p>
+  <div class="row">
+    <div>
+      <p class="label">Phone · 375 px · no saved priorities</p>
+      <div class="frame phone"><div class="bar"><span class="logo">Spindle</span><span class="icons"><span></span><span></span></span></div><div class="in">
+        <div class="cover"><img src="https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500" alt=""></div>
+        <h2 class="hd title mt20">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</h2>
+        <p class="artist">David Bowie · 1972</p>
+        <div class="act mt20">
+          <h3 class="hd">Several versions are on sale</h3>
+          <p>Tell us what matters to you and we pick one for you.</p>
+          <div class="btn">Help me choose a version</div>
+        </div>
+        <dl class="facts mt20"><div><dt>Released</dt><dd>16 June 1972</dd></div><div><dt>Label</dt><dd>RCA Victor</dd></div></dl>
+        <div class="about"><h3 class="hd sec">About David Bowie</h3><p>David Robert Jones, known as David Bowie, was an English singer-songwriter and actor…</p></div>
+      </div></div>
+    </div>
+    <div>
+      <p class="label">Phone · 375 px · saved priorities</p>
+      <div class="frame phone"><div class="bar"><span class="logo">Spindle</span><span class="icons"><span></span><span></span></span></div><div class="in">
+        <div class="cover"><img src="https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500" alt=""></div>
+        <h2 class="hd title mt20">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</h2>
+        <p class="artist">David Bowie · 1972</p>
+        <div class="act mt20">
+          <h3 class="hd">Your recommendation is ready</h3>
+          <p>We picked a version using your priorities.</p>
+          <div class="btn">See your recommendation</div>
+          <p class="based">Based on: Price, Sound · <a>Change</a></p>
+        </div>
+        <dl class="facts mt20"><div><dt>Released</dt><dd>16 June 1972</dd></div><div><dt>Label</dt><dd>RCA Victor</dd></div></dl>
+      </div></div>
+    </div>
+  </div>
+  <p class="label" style="margin-top:28px">Desktop · 1280 px · no saved priorities</p>
+  <div class="frame desk" style="margin-top:0"><div class="bar"><span class="logo">Spindle</span><span class="icons"><span></span><span></span></span></div><div class="in">
+    <div style="display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:start">
+      <div>
+        <div class="cover"><img src="https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500" alt=""></div>
+        <dl class="facts mt20"><div><dt>Released</dt><dd>16 June 1972</dd></div><div><dt>Label</dt><dd>RCA Victor</dd></div></dl>
+      </div>
+      <div>
+        <h2 class="hd title" style="font-size:52px">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</h2>
+        <p class="artist">David Bowie · 1972</p>
+        <div class="act mt24" style="display:flex;justify-content:space-between;align-items:center;gap:24px">
+          <div><h3 class="hd">Several versions are on sale</h3><p style="margin-bottom:0">Tell us what matters to you and we pick one for you.</p></div>
+          <div class="btn" style="flex:none">Help me choose a version</div>
+        </div>
+        <div class="about"><h3 class="hd sec">About David Bowie</h3><p>David Robert Jones, known as David Bowie, was an English singer-songwriter and actor. A leading figure in popular music, he was known for his reinvention and visual presentation…</p><a class="link">Read more on Wikipedia</a></div>
+        <h3 class="hd sec">Track list</h3>
+        <ol class="tracks"><li><span class="n">1</span>Five Years</li><li><span class="n">2</span>Soul Love</li><li><span class="n">3</span>Moonage Daydream</li><li><span class="n">4</span>Starman</li><li><span class="n">…</span>7 more</li></ol>
+        <span class="pill">Source: MusicBrainz · Wikipedia</span>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============================ OPTION A′ ============================ -->
+<section class="opt" id="a-prime">
+  <h2>Option A′ · Option A with a smaller cover on phone (chosen 2026-11-14, for approval)</h2>
+  <p class="why">Same as option A, but on phone the cover is 60% of the width and centred, so the action button sits on the first screen. The same smaller cover applies to the album with no listings, so every album page looks the same. Desktop is unchanged from option A. The dashed line marks the end of the first screen on a 375 × 812 phone with the browser bars (about 680 px).</p>
+  <div class="row">
+    <div>
+      <p class="label">Phone · 375 px · no saved priorities</p>
+      <div class="frame phone"><div class="fold"><span>end of first screen</span></div><div class="bar"><span class="logo">Spindle</span><span class="icons"><span></span><span></span></span></div><div class="in">
+        <div class="cover small"><img src="https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500" alt=""></div>
+        <h2 class="hd title ap">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</h2>
+        <p class="artist">David Bowie · 1972</p>
+        <div class="act mt16">
+          <h3 class="hd">Several versions are on sale</h3>
+          <p>Tell us what matters to you and we pick one for you.</p>
+          <div class="btn">Help me choose a version</div>
+        </div>
+        <dl class="facts mt20"><div><dt>Released</dt><dd>16 June 1972</dd></div><div><dt>Label</dt><dd>RCA Victor</dd></div></dl>
+        <div class="about"><h3 class="hd sec">About David Bowie</h3><p>David Robert Jones, known as David Bowie, was an English singer-songwriter and actor…</p></div>
+      </div></div>
+    </div>
+    <div>
+      <p class="label">Phone · 375 px · saved priorities</p>
+      <div class="frame phone"><div class="fold"><span>end of first screen</span></div><div class="bar"><span class="logo">Spindle</span><span class="icons"><span></span><span></span></span></div><div class="in">
+        <div class="cover small"><img src="https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500" alt=""></div>
+        <h2 class="hd title ap">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</h2>
+        <p class="artist">David Bowie · 1972</p>
+        <div class="act mt16">
+          <h3 class="hd">Your recommendation is ready</h3>
+          <p>We picked a version using your priorities.</p>
+          <div class="btn">See your recommendation</div>
+          <p class="based">Based on: Price, Sound · <a>Change</a></p>
+        </div>
+        <dl class="facts mt20"><div><dt>Released</dt><dd>16 June 1972</dd></div><div><dt>Label</dt><dd>RCA Victor</dd></div></dl>
+      </div></div>
+    </div>
+    <div>
+      <p class="label">Phone · 375 px · no listings (story 21 text)</p>
+      <div class="frame phone"><div class="fold"><span>end of first screen</span></div><div class="bar"><span class="logo">Spindle</span><span class="icons"><span></span><span></span></span></div><div class="in">
+        <div class="cover small"><img src="https://coverartarchive.org/release-group/8e8a594f-2175-38c7-a871-abb68ec363e7/front-500" alt=""></div>
+        <h2 class="hd title ap">Kind of Blue</h2>
+        <p class="artist">Miles Davis · 1959</p>
+        <div class="act mt16">
+          <h3 class="hd">Nobody is selling this album right now</h3>
+          <p style="margin-bottom:0">Check back later, or browse other albums in this genre.</p>
+        </div>
+        <dl class="facts mt20"><div><dt>Released</dt><dd>17 August 1959</dd></div><div><dt>Label</dt><dd>Columbia</dd></div></dl>
+        <div class="about"><h3 class="hd sec">About Miles Davis</h3><p>Miles Dewey Davis III was an American trumpeter, bandleader and composer…</p></div>
+      </div></div>
+    </div>
+  </div>
+  <p class="label" style="margin-top:28px">Desktop · 1280 px · saved priorities (layout as option A)</p>
+  <div class="frame desk" style="margin-top:0"><div class="bar"><span class="logo">Spindle</span><span class="icons"><span></span><span></span></span></div><div class="in">
+    <div style="display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:start">
+      <div>
+        <div class="cover"><img src="https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500" alt=""></div>
+        <dl class="facts mt20"><div><dt>Released</dt><dd>16 June 1972</dd></div><div><dt>Label</dt><dd>RCA Victor</dd></div></dl>
+      </div>
+      <div>
+        <h2 class="hd title" style="font-size:52px">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</h2>
+        <p class="artist">David Bowie · 1972</p>
+        <div class="act mt24" style="display:flex;justify-content:space-between;align-items:center;gap:24px">
+          <div><h3 class="hd">Your recommendation is ready</h3><p style="margin-bottom:0">We picked a version using your priorities.</p></div>
+          <div style="flex:none"><div class="btn">See your recommendation</div><p class="based">Based on: Price, Sound · <a>Change</a></p></div>
+        </div>
+        <div class="about"><h3 class="hd sec">About David Bowie</h3><p>David Robert Jones, known as David Bowie, was an English singer-songwriter and actor. A leading figure in popular music, he was known for his reinvention and visual presentation…</p><a class="link">Read more on Wikipedia</a></div>
+        <h3 class="hd sec">Track list</h3>
+        <ol class="tracks"><li><span class="n">1</span>Five Years</li><li><span class="n">2</span>Soul Love</li><li><span class="n">3</span>Moonage Daydream</li><li><span class="n">4</span>Starman</li><li><span class="n">…</span>7 more</li></ol>
+        <span class="pill">Source: MusicBrainz · Wikipedia</span>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============================ OPTION B ============================ -->
+<section class="opt">
+  <h2>Option B · Button always in view</h2>
+  <p class="why">Phone: the button sits in a bar fixed to the bottom of the screen, so it stays visible while the buyer reads the details. Desktop: a sand action card in the right column that stays in place while the page scrolls; details on the left.</p>
+  <div class="row">
+    <div>
+      <p class="label">Phone · 375 px · no saved priorities</p>
+      <div class="frame phone"><div class="bar"><span class="logo">Spindle</span><span class="icons"><span></span><span></span></span></div><div class="in">
+        <div class="cover"><img src="https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500" alt=""></div>
+        <h2 class="hd title mt20">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</h2>
+        <p class="artist">David Bowie · 1972</p>
+        <dl class="facts mt20"><div><dt>Released</dt><dd>16 June 1972</dd></div><div><dt>Label</dt><dd>RCA Victor</dd></div></dl>
+        <div class="about"><h3 class="hd sec">About David Bowie</h3><p>David Robert Jones, known as David Bowie, was an English singer-songwriter…</p></div>
+      </div>
+      <div class="sticky"><div class="btn">Help me choose a version</div></div>
+      </div>
+    </div>
+    <div>
+      <p class="label">Phone · 375 px · saved priorities</p>
+      <div class="frame phone"><div class="bar"><span class="logo">Spindle</span><span class="icons"><span></span><span></span></span></div><div class="in">
+        <div class="cover"><img src="https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500" alt=""></div>
+        <h2 class="hd title mt20">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</h2>
+        <p class="artist">David Bowie · 1972</p>
+        <dl class="facts mt20"><div><dt>Released</dt><dd>16 June 1972</dd></div><div><dt>Label</dt><dd>RCA Victor</dd></div></dl>
+        <div class="about"><h3 class="hd sec">About David Bowie</h3><p>David Robert Jones, known as David Bowie, was an English singer-songwriter…</p></div>
+      </div>
+      <div class="sticky"><div class="btn">See your recommendation</div><p class="based">Based on: Price, Sound · <a>Change</a></p></div>
+      </div>
+    </div>
+  </div>
+  <p class="label" style="margin-top:28px">Desktop · 1280 px · saved priorities</p>
+  <div class="frame desk" style="margin-top:0"><div class="bar"><span class="logo">Spindle</span><span class="icons"><span></span><span></span></span></div><div class="in">
+    <div style="display:grid;grid-template-columns:3fr 5fr 4fr;gap:40px;align-items:start">
+      <div>
+        <div class="cover"><img src="https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500" alt=""></div>
+        <dl class="facts mt20"><div><dt>Released</dt><dd>16 June 1972</dd></div><div><dt>Label</dt><dd>RCA Victor</dd></div></dl>
+      </div>
+      <div>
+        <h2 class="hd title" style="font-size:46px">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</h2>
+        <p class="artist">David Bowie · 1972</p>
+        <div class="about"><h3 class="hd sec">About David Bowie</h3><p>David Robert Jones, known as David Bowie, was an English singer-songwriter and actor. A leading figure in popular music, he was known for his reinvention and visual presentation…</p><a class="link">Read more on Wikipedia</a></div>
+        <h3 class="hd sec">Track list</h3>
+        <ol class="tracks"><li><span class="n">1</span>Five Years</li><li><span class="n">2</span>Soul Love</li><li><span class="n">3</span>Moonage Daydream</li><li><span class="n">…</span>8 more</li></ol>
+        <span class="pill">Source: MusicBrainz · Wikipedia</span>
+      </div>
+      <div class="act dsticky">
+        <h3 class="hd">Your recommendation is ready</h3>
+        <p>We picked a version using your priorities.</p>
+        <div class="btn">See your recommendation</div>
+        <p class="based">Based on: Price, Sound · <a>Change</a></p>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============================ OPTION C ============================ -->
+<section class="opt">
+  <h2>Option C · Compact top, details folded</h2>
+  <p class="why">Phone: small cover beside the title, button straight after, so it shows without scrolling. The details (release, label, musician, tracks) sit in closed sections the buyer opens if they want to be sure. Desktop: cover, title and button across the top; details below in two columns, open.</p>
+  <div class="row">
+    <div>
+      <p class="label">Phone · 375 px · no saved priorities</p>
+      <div class="frame phone"><div class="bar"><span class="logo">Spindle</span><span class="icons"><span></span><span></span></span></div><div class="in">
+        <div class="head">
+          <div class="cover"><img src="https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500" alt=""></div>
+          <div><h2 class="hd title" style="font-size:24px;line-height:1.05">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</h2><p class="artist">David Bowie · 1972</p></div>
+        </div>
+        <div class="btn mt20">Help me choose a version</div>
+        <p class="fade" style="text-align:center">Several versions are on sale. We pick one for you.</p>
+        <div class="disc open mt24"><div class="summary" style="display:flex;justify-content:space-between;padding:16px 20px;font-weight:600">About this album<span>⌃</span></div>
+          <div class="body"><dl><div style="display:flex;justify-content:space-between;padding:6px 0"><dt style="color:#4a5163">Released</dt><dd style="font-weight:600">16 June 1972</dd></div><div style="display:flex;justify-content:space-between;padding:6px 0"><dt style="color:#4a5163">Label</dt><dd style="font-weight:600">RCA Victor</dd></div></dl></div></div>
+        <div class="disc"><div style="display:flex;justify-content:space-between;padding:16px 20px;font-weight:600">About David Bowie<span>⌄</span></div></div>
+        <div class="disc"><div style="display:flex;justify-content:space-between;padding:16px 20px;font-weight:600">Track list · 11<span>⌄</span></div></div>
+        <span class="pill">Source: MusicBrainz · Wikipedia</span>
+      </div></div>
+    </div>
+    <div>
+      <p class="label">Phone · 375 px · saved priorities</p>
+      <div class="frame phone"><div class="bar"><span class="logo">Spindle</span><span class="icons"><span></span><span></span></span></div><div class="in">
+        <div class="head">
+          <div class="cover"><img src="https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500" alt=""></div>
+          <div><h2 class="hd title" style="font-size:24px;line-height:1.05">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</h2><p class="artist">David Bowie · 1972</p></div>
+        </div>
+        <div class="btn mt20">See your recommendation</div>
+        <p class="based">Based on: Price, Sound · <a>Change</a></p>
+        <div class="disc mt24"><div style="display:flex;justify-content:space-between;padding:16px 20px;font-weight:600">About this album<span>⌄</span></div></div>
+        <div class="disc"><div style="display:flex;justify-content:space-between;padding:16px 20px;font-weight:600">About David Bowie<span>⌄</span></div></div>
+        <div class="disc"><div style="display:flex;justify-content:space-between;padding:16px 20px;font-weight:600">Track list · 11<span>⌄</span></div></div>
+      </div></div>
+    </div>
+  </div>
+  <p class="label" style="margin-top:28px">Desktop · 1280 px · no saved priorities</p>
+  <div class="frame desk" style="margin-top:0"><div class="bar"><span class="logo">Spindle</span><span class="icons"><span></span><span></span></span></div><div class="in">
+    <div style="display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:center">
+      <div class="cover"><img src="https://coverartarchive.org/release-group/6c9ae3dd-32ad-472c-96be-69d0a3536261/front-500" alt=""></div>
+      <div>
+        <h2 class="hd title" style="font-size:52px">The Rise and Fall of Ziggy Stardust and the Spiders from Mars</h2>
+        <p class="artist">David Bowie · 1972</p>
+        <div style="display:flex;align-items:center;gap:20px;margin-top:24px"><div class="btn" style="min-width:300px">Help me choose a version</div><p class="fade" style="margin:0">Several versions are on sale. We pick one for you.</p></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;border-top:1px solid #e2dacb;padding-top:8px">
+      <div>
+        <dl class="facts mt20"><div><dt>Released</dt><dd>16 June 1972</dd></div><div><dt>Label</dt><dd>RCA Victor</dd></div></dl>
+        <div class="about"><h3 class="hd sec">About David Bowie</h3><p>David Robert Jones, known as David Bowie, was an English singer-songwriter and actor. A leading figure in popular music, he was known for his reinvention and visual presentation…</p><a class="link">Read more on Wikipedia</a></div>
+      </div>
+      <div>
+        <h3 class="hd sec">Track list</h3>
+        <ol class="tracks"><li><span class="n">1</span>Five Years</li><li><span class="n">2</span>Soul Love</li><li><span class="n">3</span>Moonage Daydream</li><li><span class="n">4</span>Starman</li><li><span class="n">5</span>It Ain't Easy</li><li><span class="n">…</span>6 more</li></ol>
+        <span class="pill">Source: MusicBrainz · Wikipedia</span>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+</body></html>

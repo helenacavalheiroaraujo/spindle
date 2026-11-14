@@ -7,7 +7,7 @@ Stack and hosting: see `DECISIONS.md`. Assignment 1 stated PHP; the MVP uses Nex
 1. **Core:** stories 1, 2, 3, 5, 6, 12
 2. **Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)
 3. **Seller:** story 8
-4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15), then story 20 (cart), **story 14 (desktop footer), story 22 (navy header), story 24 (more genres and crate row), story 21 (album details), story 23 (buying priorities on the account page), story 25 (recommendation page polish), story 26 (change buying priorities), story 27 (log in in a window on the page)**
+4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15), then story 20 (cart), **story 14 (desktop footer), story 22 (navy header), story 24 (more genres and crate row), story 21 (album details), story 23 (buying priorities on the account page), story 25 (recommendation page polish), story 26 (change buying priorities), story 27 (log in in a window on the page), story 28 (one album page for every album)**
 
 Not in this MVP: stories 10, 11, 13
 
@@ -63,6 +63,7 @@ In build order. Each story has its own file in `specs/stories/` (bugs are in `sp
 | Story 25 · Recommendation page polish | [`specs/stories/story-25-recommendation-polish.md`](specs/stories/story-25-recommendation-polish.md) |
 | Story 26 · Change buying priorities | [`specs/stories/story-26-change-priorities.md`](specs/stories/story-26-change-priorities.md) |
 | Story 27 · Log in without leaving the page | [`specs/stories/story-27-login-window.md`](specs/stories/story-27-login-window.md) |
+| Story 28 · One album page for every album | [`specs/stories/story-28-album-page-for-all.md`](specs/stories/story-28-album-page-for-all.md) |
 
 ---
 
@@ -215,3 +216,8 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 27 | ×, Esc and the dimmed area close it; focus stays inside and returns to the button | `components/LoginWindow.tsx` | `tests/e2e/loginWindow.spec.ts` |
 | 27 | Loading mask and error screen with "Try again"; typing kept | `components/LoginWindow.tsx` | `tests/e2e/loginWindow.spec.ts` (typing kept; mask and error screen not tested automatically) |
 | 27 | 375 px sheet from the bottom, 1280 px centred window | `components/LoginWindow.tsx`, `app/globals.css` | `tests/e2e/loginWindow.spec.ts` (both sizes) |
+| 28 | Every album tap (suggestions, results, genre screen, "This weekend") opens `/albums/[id]`; "Not in the demo" does not open | `lib/rules/suggestionBox.ts`, `app/HomeSections.tsx`, `app/albums/[albumId]/page.tsx` | `tests/unit/suggestionBox.test.ts`, `tests/e2e/search.spec.ts`, `tests/e2e/suggestions.spec.ts`, `tests/e2e/home.spec.ts`, `tests/e2e/albumPage.spec.ts` |
+| 28 | Action card: "Help me choose a version" (no saved ranking) → priorities; "See your recommendation · Based on: … · Change" (saved ranking); "Nobody is selling…" (no listings) | `lib/rules/albumAction.ts`, `lib/db/preferences.ts`, `app/albums/[albumId]/page.tsx` | `tests/unit/albumAction.test.ts`, `tests/e2e/albumPage.spec.ts`, `tests/e2e/priorities.spec.ts`, `tests/e2e/savedPriorities.spec.ts` |
+| 28 | MusicBrainz without tracks: track list from the earliest version, without "Bonus" | `lib/rules/albumAction.ts`, `lib/db/albums.ts`, `app/albums/[albumId]/page.tsx` | `tests/unit/albumAction.test.ts`, `tests/e2e/albumPage.spec.ts` |
+| 28 | 375 × 812: the action button is visible without scrolling (cover 60% wide); 1280 px as in the design | `app/albums/[albumId]/page.tsx` | `tests/e2e/albumPage.spec.ts` (both sizes) |
+| 28 | Loading mask and error screen with "Try again" (Shared rules) | `app/albums/[albumId]/loading.tsx`, `app/albums/[albumId]/error.tsx` | Not tested automatically (same files as story 21) |

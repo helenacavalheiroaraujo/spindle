@@ -1,6 +1,6 @@
 # Spindle MVP — Use cases
 
-> Compiled from the "Use cases" of each story in `specs/`. Stories 3, 4, 6, 21 and 23 have no "Use cases" section, so their entries (UC-6, UC-7, UC-10, UC-30, UC-33) are taken from the story's Scope and Acceptance criteria. Stories 22 and 25 only change how pages look and add no use case. Criteria and edge cases stay in the stories: this file only lists what a user can do and where it is specified. All catalogue data is illustrative.
+> Compiled from the "Use cases" of each story in `specs/`. Stories 3, 4, 6, 21 and 23 have no "Use cases" section, so their entries (UC-6, UC-7, UC-10, UC-30, UC-33) are taken from the story's Scope and Acceptance criteria. Stories 22 and 25 only change how pages look and add no use case. Story 28 changes where an album tap leads: every album opens its album page first (UC-35). Criteria and edge cases stay in the stories: this file only lists what a user can do and where it is specified. All catalogue data is illustrative.
 
 ## Actors
 - **Buyer**: a non-specialist who wants the right pressing of a record and a safe purchase. Signed out or signed in.
@@ -10,12 +10,13 @@
 | # | Use case | Result | Story |
 |---|---|---|---|
 | UC-1 | Search for an album by title or artist | List of albums, newest release first | 1, 17 |
-| UC-2 | Pick a suggestion while typing | Opens that album, or goes to the results page | 16 |
+| UC-2 | Pick a suggestion while typing | Opens that album's page, or goes to the results page | 16, 28 |
 | UC-3 | Type with a typo | "Did you mean…?" with up to 3 albums, or "No albums found" | 1, 16, 17 |
 | UC-4 | Browse the home page by genre (crates; a scrollable row when there are 7 or more genres) | Genre screen with that genre's albums | 12, 24 |
-| UC-5 | Open an album with no active listings | "Nobody is selling this album right now" | 1 |
+| UC-5 | Open an album with no active listings | Its album page with "Nobody is selling this album right now" | 1, 28 |
 | UC-30 | Open an album with no listings and read about it | Release date, label, track list and "About [musician]" with a Wikipedia link; "Nobody is selling this album right now" stays | 21 |
 | UC-31 | Scroll to the bottom of any page on desktop | Footer with the basics about Spindle | 14 |
+| UC-35 | Open an album on sale and decide how to go on | Album page with cover, facts and tracks; "Help me choose a version" (priorities), or "See your recommendation · Based on: … · Change" with a saved ranking | 28 |
 
 ## Buyer: choose the pressing
 | # | Use case | Result | Story |

@@ -41,10 +41,9 @@ export function moveHighlight(current: number | null, key: "ArrowDown" | "ArrowU
   return current - 1;
 }
 
-// Where a buyer's tap on an album goes: open → its priorities screen; no listings → its own page, which says nobody is
-// selling it (bug 17 for genres, bug 28 for search); not in the demo → nowhere.
+// Where a buyer's tap on an album goes: its album page, with or without listings (story 28; bug 17 for genres, bug 28
+// for search); not in the demo → nowhere.
 export function albumHref(album: { id: string; access: AlbumAccess }): string | null {
-  if (album.access === "open") return `/albums/${album.id}/priorities`;
-  if (album.access === "no_listings") return `/albums/${album.id}`;
-  return null;
+  if (album.access === "not_in_demo") return null;
+  return `/albums/${album.id}`;
 }

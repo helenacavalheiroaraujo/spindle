@@ -23,10 +23,11 @@ async function expectRanks(page: Page, ranks: Record<string, number | null>) {
   }
 }
 
-test("search → tap an album → priorities screen with the album and four options", async ({ page }) => {
+test("search → album page → 'Help me choose a version' → priorities screen with the album and four options (story 28)", async ({ page }) => {
   await page.goto("/");
   await typeSearch(page, "ziggy");
   await page.getByRole("listitem").filter({ hasText: "Ziggy Stardust" }).getByRole("link").click();
+  await page.getByRole("link", { name: "Help me choose a version" }).click();
   await expect(page).toHaveURL(PRIORITIES_URL);
   await expect(page.getByRole("heading", { name: "What matters most to you?" })).toBeVisible();
   await expect(page.getByText("David Bowie · 3 versions to choose from")).toBeVisible();

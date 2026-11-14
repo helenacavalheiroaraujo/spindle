@@ -68,7 +68,7 @@ test("a typo gives 'Did you mean…?'; no match gives 'No albums found'", async 
   await expect(rows(page)).toHaveCount(0);
 });
 
-test("tap a suggestion with listings: the priorities screen; with no listings: its own page (bug 28)", async ({ page }) => {
+test("tap a suggestion: its album page, with or without listings (bug 28, story 28)", async ({ page }) => {
   await typeOnly(page, "bowie");
   await expect(rows(page)).toHaveCount(4);
   await page.getByRole("link", { name: /Blackstar/ }).click();
@@ -77,7 +77,7 @@ test("tap a suggestion with listings: the priorities screen; with no listings: i
   await page.goto("/");
   await typeOnly(page, "bowie");
   await page.getByRole("link", { name: /Ziggy Stardust/ }).first().click();
-  await expect(page).toHaveURL(/\/albums\/.*\/priorities/);
+  await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001$/);
 });
 
 test("a no-listings suggestion says why when hovered or highlighted with the keys (bug 28)", async ({ page, isMobile }) => {
@@ -105,7 +105,7 @@ test("keys: ↓ highlights, Enter opens the highlighted row, Enter with none hig
   await box(page).press("ArrowDown");
   await expect(rows(page).first().locator("[aria-current]")).toHaveCount(1);
   await box(page).press("Enter");
-  await expect(page).toHaveURL(/\/albums\/.*\/priorities/);
+  await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001$/);
 
   await page.goto("/");
   await typeOnly(page, "ziggy");

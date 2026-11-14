@@ -52,7 +52,7 @@ function Sections({ data }: { data: HomeData }) {
         <h2 id="week" className="font-heading text-3xl lg:text-4xl">This week at the shop</h2>
         <div className="mt-3 grid gap-3 lg:grid-cols-[13fr_7fr]">
           {featured && (
-            <Link href={`/albums/${featured.id}/priorities`} className="card-link">
+            <Link href={`/albums/${featured.id}`} className="card-link">
               <div className="grid h-full grid-cols-[1.35fr_1fr] overflow-hidden rounded-3xl bg-navy text-cream">
                 <div className="flex flex-col items-start gap-3 p-5 lg:p-7">
                   <span className="rounded-full bg-cream px-3 py-1 text-xs font-semibold text-navy">This weekend</span>

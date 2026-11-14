@@ -1,6 +1,7 @@
 // A signed-in buyer's saved ranking (story 2 · phase 2). One per account; "Change" replaces it (DECISIONS · finding #11).
 import { parsePriorities, type Priority } from "@/lib/rules/priorities";
 import { db } from "./client";
+import { currentUserId } from "./session";
 
 // The saved ranking, or null when the buyer has none. Values are read through the same rule as the address.
 export async function getSavedRanking(userId: string): Promise<Priority[] | null> {
@@ -9,6 +10,18 @@ export async function getSavedRanking(userId: string): Promise<Priority[] | null
   if (!data) return null;
   const ranking = parsePriorities((data.ranking as string[]).join(","));
   return ranking.length > 0 ? ranking : null;
+}
+
+// The ranking of whoever is viewing, or null when signed out, without one, or if it cannot be loaded
+// (the page then shows as for a new buyer). Used by the album page (story 28).
+export async function getViewerSavedRanking(): Promise<Priority[] | null> {
+  try {
+    const userId = await currentUserId();
+    return userId ? await getSavedRanking(userId) : null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
 
 // Saves the ranking, replacing any saved one. An empty ranking is never saved.

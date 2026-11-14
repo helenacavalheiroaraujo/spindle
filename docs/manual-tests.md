@@ -30,6 +30,10 @@ For each screen: the loading mask says what is loading; the error screen says wh
 | M14 | 17 | Search results | Search for "bowie" (Search button or Enter) | "Searching…" | "We couldn't load the albums. Check your connection." | Not run |
 | M15 | 4 | Compare pressings | Open a recommendation (e.g. Ziggy Stardust, 1. Price, 2. Sound), tap "Compare pressings" | "Comparing pressings…" | "We couldn't load the comparison. Check your connection." | Not run |
 | M16 | 4 | Version page | On the comparison, tap "See this version" | "Loading this version…" | "We couldn't load this version. Check your connection." | Not run |
+| M21 | 20 | Cart | Tap the cart icon in the header (signed in) | "Loading your cart…" | "We couldn't load your cart. Check your connection." | Not run |
+| M22 | 20 | Cart checkout | In the cart, tap "Go to checkout" | "Loading the checkout…" | "We couldn't load the checkout. Check your connection." | Not run |
+| M23 | 21 | Album with no listings | Search "blackstar" and tap the album | "Loading the album…" | "We couldn't load this album. Check your connection." | Not run |
+| M24 | 28 | Album page with listings | Search "ziggy" and tap the album | "Loading the album…" | "We couldn't load this album. Check your connection." | Not run |
 
 ## Other manual checks
 

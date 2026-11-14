@@ -55,9 +55,9 @@ describe("suggestionTag", () => {
   });
 });
 
-describe("albumHref (bug 28)", () => {
+describe("albumHref (bug 28, story 28)", () => {
   it.each([
-    [{ id: "a1", access: "open" }, "/albums/a1/priorities"],
+    [{ id: "a1", access: "open" }, "/albums/a1"],
     [{ id: "a2", access: "no_listings" }, "/albums/a2"],
     [{ id: "a3", access: "not_in_demo" }, null],
   ] as const)("%j → %j", (album, href) => {
