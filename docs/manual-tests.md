@@ -33,7 +33,7 @@ For each screen: the loading mask says what is loading; the error screen says wh
 | M21 | 20 | Cart | Tap the cart icon in the header (signed in) | "Loading your cart…" | "We couldn't load your cart. Check your connection." | Not run |
 | M22 | 20 | Cart checkout | In the cart, tap "Go to checkout" | "Loading the checkout…" | "We couldn't load the checkout. Check your connection." | Not run |
 | M23 | 21 | Album with no listings | Search "blackstar" and tap the album | "Loading the album…" | "We couldn't load this album. Check your connection." | Not run |
-| M24 | 28 | Album page with listings | Search "ziggy" and tap the album | "Loading the album…" | "We couldn't load this album. Check your connection." | Not run |
+| M24 | 28 | Album page with listings | Search "ziggy" and tap the album | "Loading the album…" | "We couldn't load this album. Check your connection." | Not run · Bug 29 (specs/bugs/bug-29-album-release-date-label-missing.md) |
 
 ## Other manual checks
 
