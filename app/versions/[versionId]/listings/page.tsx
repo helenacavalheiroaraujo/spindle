@@ -34,6 +34,7 @@ export default async function ListingsPage({
       <div className="mt-6">
         <ListingList
           versionId={version.id}
+          record={{ albumTitle: version.albumTitle, versionName: version.name }}
           listings={listings}
           typicalRange={version.typicalRange}
           ranking={ranking}

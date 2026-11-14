@@ -174,12 +174,13 @@ test("signed out: Add to cart asks to log in, and after logging in the record is
   await page.goto(listingPage(a28));
   await hydrated(page, /^Add to cart/);
   await page.getByRole("button", { name: /^Add to cart/ }).click();
-  await expect(page.getByText("Log in to add this record to your cart")).toBeVisible();
-  await screenshot(page, 20, "log-in-to-add");
+  // Story 27: the log-in window opens on the page (it replaced the "Log in to add this record to your cart" line).
+  const box = page.getByRole("dialog");
+  await expect(box.getByRole("heading", { name: "Log in to add to your cart" })).toBeVisible();
   expect(await inCart()).toEqual([]); // nothing yet
-  await page.getByRole("link", { name: "Log in", exact: true }).last().click();
-  await expect(page).toHaveURL(/\/login\?next=/);
-  await logIn(page);
+  await box.getByLabel("Email").fill(email);
+  await box.getByLabel("Password").fill(PASSWORD);
+  await box.getByRole("button", { name: "Log in" }).click();
   await expect(page).toHaveURL(listingPage(a28)); // back where they were
   await expect(page.getByText("In your cart ·")).toBeVisible();
   expect(await inCart()).toEqual([a28]);

@@ -14,12 +14,14 @@ import { YourListing } from "@/components/YourListing";
 import { sellerText } from "@/lib/rules/seller";
 import { SellerLine } from "@/components/SellerLine";
 import { SellerRating } from "@/components/SellerRating";
+import { loginRecord } from "@/lib/rules/loginWindow";
 
 // Verified listings for one version (story 5), each with its price label (story 6): on its own screen on phone, beside the recommendation on desktop.
 // "from" tells the listing check screen where its Back button goes. viewerId: the signed-in user's profile id,
 // so their own listings show "Your listing" instead of Buy (story 8 · finding #12).
 export function ListingList({
   versionId,
+  record,
   listings,
   typicalRange,
   ranking,
@@ -29,6 +31,7 @@ export function ListingList({
   priceBar = false,
 }: {
   versionId: string;
+  record: { albumTitle: string; versionName: string }; // for the record summary in the log-in window (story 27)
   listings: ListingDetails[];
   typicalRange: TypicalRange; // this version's range, for the line below the list
 
@@ -65,6 +68,7 @@ export function ListingList({
       <ul aria-label="Verified listings" className={from === "list" ? "lg:grid lg:grid-cols-2 lg:gap-x-8" : undefined}>
         {rows.map(({ listing: l, light, movedHere, movedToVersionId }) => {
           const label = `${formatPrice(l.price)}, ${l.condition.name}, ${sellerText(l.seller)}`;
+          const summary = loginRecord({ ...record, conditionCode: l.condition.code, seller: l.seller, city: l.city, price: l.price });
           return (
             <li key={l.id} aria-label={label} className="flex flex-wrap items-start gap-x-4 gap-y-3 border-b border-line py-4">
               <span aria-hidden className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy">
@@ -112,9 +116,10 @@ export function ListingList({
                       <BuyButton
                         href={checkoutPath(l.id, versionId)}
                         listingLabel={label}
+                        record={summary}
                         warning={light === "yellow" ? yellowWarning(l.checks, l.hasMatrixPhoto, movedHere) : null}
                       />
-                      <AddToCart listingId={l.id} listingLabel={label} />
+                      <AddToCart listingId={l.id} listingLabel={label} record={summary} />
                     </div>
                   )}
                 </div>

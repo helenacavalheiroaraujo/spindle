@@ -61,3 +61,9 @@ button[class~="rounded-2xl"][class~="border"]:not(:disabled):hover { background-
 .card-link:hover [data-card-cta] { background-color: var(--color-sand); }
 .card-link:hover [data-card-cta-navy] { background-color: #323d57; }
 @media (prefers-reduced-motion: reduce) { .card-link { transition: none; } .card-link:hover { transform: none; } }
+
+/* Log-in window (story 27): on a phone the sheet rises from the bottom; from 640 px it is a centred window. */
+@keyframes sheet-rise { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.login-window[open] { animation: sheet-rise 220ms ease-out; }
+@media (min-width: 640px) { .login-window[open] { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .login-window[open] { animation: none; } }

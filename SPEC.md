@@ -209,3 +209,9 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 26 | "Save my order" replaces the saved order; the next recommendation uses it | `app/account/actions.ts`, `lib/db/preferences.ts` | `tests/e2e/changePriorities.spec.ts` |
 | 26 | "Cancel" keeps the saved order as it was | `app/account/PrioritiesSection.tsx` | `tests/e2e/changePriorities.spec.ts` |
 | 26 | Checked at 375 px and 1280 px; loading mask "Saving…" and error screen with "Try again" | `app/account/PrioritiesSection.tsx` | `tests/e2e/changePriorities.spec.ts` (both sizes; mask and error screen not tested automatically) |
+| 27 | Buy, Continue to checkout, Add to cart, Sell and the menu "Log in", signed out, open the window without changing the page | `components/LoginWindow.tsx`, `components/LoginWindowLink.tsx`, `components/BuyButton.tsx`, `components/AddToCart.tsx` | `tests/e2e/loginWindow.spec.ts` |
+| 27 | Right title for the action; record summary only with a record | `lib/rules/loginWindow.ts` | `tests/unit/loginWindow.test.ts`, `tests/e2e/loginWindow.spec.ts` |
+| 27 | Log in and sign-up use the same rules; then the original action goes on | `app/login/actions.ts`, `app/signup/actions.ts`, `lib/rules/loginWindow.ts` | `tests/e2e/loginWindow.spec.ts`, `tests/e2e/cart.spec.ts`, `tests/e2e/checkout.spec.ts`, `tests/e2e/sell.spec.ts` |
+| 27 | ×, Esc and the dimmed area close it; focus stays inside and returns to the button | `components/LoginWindow.tsx` | `tests/e2e/loginWindow.spec.ts` |
+| 27 | Loading mask and error screen with "Try again"; typing kept | `components/LoginWindow.tsx` | `tests/e2e/loginWindow.spec.ts` (typing kept; mask and error screen not tested automatically) |
+| 27 | 375 px sheet from the bottom, 1280 px centred window | `components/LoginWindow.tsx`, `app/globals.css` | `tests/e2e/loginWindow.spec.ts` (both sizes) |

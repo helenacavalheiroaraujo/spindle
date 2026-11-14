@@ -43,8 +43,9 @@ const corner = (page: Page, info: { project: { name: string } }) =>
 test("a registered user logs in from the header and logs out", async ({ page }, info) => {
   await page.goto("/");
   await screenshot(page, 9, "home-signed-out");
-  await corner(page, info).getByRole("link", { name: "Log in" }).click();
-  await expect(page).toHaveURL("/login");
+  // The header link opens the log-in window (story 27, tested in loginWindow.spec.ts); the page is opened directly.
+  await expect(corner(page, info).getByRole("link", { name: "Log in" })).toHaveAttribute("href", "/login");
+  await page.goto("/login");
   await expect(corner(page, info).getByRole("link", { name: "Log in" })).toHaveCount(0); // not shown on the log-in page itself
   await screenshot(page, 9, "login");
 

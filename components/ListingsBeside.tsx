@@ -13,7 +13,7 @@ import { LoadingMask } from "./LoadingMask";
 // loading mask and error screen (SPEC · Shared rules), so a failure never hides the recommendation.
 const DESKTOP = "(min-width: 1024px)";
 
-type State = { kind: "loading" } | { kind: "error" } | { kind: "ready"; listings: ListingDetails[]; viewerId: string | null };
+type State = { kind: "loading" } | { kind: "error" } | { kind: "ready"; listings: ListingDetails[]; viewerId: string | null; record: { albumTitle: string; versionName: string } };
 
 export function ListingsBeside({
   versionId,
@@ -36,7 +36,7 @@ export function ListingsBeside({
     let current = true;
     setState({ kind: "loading" });
     versionListings(versionId)
-      .then(({ listings, viewerId }) => current && setState({ kind: "ready", listings, viewerId }))
+      .then(({ listings, viewerId, record }) => current && setState({ kind: "ready", listings, viewerId, record }))
       .catch(() => current && setState({ kind: "error" }));
     return () => {
       current = false;
@@ -53,6 +53,7 @@ export function ListingsBeside({
         <>
           <ListingList
             versionId={versionId}
+            record={state.record}
             listings={state.listings}
             typicalRange={typicalRange}
             ranking={ranking}

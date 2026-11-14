@@ -27,9 +27,13 @@ export async function suggest(typed: string): Promise<BoxContent<AlbumSummary>> 
 // Listings beside the recommendation on desktop (story 5): loaded on their own, so a failure only
 // affects that area, and phones (which open the listings on their own screen) never load them.
 // viewerId: the signed-in user's profile id, for "Your listing" on their own listings (finding #12).
-export async function versionListings(versionId: string): Promise<{ listings: ListingDetails[]; viewerId: string | null }> {
+export async function versionListings(
+  versionId: string,
+): Promise<{ listings: ListingDetails[]; viewerId: string | null; record: { albumTitle: string; versionName: string } }> {
   const [data, viewerId] = await Promise.all([getVersionListings(versionId), currentProfileId()]);
-  return { listings: data?.listings ?? [], viewerId };
+  // record: the album and version, for the summary in the log-in window (story 27).
+  const record = { albumTitle: data?.version.albumTitle ?? "", versionName: data?.version.name ?? "" };
+  return { listings: data?.listings ?? [], viewerId, record };
 }
 
 // "See recommendation" (story 2 · phase 2): a signed-in buyer's ranking is saved, replacing any saved one

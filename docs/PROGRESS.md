@@ -1,24 +1,24 @@
 <!-- page: https://claude.ai/artifact/W2xGvu3nfNcfcuxAv3hYsn -->
 # MVP progress
 
-Updated 2026-11-13 on request · Deadline 23 Nov 2026 (moved from 15 Nov) · **10 days left**
+Updated 2026-11-14 after story 27 · Deadline 23 Nov 2026 (moved from 15 Nov) · **9 days left**
 
 ## Summary
-- **Stories:** 24 MVP stories: 10 built, 13 built with gaps, 0 in progress, 1 not started (story 27: spec and design committed, no code)
-- **Tests:** unit 635/635 · end-to-end 336/360 (24 skipped) — all pass (full suite, phone and desktop, 12.6 min; a second full run alone on 2026-11-14: 336 passed, 0 failed, 24 skipped, 12.3 min). The 57 failures of the earlier run on 2026-11-13 no longer appear. Probable cause, not proven: test runs from several sessions overlapped on the one shared database and changed each other's data. The demo data was also restored to the seed on 2026-11-14 with the owner's yes (a seed listing, Megalithic Symphony €29, had been sold by hand; two test listings from 2026-11-10 were never removed), but the earlier full run passed before that, so the data was not the main cause. Only one session at a time runs end-to-end tests
-- **Demo:** the happy path (search → priorities → recommendation → listings → checkout → confirmation) passes its end-to-end tests on phone and desktop. Not rehearsed live. A hand purchase on a seed listing can break the same tests again (it happened on 2026-11-08)
-- **Next:** the brief items (PDF, manual checks, online check, rehearsal). Story 27 only after them
-- **Risk:** 10 days. Story 27 is the last in "If time allows" and is cut first. The PDF, the manual checks, the online check and the rehearsal come before it
+- **Stories:** 24 of 24 MVP stories built (14 with gaps), 0 in progress, 0 not started
+- **Tests:** unit 659/659 · end-to-end 346/370 (24 skipped) — all pass (full suite, phone and desktop, 12.8 min, one session alone on the shared database). The temporary test `tests/e2e/tmp-bug26/shot.spec.ts` was left out of this run (`--grep-invert`); the owner removes it
+- **Demo:** the happy path (search → priorities → recommendation → listings → checkout → confirmation) passes its end-to-end tests on phone and desktop, now with the log-in window of story 27. Not rehearsed live
+- **Next:** no story left in the build order. The brief items: PDF, manual checks, online check, rehearsal. Bug 27 (name asked twice in the checkout) is open
+- **Risk:** 9 days and no story left to build. The risk is now the brief items, not code. Any new story or polish competes with the PDF, the manual checks and the rehearsal
 
 ## Against the brief
 | Criterion | Status | Evidence / what is missing |
 |---|---|---|
 | 1 · Core features work end to end | Done | Phases 1–3 built; the full end-to-end suite passes, including search, recommendation, listings, checkout and confirmation, on phone and desktop. Not rehearsed live |
-| 2 · Data tables | Partly | `supabase/migrations/` is committed. `docs/database.md` does not mention migration 0012 (Classical genre). Story 26 adds no table |
-| 3 · Testing, automated and manual | Partly | Automated: unit 635/635; end-to-end 336/360 (24 skipped), all pass. Manual: 21 "Not run" entries in `docs/manual-tests.md` |
+| 2 · Data tables | Partly | `supabase/migrations/` is committed. `docs/database.md` does not mention migration 0012 (Classical genre). Story 27 adds no table |
+| 3 · Testing, automated and manual | Partly | Automated: unit 659/659; end-to-end 346/370 (24 skipped), all pass. Manual: 21 "Not run" entries in `docs/manual-tests.md` |
 | 4 · LLM good practices in the repo | Done | SPEC.md, `specs/`, CLAUDE.md, ARCHITECTURE.md, DECISIONS.md, `docs/AI_USAGE.md` and the tests are committed |
 | 5 · UX and UI quality | Partly | `docs/ux-review/findings.json`: 6 open (2 Medium: #38, #39; 4 Low: #37, #40, #42, #43). No High or Blocker. Story 25 covers #38–#43 with tests, but the entries are still marked open |
-| 6 · App online and reachable | Not checked | Vercel address not known to this run. All commits are pushed (`git log origin/main..main` is empty) |
+| 6 · App online and reachable | Not checked | Vercel address not known to this run. 2 local commits are not pushed (`git log origin/main..main`) |
 | 7 · Live demo | Partly | `docs/demo-script.md` exists, marked DRAFT, not rehearsed, address still a placeholder |
 | S1 · Link to the running app | Not checked | Same as criterion 6 |
 | S2 · PDF with data tables and screenshots | Missing | No PDF. `docs/submission/spindle-submission.md` is marked DRAFT (address missing, screenshots to retake) |
@@ -26,10 +26,10 @@ Updated 2026-11-13 on request · Deadline 23 Nov 2026 (moved from 15 Nov) · **1
 ### Missing for the brief, by impact on the grade
 1. Submission PDF (S2): data tables and screenshots, after the final changes.
 2. Manual test record: 21 entries "Not run".
-3. Online check (criterion 6, S1): give the address, open it.
+3. Online check (criterion 6, S1): push, give the address, open it.
 4. Demo: rehearse `docs/demo-script.md` once; add the address.
 5. `docs/database.md`: add migration 0012.
-6. Close the UX entries that story 25 already fixed (#38–#43), if the user agrees.
+6. Close the UX entries that story 25 already fixed (#38–#43), if the owner agrees.
 
 ## Build phases
 | Phase | Stories | Status |
@@ -37,7 +37,7 @@ Updated 2026-11-13 on request · Deadline 23 Nov 2026 (moved from 15 Nov) · **1
 | 1 · Core | 1, 2, 3, 5, 6, 12 | Done with gaps (manual checks not run) |
 | 2 · Purchase | 9, 7, 2 (save to account) | Done with gaps. Save to account: rows tested |
 | 3 · Seller | 8 | Done with gaps (manual checks not run) |
-| 4 · If time allows | 7 step 3, 17, 4, 18, 16, 15, 19, 20, 14, 22, 24, 21, 23, 25, 26, 27 | 15 of 16 built (7 step 3, 18, 15, 19, 20, 14, 22, 24 fully; 17, 4, 16, 21, 23, 25, 26 with gaps); story 27 not started |
+| 4 · If time allows | 7 step 3, 17, 4, 18, 16, 15, 19, 20, 14, 22, 24, 21, 23, 25, 26, 27 | 16 of 16 built (7 step 3, 18, 15, 19, 20, 14, 22, 24 fully; 17, 4, 16, 21, 23, 25, 26, 27 with gaps) |
 
 ## Stories
 | Story | Status | Requirements with automated test | Open findings |
@@ -65,7 +65,7 @@ Updated 2026-11-13 on request · Deadline 23 Nov 2026 (moved from 15 Nov) · **1
 | 24 · More genres and a crate row | Built | 6 of 6 | — |
 | 25 · Recommendation page polish | Built with gaps | 5 of 6 | UX #38, #39, #40, #42, #43 (marked open, covered by this story) |
 | 26 · Change buying priorities | Built with gaps | 5 of 6 | — |
-| 27 · Log in without leaving the page | Not started | 0 of 0 | — |
+| 27 · Log in without leaving the page | Built with gaps | 5 of 6 | — |
 
 The spec-review register has 0 open findings (81 resolved, 2 won't fix).
 
@@ -73,7 +73,7 @@ The spec-review register has 0 open findings (81 resolved, 2 won't fix).
 Not counted in the figures above.
 
 ### Specified, not in the build order
-None. Every story with a spec file is now in the build order.
+None. Every story with a spec file is in the build order.
 
 ### Not in this MVP
 | Story | Spec file | What the repo says |
@@ -90,10 +90,10 @@ None. Every story with a spec file is now in the build order.
 - Story 23: signed out, the account page redirects to log in
 - Story 25: visible space between "Buy" and "Add to cart"
 - Story 26: loading mask "Saving…" and error screen with "Try again"
+- Story 27: loading mask and error screen with "Try again" in the log-in window (typing kept is tested)
 
-## Before the next story can start
+## Before the next step
 - Only one session at a time runs end-to-end tests (one shared database); no hand purchases on seed listings
-- Story 27: no open findings. Design (option A) and spec are committed
-- The brief items come first (PDF, manual checks, online check, rehearsal)
-- Not committed and not to commit: `tests/e2e/tmp-bug26/shot.spec.ts` (temporary screenshot test; the full suite picks it up until the owner removes it: it ran and passed in this report)
+- No story left in the build order; a new requirement becomes a new story
+- Not to commit: `tests/e2e/tmp-bug26/shot.spec.ts` (temporary screenshot test; the owner removes it; until then the full suite picks it up)
 - Bug 27 (the checkout asks for the name twice) is logged and open

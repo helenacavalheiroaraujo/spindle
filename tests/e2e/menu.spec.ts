@@ -130,8 +130,9 @@ test("phone: ☰ opens the drawer; items, current page and 'Coming soon'; a link
   expect(tap!.height).toBeGreaterThanOrEqual(44); // large enough to tap
   await screenshot(page, 15, "menu-open");
   await drawer(page).getByRole("link", { name: "Sell for free" }).click();
-  await expect(page).toHaveURL(/\/login\?next=%2Fsell/); // signed out: log in first (story 8)
   await expect(drawer(page)).toHaveCount(0);
+  // Signed out: the log-in window opens on the page (story 27).
+  await expect(page.getByRole("dialog").getByRole("heading", { name: "Log in to sell" })).toBeVisible();
 });
 
 test("phone: the chevron of a row opens the same message under the row, and a second tap closes it", async ({ page }, info) => {

@@ -104,7 +104,9 @@ test("'This weekend' opens the featured album; 'For sellers' opens selling", asy
   await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001\/priorities$/);
   await page.goto("/");
   await page.getByRole("link", { name: "Sell a record" }).click();
-  await expect(page).toHaveURL(/\/login\?next=%2Fsell$|\/sell$/);
+  // Signed out: the log-in window opens on the page (story 27).
+  await expect(page.getByRole("dialog").getByRole("heading", { name: "Log in to sell" })).toBeVisible();
+  await expect(page).toHaveURL("/");
 });
 
 test("the search opens the results page from the home page at both sizes, and from the header of another page on desktop", async ({ page }) => {

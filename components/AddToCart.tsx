@@ -1,37 +1,40 @@
 "use client";
 // "Add to cart" under Buy (story 20 · design part 1, option B): a text link with a cart icon, 48 px high.
 // After adding: "Added to your cart" with "View cart". Already in the cart: "In your cart · View cart".
-// Signed out: "Log in to add this record to your cart"; after logging in the record is added (app/cart/add).
+// Signed out: the log-in window opens (story 27, replacing the "Log in to add this record to your cart" line);
+// after logging in the record is added on the way back to this page (app/cart/add).
 import Link from "next/link";
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import { addListingToCart } from "@/app/cart/actions";
-import { withReturn } from "@/lib/rules/login";
+import { loginWindowNext, type LoginRecord } from "@/lib/rules/loginWindow";
 import { CartIcon } from "./CartIcon";
 import { ErrorScreen } from "./ErrorScreen";
+import { useLoginWindow } from "./LoginWindow";
 import { useInCart, useSignedIn } from "./SignedIn";
 
-type Shown = "idle" | "added" | "login" | "failed" | "unavailable";
+type Shown = "idle" | "added" | "failed" | "unavailable";
 
-export function AddToCart({ listingId, listingLabel }: { listingId: string; listingLabel: string }) {
+export function AddToCart({ listingId, listingLabel, record }: { listingId: string; listingLabel: string; record: LoginRecord }) {
   const signedIn = useSignedIn();
   const inCart = useInCart(listingId);
+  const openLogin = useLoginWindow();
+  const button = useRef<HTMLButtonElement>(null);
   const [shown, setShown] = useState<Shown>("idle");
-  const [loginHref, setLoginHref] = useState("/login");
   const [pending, start] = useTransition();
   const row = "flex min-h-12 flex-wrap items-center justify-end gap-x-2 text-sm";
   const link = "font-semibold underline underline-offset-4";
 
+  function askLogin() {
+    const here = window.location.pathname + window.location.search;
+    openLogin({ purpose: "cart", next: loginWindowNext("cart", here, listingId), record }, button.current);
+  }
+
   function add() {
-    if (!signedIn) {
-      // Back to this page after logging in; the record is added on the way (app/cart/add).
-      const here = window.location.pathname + window.location.search;
-      setLoginHref(withReturn("/login", `/cart/add/${listingId}?next=${encodeURIComponent(here)}`));
-      setShown("login");
-      return;
-    }
+    if (!signedIn) return askLogin();
     start(async () => {
       const result = await addListingToCart(listingId);
-      setShown(result === "added" || result === "already" ? "added" : result === "not_allowed" ? "unavailable" : result === "login" ? "login" : "failed");
+      if (result === "login") return askLogin(); // the session ended meanwhile
+      setShown(result === "added" || result === "already" ? "added" : result === "not_allowed" ? "unavailable" : "failed");
     });
   }
 
@@ -53,14 +56,6 @@ export function AddToCart({ listingId, listingLabel }: { listingId: string; list
       </p>
     );
   }
-  if (shown === "login") {
-    return (
-      <p role="status" className={row}>
-        <span>Log in to add this record to your cart</span>
-        <Link href={loginHref} className={link}>Log in</Link>
-      </p>
-    );
-  }
   if (shown === "unavailable") {
     return <p role="status" className={row}>This record is no longer available</p>;
   }
@@ -69,6 +64,7 @@ export function AddToCart({ listingId, listingLabel }: { listingId: string; list
   }
   return (
     <button
+      ref={button}
       type="button"
       onClick={add}
       disabled={pending}

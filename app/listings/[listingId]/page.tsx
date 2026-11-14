@@ -15,6 +15,7 @@ import { ListingUnavailable } from "@/components/ListingUnavailable";
 import { currentProfileId } from "@/lib/db/profiles";
 import { YourListing } from "@/components/YourListing";
 import { sellerText } from "@/lib/rules/seller";
+import { loginRecord } from "@/lib/rules/loginWindow";
 import { SellerLine } from "@/components/SellerLine";
 import { SellerRating } from "@/components/SellerRating";
 import { PhotoGallery } from "@/components/PhotoGallery";
@@ -55,6 +56,7 @@ export default async function ListingCheckPage({
   const prioritiesQuery = ranking.length ? `?priorities=${formatPriorities(ranking)}` : "";
   const notice = listingNotice(one(query.notice));
   const label = `${formatPrice(l.price)}, ${l.condition.name}, ${sellerText(l.seller)}`;
+  const loginSummary = loginRecord({ albumTitle: l.albumTitle, versionName, conditionCode: l.condition.code, seller: l.seller, city: l.city, price: l.price });
 
   return (
     <main className="px-4 pb-16 page-main">
@@ -136,9 +138,10 @@ export default async function ListingCheckPage({
               text="Buy with protection"
               href={checkoutPath(l.id, versionId)}
               listingLabel={label}
+              record={loginSummary}
               warning={light === "yellow" ? yellowWarning(l.checks, l.hasMatrixPhoto, movedHere) : null}
             />
-            <AddToCart listingId={l.id} listingLabel={label} />
+            <AddToCart listingId={l.id} listingLabel={label} record={loginSummary} />
           </div>
         )}
       </div>

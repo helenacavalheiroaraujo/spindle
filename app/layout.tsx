@@ -3,6 +3,7 @@ import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
 import { AccountBadge } from "@/components/AccountBadge";
 import { SignedInProvider } from "@/components/SignedIn";
+import { LoginWindowProvider } from "@/components/LoginWindow";
 import { currentUserId } from "@/lib/db/session";
 import { getProfileName } from "@/lib/db/profiles";
 import { cartListingIds } from "@/lib/db/cart";
@@ -27,10 +28,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en" className={`${heading.variable} ${body.variable}`}>
       <body className="relative flex min-h-screen flex-col font-body antialiased">
         <SignedInProvider signedIn={signedIn} name={name ?? ""} cartIds={cartIds}>
-          <AccountBadge signedIn={signedIn} name={name ?? ""} />
-          {/* Story 14: the footer sits below the content, at the bottom of the window on short pages. */}
-          <div className="flex flex-1 flex-col">{children}</div>
-          <Footer />
+          {/* Story 27: Buy, Add to cart, Sell and the menu "Log in" open the log-in window when signed out. */}
+          <LoginWindowProvider>
+            <AccountBadge signedIn={signedIn} name={name ?? ""} />
+            {/* Story 14: the footer sits below the content, at the bottom of the window on short pages. */}
+            <div className="flex flex-1 flex-col">{children}</div>
+            <Footer />
+          </LoginWindowProvider>
         </SignedInProvider>
       </body>
     </html>

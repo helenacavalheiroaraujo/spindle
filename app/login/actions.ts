@@ -5,9 +5,18 @@ import { checkLogin, loginErrorFor, returnPath, type LoginErrors } from "@/lib/r
 import { logInWithPassword } from "@/lib/db/session";
 import { ensureProfile } from "@/lib/db/profiles";
 
-export type LoginState = { errors: LoginErrors; failed: boolean; email: string };
+export type LoginState = { errors: LoginErrors; failed: boolean; email: string; done?: string };
 
-export async function logIn(_prev: LoginState, form: FormData): Promise<LoginState> {
+// The log-in page: goes on to `next` once logged in.
+export async function logIn(prev: LoginState, form: FormData): Promise<LoginState> {
+  const state = await logInOnly(prev, form);
+  if (state.done) redirect(state.done);
+  return state;
+}
+
+// The log-in window (story 27): same rules, but returns where to go (`done`), and the window opens it with a full page
+// load, so the header and the cart are read again after the action goes on (e.g. a record added through /cart/add).
+export async function logInOnly(_prev: LoginState, form: FormData): Promise<LoginState> {
   const input = {
     email: String(form.get("email") ?? "").trim(),
     password: String(form.get("password") ?? ""),
@@ -30,5 +39,5 @@ export async function logIn(_prev: LoginState, form: FormData): Promise<LoginSta
 
   // The user is signed in either way; a missing profile is tried again before Buy / Sell.
   await ensureProfile(result.userId, result.name).catch(() => undefined);
-  redirect(returnPath(String(form.get("next") ?? "")));
+  return { errors: {}, failed: false, email, done: returnPath(String(form.get("next") ?? "")) };
 }

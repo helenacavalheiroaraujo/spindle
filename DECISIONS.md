@@ -3,6 +3,19 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-14 — Bug 28: an album with no listings opens its own page from search too
+
+- **Decision:** in the search suggestion box (home, results page and desktop header) and on the search results page (`/search`), clicking an album with no listings opens its own page (`/albums/[id]`), the same page used on the genre screen since bug 17. The dark "Nobody is selling" card above the results is removed everywhere. On hover, and when the row is highlighted with the arrow keys, the "No listings" tag on that row reads "Nobody is selling this album right now". On a touch screen there is no hover: a tap opens the album's page, which already shows the message.
+- **Replaces:** decision #44, and the 2026-11-10 line "The search results and the home box keep the card (#44)."
+- **Why:** bug 28. Clicking the album led nowhere, and the message sat below the list, apart from the album it refers to. The owner chose one behaviour in every search place over keeping the card on `/search`, no message on touch screens over a two-tap row, and changing the tag text over a tooltip or a second line.
+- **Links:** bug 28; bug 17; story 17; `docs/design/album-no-listings.html`.
+
+## 2026-11-14 — Story 27: details of the log-in window
+
+- **Decision:** signed out, Add to cart opens the log-in window; the story 20 line "Log in to add this record to your cart" is removed. The home card "Sell a record" also opens the window. After logging in or creating an account in the window, the next page opens with a full page load. In the "Create one" state the titles are "Create an account to buy / to add to your cart / to sell" and "Create an account" from the menu; "Selling is free. You need an account." stays for Sell, "Welcome back." shows only in the log-in state, and "You are buying:" only for Buy in the log-in state.
+- **Why:** one way to log in for every signed-out action. The full page load makes the header and the cart show the record just added; without it they showed the state from before logging in.
+- **Links:** story 27; story 20; `components/LoginWindow.tsx`; `lib/rules/loginWindow.ts`; `tests/e2e/loginWindow.spec.ts`.
+
 ## 2026-11-14 — Genre crates show a pattern from the genre's world (fine line)
 
 - **Decision:** each genre crate keeps its colour, name and record count, and the decorative disc is replaced by a fine-line drawing from the genre's world, in one thin line weight in the crate's text colour: a staff with notes (Classical), sound waves (Electronic), azulejo tiles (Fado), a brick wall with a spray stroke (Hip-hop), mid-century shapes (Jazz), a lightning bolt in outline (Rock), 70s rings (Soul and funk). Full-crate patterns fade towards the name. The same crate heads the genre screen. This replaces the 2026-11-11 decision "Crate name on phone: smaller disc".

@@ -2,13 +2,13 @@
 // The menu (stories 15, 19). Desktop: cells in the top row of the header (MenuRow), each a link plus a chevron whose box
 // says there is nothing there yet. Phone: a ☰ button, top left, that opens a side drawer (MenuDrawer), each row with a
 // chevron too. The items come from lib/rules/menuItems; "Soon" items are not links.
-import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { desktopMenu, menuItems, type DesktopCell, type MenuItem } from "@/lib/rules/menuItems";
 import { initials } from "@/lib/rules/initials";
 import { CartLink } from "./CartLink";
 import { CartIcon } from "./CartIcon";
+import { LoginWindowLink } from "./LoginWindowLink";
 import { useAccountName, useCartCount, useSignedIn } from "./SignedIn";
 
 function Chevron({ open }: { open: boolean }) {
@@ -76,14 +76,15 @@ function Cell({ cell }: { cell: DesktopCell }) {
       className={`relative flex items-center rounded-full hover:bg-white/10 ${cell.cta ? "border-[1.5px] border-cream hover:bg-white/10" : ""}`}
     >
       {cell.href ? (
-        <Link
+        // Signed out, "Log in" and "Sell for free" open the log-in window (story 27).
+        <LoginWindowLink
           href={cell.href}
           aria-label={cell.accountLabel ?? undefined}
           aria-current={cell.current ? "page" : undefined}
           className={`${text} ${cell.cta ? "pl-[18px]" : ""}`}
         >
           {cell.label}
-        </Link>
+        </LoginWindowLink>
       ) : (
         <span aria-disabled="true" className={text}>
           {cell.label}
@@ -135,22 +136,37 @@ export function MenuRow() {
 }
 
 // A drawer row: the link (or the "Coming soon" label) and a 48 px chevron that opens the same message under the row.
-function DrawerRow({ item, open, onToggle, onNavigate }: { item: MenuItem; open: boolean; onToggle: () => void; onNavigate: () => void }) {
+// Signed out, "Log in" and "Sell for free" close the drawer and open the log-in window (story 27); onLoginWindow says
+// where the focus goes back when that window closes.
+function DrawerRow({
+  item,
+  open,
+  onToggle,
+  onNavigate,
+  onLoginWindow,
+}: {
+  item: MenuItem;
+  open: boolean;
+  onToggle: () => void;
+  onNavigate: () => void;
+  onLoginWindow: () => HTMLElement | null;
+}) {
   const boxId = useId();
   return (
     <>
       <div className="flex items-center">
         {item.href ? (
-          <Link
+          <LoginWindowLink
             href={item.href}
             onClick={onNavigate}
+            beforeOpen={onLoginWindow}
             aria-current={item.current ? "page" : undefined}
             className={`flex min-h-14 flex-1 items-center rounded-xl px-3 text-base font-semibold hover:bg-sand ${item.current ? "bg-sand" : ""}`}
           >
             {item.label === "Cart" && <CartIcon className="mr-2 h-5 w-5" />}
             {item.label}
             {item.count > 0 && <span className="ml-auto mr-2 rounded-full bg-navy px-2 text-sm font-semibold text-cream">{item.count}</span>}
-          </Link>
+          </LoginWindowLink>
         ) : (
           <span aria-disabled="true" className="flex min-h-14 flex-1 items-center justify-between gap-2 px-3 text-base text-navy/60">
             {item.label}
@@ -258,6 +274,10 @@ export function MenuDrawer() {
                     open={expanded === item.label}
                     onToggle={() => setExpanded((e) => (e === item.label ? null : item.label))}
                     onNavigate={() => setOpen(false)}
+                    onLoginWindow={() => {
+                      setExpanded(null);
+                      return opener.current;
+                    }}
                   />
                 </li>
               ))}

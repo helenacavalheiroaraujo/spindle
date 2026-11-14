@@ -7,6 +7,7 @@ import { homeData, type HomeData } from "./actions";
 import { CrateRow } from "@/components/CrateRow";
 import { ErrorScreen } from "@/components/ErrorScreen";
 import { LoadingMask } from "@/components/LoadingMask";
+import { LoginWindowLink } from "@/components/LoginWindowLink";
 
 type State = { kind: "loading" } | { kind: "error" } | { kind: "ready"; data: HomeData };
 
@@ -73,7 +74,8 @@ function Sections({ data }: { data: HomeData }) {
               </div>
             </Link>
           )}
-          <Link href="/sell" className="card-link">
+          {/* Signed out: opens the log-in window (story 27). */}
+          <LoginWindowLink href="/sell" className="card-link">
             <div className="flex h-full flex-col justify-between gap-6 rounded-3xl bg-[#e6d8bf] p-5 lg:p-7">
               <span className="w-fit rounded-full bg-navy/10 px-3 py-1 text-xs font-semibold">For sellers</span>
               <p className="font-heading text-3xl leading-none lg:text-4xl">
@@ -84,7 +86,7 @@ function Sections({ data }: { data: HomeData }) {
                 Sell a record
               </span>
             </div>
-          </Link>
+          </LoginWindowLink>
         </div>
         <p className="mt-2 text-xs text-navy/70">Illustrative data</p>
       </section>

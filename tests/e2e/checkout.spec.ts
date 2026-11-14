@@ -88,12 +88,20 @@ test.afterAll(async () => {
 });
 
 const logIn = (page: Page) => signIn(page, email, PASSWORD);
+// Signed out, Buy and Continue to checkout open the log-in window on the page (story 27).
+async function windowLogIn(page: Page) {
+  const box = page.getByRole("dialog");
+  await expect(box.getByRole("heading", { name: "Log in to buy" })).toBeVisible();
+  await expect(page).toHaveURL(`/versions/${V2012}/listings`);
+  await box.getByLabel("Email").fill(email);
+  await box.getByLabel("Password").fill(PASSWORD);
+  await box.getByRole("button", { name: "Log in" }).click();
+}
 
 test("signed out: Buy on a green listing asks to log in, then lands on its checkout", async ({ page }) => {
   await page.goto(`/versions/${V2012}/listings`);
   await rows(page).nth(0).getByRole("link", { name: /^Buy/ }).click();
-  await expect(page).toHaveURL(`/login?next=${encodeURIComponent(`/checkout/${GREEN_32}?version=${V2012}`)}`);
-  await logIn(page);
+  await windowLogIn(page); // story 27: the log-in window, on the same page
   await expect(page).toHaveURL(`/checkout/${GREEN_32}?version=${V2012}`);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Buy with protection");
   await expect(page.getByRole("region", { name: "The record" })).toContainText("Spiders from Mars, 2012 Remaster");
@@ -103,8 +111,7 @@ test("signed out: Continue to checkout after the yellow warning asks to log in, 
   await page.goto(`/versions/${V2012}/listings`);
   await rows(page).nth(1).getByRole("button", { name: /^Buy/ }).click();
   await page.getByRole("group", { name: "Before you buy" }).getByRole("link", { name: "Continue to checkout" }).click();
-  await expect(page).toHaveURL(/\/login\?next=/);
-  await logIn(page);
+  await windowLogIn(page);
   await expect(page).toHaveURL(`/checkout/${YELLOW_36}?version=${V2012}`);
 });
 

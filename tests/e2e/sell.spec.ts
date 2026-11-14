@@ -73,8 +73,12 @@ test("signed out: Sell in the menu asks to log in, then returns to the sell sear
   } else {
     await page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Sell for free" }).click();
   }
-  await expect(page).toHaveURL(`/login?next=${encodeURIComponent("/sell")}`);
-  await logIn(page);
+  // Story 27: the log-in window opens on the page; logging in there goes on to the sell flow.
+  const box = page.getByRole("dialog", { name: "Log in to sell" });
+  await expect(box).toBeVisible();
+  await box.getByLabel("Email").fill(email);
+  await box.getByLabel("Password").fill(PASSWORD);
+  await box.getByRole("button", { name: "Log in" }).click();
   await expect(page).toHaveURL("/sell");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Which record are you selling?");
   await expect(page.getByRole("link", { name: "Back to home" })).toHaveCount(0); // bug 16 (was finding #28)

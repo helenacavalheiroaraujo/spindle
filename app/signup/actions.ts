@@ -6,9 +6,23 @@ import { checkSignUp, isAccountNotCreated, signUpErrorFor, type FieldErrors } fr
 import { signUpWithPassword } from "@/lib/db/session";
 import { createProfile } from "@/lib/db/profiles";
 
-export type SignUpState = { errors: FieldErrors; failed: boolean; checkEmail: boolean; values: { name: string; email: string } };
+export type SignUpState = {
+  errors: FieldErrors;
+  failed: boolean;
+  checkEmail: boolean;
+  values: { name: string; email: string };
+  done?: string;
+};
 
-export async function signUp(_prev: SignUpState, form: FormData): Promise<SignUpState> {
+// The sign-up page: goes on to `next` once the account is created.
+export async function signUp(prev: SignUpState, form: FormData): Promise<SignUpState> {
+  const state = await signUpOnly(prev, form);
+  if (state.done) redirect(state.done);
+  return state;
+}
+
+// The log-in window (story 27): same rules, but returns where to go (`done`); the window opens it with a full page load.
+export async function signUpOnly(_prev: SignUpState, form: FormData): Promise<SignUpState> {
   const input = {
     name: String(form.get("name") ?? "").trim(),
     email: String(form.get("email") ?? "").trim(),
@@ -35,5 +49,5 @@ export async function signUp(_prev: SignUpState, form: FormData): Promise<SignUp
 
   // If this fails, the user is still signed in; the profile is recreated at login or before Buy / Sell.
   await createProfile(result.userId, input.name).catch(() => false);
-  redirect(returnPath(String(form.get("next") ?? "")));
+  return { errors: {}, failed: false, checkEmail: false, values, done: returnPath(String(form.get("next") ?? "")) };
 }
