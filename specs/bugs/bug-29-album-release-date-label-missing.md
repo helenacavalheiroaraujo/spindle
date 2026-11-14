@@ -1,6 +1,6 @@
 # Bug 29 · Album page: release date and label missing
 
-> Found in manual test M24 (story 28) · live site · 2026-11-14. Status: open.
+> Found in manual test M24 (story 28) · live site · 2026-11-14. Status: fixed in part 2026-11-14 (quotes, album over single, one retry, answers kept for one day; dates wrong in MusicBrainz itself stay wrong; DECISIONS 2026-11-14, bug 29).
 
 ## Description
 On the live site, the album page shows neither the release date nor the label for about half of the albums. This data comes from MusicBrainz. We found three causes: a curly vs straight apostrophe in the title ("Let's Dance"), MusicBrainz refusing requests that arrive in quick succession (the failure is intermittent), and odd data ("AM" shows "1 January 2013", "Seven Days Walking" shows 80 tracks, "Divenire" shows 1 track). "The Dark Side of the Moon" always fails, and the cause is unknown.

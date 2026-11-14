@@ -24,14 +24,29 @@ export type GroupCandidate = {
   title: string;
   artist: string;
   firstReleaseDate: string | null;
+  primaryType?: string | null; // MusicBrainz: "Album", "Single", "EP"…
+  secondaryTypes?: string[]; // MusicBrainz: "Compilation", "Live"…
 };
 
-// The album's own record group: title and artist match exactly (ignoring case and spaces).
-// If several match, the one with the earliest first release date wins.
+// Curly quotes become straight ones, so "Let’s Dance" in MusicBrainz matches "Let's Dance" in our data (bug 29).
+function sameText(a: string, b: string): boolean {
+  const norm = (s: string) => s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').trim().toLowerCase();
+  return norm(a) === norm(b);
+}
+
+// A plain album first, then an album with secondary types (compilation, live…), then anything else (single, EP…).
+function groupRank(g: GroupCandidate): number {
+  if (g.primaryType !== "Album") return 2;
+  return (g.secondaryTypes ?? []).length === 0 ? 0 : 1;
+}
+
+// The album's own record group: title and artist match exactly (ignoring case, spaces and curly vs straight quotes).
+// If several match, a plain album wins over a compilation or live album, and those win over a single or EP (bug 29:
+// the 2006 single "Divenire" has 1 track). Within the same kind, the earliest first release date wins.
 export function pickReleaseGroup<T extends GroupCandidate>(groups: T[], title: string, artist: string): T | null {
-  const same = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase();
-  const matches = groups.filter((g) => same(g.title, title) && same(g.artist, artist));
-  return sortByDate(matches, (g) => g.firstReleaseDate)[0] ?? null;
+  const matches = groups.filter((g) => sameText(g.title, title) && sameText(g.artist, artist));
+  const byDate = sortByDate(matches, (g) => g.firstReleaseDate);
+  return [...byDate].sort((a, b) => groupRank(a) - groupRank(b))[0] ?? null;
 }
 
 export type ReleaseCandidate = {

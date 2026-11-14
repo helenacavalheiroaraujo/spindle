@@ -3,6 +3,14 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-14 — Bug 29: album details found more often, kept for one day
+
+- **Decision:** when the album page looks up MusicBrainz, curly and straight quotes count as the same ("Let’s Dance" = "Let's Dance"). If several record groups have the album's exact title and artist, a plain album wins over a compilation or live album, and those win over a single or EP; within the same kind, the earliest wins. If MusicBrainz answers "busy" (503), the page asks once more after 1.2 seconds. Successful answers from MusicBrainz and Wikipedia are kept for one day, so a page opened again does not ask again. This replaces "the data is fetched when the page opens" in the 2026-11-10 decision (album page: details from MusicBrainz and Wikipedia).
+- **Why:** bug 29. The straight apostrophe found no match; the 2006 single "Divenire" (1 track) won over the album because its date "2006" sorts before "2006-11-07"; MusicBrainz refuses requests that arrive in quick succession. The owner chose patching the search (option A) with the one-day cache over storing the MusicBrainz ID or the details in the database.
+- **Not fixed:** dates that are wrong in MusicBrainz itself stay wrong ("AM" shows 1 January 2013, "Whatever People Say I Am…" shows 2005). "Seven Days Walking" keeps its 80 tracks: in MusicBrainz the only group with that exact title is the 7-volume compilation. Two 503s in a row still leave the page without the date and label until the next visit.
+- **Choices by the AI:** the 1.2-second pause and a single retry; one day as the time an answer is kept.
+- **Links:** bug 29; story 21; story 28; `lib/rules/albumDetails.ts`; `lib/external/albumDetails.ts`.
+
 ## 2026-11-14 — Story 28: tapping an album always opens its album page
 
 - **Decision:** every album tap opens `/albums/[id]`. Only the action card changes: "Help me choose a version" (no saved ranking), "See your recommendation · Based on: … · Change" (saved ranking; "Change" opens the priorities screen with the ranking filled in, as story 3), "Nobody is selling this album right now" (no listings). On phone the album cover is 60% of the width on every album page, including the story 21 page, so the action button shows without scrolling. If MusicBrainz fails, the track list comes from the album's earliest version in the database, without "Bonus" tracks. This supersedes the tap rules of stories 1, 2, 12, 16 and 17 ("tap an album → priorities screen"); their files are not changed.

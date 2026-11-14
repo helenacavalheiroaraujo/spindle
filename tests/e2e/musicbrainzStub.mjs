@@ -6,6 +6,8 @@ const KIND_OF_BLUE_GROUP = {
   id: "kob",
   title: "Kind of Blue",
   "first-release-date": "1959-08-17",
+  "primary-type": "Album",
+  "secondary-types": [],
   "artist-credit": [{ name: "Miles Davis" }],
 };
 const KIND_OF_BLUE_RELEASE = {

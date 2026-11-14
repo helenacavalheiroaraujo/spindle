@@ -1,5 +1,5 @@
 // Fetches album details from MusicBrainz (release date, label, tracks) and Wikipedia (musician).
-// Server only. Rules are in lib/rules/albumDetails.ts. Nothing is stored: fetched each time the page opens.
+// Server only. Rules are in lib/rules/albumDetails.ts. Successful answers are kept for one day (bug 29, DECISIONS).
 import {
   firstSentences,
   formatReleaseDate,
@@ -24,6 +24,8 @@ type RawGroup = {
   id: string;
   title: string;
   "first-release-date"?: string;
+  "primary-type"?: string | null;
+  "secondary-types"?: string[];
   "artist-credit": { name: string }[];
 };
 type RawRelease = {
@@ -32,11 +34,22 @@ type RawRelease = {
   media?: { tracks?: { title: string }[] }[];
 };
 
-async function getJson(url: string): Promise<unknown> {
-  const response = await fetch(url, {
-    headers: { "User-Agent": USER_AGENT, Accept: "application/json" },
-    cache: "no-store",
-  });
+// One day, in seconds. Next.js keeps only answers with status 200, so a failure is never kept (bug 29).
+const ONE_DAY = 60 * 60 * 24;
+// MusicBrainz answers 503 when requests arrive too quickly; one more try after a pause (bug 29).
+const RETRY_PAUSE_MS = 1200;
+
+export async function getJson(url: string, fetcher: typeof fetch = fetch, pauseMs = RETRY_PAUSE_MS): Promise<unknown> {
+  const request = () =>
+    fetcher(url, {
+      headers: { "User-Agent": USER_AGENT, Accept: "application/json" },
+      next: { revalidate: ONE_DAY },
+    });
+  let response = await request();
+  if (response.status === 503) {
+    await new Promise((resolve) => setTimeout(resolve, pauseMs));
+    response = await request();
+  }
   if (!response.ok) throw new Error(`Request failed (${response.status})`);
   return response.json();
 }
@@ -68,6 +81,8 @@ async function loadCatalogue(title: string, artist: string) {
       title: g.title,
       artist: g["artist-credit"].map((c) => c.name).join(""),
       firstReleaseDate: g["first-release-date"] || null,
+      primaryType: g["primary-type"] ?? null,
+      secondaryTypes: g["secondary-types"] ?? [],
     })),
     title,
     artist,
