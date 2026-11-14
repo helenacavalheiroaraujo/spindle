@@ -5,7 +5,7 @@ Updated 2026-11-13 on request · Deadline 23 Nov 2026 (moved from 15 Nov) · **1
 
 ## Summary
 - **Stories:** 24 MVP stories: 10 built, 13 built with gaps, 0 in progress, 1 not started (story 27: spec and design committed, no code)
-- **Tests:** unit 635/635 · end-to-end 336/360 (24 skipped) — all pass (full suite, phone and desktop, 12.6 min). The 57 failures of the earlier run on 2026-11-13 no longer appear; their cause was not diagnosed
+- **Tests:** unit 635/635 · end-to-end 336/360 (24 skipped) — all pass (full suite, phone and desktop, 12.6 min; a second full run alone on 2026-11-14: 336 passed, 0 failed, 24 skipped, 12.3 min). The 57 failures of the earlier run on 2026-11-13 no longer appear. Probable cause, not proven: test runs from several sessions overlapped on the one shared database and changed each other's data. The demo data was also restored to the seed on 2026-11-14 with the owner's yes (a seed listing, Megalithic Symphony €29, had been sold by hand; two test listings from 2026-11-10 were never removed), but the earlier full run passed before that, so the data was not the main cause. Only one session at a time runs end-to-end tests
 - **Demo:** the happy path (search → priorities → recommendation → listings → checkout → confirmation) passes its end-to-end tests on phone and desktop. Not rehearsed live. A hand purchase on a seed listing can break the same tests again (it happened on 2026-11-08)
 - **Next:** the brief items (PDF, manual checks, online check, rehearsal). Story 27 only after them
 - **Risk:** 10 days. Story 27 is the last in "If time allows" and is cut first. The PDF, the manual checks, the online check and the rehearsal come before it
@@ -92,6 +92,7 @@ None. Every story with a spec file is now in the build order.
 - Story 26: loading mask "Saving…" and error screen with "Try again"
 
 ## Before the next story can start
+- Only one session at a time runs end-to-end tests (one shared database); no hand purchases on seed listings
 - Story 27: no open findings. Design (option A) and spec are committed
 - The brief items come first (PDF, manual checks, online check, rehearsal)
 - Not committed and not to commit: `tests/e2e/tmp-bug26/shot.spec.ts` (temporary screenshot test; the full suite picks it up until the owner removes it: it ran and passed in this report)
