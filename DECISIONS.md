@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-14 — Desktop is the reference for this delivery; phone polish moves to the next one
+
+- **Decision:** for the MVP delivery, desktop (1280 px) is the reference layout: the live demo and the main screenshots use it. The phone layout (375 px) stays built and tested at both sizes; its visual bugs are logged in `specs/bugs/` and fixed in the next delivery. Spindle's design principle stays phone first.
+- **Why:** at the end of the MVP the desktop layout is the more polished one; the owner's manual checks found visual bugs on the phone. Polishing the phone now would take time from the submission PDF, the manual checks and the demo.
+- **Links:** CLAUDE.md (visual direction); `docs/demo-script.md`; ARCHITECTURE.md ("Next delivery").
+
 ## 2026-11-14 — Feature freeze: nothing new after story 29
 
 - **Decision:** no new stories, features or polish are added to the MVP. Story 29 and bugs 27 and 32 are the last product items. Bugs found in the manual tests are still fixed. The remaining time goes to the brief's deliverables, in this order: the manual tests in `docs/manual-tests.md`, the demo script (updated to the current flow and rehearsed), the Vercel address checked online, the submission PDF (12 migrations, final screenshots), and the 2 open Medium UX findings.

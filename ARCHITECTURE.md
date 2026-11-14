@@ -76,6 +76,7 @@ Every rule the SPEC marks "in one function, covered by unit tests" is a pure fun
 - **Public API.** The next assignments will need the app to be reachable by other applications. The API is built when that brief is known. Keeping every rule in `lib/rules/` means the API can reuse them without reorganising the code.
 - **Guard the server-only code.** `lib/db/` and `lib/external/` must never reach the browser. Today this holds by convention (the secret key has no `NEXT_PUBLIC_` prefix, so it is never sent), but a wrong import would only show when the app runs. Next delivery: mark these folders as server only, so the build itself refuses such an import (needs one small package, `server-only`; ask before installing).
 - **Split the largest screens.** `components/LoginWindow.tsx` (~370 lines) into the left panel, the log-in form and the sign-up form; `app/my-listings/MyListings.tsx` (~400 lines) into the listing row, edit price and remove with Undo. Same behaviour, smaller files with one job each.
+- **Polish the phone layout.** For the MVP delivery desktop is the reference (DECISIONS 2026-11-14); the phone visual bugs logged in `specs/bugs/` are fixed in the next delivery, keeping the phone-first principle.
 - **Check the session once.** About 24 pages each ask "is someone signed in?" at their top. Group the pages that need an account under one route group (e.g. `app/(signed-in)/`) whose layout checks the session once and returns `SignInRequired`, so a new page cannot forget it.
 
 ## Testing

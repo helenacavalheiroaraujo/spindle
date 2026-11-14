@@ -2,7 +2,7 @@
 
 > **DRAFT** — not rehearsed yet. Timings, wording and steps will change after the rehearsals.
 
-Assignment 2 · live demo · due 15 Nov 2026.
+Assignment 2 · live demo · due 23 Nov 2026 (moved from 15 Nov). Shown on desktop at 1280 px, the reference layout for this delivery (DECISIONS 2026-11-14).
 App address: **`<VERCEL ADDRESS — to be added>`** (fallback: `http://localhost:3000`).
 
 All records, prices, sellers, checks and payments in the app are **illustrative** (Assignment 1, p. 12). Say so once, early.
