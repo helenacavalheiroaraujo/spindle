@@ -1,6 +1,6 @@
 # Spindle MVP — Use cases
 
-> Compiled from the "Use cases" of each story in `specs/` (story 14 is outside the MVP). Stories 3, 4 and 6 have no "Use cases" section, so their entries (UC-6, UC-7, UC-10) are taken from the story's Scope and Acceptance criteria. Criteria and edge cases stay in the stories: this file only lists what a user can do and where it is specified. All catalogue data is illustrative.
+> Compiled from the "Use cases" of each story in `specs/`. Stories 3, 4, 6, 21 and 23 have no "Use cases" section, so their entries (UC-6, UC-7, UC-10, UC-30, UC-33) are taken from the story's Scope and Acceptance criteria. Stories 22 and 25 only change how pages look and add no use case. Criteria and edge cases stay in the stories: this file only lists what a user can do and where it is specified. All catalogue data is illustrative.
 
 ## Actors
 - **Buyer**: a non-specialist who wants the right pressing of a record and a safe purchase. Signed out or signed in.
@@ -12,8 +12,10 @@
 | UC-1 | Search for an album by title or artist | List of albums, newest release first | 1, 17 |
 | UC-2 | Pick a suggestion while typing | Opens that album, or goes to the results page | 16 |
 | UC-3 | Type with a typo | "Did you mean…?" with up to 3 albums, or "No albums found" | 1, 16, 17 |
-| UC-4 | Browse the home page by genre (crates) | Genre screen with that genre's albums | 12 |
+| UC-4 | Browse the home page by genre (crates; a scrollable row when there are 7 or more genres) | Genre screen with that genre's albums | 12, 24 |
 | UC-5 | Open an album with no active listings | "Nobody is selling this album right now" | 1 |
+| UC-30 | Open an album with no listings and read about it | Release date, label, track list and "About [musician]" with a Wikipedia link; "Nobody is selling this album right now" stays | 21 |
+| UC-31 | Scroll to the bottom of any page on desktop | Footer with the basics about Spindle | 14 |
 
 ## Buyer: choose the pressing
 | # | Use case | Result | Story |
@@ -40,6 +42,14 @@
 | UC-17 | Rate the seller (1 to 5 stars, or "Not now" and rate later) | Seller summary on listings updates | 18 |
 | UC-18 | Buy a record that was just sold | "Sorry, this record was just sold", no order | 7 |
 
+## Buyer: cart
+| # | Use case | Result | Story |
+|---|---|---|---|
+| UC-32a | Add a green or yellow listing to the cart (signed out → log in first) | Record in the cart | 20 |
+| UC-32b | Open the cart from the menu; remove a record | Records, total, "Remove"; total recalculated | 20 |
+| UC-32c | Go to checkout and pay the total | One order per record, each "Paid · waiting for the seller" | 20 |
+| UC-32d | A record in the cart is sold to someone else | It leaves the cart with a message; total recalculated | 20 |
+
 ## Account (buyer and seller)
 | # | Use case | Result | Story |
 |---|---|---|---|
@@ -48,6 +58,8 @@
 | UC-21 | Log out (from Your account) | Signed out, back to home | 9 |
 | UC-22 | Buy or Sell while signed out | Log in or sign up, then back to checkout or to the sell form | 9 |
 | UC-23 | Use the menu (Home, Sell, Your account / Log in) | Drawer on phone, row on desktop | 15 |
+| UC-33 | See my buying priorities on Your account | Saved order, numbered from 1; no section if nothing is saved | 23 |
+| UC-34 | Change my buying priorities from Your account | New order shown; the next recommendation uses it | 26 |
 
 ## Seller
 | # | Use case | Result | Story |
@@ -64,5 +76,5 @@
 - A sold or removed listing opened from a link → "This record is no longer available".
 
 ## Not in the MVP
-- Story 14 (desktop footer); stories 10, 11 and 13.
+- Stories 10, 11 and 13.
 - Out of scope: artist pages, new (sealed) records, real payments and shipping, automatic photo and matrix checks, AI-written text, Google and Apple sign-in, real catalogue data.
