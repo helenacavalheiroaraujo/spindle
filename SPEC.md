@@ -7,7 +7,7 @@ Stack and hosting: see `DECISIONS.md`. Assignment 1 stated PHP; the MVP uses Nex
 1. **Core:** stories 1, 2, 3, 5, 6, 12
 2. **Purchase:** stories 9 (sign-up, log in), 7, 2 (save to account)
 3. **Seller:** story 8
-4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15), then story 20 (cart), **story 14 (desktop footer), story 22 (navy header), story 24 (more genres and crate row), story 21 (album details), story 23 (buying priorities on the account page), story 25 (recommendation page polish), story 26 (change buying priorities), story 27 (log in in a window on the page), story 28 (one album page for every album)**
+4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15), then story 20 (cart), **story 14 (desktop footer), story 22 (navy header), story 24 (more genres and crate row), story 21 (album details), story 23 (buying priorities on the account page), story 25 (recommendation page polish), story 26 (change buying priorities), story 27 (log in in a window on the page), story 28 (one album page for every album), story 31 (account in tabs), story 30 (next steps after the order), story 32 (account button and menu), story 33 (pressing check on listings), story 29 (larger log-in window, every log-in in the window), story 34 (listen to the album)**
 
 Not in this MVP: stories 10, 11, 13
 
@@ -64,6 +64,12 @@ In build order. Each story has its own file in `specs/stories/` (bugs are in `sp
 | Story 26 · Change buying priorities | [`specs/stories/story-26-change-priorities.md`](specs/stories/story-26-change-priorities.md) |
 | Story 27 · Log in without leaving the page | [`specs/stories/story-27-login-window.md`](specs/stories/story-27-login-window.md) |
 | Story 28 · One album page for every album | [`specs/stories/story-28-album-page-for-all.md`](specs/stories/story-28-album-page-for-all.md) |
+| Story 29 · A larger log-in window, used for every log-in | [`specs/stories/story-29-login-window-everywhere.md`](specs/stories/story-29-login-window-everywhere.md) |
+| Story 30 · Next steps after "Order placed" | [`specs/stories/story-30-after-order.md`](specs/stories/story-30-after-order.md) |
+| Story 31 · Your account in tabs | [`specs/stories/story-31-account-tabs.md`](specs/stories/story-31-account-tabs.md) |
+| Story 32 · Account button and menu | [`specs/stories/story-32-account-menu.md`](specs/stories/story-32-account-menu.md) |
+| Story 33 · "Pressing check" on every listing | [`specs/stories/story-33-pressing-check.md`](specs/stories/story-33-pressing-check.md) |
+| Story 34 · Listen to the album | [`specs/stories/story-34-album-preview.md`](specs/stories/story-34-album-preview.md) |
 
 ---
 

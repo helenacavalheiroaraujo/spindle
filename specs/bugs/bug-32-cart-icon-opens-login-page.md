@@ -10,7 +10,7 @@ When signed out, tapping the cart icon does not behave like the other buttons: i
 
 ## Current vs expected behaviour
 **Current:** the separate log-in page opens.
-**Expected:** the log-in window opens, as it does for Buy, Add to cart and Sell.
+**Expected:** the log-in window opens with the title "Log in to see your cart", as it does for Buy, Add to cart and Sell; after logging in, the cart opens.
 
 ## Customer impact
 Poor user experience

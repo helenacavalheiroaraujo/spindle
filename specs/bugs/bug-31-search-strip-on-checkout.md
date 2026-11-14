@@ -10,7 +10,7 @@ On desktop, the checkout pages show the header search.
 
 ## Current vs expected behaviour
 **Current:** the checkout pages show the header search.
-**Expected:** the checkout pages show no search.
+**Expected:** the checkout pages show no search; the cream strip under the navy row stays, empty.
 
 ## Customer impact
 Poor user experience

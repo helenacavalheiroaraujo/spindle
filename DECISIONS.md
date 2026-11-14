@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-14 — Every log-in opens the log-in window
+
+- **Decision:** the separate log-in and sign-up pages stop appearing. Every log-in opens the window of story 27 (in the two-panel size of story 29): Buy, Continue to checkout, Add to cart, Sell, the menu, the cart icon, and a session that ends during a checkout. A page that needs an account (checkout, cart checkout, cart, sell, Your account), opened by its address while signed out, shows only its header with the window on top; after logging in it shows its content. `/login` and `/signup` open the home page with the window. This replaces the story 27 line "The separate log-in and sign-up pages stay".
+- **Why:** in manual tests the cart icon opened the old page (bug 32) while every other button opened the window; two ways to log in felt incoherent. The owner chose opening the requested page under the window over sending the user to the home page, so they keep the context of what they opened; under the window only the header shows (design option C), since the window covers almost all of the page on desktop and all of it on phone.
+- **Links:** story 27; story 29; bug 32.
+
 ## 2026-11-14 — Bug 29: album details found more often, kept for one day
 
 - **Decision:** when the album page looks up MusicBrainz, curly and straight quotes count as the same ("Let’s Dance" = "Let's Dance"). If several record groups have the album's exact title and artist, a plain album wins over a compilation or live album, and those win over a single or EP; within the same kind, the earliest wins. If MusicBrainz answers "busy" (503), the page asks once more after 1.2 seconds. Successful answers from MusicBrainz and Wikipedia are kept for one day, so a page opened again does not ask again. This replaces "the data is fetched when the page opens" in the 2026-11-10 decision (album page: details from MusicBrainz and Wikipedia).
