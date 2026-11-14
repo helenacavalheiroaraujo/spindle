@@ -9,7 +9,8 @@ import { initials } from "@/lib/rules/initials";
 import { CartLink } from "./CartLink";
 import { CartIcon } from "./CartIcon";
 import { LoginWindowLink } from "./LoginWindowLink";
-import { useAccountName, useCartCount, useSignedIn } from "./SignedIn";
+import { useAccountEmail, useAccountName, useCartCount, useSignedIn } from "./SignedIn";
+import { AccountMenu } from "./AccountMenu";
 
 function Chevron({ open }: { open: boolean }) {
   return (
@@ -121,13 +122,15 @@ function Cell({ cell }: { cell: DesktopCell }) {
 export function MenuRow() {
   const signedIn = useSignedIn();
   const name = useAccountName();
+  const email = useAccountEmail();
   const cells = desktopMenu(signedIn, usePathname(), useSearchParams().toString(), initials(name), name);
   return (
     <nav aria-label="Main" className="hidden items-center gap-4 lg:flex">
       {cells.map((cell) => (
         <div key={cell.label} className="flex items-center gap-0.5">
           {cell.divider && <span aria-hidden className="mx-2 h-5 w-px bg-cream/30" />}
-          <Cell cell={cell} />
+          {/* Signed in, the account cell is the account pill and its menu (story 32). */}
+          {signedIn && cell.accountLabel ? <AccountMenu name={name} email={email} variant="desktop" /> : <Cell cell={cell} />}
         </div>
       ))}
       <CartLink />

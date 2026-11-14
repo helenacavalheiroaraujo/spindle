@@ -1,6 +1,6 @@
 # Bug 31 · Search strip shown on the checkout pages
 
-> Found in feedback on the app · 2026-11-14. Status: open.
+> Found in feedback on the app · 2026-11-14. Status: fixed 2026-11-14 — the single and cart checkout pages keep the empty cream strip, without the search (tests: checkout.spec.ts and cart.spec.ts "… without the search (bug 31)").
 
 ## Description
 On desktop, the checkout pages show the header search.

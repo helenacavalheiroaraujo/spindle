@@ -5,6 +5,7 @@ import { getCart, placeCartOrders } from "@/lib/db/cart";
 import { currentUserId } from "@/lib/db/session";
 import { withReturn } from "@/lib/rules/login";
 import { canPay, type ShippingAddress } from "@/lib/rules/shippingAddress";
+import { orderPlacedPath } from "@/lib/rules/orderPlaced";
 import type { PayState } from "@/app/checkout/[listingId]/actions";
 
 // A record sold meanwhile sends the buyer back to the cart: nothing was paid, and the cart screen removes the
@@ -22,16 +23,17 @@ export async function payCart(_prev: PayState, form: FormData): Promise<PayState
   if (userId === undefined) return { status: "failed" };
   if (userId === null) redirect(withReturn("/login", "/cart/checkout")); // session ended meanwhile
 
-  let backToCart = false;
+  let orderIds: string[] = [];
   try {
     const { items, messages } = await getCart(userId, false);
-    if (items.length === 0 || messages.length > 0) backToCart = true; // something left the cart: nothing is paid
-    else {
+    if (items.length > 0 && messages.length === 0) {
+      // otherwise something left the cart: nothing is paid
       const result = await placeCartOrders(userId, items, address);
-      if ("sold" in result) backToCart = true;
+      if ("orderIds" in result) orderIds = result.orderIds;
     }
   } catch {
     return { status: "failed" };
   }
-  redirect(backToCart ? "/cart" : "/account"); // "Your account" shows the new orders like any other (story 7)
+  // Story 30 (option B): the "Order placed" page with one card per record; "Your account" shows them like any other.
+  redirect(orderIds.length === 0 ? "/cart" : orderPlacedPath(orderIds));
 }

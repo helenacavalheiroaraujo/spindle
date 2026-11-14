@@ -4,7 +4,7 @@ import "./globals.css";
 import { AccountBadge } from "@/components/AccountBadge";
 import { SignedInProvider } from "@/components/SignedIn";
 import { LoginWindowProvider } from "@/components/LoginWindow";
-import { currentUserId } from "@/lib/db/session";
+import { currentUser } from "@/lib/db/session";
 import { getProfileName } from "@/lib/db/profiles";
 import { cartListingIds } from "@/lib/db/cart";
 import { Footer } from "@/components/Footer";
@@ -20,17 +20,20 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // For the menu (stories 15, 19) and the phone badge: signed in or not, and the name (its initials).
-  const userId = await currentUserId().catch(() => null);
+  // The email is shown in the account menu (story 32).
+  const user = await currentUser().catch(() => null);
+  const userId = user?.id ?? null;
+  const email = user?.email ?? "";
   const name = userId ? await getProfileName(userId).catch(() => "") : "";
   const signedIn = Boolean(userId);
   const cartIds = userId ? await cartListingIds(userId).catch(() => []) : []; // story 20: the count in the header
   return (
     <html lang="en" className={`${heading.variable} ${body.variable}`}>
       <body className="relative flex min-h-screen flex-col font-body antialiased">
-        <SignedInProvider signedIn={signedIn} name={name ?? ""} cartIds={cartIds}>
+        <SignedInProvider signedIn={signedIn} name={name ?? ""} email={email} cartIds={cartIds}>
           {/* Story 27: Buy, Add to cart, Sell and the menu "Log in" open the log-in window when signed out. */}
           <LoginWindowProvider>
-            <AccountBadge signedIn={signedIn} name={name ?? ""} />
+            <AccountBadge signedIn={signedIn} name={name ?? ""} email={email} />
             {/* Story 14: the footer sits below the content, at the bottom of the window on short pages. */}
             <div className="flex flex-1 flex-col">{children}</div>
             <Footer />

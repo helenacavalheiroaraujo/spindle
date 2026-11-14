@@ -50,7 +50,8 @@ test.afterAll(async () => {
 });
 
 async function openAccount(page: Page) {
-  await page.goto("/login?next=%2Faccount");
+  // Password and addresses are on the Account details tab (story 31).
+  await page.goto("/login?next=%2Faccount%2Fdetails");
   await signIn(page, email, PASSWORD);
   await expect(page.getByRole("heading", { name: "Your account" })).toBeVisible();
   // The address form is a client component: typing before it is hydrated loses the first field.

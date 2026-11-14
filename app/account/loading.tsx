@@ -1,14 +1,6 @@
-import { Header } from "@/components/Header";
-import { LoadingMask } from "@/components/LoadingMask";
+import { TabLoading } from "./TabStates";
 
-// While Your account loads (SPEC · Shared rules).
+// While the Orders tab loads (SPEC · Shared rules; story 31). /account shows Orders.
 export default function Loading() {
-  return (
-    <main className="px-4 pb-16 page-main">
-      <Header />
-      <div className="relative min-h-96">
-        <LoadingMask label="Loading your account…" />
-      </div>
-    </main>
-  );
+  return <TabLoading label="Loading your orders…" />;
 }

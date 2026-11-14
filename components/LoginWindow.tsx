@@ -132,6 +132,9 @@ function RecordSummary({ record }: { record: LoginRecord }) {
   );
 }
 
+// Name and email are left to the browser (defaultValue, not value): a value filled in by the browser or a password manager
+// may not reach React, and a controlled field would then empty it on the next keystroke elsewhere (bug 30). What was typed
+// still goes along when switching forms (typed), and after a failed try the form shows what was sent (state).
 type FormProps = { next: string; typed: Typed; set: (field: keyof Typed) => (value: string) => void; onSwitch: () => void };
 
 const submit = "min-h-12 w-full rounded-full bg-navy px-6 font-semibold text-cream";
@@ -168,7 +171,15 @@ function WindowLogIn({ next, typed, set, onSwitch }: FormProps) {
           {state.errors.form}
         </p>
       )}
-      <Field name="email" label="Email" type="email" autoComplete="email" value={typed.email} onChange={set("email")} error={state.errors.email} />
+      <Field
+        name="email"
+        label="Email"
+        type="email"
+        autoComplete="email"
+        defaultValue={state.email || typed.email}
+        onChange={set("email")}
+        error={state.errors.email}
+      />
       <Field
         name="password"
         label="Password"
@@ -222,8 +233,16 @@ function WindowSignUp({ next, typed, set, onSwitch }: FormProps) {
     <form action={action} noValidate className="relative mt-5 space-y-4">
       {(pending || leaving) && <LoadingMask label="Creating your account…" />}
       <input type="hidden" name="next" value={next} />
-      <Field name="name" label="Name" autoComplete="name" value={typed.name} onChange={set("name")} error={state.errors.name} />
-      <Field name="email" label="Email" type="email" autoComplete="email" value={typed.email} onChange={set("email")} error={state.errors.email} />
+      <Field name="name" label="Name" autoComplete="name" defaultValue={state.values.name || typed.name} onChange={set("name")} error={state.errors.name} />
+      <Field
+        name="email"
+        label="Email"
+        type="email"
+        autoComplete="email"
+        defaultValue={state.values.email || typed.email}
+        onChange={set("email")}
+        error={state.errors.email}
+      />
       <Field
         name="password"
         label="Password"

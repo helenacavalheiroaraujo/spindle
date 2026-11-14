@@ -9,7 +9,7 @@ Stack and hosting: see `DECISIONS.md`. Assignment 1 stated PHP; the MVP uses Nex
 3. **Seller:** story 8
 4. **If time allows:** story 7 step 3 (confirm receipt), story 17 (results page), story 4, story 18 (rate the seller, replaces the reviews of story 9). **Only if time is left, in this order:** story 16 (suggestions; opens story 17), story 15 (menu), then story 19 (menu with chevrons, replaces the desktop menu of story 15), then story 20 (cart), **story 14 (desktop footer), story 22 (navy header), story 24 (more genres and crate row), story 21 (album details), story 23 (buying priorities on the account page), story 25 (recommendation page polish), story 26 (change buying priorities), story 27 (log in in a window on the page), story 28 (one album page for every album), story 31 (account in tabs), story 30 (next steps after the order), story 32 (account button and menu), story 33 (pressing check on listings), story 29 (larger log-in window, every log-in in the window), story 34 (listen to the album)**
 
-Not in this MVP: stories 10, 11, 13
+Not in this MVP: stories 10, 11 (except its 30-second previews, now story 34), 13
 
 ## Out of scope
 - Search by artist with an artist page (possible future story)
@@ -227,3 +227,24 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 28 | MusicBrainz without tracks: track list from the earliest version, without "Bonus" | `lib/rules/albumAction.ts`, `lib/db/albums.ts`, `app/albums/[albumId]/page.tsx` | `tests/unit/albumAction.test.ts`, `tests/e2e/albumPage.spec.ts` |
 | 28 | 375 × 812: the action button is visible without scrolling (cover 60% wide); 1280 px as in the design | `app/albums/[albumId]/page.tsx` | `tests/e2e/albumPage.spec.ts` (both sizes) |
 | 28 | Loading mask and error screen with "Try again" (Shared rules) | `app/albums/[albumId]/loading.tsx`, `app/albums/[albumId]/error.tsx` | Not tested automatically (same files as story 21) |
+| 30 | One record: "Order placed" gains See my orders and Back to the home page, same size and weight | `app/orders/[id]/page.tsx`, `components/OrderPlacedActions.tsx` | `tests/e2e/afterOrder.spec.ts` |
+| 30 | Cart of several records: "Order placed" with the total, the number of records, the two buttons and one card per record with its price and progress | `app/orders/placed/page.tsx`, `lib/rules/orderPlaced.ts`, `components/OrderProgress.tsx`, `lib/db/orders.ts` | `tests/unit/orderPlaced.test.ts`, `tests/e2e/afterOrder.spec.ts`, `tests/e2e/cart.spec.ts` |
+| 30 | See my orders opens the Orders tab; Back to the home page opens `/` | `lib/rules/orderPlaced.ts` | `tests/unit/orderPlaced.test.ts`, `tests/e2e/afterOrder.spec.ts` |
+| 30 | Only the buyer opens the page | `lib/db/orders.ts` | `tests/e2e/afterOrder.spec.ts` |
+| 30 | Loading mask and error screen with "Try again"; 375 px and 1280 px | `app/orders/placed/loading.tsx`, `app/orders/placed/error.tsx` | `tests/e2e/afterOrder.spec.ts` (both sizes; mask and error screen not tested automatically) |
+| 31 | Profile header (initials, name, email); tabs Orders (n), For sale (n), Account details; Orders opens first | `app/account/layout.tsx`, `app/account/AccountTabs.tsx`, `lib/rules/accountTabs.ts`, `lib/db/account.ts` | `tests/unit/accountTabs.test.ts`, `tests/e2e/accountTabs.spec.ts` |
+| 31 | Each tab shows its content; nothing from the old account page is lost | `app/account/page.tsx`, `app/account/for-sale/page.tsx`, `app/account/details/page.tsx` | `tests/e2e/accountTabs.spec.ts`, `tests/e2e/account.spec.ts`, `tests/e2e/myListings.spec.ts`, `tests/e2e/accountPriorities.spec.ts` |
+| 31 | Each tab has its own address; reloading keeps it; `/my-listings` opens For sale | `lib/rules/accountTabs.ts`, `app/account/orders/page.tsx`, `app/my-listings/page.tsx` | `tests/unit/accountTabs.test.ts`, `tests/e2e/accountTabs.spec.ts` |
+| 31 | Tabs work with the keyboard; the selected tab is underlined and marked for screen readers | `app/account/AccountTabs.tsx` | `tests/e2e/accountTabs.spec.ts` (keyboard in Chromium) |
+| 31 | Loading mask and error screen with "Try again" per tab | `app/account/TabStates.tsx`, `loading.tsx` and `error.tsx` in each tab folder | Not tested automatically |
+| 32 | Pill: initials, first name (desktop), ▾; long first name cut with … | `components/AccountMenu.tsx`, `components/AccountBadge.tsx`, `components/MainMenu.tsx`, `lib/rules/accountTabs.ts` | `tests/unit/accountTabs.test.ts`, `tests/e2e/accountMenu.spec.ts` |
+| 32 | Card: name, email, Orders, For sale, Account details, Log out; each link opens its tab | `components/AccountMenu.tsx` | `tests/e2e/accountMenu.spec.ts` |
+| 32 | Esc, a tap outside or a choice close the card | `components/AccountMenu.tsx` | `tests/e2e/accountMenu.spec.ts` |
+| 32 | Log out stays on the page, or goes home from a page that needs an account | `lib/rules/accountTabs.ts`, `app/account/actions.ts` | `tests/unit/accountTabs.test.ts`, `tests/e2e/accountMenu.spec.ts` |
+| 33 | Each listing shows "Pressing check", the word, its meaning, then "See the checks" | `components/PressingCheck.tsx`, `components/ListingList.tsx`, `lib/rules/trafficLight.ts` | `tests/unit/pressingCheck.test.ts`, `tests/e2e/pressingCheck.spec.ts` |
+| 33 | Card tinted with its colour, thin border of that colour; the word is always written | `components/PressingCheck.tsx`, `components/ListingList.tsx`, `app/globals.css` | `tests/e2e/pressingCheck.spec.ts` |
+| 33 | No legend and no "What do these mean?" | `components/ListingList.tsx` | `tests/e2e/pressingCheck.spec.ts` |
+| 33 | Text on every tint meets 4.5:1 contrast | `app/globals.css` | `tests/unit/pressingCheck.test.ts` |
+| 34 | Title matching ignores case, accents, quotes and bracketed text; a track with no match has no button | `lib/rules/trackPreview.ts` | `tests/unit/trackPreview.test.ts`, `tests/e2e/albumPreview.spec.ts` |
+| 34 | ▶ Preview plays 30 seconds; navy with ❚❚ and the time while playing; one at a time | `app/albums/[albumId]/TrackList.tsx`, `lib/external/itunes.ts` | `tests/e2e/albumPreview.spec.ts` |
+| 34 | The iTunes line shows with the buttons; iTunes down → no buttons, no line, the page stays | `lib/rules/trackPreview.ts`, `app/albums/[albumId]/page.tsx` | `tests/unit/trackPreview.test.ts`, `tests/e2e/albumPreview.spec.ts` (both sizes) |

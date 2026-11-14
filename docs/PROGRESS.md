@@ -1,34 +1,35 @@
 <!-- page: https://claude.ai/artifact/W2xGvu3nfNcfcuxAv3hYsn -->
 # MVP progress
 
-Updated 2026-11-14 on request, after bug 29 · Deadline 23 Nov 2026 (moved from 15 Nov) · **9 days left**
+Updated 2026-11-14 after stories 30–34 and bugs 30–31 · Deadline 23 Nov 2026 (moved from 15 Nov) · **9 days left**
 
 ## Summary
-- **Stories:** 25 of 25 MVP stories built (15 with gaps), 0 in progress, 0 not started
-- **Tests:** unit 688/688 · end-to-end 357/382 (25 skipped) — all pass (full suite, phone and desktop, 12.9 min)
+- **Stories:** 30 of 31 MVP stories built (17 with gaps), 0 in progress, 1 not started (story 29)
+- **Tests:** unit 774/774 · end-to-end 403/432 (29 skipped) — all pass (full suite, phone and desktop, 15.3 min). After that run, two small fixes (red listing top line, playing preview pill) were re-tested with their own suites: listings, pressing check, listing check, recommendation and album preview, all pass
 - **Demo:** the happy path (search → album page → priorities → recommendation → listings → checkout → confirmation) passes its end-to-end tests on phone and desktop. Not rehearsed live
-- **Next:** no story left in the build order. The brief items: PDF, manual checks, rehearsal. Bug 27 (name asked twice in the checkout) is open
-- **Risk:** 9 days and no story left to build. The risk is the brief items, not code: 25 manual checks "Not run", no PDF, demo not rehearsed. Any new story or polish competes with them
+- **Next:** story 29 (larger log-in window, every log-in in the window; covers bug 32). Nothing blocks it: no open findings, designs approved. It touches the account pages that story 31 just changed
+- **Risk:** 9 days, one story left (29) plus the brief items: 25 manual checks "Not run", no PDF, demo not rehearsed. Stories 30–34 are not committed or deployed yet. Story 34 (previews) would be cut first if time runs short
 
 ## Against the brief
 | Criterion | Status | Evidence / what is missing |
 |---|---|---|
 | 1 · Core features work end to end | Done | Phases 1–3 built; the full end-to-end suite passes on phone and desktop, including search, recommendation, listings, checkout and confirmation. Not rehearsed live |
 | 2 · Data tables | Partly | `supabase/migrations/` is committed. `docs/database.md` does not mention migration 0012 (Classical genre) |
-| 3 · Testing, automated and manual | Partly | Automated: unit 688/688; end-to-end 357/382 (25 skipped), all pass. Manual: all 25 entries in `docs/manual-tests.md` are "Not run" (M25 new, bug 29) |
+| 3 · Testing, automated and manual | Partly | Automated: unit 774/774; end-to-end 403/432 (29 skipped), all pass. Manual: all 25 entries in `docs/manual-tests.md` are "Not run" (M25 new, bug 29) |
 | 4 · LLM good practices in the repo | Done | SPEC.md, `specs/`, CLAUDE.md, ARCHITECTURE.md, DECISIONS.md, `docs/AI_USAGE.md` and the tests are committed |
 | 5 · UX and UI quality | Partly | `docs/ux-review/findings.json`: 6 open (2 Medium: #38, #39; 4 Low: #37, #40, #42, #43). No High or Blocker. Story 25 covers #38–#43 with tests, but the entries are still marked open |
-| 6 · App online and reachable | Done | https://spindle-three.vercel.app opened on 14 Nov: home and album pages load; the latest commit (e52d95d, bug 29) is deployed; nothing waiting to be pushed |
+| 6 · App online and reachable | Done | https://spindle-three.vercel.app opened on 14 Nov (before stories 30–34): home and album pages load. Not re-checked in this run; stories 30–34 are not committed or pushed yet |
 | 7 · Live demo | Partly | `docs/demo-script.md` exists, marked DRAFT, not rehearsed; it still says "due 15 Nov" |
 | S1 · Link to the running app | Done | https://spindle-three.vercel.app, checked online |
 | S2 · PDF with data tables and screenshots | Missing | No PDF. `docs/submission/spindle-submission.md` is marked DRAFT (says the address is missing; screenshots to retake) |
 
 ### Missing for the brief, by impact on the grade
 1. Submission PDF (S2): data tables and screenshots, after the final changes; add the Vercel address to the draft.
-2. Manual test record: 25 entries "Not run" in `docs/manual-tests.md` (test plan page: TC-46 and TC-47 new).
-3. Demo: rehearse `docs/demo-script.md` once; update the date and the address.
-4. `docs/database.md`: add migration 0012.
-5. Close the UX entries that story 25 already fixed (#38–#43), if the owner agrees.
+2. Commit and push stories 30–34, then check the live site.
+3. Manual test record: 25 entries "Not run" in `docs/manual-tests.md` (test plan page: TC-46 and TC-47 new).
+4. Demo: rehearse `docs/demo-script.md` once; update the date and the address.
+5. `docs/database.md`: add migration 0012.
+6. Close the UX entries that story 25 already fixed (#38–#43), if the owner agrees.
 
 ## Build phases
 | Phase | Stories | Status |
@@ -36,7 +37,7 @@ Updated 2026-11-14 on request, after bug 29 · Deadline 23 Nov 2026 (moved from 
 | 1 · Core | 1, 2, 3, 5, 6, 12 | Done with gaps (manual checks not run) |
 | 2 · Purchase | 9, 7, 2 (save to account) | Done with gaps. Save to account: rows tested |
 | 3 · Seller | 8 | Done with gaps (manual checks not run) |
-| 4 · If time allows | 7 step 3, 17, 4, 18, 16, 15, 19, 20, 14, 22, 24, 21, 23, 25, 26, 27, 28 | 17 of 17 built (7 step 3, 18, 15, 19, 20, 14, 22, 24 fully; 17, 4, 16, 21, 23, 25, 26, 27, 28 with gaps) |
+| 4 · If time allows | 7 step 3, 17, 4, 18, 16, 15, 19, 20, 14, 22, 24, 21, 23, 25, 26, 27, 28, 31, 30, 32, 33, 29, 34 | 22 of 23 built (7 step 3, 18, 15, 19, 20, 14, 22, 24, 32, 33, 34 fully; 17, 4, 16, 21, 23, 25, 26, 27, 28, 30, 31 with gaps); 29 not started |
 
 ## Stories
 | Story | Status | Requirements with automated test | Open findings |
@@ -66,6 +67,12 @@ Updated 2026-11-14 on request, after bug 29 · Deadline 23 Nov 2026 (moved from 
 | 26 · Change buying priorities | Built with gaps | 5 of 6 | — |
 | 27 · Log in without leaving the page | Built with gaps | 5 of 6 | — |
 | 28 · One album page for every album | Built with gaps | 4 of 5 | — |
+| 29 · A larger log-in window, used for every log-in | Not started | 0 of 0 | — |
+| 30 · Next steps after "Order placed" | Built with gaps | 4 of 5 | — |
+| 31 · Your account in tabs | Built with gaps | 4 of 5 | — |
+| 32 · Account button and menu | Built | 4 of 4 | — |
+| 33 · "Pressing check" on every listing | Built | 4 of 4 | — |
+| 34 · Listen to the album | Built | 3 of 3 | — |
 
 The spec-review register has 0 open findings (81 resolved, 2 won't fix).
 
@@ -79,7 +86,7 @@ None. Every story with a spec file is in the build order.
 | Story | Spec file | What the repo says |
 |---|---|---|
 | 10 · No title in the repo | None | Filters (story 1), "All genres and formats" (stories 12, 24), "Ask the seller" (story 5) |
-| 11 · No title in the repo | None | 30-second previews (story 3); "Spindle Pro" for shops (story 9) |
+| 11 · No title in the repo | None | "Spindle Pro" for shops (story 9). Its 30-second previews are now story 34 (DECISIONS 2026-11-14) |
 | 13 · No title in the repo | None | "Because you like…" with a wishlist (story 12) |
 
 ## Gaps (not tested automatically)
@@ -93,10 +100,15 @@ None. Every story with a spec file is in the build order.
 - Story 27: loading mask and error screen with "Try again" in the log-in window (typing kept is tested)
 - Story 28: loading mask and error screen on the album page (manual test M24)
 - Bug 29: album details from live MusicBrainz (manual test M25; the automated tests use a local stub)
+- Story 30: loading mask and error screen on the cart's "Order placed" page
+- Story 31: loading mask and error screen with "Try again" per tab
+- Story 34: previews from live iTunes (the automated tests use a local stub)
+- Bug 30: real browser or password-manager autofill (the test sets the value without an event; check on the device where it was seen)
 
 ## Before the next step
 - Only one session at a time runs end-to-end tests (one shared database); no hand purchases on seed listings
-- No story left in the build order; a new requirement becomes a new story
-- Bug 27 (the checkout asks for the name twice) is logged and open
+- Story 29 next (wave 2); it covers bug 32 (cart icon opens the log-in page). Expect it to touch `app/account/layout.tsx` and the tab pages
+- A new requirement becomes a new story
+- Bug 27 (the checkout asks for the name twice) and bug 32 are open; bugs 30 and 31 are fixed
 - Bug 29 is fixed in part: dates wrong in MusicBrainz itself stay wrong ("AM", "Whatever People Say I Am…")
 - Parked by the owner on 14 Nov, not logged yet: signed out, the buyer only learns at "Buy" that an account is needed (after album page, priorities, recommendation and listings). Decide after the brief items whether it becomes a bug or a story

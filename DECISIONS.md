@@ -3,6 +3,25 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-14 — Story 33: a red listing says "different pressing" once
+
+- **Decision:** on the listing card, a red listing's top line reads "Moved to [version]" (the link), without "It's a different pressing ·". The phrase stays in the card's "Pressing check · No match" line. The listing check screen keeps "It's a different pressing · moved to [version]". This replaces, for the listing card only, the story 5 text "Red listing: \"It's a different pressing · moved to [version]\""; the story 5 file is not changed.
+- **Why:** with story 33 the phrase appeared twice on the same card. The owner chose removing it from the top line over keeping both or changing the meaning in the Pressing check line.
+- **Links:** story 5; story 33; bug 4.
+
+## 2026-11-14 — Stories 30–34: choices made while building
+
+- **Decision:**
+  - Account tabs (story 31) are links with their own addresses: `/account/orders`, `/account/for-sale`, `/account/details`; `/account` shows Orders; `/my-listings` redirects to For sale.
+  - The account menu card (story 32) shows no counts, unlike the flyout design: the story does not ask for them, and they would be loaded on every page.
+  - Log out from the menu (story 32): on a page that needs an account, the server sends the user home; elsewhere the page reloads signed out. After Esc or a choice the focus returns to the pill; after a tap outside it stays where the user tapped.
+  - Paying a cart (story 30) with several records ends on `/orders/placed?ids=…`, shown only if every order belongs to the signed-in buyer. A cart with one record ends on the story 7 one-record page, to avoid "paid for 1 record · each seller ships their own".
+  - Track previews (story 34) come from the iTunes Search API (free, no key); the album must match by name and artist after the same title rule; answers are kept for one day, as MusicBrainz (bug 29). With no match, no previews.
+  - The 30-second previews of story 11 are now in scope as story 34; the rest of story 11 (Spindle Pro) stays out. This updates the 2026-11-11 decision "Stories 10, 11 and 13 move to the next delivery".
+- **Why:** each story needed these to be built and tested; the owner chose the menu without counts and the one-record page on 14 Nov 2026.
+- **Choices by the AI:** red tint #f5e2df (the design shows only green and amber); the Pressing check line in semi-transparent white; cards 12 px apart; preview pill 44 px high, a second tap pauses; texts "Loading your orders…", "We couldn't load your orders. Check your connection." and the same for listings and details; "Search for a record" when there are no orders.
+- **Links:** stories 30, 31, 32, 33, 34; `docs/design/` options approved 14 Nov 2026.
+
 ## 2026-11-14 — Every log-in opens the log-in window
 
 - **Decision:** the separate log-in and sign-up pages stop appearing. Every log-in opens the window of story 27 (in the two-panel size of story 29): Buy, Continue to checkout, Add to cart, Sell, the menu, the cart icon, and a session that ends during a checkout. A page that needs an account (checkout, cart checkout, cart, sell, Your account), opened by its address while signed out, shows only its header with the window on top; after logging in it shows its content. `/login` and `/signup` open the home page with the window. This replaces the story 27 line "The separate log-in and sign-up pages stay".

@@ -164,6 +164,21 @@ test("Buy opens the window with the record; ×, Esc and the dimmed area close it
   await expect(box).toBeHidden();
 });
 
+test("an email filled in by the browser stays when the password is typed (bug 30)", async ({ page }) => {
+  await open(page, toBuy);
+  await page.getByRole("link", { name: /^Buy with protection/ }).click();
+  const box = windowOf(page);
+  await expect(box.getByRole("heading", { name: "Log in to buy" })).toBeVisible();
+  // Autofill: the value is set on the field directly, without typing and without any input event.
+  await box.getByLabel("Email").evaluate((el, value) => {
+    (el as HTMLInputElement).value = value;
+  }, email);
+  await box.getByLabel("Password").pressSequentially(PASSWORD);
+  await expect(box.getByLabel("Email")).toHaveValue(email);
+  await box.getByRole("button", { name: "Log in" }).click();
+  await expect(page).toHaveURL(`/checkout/${toBuy}?version=${V_HOMOGENIC_2017}`);
+});
+
 test("Add to cart → Create one → the new account has the record in its cart, on the same page", async ({ page }, info) => {
   await open(page, toAdd);
   await page.getByRole("button", { name: /^Add to cart/ }).click();
@@ -214,7 +229,7 @@ test("the menu Log in opens the window without a record; after logging in the us
   await expect(box.getByLabel("Record")).toHaveCount(0);
   await screenshot(page, 27, "log-in-menu");
   await logInInWindow(page);
-  await expect(page.getByRole("link", { name: /signed in as Rui Costa/ }).first()).toBeVisible();
+  await expect(page.getByRole("button", { name: /signed in as Rui Costa/ }).first()).toBeVisible(); // the account pill (story 32)
   await expect(page).toHaveURL("/search?q=bowie");
   await expect(box).toBeHidden();
 });

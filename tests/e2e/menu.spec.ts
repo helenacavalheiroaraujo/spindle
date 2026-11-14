@@ -194,10 +194,15 @@ test("signed in: 'Your account' replaces 'Log in', on the same pages, and opens 
   const items = info.project.name === "phone" ? drawer(page) : row(page);
   if (info.project.name === "phone") await openMenu(page);
   const phone = info.project.name === "phone";
-  await expect(items.getByRole("link")).toHaveText(phone ? ["Home", "Sell for free", "Your account", "Cart"] : ["RC", "Sell for free", ""]); // desktop: the initials, and the cart icon (no text)
+  // Desktop: the account is the pill that opens the account menu (story 32), then Sell for free and the cart icon (no text).
+  await expect(items.getByRole("link")).toHaveText(phone ? ["Home", "Sell for free", "Your account", "Cart"] : ["Sell for free", ""]);
   await expect(items.getByRole("link", { name: "Log in" })).toHaveCount(0);
-  await items.getByRole("link", { name: /Your account/ }).click();
-  await expect(page).toHaveURL("/account");
+  if (phone) await items.getByRole("link", { name: /Your account/ }).click();
+  else {
+    await items.getByRole("button", { name: "Your account, signed in as Rui Costa" }).click();
+    await items.getByRole("link", { name: "Orders" }).click();
+  }
+  await expect(page).toHaveURL(phone ? "/account" : "/account/orders");
   if (phone) {
     await openMenu(page);
     await expect(items.getByRole("link", { name: "Your account" })).toHaveAttribute("aria-current", "page");

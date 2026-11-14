@@ -31,7 +31,7 @@ async function openAccount(page: Page) {
   await page.goto("/login");
   await signIn(page, email, PASSWORD);
   await expect(page).toHaveURL("/");
-  await page.goto("/account");
+  await page.goto("/account/details"); // buying priorities are on the Account details tab (story 31)
   await expect(section(page)).toBeVisible();
 }
 

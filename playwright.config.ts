@@ -13,11 +13,13 @@ export default defineConfig({
   webServer: [
     // Fixed MusicBrainz answers for the album test (no network needed). The dev server below is pointed at it.
     { command: "node tests/e2e/musicbrainzStub.mjs", url: "http://localhost:4010/ws/2/release-group/", reuseExistingServer: true },
+    // Fixed iTunes answers and silent previews for the album preview test (story 34).
+    { command: "node tests/e2e/itunesStub.mjs", url: "http://localhost:4011/search", reuseExistingServer: true },
     {
       command: "npm run dev",
       url: "http://localhost:3000",
       reuseExistingServer: true,
-      env: { MUSICBRAINZ_URL: "http://localhost:4010/ws/2" },
+      env: { MUSICBRAINZ_URL: "http://localhost:4010/ws/2", ITUNES_URL: "http://localhost:4011" },
     },
   ],
 });

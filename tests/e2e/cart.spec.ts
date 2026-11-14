@@ -297,7 +297,10 @@ test("checkout: the address is typed once; Pay creates one order for each record
   await expect(pay).toBeEnabled();
   await pay.click();
 
-  await expect(page).toHaveURL("/account");
+  // Story 30: the cart checkout ends on its own "Order placed" page; Your account shows the orders like any other.
+  await expect(page).toHaveURL(/\/orders\/placed\?ids=/);
+  await expect(page.getByText("€71.80 paid for 2 records")).toBeVisible();
+  await page.goto("/account");
   const cards = page.getByRole("region", { name: "On its way" }).getByRole("listitem", { name: "Homogenic, 2017 Reissue" });
   await expect(cards).toHaveCount(2);
   await screenshot(page, 20, "orders-in-account");
@@ -310,6 +313,18 @@ test("checkout: the address is typed once; Pay creates one order for each record
   const { data: listings } = await admin().from("listings").select("status").in("id", [a28, b30]);
   expect(listings?.map((l) => l.status)).toEqual(["sold", "sold"]);
   expect(await inCart()).toEqual([]);
+});
+
+test("desktop: the cart checkout keeps the cream strip under the navy row, without the search (bug 31)", async ({ page, isMobile }) => {
+  test.skip(isMobile, "the strip exists on the desktop only");
+  await signedIn(page);
+  await addToCart(page, a28);
+  await page.goto("/cart/checkout");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Buy with protection");
+  await expect(page.getByTestId("header-search-strip")).toBeVisible();
+  await expect(page.locator("header").getByRole("search")).toHaveCount(0);
+  await page.goto("/cart"); // other pages keep the search
+  await expect(page.locator("header").getByRole("search")).toBeVisible();
 });
 
 test("a record sold between opening the checkout and paying: nothing is paid, it leaves the cart with a message", async ({ page }) => {

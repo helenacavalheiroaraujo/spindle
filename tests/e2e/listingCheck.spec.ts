@@ -62,10 +62,10 @@ test("red: 'moved to 1990 Reissue' on the check screen opens the listings of tha
   await expect(page.getByRole("list", { name: "Verified listings" })).toBeVisible();
 });
 
-test("red: 'moved to 1990 Reissue' on the list opens the listings of that version, keeping the priorities (finding #10)", async ({ page }) => {
+test("red: 'Moved to 1990 Reissue' on the list opens the listings of that version, keeping the priorities (finding #10)", async ({ page }) => {
   await page.goto(`/versions/${V2012}/listings?priorities=price,sound`);
-  await expect(page.getByText("It's a different pressing ·")).toBeVisible();
-  await page.getByRole("link", { name: "moved to 1990 Reissue" }).click();
+  // Since story 33 the card says "Moved to …" alone; "It's a different pressing" is in its Pressing check line.
+  await page.getByRole("link", { name: "Moved to 1990 Reissue" }).click();
   await expect(page).toHaveURL(`/versions/${V1990}/listings?priorities=price,sound`);
   await expect(page.getByRole("link", { name: /^Open €29/ })).toBeVisible(); // there it is yellow ("Moved here")
 });

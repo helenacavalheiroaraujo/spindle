@@ -11,6 +11,10 @@
   --color-light-green: #3f7a4b;
   --color-light-amber: #c8923a;
   --color-light-red: #a8403a;
+  /* Listing card tints (story 33, Colour 3): light tints of the three colours; text on them meets 4.5:1 (tests/unit/pressingCheck.test.ts). */
+  --color-tint-green: #e3eee5;
+  --color-tint-amber: #f6e9cf;
+  --color-tint-red: #f5e2df;
   --font-heading: var(--font-heading), "Arial Narrow", sans-serif;
   --font-body: var(--font-body), system-ui, sans-serif;
 }

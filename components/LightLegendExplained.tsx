@@ -1,13 +1,8 @@
-import { LIGHT_WORD, type Light } from "@/lib/rules/trafficLight";
+import { LIGHT_MEANING as MEANING, LIGHT_WORD } from "@/lib/rules/trafficLight";
 import { LightLegend } from "@/components/TrafficLight";
 
-// What each traffic-light word means (bug 4). Match and No match reuse the story 5
-// summary wording; the Check line is a general form of "One check is uncertain".
-const MEANING: Record<Light, string> = {
-  green: "All three checks match this version",
-  yellow: "At least one check is uncertain",
-  red: "It's a different pressing",
-};
+// What each traffic-light word means (bug 4). No longer shown on the listings since story 33
+// (each listing explains itself with its "Pressing check" line); kept, not deleted.
 
 // The legend plus a "What do these mean?" disclosure. Words always show, never colour alone.
 export function LightLegendExplained() {

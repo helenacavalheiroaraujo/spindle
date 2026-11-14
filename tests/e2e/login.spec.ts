@@ -61,16 +61,18 @@ test("a registered user logs in from the header and logs out", async ({ page }, 
   await page.getByLabel("Password").fill(PASSWORD);
   await page.getByRole("button", { name: "Log in" }).click();
   await expect(page).toHaveURL("/");
-  const badge = page.getByRole("link", { name: "Your account, signed in as Rui Costa" });
-  await expect(badge).toHaveText("RC");
+  // The account pill (story 32): initials, first name on desktop, ▾; it opens the account menu.
+  const badge = page.getByRole("button", { name: "Your account, signed in as Rui Costa" });
+  await expect(badge).toContainText("RC");
 
   await badge.click();
-  await expect(page).toHaveURL("/account");
-  await expect(page.getByText(email)).toBeVisible();
-  await expect(page.getByText("Rui Costa")).toBeVisible();
+  await page.getByRole("link", { name: "Account details" }).click();
+  await expect(page).toHaveURL("/account/details");
+  await expect(page.getByRole("main").getByText(email)).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Rui Costa" })).toBeVisible();
   await screenshot(page, 9, "account");
 
-  await page.getByRole("button", { name: "Log out" }).click();
+  await page.getByRole("main").getByRole("button", { name: "Log out" }).click();
   await expect(page).toHaveURL("/");
   await expect(corner(page, info).getByRole("link", { name: "Log in" })).toBeVisible();
 

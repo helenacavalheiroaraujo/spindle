@@ -3,8 +3,11 @@ import { notFound } from "next/navigation";
 import { getVersionTracks, listAlbumSummaries } from "@/lib/db/albums";
 import { getViewerSavedRanking } from "@/lib/db/preferences";
 import { loadAlbumDetails } from "@/lib/external/albumDetails";
+import { loadPreviews } from "@/lib/external/itunes";
+import { matchPreviews } from "@/lib/rules/trackPreview";
 import { albumAction, fallbackTracks, type AlbumAction } from "@/lib/rules/albumAction";
 import { Header } from "@/components/Header";
+import { TrackList } from "./TrackList";
 
 // The album page (story 28 · DECISIONS 2026-11-14): every album tap opens it. Only the action card under the title changes:
 // "Help me choose a version", "See your recommendation · Based on: …", or "Nobody is selling this album right now" (story 21).
@@ -16,6 +19,7 @@ import { Header } from "@/components/Header";
 // the title, the action card and the musician's text sit on the right. On phone it is one column in this order: cover (60%
 // of the width, so the action button shows without scrolling), title, action card, facts, musician, source, track list.
 // The two groups are "contents" on phone and columns on desktop; the `order` classes keep the phone order.
+// Story 34: each track matched on iTunes gets a 30-second preview; if iTunes does not answer, the list shows without them.
 export default async function AlbumPage({ params }: { params: Promise<{ albumId: string }> }) {
   const { albumId } = await params;
   const album = (await listAlbumSummaries()).find((a) => a.id === albumId);
@@ -23,17 +27,19 @@ export default async function AlbumPage({ params }: { params: Promise<{ albumId:
   const action = albumAction(album.id, album.access, album.access === "open" ? await getViewerSavedRanking() : null);
   if (action.kind === "none") notFound();
 
-  const [loaded, ownTracks] = await Promise.all([
+  const [loaded, ownTracks, itunesTracks] = await Promise.all([
     loadAlbumDetails(album.title, album.artist).catch(() => null),
     getVersionTracks(album.id)
       .then(fallbackTracks)
       .catch(() => [] as string[]),
+    loadPreviews(album.title, album.artist).catch(() => []),
   ]);
   const details = loaded && {
     ...loaded,
     tracks: loaded.tracks.length > 0 ? loaded.tracks : ownTracks,
   };
   const tracks = details?.tracks ?? ownTracks;
+  const previews = matchPreviews(tracks, itunesTracks);
   const hasDetails =
     details !== null && (details.releaseDate !== null || details.label !== null || tracks.length > 0 || details.musician !== null);
 
@@ -69,17 +75,7 @@ export default async function AlbumPage({ params }: { params: Promise<{ albumId:
 
           {tracks.length > 0 && (
             <div className="order-6 mt-8 lg:mt-0">
-              <section>
-                <h2 className="font-heading text-2xl">Track list</h2>
-                <ol className="mt-2 divide-y divide-line rounded-2xl border border-line bg-sand px-5">
-                  {tracks.map((track, i) => (
-                    <li key={`${i}-${track}`} className="flex gap-4 py-3">
-                      <span className="w-6 font-semibold text-navy/70">{i + 1}</span>
-                      <span>{track}</span>
-                    </li>
-                  ))}
-                </ol>
-              </section>
+              <TrackList tracks={tracks} previews={previews} />
             </div>
           )}
         </div>

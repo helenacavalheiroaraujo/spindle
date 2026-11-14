@@ -1,6 +1,6 @@
 # Bug 30 · Autofilled email is cleared in the log-in window
 
-> Found in feedback on the app · 2026-11-14. Status: open.
+> Found in feedback on the app · 2026-11-14. Status: fixed 2026-11-14 — name and email in the log-in window are kept by the browser, so a filled-in value is no longer cleared (test: loginWindow.spec.ts "an email filled in by the browser stays…").
 
 ## Description
 In the log-in window (story 27), an email filled in by the browser or a password manager is cleared when the user types in the password field.

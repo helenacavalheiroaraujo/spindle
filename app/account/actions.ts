@@ -9,6 +9,7 @@ import { checkMessage } from "@/lib/rules/orderMessage";
 import { checkAddresses, checkPasswordChange, passwordErrorFor, type AddressesErrors, type PasswordErrors } from "@/lib/rules/accountSettings";
 import type { ShippingAddress } from "@/lib/rules/shippingAddress";
 import { confirmReceipt } from "@/lib/db/orders";
+import { afterLogOut } from "@/lib/rules/accountTabs";
 import { addReview } from "@/lib/db/reviews";
 import { isValidRating } from "@/lib/rules/sellerRating";
 import { saveRanking } from "@/lib/db/preferences";
@@ -25,6 +26,20 @@ export async function logOutAction(_prev: LogOutState): Promise<LogOutState> {
   redirect("/");
 }
 
+// Log out from the account menu (story 32): on a page that needs an account the user goes home (lib/rules/accountTabs ·
+// afterLogOut). The redirect happens here, on the server: otherwise the page refreshes signed out first and sends the
+// user to the log-in page. On any other page the menu reloads it.
+export async function logOutFromMenuAction(from: string): Promise<LogOutState> {
+  try {
+    await logOut();
+  } catch {
+    return { failed: true };
+  }
+  const home = afterLogOut(from);
+  if (home) redirect(home);
+  return { failed: false };
+}
+
 // "It arrived, all good" (story 7 · step 3): the order becomes "Seller paid". Only its buyer can do it, once.
 // "done": confirmed now, or already confirmed (nothing to retry). "failed": anything unexpected.
 export type ConfirmState = { status: "ready" | "done" | "failed" };
@@ -37,7 +52,7 @@ export async function confirmReceiptAction(orderId: string, _prev: ConfirmState)
   } catch {
     return { status: "failed" };
   }
-  revalidatePath("/account");
+  revalidatePath("/account", "layout"); // every tab and the counts (story 31)
   return { status: "done" };
 }
 
@@ -54,7 +69,7 @@ export async function rateSellerAction(orderId: string, _prev: RateState, formDa
   } catch {
     return { status: "failed" };
   }
-  revalidatePath("/account");
+  revalidatePath("/account", "layout"); // every tab and the counts (story 31)
   return { status: "done" };
 }
 
@@ -100,7 +115,7 @@ export async function saveAddressesAction(_prev: AddressesState, form: FormData)
   } catch {
     return { status: "failed", errors: {} };
   }
-  revalidatePath("/account");
+  revalidatePath("/account", "layout"); // every tab and the counts (story 31)
   return { status: "done", errors: {} };
 }
 
@@ -119,7 +134,7 @@ export async function sendMessageAction(orderId: string, _prev: MessageState, fo
   } catch {
     return { status: "failed" };
   }
-  revalidatePath("/account");
+  revalidatePath("/account", "layout"); // every tab and the counts (story 31)
   revalidatePath("/my-listings");
   return { status: "done", text: checked.text };
 }
@@ -138,6 +153,6 @@ export async function saveRankingAction(_prev: RankingState, form: FormData): Pr
   } catch {
     return { status: "failed" };
   }
-  revalidatePath("/account");
+  revalidatePath("/account", "layout"); // every tab and the counts (story 31)
   return { status: "done" };
 }

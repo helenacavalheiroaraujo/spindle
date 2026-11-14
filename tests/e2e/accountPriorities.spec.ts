@@ -51,7 +51,7 @@ test.afterAll(async () => {
 
 test("no saved ranking → the account page has no buying priorities section", async ({ page }) => {
   await logIn(page);
-  await page.goto("/account");
+  await page.goto("/account/details"); // buying priorities are on the Account details tab (story 31)
   await expect(page.getByRole("heading", { name: "Your account" })).toBeVisible();
   await expect(section(page)).toHaveCount(0);
   await screenshot(page, 23, "account-no-priorities");
@@ -60,7 +60,7 @@ test("no saved ranking → the account page has no buying priorities section", a
 test("a saved ranking is listed on the account page in saved order, numbered from 1", async ({ page }) => {
   await admin().from("user_preferences").upsert({ user_id: userId, ranking: ["condition", "sound", "price"] });
   await logIn(page);
-  await page.goto("/account");
+  await page.goto("/account/details"); // buying priorities are on the Account details tab (story 31)
 
   const items = section(page).locator("li");
   await expect(section(page).getByRole("heading", { name: "Buying priorities" })).toBeVisible();

@@ -67,7 +67,9 @@ test("green and yellow cheapest first, red last although cheapest; every light s
 test("red listing: moved to its version, not for sale here, no Buy button", async ({ page }) => {
   await page.goto(`/versions/${V2012}/listings`);
   const red = rows(page).nth(2);
-  await expect(red).toContainText("It's a different pressing · moved to 1990 Reissue");
+  await expect(red.getByRole("link", { name: "Moved to 1990 Reissue" })).toBeVisible();
+  // "It's a different pressing" is said once, in the Pressing check line (story 33).
+  await expect(red.getByText("It's a different pressing")).toHaveCount(1);
   await expect(red).toContainText("Not for sale here");
   await expect(red.getByRole("button", { name: /^Buy/ })).toHaveCount(0);
 });

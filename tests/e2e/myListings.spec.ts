@@ -93,8 +93,9 @@ test.afterAll(async () => {
 async function openMyListings(page: Page) {
   await page.goto(`/login?next=${encodeURIComponent("/account")}`);
   await signIn(page, email, PASSWORD);
-  await page.getByRole("link", { name: "My listings" }).click();
-  await expect(page).toHaveURL("/my-listings");
+  // My listings is the For sale tab of Your account (story 31).
+  await page.getByRole("navigation", { name: "Your account" }).getByRole("link", { name: /^For sale/ }).click();
+  await expect(page).toHaveURL("/account/for-sale");
 }
 const onSale = (page: Page) => page.getByRole("list", { name: "On sale" }).getByRole("listitem");
 const row = (page: Page, price: string) => onSale(page).filter({ hasText: price });

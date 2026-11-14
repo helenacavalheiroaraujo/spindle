@@ -32,7 +32,7 @@ test("a new user signs up with name, email and password and is signed in", async
   await page.getByRole("button", { name: "Create account" }).click();
 
   await expect(page).toHaveURL("/");
-  await expect(page.getByRole("link", { name: "Your account, signed in as Ana Silva" })).toHaveText("AS");
+  await expect(page.getByRole("button", { name: "Your account, signed in as Ana Silva" }).first()).toContainText("AS"); // the account pill (story 32)
   await screenshot(page, 9, "signed-in");
 
   const { data } = await admin().from("profiles").select("user_id, name").eq("name", "Ana Silva");
@@ -50,7 +50,7 @@ test("a new user signs up with name, email and password and is signed in", async
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(page.getByRole("heading", { name: "We couldn't create an account with these details." })).toBeVisible();
   await expect(page.getByText(/already has an account/i)).toHaveCount(0);
-  await expect(page.getByRole("link", { name: /signed in as/ })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /signed in as/ })).toHaveCount(0);
   await expect(page.getByRole("status").getByRole("link", { name: "Log in" })).toBeVisible();
   await screenshot(page, 9, "signup-email-in-use");
   await page.getByRole("button", { name: "Back to sign up" }).click();

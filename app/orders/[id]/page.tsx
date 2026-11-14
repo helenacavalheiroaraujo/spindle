@@ -6,8 +6,10 @@ import { withReturn } from "@/lib/rules/login";
 import { PROTECTION_STEPS } from "@/lib/rules/protectionSteps";
 import { Header } from "@/components/Header";
 import { SellerLine } from "@/components/SellerLine";
+import { OrderPlacedActions } from "@/components/OrderPlacedActions";
 
 // Confirmation after Pay (story 7 · What the confirmation shows). Only the buyer can open it.
+// Story 30 (option A): two next steps, "See my orders" and "Back to the home page".
 export default async function OrderPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const userId = await currentUserId();
@@ -27,10 +29,16 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
             Paid · waiting for the seller
           </p>
           <div className="mt-6 hidden items-center gap-3 lg:flex">{record(order, true)}</div>
+          <div className="mt-6 hidden lg:block">
+            <OrderPlacedActions />
+          </div>
         </section>
 
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3 lg:hidden">{record(order, true)}</div>
+          <div className="lg:hidden">
+            <OrderPlacedActions />
+          </div>
           <ol aria-label="How protection works" className="rounded-2xl border border-line bg-white/60 p-4">
             {PROTECTION_STEPS.map((step, i) => (
               <li key={step} className="flex items-center gap-3 py-2">

@@ -5,8 +5,7 @@ import { formatPriorities, type Priority } from "@/lib/rules/priorities";
 import { formatPrice } from "@/lib/rules/recommendation";
 import { yellowWarning } from "@/lib/rules/yellowWarning";
 import { priceBar as barFor, priceLabel, type TypicalRange } from "@/lib/rules/fairPrice";
-import { TrafficLight } from "@/components/TrafficLight";
-import { LightLegendExplained } from "@/components/LightLegendExplained";
+import { CARD_TINT, PressingCheck } from "@/components/PressingCheck";
 import { BuyButton } from "@/components/BuyButton";
 import { AddToCart } from "@/components/AddToCart";
 import { checkoutPath, isOwnListing } from "@/lib/rules/checkoutAccess";
@@ -55,9 +54,6 @@ export function ListingList({
       <Heading className="font-heading text-4xl leading-tight">
         {forSale} for sale{moved > 0 && ` · ${moved} moved`}
       </Heading>
-      <div className="mt-3 border-b border-line pb-3">
-        <LightLegendExplained />
-      </div>
 
       {allRed(rows) && (
         <p role="note" className="mt-4 rounded-2xl border border-line bg-white/50 p-4 font-semibold">
@@ -65,22 +61,22 @@ export function ListingList({
         </p>
       )}
 
-      <ul aria-label="Verified listings" className={from === "list" ? "lg:grid lg:grid-cols-2 lg:gap-x-8" : undefined}>
+      <ul aria-label="Verified listings" className={`mt-3 space-y-3 ${from === "list" ? "lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-3 lg:space-y-0" : ""}`}>
         {rows.map(({ listing: l, light, movedHere, movedToVersionId }) => {
           const label = `${formatPrice(l.price)}, ${l.condition.name}, ${sellerText(l.seller)}`;
           const summary = loginRecord({ ...record, conditionCode: l.condition.code, seller: l.seller, city: l.city, price: l.price });
           return (
-            <li key={l.id} aria-label={label} className="flex flex-wrap items-start gap-x-4 gap-y-3 border-b border-line py-4">
+            <li key={l.id} aria-label={label} className={`flex flex-wrap items-start gap-x-4 gap-y-3 rounded-2xl border p-4 ${CARD_TINT[light]}`}>
               <span aria-hidden className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy">
                 <span className="h-3 w-3 rounded-full bg-cream" />
               </span>
               <div className="min-w-0 flex-1 text-sm">
-              {/* Finding #10 (DECISIONS 2026-11-09): "moved to …" opens the listings of the version it moved to. */}
+              {/* Finding #10 (DECISIONS 2026-11-09): "Moved to …" opens the listings of the version it moved to.
+                  "It's a different pressing" is said once, in the Pressing check line (DECISIONS 2026-11-14, story 33). */}
               {light === "red" && movedToVersionId && (
                 <p className="font-semibold">
-                  It&apos;s a different pressing ·{" "}
                   <Link href={`/versions/${movedToVersionId}/listings${prioritiesQuery}`} className="underline underline-offset-4">
-                    moved to {l.actualVersionName}
+                    Moved to {l.actualVersionName}
                   </Link>
                 </p>
               )}
@@ -103,10 +99,9 @@ export function ListingList({
                   <SellerLine seller={l.seller} city={l.city} />
                   <SellerRating rating={l.rating} />
                 </p>
-                <p className="mt-1 font-semibold underline underline-offset-4">See the checks</p>
+                <PressingCheck light={light} />
               </Link>
               </div>
-              <TrafficLight light={light} />
               {light !== "red" && (
                 <div className="flex w-full justify-end lg:w-auto lg:has-[[role=group]]:w-full">
                   {isOwnListing(l.sellerId, viewerId) ? (

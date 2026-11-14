@@ -6,7 +6,8 @@ import { useActionState, useEffect, useState } from "react";
 import { confirmReceiptAction, rateSellerAction, sendMessageAction, type ConfirmState, type MessageState, type RateState } from "./actions";
 import type { OrderView } from "@/lib/db/orders";
 import { euros } from "@/lib/rules/checkoutTotal";
-import { canConfirmReceipt, PROGRESS_LABELS, stepsDone } from "@/lib/rules/orderProgress";
+import { canConfirmReceipt } from "@/lib/rules/orderProgress";
+import { OrderProgress } from "@/components/OrderProgress";
 import { canRate, canSendReview, starsText } from "@/lib/rules/sellerRating";
 import { MAX_MESSAGE_LENGTH, canMessageSeller } from "@/lib/rules/orderMessage";
 import { LoadingMask } from "@/components/LoadingMask";
@@ -24,7 +25,6 @@ export function OrderCard({ order }: { order: OrderView }) {
   const [state, action, pending] = useActionState(confirmReceiptAction.bind(null, order.id), initial);
   const [asking, setAsking] = useState(false);
   const [dismissed, setDismissed] = useState<ConfirmState | null>(null);
-  const done = stepsDone(order.status);
   const waiting = canConfirmReceipt(order.status);
   const [rateOpen, setRateOpen] = useState(() => justConfirmed.has(order.id) && canRate(order.status, order.reviewed));
   useEffect(() => {
@@ -50,17 +50,7 @@ export function OrderCard({ order }: { order: OrderView }) {
         </p>
       </div>
 
-      <ol aria-label="Order progress" className="mt-4 grid grid-cols-4 gap-1.5">
-        {PROGRESS_LABELS.map((label, i) => (
-          <li key={label}>
-            <span aria-hidden className={`block h-1 rounded-full ${i < done ? "bg-navy" : "bg-line"}`} />
-            <span className={`mt-1 block text-xs ${i < done ? "font-semibold" : "text-navy/70"}`}>
-              {label}
-              {i < done && <span className="sr-only"> (done)</span>}
-            </span>
-          </li>
-        ))}
-      </ol>
+      <OrderProgress status={order.status} />
 
       {waiting ? (
         <p className="mt-3 text-sm text-navy/70">Your money is held by Spindle until you confirm the record is as listed.</p>

@@ -97,6 +97,23 @@ export async function getOrderForBuyer(orderId: string, buyerUserId: string): Pr
   return toOrderView(data as unknown as OrderRow, reviewed.has(data.id), messages.get(data.id) ?? null);
 }
 
+// Several orders as their buyer sees them, in the order of the ids given (story 30: the cart's "Order placed" page).
+// Null when one of them does not exist or belongs to someone else: the whole page is refused (as story 7).
+export async function getOrdersForBuyerByIds(orderIds: string[], buyerUserId: string): Promise<OrderView[] | null> {
+  if (orderIds.length === 0) return null;
+  const { data, error } = await db().from("orders").select(ORDER_COLUMNS).in("id", orderIds);
+  if (error?.code === "22P02") return null; // not a valid order id
+  if (error) throw error;
+  const rows = data ?? [];
+  if (rows.length !== orderIds.length) return null;
+  if (rows.some((row) => (row.profiles as unknown as { user_id: string }).user_id !== buyerUserId)) return null;
+  const [reviewed, messages] = await Promise.all([reviewedOrderIds(orderIds), messagesForOrders(orderIds)]);
+  const byId = new Map(rows.map((row) => [row.id as string, row]));
+  return orderIds.map((id) =>
+    toOrderView(byId.get(id) as unknown as OrderRow, reviewed.has(id), messages.get(id) ?? null),
+  );
+}
+
 // All of the signed-in buyer's orders, newest first (story 7 · step 3: "On its way" on Your account).
 export async function getOrdersForBuyer(buyerUserId: string): Promise<OrderView[]> {
   const profile = await db().from("profiles").select("id").eq("user_id", buyerUserId).maybeSingle();

@@ -126,6 +126,17 @@ test("signed in: a red listing never reaches the checkout; the same listing unde
   await expect(page.getByRole("region", { name: "The record" })).toContainText("Spiders from Mars, 1990 Reissue");
 });
 
+test("desktop: the checkout keeps the cream strip under the navy row, without the search (bug 31)", async ({ page, isMobile }) => {
+  test.skip(isMobile, "the strip exists on the desktop only");
+  await page.goto("/login");
+  await logIn(page);
+  await expect(page).toHaveURL("/");
+  await page.goto(`/checkout/${RED_29}?version=${V1990}`);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Buy with protection");
+  await expect(page.getByTestId("header-search-strip")).toBeVisible();
+  await expect(page.locator("header").getByRole("search")).toHaveCount(0);
+});
+
 test("signed in: the checkout of my own listing goes back to the listing with a notice, and has no Buy button (bug 12)", async ({ page }) => {
   await page.goto("/login");
   await logIn(page);
