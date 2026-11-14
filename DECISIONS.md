@@ -3,6 +3,12 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-14 — Genre crates show a pattern from the genre's world (fine line)
+
+- **Decision:** each genre crate keeps its colour, name and record count, and the decorative disc is replaced by a fine-line drawing from the genre's world, in one thin line weight in the crate's text colour: a staff with notes (Classical), sound waves (Electronic), azulejo tiles (Fado), a brick wall with a spray stroke (Hip-hop), mid-century shapes (Jazz), a lightning bolt in outline (Rock), 70s rings (Soul and funk). Full-crate patterns fade towards the name. The same crate heads the genre screen. This replaces the 2026-11-11 decision "Crate name on phone: smaller disc".
+- **Why:** the owner wanted each crate to show the style of its genre. Option B was chosen over instruments and own colours and fonts per genre. The fine-line variation was chosen because the first drawing of B looked childish, and buyers are eclectic, so the crates should look like one shop.
+- **Links:** `docs/design/genre-tiles-options.html` (B · variation 1); `components/Crate.tsx`.
+
 ## 2026-11-13 — Deadline moved to 23 Nov 2026
 
 - **Decision:** the MVP delivery and the 5-minute demo are on 23 Nov 2026, not 15 Nov. CLAUDE.md and the progress script use the new date. Earlier entries that mention 15 Nov are kept as they were: they record the reasoning at the time.
