@@ -24,7 +24,9 @@ export async function signIn(page: Page, email: string, password: string) {
   await windowReady(page);
   await box.getByLabel("Email").fill(email);
   await box.getByLabel("Password").fill(password);
-  await box.getByRole("button", { name: "Log in" }).click();
+  // Enter sends the form, as the button does. On a slow phone run the click on "Log in" sometimes landed on the page
+  // under the window; tapping the button itself is tested in loginWindow.spec.ts and loginEverywhere.spec.ts.
+  await box.getByLabel("Password").press("Enter");
   // Logged in, the window opens the next page with a full page load, where no window is open (story 29: often the
   // same address, so the address alone does not say it is done).
   await page.waitForURL((url) => !url.pathname.startsWith("/login"));
