@@ -1,35 +1,34 @@
 <!-- page: https://claude.ai/artifact/W2xGvu3nfNcfcuxAv3hYsn -->
 # MVP progress
 
-Updated 2026-11-14 after story 28 · Deadline 23 Nov 2026 (moved from 15 Nov) · **9 days left**
+Updated 2026-11-14 on request, after bug 29 · Deadline 23 Nov 2026 (moved from 15 Nov) · **9 days left**
 
 ## Summary
 - **Stories:** 25 of 25 MVP stories built (15 with gaps), 0 in progress, 0 not started
-- **Tests:** unit 677/677 · end-to-end 357/382 (25 skipped) — all pass (full suite, phone and desktop, 12.7 min, one session alone on the shared database)
-- **Demo:** the happy path (search → priorities → recommendation → listings → checkout → confirmation) passes its end-to-end tests on phone and desktop, now through the album page of story 28 ("Help me choose a version"). Not rehearsed live
-- **Next:** no story left in the build order. The brief items: PDF, manual checks, online check, rehearsal. Bug 27 (name asked twice in the checkout) is open
-- **Risk:** 9 days and no story left to build. The risk is now the brief items, not code. Any new story or polish competes with the PDF, the manual checks and the rehearsal
+- **Tests:** unit 688/688 · end-to-end 357/382 (25 skipped) — all pass (full suite, phone and desktop, 12.9 min)
+- **Demo:** the happy path (search → album page → priorities → recommendation → listings → checkout → confirmation) passes its end-to-end tests on phone and desktop. Not rehearsed live
+- **Next:** no story left in the build order. The brief items: PDF, manual checks, rehearsal. Bug 27 (name asked twice in the checkout) is open
+- **Risk:** 9 days and no story left to build. The risk is the brief items, not code: 25 manual checks "Not run", no PDF, demo not rehearsed. Any new story or polish competes with them
 
 ## Against the brief
 | Criterion | Status | Evidence / what is missing |
 |---|---|---|
-| 1 · Core features work end to end | Done | Phases 1–3 built; the full end-to-end suite passes, including search, recommendation, listings, checkout and confirmation, on phone and desktop. Not rehearsed live |
-| 2 · Data tables | Partly | `supabase/migrations/` is committed. `docs/database.md` does not mention migration 0012 (Classical genre). Stories 27 and 28 add no table |
-| 3 · Testing, automated and manual | Partly | Automated: unit 677/677; end-to-end 357/382 (25 skipped), all pass. Manual: 24 "Not run" entries in `docs/manual-tests.md` |
+| 1 · Core features work end to end | Done | Phases 1–3 built; the full end-to-end suite passes on phone and desktop, including search, recommendation, listings, checkout and confirmation. Not rehearsed live |
+| 2 · Data tables | Partly | `supabase/migrations/` is committed. `docs/database.md` does not mention migration 0012 (Classical genre) |
+| 3 · Testing, automated and manual | Partly | Automated: unit 688/688; end-to-end 357/382 (25 skipped), all pass. Manual: all 25 entries in `docs/manual-tests.md` are "Not run" (M25 new, bug 29) |
 | 4 · LLM good practices in the repo | Done | SPEC.md, `specs/`, CLAUDE.md, ARCHITECTURE.md, DECISIONS.md, `docs/AI_USAGE.md` and the tests are committed |
 | 5 · UX and UI quality | Partly | `docs/ux-review/findings.json`: 6 open (2 Medium: #38, #39; 4 Low: #37, #40, #42, #43). No High or Blocker. Story 25 covers #38–#43 with tests, but the entries are still marked open |
-| 6 · App online and reachable | Not checked | Vercel address not known to this run. No local commits waiting to be pushed; the story 28 work is not committed yet |
-| 7 · Live demo | Partly | `docs/demo-script.md` exists, marked DRAFT, not rehearsed, address still a placeholder |
-| S1 · Link to the running app | Not checked | Same as criterion 6 |
-| S2 · PDF with data tables and screenshots | Missing | No PDF. `docs/submission/spindle-submission.md` is marked DRAFT (address missing, screenshots to retake) |
+| 6 · App online and reachable | Done | https://spindle-three.vercel.app opened on 14 Nov: home and album pages load; the latest commit (e52d95d, bug 29) is deployed; nothing waiting to be pushed |
+| 7 · Live demo | Partly | `docs/demo-script.md` exists, marked DRAFT, not rehearsed; it still says "due 15 Nov" |
+| S1 · Link to the running app | Done | https://spindle-three.vercel.app, checked online |
+| S2 · PDF with data tables and screenshots | Missing | No PDF. `docs/submission/spindle-submission.md` is marked DRAFT (says the address is missing; screenshots to retake) |
 
 ### Missing for the brief, by impact on the grade
-1. Submission PDF (S2): data tables and screenshots, after the final changes.
-2. Manual test record: 24 entries "Not run" (M24 is new, story 28), and the test plan page (TC-46 new, 7 tests updated for story 28).
-3. Online check (criterion 6, S1): push, give the address, open it.
-4. Demo: rehearse `docs/demo-script.md` once; add the address.
-5. `docs/database.md`: add migration 0012.
-6. Close the UX entries that story 25 already fixed (#38–#43), if the owner agrees.
+1. Submission PDF (S2): data tables and screenshots, after the final changes; add the Vercel address to the draft.
+2. Manual test record: 25 entries "Not run" in `docs/manual-tests.md` (test plan page: TC-46 and TC-47 new).
+3. Demo: rehearse `docs/demo-script.md` once; update the date and the address.
+4. `docs/database.md`: add migration 0012.
+5. Close the UX entries that story 25 already fixed (#38–#43), if the owner agrees.
 
 ## Build phases
 | Phase | Stories | Status |
@@ -93,9 +92,11 @@ None. Every story with a spec file is in the build order.
 - Story 26: loading mask "Saving…" and error screen with "Try again"
 - Story 27: loading mask and error screen with "Try again" in the log-in window (typing kept is tested)
 - Story 28: loading mask and error screen on the album page (manual test M24)
+- Bug 29: album details from live MusicBrainz (manual test M25; the automated tests use a local stub)
 
 ## Before the next step
 - Only one session at a time runs end-to-end tests (one shared database); no hand purchases on seed listings
 - No story left in the build order; a new requirement becomes a new story
-- Story 28 is built and tested but not committed: waiting for the owner's yes
 - Bug 27 (the checkout asks for the name twice) is logged and open
+- Bug 29 is fixed in part: dates wrong in MusicBrainz itself stay wrong ("AM", "Whatever People Say I Am…")
+- Parked by the owner on 14 Nov, not logged yet: signed out, the buyer only learns at "Buy" that an account is needed (after album page, priorities, recommendation and listings). Decide after the brief items whether it becomes a bug or a story
