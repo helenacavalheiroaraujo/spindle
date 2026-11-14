@@ -54,7 +54,7 @@ test("desktop: the top row is navy with cream text; the search is in a cream str
 
 test("desktop: the search is under the navy row on another page too, and it still searches", async ({ page }, info) => {
   desktopOnly(info);
-  await page.goto("/cart");
+  await page.goto("/search?q=bowie"); // a page anyone can open (signed out, /cart now shows the log-in window, story 29)
   await expect(page.getByRole("searchbox", { name: "Album or artist" })).toBeVisible();
   await expect(topRow(page)).toHaveCSS("background-color", NAVY);
   await page.getByRole("searchbox", { name: "Album or artist" }).fill("Ziggy");

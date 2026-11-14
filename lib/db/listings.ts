@@ -40,6 +40,7 @@ export type ListingDetails = ListingForList & {
   claimedVersionName: string;
   actualVersionName: string;
   actualTypicalRange: TypicalRange; // story 6: the price label uses the range of the actual version
+  cover: string | null; // the seller's cover photo, in the log-in window (story 29)
 };
 
 type RangeRow = { typical_price_min: string | number | null; typical_price_max: string | number | null };
@@ -72,7 +73,7 @@ export async function getVersionListings(versionId: string): Promise<VersionList
   const listings = await client
     .from("listings")
     .select(
-      `id, price, seller_id, seller_city, seller_shop_name, ${LISTING_FACTS_COLUMNS},
+      `id, price, seller_id, seller_city, seller_shop_name, cover_photo_url, ${LISTING_FACTS_COLUMNS},
        profiles (shop_name, city),
        condition_grades (code, name, explanation),
        claimed:versions!listings_claimed_version_id_fkey (name),
@@ -111,6 +112,7 @@ export async function getVersionListings(versionId: string): Promise<VersionList
         claimedVersionName: (l.claimed as unknown as { name: string }).name,
         actualVersionName: (l.actual as unknown as { name: string }).name,
         actualTypicalRange: toTypicalRange(l.actual as unknown as RangeRow),
+        cover: l.cover_photo_url,
       };
     }),
   };
@@ -165,6 +167,7 @@ export async function getListingCheck(listingId: string): Promise<ListingCheckDa
     albumTitle: claimed.albums.title,
     artist: claimed.albums.artist,
     photos: { cover: l.cover_photo_url, record: l.record_photo_url, matrix: l.matrix_photo_url },
+    cover: l.cover_photo_url,
   };
 }
 

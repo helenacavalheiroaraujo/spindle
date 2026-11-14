@@ -347,7 +347,9 @@ test("a record sold between opening the checkout and paying: nothing is paid, it
 
 test("checkout of an empty cart goes back to the cart; signed out, the cart asks to log in and comes back", async ({ page }) => {
   await page.goto("/cart");
-  await expect(page).toHaveURL(`/login?next=${encodeURIComponent("/cart")}`);
+  // Story 29: the same address, only the header, and the window "Log in to see your cart" (bug 32) on top.
+  await expect(page).toHaveURL("/cart");
+  await expect(page.getByRole("dialog").getByRole("heading", { name: "Log in to see your cart" })).toBeVisible();
   await logIn(page);
   await expect(page).toHaveURL("/cart");
   await page.goto("/cart/checkout");

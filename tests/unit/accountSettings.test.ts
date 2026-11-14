@@ -72,11 +72,16 @@ describe("checkAddresses", () => {
 
 describe("startingAddress (checkout)", () => {
   it.each([
-    ["saved and last order → saved first", HOME, LAST, HOME],
-    ["saved only → saved", HOME, null, HOME],
-    ["last order only → last order", null, LAST, LAST],
-    ["neither → empty form", null, null, null],
-  ])("%s", (_name, saved, last, expected) => {
-    expect(startingAddress(saved, last)).toEqual(expected);
+    ["saved and last order → saved first", HOME, LAST, null, HOME],
+    ["saved only → saved", HOME, null, null, HOME],
+    ["last order only → last order", null, LAST, null, LAST],
+    ["neither → empty form", null, null, null, null],
+    ["saved and account name → saved", HOME, null, "Ana Silva", HOME],
+    ["last order and account name → last order", null, LAST, "Ana Silva", LAST],
+    ["account name only → name filled in, rest empty (bug 27)", null, null, "Ana Silva", { name: "Ana Silva", street: "", postcode: "", city: "" }],
+    ["account name with spaces → trimmed (bug 27)", null, null, "  Ana Silva ", { name: "Ana Silva", street: "", postcode: "", city: "" }],
+    ["account name blank → empty form", null, null, "  ", null],
+  ])("%s", (_name, saved, last, accountName, expected) => {
+    expect(startingAddress(saved, last, accountName)).toEqual(expected);
   });
 });

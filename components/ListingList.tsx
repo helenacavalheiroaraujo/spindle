@@ -64,7 +64,7 @@ export function ListingList({
       <ul aria-label="Verified listings" className={`mt-3 space-y-3 ${from === "list" ? "lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-3 lg:space-y-0" : ""}`}>
         {rows.map(({ listing: l, light, movedHere, movedToVersionId }) => {
           const label = `${formatPrice(l.price)}, ${l.condition.name}, ${sellerText(l.seller)}`;
-          const summary = loginRecord({ ...record, conditionCode: l.condition.code, seller: l.seller, city: l.city, price: l.price });
+          const summary = loginRecord({ ...record, conditionCode: l.condition.code, seller: l.seller, city: l.city, price: l.price, cover: l.cover });
           return (
             <li key={l.id} aria-label={label} className={`flex flex-wrap items-start gap-x-4 gap-y-3 rounded-2xl border p-4 ${CARD_TINT[light]}`}>
               <span aria-hidden className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy">

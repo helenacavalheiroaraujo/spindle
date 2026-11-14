@@ -8,6 +8,8 @@ import { currentUser } from "@/lib/db/session";
 import { getProfileName } from "@/lib/db/profiles";
 import { cartListingIds } from "@/lib/db/cart";
 import { Footer } from "@/components/Footer";
+import { PageTrail } from "@/components/PageTrail";
+import { Suspense } from "react";
 
 // Headings: bold condensed sans-serif; body: plain readable sans-serif (CLAUDE.md, visual direction).
 const heading = Barlow_Condensed({ subsets: ["latin"], weight: ["600"], variable: "--font-heading" }); // semibold headings (DECISIONS 2026-11-10, option 2)
@@ -33,6 +35,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <SignedInProvider signedIn={signedIn} name={name ?? ""} email={email} cartIds={cartIds}>
           {/* Story 27: Buy, Add to cart, Sell and the menu "Log in" open the log-in window when signed out. */}
           <LoginWindowProvider>
+            {/* Story 29: the previous page, for closing the log-in window on a page that needs an account. */}
+            <Suspense>
+              <PageTrail />
+            </Suspense>
             <AccountBadge signedIn={signedIn} name={name ?? ""} email={email} />
             {/* Story 14: the footer sits below the content, at the bottom of the window on short pages. */}
             <div className="flex flex-1 flex-col">{children}</div>

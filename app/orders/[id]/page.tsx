@@ -1,19 +1,19 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { getOrderForBuyer } from "@/lib/db/orders";
 import { currentUserId } from "@/lib/db/session";
 import { euros } from "@/lib/rules/checkoutTotal";
-import { withReturn } from "@/lib/rules/login";
 import { PROTECTION_STEPS } from "@/lib/rules/protectionSteps";
 import { Header } from "@/components/Header";
 import { SellerLine } from "@/components/SellerLine";
 import { OrderPlacedActions } from "@/components/OrderPlacedActions";
+import { SignInRequired } from "@/components/SignInRequired";
 
 // Confirmation after Pay (story 7 · What the confirmation shows). Only the buyer can open it.
 // Story 30 (option A): two next steps, "See my orders" and "Back to the home page".
 export default async function OrderPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const userId = await currentUserId();
-  if (!userId) redirect(withReturn("/login", `/orders/${id}`));
+  if (!userId) return <SignInRequired path={`/orders/${id}`} />; // story 29
   const order = await getOrderForBuyer(id, userId);
   if (!order) notFound();
 

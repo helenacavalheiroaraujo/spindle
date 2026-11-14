@@ -3,7 +3,9 @@
 // Phone: one column in the design's order (p. 16). Desktop: address, payment and protection on the left;
 // the record, the price breakdown and Pay in a card on the right (p. 19).
 import Link from "next/link";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
+import type { LoginPurpose, LoginRecord } from "@/lib/rules/loginWindow";
+import { useLoginWindow } from "@/components/LoginWindow";
 import type { PayState } from "./actions";
 import { euros } from "@/lib/rules/checkoutTotal";
 import { PROTECTION_STEPS } from "@/lib/rules/protectionSteps";
@@ -23,6 +25,7 @@ export function CheckoutForm({
   rows,
   total,
   initialAddress,
+  login,
 }: {
   pay: (prev: PayState, form: FormData) => Promise<PayState>;
   soldHref: string; // "See other listings" when the record was just sold
@@ -30,6 +33,7 @@ export function CheckoutForm({
   rows: [label: string, amount: number][]; // the lines before the total
   total: number;
   initialAddress: ShippingAddress | null; // address of the most recent order (bug 6)
+  login: { purpose: LoginPurpose; record?: LoginRecord }; // the log-in window if the session ends before Pay (story 29)
 }) {
   const [state, action, pending] = useActionState(pay, { status: "ready" } as PayState);
   // The address lives here, so it is kept after "Try again" (SPEC · Shared rules).
@@ -37,6 +41,15 @@ export function CheckoutForm({
   const [dismissed, setDismissed] = useState<PayState | null>(null);
   const set = (field: keyof ShippingAddress) => (value: string) => setAddress((a) => ({ ...a, [field]: value }));
   const sold = state.status === "sold";
+  const openLogin = useLoginWindow();
+
+  // The session ended before Pay (story 29): the log-in window opens on top of this checkout. Logged in, the page stays
+  // as it is, so the address typed is still here; the buyer taps Pay again.
+  useEffect(() => {
+    if (state.status !== "signedOut") return;
+    const here = window.location.pathname + window.location.search;
+    openLogin({ ...login, next: here, stay: true });
+  }, [state]);
 
   if (state.status === "failed" && dismissed !== state) {
     return (

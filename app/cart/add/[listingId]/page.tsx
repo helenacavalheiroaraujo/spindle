@@ -4,7 +4,8 @@
 import { redirect } from "next/navigation";
 import { addToCart } from "@/lib/db/cart";
 import { currentUser } from "@/lib/db/session";
-import { returnPath, withReturn } from "@/lib/rules/login";
+import { returnPath } from "@/lib/rules/login";
+import { SignInRequired } from "@/components/SignInRequired";
 
 export default async function AddToCartPage({
   params,
@@ -17,7 +18,7 @@ export default async function AddToCartPage({
   const next = (await searchParams).next;
   const back = returnPath(Array.isArray(next) ? next[0] : next);
   const user = await currentUser().catch(() => null);
-  if (!user) redirect(withReturn("/login", `/cart/add/${listingId}?next=${encodeURIComponent(back)}`));
+  if (!user) return <SignInRequired path={`/cart/add/${listingId}`} />; // story 29: the window comes back here
   try {
     await addToCart(user.id, listingId, user.name);
   } catch {

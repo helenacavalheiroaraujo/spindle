@@ -1,15 +1,15 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { getAlbumVersions } from "@/lib/db/albums";
 import { currentUserId } from "@/lib/db/session";
-import { withReturn } from "@/lib/rules/login";
 import { VersionPicker } from "./VersionPicker";
+import { SignInRequired } from "@/components/SignInRequired";
 
 // List of versions to pick from (story 8 · use case 1, finding #72, option B): every version of the album,
 // even when nobody is selling it; the seller chooses one, then "Continue".
 export default async function SellVersionsPage({ params }: { params: Promise<{ albumId: string }> }) {
   const { albumId } = await params;
-  if (!(await currentUserId())) redirect(withReturn("/login", `/sell/albums/${albumId}`));
+  if (!(await currentUserId())) return <SignInRequired path={`/sell/albums/${albumId}`} />; // story 29
   const album = await getAlbumVersions(albumId);
   if (!album) notFound();
 

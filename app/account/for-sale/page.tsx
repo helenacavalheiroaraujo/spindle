@@ -1,10 +1,8 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { getMyListings } from "@/lib/db/listings";
 import { getSellerProfile } from "@/lib/db/profiles";
 import { messagesForSoldListings } from "@/lib/db/messages";
 import { currentUser } from "@/lib/db/session";
-import { withReturn } from "@/lib/rules/login";
 import { myListingTabs } from "@/lib/rules/myListings";
 import { MyListings } from "@/app/my-listings/MyListings";
 
@@ -12,7 +10,7 @@ import { MyListings } from "@/app/my-listings/MyListings";
 // and "Sell a record". /my-listings opens this tab. No listings: "Nothing for sale yet" (story 31 · Edge cases).
 export default async function ForSaleTab() {
   const user = await currentUser();
-  if (!user) redirect(withReturn("/login", "/account/for-sale"));
+  if (!user) return null; // signed out: the layout shows the log-in window (story 29)
   const profile = await getSellerProfile(user.id, user.name);
   if (!profile) throw new Error("No profile for the signed-in user.");
   const tabs = myListingTabs(await getMyListings(profile.id));

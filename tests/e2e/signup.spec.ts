@@ -4,6 +4,7 @@ import { expect, test } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
 import { screenshot } from "./screenshot";
+import { windowReady } from "./session";
 
 function env(name: string) {
   if (process.env[name]) return process.env[name]!;
@@ -24,12 +25,15 @@ test.afterAll(async () => {
 
 test("a new user signs up with name, email and password and is signed in", async ({ page }, info) => {
   const email = `spindle-test-${info.project.name}-${Date.now()}@spindle.test`; // Supabase refuses @example.com
-  await page.goto("/signup");
+  await page.goto("/signup"); // story 29: the home page with the window in its "Create one" state
+  const box = page.getByRole("dialog");
+  await windowReady(page);
+  await expect(box.getByRole("heading", { name: "Create an account" })).toBeVisible();
   await screenshot(page, 9, "signup");
-  await page.getByLabel("Name").fill("Ana Silva");
-  await page.getByLabel("Email").fill(email);
-  await page.getByLabel("Password").fill("vinyl-test-123");
-  await page.getByRole("button", { name: "Create account" }).click();
+  await box.getByLabel("Name").fill("Ana Silva");
+  await box.getByLabel("Email").fill(email);
+  await box.getByLabel("Password").fill("vinyl-test-123");
+  await box.getByRole("button", { name: "Create account" }).click();
 
   await expect(page).toHaveURL("/");
   await expect(page.getByRole("button", { name: "Your account, signed in as Ana Silva" }).first()).toContainText("AS"); // the account pill (story 32)
@@ -44,27 +48,29 @@ test("a new user signs up with name, email and password and is signed in", async
   // Same email again → the generic message, never "already has an account" (bug 15); no second account, not signed in.
   await page.context().clearCookies();
   await page.goto("/signup");
-  await page.getByLabel("Name").fill("Ana Silva");
-  await page.getByLabel("Email").fill(email);
-  await page.getByLabel("Password").fill("vinyl-test-123");
-  await page.getByRole("button", { name: "Create account" }).click();
-  await expect(page.getByRole("heading", { name: "We couldn't create an account with these details." })).toBeVisible();
+  await windowReady(page);
+  await box.getByLabel("Name").fill("Ana Silva");
+  await box.getByLabel("Email").fill(email);
+  await box.getByLabel("Password").fill("vinyl-test-123");
+  await box.getByRole("button", { name: "Create account" }).click();
+  await expect(box.getByRole("status")).toContainText("We couldn't create an account with these details.");
   await expect(page.getByText(/already has an account/i)).toHaveCount(0);
   await expect(page.getByRole("button", { name: /signed in as/ })).toHaveCount(0);
-  await expect(page.getByRole("status").getByRole("link", { name: "Log in" })).toBeVisible();
   await screenshot(page, 9, "signup-email-in-use");
-  await page.getByRole("button", { name: "Back to sign up" }).click();
-  await expect(page.getByLabel("Email")).toHaveValue(email);
+  await box.getByRole("status").getByRole("button", { name: "Log in" }).click();
+  await expect(box.getByLabel("Email")).toHaveValue(email); // what was typed goes along to the log-in form
 });
 
 test("passwords shorter than 8 characters are refused", async ({ page }) => {
   await page.goto("/signup");
-  await page.getByLabel("Name").fill("Ana Silva");
-  await page.getByLabel("Email").fill("short-password@example.com");
-  await page.getByLabel("Password").fill("1234567");
-  await page.getByRole("button", { name: "Create account" }).click();
-  await expect(page.getByText("Use at least 8 characters.")).toBeVisible();
+  const box = page.getByRole("dialog");
+  await windowReady(page);
+  await box.getByLabel("Name").fill("Ana Silva");
+  await box.getByLabel("Email").fill("short-password@example.com");
+  await box.getByLabel("Password").fill("1234567");
+  await box.getByRole("button", { name: "Create account" }).click();
+  await expect(box.getByText("Use at least 8 characters.")).toBeVisible();
   await screenshot(page, 9, "signup-short-password");
   await expect(page).toHaveURL("/signup");
-  await expect(page.getByLabel("Name")).toHaveValue("Ana Silva"); // what was typed is kept
+  await expect(box.getByLabel("Name")).toHaveValue("Ana Silva"); // what was typed is kept
 });

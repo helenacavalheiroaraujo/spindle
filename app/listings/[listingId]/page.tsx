@@ -56,7 +56,7 @@ export default async function ListingCheckPage({
   const prioritiesQuery = ranking.length ? `?priorities=${formatPriorities(ranking)}` : "";
   const notice = listingNotice(one(query.notice));
   const label = `${formatPrice(l.price)}, ${l.condition.name}, ${sellerText(l.seller)}`;
-  const loginSummary = loginRecord({ albumTitle: l.albumTitle, versionName, conditionCode: l.condition.code, seller: l.seller, city: l.city, price: l.price });
+  const loginSummary = loginRecord({ albumTitle: l.albumTitle, versionName, conditionCode: l.condition.code, seller: l.seller, city: l.city, price: l.price, cover: l.photos.cover });
 
   return (
     <main className="px-4 pb-16 page-main">

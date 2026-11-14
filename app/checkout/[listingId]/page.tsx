@@ -4,10 +4,11 @@ import { currentUserId } from "@/lib/db/session";
 import { getLastShippingAddress } from "@/lib/db/orders";
 import { getSavedAddresses } from "@/lib/db/addresses";
 import { startingAddress } from "@/lib/rules/shippingAddress";
-import { currentProfileId } from "@/lib/db/profiles";
+import { currentProfileId, getProfileName } from "@/lib/db/profiles";
 import { canCheckout, checkoutPath, isNoLongerAvailable, isOwnListing, ownListingPath } from "@/lib/rules/checkoutAccess";
 import { ListingUnavailable } from "@/components/ListingUnavailable";
-import { withReturn } from "@/lib/rules/login";
+import { loginRecord } from "@/lib/rules/loginWindow";
+import { SignInRequired } from "@/components/SignInRequired";
 import { Header } from "@/components/Header";
 import { SellerLine } from "@/components/SellerLine";
 import { checkoutTotal } from "@/lib/rules/checkoutTotal";
@@ -17,7 +18,7 @@ import { pay } from "./actions";
 const one = (v?: string | string[]) => (Array.isArray(v) ? v[0] : v);
 
 // Checkout, "Buy with protection" (story 7). Reached from Buy on a green or yellow listing; the version
-// in the address is the one the buyer came from. Signed out → log in first, then back here (story 7 · Edge cases).
+// in the address is the one the buyer came from. Signed out → only the header and the log-in window, then back here (story 7 · Edge cases, story 29).
 export default async function CheckoutPage({
   params,
   searchParams,
@@ -31,18 +32,33 @@ export default async function CheckoutPage({
   if (isNoLongerAvailable(l.status)) return <ListingUnavailable />; // sold or removed (finding #61)
   const versionId = one((await searchParams).version) ?? l.claimedVersionId;
 
+  const versionName = versionId === l.actualVersionId ? l.actualVersionName : l.claimedVersionName;
+  // The record in the log-in window (design B): signed out, and if the session ends before Pay (story 29).
+  const loginSummary = loginRecord({
+    albumTitle: l.albumTitle,
+    versionName,
+    conditionCode: l.condition.code,
+    seller: l.seller,
+    city: l.city,
+    price: l.price,
+    cover: l.photos.cover,
+  });
+
   const userId = await currentUserId();
-  if (!userId) redirect(withReturn("/login", checkoutPath(listingId, versionId)));
+  if (!userId) return <SignInRequired path={checkoutPath(listingId, versionId)} record={loginSummary} />; // story 29
   // The seller's own listing (finding #12, bug 12): back to the listing's page with a notice, never "not found".
   const profileId = await currentProfileId();
   if (isOwnListing(l.sellerId, profileId)) redirect(ownListingPath(listingId, versionId));
   // Red, sold or removed: never reaches the checkout.
   if (!canCheckout(l, versionId, profileId)) notFound();
 
-  const [saved, last] = await Promise.all([getSavedAddresses(userId), getLastShippingAddress(userId)]);
-  const initialAddress = startingAddress(saved.delivery, last); // saved address first (bug 9), then the last order (bug 6)
-
-  const versionName = versionId === l.actualVersionId ? l.actualVersionName : l.claimedVersionName;
+  const [saved, last, accountName] = await Promise.all([
+    getSavedAddresses(userId),
+    getLastShippingAddress(userId),
+    getProfileName(userId).catch(() => null),
+  ]);
+  // Saved address first (bug 9), then the last order (bug 6), then the name given at sign-up (bug 27).
+  const initialAddress = startingAddress(saved.delivery, last, accountName);
 
   const amounts = checkoutTotal(l.price);
 
@@ -80,6 +96,7 @@ export default async function CheckoutPage({
         ]}
         total={amounts.total}
         initialAddress={initialAddress}
+        login={{ purpose: "buy", record: loginSummary }}
       />
     </main>
   );

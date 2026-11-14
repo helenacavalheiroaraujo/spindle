@@ -1,9 +1,7 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { currentUser } from "@/lib/db/session";
 import { getOrdersForBuyer } from "@/lib/db/orders";
 import { splitOrders } from "@/lib/rules/orderProgress";
-import { withReturn } from "@/lib/rules/login";
 import { OrderCard } from "./OrderCard";
 
 // Your account, Orders tab (story 31): /account and /account/orders. The profile header and the tabs are in layout.tsx.
@@ -11,7 +9,7 @@ import { OrderCard } from "./OrderCard";
 // rating (story 18). No orders: "No orders yet" and a link to search (story 31 · Edge cases).
 export default async function OrdersTab() {
   const user = await currentUser();
-  if (!user) redirect(withReturn("/login", "/account"));
+  if (!user) return null; // signed out: the layout shows the log-in window (story 29)
   const orders = await getOrdersForBuyer(user.id);
   const { onItsWay, delivered } = splitOrders(orders);
 

@@ -3,7 +3,6 @@
 import { redirect } from "next/navigation";
 import { getCart, placeCartOrders } from "@/lib/db/cart";
 import { currentUserId } from "@/lib/db/session";
-import { withReturn } from "@/lib/rules/login";
 import { canPay, type ShippingAddress } from "@/lib/rules/shippingAddress";
 import { orderPlacedPath } from "@/lib/rules/orderPlaced";
 import type { PayState } from "@/app/checkout/[listingId]/actions";
@@ -21,7 +20,7 @@ export async function payCart(_prev: PayState, form: FormData): Promise<PayState
 
   const userId = await currentUserId().catch(() => undefined);
   if (userId === undefined) return { status: "failed" };
-  if (userId === null) redirect(withReturn("/login", "/cart/checkout")); // session ended meanwhile
+  if (userId === null) return { status: "signedOut" }; // session ended meanwhile: the log-in window opens on top (story 29)
 
   let orderIds: string[] = [];
   try {

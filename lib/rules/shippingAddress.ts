@@ -29,7 +29,14 @@ export function canPay(address: ShippingAddress): boolean {
 }
 
 // The address the checkout form starts with (bug 9, then bug 6): the delivery address saved on "Your account",
-// otherwise the address of the buyer's most recent order, otherwise empty (null). It can still be edited.
-export function startingAddress(saved: ShippingAddress | null, lastOrder: ShippingAddress | null): ShippingAddress | null {
-  return saved ?? lastOrder;
+// otherwise the address of the buyer's most recent order, otherwise only the name given at sign-up (bug 27: the name
+// is not asked twice), otherwise empty (null). It can still be edited.
+export function startingAddress(
+  saved: ShippingAddress | null,
+  lastOrder: ShippingAddress | null,
+  accountName: string | null = null,
+): ShippingAddress | null {
+  if (saved ?? lastOrder) return saved ?? lastOrder;
+  const name = accountName?.trim() ?? "";
+  return name ? { name, street: "", postcode: "", city: "" } : null;
 }

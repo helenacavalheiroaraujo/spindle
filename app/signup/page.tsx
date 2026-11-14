@@ -1,27 +1,18 @@
-import Link from "next/link";
-import { Header } from "@/components/Header";
-import { returnPath, withReturn } from "@/lib/rules/login";
-import { SignUpForm } from "./SignUpForm";
+import { redirect } from "next/navigation";
+import Home from "@/app/page";
+import { LoginGate } from "@/components/LoginGate";
+import { currentUserId } from "@/lib/db/session";
+import { returnPath } from "@/lib/rules/login";
 
-// Sign up (story 9 · use case 1): name, email and password; no terms line, no seller box (finding #23).
-// ?next= is where the user was (e.g. Buy); it is kept when switching to log-in.
+// /signup (story 29 · Scope): the separate sign-up page is gone; the home page opens with the log-in window on top, in
+// its "Create one" state. ?next= is still where the user goes after signing up. Already signed in: straight there.
 export default async function SignUpPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
   const next = returnPath((await searchParams).next);
+  if (await currentUserId().catch(() => null)) redirect(next);
   return (
-    <main className="px-4 pb-16 page-main page-form">
-      <Header />
-      <h1 className="mt-6 font-heading text-4xl leading-tight">Create your account</h1>
-      <p className="mt-2">One account to buy and sell records.</p>
-      <SignUpForm next={next} />
-      <p className="mt-6 text-center">
-        Already have an account?{" "}
-        <Link href={withReturn("/login", next)} className="inline-block min-h-12 py-3 font-semibold underline">
-          Log in
-        </Link>
-      </p>
-      <p className="mt-2 text-center text-sm text-navy/70">
-        Just browsing? You can search and get recommendations without an account.
-      </p>
-    </main>
+    <>
+      <Home />
+      <LoginGate purpose="menu" next={next} mode="signup" onClose="home" />
+    </>
   );
 }

@@ -1,20 +1,20 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { getOrdersForBuyerByIds } from "@/lib/db/orders";
 import { currentUserId } from "@/lib/db/session";
 import { euros } from "@/lib/rules/checkoutTotal";
-import { withReturn } from "@/lib/rules/login";
 import { orderPlacedPath, paidSummary, parseOrderIds } from "@/lib/rules/orderPlaced";
 import { Header } from "@/components/Header";
 import { SellerLine } from "@/components/SellerLine";
 import { OrderPlacedActions } from "@/components/OrderPlacedActions";
 import { OrderProgress } from "@/components/OrderProgress";
+import { SignInRequired } from "@/components/SignInRequired";
 
 // "Order placed" after Pay in the cart (story 30 · option B): a summary with the two next steps, then one card per
 // record with its price paid and its progress bar. Only the buyer of every order can open it (as story 7).
 export default async function OrdersPlacedPage({ searchParams }: { searchParams: Promise<{ ids?: string | string[] }> }) {
   const ids = parseOrderIds((await searchParams).ids);
   const userId = await currentUserId();
-  if (!userId) redirect(withReturn("/login", orderPlacedPath(ids)));
+  if (!userId) return <SignInRequired path="/orders/placed" />; // story 29
   const orders = await getOrdersForBuyerByIds(ids, userId);
   if (!orders) notFound();
   const summary = paidSummary(orders.map((o) => o.total));

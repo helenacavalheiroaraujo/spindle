@@ -1,13 +1,12 @@
-import { redirect } from "next/navigation";
 import { AlbumSearch } from "../AlbumSearch";
 import { Header } from "@/components/Header";
 import { currentUserId } from "@/lib/db/session";
-import { withReturn } from "@/lib/rules/login";
+import { SignInRequired } from "@/components/SignInRequired";
 
 // "Sell for free" (story 8 · use case 1): a search screen of its own, same box and matching as story 1
 // (finding #36). Requires login; after login the seller comes back here.
 export default async function SellSearchPage() {
-  if (!(await currentUserId())) redirect(withReturn("/login", "/sell"));
+  if (!(await currentUserId())) return <SignInRequired path="/sell" />; // story 29
   return (
     <main className="px-4 pb-16 page-main page-narrow">
       <Header />

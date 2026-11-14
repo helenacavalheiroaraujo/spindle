@@ -1,18 +1,17 @@
-import { redirect } from "next/navigation";
 import { Header } from "@/components/Header";
 import { getVersionToSell } from "@/lib/db/albums";
 import { getSellingPlace } from "@/lib/db/listings";
 import { getSellerProfile } from "@/lib/db/profiles";
 import { currentUser } from "@/lib/db/session";
-import { withReturn } from "@/lib/rules/login";
 import { NOT_IN_CATALOGUE } from "@/app/sell/albums/[albumId]/VersionPicker";
 import { SellForm } from "./SellForm";
+import { SignInRequired } from "@/components/SignInRequired";
 
 // Sell form, "Sell a record" (story 8 · use case 2; design p. 16 phone, p. 20 desktop; first time: finding #73, option C).
 export default async function SellFormPage({ params }: { params: Promise<{ versionId: string }> }) {
   const { versionId } = await params;
   const user = await currentUser();
-  if (!user) redirect(withReturn("/login", `/sell/versions/${versionId}`));
+  if (!user) return <SignInRequired path={`/sell/versions/${versionId}`} />; // story 29
 
   const version = await getVersionToSell(versionId);
   if (!version) {

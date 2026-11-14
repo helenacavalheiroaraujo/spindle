@@ -5,14 +5,14 @@ import { getListingCheck } from "@/lib/db/listings";
 import { placeOrder } from "@/lib/db/orders";
 import { currentUserId } from "@/lib/db/session";
 import { currentProfileId } from "@/lib/db/profiles";
-import { canCheckout, checkoutPath } from "@/lib/rules/checkoutAccess";
+import { canCheckout } from "@/lib/rules/checkoutAccess";
 import { checkoutTotal } from "@/lib/rules/checkoutTotal";
-import { withReturn } from "@/lib/rules/login";
 import { canPay, type ShippingAddress } from "@/lib/rules/shippingAddress";
 
 // "sold": the listing is no longer for sale ("Sorry, this record was just sold"); no order was created.
 // "failed": anything unexpected (the error screen with "Try again"; the form keeps what was typed).
-export type PayState = { status: "ready" | "sold" | "failed" };
+// "signedOut": the session ended before Pay; the log-in window opens on the checkout and the address stays (story 29).
+export type PayState = { status: "ready" | "sold" | "failed" | "signedOut" };
 
 export async function pay(listingId: string, versionId: string, _prev: PayState, form: FormData): Promise<PayState> {
   const address: ShippingAddress = {
@@ -25,7 +25,7 @@ export async function pay(listingId: string, versionId: string, _prev: PayState,
 
   const buyerId = await currentUserId().catch(() => undefined);
   if (buyerId === undefined) return { status: "failed" };
-  if (buyerId === null) redirect(withReturn("/login", checkoutPath(listingId, versionId))); // session ended meanwhile
+  if (buyerId === null) return { status: "signedOut" }; // session ended meanwhile: the log-in window opens on top (story 29)
 
   let orderId: string;
   try {

@@ -4,10 +4,11 @@
 import type { Page } from "@playwright/test";
 
 // A bug fix passes its folder name instead of a story number, e.g. "bug-10" → docs/screenshots/bug-10/.
-export async function screenshot(page: Page, story: number | string, name: string) {
+// fullPage false: only what the screen shows, for a window fixed to the screen (story 29's log-in window).
+export async function screenshot(page: Page, story: number | string, name: string, { fullPage = true } = {}) {
   if (process.env.SCREENSHOTS !== "1") return;
   const width = page.viewportSize()?.width ?? 0;
   // Hide the Next.js development badge: it is not part of the app.
   await page.addStyleTag({ content: "nextjs-portal { display: none !important; }" });
-  await page.screenshot({ path: `docs/screenshots/${typeof story === "number" ? `story-${story}` : story}/${name}-${width}.png`, fullPage: true });
+  await page.screenshot({ path: `docs/screenshots/${typeof story === "number" ? `story-${story}` : story}/${name}-${width}.png`, fullPage, animations: "disabled" }); // animations shown at their end
 }

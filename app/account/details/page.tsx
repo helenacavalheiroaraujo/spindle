@@ -1,8 +1,6 @@
-import { redirect } from "next/navigation";
 import { currentUser } from "@/lib/db/session";
 import { getSavedAddresses } from "@/lib/db/addresses";
 import { getSavedRanking } from "@/lib/db/preferences";
-import { withReturn } from "@/lib/rules/login";
 import { LogOutButton } from "../LogOutButton";
 import { PasswordForm } from "../PasswordForm";
 import { AddressesForm } from "../AddressesForm";
@@ -13,7 +11,7 @@ import { PrioritiesSection } from "../PrioritiesSection";
 // header (layout.tsx), not here.
 export default async function DetailsTab() {
   const user = await currentUser();
-  if (!user) redirect(withReturn("/login", "/account/details"));
+  if (!user) return null; // signed out: the layout shows the log-in window (story 29)
   const [saved, ranking] = await Promise.all([getSavedAddresses(user.id), getSavedRanking(user.id)]);
 
   return (

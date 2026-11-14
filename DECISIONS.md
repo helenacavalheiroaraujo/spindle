@@ -3,6 +3,26 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-14 — Feature freeze: nothing new after story 29
+
+- **Decision:** no new stories, features or polish are added to the MVP. Story 29 and bugs 27 and 32 are the last product items. Bugs found in the manual tests are still fixed. The remaining time goes to the brief's deliverables, in this order: the manual tests in `docs/manual-tests.md`, the demo script (updated to the current flow and rehearsed), the Vercel address checked online, the submission PDF (12 migrations, final screenshots), and the 2 open Medium UX findings.
+- **Why:** an assessment against the brief's criteria (section 6) found the product complete but the deliverables around it behind: 0 of 25 manual tests run (criterion 3), the demo script a draft that was never rehearsed and is out of date (criterion 7), the Vercel site not checked (criterion 6), and an outdated submission PDF. The brief values a small product that works over a large one half finished.
+- **Links:** `.claude/skills/mvp-progress/references/brief-checklist.md`; story 29; bugs 27, 32.
+
+## 2026-11-14 — Bug 27: the checkout starts with the account's name
+
+- **Decision:** when the buyer has no saved delivery address and no earlier order, the checkout's Name field starts with the name given at sign-up; street, postcode and city stay empty. A saved address and the last order still come first. The name can still be edited (for a gift, for example).
+- **Why:** bug 27: the name was asked at sign-up and again at checkout. The owner chose filling it in over removing the field from the checkout or from sign-up.
+- **Choices by the AI:** a name with only spaces counts as no name.
+- **Links:** bug 27; story 7; bugs 6 and 9; `lib/rules/shippingAddress.ts`.
+
+## 2026-11-14 — Story 29: choices made while building
+
+- **Decision:** orders, "Order placed" and the add-to-cart link behave like the pages in the story's list (header only, window on top). The cart window reads "Log in to see your cart" / "Create an account to see your cart", from the icon and from `/cart`. Closing goes back to the previous Spindle page in the tab, else home.
+- **Why:** the owner chose these on 14 Nov 2026; "previous page" excludes the browser's start page and other sites.
+- **Choices by the AI:** cart checkout uses the cart window; window up to 600 px tall; two panels from 768 px.
+- **Links:** story 29; bug 32.
+
 ## 2026-11-14 — Story 33: a red listing says "different pressing" once
 
 - **Decision:** on the listing card, a red listing's top line reads "Moved to [version]" (the link), without "It's a different pressing ·". The phrase stays in the card's "Pressing check · No match" line. The listing check screen keeps "It's a different pressing · moved to [version]". This replaces, for the listing card only, the story 5 text "Red listing: \"It's a different pressing · moved to [version]\""; the story 5 file is not changed.

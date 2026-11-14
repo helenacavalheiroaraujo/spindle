@@ -69,5 +69,5 @@ button[class~="rounded-2xl"][class~="border"]:not(:disabled):hover { background-
 /* Log-in window (story 27): on a phone the sheet rises from the bottom; from 640 px it is a centred window. */
 @keyframes sheet-rise { from { transform: translateY(100%); } to { transform: translateY(0); } }
 .login-window[open] { animation: sheet-rise 220ms ease-out; }
-@media (min-width: 640px) { .login-window[open] { animation: none; } }
+@media (min-width: 768px) { .login-window[open] { animation: none; } }
 @media (prefers-reduced-motion: reduce) { .login-window[open] { animation: none; } }

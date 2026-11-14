@@ -1,20 +1,19 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { Header } from "@/components/Header";
 import { SellerLine } from "@/components/SellerLine";
 import { getCart } from "@/lib/db/cart";
 import { currentUserId } from "@/lib/db/session";
 import { euros } from "@/lib/rules/checkoutTotal";
-import { withReturn } from "@/lib/rules/login";
 import { cartTotal } from "@/lib/rules/cartTotal";
 import { CartSummary } from "./CartSummary";
 import { RemoveButton } from "./RemoveButton";
+import { SignInRequired } from "@/components/SignInRequired";
 
 // The cart (story 20 · use cases 2, 3 and 5; design part 3, option A): the records as rows with "Remove", then the
 // sand summary card and "Go to checkout". On desktop the summary sits beside the list. Needs an account.
 export default async function CartPage() {
   const userId = await currentUserId();
-  if (!userId) redirect(withReturn("/login", "/cart"));
+  if (!userId) return <SignInRequired path="/cart" />; // story 29, bug 32
   const { items, messages } = await getCart(userId);
   const amounts = cartTotal(items.map((i) => i.price));
 

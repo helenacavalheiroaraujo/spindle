@@ -4,6 +4,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
 import { screenshot } from "./screenshot";
+import { waitUntilHydrated } from "./hydration";
 
 function env(name: string) {
   if (process.env[name]) return process.env[name]!;
@@ -61,9 +62,9 @@ test("desktop: the menu is in the top row above the search; cells Artists, All g
   await page.goto("/search?q=bowie");
   await expect(row(page).getByRole("link", { name: "Log in" })).toHaveAttribute("href", "/login?next=%2Fsearch%3Fq%3Dbowie"); // back to this page after logging in
   await page.goto("/sell");
-  await expect(page).toHaveURL(/\/login\?next=%2Fsell/);
-  await expect(row(page).getByRole("link", { name: "Log in" })).toHaveCount(0); // not shown on the log-in page
-  await expect(row(page).getByRole("link", { name: "Sell for free" })).toBeVisible();
+  await expect(page).toHaveURL("/sell"); // story 29: the header, with the log-in window on top
+  await expect(page.getByRole("dialog").getByRole("heading", { name: "Log in to sell" })).toBeVisible();
+  await expect(row(page).getByRole("link", { name: "Sell for free" })).toBeAttached();
 });
 
 test("desktop: the search is in a cream strip under the menu row on every page, and the header is the same height everywhere (story 22)", async ({ page }, info) => {
@@ -199,6 +200,8 @@ test("signed in: 'Your account' replaces 'Log in', on the same pages, and opens 
   await expect(items.getByRole("link", { name: "Log in" })).toHaveCount(0);
   if (phone) await items.getByRole("link", { name: /Your account/ }).click();
   else {
+    // The window logs in with a full page load (story 29): wait until the pill answers clicks.
+    await waitUntilHydrated(items.getByRole("button", { name: "Your account, signed in as Rui Costa" }));
     await items.getByRole("button", { name: "Your account, signed in as Rui Costa" }).click();
     await items.getByRole("link", { name: "Orders" }).click();
   }

@@ -189,6 +189,10 @@ test("checkout: fee and total before paying; Pay waits for a full address; no ca
 
   const payButton = page.getByRole("button", { name: "Pay €34.90" });
   await expect(payButton).toBeDisabled();
+  // Bug 27: no saved address and no earlier order, so only the name from sign-up is filled in; the rest stays empty.
+  await expect(page.getByLabel("Name")).toHaveValue("Rui Costa");
+  await expect(page.getByLabel("Street")).toHaveValue("");
+  await shot(page, "bug-27", "name-filled-in");
   await page.getByLabel("Name").fill("Rui Costa");
   await page.getByLabel("Street").fill("Rua do Almada 120");
   await page.getByLabel("City").fill("Porto");
@@ -228,7 +232,9 @@ test("Pay: the order is created as 'Paid · waiting for the seller'; the listing
   // Only the buyer can open it: signed out, the login is asked; the link then comes back to the order.
   await page.context().clearCookies();
   await page.goto(orderUrl);
-  await expect(page).toHaveURL(/\/login/);
+  await expect(page).toHaveURL(orderUrl); // story 29: the window opens on the order's own address
+  await expect(page.getByRole("dialog").getByRole("heading", { name: "Log in" })).toBeVisible();
+  await expect(page.getByText("€34.90 paid")).toHaveCount(0); // nothing of the order shows
   await logIn(page);
   await expect(page.getByRole("heading", { name: "Order placed" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Back to search" })).toHaveCount(0); // no back link (DECISIONS 2026-11-11)

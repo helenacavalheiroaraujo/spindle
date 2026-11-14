@@ -4,6 +4,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
 import { screenshot } from "./screenshot";
+import { windowReady } from "./session";
 
 function env(name: string) {
   if (process.env[name]) return process.env[name]!;
@@ -43,23 +44,27 @@ const corner = (page: Page, info: { project: { name: string } }) =>
 test("a registered user logs in from the header and logs out", async ({ page }, info) => {
   await page.goto("/");
   await screenshot(page, 9, "home-signed-out");
-  // The header link opens the log-in window (story 27, tested in loginWindow.spec.ts); the page is opened directly.
+  // The header link opens the log-in window (story 27, tested in loginWindow.spec.ts); /login is the home page with the
+  // same window on top (story 29).
   await expect(corner(page, info).getByRole("link", { name: "Log in" })).toHaveAttribute("href", "/login");
   await page.goto("/login");
-  await expect(corner(page, info).getByRole("link", { name: "Log in" })).toHaveCount(0); // not shown on the log-in page itself
+  const box = page.getByRole("dialog");
+  await windowReady(page);
+  await expect(box.getByRole("heading", { name: "Log in" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Pick a crate. We'll pick the pressing." })).toBeAttached(); // the home page under it
   await screenshot(page, 9, "login");
 
   // Wrong password → message that does not say which one was wrong; no reset link.
-  await page.getByLabel("Email").fill(email);
-  await page.getByLabel("Password").fill("wrong-password");
-  await page.getByRole("button", { name: "Log in" }).click();
-  await expect(page.getByText("That email and password don't match. Check them and try again.")).toBeVisible();
+  await box.getByLabel("Email").fill(email);
+  await box.getByLabel("Password").fill("wrong-password");
+  await box.getByRole("button", { name: "Log in" }).click();
+  await expect(box.getByText("That email and password don't match. Check them and try again.")).toBeVisible();
   await expect(page.getByText(/reset|forgot/i)).toHaveCount(0);
-  await expect(page.getByLabel("Email")).toHaveValue(email); // what was typed is kept
+  await expect(box.getByLabel("Email")).toHaveValue(email); // what was typed is kept
   await screenshot(page, 9, "login-wrong-password");
 
-  await page.getByLabel("Password").fill(PASSWORD);
-  await page.getByRole("button", { name: "Log in" }).click();
+  await box.getByLabel("Password").fill(PASSWORD);
+  await box.getByRole("button", { name: "Log in" }).click();
   await expect(page).toHaveURL("/");
   // The account pill (story 32): initials, first name on desktop, ▾; it opens the account menu.
   const badge = page.getByRole("button", { name: "Your account, signed in as Rui Costa" });
@@ -76,31 +81,43 @@ test("a registered user logs in from the header and logs out", async ({ page }, 
   await expect(page).toHaveURL("/");
   await expect(corner(page, info).getByRole("link", { name: "Log in" })).toBeVisible();
 
-  // Signed out: Your account sends the user to log in.
+  // Signed out: Your account shows only the header, with the log-in window on top (story 29).
   await page.goto("/account");
-  await expect(page).toHaveURL("/login?next=%2Faccount");
+  await expect(page).toHaveURL("/account");
+  await expect(page.getByRole("dialog").getByRole("heading", { name: "Log in" })).toBeVisible();
+  await expect(page.getByText(email)).toHaveCount(0);
 });
 
 test("after logging in, the user returns to where they were", async ({ page }) => {
-  await page.goto("/login?next=%2Faccount");
-  await page.getByLabel("Email").fill(email);
-  await page.getByLabel("Password").fill(PASSWORD);
-  await page.getByRole("button", { name: "Log in" }).click();
+  await page.goto("/login?next=%2Faccount"); // a link from before story 29 still lands on the right page
+  const box = page.getByRole("dialog");
+  await windowReady(page);
+  await box.getByLabel("Email").fill(email);
+  await box.getByLabel("Password").fill(PASSWORD);
+  await box.getByRole("button", { name: "Log in" }).click();
   await expect(page).toHaveURL("/account");
 });
 
 test("the return address survives switching between log-in and sign-up", async ({ page }) => {
   await page.goto("/login?next=%2Faccount");
-  await page.getByRole("link", { name: "Create one" }).click();
-  await expect(page).toHaveURL("/signup?next=%2Faccount");
-  await page.locator("p").getByRole("link", { name: "Log in" }).click();
-  await expect(page).toHaveURL("/login?next=%2Faccount");
+  const box = page.getByRole("dialog");
+  await windowReady(page);
+  await box.getByRole("button", { name: "Create one" }).click();
+  await expect(box.getByRole("heading", { name: "Create an account" })).toBeVisible();
+  await box.getByRole("button", { name: "Log in" }).click();
+  await expect(box.getByRole("heading", { name: "Log in" })).toBeVisible();
+  await box.getByLabel("Email").fill(email);
+  await box.getByLabel("Password").fill(PASSWORD);
+  await box.getByRole("button", { name: "Log in" }).click();
+  await expect(page).toHaveURL("/account");
 });
 
 test("a link to another site after log-in goes to the home page", async ({ page }) => {
   await page.goto("/login?next=https%3A%2F%2Fevil.example");
-  await page.getByLabel("Email").fill(email);
-  await page.getByLabel("Password").fill(PASSWORD);
-  await page.getByRole("button", { name: "Log in" }).click();
+  const box = page.getByRole("dialog");
+  await windowReady(page);
+  await box.getByLabel("Email").fill(email);
+  await box.getByLabel("Password").fill(PASSWORD);
+  await box.getByRole("button", { name: "Log in" }).click();
   await expect(page).toHaveURL("/");
 });

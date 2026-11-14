@@ -1,6 +1,6 @@
 # Bug 32 · Cart icon opens the log-in page when signed out
 
-> Found in feedback on the app · 2026-11-14. Status: open.
+> Found in feedback on the app · 2026-11-14. Status: fixed 2026-11-14 by story 29 — signed out, the cart icon opens the log-in window "Log in to see your cart", then the cart.
 
 ## Description
 When signed out, tapping the cart icon does not behave like the other buttons: it opens the separate log-in page instead of the log-in window.
