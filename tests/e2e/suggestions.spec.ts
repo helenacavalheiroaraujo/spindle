@@ -68,14 +68,35 @@ test("a typo gives 'Did you mean…?'; no match gives 'No albums found'", async 
   await expect(rows(page)).toHaveCount(0);
 });
 
-test("tap a suggestion with listings: the priorities screen; with no listings: the message, in the box", async ({ page }) => {
+test("tap a suggestion with listings: the priorities screen; with no listings: its own page (bug 28)", async ({ page }) => {
   await typeOnly(page, "bowie");
   await expect(rows(page)).toHaveCount(4);
-  await page.getByRole("button", { name: /Blackstar/ }).click();
-  await expect(page.getByRole("status").filter({ hasText: "Nobody is selling this album right now" })).toBeVisible();
-  await expect(page).toHaveURL("/");
+  await page.getByRole("link", { name: /Blackstar/ }).click();
+  await expect(page).toHaveURL(/\/albums\/[^/]+$/);
+  await expect(page.getByRole("heading", { level: 2, name: "Nobody is selling this album right now" })).toBeVisible();
+  await page.goto("/");
+  await typeOnly(page, "bowie");
   await page.getByRole("link", { name: /Ziggy Stardust/ }).first().click();
   await expect(page).toHaveURL(/\/albums\/.*\/priorities/);
+});
+
+test("a no-listings suggestion says why when hovered or highlighted with the keys (bug 28)", async ({ page, isMobile }) => {
+  await typeOnly(page, "blackstar");
+  const row = rows(page).filter({ hasText: "Blackstar" });
+  const tag = (text: string) => row.getByText(text, { exact: true });
+  await expect(tag("No listings")).toBeVisible();
+  await expect(tag("Nobody is selling this album right now")).toBeHidden();
+  if (!isMobile) {
+    await row.hover();
+    await expect(tag("Nobody is selling this album right now")).toBeVisible();
+    await page.mouse.move(0, 0);
+    await expect(tag("No listings")).toBeVisible();
+  }
+  await box(page).press("ArrowDown");
+  await expect(tag("Nobody is selling this album right now")).toBeVisible();
+  await expect(tag("No listings")).toHaveCount(0);
+  await box(page).press("Enter");
+  await expect(page).toHaveURL(/\/albums\/[^/]+$/);
 });
 
 test("keys: ↓ highlights, Enter opens the highlighted row, Enter with none highlighted opens the results page", async ({ page }) => {

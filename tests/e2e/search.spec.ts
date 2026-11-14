@@ -126,9 +126,21 @@ test("tapping an album with active listings opens the priorities screen", async 
   await expect(page).toHaveURL(/\/albums\/10000000-0000-0000-0000-000000000001\/priorities$/);
 });
 
-test("tapping an album with no listings shows the message directly", async ({ page }) => {
+test("tapping an album with no listings opens its own page (bug 28)", async ({ page }) => {
   await typeSearch(page, "blackstar");
-  await rows(page).filter({ hasText: "Blackstar" }).getByRole("button").click();
-  await expect(page.getByText("Nobody is selling this album right now")).toBeVisible();
-  expect(new URL(page.url()).pathname).toBe("/search"); // stays on the results page
+  await rows(page).filter({ hasText: "Blackstar" }).getByRole("link").click();
+  await expect(page).toHaveURL(/\/albums\/[^/]+$/);
+  await expect(page.getByRole("heading", { level: 2, name: "Nobody is selling this album right now" })).toBeVisible();
+});
+
+test("hovering an album with no listings changes its tag (bug 28)", async ({ page, isMobile }) => {
+  test.skip(!!isMobile, "a touch screen has no hover");
+  await typeSearch(page, "blackstar");
+  const row = rows(page).filter({ hasText: "Blackstar" });
+  const tag = (text: string) => row.getByText(text, { exact: true });
+  await expect(tag("No listings")).toBeVisible();
+  await expect(tag("Nobody is selling this album right now")).toBeHidden();
+  await row.hover();
+  await expect(tag("Nobody is selling this album right now")).toBeVisible();
+  await expect(tag("No listings")).toBeHidden();
 });

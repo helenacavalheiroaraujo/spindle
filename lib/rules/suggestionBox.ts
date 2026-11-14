@@ -22,9 +22,13 @@ export function boxContent<T extends SearchableAlbum>(all: T[], typed: string): 
   return { kind: "empty" };
 }
 
-// The tag on a suggestion row, as on the results rows of story 1 and 17.
-export function suggestionTag(album: { versionCount: number; access: AlbumAccess }): string {
-  if (album.access === "no_listings") return "No listings";
+export const NO_LISTINGS_TAG = "No listings";
+export const NOBODY_SELLING_TAG = "Nobody is selling this album right now";
+
+// The tag on a suggestion row, as on the results rows of story 1 and 17. active: the row is hovered or highlighted
+// with the arrow keys; an album with no listings then says why (bug 28).
+export function suggestionTag(album: { versionCount: number; access: AlbumAccess }, active = false): string {
+  if (album.access === "no_listings") return active ? NOBODY_SELLING_TAG : NO_LISTINGS_TAG;
   if (album.access === "not_in_demo") return "Not in the demo";
   return `${album.versionCount} ${album.versionCount === 1 ? "version" : "versions"}`;
 }
@@ -35,4 +39,12 @@ export function moveHighlight(current: number | null, key: "ArrowDown" | "ArrowU
   if (key === "ArrowDown") return current === null ? 0 : Math.min(current + 1, count - 1);
   if (current === null || current === 0) return null;
   return current - 1;
+}
+
+// Where a buyer's tap on an album goes: open → its priorities screen; no listings → its own page, which says nobody is
+// selling it (bug 17 for genres, bug 28 for search); not in the demo → nowhere.
+export function albumHref(album: { id: string; access: AlbumAccess }): string | null {
+  if (album.access === "open") return `/albums/${album.id}/priorities`;
+  if (album.access === "no_listings") return `/albums/${album.id}`;
+  return null;
 }

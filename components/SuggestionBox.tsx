@@ -9,8 +9,10 @@ import { suggest } from "@/app/actions";
 import type { AlbumSummary } from "@/lib/db/albums";
 import { isTooShort, SHORT_SEARCH_MESSAGE } from "@/lib/rules/albumSearch";
 import {
+  albumHref,
   boxContent,
   moveHighlight,
+  NOBODY_SELLING_TAG,
   suggestionTag,
   type BoxContent,
 } from "@/lib/rules/suggestionBox";
@@ -24,8 +26,6 @@ type State =
   | { kind: "error" };
 
 
-const hrefOf = (a: AlbumSummary) => (a.access === "open" ? `/albums/${a.id}/priorities` : null);
-
 export function useSuggestions(typed: string) {
   const router = useRouter();
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -33,13 +33,11 @@ export function useSuggestions(typed: string) {
   const [open, setOpen] = useState(true);
   const [state, setState] = useState<State>({ kind: "idle" });
   const [highlight, setHighlight] = useState<number | null>(null);
-  const [nobodySelling, setNobodySelling] = useState<AlbumSummary | null>(null);
   const [attempt, setAttempt] = useState(0);
   const short = isTooShort(typed);
 
   useEffect(() => {
     setHighlight(null);
-    setNobodySelling(null);
     if (!touched) return setState({ kind: "idle" });
     // Under 3 characters no search runs: the rule says at once whether the box shows nothing or the hint (bug 26).
     if (short) return setState({ kind: "done", content: boxContent<AlbumSummary>([], typed) });
@@ -87,10 +85,8 @@ export function useSuggestions(typed: string) {
       );
     } else if (e.key === "Enter" && highlight !== null) {
       e.preventDefault();
-      const album = albums[highlight];
-      const href = hrefOf(album);
+      const href = albumHref(albums[highlight]);
       if (href) router.push(href);
-      else if (album.access === "no_listings") setNobodySelling(album);
     }
   }
 
@@ -106,8 +102,6 @@ export function useSuggestions(typed: string) {
       state,
       content,
       highlight,
-      nobodySelling,
-      setNobodySelling,
       close: () => setOpen(false),
       retry: () => setAttempt((n) => n + 1),
       typed,
@@ -120,8 +114,6 @@ export function SuggestionList({
   state,
   content,
   highlight,
-  nobodySelling,
-  setNobodySelling,
   close,
   retry,
   typed,
@@ -129,7 +121,7 @@ export function SuggestionList({
 }: ReturnType<typeof useSuggestions>["list"] & { wide?: boolean }) {
   if (!visible) return null;
   const rowClass = (i: number) =>
-    `flex min-h-14 w-full items-center gap-3 border-b border-line px-3.5 py-2 text-left hover:bg-sand ${highlight === i ? "bg-sand" : ""}`;
+    `group flex min-h-14 w-full items-center gap-3 border-b border-line px-3.5 py-2 text-left hover:bg-sand ${highlight === i ? "bg-sand" : ""}`;
   return (
     <div className={`absolute top-full z-20 mt-2 overflow-hidden rounded-[18px] border border-line bg-white shadow-lg ${wide ? "left-0 w-[28rem] max-w-[90vw]" : "inset-x-0"}`}>
       <div className="relative min-h-24">
@@ -152,7 +144,9 @@ export function SuggestionList({
         {content && "albums" in content && (
           <ul aria-label="Suggestions">
             {content.albums.map((a, i) => {
-              const href = hrefOf(a);
+              const href = albumHref(a);
+              // Hovered or highlighted, a "No listings" tag says why (bug 28). Hover is CSS, so it needs no state.
+              const highlighted = highlight === i;
               const inside = (
                 <>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -174,7 +168,14 @@ export function SuggestionList({
                     </span>
                   </span>
                   <span className="shrink-0 rounded-full bg-navy/10 px-2.5 py-0.5 text-[11px] font-semibold">
-                    {suggestionTag(a)}
+                    {a.access === "no_listings" && !highlighted ? (
+                      <>
+                        <span className="group-hover:hidden">{suggestionTag(a)}</span>
+                        <span className="hidden group-hover:inline">{NOBODY_SELLING_TAG}</span>
+                      </>
+                    ) : (
+                      suggestionTag(a, highlighted)
+                    )}
                   </span>
                 </>
               );
@@ -189,15 +190,6 @@ export function SuggestionList({
                     >
                       {inside}
                     </Link>
-                  ) : a.access === "no_listings" ? (
-                    <button
-                      type="button"
-                      onClick={() => setNobodySelling(a)}
-                      aria-current={highlight === i ? "true" : undefined}
-                      className={rowClass(i)}
-                    >
-                      {inside}
-                    </button>
                   ) : (
                     <div className={rowClass(i)}>{inside}</div>
                   )}
@@ -205,16 +197,6 @@ export function SuggestionList({
               );
             })}
           </ul>
-        )}
-        {nobodySelling && (
-          <div role="status" className="border-b border-line bg-sand p-4">
-            <p className="font-heading text-xl">
-              Nobody is selling this album right now
-            </p>
-            <p className="text-sm text-navy/80">
-              {nobodySelling.title} · {nobodySelling.artist}
-            </p>
-          </div>
         )}
         {content?.kind === "albums" && (
           <Link

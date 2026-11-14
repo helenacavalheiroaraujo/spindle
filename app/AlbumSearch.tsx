@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { search, type SearchResponse } from "./actions";
 import type { AlbumSummary } from "@/lib/db/albums";
 import { MIN_SEARCH_LENGTH, normalize } from "@/lib/rules/albumSearch";
+import { albumHref, NO_LISTINGS_TAG, NOBODY_SELLING_TAG } from "@/lib/rules/suggestionBox";
 import { LoadingMask } from "@/components/LoadingMask";
 import { ErrorScreen } from "@/components/ErrorScreen";
 
@@ -70,11 +71,7 @@ export function AlbumSearch() {
   );
 }
 
-// noListingsHref: where an album with no listings goes (the genre screen, bug 17). Without it, the row shows the card in place.
-export type RowProps = { mode: Mode; onNobodySelling: (a: AlbumSummary) => void; noListingsHref?: (id: string) => string };
-
-// Sell rows never reach the "Nobody is selling" branch of AlbumRow, so there is nothing to call.
-const ignore = () => {};
+export type RowProps = { mode: Mode };
 
 function Results({ response }: { response: SearchResponse }) {
   const { albums, suggestions } = response;
@@ -87,7 +84,7 @@ function Results({ response }: { response: SearchResponse }) {
         <ul aria-label="Search results" className="divide-y divide-line border-y border-line">
           {albums.map((a) => (
             <li key={a.id}>
-              <AlbumRow album={a} mode="sell" onNobodySelling={ignore} />
+              <AlbumRow album={a} mode="sell" />
             </li>
           ))}
         </ul>
@@ -101,7 +98,7 @@ function Results({ response }: { response: SearchResponse }) {
         <ul aria-label="Search results" className="divide-y divide-line border-y border-line">
           {suggestions.map((a) => (
             <li key={a.id}>
-              <AlbumRow album={a} mode="sell" onNobodySelling={ignore} />
+              <AlbumRow album={a} mode="sell" />
             </li>
           ))}
         </ul>
@@ -111,7 +108,7 @@ function Results({ response }: { response: SearchResponse }) {
   return <p className="font-medium">No albums found</p>;
 }
 
-export function AlbumRow({ album, mode, onNobodySelling, noListingsHref }: RowProps & { album: AlbumSummary }) {
+export function AlbumRow({ album, mode }: RowProps & { album: AlbumSummary }) {
   const content = (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -123,7 +120,15 @@ export function AlbumRow({ album, mode, onNobodySelling, noListingsHref }: RowPr
         </span>
         {mode === "buy" && album.access !== "open" && (
           <span className="mt-1 inline-block rounded-full border border-navy/30 px-2 py-0.5 text-xs">
-            {album.access === "no_listings" ? "No listings" : "Not in the demo"}
+            {album.access === "no_listings" ? (
+              <>
+                {/* On hover the tag says why (bug 28); a touch screen has no hover and opens the album's page. */}
+                <span className="group-hover:hidden">{NO_LISTINGS_TAG}</span>
+                <span className="hidden group-hover:inline">{NOBODY_SELLING_TAG}</span>
+              </>
+            ) : (
+              "Not in the demo"
+            )}
           </span>
         )}
       </span>
@@ -132,30 +137,20 @@ export function AlbumRow({ album, mode, onNobodySelling, noListingsHref }: RowPr
       </span>
     </>
   );
-  const rowClass = "flex min-h-20 w-full items-center gap-3 py-3 text-left hover:bg-sand/60";
+  const rowClass = "group flex min-h-20 w-full items-center gap-3 py-3 text-left hover:bg-sand/60";
   if (mode === "sell")
     return (
       <Link href={`/sell/albums/${album.id}`} className={rowClass}>
         {content}
       </Link>
     );
-  // Only albums with recommendation data open (finding #50); "Not in the demo" rows do nothing.
-  if (album.access === "open")
-    return (
-      <Link href={`/albums/${album.id}/priorities`} className={rowClass}>
-        {content}
-      </Link>
-    );
-  if (album.access === "not_in_demo") return <div className={rowClass}>{content}</div>;
-  if (noListingsHref)
-    return (
-      <Link href={noListingsHref(album.id)} className={rowClass}>
-        {content}
-      </Link>
-    );
+  // Open albums go to their priorities screen (finding #50), albums with no listings to their own page (bugs 17 and 28);
+  // "Not in the demo" rows do nothing.
+  const href = albumHref(album);
+  if (!href) return <div className={rowClass}>{content}</div>;
   return (
-    <button type="button" onClick={() => onNobodySelling(album)} className={rowClass}>
+    <Link href={href} className={rowClass}>
       {content}
-    </button>
+    </Link>
   );
 }

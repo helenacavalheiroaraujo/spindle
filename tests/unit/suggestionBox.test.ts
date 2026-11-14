@@ -1,6 +1,6 @@
 // Decision table from SPEC story 16 · Acceptance criteria (seed-like data).
 import { describe, expect, it } from "vitest";
-import { boxContent, moveHighlight, suggestionTag } from "@/lib/rules/suggestionBox";
+import { boxContent, moveHighlight, suggestionTag, albumHref } from "@/lib/rules/suggestionBox";
 import { albums, ZIGGY } from "./fixtures/albums";
 
 const content = (typed: string) => {
@@ -43,6 +43,25 @@ describe("suggestionTag", () => {
     [{ versionCount: 2, access: "not_in_demo" }, "Not in the demo"],
   ] as const)("%j → %s", (album, tag) => {
     expect(suggestionTag(album)).toBe(tag);
+  });
+
+  // Bug 28: hovered or highlighted with the arrow keys, only a "No listings" tag changes.
+  it.each([
+    [{ versionCount: 2, access: "no_listings" }, "Nobody is selling this album right now"],
+    [{ versionCount: 3, access: "open" }, "3 versions"],
+    [{ versionCount: 2, access: "not_in_demo" }, "Not in the demo"],
+  ] as const)("active %j → %s", (album, tag) => {
+    expect(suggestionTag(album, true)).toBe(tag);
+  });
+});
+
+describe("albumHref (bug 28)", () => {
+  it.each([
+    [{ id: "a1", access: "open" }, "/albums/a1/priorities"],
+    [{ id: "a2", access: "no_listings" }, "/albums/a2"],
+    [{ id: "a3", access: "not_in_demo" }, null],
+  ] as const)("%j → %j", (album, href) => {
+    expect(albumHref(album)).toBe(href);
   });
 });
 
