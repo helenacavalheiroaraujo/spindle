@@ -5,7 +5,7 @@ Updated 2026-11-14 after story 29 and bugs 27, 32 · Deadline 23 Nov 2026 (moved
 
 ## Summary
 - **Stories:** 31 of 31 MVP stories built (18 with gaps), 0 in progress, 0 not started. Feature freeze: nothing new after story 29 (DECISIONS 2026-11-14)
-- **Tests:** unit 805/805 · end-to-end 404/439 (28 skipped), **7 failing** in the full run (19.8 min, phone and desktop). Re-run of those 6 files after a test fix: 54 passed, **2 failing** (`reviews.spec.ts:108`, phone and desktop). Cause: a purchase made by hand on seed listing …0036 (Helena's account, 14 Nov) added a second review to seller João Pinto; the test expects one. Not a code defect; the data needs the owner's decision. The other 5 failures were slow-run timing (crate drag, home sections, and the log-in click on phone, now sent with Enter in the test helper)
+- **Tests:** unit 805/805 · end-to-end 404/439 (28 skipped), **7 failing** in the full run (19.8 min, phone and desktop). Re-run of those 6 files after a test fix: 54 passed, **2 failing** (`reviews.spec.ts:108`, phone and desktop). Cause: a purchase made by hand on seed listing …0036 (Helena's account, 14 Nov) added a second review to seller João Pinto; the test expects one. Not a code defect: the owner had the purchase and its review deleted and the listing put back on sale; `reviews.spec.ts` and the log-in specs then passed (48/48). The other 5 failures were slow-run timing (crate drag, home sections, and the log-in click on phone, now sent with Enter in the test helper)
 - **Demo:** the happy path (search → album page → priorities → recommendation → listings → checkout → confirmation) passes its end-to-end tests on phone and desktop. Not rehearsed live
 - **Next:** no story left. Brief items: 26 manual checks (planned for 15 Nov), submission PDF, demo rehearsal, `docs/database.md` migration 0012
 - **Risk:** 9 days and no story left; the risk is in the brief items, not the code. The PDF is the largest one: its draft still lists 6 of 12 migrations and has screenshots only for stories 1–9, 12 and 17
@@ -15,7 +15,7 @@ Updated 2026-11-14 after story 29 and bugs 27, 32 · Deadline 23 Nov 2026 (moved
 |---|---|---|
 | 1 · Core features work end to end | Done | Phases 1–3 built; the full end-to-end suite passes the core flow on phone and desktop (search, recommendation, listings, checkout, confirmation). Not rehearsed live |
 | 2 · Data tables | Partly | `supabase/migrations/` 0001–0012 committed. `docs/database.md` does not mention migration 0012 (Classical genre); the PDF draft lists only 0001–0006 |
-| 3 · Testing, automated and manual | Partly | Automated: unit 805/805; end-to-end 404/439 (28 skipped, 7 failing; 2 still failing after re-run, caused by data, see Summary). Manual: all 26 entries in `docs/manual-tests.md` are "Not run" |
+| 3 · Testing, automated and manual | Partly | Automated: unit 805/805; end-to-end 404/439 (28 skipped, 7 failing; after the fixes and the data clean-up the failing files pass, see Summary). Manual: all 26 entries in `docs/manual-tests.md` are "Not run" |
 | 4 · LLM good practices in the repo | Done | SPEC.md, `specs/`, CLAUDE.md, ARCHITECTURE.md (updated 14 Nov to the final structure), DECISIONS.md, `docs/AI_USAGE.md`, use cases and flowchart (updated 14 Nov) and the tests |
 | 5 · UX and UI quality | Partly | `docs/ux-review/findings.json`: 6 open (2 Medium: #38, #39; 4 Low: #37, #40, #42, #43). No High or Blocker. Story 25 covers #38–#43 with tests, but the entries are still marked open |
 | 6 · App online and reachable | Done | https://spindle-three.vercel.app checked on 14 Nov after a881f52: `/login` opens the home page with the two-panel window, `/cart` signed out shows "Log in to see your cart" (story 29, bug 32) |
@@ -28,8 +28,7 @@ Updated 2026-11-14 after story 29 and bugs 27, 32 · Deadline 23 Nov 2026 (moved
 2. Manual test record: 26 entries "Not run" in `docs/manual-tests.md` (planned for 15 Nov).
 3. Demo: rehearse `docs/demo-script.md` once; update the date (23 Nov) and the address.
 4. `docs/database.md`: add migration 0012.
-5. Decide the hand purchase on seed listing …0036 (it breaks `reviews.spec.ts:108`).
-6. Close the UX entries that story 25 already fixed (#38–#43), if the owner agrees.
+5. Close the UX entries that story 25 already fixed (#38–#43), if the owner agrees.
 
 ## Build phases
 | Phase | Stories | Status |
@@ -107,9 +106,9 @@ None. Every story with a spec file is in the build order.
 - Bug 30: real browser or password-manager autofill (the test sets the value without an event; check on the device where it was seen)
 
 ## Before the next step
-- Only one session at a time runs end-to-end tests (one shared database, port 3000); no hand purchases on seed listings (one on …0036 now breaks `reviews.spec.ts:108`)
+- Only one session at a time runs end-to-end tests (one shared database, port 3000); no hand purchases on seed listings (one on …0036 was deleted on 14 Nov)
 - Feature freeze: no new stories. A problem found in the manual checks becomes a bug (`/log-bug`)
 - Bugs 27 and 32 fixed (a881f52). Bug 29 fixed in part: dates wrong in MusicBrainz itself stay wrong
-- Unused since story 29: `app/login/LoginForm.tsx`, `app/signup/SignUpForm.tsx` and the `logIn` / `signUp` actions (removal waits for the owner's OK)
+- The old log-in and sign-up forms, unused since story 29, were removed on 14 Nov (owner's OK)
 - Next delivery notes are in ARCHITECTURE.md ("Next delivery"): server-only guard, split the largest screens, one session check
 - Parked by the owner on 14 Nov, not logged yet: signed out, the buyer only learns at "Buy" that an account is needed. With the freeze, a candidate for the next delivery

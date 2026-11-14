@@ -1,6 +1,5 @@
 "use server";
 // Sign-up (story 9 · use case 1): rules in lib/rules/signUp, Supabase access in lib/db.
-import { redirect } from "next/navigation";
 import { returnPath } from "@/lib/rules/login";
 import { checkSignUp, isAccountNotCreated, signUpErrorFor, type FieldErrors } from "@/lib/rules/signUp";
 import { signUpWithPassword } from "@/lib/db/session";
@@ -14,14 +13,8 @@ export type SignUpState = {
   done?: string;
 };
 
-// The sign-up page: goes on to `next` once the account is created.
-export async function signUp(prev: SignUpState, form: FormData): Promise<SignUpState> {
-  const state = await signUpOnly(prev, form);
-  if (state.done) redirect(state.done);
-  return state;
-}
-
-// The log-in window (story 27): same rules, but returns where to go (`done`); the window opens it with a full page load.
+// Sign up from the log-in window (stories 27, 29), the only way to sign up: returns where to go (`done`); the window
+// opens it with a full page load.
 export async function signUpOnly(_prev: SignUpState, form: FormData): Promise<SignUpState> {
   const input = {
     name: String(form.get("name") ?? "").trim(),

@@ -1,21 +1,14 @@
 "use server";
 // Log in (story 9 · use case 2): rules in lib/rules/login, Supabase access in lib/db.
-import { redirect } from "next/navigation";
 import { checkLogin, loginErrorFor, returnPath, type LoginErrors } from "@/lib/rules/login";
 import { logInWithPassword } from "@/lib/db/session";
 import { ensureProfile } from "@/lib/db/profiles";
 
 export type LoginState = { errors: LoginErrors; failed: boolean; email: string; done?: string };
 
-// The log-in page: goes on to `next` once logged in.
-export async function logIn(prev: LoginState, form: FormData): Promise<LoginState> {
-  const state = await logInOnly(prev, form);
-  if (state.done) redirect(state.done);
-  return state;
-}
-
-// The log-in window (story 27): same rules, but returns where to go (`done`), and the window opens it with a full page
-// load, so the header and the cart are read again after the action goes on (e.g. a record added through /cart/add).
+// Log in from the log-in window (stories 27, 29), the only way to log in: returns where to go (`done`), and the window
+// opens it with a full page load, so the header and the cart are read again after the action goes on (e.g. a record
+// added through /cart/add).
 export async function logInOnly(_prev: LoginState, form: FormData): Promise<LoginState> {
   const input = {
     email: String(form.get("email") ?? "").trim(),
