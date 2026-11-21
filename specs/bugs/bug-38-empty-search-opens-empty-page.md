@@ -1,6 +1,6 @@
 # Bug 38 · Search with no text opens an empty page
 
-> Found in a user test · 2026-11-21. Status: open.
+> Found in a user test · 2026-11-21. Status: fixed 21 Nov 2026 (stories 37 and 38 session): the Search button is disabled until 3 characters in the header, home and results boxes; Enter does nothing under 3; the hint "Type at least 3 characters" stays in the suggestion box (bug 26).
 
 ## Description
 Pressing "Search" with nothing typed shows an almost empty page with "Type at least 3 characters to search.", which does not make sense.

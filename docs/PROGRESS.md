@@ -1,24 +1,24 @@
 <!-- page: https://claude.ai/artifact/W2xGvu3nfNcfcuxAv3hYsn -->
 # MVP progress
 
-Updated 2026-11-14 after story 29 and bugs 27, 32 · Deadline 23 Nov 2026 (moved from 15 Nov) · **9 days left**
+Updated 2026-11-21 after group 2 of the user-test feedback (stories 37, 38, bug 38) · Deadline 23 Nov 2026 · **2 days left**
 
 ## Summary
-- **Stories:** 31 of 31 MVP stories built (18 with gaps), 0 in progress, 0 not started. Feature freeze: nothing new after story 29 (DECISIONS 2026-11-14)
-- **Tests:** unit 805/805 · end-to-end 404/439 (28 skipped), **7 failing** in the full run (19.8 min, phone and desktop). Re-run of those 6 files after a test fix: 54 passed, **2 failing** (`reviews.spec.ts:108`, phone and desktop). Cause: a purchase made by hand on seed listing …0036 (Helena's account, 14 Nov) added a second review to seller João Pinto; the test expects one. Not a code defect: the owner had the purchase and its review deleted and the listing put back on sale; `reviews.spec.ts` and the log-in specs then passed (48/48). The other 5 failures were slow-run timing (crate drag, home sections, and the log-in click on phone, now sent with Enter in the test helper)
-- **Demo:** the happy path (search → album page → priorities → recommendation → listings → checkout → confirmation) passes its end-to-end tests on phone and desktop. Not rehearsed live
-- **Next:** no story left. Brief items: 26 manual checks (planned for 15 Nov), submission PDF, demo rehearsal, `docs/database.md` migration 0012
-- **Risk:** 9 days and no story left; the risk is in the brief items, not the code. The PDF is the largest one: its draft still lists 6 of 12 migrations and has screenshots only for stories 1–9, 12 and 17
+- **Stories:** 31 of 31 MVP stories built (18 with gaps), 0 in progress, 0 not started. Since the 14 Nov freeze was lifted for one user test (DECISIONS 2026-11-21), stories 35, 37 and 38 are also built (all rows tested); they are not in the build order yet (see "Outside the MVP")
+- **Tests:** unit 830/830 · end-to-end 432/466 (34 skipped) — the full run (17.0 min) had 430 passed and 2 failing: `search.spec.ts:17` on phone and desktop, a test of the old behaviour (Search with 2 characters opened the page; bug 38 removes that). The test was changed and `search.spec.ts` with `fixedHeader.spec.ts` re-run alone: 38 passed, 6 skipped. The full suite was not run again after that one test edit
+- **Demo:** the happy path passes its end-to-end tests on phone and desktop. Not rehearsed live
+- **Next:** group 3 (bug 34 button gap, bug 36 address text, genre arrows) and group 4 (cancel order, cut Sunday 22 Nov 14:00), in other sessions. Brief items: 26 manual checks, submission PDF, demo rehearsal, `docs/database.md` migration 0012
+- **Risk:** 2 days left. The risk is in the brief items, not the code: the PDF is the largest one (its draft lists 6 of 12 migrations and has screenshots only up to story 34 at best). If time runs out, cancel order moves to the next delivery (cut rule)
 
 ## Against the brief
 | Criterion | Status | Evidence / what is missing |
 |---|---|---|
 | 1 · Core features work end to end | Done | Phases 1–3 built; the full end-to-end suite passes the core flow on phone and desktop (search, recommendation, listings, checkout, confirmation). Not rehearsed live |
 | 2 · Data tables | Partly | `supabase/migrations/` 0001–0012 committed. `docs/database.md` does not mention migration 0012 (Classical genre); the PDF draft lists only 0001–0006 |
-| 3 · Testing, automated and manual | Partly | Automated: unit 805/805; end-to-end 404/439 (28 skipped, 7 failing; after the fixes and the data clean-up the failing files pass, see Summary). Manual: all 26 entries in `docs/manual-tests.md` are "Not run" |
+| 3 · Testing, automated and manual | Partly | Automated: unit 830/830; end-to-end 432/466 (34 skipped; see Summary for the one test edited after the full run). Manual: all 26 entries in `docs/manual-tests.md` are "Not run" |
 | 4 · LLM good practices in the repo | Done | SPEC.md, `specs/`, CLAUDE.md, ARCHITECTURE.md (updated 14 Nov to the final structure), DECISIONS.md, `docs/AI_USAGE.md`, use cases and flowchart (updated 14 Nov) and the tests |
 | 5 · UX and UI quality | Partly | `docs/ux-review/findings.json`: 6 open (2 Medium: #38, #39; 4 Low: #37, #40, #42, #43). No High or Blocker. Story 25 covers #38–#43 with tests, but the entries are still marked open |
-| 6 · App online and reachable | Done | https://spindle-three.vercel.app checked on 14 Nov after a881f52: `/login` opens the home page with the two-panel window, `/cart` signed out shows "Log in to see your cart" (story 29, bug 32) |
+| 6 · App online and reachable | Done (not rechecked) | https://spindle-three.vercel.app checked on 14 Nov after a881f52, not rechecked after the 21 Nov changes (not pushed yet): `/login` opens the home page with the two-panel window, `/cart` signed out shows "Log in to see your cart" (story 29, bug 32) |
 | 7 · Live demo | Partly | `docs/demo-script.md` exists, marked DRAFT, not rehearsed; it still says "due 15 Nov" |
 | S1 · Link to the running app | Done | https://spindle-three.vercel.app, checked online |
 | S2 · PDF with data tables and screenshots | Missing | No PDF. `docs/submission/spindle-submission.md` is a DRAFT: no address, migrations 0007–0012 missing, stories 14–34 missing, story 9 shows the old log-in page |
@@ -79,7 +79,11 @@ The spec-review register has 0 open findings (81 resolved, 2 won't fix).
 Not counted in the figures above.
 
 ### Specified, not in the build order
-None. Every story with a spec file is in the build order.
+| Story | Spec file | Status | Note |
+|---|---|---|---|
+| 35 · A sold record stays in the cart | `specs/stories/story-35-sold-record-stays-in-cart.md` | Built (4 of 4 rows tested) | Needs a place in the build order (owner decides) |
+| 37 · The header stays on screen while scrolling (desktop) | `specs/stories/story-37-fixed-header.md` | Built (3 of 3) | Needs a place in the build order |
+| 38 · No search bar on the purchase and account pages | `specs/stories/story-38-no-search-on-purchase-pages.md` | Built (2 of 2) | Needs a place in the build order. Story 36 (arrows) and 39 (cancel order) are planned, not written
 
 ### Not in this MVP
 | Story | Spec file | What the repo says |
@@ -107,7 +111,7 @@ None. Every story with a spec file is in the build order.
 
 ## Before the next step
 - Only one session at a time runs end-to-end tests (one shared database, port 3000); no hand purchases on seed listings (one on …0036 was deleted on 14 Nov)
-- Feature freeze: no new stories. A problem found in the manual checks becomes a bug (`/log-bug`)
+- Feature freeze lifted on 21 Nov only for the user-test feedback (DECISIONS 2026-11-21): groups 3 and 4 are next. Otherwise no new stories. A problem found in the manual checks becomes a bug (`/log-bug`)
 - Bugs 27 and 32 fixed (a881f52). Bug 29 fixed in part: dates wrong in MusicBrainz itself stay wrong
 - The old log-in and sign-up forms, unused since story 29, were removed on 14 Nov (owner's OK)
 - Next delivery notes are in ARCHITECTURE.md ("Next delivery"): server-only guard, split the largest screens, one session check

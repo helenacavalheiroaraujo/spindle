@@ -1,27 +1,29 @@
 "use client";
 // Desktop only (stories 12, 19, 22): the search sits in a cream strip under the navy top row of the header, on every page
 // (story 22, option B). Typing and pressing Search opens the results page (story 17, "/search?q="). Not on the sell pages:
-// selling has its own search (story 8 · finding #36). On the checkout pages the strip stays empty (bug 31).
+// selling has its own search (story 8 · finding #36). Not on the purchase and account pages either (story 38).
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { SuggestionList, useSuggestions } from "./SuggestionBox";
+import { isTooShort } from "@/lib/rules/albumSearch";
+import { showsHeaderSearch } from "@/lib/rules/headerSearch";
 
 export function HeaderSearch() {
   const router = useRouter();
   const path = usePathname();
   const [typed, setTyped] = useState(useSearchParams().get("q") ?? "");
   const box = useSuggestions(typed);
-  if (path.startsWith("/sell")) return null;
-  // Checkout (single and cart): the cream strip stays, empty (bug 31).
-  const checkout = path.startsWith("/checkout") || path.startsWith("/cart/checkout");
+  // Purchase, account and sell pages: no search and no strip (stories 8, 38).
+  if (!showsHeaderSearch(path)) return null;
   return (
     <div data-testid="header-search-strip" className="hidden border-b border-line bg-cream lg:flex lg:h-16 lg:items-center lg:px-[max(1rem,calc(50vw-35rem))]">
-      {!checkout && (
+      {(
         <div ref={box.wrapperRef} className="relative min-w-0 flex-1 lg:block">
           <form
             role="search"
             onSubmit={(e) => {
               e.preventDefault();
+              if (isTooShort(typed)) return; // bug 38: nothing to search for yet
               router.push(`/search?q=${encodeURIComponent(typed.trim())}`);
             }}
           >
@@ -39,7 +41,7 @@ export function HeaderSearch() {
                 autoComplete="off"
                 className="w-full min-w-0 bg-transparent outline-none placeholder:text-navy/50"
               />
-              <button type="submit" className="min-h-9 shrink-0 rounded-full bg-navy px-5 text-sm font-semibold text-cream">
+              <button type="submit" disabled={isTooShort(typed)} className="min-h-9 shrink-0 rounded-full bg-navy px-5 text-sm font-semibold text-cream disabled:opacity-40">
                 Search
               </button>
             </label>

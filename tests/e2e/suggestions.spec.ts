@@ -18,7 +18,7 @@ test("fewer than 3 characters: the box says to type at least 3, with no albums (
   await expect(page.getByText("Type at least 3 characters to search.")).toBeVisible();
   await expect(list(page)).toHaveCount(0);
   await expect(page.getByText("No albums found")).toHaveCount(0);
-  await box(page).press("ArrowDown"); // nothing to highlight; Enter still opens the results page as before
+  await box(page).press("ArrowDown"); // nothing to highlight; Enter does nothing under 3 characters (bug 38)
   await expect(page.locator("[aria-current=true]")).toHaveCount(0);
   await typeOnly(page, "bow");
   await expect(page.getByText("Type at least 3 characters to search.")).toHaveCount(0);

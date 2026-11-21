@@ -4,6 +4,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SuggestionList, useSuggestions } from "./SuggestionBox";
+import { isTooShort } from "@/lib/rules/albumSearch";
 
 export function SearchBox({ initial = "" }: { initial?: string }) {
   const router = useRouter();
@@ -15,6 +16,7 @@ export function SearchBox({ initial = "" }: { initial?: string }) {
       role="search"
       onSubmit={(e) => {
         e.preventDefault();
+        if (isTooShort(typed)) return; // bug 38: nothing to search for yet
         router.push(`/search?q=${encodeURIComponent(typed.trim())}`);
       }}
     >
@@ -32,7 +34,7 @@ export function SearchBox({ initial = "" }: { initial?: string }) {
           autoComplete="off"
           className="w-full min-w-0 bg-transparent text-lg outline-none placeholder:text-navy/50"
         />
-        <button type="submit" className="min-h-12 shrink-0 rounded-full bg-navy px-5 text-sm font-semibold text-cream">
+        <button type="submit" disabled={isTooShort(typed)} className="min-h-12 shrink-0 rounded-full bg-navy px-5 text-sm font-semibold text-cream disabled:opacity-40">
           Search
         </button>
       </label>

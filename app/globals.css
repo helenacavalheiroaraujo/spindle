@@ -38,6 +38,8 @@ a.font-semibold, a.font-medium, button.font-semibold, button.font-medium, [role=
    everything under the header becomes a left-aligned column of that width. */
 .page-main { margin-inline: auto; width: 100%; max-width: 42rem; }
 @media (min-width: 1024px) {
+  /* Story 37: the header (56 + 64 px) stays on screen, so a link to a part of the page lands below it. */
+  html { scroll-padding-top: 8.5rem; }
   .page-main { max-width: 72rem; }
   .page-narrow > :not(header) { max-width: 42rem; }
   .page-mid > :not(header) { max-width: 48rem; }

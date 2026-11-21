@@ -3,6 +3,13 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-21 — Fixed header on desktop; no search on the purchase and account pages
+
+- **Decision:** from 1024 px the header (navy row and search strip) stays on screen while scrolling (story 37). The cart, both checkouts and every account tab show only the navy row, with no search strip (story 38). The Search button is disabled until 3 characters in every search box (bug 38).
+- **Why:** the owner's choices after the user test of 21 Nov 2026. 1024 px is where the desktop header already begins, so there is one desktop behaviour, not two.
+- **Consequence:** story 19's "same header height on every page" no longer holds for the pages in story 38 (56 px instead of 120 px). The empty strip of bug 31 is gone.
+- **Links:** stories 37, 38; bug 38; stories 19, 22.
+
 ## 2026-11-21 — Feature freeze lifted for the user-test feedback
 
 - **Decision:** the freeze of 14 Nov 2026 is lifted for the feedback of one real user (test of 21 Nov 2026), and only for it. Of 17 points: 11 are built now, 5 wait for the next delivery (cart without log-in, wishlist and alerts, several messages to the seller, pausing a listing, search history and trends), 1 is not done (a way to skip "Help me choose a version": the help is the product, and the user is not the target buyer).

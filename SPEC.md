@@ -71,6 +71,8 @@ In build order. Each story has its own file in `specs/stories/` (bugs are in `sp
 | Story 33 · "Pressing check" on every listing | [`specs/stories/story-33-pressing-check.md`](specs/stories/story-33-pressing-check.md) |
 | Story 34 · Listen to the album | [`specs/stories/story-34-album-preview.md`](specs/stories/story-34-album-preview.md) |
 | Story 35 · A sold record stays in the cart | [`specs/stories/story-35-sold-record-stays-in-cart.md`](specs/stories/story-35-sold-record-stays-in-cart.md) |
+| Story 37 · The header stays on screen while scrolling (desktop) | [`specs/stories/story-37-fixed-header.md`](specs/stories/story-37-fixed-header.md) |
+| Story 38 · No search bar on the purchase and account pages | [`specs/stories/story-38-no-search-on-purchase-pages.md`](specs/stories/story-38-no-search-on-purchase-pages.md) |
 
 ---
 
@@ -255,3 +257,13 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 34 | Title matching ignores case, accents, quotes and bracketed text; a track with no match has no button | `lib/rules/trackPreview.ts` | `tests/unit/trackPreview.test.ts`, `tests/e2e/albumPreview.spec.ts` |
 | 34 | ▶ Preview plays 30 seconds; navy with ❚❚ and the time while playing; one at a time | `app/albums/[albumId]/TrackList.tsx`, `lib/external/itunes.ts` | `tests/e2e/albumPreview.spec.ts` |
 | 34 | The iTunes line shows with the buttons; iTunes down → no buttons, no line, the page stays | `lib/rules/trackPreview.ts`, `app/albums/[albumId]/page.tsx` | `tests/unit/trackPreview.test.ts`, `tests/e2e/albumPreview.spec.ts` (both sizes) |
+| 35 | An unavailable record stays in the cart, greyed, with its tag and "Remove"; the message names it and stays | `app/cart/page.tsx`, `lib/rules/cartAccess.ts`, `lib/db/cart.ts` | `tests/unit/cartAccess.test.ts`, `tests/e2e/cart.spec.ts` |
+| 35 | Total and header count skip unavailable records; the count is right without reloading (bug 33) | `app/cart/page.tsx`, `components/CartCountSync.tsx`, `lib/db/cart.ts` | `tests/e2e/cart.spec.ts` |
+| 35 | "Go to checkout" greyed with any unavailable record; `/cart/checkout` sends the buyer back; only-sold cart shows €0.00; a sale during payment pays nothing | `lib/rules/cartAccess.ts`, `app/cart/checkout/page.tsx`, `app/cart/checkout/actions.ts` | `tests/unit/cartAccess.test.ts`, `tests/e2e/cart.spec.ts` |
+| 35 | 375 px and 1280 px | `app/cart/page.tsx` | `tests/e2e/cart.spec.ts` (both sizes) |
+| 37 | From 1024 px the navy row and the search strip stay at the top while scrolling; the phone header scrolls away | `components/Header.tsx` | `tests/e2e/fixedHeader.spec.ts` |
+| 37 | Content and page anchors are not hidden behind the header | `app/globals.css` | `tests/e2e/fixedHeader.spec.ts` |
+| 37 | The log-in window covers the header; the suggestion box opens over the page | `components/Header.tsx` (z-index), `components/LoginWindow.tsx` (unchanged) | `tests/e2e/fixedHeader.spec.ts` |
+| 38 | No search and no strip on the cart, both checkouts and the account tabs; other pages keep them | `lib/rules/headerSearch.ts`, `components/HeaderSearch.tsx` | `tests/unit/headerSearch.test.ts`, `tests/e2e/fixedHeader.spec.ts`, `tests/e2e/checkout.spec.ts`, `tests/e2e/cart.spec.ts` |
+| 38 | 375 px and 1280 px | `components/HeaderSearch.tsx` | `tests/e2e/fixedHeader.spec.ts` (desktop-only checks skip on the phone; the search button check runs on both) |
+| Bug 38 | The Search button is disabled under 3 characters in the header, home and results boxes; Enter does nothing; the hint stays in the box | `components/HeaderSearch.tsx`, `components/SearchBox.tsx`, `lib/rules/albumSearch.ts` | `tests/e2e/fixedHeader.spec.ts`, `tests/e2e/suggestions.spec.ts` |

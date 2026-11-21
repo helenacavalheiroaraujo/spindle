@@ -376,16 +376,17 @@ test("checkout: the address is typed once; Pay creates one order for each record
   expect(await inCart()).toEqual([]);
 });
 
-test("desktop: the cart checkout keeps the cream strip under the navy row, without the search (bug 31)", async ({ page, isMobile }) => {
+test("desktop: the cart checkout and the cart show the navy row only, no cream strip and no search (story 38, was bug 31)", async ({ page, isMobile }) => {
   test.skip(isMobile, "the strip exists on the desktop only");
   await signedIn(page);
   await addToCart(page, a28);
   await page.goto("/cart/checkout");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Buy with protection");
-  await expect(page.getByTestId("header-search-strip")).toBeVisible();
+  await expect(page.getByTestId("header-search-strip")).toHaveCount(0);
   await expect(page.locator("header").getByRole("search")).toHaveCount(0);
-  await page.goto("/cart"); // other pages keep the search
-  await expect(page.locator("header").getByRole("search")).toBeVisible();
+  await page.goto("/cart"); // the cart too (story 38)
+  await expect(page.getByTestId("header-search-strip")).toHaveCount(0);
+  await expect(page.locator("header").getByRole("search")).toHaveCount(0);
 });
 
 test("a record sold between opening the checkout and paying: nothing is paid, it stays in the cart greyed, with a message (story 35)", async ({ page }) => {
