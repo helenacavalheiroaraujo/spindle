@@ -4,22 +4,22 @@
 Updated 2026-11-21 on request, after story 39 (cancel order) · Deadline 23 Nov 2026 · **2 days left**
 
 ## Summary
-- **Stories:** 31 of 31 MVP stories built (18 with gaps), 0 in progress, 0 not started; user-test stories 35–39 also built, all rows tested; stories 35–39 and the 21 Nov changes are not committed or pushed yet
+- **Stories:** 31 of 31 MVP stories built (18 with gaps), 0 in progress, 0 not started; user-test stories 35–39 also built, all rows tested; stories 35–39 and the 21 Nov changes are committed and pushed (origin/main at 9cc76ba)
 - **Tests:** Unit 852/852 · end-to-end 428 passed, 15 failed, 35 skipped in the full run (18.5 min); the 15 failures came after the dev server dropped (9 show ERR_CONNECTION_REFUSED), and the 4 files re-run alone passed 66 of 66 (4 skipped)
 - **Demo:** The happy path passes its end-to-end tests on phone and desktop. Not rehearsed live
-- **Next:** Brief items: submission PDF (data tables now cover 0001–0013, screenshots not done), 26 manual checks, demo rehearsal, `docs/database.md` migration 0012, push
+- **Next:** Brief items: submission PDF (data tables now cover 0001–0013, screenshots not done), 26 manual checks, demo rehearsal, `docs/database.md` migration 0012
 - **Risk:** 2 days left. The code is done; the risk is the PDF and the manual checks, none run. If time runs out, nothing in the code is cut: the PDF and the demo come first
-- **Brief:** 2 of 7 criteria done, 5 partly; S1 done, S2 (PDF) missing
+- **Brief:** 3 of 7 criteria done, 4 partly; S1 done, S2 (PDF) missing
 
 ## Against the brief
 | Criterion | Status | Evidence / what is missing |
 |---|---|---|
 | 1 · Core features end to end | Done | Core flow passes end to end on phone and desktop (search, recommendation, listings, checkout, confirmation). Not rehearsed live |
-| 2 · Data tables | Partly | Migrations 0001–0013 committed except 0013 (not committed yet); the PDF draft now lists all 13; `docs/database.md` does not mention 0012; not checked that 0013 is applied online |
+| 2 · Data tables | Partly | Migrations 0001–0013 committed; the PDF draft lists all 13; `docs/database.md` does not mention 0012; not checked that 0013 is applied online |
 | 3 · Testing, automated and manual | Partly | Unit 852/852; end-to-end: no single clean full run (15 failures after the dev server dropped, all re-run green); manual: all 26 entries in `docs/manual-tests.md` Not run |
 | 4 · LLM good practices in the repo | Done | SPEC, `specs/`, CLAUDE.md, ARCHITECTURE, DECISIONS, `docs/AI_USAGE.md`, use cases, flowchart, tests |
 | 5 · UX and UI quality | Partly | `docs/ux-review/findings.json`: 5 open (Medium #38, #39; Low #40, #42, #43), no High; story 25 covers them but they are still marked open |
-| 6 · App online and reachable | Partly | https://spindle-three.vercel.app opens the home page (checked 21 Nov), but 2 commits and the uncommitted work (stories 35–39) are not pushed: the online app is behind |
+| 6 · App online and reachable | Done | https://spindle-three.vercel.app opens the home page and the signed-out cart (checked 21 Nov); origin/main has all code (9cc76ba). Not confirmed that the deployed build includes stories 35–39: the layout checks could not run in a hidden browser pane |
 | 7 · Live demo | Partly | `docs/demo-script.md` is a DRAFT, not rehearsed, no address |
 | S1 · Link to the app | Done | https://spindle-three.vercel.app, checked online |
 | S2 · PDF with tables and screenshots | Missing | No PDF. Draft: data tables now cover 0001–0013; screenshots section still covers stories 1–9, 12 and 17 only, and story 9 shows the old log-in page |
@@ -27,7 +27,7 @@ Updated 2026-11-21 on request, after story 39 (cancel order) · Deadline 23 Nov 
 ### Missing for the brief, by impact on the grade
 1. Submission PDF (S2): screenshots of stories 14–39 grouped by journey, retake the desktop screenshots of the account, genre and order-placed pages, Vercel address in the draft, then export.
 2. Manual test record: 26 entries "Not run" in `docs/manual-tests.md`.
-3. Push the 21 Nov commits and the story 39 work; check migration 0013 online; recheck the Vercel address.
+3. Check online that the deployed build has stories 35–39 (code is pushed) and that migration 0013 is applied; push the docs commit.
 4. Demo: rehearse `docs/demo-script.md` once; add the address.
 5. `docs/database.md`: add migration 0012.
 6. Close the UX entries that story 25 already fixed (#38–#43), if the owner agrees.
