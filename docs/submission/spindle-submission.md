@@ -8,6 +8,8 @@ Helena Cavalheiro Araújo · Student number: up202510618
 
 Spindle helps people who are not vinyl specialists to choose the right pressing of a record and to buy a verified copy safely. All data shown is illustrative: the application uses no real catalogue, and payments and shipping are simulated (Assignment 1, p. 12).
 
+<!-- cover-end -->
+
 ## At a glance
 
 - **Contents:** the data tables of the application (part 1) and screenshots of its screens (part 2).

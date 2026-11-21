@@ -34,6 +34,24 @@ def render(pages):
     """Markdown -> one HTML page. `pages` maps a heading to its page number (empty on the first pass)."""
     lines = MD.read_text().replace("../screenshots/", SHOTS).split("\n")
     out, toc, i, first_h1, fig = [], [], 0, True, 0
+    # The cover is everything above <!-- cover-end -->: title, course and date, author, app link and one paragraph.
+    end = lines.index("<!-- cover-end -->")
+    cover_lines = [l for l in lines[:end] if l.strip()]
+    lines = lines[end + 1:]
+    title = re.sub(r"^# ", "", cover_lines[0])
+    kicker = cover_lines[1].split(" · ")                      # Assignment 2 · ASI, MESG/FEUP · 23 Nov 2026
+    author, number = cover_lines[2].split(" · Student number: ")
+    app = re.sub(r"^\*\*App:\*\* ", "", cover_lines[3])
+    lead = cover_lines[4]
+    meta = [("Author", author), ("Student number", number), ("Course", kicker[1]), ("Date", kicker[2]), ("Application", app)]
+    vinyl = (HERE / "cover-vinyl.svg").read_text()
+    cover = (
+        f'<section class="cover"><div class="disc">{vinyl}</div><div class="top"><div class="kicker">{html.escape(kicker[0])}</div>'
+        f'<h1 class="title">{html.escape(title)}</h1><p class="lead">{inline(lead)}</p></div><dl class="meta">'
+        + "".join(f"<div><dt>{html.escape(k)}</dt><dd>{inline(v)}</dd></div>" for k, v in meta) + "</dl></section>"
+    )
+    out.append(cover)
+    first_h1 = False
 
     def number_figures(row):
         nonlocal fig
@@ -63,11 +81,11 @@ def render(pages):
             n, txt = len(m.group(1)), m.group(2)
             plain = re.sub(r"[`*]", "", txt)
             cls = ""
-            if n == 1 and first_h1:
-                cls, first_h1 = ' class="title"', False
-            elif n == 1:
+            if n == 1:
                 cls = ' class="pb"'
-            if n <= 2 and cls != ' class="title"' and not plain.startswith(("At a glance", "How to read")):
+            elif plain.startswith("At a glance"):
+                cls = ' class="pb"'
+            if n <= 2 and not plain.startswith(("At a glance", "How to read")):
                 toc.append((n, plain, slug(plain)))
             out.append(f'<h{n}{cls} id="{slug(plain)}">{inline(txt)}</h{n}>'); i += 1; continue
         if line.startswith("|"):

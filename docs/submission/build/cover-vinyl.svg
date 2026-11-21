@@ -1,0 +1,39 @@
+<svg class="vinyl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Illustration of a vinyl record">
+<circle cx="200" cy="200" r="196" fill="#1d2433"/>
+<circle cx="200" cy="200" r="62" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="67" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="72" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="77" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="82" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="87" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="92" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="97" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="102" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="107" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="112" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="117" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="122" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="127" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="132" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="137" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="142" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="147" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="152" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="157" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="162" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="167" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="172" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="177" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="182" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="187" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="192" fill="none" stroke="#33405e" stroke-width="0.7" opacity="0.55"/>
+<circle cx="200" cy="200" r="120" fill="none" stroke="#0f1522" stroke-width="2.2" opacity=".9"/>
+<circle cx="200" cy="200" r="160" fill="none" stroke="#0f1522" stroke-width="2.2" opacity=".9"/>
+<path d="M265.7 19.6 A192 192 0 0 1 357.3 89.9 L247.5 166.7 A58 58 0 0 0 219.8 145.5 Z" fill="#f4efe6" opacity="0.07"/>
+<path d="M134.3 380.4 A192 192 0 0 1 42.7 310.1 L152.5 233.3 A58 58 0 0 0 180.2 254.5 Z" fill="#f4efe6" opacity="0.07"/>
+<circle cx="200" cy="200" r="58" fill="#c9a46a"/>
+<circle cx="200" cy="200" r="52" fill="none" stroke="#5a3a24" stroke-width="1.2" opacity=".75"/>
+<text x="200" y="186" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="600" font-size="19" letter-spacing="3" fill="#1d2433">SPINDLE</text>
+<text x="200" y="226" text-anchor="middle" font-family="Inter, sans-serif" font-size="6" letter-spacing="1.1" fill="#5a3a24">VERIFIED PRESSINGS</text>
+<circle cx="200" cy="200" r="7" fill="#f4efe6"/>
+</svg>
