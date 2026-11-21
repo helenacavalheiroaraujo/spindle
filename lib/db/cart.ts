@@ -3,7 +3,7 @@
 import { db } from "./client";
 import { LISTING_FACTS_COLUMNS, getListingCheck, toListingFacts } from "./listings";
 import { sellerOf, type Seller } from "@/lib/rules/seller";
-import { canAddToCart, leftCartMessage, staysInCart } from "@/lib/rules/cartAccess";
+import { canAddToCart, staysInCart } from "@/lib/rules/cartAccess";
 import { cartTotal } from "@/lib/rules/cartTotal";
 import type { ShippingAddress } from "@/lib/rules/shippingAddress";
 
@@ -61,15 +61,16 @@ export type CartItem = {
   seller: Seller;
   city: string | null;
   cover: string | null;
+  versionId: string; // the version the listing really is, for the link to its page (bug 35)
+  status: "on_sale" | "sold" | "removed";
+  available: boolean; // false: sold, removed or no longer matching; it stays greyed until removed (story 35)
 };
 
-// The cart as the buyer sees it. A record that can no longer be bought (sold to someone else, removed) leaves the
-// cart here, and the message for it comes back once (use case 5). The rest is in the order it was added.
-// sweep = false only looks (the checkout does): a screen that sends the buyer back to the cart leaves the removal,
-// and so the message, to the cart screen.
-export async function getCart(userId: string, sweep = true): Promise<{ items: CartItem[]; messages: string[] }> {
+// The cart as the buyer sees it, in the order it was added. A record that can no longer be bought (sold to someone
+// else, removed) stays in the list with available = false until the buyer removes it (story 35, bug 33).
+export async function getCart(userId: string): Promise<CartItem[]> {
   const buyerId = await profileIdOf(userId);
-  if (!buyerId) return { items: [], messages: [] };
+  if (!buyerId) return [];
   const { data, error } = await db()
     .from("cart_items")
     .select(
@@ -83,8 +84,6 @@ export async function getCart(userId: string, sweep = true): Promise<{ items: Ca
   if (error) throw error;
 
   const items: CartItem[] = [];
-  const messages: string[] = [];
-  const gone: string[] = [];
   for (const row of data ?? []) {
     const l = row.listings as unknown as {
       id: string;
@@ -96,11 +95,6 @@ export async function getCart(userId: string, sweep = true): Promise<{ items: Ca
     } & Parameters<typeof toListingFacts>[0];
     const facts = toListingFacts(l);
     const title = `${l.actual.albums.title}, ${l.actual.name}`;
-    if (!staysInCart({ ...facts, id: l.id, price: Number(l.price) })) {
-      gone.push(row.listing_id);
-      messages.push(leftCartMessage(title, facts.status));
-      continue;
-    }
     items.push({
       listingId: l.id,
       title,
@@ -109,17 +103,16 @@ export async function getCart(userId: string, sweep = true): Promise<{ items: Ca
       seller: sellerOf(l.profiles.shop_name),
       city: l.profiles.city,
       cover: l.cover_photo_url,
+      versionId: facts.actualVersionId,
+      status: facts.status,
+      available: staysInCart({ ...facts, id: l.id, price: Number(l.price) }),
     });
   }
-  if (sweep && gone.length > 0) {
-    const removed = await db().from("cart_items").delete().eq("buyer_id", buyerId).in("listing_id", gone);
-    if (removed.error) throw removed.error;
-  }
-  return { items, messages };
+  return items;
 }
 
 // Pay for the whole cart: one order per record, all or nothing (place_orders in the database).
-// { sold: true } when a record was sold meanwhile: nothing was paid, and the cart screen removes it with a message.
+// { sold: true } when a record was sold meanwhile: nothing was paid, and the cart screen shows it greyed (story 35).
 // orderIds in the order of the cart. Throws on any other failure (the caller shows the error screen).
 export async function placeCartOrders(
   userId: string,

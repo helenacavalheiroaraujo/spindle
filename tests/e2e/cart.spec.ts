@@ -260,20 +260,81 @@ test("the menu: the Cart cell with the number of records in the phone drawer", a
   await expect(page).toHaveURL("/cart");
 });
 
-test("a record sold to someone else while in the cart leaves it with a message and the total is recalculated", async ({ page }) => {
+test("a record sold to someone else while in the cart stays greyed with a message; the total and the header count skip it; Go to checkout waits until it is removed (story 35, bug 33)", async ({ page }) => {
   await signedIn(page);
   await addToCart(page, a28);
   await addToCart(page, b30);
+  await page.goto("/"); // the header counts 2 here; the layout is not reloaded when we open the cart from it
+  await expect(cartLink(page, "Cart, 2 records")).toBeVisible();
   await admin().from("listings").update({ status: "sold" }).eq("id", a28);
-  await page.goto("/cart");
-  await expect(page.getByRole("status").filter({ hasText: "left your cart" })).toHaveText(
-    "“Homogenic, 2017 Reissue” was just sold to someone else and left your cart. The total is updated.",
+  await cartLink(page, "Cart, 2 records").click();
+  await expect(page).toHaveURL("/cart");
+
+  await expect(page.getByRole("status").filter({ hasText: "sold to someone else" })).toHaveText(
+    "“Homogenic, 2017 Reissue” was sold to someone else. Remove it to go to checkout.",
   );
   const list = page.getByRole("list", { name: "Records in your cart" }).getByRole("listitem");
-  await expect(list).toHaveCount(1);
+  await expect(list).toHaveCount(2); // the sold one stays
+  const sold = page.getByRole("listitem", { name: /Sold$/ });
+  await expect(sold).toHaveCount(1);
+  await expect(sold.getByText("Sold", { exact: true })).toBeVisible();
+  await expect(sold.getByRole("button", { name: /^Remove/ })).toBeVisible();
   await expect(page.getByRole("region", { name: "Summary" }).getByRole("definition")).toHaveText(["€30.00", "€4.90", "€2.00", "€36.90"]);
-  await screenshot(page, 20, "cart-sold");
+  await expect(page.getByRole("button", { name: "Go to checkout" })).toBeDisabled();
+  await expect(page.getByRole("link", { name: "Go to checkout" })).toHaveCount(0);
+  await expect(page.getByText("Remove the sold record to continue.")).toBeVisible();
+  await expect(cartLink(page, "Cart, 1 record")).toBeVisible(); // bug 33: no reload needed
+  await screenshot(page, 35, "cart-sold");
+  expect(await inCart()).toEqual([a28, b30].sort()); // nothing was removed behind the buyer's back
+
+  // The address of the checkout sends the buyer back to the cart while a record is unavailable.
+  await page.goto("/cart/checkout");
+  await expect(page).toHaveURL("/cart");
+
+  // Removing the sold record enables Go to checkout again.
+  await page.getByRole("button", { name: /^Remove “?Homogenic/ }).first().click();
+  await expect(page.getByRole("link", { name: "Go to checkout" })).toBeEnabled();
+  await expect(page.getByRole("status")).toHaveCount(0);
   expect(await inCart()).toEqual([b30]);
+});
+
+test("a cart with only a sold record: Go to checkout is greyed and the total is €0.00 (story 35)", async ({ page }) => {
+  await signedIn(page);
+  await addToCart(page, a28);
+  await admin().from("listings").update({ status: "sold" }).eq("id", a28);
+  await page.goto("/cart");
+  await expect(page.getByRole("button", { name: "Go to checkout" })).toBeDisabled();
+  await expect(page.getByRole("region", { name: "Summary" }).getByRole("definition")).toHaveText(["€0.00", "€0.00", "€0.00", "€0.00"]);
+});
+
+test("a record removed by its seller: tag 'No longer available' and its own message (story 35)", async ({ page }) => {
+  await signedIn(page);
+  await addToCart(page, a28);
+  await admin().from("listings").update({ status: "removed" }).eq("id", a28);
+  await page.goto("/cart");
+  await expect(page.getByRole("status")).toHaveText("“Homogenic, 2017 Reissue” is no longer available. Remove it to go to checkout.");
+  await expect(page.getByText("No longer available", { exact: true })).toBeVisible();
+});
+
+test("the name and the cover of a record in the cart open its listing (bug 35)", async ({ page }) => {
+  await signedIn(page);
+  await addToCart(page, a28);
+  await page.goto("/cart");
+  await page.getByRole("list", { name: "Records in your cart" }).getByRole("link", { name: "Homogenic, 2017 Reissue" }).click();
+  await expect(page).toHaveURL(new RegExp(`/listings/${a28}`));
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+});
+
+test("Buy now with other records in the cart says it buys only this one; without a cart, no notice (bug 37)", async ({ page }) => {
+  await signedIn(page);
+  const checkout = `/checkout/${a28}?version=${V_HOMOGENIC_2017}`;
+  await page.goto(checkout);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Buy with protection");
+  await expect(page.getByRole("note")).toHaveCount(0);
+  await addToCart(page, b30);
+  await page.goto(checkout);
+  await expect(page.getByRole("note")).toHaveText("This buys only this record. The records in your cart stay in your cart.");
+  await screenshot(page, 35, "buy-now-notice");
 });
 
 test("checkout: the address is typed once; Pay creates one order for each record, 'Paid · waiting for the seller', the listings are sold and the cart is empty", async ({ page }) => {
@@ -327,7 +388,7 @@ test("desktop: the cart checkout keeps the cream strip under the navy row, witho
   await expect(page.locator("header").getByRole("search")).toBeVisible();
 });
 
-test("a record sold between opening the checkout and paying: nothing is paid, it leaves the cart with a message", async ({ page }) => {
+test("a record sold between opening the checkout and paying: nothing is paid, it stays in the cart greyed, with a message (story 35)", async ({ page }) => {
   await signedIn(page);
   await addToCart(page, a28);
   await addToCart(page, b30);
@@ -337,7 +398,8 @@ test("a record sold between opening the checkout and paying: nothing is paid, it
   await page.getByRole("button", { name: "Pay €71.80" }).click();
 
   await expect(page).toHaveURL("/cart");
-  await expect(page.getByRole("status").filter({ hasText: "left your cart" })).toContainText("was just sold to someone else");
+  await expect(page.getByRole("status").filter({ hasText: "sold to someone else" })).toContainText("was sold to someone else");
+  await expect(page.getByRole("button", { name: "Go to checkout" })).toBeDisabled();
   await expect(page.getByRole("region", { name: "Summary" }).getByRole("definition")).toHaveText(["€28.00", "€4.90", "€2.00", "€34.90"]);
   const { data: orders } = await admin().from("orders").select("id").eq("buyer_id", profileId);
   expect(orders).toEqual([]); // nothing was paid

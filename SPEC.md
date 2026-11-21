@@ -70,6 +70,7 @@ In build order. Each story has its own file in `specs/stories/` (bugs are in `sp
 | Story 32 · Account button and menu | [`specs/stories/story-32-account-menu.md`](specs/stories/story-32-account-menu.md) |
 | Story 33 · "Pressing check" on every listing | [`specs/stories/story-33-pressing-check.md`](specs/stories/story-33-pressing-check.md) |
 | Story 34 · Listen to the album | [`specs/stories/story-34-album-preview.md`](specs/stories/story-34-album-preview.md) |
+| Story 35 · A sold record stays in the cart | [`specs/stories/story-35-sold-record-stays-in-cart.md`](specs/stories/story-35-sold-record-stays-in-cart.md) |
 
 ---
 

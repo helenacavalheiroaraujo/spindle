@@ -1,7 +1,7 @@
 // Decision table from story 20 · Acceptance criteria: a red or sold listing cannot be added; a seller cannot add
-// their own listing (finding #12); a record that can no longer be bought leaves the cart (use case 5).
+// their own listing (finding #12); a record that can no longer be bought stays in the cart, greyed (story 35).
 import { describe, expect, it } from "vitest";
-import { canAddToCart, leftCartMessage, staysInCart } from "@/lib/rules/cartAccess";
+import { canAddToCart, canGoToCheckout, staysInCart, unavailableMessage, unavailableTag } from "@/lib/rules/cartAccess";
 import type { ListingForList } from "@/lib/rules/listingOrder";
 
 const allMatch = { cover_label: "match", country_year: "match", matrix: "match" } as const;
@@ -43,13 +43,26 @@ describe("staysInCart", () => {
   });
 });
 
-describe("leftCartMessage", () => {
-  it("sold: the text of the design", () => {
-    expect(leftCartMessage("Homogenic, 2017 Reissue", "sold")).toBe(
-      "“Homogenic, 2017 Reissue” was just sold to someone else and left your cart. The total is updated.",
-    );
+describe("unavailableMessage and unavailableTag", () => {
+  it.each([
+    // case, status, tag, message
+    ["sold", "sold", "Sold", "“Homogenic, 2017 Reissue” was sold to someone else. Remove it to go to checkout."],
+    ["removed by its seller", "removed", "No longer available", "“Homogenic, 2017 Reissue” is no longer available. Remove it to go to checkout."],
+    ["on sale but no longer matching", "on_sale", "No longer available", "“Homogenic, 2017 Reissue” is no longer available. Remove it to go to checkout."],
+  ] as const)("%s → %s", (_case, status, tag, message) => {
+    expect(unavailableTag(status)).toBe(tag);
+    expect(unavailableMessage("Homogenic, 2017 Reissue", status)).toBe(message);
   });
-  it("removed: no longer available", () => {
-    expect(leftCartMessage("Vespertine, 2001", "removed")).toBe("“Vespertine, 2001” is no longer available and left your cart. The total is updated.");
+});
+
+describe("canGoToCheckout", () => {
+  it.each([
+    ["empty cart", [], false],
+    ["one record, available", [{ available: true }], true],
+    ["two records, both available", [{ available: true }, { available: true }], true],
+    ["one sold, one available", [{ available: false }, { available: true }], false],
+    ["only a sold record", [{ available: false }], false],
+  ] as const)("%s → %s", (_case, items, expected) => {
+    expect(canGoToCheckout([...items])).toBe(expected);
   });
 });

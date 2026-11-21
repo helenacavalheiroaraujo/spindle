@@ -3,6 +3,17 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-21 — Feature freeze lifted for the user-test feedback
+
+- **Decision:** the freeze of 14 Nov 2026 is lifted for the feedback of one real user (test of 21 Nov 2026), and only for it. Of 17 points: 11 are built now, 5 wait for the next delivery (cart without log-in, wishlist and alerts, several messages to the seller, pausing a listing, search history and trends), 1 is not done (a way to skip "Help me choose a version": the help is the product, and the user is not the target buyer).
+- **Built now:**
+  - Bugs: cart count after a record leaves the cart; the two order buttons stuck together; cart items link to the listing; a text on the checkout address explaining where it comes from; a notice that "Buy now" buys only that record; the Search button.
+  - New stories: a sold record stays in the cart, greyed, and blocks the checkout until removed (replaces the story 20 rule "it leaves the cart with a message"); arrows on the genre row on desktop (reverses option C of story 24); a fixed header on desktop; no search bar on the purchase and account pages; "Cancel order" while an order is "Paid".
+- **Why:** the owner chose each destination on 21 Nov 2026. The designs (cart, arrows, cancel order) are in `docs/design/user-test-options.html`: option A of each.
+- **Choices by the AI:** the 12 px gap between the order buttons; the texts "Sold to someone else", "Cancel this order?" and "Cancelled · €38.90 returned to you"; the cart count shows only the available records.
+- **Cut rule:** if "Cancel order" has no passing tests by Sunday 22 Nov at 14:00, it moves to the next delivery.
+- **Links:** `docs/design/user-test-options.html`; stories 20, 24, 7; bugs 33–38.
+
 ## 2026-11-14 — Desktop is the reference for this delivery; phone polish moves to the next one
 
 - **Decision:** for the MVP delivery, desktop (1280 px) is the reference layout: the live demo and the main screenshots use it. The phone layout (375 px) stays built and tested at both sizes; its visual bugs are logged in `specs/bugs/` and fixed in the next delivery. Spindle's design principle stays phone first.

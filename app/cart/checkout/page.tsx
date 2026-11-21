@@ -9,16 +9,17 @@ import { startingAddress } from "@/lib/rules/shippingAddress";
 import { getProfileName } from "@/lib/db/profiles";
 import { currentUserId } from "@/lib/db/session";
 import { cartSummaryRows, cartTotal } from "@/lib/rules/cartTotal";
+import { canGoToCheckout } from "@/lib/rules/cartAccess";
 import { payCart } from "./actions";
 import { SignInRequired } from "@/components/SignInRequired";
 
 // Checkout of the cart (story 20 · use case 4): story 7's checkout, extended. The address is typed once; Pay creates
-// one order for each record. If a record left the cart meanwhile, the cart screen says so first (Edge cases).
+// one order for each record. If a record can no longer be bought, the cart screen says so first (story 35).
 export default async function CartCheckoutPage() {
   const userId = await currentUserId();
   if (!userId) return <SignInRequired path="/cart/checkout" />; // story 29
-  const { items, messages } = await getCart(userId, false);
-  if (items.length === 0 || messages.length > 0) redirect("/cart");
+  const items = await getCart(userId);
+  if (!canGoToCheckout(items)) redirect("/cart");
 
   const [saved, last, accountName] = await Promise.all([
     getSavedAddresses(userId),

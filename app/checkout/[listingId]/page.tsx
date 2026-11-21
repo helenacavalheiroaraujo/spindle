@@ -12,6 +12,7 @@ import { SignInRequired } from "@/components/SignInRequired";
 import { Header } from "@/components/Header";
 import { SellerLine } from "@/components/SellerLine";
 import { checkoutTotal } from "@/lib/rules/checkoutTotal";
+import { cartListingIds } from "@/lib/db/cart";
 import { CheckoutForm } from "./CheckoutForm";
 import { pay } from "./actions";
 
@@ -61,6 +62,8 @@ export default async function CheckoutPage({
   const initialAddress = startingAddress(saved.delivery, last, accountName);
 
   const amounts = checkoutTotal(l.price);
+  // Bug 37: with other records in the cart, say that this checkout buys only this one.
+  const othersInCart = (await cartListingIds(userId)).filter((id) => id !== listingId).length > 0;
 
   const record = (
     <section aria-label="The record" className="flex items-center gap-3">
@@ -84,6 +87,11 @@ export default async function CheckoutPage({
     <main className="px-4 pb-16 page-main">
       <Header />
       <h1 className="mt-4 font-heading text-4xl leading-tight lg:text-6xl">Buy with protection</h1>
+      {othersInCart && (
+        <p role="note" className="mt-4 rounded-2xl border border-light-amber/60 bg-light-amber/10 p-4 text-sm">
+          This buys only this record. The records in your cart stay in your cart.
+        </p>
+      )}
 
       <CheckoutForm
         pay={pay.bind(null, listingId, versionId)}

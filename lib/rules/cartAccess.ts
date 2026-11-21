@@ -16,9 +16,21 @@ export function staysInCart(listing: CartListing): boolean {
   return canCheckout(listing, listing.actualVersionId);
 }
 
-// The message when a record leaves the cart (design: cart-options.html, part 3). Sold → the design's text;
-// removed by its seller or no longer matching → a plain "no longer available".
-export function leftCartMessage(title: string, status: "on_sale" | "sold" | "removed"): string {
-  const why = status === "sold" ? "was just sold to someone else" : "is no longer available";
-  return `“${title}” ${why} and left your cart. The total is updated.`;
+// A record that can no longer be bought stays in the cart, greyed, until the buyer removes it (story 35, replacing the
+// story 20 rule that it leaves on its own). Its tag and its message: sold → "Sold" and "was sold to someone else";
+// removed by its seller or no longer matching → "No longer available".
+type ListingStatus = "on_sale" | "sold" | "removed";
+
+export function unavailableTag(status: ListingStatus): string {
+  return status === "sold" ? "Sold" : "No longer available";
+}
+
+export function unavailableMessage(title: string, status: ListingStatus): string {
+  const why = status === "sold" ? "was sold to someone else" : "is no longer available";
+  return `“${title}” ${why}. Remove it to go to checkout.`;
+}
+
+// "Go to checkout" works only when the cart has records and every one of them can still be bought.
+export function canGoToCheckout(items: { available: boolean }[]): boolean {
+  return items.length > 0 && items.every((item) => item.available);
 }

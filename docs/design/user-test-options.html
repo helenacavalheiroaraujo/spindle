@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User-test feedback: design options (cart, genre row, cancel order)</title>
+<!-- Proposed after the user test of 21 Nov 2026 · Part 1: a record sold while in the cart (C1). Part 2: arrows on the genre row, desktop (C2). Part 3: cancelling a paid order (E1), with the buttons 12 px apart (A2). Texts are proposals. Illustrative data. Not built. No option is marked as preferred. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0} body{font-family:Inter,sans-serif;background:#f4efe6;color:#1d2433;font-size:14px;line-height:1.35;padding:24px}
+.wrap{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;justify-content:center;margin-bottom:34px}
+.col{width:375px;flex:none} h2{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px} .why{color:#4a5163;margin:4px 0 12px;font-size:13px}
+.big{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:34px;text-align:center;margin:10px 0 6px}
+.intro{text-align:center;color:#4a5163;font-size:14px;margin:0 auto 18px;max-width:760px}
+.lbl{font-size:12px;font-weight:600;color:#6f6a60;margin:14px 0 6px}
+.phone{position:relative;border:1px solid #1d2433;border-radius:28px;overflow:hidden;background:#f4efe6;padding:16px}
+h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:30px;margin:4px 0 10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;font-weight:600;font-size:14px;text-align:center}
+.btn.p{background:#1d2433;color:#f4efe6}.btn.g{border:1.5px solid #1d2433}.btn.off{background:#d8d2c6;color:#8b8577}
+.btn.block{display:flex;width:100%}
+.row{display:flex;gap:12px;margin-top:12px}.row .btn{flex:1;padding:0 10px}
+.col2{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.sand{background:#f1e6d0;border:1px solid #e2dacb;border-radius:14px;padding:14px;margin-top:12px}
+.card{background:#fffdf9;border:1px solid #e2dacb;border-radius:16px;padding:14px;margin-bottom:12px}
+.msg{background:#f1e6d0;border:1px solid #d9b873;border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:12px}
+.li{border-bottom:1px solid #e2dacb;padding:12px 0;display:flex;gap:10px;align-items:flex-start}.li .m{flex:1;font-size:13px}.li .pr{font-weight:700;font-size:18px}.li .sl{color:#4a5163}
+.cover{width:56px;height:56px;border-radius:8px;background:#8a8f9c;flex:none}
+.li.sold .cover{filter:grayscale(1);opacity:.55}.li.sold .m,.li.sold .pr{color:#8b8577}.li.sold .pr{text-decoration:line-through}
+.rm{font-size:13px;font-weight:600;text-decoration:underline;color:#1d2433;display:inline-block;margin-top:6px;padding:8px 0}
+.tagsold{display:inline-block;border:1px solid #8b8577;border-radius:999px;padding:1px 9px;font-size:11px;font-weight:600;color:#6f6a60;margin-left:6px}
+.pillbtn{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1.5px solid #1d2433;border-radius:999px;font-weight:600;font-size:13px;color:#1d2433;margin-top:8px}
+.sum{display:flex;justify-content:space-between;font-size:13px;padding:3px 0}.sum.t{font-weight:700;font-size:18px;border-top:1px solid #1d2433;margin-top:6px;padding-top:8px}
+.hint{font-size:12px;color:#6f6a60;text-align:center;margin-top:8px}
+.ill{display:inline-block;border:1px solid #e2dacb;border-radius:999px;padding:3px 9px;font-size:11px;margin-top:10px}
+.badge{min-width:22px;height:22px;border-radius:999px;background:#1d2433;color:#f4efe6;font-size:12px;display:inline-flex;align-items:center;justify-content:center;padding:0 6px}
+.sec{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;margin:16px 0 4px}
+/* order card */
+.bar{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0 4px}.bar i{height:4px;border-radius:999px;background:#e2dacb;display:block}.bar i.on{background:#1d2433}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:11px;color:#4a5163}
+.dlg{position:relative;background:#fffdf9;border:1px solid #1d2433;border-radius:20px;padding:16px;margin-top:14px;box-shadow:0 8px 24px rgba(29,36,51,.18)}
+.dlg b{font-family:'Barlow Condensed',sans-serif;font-size:24px;display:block;margin-bottom:4px}
+.undone{background:#ece5d6;border:1px solid #e2dacb;border-radius:16px;padding:14px}
+/* desktop frames */
+.frame{border:1px solid #1d2433;border-radius:20px;background:#f4efe6;padding:28px 32px;margin:0 auto 28px;max-width:1232px}
+.head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}.head h2{font-size:34px;line-height:1}
+.opt-label{font-size:13px;font-weight:600;margin-bottom:10px}
+.crow{display:flex;gap:16px;position:relative}
+.crate{border-radius:22px;position:relative;overflow:hidden;padding:18px;min-height:150px;color:#1d2433;flex:0 0 calc((100% - 48px)/4)}
+.crate .rec{position:absolute;right:-24px;top:-24px;width:96px;height:96px;border-radius:50%;background:#1d2433;box-shadow:inset 0 0 0 30px #1d2433,inset 0 0 0 38px #f4efe6}
+.crate b{font-family:'Barlow Condensed',sans-serif;font-size:34px;line-height:1;position:absolute;left:18px;bottom:40px}
+.crate span{position:absolute;left:18px;bottom:18px;font-size:14px}
+.c1{background:#c9a46a}.c2{background:#323d57;color:#f4efe6}.c3{background:#5a3a24;color:#f4efe6}.c4{background:#faf7f1}
+.line{height:3px;background:#e2dacb;border-radius:999px;margin-top:16px;position:relative}.line i{position:absolute;left:0;top:0;height:3px;width:57%;background:#1d2433;border-radius:999px}
+.lab{font-size:13px;color:#6f6a60;margin-top:8px}
+.arrow{width:44px;height:44px;border-radius:50%;border:1.5px solid #1d2433;background:#f4efe6;color:#1d2433;display:inline-flex;align-items:center;justify-content:center;font-size:20px;font-weight:600;flex:none}
+.arrow.off{border-color:#c8bfae;color:#c8bfae}
+.arrow.float{position:absolute;top:50%;margin-top:-22px;background:#fffdf9;box-shadow:0 4px 14px rgba(29,36,51,.22)}
+.arrows{display:flex;gap:10px}
+.metaRow{display:flex;align-items:center;gap:14px;margin-top:12px}.metaRow .line{flex:1;margin-top:0}
+</style></head><body>
+
+<!-- ============ PART 1 · C1 ============ -->
+<p class="big">1 · A record sold while it is in the cart</p>
+<p class="intro">Today the record leaves the cart on its own with a message. The user asked to keep it visible, disabled, and to block the checkout until it is removed by hand. Three ways to show that. The cart icon shows the number of records still available (here 1). Illustrative data.</p>
+<div class="wrap">
+
+<section class="col"><h2>Option A · Message on top, row greyed in place</h2>
+<p class="why">A message at the top says what happened. The sold record stays where it was, greyed, with a "Sold" tag and "Remove". The total counts only the available record. "Go to checkout" is grey with a line saying why.</p>
+<div class="phone">
+<h3>Your cart</h3>
+<div class="msg"><b>“Ziggy Stardust, 2012 Remaster”</b> was sold to someone else. Remove it to go to checkout.</div>
+<div class="li sold"><div class="cover"></div><div class="m"><b>Ziggy Stardust, 2012 Remaster</b><span class="tagsold">Sold</span><div class="sl">VG+ · Private seller, Porto</div><span class="rm">Remove</span></div><div class="pr">€36.00</div></div>
+<div class="li"><div class="cover"></div><div class="m"><b>Blackstar</b><div class="sl">NM · Discos do Rui, Lisboa</div><span class="rm">Remove</span></div><div class="pr">€28.00</div></div>
+<div class="sand"><div class="sum"><span>Records</span><span>€28.00</span></div><div class="sum"><span>Insured shipping · 1 × €4.90</span><span>€4.90</span></div><div class="sum"><span>Buyer protection · 1 × €2.00</span><span>€2.00</span></div><div class="sum t"><span>Total</span><span>€34.90</span></div>
+<span class="btn off block" style="margin-top:12px">Go to checkout</span><p class="hint">Remove the sold record to continue.</p></div>
+<span class="ill">Simulated payment · Illustrative data</span></div></section>
+
+<section class="col"><h2>Option B · The row carries its own message and button</h2>
+<p class="why">No message at the top. The greyed row says "Sold to someone else" inside itself and has a bordered "Remove" button, bigger than the text link, so the way forward is on the row that blocks it.</p>
+<div class="phone">
+<h3>Your cart</h3>
+<div class="li sold"><div class="cover"></div><div class="m"><b>Ziggy Stardust, 2012 Remaster</b><div class="sl">VG+ · Private seller, Porto</div><div style="color:#1d2433;font-weight:600;margin-top:6px">Sold to someone else</div><span class="pillbtn">Remove from cart</span></div><div class="pr">€36.00</div></div>
+<div class="li"><div class="cover"></div><div class="m"><b>Blackstar</b><div class="sl">NM · Discos do Rui, Lisboa</div><span class="rm">Remove</span></div><div class="pr">€28.00</div></div>
+<div class="sand"><div class="sum"><span>Records</span><span>€28.00</span></div><div class="sum"><span>Insured shipping · 1 × €4.90</span><span>€4.90</span></div><div class="sum"><span>Buyer protection · 1 × €2.00</span><span>€2.00</span></div><div class="sum t"><span>Total</span><span>€34.90</span></div>
+<span class="btn off block" style="margin-top:12px">Go to checkout</span><p class="hint">Remove the sold record to continue.</p></div>
+<span class="ill">Simulated payment · Illustrative data</span></div></section>
+
+<section class="col"><h2>Option C · A separate "No longer available" block</h2>
+<p class="why">Sold records move into their own block under the available ones, so the list above is only what can be bought. The block has a one-line explanation and "Remove". The checkout stays grey while the block exists.</p>
+<div class="phone">
+<h3>Your cart</h3>
+<div class="li"><div class="cover"></div><div class="m"><b>Blackstar</b><div class="sl">NM · Discos do Rui, Lisboa</div><span class="rm">Remove</span></div><div class="pr">€28.00</div></div>
+<p class="sec">No longer available</p>
+<p class="why" style="margin-top:0">Sold to someone else. Remove it to continue.</p>
+<div class="li sold" style="border-bottom:0"><div class="cover"></div><div class="m"><b>Ziggy Stardust, 2012 Remaster</b><div class="sl">VG+ · Private seller, Porto</div><span class="rm">Remove</span></div><div class="pr">€36.00</div></div>
+<div class="sand"><div class="sum"><span>Records</span><span>€28.00</span></div><div class="sum"><span>Insured shipping · 1 × €4.90</span><span>€4.90</span></div><div class="sum"><span>Buyer protection · 1 × €2.00</span><span>€2.00</span></div><div class="sum t"><span>Total</span><span>€34.90</span></div>
+<span class="btn off block" style="margin-top:12px">Go to checkout</span><p class="hint">Remove the sold record to continue.</p></div>
+<span class="ill">Simulated payment · Illustrative data</span></div></section>
+</div>
+
+<!-- ============ PART 2 · C2 ============ -->
+<p class="big">2 · Arrows on the genre row (desktop, 1280 px)</p>
+<p class="intro">Arrows only on desktop, with 7 or more genres. Phone keeps the sideways swipe. The progress line and the label "Showing 1 to 4 of 7 genres" stay in all three. At the start the left arrow is greyed. Illustrative data.</p>
+
+<section class="frame">
+  <p class="opt-label">Option A · Two arrows at the right end of the heading</p>
+  <div class="head"><h2 class="hd" style="font-family:'Barlow Condensed',sans-serif">Crates by genre</h2><div class="arrows"><span class="arrow off">‹</span><span class="arrow">›</span></div></div>
+  <div class="crow"><div class="crate c1"><i class="rec"></i><b>Classical</b><span>8 records</span></div><div class="crate c2"><i class="rec"></i><b>Electronic</b><span>2 records</span></div><div class="crate c3"><i class="rec"></i><b>Fado</b><span>1 record</span></div><div class="crate c4"><i class="rec"></i><b>Hip-hop</b><span>1 record</span></div></div>
+  <div class="line"><i></i></div><p class="lab">Showing 1 to 4 of 7 genres</p>
+</section>
+
+<section class="frame">
+  <p class="opt-label">Option B · Round arrows on the edges of the row, level with the middle of the crates</p>
+  <div class="head"><h2 style="font-family:'Barlow Condensed',sans-serif">Crates by genre</h2></div>
+  <div class="crow"><span class="arrow float off" style="left:-22px">‹</span><div class="crate c1"><i class="rec"></i><b>Classical</b><span>8 records</span></div><div class="crate c2"><i class="rec"></i><b>Electronic</b><span>2 records</span></div><div class="crate c3"><i class="rec"></i><b>Fado</b><span>1 record</span></div><div class="crate c4"><i class="rec"></i><b>Hip-hop</b><span>1 record</span></div><span class="arrow float" style="right:-22px">›</span></div>
+  <div class="line"><i></i></div><p class="lab">Showing 1 to 4 of 7 genres</p>
+</section>
+
+<section class="frame">
+  <p class="opt-label">Option C · Arrows on both sides of the progress line, under the row</p>
+  <div class="head"><h2 style="font-family:'Barlow Condensed',sans-serif">Crates by genre</h2></div>
+  <div class="crow"><div class="crate c1"><i class="rec"></i><b>Classical</b><span>8 records</span></div><div class="crate c2"><i class="rec"></i><b>Electronic</b><span>2 records</span></div><div class="crate c3"><i class="rec"></i><b>Fado</b><span>1 record</span></div><div class="crate c4"><i class="rec"></i><b>Hip-hop</b><span>1 record</span></div></div>
+  <div class="metaRow"><span class="arrow off">‹</span><div class="line"><i></i></div><span class="arrow">›</span></div><p class="lab" style="text-align:center">Showing 1 to 4 of 7 genres</p>
+</section>
+
+<!-- ============ PART 3 · E1 + A2 ============ -->
+<p class="big">3 · Cancel a paid order</p>
+<p class="intro">Only while the order is "Paid" (not yet shipped). Cancelling puts the record back on sale and returns the money (simulated). In all three the two existing buttons are now 12 px apart (user-test point about buttons stuck together). Illustrative data.</p>
+<div class="wrap">
+
+<section class="col"><h2>Option A · A text link under the buttons</h2>
+<p class="why">"Cancel order" is a quiet underlined link below the two buttons. Tapping it opens a confirmation box. Hard to tap by accident, but easy to miss.</p>
+<div class="phone">
+<div class="card" style="margin:0"><b>Ziggy Stardust, 2012 Remaster</b><div style="color:#4a5163">Discos do Rui, Lisboa · €38.90</div>
+<div class="bar"><i class="on"></i><i></i><i></i><i></i></div><div class="steps"><span>Paid</span><span>Shipped</span><span>You confirm</span><span>Seller paid</span></div>
+<p class="why" style="margin-top:10px">Your money is held by Spindle until you confirm the record is as listed.</p>
+<div class="row"><span class="btn p">It arrived, all good</span><span class="btn g">Message the seller</span></div>
+<div style="text-align:center"><span class="rm">Cancel order</span></div></div>
+<div class="dlg"><b>Cancel this order?</b><p class="why">The record goes back on sale and your €38.90 is returned.</p><div class="row"><span class="btn g">Keep order</span><span class="btn p">Cancel order</span></div></div>
+<span class="ill">Simulated payment · Illustrative data</span></div></section>
+
+<section class="col"><h2>Option B · A third button</h2>
+<p class="why">"Cancel order" is a third outline button, stacked under the other two. Easy to find, but three buttons on one card make "It arrived, all good" less obviously the main action.</p>
+<div class="phone">
+<div class="card" style="margin:0"><b>Ziggy Stardust, 2012 Remaster</b><div style="color:#4a5163">Discos do Rui, Lisboa · €38.90</div>
+<div class="bar"><i class="on"></i><i></i><i></i><i></i></div><div class="steps"><span>Paid</span><span>Shipped</span><span>You confirm</span><span>Seller paid</span></div>
+<p class="why" style="margin-top:10px">Your money is held by Spindle until you confirm the record is as listed.</p>
+<div class="col2"><span class="btn p block">It arrived, all good</span><span class="btn g block">Message the seller</span><span class="btn g block">Cancel order</span></div></div>
+<div class="dlg"><b>Cancel this order?</b><p class="why">The record goes back on sale and your €38.90 is returned.</p><div class="row"><span class="btn g">Keep order</span><span class="btn p">Cancel order</span></div></div>
+<span class="ill">Simulated payment · Illustrative data</span></div></section>
+
+<section class="col"><h2>Option C · "Need to change something?" block</h2>
+<p class="why">The main button stays alone. Below it, a quiet block groups the two ways out: "Message the seller" and "Cancel order". The card reads as one clear action plus a help area.</p>
+<div class="phone">
+<div class="card" style="margin:0"><b>Ziggy Stardust, 2012 Remaster</b><div style="color:#4a5163">Discos do Rui, Lisboa · €38.90</div>
+<div class="bar"><i class="on"></i><i></i><i></i><i></i></div><div class="steps"><span>Paid</span><span>Shipped</span><span>You confirm</span><span>Seller paid</span></div>
+<p class="why" style="margin-top:10px">Your money is held by Spindle until you confirm the record is as listed.</p>
+<span class="btn p block" style="margin-top:12px">It arrived, all good</span>
+<div class="undone" style="margin-top:14px"><b>Need to change something?</b><p class="why" style="margin:2px 0 0">Until the seller ships, you can cancel.</p><div class="row"><span class="btn g">Message the seller</span><span class="btn g">Cancel order</span></div></div></div>
+<div class="dlg"><b>Cancel this order?</b><p class="why">The record goes back on sale and your €38.90 is returned.</p><div class="row"><span class="btn g">Keep order</span><span class="btn p">Cancel order</span></div></div>
+<span class="ill">Simulated payment · Illustrative data</span></div></section>
+</div>
+
+<div class="wrap" style="margin-top:-10px"><section class="col" style="width:520px"><h2>After cancelling (the same in A, B and C)</h2>
+<p class="why">The card stays in "Your account → Orders", greyed, so the buyer can see what happened. No buttons.</p>
+<div class="phone"><div class="card" style="margin:0;background:#ece5d6"><b>Ziggy Stardust, 2012 Remaster</b><div style="color:#4a5163">Discos do Rui, Lisboa · €38.90</div>
+<p style="margin-top:10px;font-weight:600">Cancelled · €38.90 returned to you</p></div><span class="ill">Simulated payment · Illustrative data</span></div></section></div>
+
+</body></html>
