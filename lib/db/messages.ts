@@ -36,7 +36,8 @@ export async function messagesForSoldListings(listingIds: string[]): Promise<Rec
   const { data, error } = await db()
     .from("orders")
     .select("listing_id, profiles!orders_buyer_id_fkey (name), order_messages (body)")
-    .in("listing_id", listingIds);
+    .in("listing_id", listingIds)
+    .neq("status", "cancelled"); // story 39: a cancelled order's message never shows on the record sold again
   if (error) throw error;
   const result: Record<string, ReceivedMessage> = {};
   for (const row of data ?? []) {

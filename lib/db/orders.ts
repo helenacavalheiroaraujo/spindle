@@ -149,6 +149,20 @@ export async function confirmReceipt(orderId: string, buyerUserId: string): Prom
   return data.length > 0 ? "confirmed" : "not_waiting";
 }
 
+// Story 39 · "Cancel order": cancel_order in the database sets the order to "cancelled" and puts the record back on
+// sale in one step. "cancelled": done. "not_cancellable": not this buyer's order, or no longer "Paid"; nothing changed.
+// Throws on any other failure (the caller shows the error screen).
+export async function cancelOrder(orderId: string, buyerUserId: string): Promise<"cancelled" | "not_cancellable"> {
+  const profile = await db().from("profiles").select("id").eq("user_id", buyerUserId).maybeSingle();
+  if (profile.error) throw profile.error;
+  if (!profile.data) return "not_cancellable";
+  const { error } = await db().rpc("cancel_order", { p_buyer_id: profile.data.id, p_order_id: orderId });
+  if (error?.message.includes("order_not_cancellable")) return "not_cancellable";
+  if (error?.code === "22P02") return "not_cancellable"; // not a valid order id
+  if (error) throw error;
+  return "cancelled";
+}
+
 // The shipping address of the buyer's most recent order (bug 6: the checkout starts with it).
 // Null when there are no orders.
 export async function getLastShippingAddress(buyerUserId: string): Promise<ShippingAddress | null> {

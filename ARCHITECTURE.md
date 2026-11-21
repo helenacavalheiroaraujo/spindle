@@ -52,7 +52,7 @@ lib/rules/                            ← business rules: pure functions, no dat
   … one file per rule; the SPEC's Traceability table names each one
 lib/db/                               ← all database access (Supabase), one file per entity; server only
 lib/external/                         ← outside services, server only: albumDetails.ts (MusicBrainz, Wikipedia), itunes.ts (previews); answers kept for one day
-supabase/migrations/                  ← tables, 0001–0012 (described in docs/database.md)
+supabase/migrations/                  ← tables, 0001–0013 (described in docs/database.md)
 supabase/seed.sql                     ← illustrative data (albums, versions, listings)
 tests/unit/                           ← Vitest: decision tables for lib/rules
 tests/e2e/                            ← Playwright: critical flows, each at 375 px (phone) and 1280 px (desktop)

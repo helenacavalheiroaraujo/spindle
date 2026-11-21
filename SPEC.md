@@ -74,6 +74,7 @@ In build order. Each story has its own file in `specs/stories/` (bugs are in `sp
 | Story 36 · Arrows on the genre row (desktop) | [`specs/stories/story-36-genre-row-arrows.md`](specs/stories/story-36-genre-row-arrows.md) |
 | Story 37 · The header stays on screen while scrolling (desktop) | [`specs/stories/story-37-fixed-header.md`](specs/stories/story-37-fixed-header.md) |
 | Story 38 · No search bar on the purchase and account pages | [`specs/stories/story-38-no-search-on-purchase-pages.md`](specs/stories/story-38-no-search-on-purchase-pages.md) |
+| Story 39 · Cancel an order while it is "Paid" | [`specs/stories/story-39-cancel-order.md`](specs/stories/story-39-cancel-order.md) |
 
 ---
 
@@ -273,3 +274,8 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 36 | No arrows and no heading on the phone or with 6 or fewer crates | `components/CrateRow.tsx` | `tests/e2e/home.spec.ts` (both sizes) |
 | Bug 34 | The two order buttons ("It arrived, all good", "Message the seller") are 12 px apart | `app/account/OrderCard.tsx` | `tests/e2e/confirmReceipt.spec.ts` |
 | Bug 36 | A line under "Ship to" says where the address comes from: saved address, last order, or the account name; none when empty | `lib/rules/shippingAddress.ts`, `app/checkout/[listingId]/CheckoutForm.tsx`, `app/checkout/[listingId]/page.tsx`, `app/cart/checkout/page.tsx` | `tests/unit/shippingAddress.test.ts`, `tests/e2e/checkout.spec.ts`, `tests/e2e/cart.spec.ts` |
+| 39 | A "Paid" order shows "Cancel order"; "Seller paid" and cancelled orders do not; "Keep order" and Esc change nothing | `lib/rules/orderProgress.ts`, `app/account/OrderCard.tsx` | `tests/unit/orderProgress.test.ts`, `tests/e2e/cancelOrder.spec.ts` |
+| 39 | Cancelling sets the order to "cancelled" and the listing back on sale in one step; the record can be bought again; the card moves to "Cancelled", greyed, no steps, no buttons, "You wrote" stays | `supabase/migrations/0013_cancel_order.sql`, `lib/db/orders.ts`, `app/account/page.tsx`, `app/account/OrderCard.tsx` | `tests/unit/orderProgress.test.ts`, `tests/e2e/cancelOrder.spec.ts` |
+| 39 | An order no longer "Paid" cannot be cancelled: nothing changes, "This order can no longer be cancelled." | `supabase/migrations/0013_cancel_order.sql`, `app/account/actions.ts` | `tests/e2e/cancelOrder.spec.ts` |
+| 39 | "Cancelling…" mask; on failure the shared error with "Try again", order unchanged | `app/account/OrderCard.tsx` | `tests/e2e/cancelOrder.spec.ts` |
+| 39 | 375 px and 1280 px | `app/account/OrderCard.tsx` | `tests/e2e/cancelOrder.spec.ts` (both sizes) |

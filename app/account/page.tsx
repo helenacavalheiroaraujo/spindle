@@ -6,12 +6,12 @@ import { OrderCard } from "./OrderCard";
 
 // Your account, Orders tab (story 31): /account and /account/orders. The profile header and the tabs are in layout.tsx.
 // "On its way" and "Delivered": the buyer's orders, with "It arrived, all good" (story 7 · step 3) and the seller
-// rating (story 18). No orders: "No orders yet" and a link to search (story 31 · Edge cases).
+// rating (story 18), then "Cancelled" (story 39). No orders: "No orders yet" and a link to search (story 31 · Edge cases).
 export default async function OrdersTab() {
   const user = await currentUser();
   if (!user) return null; // signed out: the layout shows the log-in window (story 29)
   const orders = await getOrdersForBuyer(user.id);
-  const { onItsWay, delivered } = splitOrders(orders);
+  const { onItsWay, delivered, cancelled } = splitOrders(orders);
 
   if (orders.length === 0) {
     return (
@@ -41,6 +41,16 @@ export default async function OrdersTab() {
           <h2 className="font-heading text-3xl leading-tight">Delivered</h2>
           <ul className="mt-3 space-y-3">
             {delivered.map((o) => (
+              <OrderCard key={o.id} order={o} />
+            ))}
+          </ul>
+        </section>
+      )}
+      {cancelled.length > 0 && (
+        <section aria-label="Cancelled" className="mt-8">
+          <h2 className="font-heading text-3xl leading-tight">Cancelled</h2>
+          <ul className="mt-3 space-y-3">
+            {cancelled.map((o) => (
               <OrderCard key={o.id} order={o} />
             ))}
           </ul>

@@ -1,5 +1,6 @@
 // What a seller's reviews look like on listings (story 18): covered by tests/unit/sellerRating.test.ts.
 // One place for the average, the count and the words; the screens only show what comes back.
+import type { OrderStatus } from "./orderProgress";
 export const MIN_RATING = 1;
 export const MAX_RATING = 5;
 
@@ -33,6 +34,6 @@ export function canSendReview(chosen: number | null): boolean {
 }
 
 // The question is open for an order that is delivered, not yet rated, and not closed with "Not now".
-export function canRate(status: "paid_waiting_seller" | "seller_paid", reviewed: boolean): boolean {
+export function canRate(status: OrderStatus, reviewed: boolean): boolean {
   return status === "seller_paid" && !reviewed;
 }

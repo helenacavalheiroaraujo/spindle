@@ -43,6 +43,7 @@ describe("the question", () => {
     ["seller_paid", true, false], // already rated: the question does not come back
     ["paid_waiting_seller", false, false], // not delivered yet: cannot rate
     ["paid_waiting_seller", true, false],
+    ["cancelled", false, false], // story 39: cancelled, nothing to rate
   ] as const)("order %s, reviewed %s → can rate %s", (status, reviewed, expected) => {
     expect(canRate(status, reviewed)).toBe(expected);
   });

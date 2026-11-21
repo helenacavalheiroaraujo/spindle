@@ -3,6 +3,14 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-21 — Cancel an order while it is "Paid" (story 39)
+
+- **Decision:** a "Paid" order can be cancelled from "Your account → Orders" (design part 3, option A). Cancelling sets the order to `cancelled` and puts the record back on sale in one database step (`cancel_order`, migration 0013). A listing now has at most one order that is not cancelled, instead of one order in all. Cancelled orders sit in their own group, "Cancelled", under "Delivered"; the cancelled card keeps the buyer's message ("You wrote").
+- **Why:** the owner's choices of 21 Nov 2026 (group 4 of the user-test feedback; 1a and 2a). A cancelled record has to be buyable again, which the old one-order-per-listing rule did not allow.
+- **Consequence:** the seller's "Sold" tab reads the buyer's message only from orders that are not cancelled, so a new buyer never sees an old message. The "Order placed" and single-order pages are unchanged and do not show a cancelled status.
+- **Choices by the AI:** "This order can no longer be cancelled."; the mask "Cancelling…"; the error "We couldn't cancel your order. Check your connection."; Esc closes the box as "Keep order", which gets the focus; the box buttons side by side on the phone; no "Simulated payment" inside the cancelled card, since the page already has that line.
+- **Links:** story 39; stories 7, 18, 31; bug 8; `docs/design/user-test-options.html`; `supabase/migrations/0013_cancel_order.sql`.
+
 ## 2026-11-21 — Arrows on the genre row (desktop); where the checkout address comes from; two items closed
 
 - **Decision:** from 1024 px, with 7 or more genres, the home page shows a heading "Crates by genre" and two arrows at its right end; one click moves the row one crate (story 36, design option A). This replaces the "No arrows" line of story 24; the story 24 file is not changed. On the checkout and the cart checkout, a line under "Ship to" says where the filled-in address comes from (bug 36). Bug 34: the order buttons are 12 px apart. UX finding #37 is closed: at 375 px "Soul and funk" fits on one line since the fine-line crates of 14 Nov.

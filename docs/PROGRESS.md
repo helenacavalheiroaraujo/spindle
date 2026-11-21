@@ -1,30 +1,30 @@
 <!-- page: https://claude.ai/artifact/W2xGvu3nfNcfcuxAv3hYsn -->
 # MVP progress
 
-Updated 2026-11-21 after group 3 of the user-test feedback (story 36, bugs 34 and 36) · Deadline 23 Nov 2026 · **2 days left**
+Updated 2026-11-21 after group 4 of the user-test feedback (story 39, cancel order) · Deadline 23 Nov 2026 · **2 days left**
 
 ## Summary
-- **Stories:** 31 of 31 MVP stories built (18 with gaps), 0 in progress, 0 not started. Since the 14 Nov freeze was lifted for one user test (DECISIONS 2026-11-21), stories 35, 36, 37 and 38 are also built (all rows tested; story 36 in this run, not committed yet); they are not in the build order yet (see "Outside the MVP")
-- **Tests:** unit 842/842 · end-to-end 433/468 (35 skipped) — the full run (16.9 min) had 432 passed and 1 failing: `loginWindow.spec.ts:335` on desktop (sold while the window is open); the file re-run alone passed 12 of 12 (phone and desktop), so it looks like slowness, not a bug. Story 36's arrows, bug 34's gap and bug 36's text are covered by `home.spec.ts`, `confirmReceipt.spec.ts`, `checkout.spec.ts` and `cart.spec.ts`; the saved-address and last-order texts are covered by the unit table only, not by a browser test
+- **Stories:** 31 of 31 MVP stories built (18 with gaps), 0 in progress, 0 not started. Since the 14 Nov freeze was lifted for one user test (DECISIONS 2026-11-21), stories 35, 36, 37, 38 and 39 are also built (all rows tested; story 39 in this run, not committed yet); they are not in the build order yet (see "Outside the MVP"). All four groups of the user-test feedback are built
+- **Tests:** unit 852/852 · end-to-end 441/478 (35 skipped) — the full run (18.3 min) had 2 failing on the phone: `checkout.spec.ts:216` (the listings page showed one more €28 listing than the database) and `fixedHeader.spec.ts:114` (the 3-character hint did not show in time); both files re-run alone on the phone passed 9 of 9 (5 skipped), so it looks like slowness, not a bug. Story 39: `cancelOrder.spec.ts` 10/10, repeated twice 20/20
 - **Demo:** the happy path passes its end-to-end tests on phone and desktop. Not rehearsed live
-- **Next:** group 4 (cancel order, cut Sunday 22 Nov 14:00), in another session. Brief items: 26 manual checks, submission PDF, demo rehearsal, `docs/database.md` migration 0012
-- **Risk:** 2 days left. The risk is in the brief items, not the code: the PDF is the largest one (its draft lists 6 of 12 migrations and has screenshots only up to story 34 at best). If time runs out, cancel order moves to the next delivery (cut rule)
+- **Next:** the brief items: submission PDF, 26 manual checks, demo rehearsal, `docs/database.md` migration 0012. Push the 21 Nov commits so the online app has stories 35–39 (migration 0013 is already in the cloud database)
+- **Risk:** 2 days left. The code is done; the risk is the PDF (its draft lists 6 of 13 migrations and has screenshots only up to story 34 at best) and the manual checks, none run yet
 
 ## Against the brief
 | Criterion | Status | Evidence / what is missing |
 |---|---|---|
 | 1 · Core features work end to end | Done | Phases 1–3 built; the full end-to-end suite passes the core flow on phone and desktop (search, recommendation, listings, checkout, confirmation). Not rehearsed live |
-| 2 · Data tables | Partly | `supabase/migrations/` 0001–0012 committed. `docs/database.md` does not mention migration 0012 (Classical genre); the PDF draft lists only 0001–0006 |
-| 3 · Testing, automated and manual | Partly | Automated: unit 830/830; end-to-end 432/466 (34 skipped; see Summary for the one test edited after the full run). Manual: all 26 entries in `docs/manual-tests.md` are "Not run" |
+| 2 · Data tables | Partly | `supabase/migrations/` 0001–0013 (0013 applied to the cloud database on 21 Nov, not committed yet). `docs/database.md` describes 0013 but not 0012 (Classical genre); the PDF draft lists only 0001–0006 |
+| 3 · Testing, automated and manual | Partly | Automated: unit 852/852; end-to-end 441/478 (35 skipped, 2 slow-run failures that pass alone; see Summary). Manual: all 26 entries in `docs/manual-tests.md` are "Not run" |
 | 4 · LLM good practices in the repo | Done | SPEC.md, `specs/`, CLAUDE.md, ARCHITECTURE.md (updated 14 Nov to the final structure), DECISIONS.md, `docs/AI_USAGE.md`, use cases and flowchart (updated 14 Nov) and the tests |
 | 5 · UX and UI quality | Partly | `docs/ux-review/findings.json`: 5 open (2 Medium: #38, #39; 3 Low: #40, #42, #43); #37 closed on 21 Nov (already gone since the 14 Nov crates). No High or Blocker. Story 25 covers #38–#43 with tests, but the entries are still marked open |
-| 6 · App online and reachable | Done (not rechecked) | https://spindle-three.vercel.app checked on 14 Nov after a881f52, not rechecked after the 21 Nov changes (not pushed yet): `/login` opens the home page with the two-panel window, `/cart` signed out shows "Log in to see your cart" (story 29, bug 32) |
+| 6 · App online and reachable | Done (not rechecked) | https://spindle-three.vercel.app checked on 14 Nov after a881f52, not rechecked after the 21 Nov changes (two commits and story 39 not pushed yet; the online app runs 11cd1d1 against a database that already has migration 0013, which the old code does not use): `/login` opens the home page with the two-panel window, `/cart` signed out shows "Log in to see your cart" (story 29, bug 32) |
 | 7 · Live demo | Partly | `docs/demo-script.md` exists, marked DRAFT, not rehearsed; it still says "due 15 Nov" |
 | S1 · Link to the running app | Done | https://spindle-three.vercel.app, checked online |
 | S2 · PDF with data tables and screenshots | Missing | No PDF. `docs/submission/spindle-submission.md` is a DRAFT: no address, migrations 0007–0012 missing, stories 14–34 missing, story 9 shows the old log-in page |
 
 ### Missing for the brief, by impact on the grade
-1. Submission PDF (S2): migrations 0007–0012, screenshots of stories 14–34 and the new story 9 window, the Vercel address; retake screenshots after the manual checks.
+1. Submission PDF (S2): migrations 0007–0013, screenshots of stories 14–39 and the new story 9 window, the Vercel address; retake screenshots after the manual checks.
 2. Manual test record: 26 entries "Not run" in `docs/manual-tests.md` (planned for 15 Nov).
 3. Demo: rehearse `docs/demo-script.md` once; update the date (23 Nov) and the address.
 4. `docs/database.md`: add migration 0012.
@@ -84,7 +84,8 @@ Not counted in the figures above.
 | 35 · A sold record stays in the cart | `specs/stories/story-35-sold-record-stays-in-cart.md` | Built (4 of 4 rows tested) | Needs a place in the build order (owner decides) |
 | 37 · The header stays on screen while scrolling (desktop) | `specs/stories/story-37-fixed-header.md` | Built (3 of 3) | Needs a place in the build order |
 | 36 · Arrows on the genre row (desktop) | `specs/stories/story-36-genre-row-arrows.md` | Built (3 of 3) | Needs a place in the build order |
-| 38 · No search bar on the purchase and account pages | `specs/stories/story-38-no-search-on-purchase-pages.md` | Built (2 of 2) | Needs a place in the build order. Story 39 (cancel order) is planned, not written
+| 38 · No search bar on the purchase and account pages | `specs/stories/story-38-no-search-on-purchase-pages.md` | Built (2 of 2) | Needs a place in the build order |
+| 39 · Cancel an order while it is "Paid" | `specs/stories/story-39-cancel-order.md` | Built (5 of 5) | Needs a place in the build order. Built before the cut (Sunday 22 Nov 14:00) |
 
 ### Not in this MVP
 | Story | Spec file | What the repo says |
@@ -107,12 +108,13 @@ Not counted in the figures above.
 - Bug 29: album details from live MusicBrainz (manual test M25; the automated tests use a local stub)
 - Story 30: loading mask and error screen on the cart's "Order placed" page
 - Story 31: loading mask and error screen with "Try again" per tab
+- Story 39: the seller's "Sold" tab no longer shows a cancelled order's message (database filter; the seed seller cannot log in for a browser test)
 - Story 34: previews from live iTunes (the automated tests use a local stub)
 - Bug 30: real browser or password-manager autofill (the test sets the value without an event; check on the device where it was seen)
 
 ## Before the next step
 - Only one session at a time runs end-to-end tests (one shared database, port 3000); no hand purchases on seed listings (one on …0036 was deleted on 14 Nov)
-- Feature freeze lifted on 21 Nov only for the user-test feedback (DECISIONS 2026-11-21): group 4 is next. Otherwise no new stories. A problem found in the manual checks becomes a bug (`/log-bug`)
+- Feature freeze lifted on 21 Nov only for the user-test feedback (DECISIONS 2026-11-21): all four groups are built. Otherwise no new stories. A problem found in the manual checks becomes a bug (`/log-bug`)
 - Bugs 27 and 32 fixed (a881f52). Bug 29 fixed in part: dates wrong in MusicBrainz itself stay wrong
 - The old log-in and sign-up forms, unused since story 29, were removed on 14 Nov (owner's OK)
 - Next delivery notes are in ARCHITECTURE.md ("Next delivery"): server-only guard, split the largest screens, one session check

@@ -8,6 +8,7 @@ describe("canMessageSeller", () => {
     ["paid_waiting_seller", true, false], // only one message
     ["seller_paid", false, false], // delivered: the button is gone
     ["seller_paid", true, false],
+    ["cancelled", false, false], // story 39: cancelled, no new message
   ] as const)("%s, already sent %s → %s", (status, sent, expected) => {
     expect(canMessageSeller(status, sent)).toBe(expected);
   });

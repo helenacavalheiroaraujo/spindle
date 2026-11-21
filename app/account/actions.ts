@@ -8,7 +8,7 @@ import { sendOrderMessage } from "@/lib/db/messages";
 import { checkMessage } from "@/lib/rules/orderMessage";
 import { checkAddresses, checkPasswordChange, passwordErrorFor, type AddressesErrors, type PasswordErrors } from "@/lib/rules/accountSettings";
 import type { ShippingAddress } from "@/lib/rules/shippingAddress";
-import { confirmReceipt } from "@/lib/db/orders";
+import { cancelOrder, confirmReceipt } from "@/lib/db/orders";
 import { afterLogOut } from "@/lib/rules/accountTabs";
 import { addReview } from "@/lib/db/reviews";
 import { isValidRating } from "@/lib/rules/sellerRating";
@@ -53,6 +53,25 @@ export async function confirmReceiptAction(orderId: string, _prev: ConfirmState)
     return { status: "failed" };
   }
   revalidatePath("/account", "layout"); // every tab and the counts (story 31)
+  return { status: "done" };
+}
+
+// "Cancel order" (story 39): the order becomes "cancelled" and the record goes back on sale. Only its buyer, only while
+// it is "Paid". "done": cancelled. "refused": no longer "Paid" (confirmed in another tab): the card refreshes to its real
+// status with "This order can no longer be cancelled.". "failed": anything unexpected (the shared error with "Try again").
+export type CancelState = { status: "ready" | "done" | "refused" | "failed" };
+
+export async function cancelOrderAction(orderId: string, _prev: CancelState): Promise<CancelState> {
+  let result: "cancelled" | "not_cancellable";
+  try {
+    const userId = await currentUserId();
+    if (!userId) return { status: "failed" };
+    result = await cancelOrder(orderId, userId);
+  } catch {
+    return { status: "failed" };
+  }
+  if (result === "not_cancellable") return { status: "refused" }; // nothing changed; the card refreshes itself
+  revalidatePath("/", "layout"); // every account tab and the counts, and the record on sale again (search, album, seller)
   return { status: "done" };
 }
 

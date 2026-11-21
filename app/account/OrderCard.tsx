@@ -2,11 +2,21 @@
 // An order on Your account (story 7 · step 3, design p. 8 and p. 10 "On its way"): the four steps, and "It arrived, all good"
 // while the order is waiting. One more step before the money is released (DECISIONS 2026-11-08).
 // Shared loading mask and error screen (CLAUDE.md).
-import { useActionState, useEffect, useState } from "react";
-import { confirmReceiptAction, rateSellerAction, sendMessageAction, type ConfirmState, type MessageState, type RateState } from "./actions";
+import { useActionState, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import {
+  cancelOrderAction,
+  confirmReceiptAction,
+  rateSellerAction,
+  sendMessageAction,
+  type CancelState,
+  type ConfirmState,
+  type MessageState,
+  type RateState,
+} from "./actions";
 import type { OrderView } from "@/lib/db/orders";
 import { euros } from "@/lib/rules/checkoutTotal";
-import { canConfirmReceipt } from "@/lib/rules/orderProgress";
+import { CANCEL_REFUSED, canCancel, canConfirmReceipt, cancelQuestion, cancelledLine } from "@/lib/rules/orderProgress";
 import { OrderProgress } from "@/components/OrderProgress";
 import { canRate, canSendReview, starsText } from "@/lib/rules/sellerRating";
 import { MAX_MESSAGE_LENGTH, canMessageSeller } from "@/lib/rules/orderMessage";
@@ -21,36 +31,65 @@ const initialRate: RateState = { status: "ready" };
 // (story 18). After a reload it is a "Rate this seller" button instead.
 const justConfirmed = new Set<string>();
 
+// Story 39 · use case 3: orders whose cancel was refused in this tab (confirmed elsewhere). The card moves to its real
+// group, so it is drawn again; this keeps "This order can no longer be cancelled." on it once.
+const cancelRefused = new Set<string>();
+
 export function OrderCard({ order }: { order: OrderView }) {
+  if (order.status === "cancelled") return <CancelledCard order={order} />;
+  return <LiveOrderCard order={order} />;
+}
+
+// Story 39 · "After cancelling": greyed, no steps, no buttons; "You wrote" stays when there is a message (owner's choice 2a).
+function CancelledCard({ order }: { order: OrderView }) {
+  return (
+    <li className="rounded-2xl border border-line bg-[#ece5d6] p-4 text-navy/70" aria-label={`${order.albumTitle}, ${order.versionName}`}>
+      <OrderHeading order={order} />
+      <p className="mt-3 font-semibold text-navy">{cancelledLine(order.total)}</p>
+      <OrderMessage order={order} />
+    </li>
+  );
+}
+
+function OrderHeading({ order }: { order: OrderView }) {
+  return (
+    <div className="flex items-center gap-3">
+      {order.cover ? (
+        <img src={order.cover} alt="" className={`h-12 w-12 shrink-0 rounded-lg border border-line object-cover ${order.status === "cancelled" ? "opacity-60 grayscale" : ""}`} />
+      ) : (
+        <span aria-hidden className="h-12 w-12 shrink-0 rounded-lg border border-line bg-white/60" />
+      )}
+      <p className="text-sm">
+        <span className="block font-semibold">
+          {order.albumTitle}, {order.versionName}
+        </span>
+        <span className="text-navy/70">
+          <SellerLine seller={order.seller} city={order.city} /> · {euros(order.total)}
+        </span>
+      </p>
+    </div>
+  );
+}
+
+function LiveOrderCard({ order }: { order: OrderView }) {
   const [state, action, pending] = useActionState(confirmReceiptAction.bind(null, order.id), initial);
   const [asking, setAsking] = useState(false);
   const [dismissed, setDismissed] = useState<ConfirmState | null>(null);
   const waiting = canConfirmReceipt(order.status);
   const [rateOpen, setRateOpen] = useState(() => justConfirmed.has(order.id) && canRate(order.status, order.reviewed));
+  const [refused] = useState(() => cancelRefused.has(order.id));
   useEffect(() => {
     justConfirmed.delete(order.id); // asked once; a reload shows the button
+    cancelRefused.delete(order.id); // shown once
   }, [order.id]);
 
   return (
     <li className="relative rounded-2xl border border-line bg-white/60 p-4" aria-label={`${order.albumTitle}, ${order.versionName}`}>
       {pending && <LoadingMask label="Confirming…" />}
-      <div className="flex items-center gap-3">
-        {order.cover ? (
-          <img src={order.cover} alt="" className="h-12 w-12 shrink-0 rounded-lg border border-line object-cover" />
-        ) : (
-          <span aria-hidden className="h-12 w-12 shrink-0 rounded-lg border border-line bg-white/60" />
-        )}
-        <p className="text-sm">
-          <span className="block font-semibold">
-            {order.albumTitle}, {order.versionName}
-          </span>
-          <span className="text-navy/70">
-            <SellerLine seller={order.seller} city={order.city} /> · {euros(order.total)}
-          </span>
-        </p>
-      </div>
+      <OrderHeading order={order} />
 
       <OrderProgress status={order.status} />
+      {refused && <p role="status" className="mt-3 text-sm font-semibold">{CANCEL_REFUSED}</p>}
 
       {waiting ? (
         <p className="mt-3 text-sm text-navy/70">Your money is held by Spindle until you confirm the record is as listed.</p>
@@ -102,7 +141,73 @@ export function OrderCard({ order }: { order: OrderView }) {
       )}
 
       <OrderMessage order={order} />
+      {canCancel(order.status) && !asking && <CancelOrder order={order} />}
     </li>
+  );
+}
+
+// "Cancel order" (story 39, design part 3, option A): a quiet link under the buttons opens a box with "Keep order" and
+// "Cancel order". Esc is "Keep order". Shared loading mask and error screen (CLAUDE.md).
+function CancelOrder({ order }: { order: OrderView }) {
+  const [state, action, pending] = useActionState(cancelOrderAction.bind(null, order.id), { status: "ready" } as CancelState);
+  const [open, setOpen] = useState(false);
+  const [dismissed, setDismissed] = useState<CancelState | null>(null);
+  const keepRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
+  useEffect(() => {
+    if (open) keepRef.current?.focus();
+  }, [open]);
+  // Refused: the action changed nothing, so the page is refreshed here to show the order's real status.
+  useEffect(() => {
+    if (state.status !== "refused") return;
+    cancelRefused.add(order.id);
+    router.refresh();
+  }, [state, order.id, router]);
+
+  if (state.status === "failed" && dismissed !== state) {
+    return (
+      <div className="mt-3">
+        <ErrorScreen message="We couldn't cancel your order. Check your connection." onRetry={() => setDismissed(state)} />
+      </div>
+    );
+  }
+  if (!open) {
+    return (
+      <div className="mt-1 text-center">
+        <button type="button" onClick={() => setOpen(true)} className="min-h-11 px-2 text-sm font-semibold underline">
+          Cancel order
+        </button>
+      </div>
+    );
+  }
+  return (
+    <form
+      action={action}
+      role="group"
+      aria-labelledby={`cancel-${order.id}`}
+      onKeyDown={(e) => {
+        if (e.key === "Escape" && !pending) setOpen(false);
+      }}
+      className="relative mt-3 rounded-[20px] border border-navy bg-white p-4 shadow-[0_8px_24px_rgba(29,36,51,0.18)]"
+    >
+      {pending && <LoadingMask label="Cancelling…" />}
+      <p id={`cancel-${order.id}`} className="font-heading text-2xl leading-tight">Cancel this order?</p>
+      <p className="mt-1 text-sm text-navy/70">{cancelQuestion(order.total)}</p>
+      <div className="mt-3 flex flex-wrap gap-3">
+        <button
+          ref={keepRef}
+          type="button"
+          onClick={() => setOpen(false)}
+          disabled={pending}
+          className="min-h-12 flex-1 whitespace-nowrap rounded-full border border-navy px-3 font-semibold"
+        >
+          Keep order
+        </button>
+        <button type="submit" disabled={pending} className="min-h-12 flex-1 whitespace-nowrap rounded-full bg-navy px-3 font-semibold text-cream">
+          Cancel order
+        </button>
+      </div>
+    </form>
   );
 }
 
