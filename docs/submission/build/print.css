@@ -1,0 +1,48 @@
+@page { size: A4; margin: 16mm 15mm 18mm 15mm; background: #f4efe6; }
+:root { --cream:#f4efe6; --navy:#1d2433; --sand:#f1e6d0; --line:#e2dacb; --muted:#5d6270; --brown:#5a3a24; }
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html { background: var(--cream); }
+body { margin:0; color: var(--navy); font: 400 9.8pt/1.55 "Inter", system-ui, sans-serif; }
+h1,h2,h3,h4 { font-family: "Barlow Condensed","Arial Narrow",sans-serif; font-weight: 600; color: var(--navy); line-height: 1.1; break-after: avoid; margin: 0; }
+h1 { font-size: 26pt; margin: 0 0 6mm; padding-bottom: 3mm; border-bottom: 2px solid var(--navy); }
+h1.pb { break-before: page; }
+h1.title { font-size: 40pt; border-bottom: 0; margin: 14mm 0 3mm; padding: 0; }
+h2 { font-size: 18pt; margin: 9mm 0 3mm; padding-bottom: 1.5mm; border-bottom: 1px solid var(--line); }
+h3 { font-size: 13.5pt; margin: 7mm 0 2mm; }
+h3 code { font: inherit; font-weight: 600; background: none; padding: 0; }
+h4 { font-size: 11pt; margin: 5mm 0 1.5mm; }
+p { margin: 0 0 2.8mm; max-width: 178mm; }
+em { color: var(--muted); }
+ul { margin: 0 0 3mm; padding-left: 5mm; } li { margin-bottom: 1.2mm; }
+a { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
+code { font: 8.4pt "SF Mono", Menlo, Consolas, monospace; background: var(--sand); padding: 0 1.2mm; border-radius: 1mm; }
+pre { background: var(--sand); border: 1px solid var(--line); border-radius: 2mm; padding: 3mm 4mm; margin: 0 0 4mm; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+table.data { width: 100%; border-collapse: collapse; margin: 0 0 4mm; font-size: 8.7pt; }
+table.data th { text-align: left; font-weight: 600; background: var(--sand); border-top: 1px solid var(--navy); border-bottom: 1px solid var(--navy); padding: 1.7mm 2.4mm; }
+table.data td { border-bottom: 1px solid var(--line); padding: 1.7mm 2.4mm; vertical-align: top; }
+table.data tr { break-inside: avoid; }
+table.data thead { display: table-header-group; }
+.title ~ p { }
+.diagram { break-inside: avoid; border: 1px solid var(--line); border-radius: 2mm; background: #fbf8f2; padding: 3mm; margin: 0 0 4mm; text-align: center; }
+.diagram svg { max-width: 100% !important; height: auto; max-height: 215mm; }
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc li { margin: 0; padding: 1.4mm 0; }
+.toc li.l1 { font-family: "Barlow Condensed",sans-serif; font-weight: 600; font-size: 14pt; margin-top: 4mm; border-bottom: 1px solid var(--line); }
+.toc li.l2 { padding-left: 6mm; font-size: 10pt; }
+.toc a { display: flex; align-items: baseline; text-decoration: none; }
+.toc .d { flex: 1; border-bottom: 1px dotted var(--muted); margin: 0 2mm; transform: translateY(-1mm); }
+.toc li.l1 .d { border-bottom: 0; }
+.tochead { margin-top: 0 !important; }
+.shots { break-inside: avoid; margin: 0 0 5mm; }
+.shots table { width: 100%; border-collapse: separate; border-spacing: 4mm 0; margin: 0 -4mm; table-layout: fixed; }
+.shots td { vertical-align: top; }
+.shots b.cap, .shots b { display: block; font-size: 8.8pt; font-weight: 600; margin-bottom: 1.8mm; }
+.fig { display: inline-block; background: var(--navy); color: var(--cream); font-size: 7.6pt; font-weight: 600; padding: 0 1.8mm; border-radius: 1mm; margin-right: 1.5mm; }
+.shots img { display: block; max-width: 100%; max-height: 118mm; width: auto; height: auto; border: 1px solid var(--line); border-radius: 1.5mm; background: #fff; }
+.mermaid { font-family: Inter, sans-serif; }
+.mermaid .er.entityBox { fill: #f1e6d0 !important; stroke: #1d2433 !important; }
+.mermaid .er.attributeBoxOdd { fill: #fbf8f2 !important; stroke: #e2dacb !important; }
+.mermaid .er.attributeBoxEven { fill: #f4efe6 !important; stroke: #e2dacb !important; }
+.mermaid .er.relationshipLabelBox { fill: #f4efe6 !important; }
+.diagram pre.mermaid { background: none; border: 0; padding: 0; margin: 0; }
