@@ -353,6 +353,7 @@ test("checkout: the address is typed once; Pay creates one order for each record
   await expect(page.locator('input[autocomplete^="cc-"]')).toHaveCount(0);
   await expect(page.getByText(/card number|IBAN|CVV|expiry/i)).toHaveCount(0);
   await expect(page.getByRole("textbox")).toHaveCount(4); // one address, for all the records
+  await expect(page.getByText("Your name comes from your account. Fill in the rest.")).toBeVisible(); // bug 36 (the cart checkout too)
   await screenshot(page, 20, "checkout");
   await fillAddress(page);
   await expect(pay).toBeEnabled();

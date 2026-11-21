@@ -3,7 +3,7 @@ import { getListingCheck } from "@/lib/db/listings";
 import { currentUserId } from "@/lib/db/session";
 import { getLastShippingAddress } from "@/lib/db/orders";
 import { getSavedAddresses } from "@/lib/db/addresses";
-import { startingAddress } from "@/lib/rules/shippingAddress";
+import { addressSource, addressSourceNote, startingAddress } from "@/lib/rules/shippingAddress";
 import { currentProfileId, getProfileName } from "@/lib/db/profiles";
 import { canCheckout, checkoutPath, isNoLongerAvailable, isOwnListing, ownListingPath } from "@/lib/rules/checkoutAccess";
 import { ListingUnavailable } from "@/components/ListingUnavailable";
@@ -104,6 +104,7 @@ export default async function CheckoutPage({
         ]}
         total={amounts.total}
         initialAddress={initialAddress}
+        addressNote={addressSourceNote(addressSource(saved.delivery, last, accountName))}
         login={{ purpose: "buy", record: loginSummary }}
       />
     </main>

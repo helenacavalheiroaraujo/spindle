@@ -1,7 +1,7 @@
 // Decision tables from story 12: crates only for genres with albums (real counts), the genre screen newest
 // first, and the featured album (most active listings among albums that open; newest on a tie; none → null).
 import { describe, expect, it } from "vitest";
-import { albumsInGenre, crates, featuredAlbum, genreFromSlug, isCrateRow, recordsLabel, showingLabel } from "@/lib/rules/home";
+import { albumsInGenre, crateArrows, crates, featuredAlbum, genreFromSlug, isCrateRow, recordsLabel, showingLabel } from "@/lib/rules/home";
 
 // Story 24 decision table: six or fewer crates is a grid; seven or more is a row with a progress line and a label.
 describe("isCrateRow", () => {
@@ -11,6 +11,20 @@ describe("isCrateRow", () => {
     [7, true],
     [8, true],
   ])("%i crates → row? %s", (count, row) => expect(isCrateRow(count)).toBe(row));
+});
+
+// Story 36 decision table: the arrows of the crate row (row of 600 px scrolling up to 400 px).
+describe("crateArrows", () => {
+  it.each([
+    [0, 400, false, true], // start: only next
+    [0.5, 400, false, true], // rounding noise still counts as the start
+    [150, 400, true, true], // middle: both
+    [399.5, 400, true, false], // rounding noise still counts as the end
+    [400, 400, true, false], // end: only previous
+    [0, 0, false, false], // nothing to scroll: neither
+  ])("scrollLeft %f of %f → previous %s, next %s", (left, max, prev, next) =>
+    expect(crateArrows(left, max)).toEqual({ canPrev: prev, canNext: next }),
+  );
 });
 
 describe("showingLabel", () => {

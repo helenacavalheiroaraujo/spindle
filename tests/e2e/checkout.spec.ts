@@ -192,6 +192,8 @@ test("checkout: fee and total before paying; Pay waits for a full address; no ca
   // Bug 27: no saved address and no earlier order, so only the name from sign-up is filled in; the rest stays empty.
   await expect(page.getByLabel("Name")).toHaveValue("Rui Costa");
   await expect(page.getByLabel("Street")).toHaveValue("");
+  // Bug 36: the line under "Ship to" says where the name comes from.
+  await expect(page.getByText("Your name comes from your account. Fill in the rest.")).toBeVisible();
   await shot(page, "bug-27", "name-filled-in");
   await page.getByLabel("Name").fill("Rui Costa");
   await page.getByLabel("Street").fill("Rua do Almada 120");

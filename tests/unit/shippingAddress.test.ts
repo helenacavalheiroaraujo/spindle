@@ -1,7 +1,7 @@
 // Decision table from story 7 · Acceptance criteria: Pay is disabled until name, street, postcode
 // and city are filled in and the postcode has the format 0000-000.
 import { describe, expect, it } from "vitest";
-import { canPay, maskPostcode, postcodeError, POSTCODE_FORMAT } from "@/lib/rules/shippingAddress";
+import { addressSource, addressSourceNote, canPay, maskPostcode, postcodeError, POSTCODE_FORMAT } from "@/lib/rules/shippingAddress";
 
 const FULL = { name: "Ana Silva", street: "Rua das Flores 12", postcode: "4050-262", city: "Porto" };
 
@@ -49,5 +49,22 @@ describe("maskPostcode (bug 7)", () => {
     [" 4050 262 ", "4050-262"], // spaces are ignored (pasted text)
   ] as const)("%j → %j", (typed, masked) => {
     expect(maskPostcode(typed)).toBe(masked);
+  });
+});
+
+// Bug 36 decision table: where the starting address comes from, in the order of startingAddress
+// (saved → last order → name from sign-up → nothing), and the line under "Ship to" for each.
+describe("addressSource and addressSourceNote (bug 36)", () => {
+  const LAST = { ...FULL, city: "Lisboa" };
+  it.each([
+    ["saved and last order", FULL, LAST, "Rui", "saved", "Filled in from the delivery address saved in your account. You can change it for this order."],
+    ["saved only", FULL, null, null, "saved", "Filled in from the delivery address saved in your account. You can change it for this order."],
+    ["last order only", null, LAST, "Rui", "last-order", "Filled in from your last order. You can change it for this order."],
+    ["name only", null, null, "Rui Costa", "account-name", "Your name comes from your account. Fill in the rest."],
+    ["name of only spaces", null, null, "   ", null, null],
+    ["nothing", null, null, null, null, null],
+  ])("%s", (_label, saved, last, name, source, note) => {
+    expect(addressSource(saved, last, name)).toBe(source);
+    expect(addressSourceNote(addressSource(saved, last, name))).toBe(note);
   });
 });

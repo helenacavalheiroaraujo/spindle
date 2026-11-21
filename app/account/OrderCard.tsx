@@ -94,7 +94,7 @@ export function OrderCard({ order }: { order: OrderView }) {
           <button
             type="button"
             onClick={() => setAsking(true)}
-            className="mt-3 min-h-12 rounded-full bg-navy px-5 font-semibold text-cream"
+            className="mr-3 mt-3 min-h-12 rounded-full bg-navy px-5 font-semibold text-cream"
           >
             It arrived, all good
           </button>

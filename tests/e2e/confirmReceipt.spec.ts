@@ -118,6 +118,13 @@ test("Your account shows the order 'On its way': only Paid is done, with 'It arr
   const steps = card.getByRole("list", { name: "Order progress" }).getByRole("listitem");
   await expect(steps).toHaveText(["Paid (done)", "Shipped", "You confirm", "Seller paid"]);
   await expect(card.getByRole("button", { name: "It arrived, all good" })).toBeVisible();
+  // Bug 34: the two buttons are 12 px apart, not touching (or, when they wrap, one line apart).
+  const arrived = await card.getByRole("button", { name: "It arrived, all good" }).boundingBox();
+  const message = await card.getByRole("button", { name: "Message the seller" }).boundingBox();
+  if (!arrived || !message) throw new Error("an order button has no size");
+  const sideBySide = Math.abs(arrived.y - message.y) < 4;
+  const gap = sideBySide ? message.x - (arrived.x + arrived.width) : message.y - (arrived.y + arrived.height);
+  expect(Math.round(gap)).toBeGreaterThanOrEqual(12);
   await expect(page.getByText(/report a problem/i)).toHaveCount(0);
   await expect(page.getByText("Simulated payment · Illustrative data")).toBeVisible();
   await expect(page.getByRole("region", { name: "Delivered" })).toHaveCount(0);

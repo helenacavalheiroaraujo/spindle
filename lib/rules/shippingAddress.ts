@@ -40,3 +40,27 @@ export function startingAddress(
   const name = accountName?.trim() ?? "";
   return name ? { name, street: "", postcode: "", city: "" } : null;
 }
+
+// Bug 36: where the form's starting address comes from, and the line under "Ship to" that says so. The source is
+// decided by the same order as startingAddress; with nothing filled in there is no line.
+export type AddressSource = "saved" | "last-order" | "account-name";
+
+export function addressSource(
+  saved: ShippingAddress | null,
+  lastOrder: ShippingAddress | null,
+  accountName: string | null = null,
+): AddressSource | null {
+  if (saved) return "saved";
+  if (lastOrder) return "last-order";
+  return (accountName?.trim() ?? "") ? "account-name" : null;
+}
+
+const SOURCE_NOTES: Record<AddressSource, string> = {
+  saved: "Filled in from the delivery address saved in your account. You can change it for this order.",
+  "last-order": "Filled in from your last order. You can change it for this order.",
+  "account-name": "Your name comes from your account. Fill in the rest.",
+};
+
+export function addressSourceNote(source: AddressSource | null): string | null {
+  return source ? SOURCE_NOTES[source] : null;
+}

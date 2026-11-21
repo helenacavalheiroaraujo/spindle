@@ -5,7 +5,7 @@ import { SellerLine } from "@/components/SellerLine";
 import { getCart } from "@/lib/db/cart";
 import { getLastShippingAddress } from "@/lib/db/orders";
 import { getSavedAddresses } from "@/lib/db/addresses";
-import { startingAddress } from "@/lib/rules/shippingAddress";
+import { addressSource, addressSourceNote, startingAddress } from "@/lib/rules/shippingAddress";
 import { getProfileName } from "@/lib/db/profiles";
 import { currentUserId } from "@/lib/db/session";
 import { cartSummaryRows, cartTotal } from "@/lib/rules/cartTotal";
@@ -62,6 +62,7 @@ export default async function CartCheckoutPage() {
         rows={cartSummaryRows(amounts)}
         total={amounts.total}
         initialAddress={initialAddress}
+        addressNote={addressSourceNote(addressSource(saved.delivery, last, accountName))}
         login={{ purpose: "cartView" }}
       />
     </main>

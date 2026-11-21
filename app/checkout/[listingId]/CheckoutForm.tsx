@@ -25,6 +25,7 @@ export function CheckoutForm({
   rows,
   total,
   initialAddress,
+  addressNote,
   login,
 }: {
   pay: (prev: PayState, form: FormData) => Promise<PayState>;
@@ -32,6 +33,7 @@ export function CheckoutForm({
   record: React.ReactNode; // version, condition, seller and city (one block for each record)
   rows: [label: string, amount: number][]; // the lines before the total
   total: number;
+  addressNote: string | null; // where the starting address comes from (bug 36)
   initialAddress: ShippingAddress | null; // address of the most recent order (bug 6)
   login: { purpose: LoginPurpose; record?: LoginRecord }; // the log-in window if the session ends before Pay (story 29)
 }) {
@@ -67,6 +69,7 @@ export function CheckoutForm({
         <fieldset className="order-2 rounded-2xl border border-line bg-white/60 p-4">
           <legend className="sr-only">Shipping address</legend>
           <p aria-hidden className="text-sm text-navy/70">Ship to</p>
+          {addressNote && <p className="mt-1 text-sm text-navy/70">{addressNote}</p>}
           <div className="mt-2 grid gap-4 sm:grid-cols-2">
             <Field name="name" label="Name" autoComplete="name" value={address.name} onChange={set("name")} />
             <Field name="street" label="Street" autoComplete="street-address" value={address.street} onChange={set("street")} />

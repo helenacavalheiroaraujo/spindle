@@ -1874,9 +1874,13 @@
       ],
       "proposal": "On the phone make the record in each crate smaller (about half the width) or the name one size smaller, so a two-line name stays clear of it.",
       "question": null,
-      "status": "open",
+      "status": "resolved",
       "first_seen": 7,
-      "resolution": null
+      "resolution": {
+        "iteration": 9,
+        "date": "2026-11-21",
+        "decision": "Already gone: the fine-line crates of 14 Nov 2026 replaced the disc; at 375 px \"Soul and funk\" fits on one line (checked 21 Nov). See DECISIONS 2026-11-21."
+      }
     },
     {
       "id": 38,

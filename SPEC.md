@@ -71,6 +71,7 @@ In build order. Each story has its own file in `specs/stories/` (bugs are in `sp
 | Story 33 · "Pressing check" on every listing | [`specs/stories/story-33-pressing-check.md`](specs/stories/story-33-pressing-check.md) |
 | Story 34 · Listen to the album | [`specs/stories/story-34-album-preview.md`](specs/stories/story-34-album-preview.md) |
 | Story 35 · A sold record stays in the cart | [`specs/stories/story-35-sold-record-stays-in-cart.md`](specs/stories/story-35-sold-record-stays-in-cart.md) |
+| Story 36 · Arrows on the genre row (desktop) | [`specs/stories/story-36-genre-row-arrows.md`](specs/stories/story-36-genre-row-arrows.md) |
 | Story 37 · The header stays on screen while scrolling (desktop) | [`specs/stories/story-37-fixed-header.md`](specs/stories/story-37-fixed-header.md) |
 | Story 38 · No search bar on the purchase and account pages | [`specs/stories/story-38-no-search-on-purchase-pages.md`](specs/stories/story-38-no-search-on-purchase-pages.md) |
 
@@ -267,3 +268,8 @@ Every requirement maps to at least one feature and one automated test (Class 2, 
 | 38 | No search and no strip on the cart, both checkouts and the account tabs; other pages keep them | `lib/rules/headerSearch.ts`, `components/HeaderSearch.tsx` | `tests/unit/headerSearch.test.ts`, `tests/e2e/fixedHeader.spec.ts`, `tests/e2e/checkout.spec.ts`, `tests/e2e/cart.spec.ts` |
 | 38 | 375 px and 1280 px | `components/HeaderSearch.tsx` | `tests/e2e/fixedHeader.spec.ts` (desktop-only checks skip on the phone; the search button check runs on both) |
 | Bug 38 | The Search button is disabled under 3 characters in the header, home and results boxes; Enter does nothing; the hint stays in the box | `components/HeaderSearch.tsx`, `components/SearchBox.tsx`, `lib/rules/albumSearch.ts` | `tests/e2e/fixedHeader.spec.ts`, `tests/e2e/suggestions.spec.ts` |
+| 36 | 7+ crates, 1024 px and wider: heading "Crates by genre" and two arrows; left arrow disabled at the start, right arrow disabled at the end | `components/CrateRow.tsx`, `lib/rules/home.ts` | `tests/unit/home.test.ts`, `tests/e2e/home.spec.ts` |
+| 36 | One click moves the row one crate; the label follows; keyboard; arrows named "Previous genres" / "Next genres" | `components/CrateRow.tsx`, `lib/rules/home.ts` | `tests/unit/home.test.ts`, `tests/e2e/home.spec.ts` |
+| 36 | No arrows and no heading on the phone or with 6 or fewer crates | `components/CrateRow.tsx` | `tests/e2e/home.spec.ts` (both sizes) |
+| Bug 34 | The two order buttons ("It arrived, all good", "Message the seller") are 12 px apart | `app/account/OrderCard.tsx` | `tests/e2e/confirmReceipt.spec.ts` |
+| Bug 36 | A line under "Ship to" says where the address comes from: saved address, last order, or the account name; none when empty | `lib/rules/shippingAddress.ts`, `app/checkout/[listingId]/CheckoutForm.tsx`, `app/checkout/[listingId]/page.tsx`, `app/cart/checkout/page.tsx` | `tests/unit/shippingAddress.test.ts`, `tests/e2e/checkout.spec.ts`, `tests/e2e/cart.spec.ts` |

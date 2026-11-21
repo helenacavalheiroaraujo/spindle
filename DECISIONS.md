@@ -3,6 +3,17 @@
 > Decided **before the first prompt**, as required by the assignment brief (section 5) and Class 2, slide 11.
 > Most recent first.
 
+## 2026-11-21 — Arrows on the genre row (desktop); where the checkout address comes from; two items closed
+
+- **Decision:** from 1024 px, with 7 or more genres, the home page shows a heading "Crates by genre" and two arrows at its right end; one click moves the row one crate (story 36, design option A). This replaces the "No arrows" line of story 24; the story 24 file is not changed. On the checkout and the cart checkout, a line under "Ship to" says where the filled-in address comes from (bug 36). Bug 34: the order buttons are 12 px apart. UX finding #37 is closed: at 375 px "Soul and funk" fits on one line since the fine-line crates of 14 Nov.
+- **Why:** the owner's choices after the user test of 21 Nov 2026. The user saw an empty address in "Your account" and a filled one at checkout, because the checkout also uses the address of the last order and the name given at sign-up.
+- **Choices by the AI:** arrows 44 px; one click moves one crate; the arrows are disabled, not hidden, at the ends; the heading shows only with the arrows (desktop, 7+ genres). Texts under "Ship to":
+  - saved address: "Filled in from the delivery address saved in your account. You can change it for this order."
+  - last order: "Filled in from your last order. You can change it for this order."
+  - name only: "Your name comes from your account. Fill in the rest."
+  - nothing filled in: no line.
+- **Links:** story 36; stories 24, 7, 20; bugs 34, 36; `docs/design/user-test-options.html`; `docs/ux-review/findings.json` #37.
+
 ## 2026-11-21 — Fixed header on desktop; no search on the purchase and account pages
 
 - **Decision:** from 1024 px the header (navy row and search strip) stays on screen while scrolling (story 37). The cart, both checkouts and every account tab show only the navy row, with no search strip (story 38). The Search button is disabled until 3 characters in every search box (bug 38).

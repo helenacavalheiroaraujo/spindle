@@ -1,6 +1,6 @@
 # Bug 36 · The address is empty in "Your account" but filled in at checkout
 
-> Found in a user test · 2026-11-21. Status: open.
+> Found in a user test · 2026-11-21. Status: fixed 21 Nov 2026 — a line under "Ship to" says where the address comes from (DECISIONS 2026-11-21; tests: shippingAddress.test.ts, checkout.spec.ts, cart.spec.ts).
 
 ## Description
 In "Your account" the delivery address is empty, but when I try to buy something the checkout already has it filled in.

@@ -1,11 +1,12 @@
 "use client";
 // The crates of the home page (story 12, story 24). Up to six: a grid. From seven: one row that moves by drag, trackpad,
 // swipe or the keyboard, with a progress line and "Showing 1 to 4 of N genres" under it (option C of
-// docs/design/crate-carousel-options.html). No arrows.
+// docs/design/crate-carousel-options.html). Story 36: on desktop (1024 px and wider) a heading and two arrows too
+// (option A of docs/design/user-test-options.html).
 import Link from "next/link";
 import { useLayoutEffect, useRef, useState } from "react";
 import { Crate } from "@/components/Crate";
-import { isCrateRow, recordsLabel, showingLabel, type Genre } from "@/lib/rules/home";
+import { crateArrows, isCrateRow, recordsLabel, showingLabel, type Genre } from "@/lib/rules/home";
 
 type CrateItem = { genre: Genre; count: number };
 
@@ -34,9 +35,24 @@ export function CrateRow({ crates }: { crates: CrateItem[] }) {
   return <CrateScroller crates={crates} />;
 }
 
+// Round 44 px arrow of the design (option A of docs/design/user-test-options.html); greyed when it cannot move.
+function ArrowButton({ label, disabled, onClick, children }: { label: string; disabled: boolean; onClick: () => void; children: string }) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      disabled={disabled}
+      onClick={onClick}
+      className="flex h-11 w-11 items-center justify-center rounded-full border-[1.5px] border-navy bg-cream text-xl font-semibold text-navy disabled:cursor-default disabled:border-line disabled:text-navy/30"
+    >
+      <span aria-hidden>{children}</span>
+    </button>
+  );
+}
+
 function CrateScroller({ crates }: { crates: CrateItem[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
-  const [view, setView] = useState({ first: 1, last: 1, thumbWidth: 100, thumbLeft: 0 });
+  const [view, setView] = useState({ first: 1, last: 1, thumbWidth: 100, thumbLeft: 0, canPrev: false, canNext: true });
   // Mouse drag (story 24): trackpad and touch swipe scroll natively; a mouse does not, so the row follows the pointer.
   const drag = useRef({ active: false, startX: 0, startLeft: 0, moved: false });
 
@@ -91,7 +107,15 @@ function CrateScroller({ crates }: { crates: CrateItem[] }) {
     const thumbLeft = maxScroll > 0 ? (el.scrollLeft / maxScroll) * (100 - thumbWidth) : 0;
     const first = Math.min(Math.round(el.scrollLeft / step) + 1, total - visible + 1);
     const last = Math.min(total, first + visible - 1);
-    setView({ first, last, thumbWidth, thumbLeft });
+    setView({ first, last, thumbWidth, thumbLeft, ...crateArrows(el.scrollLeft, maxScroll) });
+  }
+
+  // Story 36: an arrow moves the row by one crate (desktop only; the arrows are hidden below 1024 px).
+  function step(direction: 1 | -1) {
+    const el = trackRef.current;
+    if (!el) return;
+    const item = el.firstElementChild as HTMLElement | null;
+    el.scrollBy({ left: direction * ((item?.offsetWidth ?? 0) + GAP_PX), behavior: "smooth" });
   }
 
   useLayoutEffect(() => {
@@ -104,6 +128,17 @@ function CrateScroller({ crates }: { crates: CrateItem[] }) {
 
   return (
     <div>
+      <div className="mb-3 hidden items-center justify-between lg:flex">
+        <h2 className="font-heading text-3xl lg:text-4xl">Crates by genre</h2>
+        <div className="flex gap-2.5">
+          <ArrowButton label="Previous genres" disabled={!view.canPrev} onClick={() => step(-1)}>
+            ‹
+          </ArrowButton>
+          <ArrowButton label="Next genres" disabled={!view.canNext} onClick={() => step(1)}>
+            ›
+          </ArrowButton>
+        </div>
+      </div>
       <div
         ref={trackRef}
         onScroll={measure}

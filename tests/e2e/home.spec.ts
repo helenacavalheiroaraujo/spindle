@@ -6,7 +6,7 @@ import { screenshot } from "./screenshot";
 
 const ZIGGY = "The Rise and Fall of Ziggy Stardust and the Spiders from Mars";
 
-test("home page: title, search, one crate per genre with real counts, and two 'This week' cards", async ({ page }) => {
+test("home page: title, search, one crate per genre with real counts, and two 'This week' cards", async ({ page, isMobile }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Pick a crate. We'll pick the pressing.");
   await expect(page.getByText("No jargon, no homework.")).toBeVisible();
@@ -17,10 +17,18 @@ test("home page: title, search, one crate per genre with real counts, and two 'T
   for (const name of ["Classical, 8 records", "Electronic, 2 records", "Fado, 1 record", "Hip-hop, 1 record", "Jazz, 1 record", "Rock, 19 records", "Soul and funk, 1 record"]) {
     await expect(page.getByRole("link", { name })).toBeVisible();
   }
-  // Story 24: seven crates → a row with a progress line and the label; no arrows. On phone fewer crates fit, so the
+  // Story 24: seven crates → a row with a progress line and the label. On phone fewer crates fit, so the
   // visible range is shorter ("Showing 1 to 2 of 7 genres").
   await expect(page.getByText(/^Showing 1 to \d of 7 genres$/)).toBeVisible();
-  await expect(page.getByRole("region", { name: "Pick a crate" }).getByRole("button")).toHaveCount(0);
+  // Story 36: the arrows and their heading show on desktop only; the phone swipes.
+  const arrows = page.getByRole("region", { name: "Pick a crate" }).getByRole("button");
+  if (isMobile) {
+    await expect(arrows).toHaveCount(0); // hidden, so not even in the accessibility tree
+    await expect(page.getByRole("heading", { name: "Crates by genre" })).toHaveCount(0);
+  } else {
+    await expect(page.getByRole("heading", { name: "Crates by genre" })).toBeVisible();
+    await expect(arrows).toHaveText(["‹", "›"]);
+  }
 
   const week = page.getByRole("region", { name: "This week at the shop" });
   await expect(week.getByText("This weekend")).toBeVisible();
@@ -47,6 +55,34 @@ test("with 7 genres the crate row moves by drag, shows its progress line, and a 
   await expect(page.getByText(/^Showing [2-9] to \d of 7 genres$/)).toBeVisible(); // the label follows the row
   await expect(page).toHaveURL("/");
   await screenshot(page, 24, "crate-row");
+});
+
+// Story 36: on desktop the arrows move the row one crate at a time; the label follows; the ends disable them.
+test("desktop: the arrows move the crate row one crate, the label follows, and the ends disable them (story 36)", async ({ page, isMobile }) => {
+  test.skip(isMobile, "no arrows on the phone");
+  await page.goto("/");
+  const prev = page.getByRole("button", { name: "Previous genres" });
+  const next = page.getByRole("button", { name: "Next genres" });
+  const row = page.getByRole("region", { name: /Crates by genre/ });
+  await expect(page.getByText("Showing 1 to 4 of 7 genres")).toBeVisible();
+  await expect(prev).toBeDisabled();
+  await expect(next).toBeEnabled();
+  await screenshot(page, 36, "arrows-start", { fullPage: false });
+  await next.click();
+  await expect(page.getByText("Showing 2 to 5 of 7 genres")).toBeVisible();
+  await expect(prev).toBeEnabled();
+  await prev.click();
+  await expect(page.getByText("Showing 1 to 4 of 7 genres")).toBeVisible();
+  await expect(prev).toBeDisabled();
+  for (let i = 0; i < 3; i++) {
+    await next.click();
+    await expect(page.getByText(`Showing ${i + 2} to ${i + 5} of 7 genres`)).toBeVisible();
+  }
+  await expect(next).toBeDisabled(); // the end of the row
+  await expect(prev).toBeEnabled();
+  await expect.poll(() => row.evaluate((el) => el.scrollLeft)).toBeGreaterThan(0);
+  await screenshot(page, 36, "arrows-end", { fullPage: false });
+  await expect(page).toHaveURL("/");
 });
 
 test("a crate opens the genre screen: only that genre's albums, newest first, rows as in search", async ({ page }) => {

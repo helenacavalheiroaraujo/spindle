@@ -1,6 +1,6 @@
 # Bug 34 · The order buttons are too close together
 
-> Found in a user test · 2026-11-21. Status: open.
+> Found in a user test · 2026-11-21. Status: fixed 21 Nov 2026 — the two buttons are 12 px apart (test: confirmReceipt.spec.ts, bug 34).
 
 ## Description
 On an order with the status "Paid", the buttons "It arrived, all good" and "Message the seller" touch each other.

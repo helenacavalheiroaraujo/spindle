@@ -31,6 +31,12 @@ export function showingLabel(first: number, last: number, total: number): string
   return `Showing ${first} to ${last} of ${total} genres`;
 }
 
+// Story 36: the two arrows of the crate row. The left one works unless the row is at its start, the right one unless
+// it is at its end (a pixel of tolerance for rounding).
+export function crateArrows(scrollLeft: number, maxScroll: number): { canPrev: boolean; canNext: boolean } {
+  return { canPrev: scrollLeft > 1, canNext: scrollLeft < maxScroll - 1 };
+}
+
 export function genreFromSlug(slug: string): Genre | null {
   return GENRES.find((g) => g.slug === slug) ?? null;
 }
