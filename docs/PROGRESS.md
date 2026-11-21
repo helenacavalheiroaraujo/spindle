@@ -7,7 +7,7 @@ Updated 2026-11-21 on request, after story 39 (cancel order) · Deadline 23 Nov 
 - **Stories:** 31 of 31 MVP stories built (15 with gaps), 0 in progress, 0 not started; user-test stories 35–39 also built, all rows tested; stories 35–39 and the 21 Nov changes are committed and pushed (origin/main at 9cc76ba)
 - **Tests:** Unit 852/852 · end-to-end, full run of 24.5 min: 428 passed, 12 failed (all on the phone, click timeouts late in the run), 3 did not run, 35 skipped. The 3 files involved re-run alone passed 46 of 46. An earlier full run the same day also failed (15, after the dev server dropped) and passed on re-run: no clean full run yet
 - **Demo:** The happy path passes its end-to-end tests on phone and desktop. Not rehearsed live
-- **Next:** Brief items: submission PDF (data tables now cover 0001–0013, screenshots not done), 26 manual checks, demo rehearsal, `docs/database.md` migration 0012
+- **Next:** Brief items: submission PDF (data tables now cover 0001–0013, screenshots not done), 35 manual checks, demo rehearsal, `docs/database.md` migration 0012
 - **Risk:** 2 days left. The code is done; the risk is the PDF and the manual checks, none run. If time runs out, nothing in the code is cut: the PDF and the demo come first
 - **Brief:** 3 of 7 criteria done, 4 partly; S1 done, S2 (PDF) missing
 
@@ -16,7 +16,7 @@ Updated 2026-11-21 on request, after story 39 (cancel order) · Deadline 23 Nov 
 |---|---|---|
 | 1 · Core features end to end | Done | Core flow passes end to end on phone and desktop (search, recommendation, listings, checkout, confirmation). Not rehearsed live |
 | 2 · Data tables | Partly | Migrations 0001–0013 committed; the PDF draft lists all 13; `docs/database.md` does not mention 0012; not checked that 0013 is applied online |
-| 3 · Testing, automated and manual | Partly | Unit 852/852; end-to-end: two full runs today, neither clean (12 and 15 failures, all green when the files are re-run alone); manual: all 26 entries in `docs/manual-tests.md` Not run |
+| 3 · Testing, automated and manual | Partly | Unit 852/852; end-to-end: two full runs today, neither clean (12 and 15 failures, all green when the files are re-run alone); manual: all 35 entries in `docs/manual-tests.md` Not run |
 | 4 · LLM good practices in the repo | Done | SPEC, `specs/`, CLAUDE.md, ARCHITECTURE, DECISIONS, `docs/AI_USAGE.md`, use cases, flowchart, tests |
 | 5 · UX and UI quality | Partly | `docs/ux-review/findings.json`: 5 open (Medium #38, #39; Low #40, #42, #43), no High; story 25 covers them but they are still marked open |
 | 6 · App online and reachable | Done | https://spindle-three.vercel.app opens the home page and the signed-out cart (checked 21 Nov); origin/main has all code (9cc76ba). Not confirmed that the deployed build includes stories 35–39: the layout checks could not run in a hidden browser pane |
@@ -26,7 +26,7 @@ Updated 2026-11-21 on request, after story 39 (cancel order) · Deadline 23 Nov 
 
 ### Missing for the brief, by impact on the grade
 1. Submission PDF (S2): screenshots of stories 14–39 grouped by journey, retake the desktop screenshots of the account, genre and order-placed pages, Vercel address in the draft, then export.
-2. Manual test record: 26 entries "Not run" in `docs/manual-tests.md`.
+2. Manual test record: 35 entries "Not run" in `docs/manual-tests.md`.
 3. Check online that the deployed build has stories 35–39 (code is pushed) and that migration 0013 is applied; push the docs commit.
 4. Demo: rehearse `docs/demo-script.md` once; add the address.
 5. `docs/database.md`: add migration 0012.
@@ -113,6 +113,9 @@ Not counted in the figures above.
 - Story 28: Loading mask and error screen with "Try again" (Shared rules)
 - Story 30: Loading mask and error screen with "Try again"; 375 px and 1280 px
 - Story 31: Loading mask and error screen with "Try again" per tab
+- Bug 29: album details from live MusicBrainz (manual test M25; the automated tests use a local stub)
+- Story 34: previews from live iTunes (the automated tests use a local stub)
+- Bug 30: real browser or password-manager autofill (the test sets the value without an event; check on the device where it was seen)
 
 ## Before the next step
 - Only one session at a time runs end-to-end tests (one shared database, port 3000); the 21 Nov full run broke when the dev server dropped
