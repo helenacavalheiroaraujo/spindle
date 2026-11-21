@@ -64,3 +64,18 @@ test("the version page shows no track list when the version has no tracks", asyn
   await expect(page.getByRole("heading", { level: 1 })).toContainText("2016");
   await expect(page.getByText(/^Track list/)).toHaveCount(0);
 });
+
+// Story 25 · there is visible space between "Buy" and "Add to cart" on a green listing (was manual test M19).
+// On a phone and on desktop the two sit one above the other. "Add to cart" is a 48 px tall tap target, so its box touches
+// the Buy button: the space you see is between the Buy button and the cart icon inside it, at least 8 px.
+test("a green listing: visible space between Buy and Add to cart", async ({ page }) => {
+  await page.goto("/versions/20000000-0000-0000-0000-000000000003/listings"); // 2012 Remaster: green listings
+  const row = page.getByRole("listitem").filter({ has: page.getByRole("button", { name: /^Add to cart/ }) }).first();
+  const buy = row.locator("a, button").filter({ hasText: /^Buy$/ }).first();
+  const add = row.getByRole("button", { name: /^Add to cart/ });
+  await expect(buy).toBeVisible();
+  await expect(add).toBeVisible();
+  const b = (await buy.boundingBox())!;
+  const icon = (await add.locator("svg").first().boundingBox())!;
+  expect(icon.y - (b.y + b.height)).toBeGreaterThanOrEqual(8);
+});

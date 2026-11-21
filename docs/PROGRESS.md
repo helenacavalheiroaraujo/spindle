@@ -4,8 +4,8 @@
 Updated 2026-11-21 on request, after story 39 (cancel order) · Deadline 23 Nov 2026 · **2 days left**
 
 ## Summary
-- **Stories:** 31 of 31 MVP stories built (18 with gaps), 0 in progress, 0 not started; user-test stories 35–39 also built, all rows tested; stories 35–39 and the 21 Nov changes are committed and pushed (origin/main at 9cc76ba)
-- **Tests:** Unit 852/852 · end-to-end 428 passed, 15 failed, 35 skipped in the full run (18.5 min); the 15 failures came after the dev server dropped (9 show ERR_CONNECTION_REFUSED), and the 4 files re-run alone passed 66 of 66 (4 skipped)
+- **Stories:** 31 of 31 MVP stories built (15 with gaps), 0 in progress, 0 not started; user-test stories 35–39 also built, all rows tested; stories 35–39 and the 21 Nov changes are committed and pushed (origin/main at 9cc76ba)
+- **Tests:** Unit 852/852 · end-to-end, full run of 24.5 min: 428 passed, 12 failed (all on the phone, click timeouts late in the run), 3 did not run, 35 skipped. The 3 files involved re-run alone passed 46 of 46. An earlier full run the same day also failed (15, after the dev server dropped) and passed on re-run: no clean full run yet
 - **Demo:** The happy path passes its end-to-end tests on phone and desktop. Not rehearsed live
 - **Next:** Brief items: submission PDF (data tables now cover 0001–0013, screenshots not done), 26 manual checks, demo rehearsal, `docs/database.md` migration 0012
 - **Risk:** 2 days left. The code is done; the risk is the PDF and the manual checks, none run. If time runs out, nothing in the code is cut: the PDF and the demo come first
@@ -16,7 +16,7 @@ Updated 2026-11-21 on request, after story 39 (cancel order) · Deadline 23 Nov 
 |---|---|---|
 | 1 · Core features end to end | Done | Core flow passes end to end on phone and desktop (search, recommendation, listings, checkout, confirmation). Not rehearsed live |
 | 2 · Data tables | Partly | Migrations 0001–0013 committed; the PDF draft lists all 13; `docs/database.md` does not mention 0012; not checked that 0013 is applied online |
-| 3 · Testing, automated and manual | Partly | Unit 852/852; end-to-end: no single clean full run (15 failures after the dev server dropped, all re-run green); manual: all 26 entries in `docs/manual-tests.md` Not run |
+| 3 · Testing, automated and manual | Partly | Unit 852/852; end-to-end: two full runs today, neither clean (12 and 15 failures, all green when the files are re-run alone); manual: all 26 entries in `docs/manual-tests.md` Not run |
 | 4 · LLM good practices in the repo | Done | SPEC, `specs/`, CLAUDE.md, ARCHITECTURE, DECISIONS, `docs/AI_USAGE.md`, use cases, flowchart, tests |
 | 5 · UX and UI quality | Partly | `docs/ux-review/findings.json`: 5 open (Medium #38, #39; Low #40, #42, #43), no High; story 25 covers them but they are still marked open |
 | 6 · App online and reachable | Done | https://spindle-three.vercel.app opens the home page and the signed-out cart (checked 21 Nov); origin/main has all code (9cc76ba). Not confirmed that the deployed build includes stories 35–39: the layout checks could not run in a hidden browser pane |
@@ -49,7 +49,7 @@ Updated 2026-11-21 on request, after story 39 (cancel order) · Deadline 23 Nov 
 | 4 · Compare versions | Built with gaps | 6 of 7 | — |
 | 5 · See verified listings | Built with gaps | 10 of 11 | — |
 | 6 · Fair price | Built | 4 of 4 | — |
-| 7 · Buy with protection | Built with gaps | 9 of 11 | — |
+| 7 · Buy with protection | Built with gaps | 10 of 12 | — |
 | 8 · Sell a record for free | Built with gaps | 13 of 14 | — |
 | 9 · Sign up, log in | Built | 4 of 4 | — |
 | 12 · Home page | Built with gaps | 4 of 5 | — |
@@ -62,13 +62,13 @@ Updated 2026-11-21 on request, after story 39 (cancel order) · Deadline 23 Nov 
 | 20 · Cart | Built | 7 of 7 | — |
 | 21 · Album details without listings | Built with gaps | 3 of 4 | — |
 | 22 · Navy header (desktop) | Built | 2 of 2 | — |
-| 23 · Buying priorities on the account page | Built with gaps | 3 of 4 | — |
+| 23 · Buying priorities on the account page | Built | 4 of 4 | — |
 | 24 · More genres and a crate row | Built | 6 of 6 | — |
-| 25 · Recommendation page polish | Built with gaps | 5 of 6 | UX #38, #39, #40, #42, #43 |
+| 25 · Recommendation page polish | Built | 6 of 6 | UX #38, #39, #40, #42, #43 |
 | 26 · Change buying priorities | Built with gaps | 5 of 6 | — |
 | 27 · Log in without leaving the page | Built with gaps | 5 of 6 | — |
 | 28 · One album page for every album | Built with gaps | 4 of 5 | — |
-| 29 · A larger log-in window, used for every log-in | Built with gaps | 5 of 6 | — |
+| 29 · A larger log-in window, used for every log-in | Built | 6 of 6 | — |
 | 30 · Next steps after "Order placed" | Built with gaps | 4 of 5 | — |
 | 31 · Your account in tabs | Built with gaps | 4 of 5 | — |
 | 32 · Account button and menu | Built | 4 of 4 | — |
@@ -102,18 +102,15 @@ Not counted in the figures above.
 - Story 4: Loading mask and error screen with "Try again" (Shared rules)
 - Story 5: Loading mask and error screen with "Try again" on the listings and listing check screens (Shared rules)
 - Story 7: Loading mask and error screen on the checkout and the confirmation (Shared rules)
-- Story 7: Step 3: "Confirming…" mask and an error screen with "Try again" on the card; Your account loading mask and error screen
+- Story 7: Your account: loading mask and error screen
 - Story 8: Loading mask and error screen with "Try again"; the sell form keeps what was typed (Shared rules)
 - Story 12: Loading mask and error screen with "Try again" (home sections, genre screen)
 - Story 16: Loading mask "Searching…" and an error screen with "Try again" that keeps the typed text (Shared rules)
 - Story 17: Loading mask and error screen with "Try again" (Shared rules)
 - Story 21: "The details of this album are not available right now." when no source answers
-- Story 23: Signed out: the account page redirects to log in (as today)
-- Story 25: Visible space between "Buy" and "Add to cart"
 - Story 26: Checked at 375 px and 1280 px; loading mask "Saving…" and error screen with "Try again"
 - Story 27: Loading mask and error screen with "Try again"; typing kept
 - Story 28: Loading mask and error screen with "Try again" (Shared rules)
-- Story 29: Session ended during a checkout: the window opens on top and the address typed is kept
 - Story 30: Loading mask and error screen with "Try again"; 375 px and 1280 px
 - Story 31: Loading mask and error screen with "Try again" per tab
 

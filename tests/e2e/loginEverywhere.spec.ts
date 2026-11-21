@@ -252,3 +252,43 @@ test("session ended during a checkout: the window opens on top and the address t
   const { data: orders } = await admin().from("orders").select("id").eq("listing_id", toBuy);
   expect(orders).toEqual([]); // nothing was paid
 });
+
+// Story 29 · the same for the cart checkout (was "not tested automatically"): the session ends, Pay opens the window on
+// top, the address typed is kept, and nothing was paid.
+test("session ended during the cart checkout: the window opens on top and the address typed is kept", async ({ page }) => {
+  const inCart = await addListing(43);
+  const { data: profile } = await admin().from("profiles").select("id").eq("user_id", userId).single();
+  const added = await admin().from("cart_items").insert({ buyer_id: profile!.id, listing_id: inCart });
+  expect(added.error).toBeNull();
+  try {
+    await page.goto("/cart/checkout");
+    await logInInWindow(page);
+    await expect(page.locator("dialog[open]")).toHaveCount(0);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Buy with protection");
+    const fields: [string, string][] = [
+      ["Name", "Rita Lopes"],
+      ["Street", "Rua das Flores 10"],
+      ["Postcode", "4050-262"],
+      ["City", "Porto"],
+    ];
+    const pay = page.getByRole("button", { name: /^Pay/ });
+    await waitUntilHydrated(pay);
+    await expect(async () => {
+      for (const [label, value] of fields) await page.getByRole("main").getByLabel(label).fill(value);
+      await expect(pay).toBeEnabled({ timeout: 1000 });
+    }).toPass();
+
+    await page.context().clearCookies(); // the session ends
+    await pay.click();
+    await expect(windowOf(page).getByRole("heading", { name: /^Log in/ })).toBeVisible();
+    await expect(page).toHaveURL("/cart/checkout");
+    await logInInWindow(page);
+    await expect(page.locator("dialog[open]")).toHaveCount(0);
+    await expect(page).toHaveURL("/cart/checkout");
+    for (const [label, value] of fields) await expect(page.getByRole("main").getByLabel(label)).toHaveValue(value);
+    const { data: orders } = await admin().from("orders").select("id").eq("listing_id", inCart);
+    expect(orders).toEqual([]); // nothing was paid
+  } finally {
+    await admin().from("cart_items").delete().eq("listing_id", inCart);
+  }
+});
