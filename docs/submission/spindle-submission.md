@@ -14,7 +14,7 @@ Spindle helps people who are not vinyl specialists to choose the right pressing 
 
 - **Contents:** the data tables of the application (part 1) and screenshots of its screens (part 2).
 - **Data:** 15 tables, created by 13 migrations, and 4 database functions.
-- **Screens:** 88 screens, in five journeys: Explore, Choose, Buy, Your account and Sell.
+- **Screens:** 84 screens, in five journeys: Explore, Choose, Buy, Your account and Sell.
 - **Screen sizes:** phone (375 px) and desktop (1280 px).
 
 ## How to read this document
@@ -393,29 +393,29 @@ How a buyer finds an album: the home page and its crates, the menu, search with 
 
 **Home page: the search box and one crate per genre (story 12)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-12/home-375.png" alt="Home: search and one crate per genre (story 12) (phone)"></td><td valign="top"><img src="../screenshots/story-12/home-1280.png" alt="Home: search and one crate per genre (story 12) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-12/home-375.png" alt="Home page: the search box and one crate per genre (story 12) (phone)"></td><td valign="top"><img src="../screenshots/story-12/home-1280.png" alt="Home page: the search box and one crate per genre (story 12) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Genre screen for Rock (story 12)</b><br><img src="../screenshots/story-12/genre-rock-1280.png" alt="Genre screen: Rock (story 12) (desktop)"></td><td valign="top" width="50%"><b>Genre row on desktop, with arrows to move along it (story 36)</b><br><img src="../screenshots/story-36/arrows-start-1280.png" alt="Genre row on desktop: arrows (story 36) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Genre screen for Rock (story 12)</b><br><img src="../screenshots/story-12/genre-rock-1280.png" alt="Genre screen for Rock (story 12) (desktop)"></td><td valign="top" width="50%"><b>Genre row on desktop, with arrows to move along it (story 36)</b><br><img src="../screenshots/story-36/arrows-start-1280.png" alt="Genre row on desktop, with arrows to move along it (story 36) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>The crate row with seven genres (story 24)</b><br><img src="../screenshots/story-24/crate-row-1280.png" alt="More genres, crate row (story 24) (desktop)"></td><td valign="top" width="50%"><b>Desktop header: navy top row and search strip (story 22)</b><br><img src="../screenshots/story-22/header-search-strip-1280.png" alt="Navy header with the search strip (story 22) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>The crate row with seven genres (story 24)</b><br><img src="../screenshots/story-24/crate-row-1280.png" alt="The crate row with seven genres (story 24) (desktop)"></td><td valign="top" width="50%"><b>Desktop header: navy top row and search strip (story 22)</b><br><img src="../screenshots/story-22/header-search-strip-1280.png" alt="Desktop header: navy top row and search strip (story 22) (desktop)"></td></tr></table>
 
 **Menu opened on the phone, and the desktop header (story 19)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-19/menu-open-375.png" alt="Menu: phone and desktop (story 19) (phone)"></td><td valign="top"><img src="../screenshots/story-19/menu-1280.png" alt="Menu: phone and desktop (story 19) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-19/menu-open-375.png" alt="Menu opened on the phone, and the desktop header (story 19) (phone)"></td><td valign="top"><img src="../screenshots/story-19/menu-1280.png" alt="Menu opened on the phone, and the desktop header (story 19) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Search suggestions that appear while typing (story 16)</b><br><img src="../screenshots/story-16/suggestions-1280.png" alt="Search suggestions as you type (story 16) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Search suggestions that appear while typing (story 16)</b><br><img src="../screenshots/story-16/suggestions-1280.png" alt="Search suggestions that appear while typing (story 16) (desktop)"></td></tr></table>
 
 **Search results for “bowie”: cover, title, artist, year and number of versions, with the tags “No listings” and “Not in the demo” (stories 1, 17)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-17/results-375.png" alt="Search results (&quot;bowie&quot;): cover, title, artist, year, versions, &quot;No listings&quot;, &quot;Not in the demo&quot; (stories 1, 17) (phone)"></td><td valign="top"><img src="../screenshots/story-17/results-1280.png" alt="Search results (&quot;bowie&quot;): cover, title, artist, year, versions, &quot;No listings&quot;, &quot;Not in the demo&quot; (stories 1, 17) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-17/results-375.png" alt="Search results for “bowie”: cover, title, artist, year and number of versions, with the tags “No listings” and “Not in the demo” (stories 1, 17) (phone)"></td><td valign="top"><img src="../screenshots/story-17/results-1280.png" alt="Search results for “bowie”: cover, title, artist, year and number of versions, with the tags “No listings” and “Not in the demo” (stories 1, 17) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>A misspelled search (“zigy”) suggests the full album title (story 17)</b><br><img src="../screenshots/story-17/typo-1280.png" alt="A typo (&quot;zigy&quot;) suggests the full album title (story 17) (desktop)"></td><td valign="top" width="50%"><b>Fewer than three characters: no search is made and a hint is shown (story 1)</b><br><img src="../screenshots/story-1/search-too-short-1280.png" alt="Fewer than 3 characters: no search, a hint, the typed text stays (story 1) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>A misspelled search (“zigy”) suggests the full album title (story 17)</b><br><img src="../screenshots/story-17/typo-1280.png" alt="A misspelled search (“zigy”) suggests the full album title (story 17) (desktop)"></td><td valign="top" width="50%"><b>Fewer than three characters: no search is made and a hint is shown (story 1)</b><br><img src="../screenshots/story-1/search-too-short-1280.png" alt="Fewer than three characters: no search is made and a hint is shown (story 1) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>No match and no close suggestion: “No albums found” (story 1)</b><br><img src="../screenshots/story-1/search-no-albums-found-1280.png" alt="No match and nothing close: &quot;No albums found&quot; (story 1) (desktop)"></td><td valign="top" width="50%"><b>The album page that every album opens first (story 28)</b><br><img src="../screenshots/story-28/album-page-choose-1280.png" alt="One album page for every album (story 28) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>No match and no close suggestion: “No albums found” (story 1)</b><br><img src="../screenshots/story-1/search-no-albums-found-1280.png" alt="No match and no close suggestion: “No albums found” (story 1) (desktop)"></td><td valign="top" width="50%"><b>The album page that every album opens first (story 28)</b><br><img src="../screenshots/story-28/album-page-choose-1280.png" alt="The album page that every album opens first (story 28) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Album page when nobody is selling the album (story 28)</b><br><img src="../screenshots/story-28/album-page-no-listings-1280.png" alt="Album page with no listings (story 28) (desktop)"></td><td valign="top" width="50%"><b>Album page for a signed-in buyer with a saved ranking (story 28)</b><br><img src="../screenshots/story-28/album-page-saved-ranking-1280.png" alt="Album page with a saved ranking (story 28) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Album page for a signed-in buyer with a saved ranking (story 28)</b><br><img src="../screenshots/story-28/album-page-saved-ranking-1280.png" alt="Album page for a signed-in buyer with a saved ranking (story 28) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Album details from MusicBrainz and Wikipedia, for an album without listings (story 21)</b><br><img src="../screenshots/bug-17/album-details-1280.png" alt="Album details without listings (story 21) (desktop)"></td><td valign="top" width="50%"><b>Desktop footer (story 14)</b><br><img src="../screenshots/story-14/footer-1280.png" alt="Desktop footer (story 14) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Album page for an album that nobody is selling, with details from MusicBrainz and Wikipedia (stories 21, 28)</b><br><img src="../screenshots/bug-17/album-details-1280.png" alt="Album page for an album that nobody is selling, with details from MusicBrainz and Wikipedia (stories 21, 28) (desktop)"></td><td valign="top" width="50%"><b>Desktop footer (story 14)</b><br><img src="../screenshots/story-14/footer-1280.png" alt="Desktop footer (story 14) (desktop)"></td></tr></table>
 
 ## 2.2 Choose
 
@@ -423,81 +423,77 @@ How a buyer picks the right pressing: what matters to them, one recommendation, 
 
 **Buying priorities with nothing chosen yet: “See recommendation” is disabled (story 2)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-2/priorities-empty-375.png" alt="Priorities screen, nothing picked: &quot;See recommendation&quot; is disabled (story 2) (phone)"></td><td valign="top"><img src="../screenshots/story-2/priorities-empty-1280.png" alt="Priorities screen, nothing picked: &quot;See recommendation&quot; is disabled (story 2) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-2/priorities-empty-375.png" alt="Buying priorities with nothing chosen yet: “See recommendation” is disabled (story 2) (phone)"></td><td valign="top"><img src="../screenshots/story-2/priorities-empty-1280.png" alt="Buying priorities with nothing chosen yet: “See recommendation” is disabled (story 2) (desktop)"></td></tr></table>
 
 **Priorities chosen: Price ranked 1 and Sound ranked 2; the number on each option shows its rank (story 2)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-2/priorities-ranked-375.png" alt="1. Price, 2. Sound picked; ranks shown as numbers (story 2) (phone)"></td><td valign="top"><img src="../screenshots/story-2/priorities-ranked-1280.png" alt="1. Price, 2. Sound picked; ranks shown as numbers (story 2) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-2/priorities-ranked-375.png" alt="Priorities chosen: Price ranked 1 and Sound ranked 2; the number on each option shows its rank (story 2) (phone)"></td><td valign="top"><img src="../screenshots/story-2/priorities-ranked-1280.png" alt="Priorities chosen: Price ranked 1 and Sound ranked 2; the number on each option shows its rank (story 2) (desktop)"></td></tr></table>
 
 **With a saved ranking the priorities screen is skipped, and the recommendation shows “Based on: … · Change” (story 2)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-2/saved-ranking-skips-screen-375.png" alt="Signed in with a saved ranking: the screen is skipped and the recommendation shows &quot;Based on: … · Change&quot; (story 2) (phone)"></td><td valign="top"><img src="../screenshots/story-2/saved-ranking-skips-screen-1280.png" alt="Signed in with a saved ranking: the screen is skipped and the recommendation shows &quot;Based on: … · Change&quot; (story 2) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-2/saved-ranking-skips-screen-375.png" alt="With a saved ranking the priorities screen is skipped, and the recommendation shows “Based on: … · Change” (story 2) (phone)"></td><td valign="top"><img src="../screenshots/story-2/saved-ranking-skips-screen-1280.png" alt="With a saved ranking the priorities screen is skipped, and the recommendation shows “Based on: … · Change” (story 2) (desktop)"></td></tr></table>
 
 **Recommendation for Price, then Sound: the 2012 Remaster; on desktop the listings sit beside it (story 3)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-3/recommendation-price-sound-375.png" alt="1. Price, 2. Sound → 2012 Remaster (on desktop the listings sit beside it) (story 3) (phone)"></td><td valign="top"><img src="../screenshots/story-3/recommendation-price-sound-1280.png" alt="1. Price, 2. Sound → 2012 Remaster (on desktop the listings sit beside it) (story 3) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-3/recommendation-price-sound-375.png" alt="Recommendation for Price, then Sound: the 2012 Remaster; on desktop the listings sit beside it (story 3) (phone)"></td><td valign="top"><img src="../screenshots/story-3/recommendation-price-sound-1280.png" alt="Recommendation for Price, then Sound: the 2012 Remaster; on desktop the listings sit beside it (story 3) (desktop)"></td></tr></table>
 
 **Recommendation for Price only: the 1990 Reissue, with no alternative (story 3)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-3/recommendation-price-only-375.png" alt="1. Price only → 1990 Reissue, no alternative (story 3) (phone)"></td><td valign="top"><img src="../screenshots/story-3/recommendation-price-only-1280.png" alt="1. Price only → 1990 Reissue, no alternative (story 3) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-3/recommendation-price-only-375.png" alt="Recommendation for Price only: the 1990 Reissue, with no alternative (story 3) (phone)"></td><td valign="top"><img src="../screenshots/story-3/recommendation-price-only-1280.png" alt="Recommendation for Price only: the 1990 Reissue, with no alternative (story 3) (desktop)"></td></tr></table>
 
 **Recommendation for Original, then Sound, with a note that the ideal version is unavailable (story 3)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-3/recommendation-ideal-unavailable-375.png" alt="1. Original, 2. Sound → &quot;ideal but unavailable&quot; note (story 3) (phone)"></td><td valign="top"><img src="../screenshots/story-3/recommendation-ideal-unavailable-1280.png" alt="1. Original, 2. Sound → &quot;ideal but unavailable&quot; note (story 3) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-3/recommendation-ideal-unavailable-375.png" alt="Recommendation for Original, then Sound, with a note that the ideal version is unavailable (story 3) (phone)"></td><td valign="top"><img src="../screenshots/story-3/recommendation-ideal-unavailable-1280.png" alt="Recommendation for Original, then Sound, with a note that the ideal version is unavailable (story 3) (desktop)"></td></tr></table>
 
 **A glossary term and the track list opened, with bonus tracks marked (story 3)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-3/recommendation-glossary-tracks-375.png" alt="Glossary term and track list open, with &quot;Bonus&quot; tracks (story 3) (phone)"></td><td valign="top"><img src="../screenshots/story-3/recommendation-glossary-tracks-1280.png" alt="Glossary term and track list open, with &quot;Bonus&quot; tracks (story 3) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-3/recommendation-glossary-tracks-375.png" alt="A glossary term and the track list opened, with bonus tracks marked (story 3) (phone)"></td><td valign="top"><img src="../screenshots/story-3/recommendation-glossary-tracks-1280.png" alt="A glossary term and the track list opened, with bonus tracks marked (story 3) (desktop)"></td></tr></table>
 
 *Note: in this screenshot the explanation of the glossary term appears in heading style next to “Reissue”. This is a known visual flaw and not the intended design.*
 
 **Comparison of pressings: the recommended version first, and the buyer’s priorities first (story 4)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-4/compare-375.png" alt="Compare pressings: recommended version first, buyer&#x27;s priorities first (story 4) (phone)"></td><td valign="top"><img src="../screenshots/story-4/compare-1280.png" alt="Compare pressings: recommended version first, buyer&#x27;s priorities first (story 4) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-4/compare-375.png" alt="Comparison of pressings: the recommended version first, and the buyer’s priorities first (story 4) (phone)"></td><td valign="top"><img src="../screenshots/story-4/compare-1280.png" alt="Comparison of pressings: the recommended version first, and the buyer’s priorities first (story 4) (desktop)"></td></tr></table>
 
 **Version page: how it fits the priorities, its tracks and its listings (story 4)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-4/version-375.png" alt="Version page: fit with the priorities, tracks, listings (story 4) (phone)"></td><td valign="top"><img src="../screenshots/story-4/version-1280.png" alt="Version page: fit with the priorities, tracks, listings (story 4) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-4/version-375.png" alt="Version page: how it fits the priorities, its tracks and its listings (story 4) (phone)"></td><td valign="top"><img src="../screenshots/story-4/version-1280.png" alt="Version page: how it fits the priorities, its tracks and its listings (story 4) (desktop)"></td></tr></table>
 
-**Verified listings: green “Match”, yellow “Check” and, last, red “No match” (story 5)**
+**Verified listings: green “Match”, yellow “Check” and, last, red “No match”; each listing shows its “Pressing check” line and a price label (stories 5, 6, 33)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-5/listings-375.png" alt="Verified listings: green Match, yellow Check, red No match last (story 5) (phone)"></td><td valign="top"><img src="../screenshots/story-5/listings-1280.png" alt="Verified listings: green Match, yellow Check, red No match last (story 5) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-5/listings-375.png" alt="Verified listings: green “Match”, yellow “Check” and, last, red “No match”; each listing shows its “Pressing check” line and a price label (stories 5, 6, 33) (phone)"></td><td valign="top"><img src="../screenshots/story-5/listings-1280.png" alt="Verified listings: green “Match”, yellow “Check” and, last, red “No match”; each listing shows its “Pressing check” line and a price label (stories 5, 6, 33) (desktop)"></td></tr></table>
 
 **A yellow listing: “Before you buy” states what is uncertain (story 5)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-5/listings-yellow-warning-375.png" alt="Yellow: &quot;Before you buy&quot; shows what is uncertain (story 5) (phone)"></td><td valign="top"><img src="../screenshots/story-5/listings-yellow-warning-1280.png" alt="Yellow: &quot;Before you buy&quot; shows what is uncertain (story 5) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-5/listings-yellow-warning-375.png" alt="A yellow listing: “Before you buy” states what is uncertain (story 5) (phone)"></td><td valign="top"><img src="../screenshots/story-5/listings-yellow-warning-1280.png" alt="A yellow listing: “Before you buy” states what is uncertain (story 5) (desktop)"></td></tr></table>
 
 **Listing check, green: three matching checks, photos and the condition in plain words (story 5)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-5/listing-check-green-375.png" alt="Listing check, green: three checks match, photos, condition in plain words (story 5) (phone)"></td><td valign="top"><img src="../screenshots/story-5/listing-check-green-1280.png" alt="Listing check, green: three checks match, photos, condition in plain words (story 5) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-5/listing-check-green-375.png" alt="Listing check, green: three matching checks, photos and the condition in plain words (story 5) (phone)"></td><td valign="top"><img src="../screenshots/story-5/listing-check-green-1280.png" alt="Listing check, green: three matching checks, photos and the condition in plain words (story 5) (desktop)"></td></tr></table>
 
 **Listing check, yellow: no matrix photo was provided (story 5)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-5/listing-check-yellow-no-matrix-375.png" alt="Listing check, yellow: no matrix photo (story 5) (phone)"></td><td valign="top"><img src="../screenshots/story-5/listing-check-yellow-no-matrix-1280.png" alt="Listing check, yellow: no matrix photo (story 5) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-5/listing-check-yellow-no-matrix-375.png" alt="Listing check, yellow: no matrix photo was provided (story 5) (phone)"></td><td valign="top"><img src="../screenshots/story-5/listing-check-yellow-no-matrix-1280.png" alt="Listing check, yellow: no matrix photo was provided (story 5) (desktop)"></td></tr></table>
 
 **Listing check, red: a different pressing, moved to its own version and not for sale here (story 5)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-5/listing-check-red-375.png" alt="Listing check, red: different pressing, moved, not for sale here (story 5) (phone)"></td><td valign="top"><img src="../screenshots/story-5/listing-check-red-1280.png" alt="Listing check, red: different pressing, moved, not for sale here (story 5) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-5/listing-check-red-375.png" alt="Listing check, red: a different pressing, moved to its own version and not for sale here (story 5) (phone)"></td><td valign="top"><img src="../screenshots/story-5/listing-check-red-1280.png" alt="Listing check, red: a different pressing, moved to its own version and not for sale here (story 5) (desktop)"></td></tr></table>
 
 **The same listing under its real version: yellow, “Moved here · check pending” (story 5)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-5/listing-check-moved-here-375.png" alt="The same listing under its real version: yellow, &quot;Moved here · check pending&quot; (story 5) (phone)"></td><td valign="top"><img src="../screenshots/story-5/listing-check-moved-here-1280.png" alt="The same listing under its real version: yellow, &quot;Moved here · check pending&quot; (story 5) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-5/listing-check-moved-here-375.png" alt="The same listing under its real version: yellow, “Moved here · check pending” (story 5) (phone)"></td><td valign="top"><img src="../screenshots/story-5/listing-check-moved-here-1280.png" alt="The same listing under its real version: yellow, “Moved here · check pending” (story 5) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>The “Pressing check” line on every listing (story 33)</b><br><img src="../screenshots/story-33/listings-1280.png" alt="&quot;Pressing check&quot; on every listing (story 33) (desktop)"></td><td valign="top" width="50%"><b>The recommendation with its listings and their checks beside it (story 33)</b><br><img src="../screenshots/story-33/recommendation-beside-1280.png" alt="Recommendation with the listings and their checks beside it (story 33) (desktop)"></td></tr></table>
-
-**Price labels (“Typical”, “Above typical”) and the typical range below the list (story 6)**
-
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-6/fair-price-labels-375.png" alt="Price labels (Typical / Above typical) and the typical range below the list (story 6) (phone)"></td><td valign="top"><img src="../screenshots/story-6/fair-price-labels-1280.png" alt="Price labels (Typical / Above typical) and the typical range below the list (story 6) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>The recommendation with its listings and their checks beside it (story 33)</b><br><img src="../screenshots/story-33/recommendation-beside-1280.png" alt="The recommendation with its listings and their checks beside it (story 33) (desktop)"></td></tr></table>
 
 **A red listing is compared with the price range of its real version (story 6)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-6/fair-price-red-actual-range-375.png" alt="A red listing is compared with the range of its real version (story 6) (phone)"></td><td valign="top"><img src="../screenshots/story-6/fair-price-red-actual-range-1280.png" alt="A red listing is compared with the range of its real version (story 6) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-6/fair-price-red-actual-range-375.png" alt="A red listing is compared with the price range of its real version (story 6) (phone)"></td><td valign="top"><img src="../screenshots/story-6/fair-price-red-actual-range-1280.png" alt="A red listing is compared with the price range of its real version (story 6) (desktop)"></td></tr></table>
 
 **A version without a price range: no label and no range line (story 6)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-6/fair-price-no-range-375.png" alt="A version without a range: no label and no range line (story 6) (phone)"></td><td valign="top"><img src="../screenshots/story-6/fair-price-no-range-1280.png" alt="A version without a range: no label and no range line (story 6) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-6/fair-price-no-range-375.png" alt="A version without a price range: no label and no range line (story 6) (phone)"></td><td valign="top"><img src="../screenshots/story-6/fair-price-no-range-1280.png" alt="A version without a price range: no label and no range line (story 6) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Listening to the album: a preview playing (story 34)</b><br><img src="../screenshots/story-34/album-preview-playing-1280.png" alt="Listen to the album: a preview playing (story 34) (desktop)"></td><td valign="top" width="50%"><b>Previews unavailable: the page works without them (story 34)</b><br><img src="../screenshots/story-34/album-preview-itunes-down-1280.png" alt="Previews unavailable: the page still works (story 34) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Listening to the album: a preview playing (story 34)</b><br><img src="../screenshots/story-34/album-preview-playing-1280.png" alt="Listening to the album: a preview playing (story 34) (desktop)"></td><td valign="top" width="50%"><b>Previews unavailable: the page works without them (story 34)</b><br><img src="../screenshots/story-34/album-preview-itunes-down-1280.png" alt="Previews unavailable: the page works without them (story 34) (desktop)"></td></tr></table>
 
 ## 2.3 Buy
 
@@ -505,33 +501,33 @@ How a buyer pays: logging in, the cart, the checkout, the order confirmation, an
 
 **Logging in without leaving the page: the window opens over the record the buyer chose (stories 27, 29)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-27/log-in-to-buy-375.png" alt="Log in without leaving the page: the window opens on top of the record (stories 27, 29) (phone)"></td><td valign="top"><img src="../screenshots/story-27/log-in-to-buy-1280.png" alt="Log in without leaving the page: the window opens on top of the record (stories 27, 29) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-27/log-in-to-buy-375.png" alt="Logging in without leaving the page: the window opens over the record the buyer chose (stories 27, 29) (phone)"></td><td valign="top"><img src="../screenshots/story-27/log-in-to-buy-1280.png" alt="Logging in without leaving the page: the window opens over the record the buyer chose (stories 27, 29) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Creating an account in the same window (story 27)</b><br><img src="../screenshots/story-27/create-account-1280.png" alt="Create an account in the window (story 27) (desktop)"></td><td valign="top" width="50%"><b>Message shown after a wrong password (story 27)</b><br><img src="../screenshots/story-27/wrong-password-1280.png" alt="Wrong password message (story 27) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Creating an account in the same window (story 27)</b><br><img src="../screenshots/story-27/create-account-1280.png" alt="Creating an account in the same window (story 27) (desktop)"></td><td valign="top" width="50%"><b>Message shown after a wrong password (story 27)</b><br><img src="../screenshots/story-27/wrong-password-1280.png" alt="Message shown after a wrong password (story 27) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>The larger window, with the record beside the form (story 29)</b><br><img src="../screenshots/story-29/window-record-1280.png" alt="The larger window with the record beside it (story 29) (desktop)"></td><td valign="top" width="50%"><b>Session ended during a checkout: the window opens over the page and what was typed is kept (story 29)</b><br><img src="../screenshots/story-29/session-ended-1280.png" alt="Session ended during a checkout: the window opens on top, what was typed is kept (story 29) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Session ended during a checkout: the window opens over the page and what was typed is kept (story 29)</b><br><img src="../screenshots/story-29/session-ended-1280.png" alt="Session ended during a checkout: the window opens over the page and what was typed is kept (story 29) (desktop)"></td></tr></table>
 
 **The cart (story 20)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-20/cart-375.png" alt="Cart (story 20) (phone)"></td><td valign="top"><img src="../screenshots/story-20/cart-1280.png" alt="Cart (story 20) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-20/cart-375.png" alt="The cart (story 20) (phone)"></td><td valign="top"><img src="../screenshots/story-20/cart-1280.png" alt="The cart (story 20) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Adding a record to the cart (story 20)</b><br><img src="../screenshots/story-20/add-to-cart-1280.png" alt="Add to cart (story 20) (desktop)"></td><td valign="top" width="50%"><b>Confirmation that the record was added (story 20)</b><br><img src="../screenshots/story-20/added-1280.png" alt="Added to the cart (story 20) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Adding a record to the cart (story 20)</b><br><img src="../screenshots/story-20/add-to-cart-1280.png" alt="Adding a record to the cart (story 20) (desktop)"></td><td valign="top" width="50%"><b>Confirmation that the record was added (story 20)</b><br><img src="../screenshots/story-20/added-1280.png" alt="Confirmation that the record was added (story 20) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>The empty cart (story 20)</b><br><img src="../screenshots/story-20/cart-empty-1280.png" alt="Empty cart (story 20) (desktop)"></td><td valign="top" width="50%"><b>A record sold to someone else stays in the cart, greyed and tagged “Sold” (story 35)</b><br><img src="../screenshots/story-35/cart-sold-1280.png" alt="A sold record stays in the cart, greyed &quot;Sold&quot; (story 35) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>The empty cart (story 20)</b><br><img src="../screenshots/story-20/cart-empty-1280.png" alt="The empty cart (story 20) (desktop)"></td><td valign="top" width="50%"><b>A record sold to someone else stays in the cart, greyed and tagged “Sold” (story 35)</b><br><img src="../screenshots/story-35/cart-sold-1280.png" alt="A record sold to someone else stays in the cart, greyed and tagged “Sold” (story 35) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Checkout reached with “Buy now” while the cart holds other records: a notice says that only this record is bought (bug 37)</b><br><img src="../screenshots/story-35/buy-now-notice-1280.png" alt="Buy now on a sold record: a notice (story 35) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Checkout reached with “Buy now” while the cart holds other records: a notice says that only this record is bought (bug 37)</b><br><img src="../screenshots/story-35/buy-now-notice-1280.png" alt="Checkout reached with “Buy now” while the cart holds other records: a notice says that only this record is bought (bug 37) (desktop)"></td></tr></table>
 
 **Checkout: delivery address, MB WAY, price breakdown and protection steps, with no card fields (story 7)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-7/checkout-375.png" alt="Checkout: address, MB WAY, price breakdown, protection steps, no card fields (story 7) (phone)"></td><td valign="top"><img src="../screenshots/story-7/checkout-1280.png" alt="Checkout: address, MB WAY, price breakdown, protection steps, no card fields (story 7) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-7/checkout-375.png" alt="Checkout: delivery address, MB WAY, price breakdown and protection steps, with no card fields (story 7) (phone)"></td><td valign="top"><img src="../screenshots/story-7/checkout-1280.png" alt="Checkout: delivery address, MB WAY, price breakdown and protection steps, with no card fields (story 7) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Checkout for the whole cart (story 20)</b><br><img src="../screenshots/story-20/checkout-1280.png" alt="Checkout for the whole cart (story 20) (desktop)"></td><td valign="top" width="50%"><b>Record sold while the buyer is on the checkout: “Sorry, this record was just sold” (story 7)</b><br><img src="../screenshots/story-7/checkout-just-sold-1280.png" alt="Sold while on the checkout: &quot;Sorry, this record was just sold&quot; (story 7) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Checkout for the whole cart (story 20)</b><br><img src="../screenshots/story-20/checkout-1280.png" alt="Checkout for the whole cart (story 20) (desktop)"></td><td valign="top" width="50%"><b>Record sold while the buyer is on the checkout: “Sorry, this record was just sold” (story 7)</b><br><img src="../screenshots/story-7/checkout-just-sold-1280.png" alt="Record sold while the buyer is on the checkout: “Sorry, this record was just sold” (story 7) (desktop)"></td></tr></table>
 
 **Order confirmation, with its next steps (stories 7, 30)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-7/order-confirmation-375.png" alt="Order confirmation (story 7) (phone)"></td><td valign="top"><img src="../screenshots/story-7/order-confirmation-1280.png" alt="Order confirmation (story 7) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-7/order-confirmation-375.png" alt="Order confirmation, with its next steps (stories 7, 30) (phone)"></td><td valign="top"><img src="../screenshots/story-7/order-confirmation-1280.png" alt="Order confirmation, with its next steps (stories 7, 30) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Next steps after “Order placed”, for a whole cart (story 30)</b><br><img src="../screenshots/story-30/order-placed-cart-1280.png" alt="Next steps after &quot;Order placed&quot;: whole cart (story 30) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Next steps after “Order placed”, for a whole cart (story 30)</b><br><img src="../screenshots/story-30/order-placed-cart-1280.png" alt="Next steps after “Order placed”, for a whole cart (story 30) (desktop)"></td></tr></table>
 
 <table><tr><td valign="top" width="50%"><b>A sold or removed listing opened from a link (story 7)</b><br><img src="../screenshots/story-7/no-longer-available-1280.png" alt="A sold or removed listing opened from a link (story 7) (desktop)"></td></tr></table>
 
@@ -539,27 +535,27 @@ How a buyer pays: logging in, the cart, the checkout, the order confirmation, an
 
 What a buyer manages after buying: orders and their steps, cancelling, messages to the seller, ratings, saved addresses and buying priorities.
 
-<table><tr><td valign="top" width="50%"><b>The account button in the header (story 32)</b><br><img src="../screenshots/story-32/pill-1280.png" alt="Account button (story 32) (desktop)"></td><td valign="top" width="50%"><b>The account menu opened from the button (story 32)</b><br><img src="../screenshots/story-32/menu-open-1280.png" alt="Account menu (story 32) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>The account button in the header (story 32)</b><br><img src="../screenshots/story-32/pill-1280.png" alt="The account button in the header (story 32) (desktop)"></td><td valign="top" width="50%"><b>The account menu opened from the button (story 32)</b><br><img src="../screenshots/story-32/menu-open-1280.png" alt="The account menu opened from the button (story 32) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Your account, Account details tab (story 31)</b><br><img src="../screenshots/story-31/details-1280.png" alt="Account tab: details (story 31) (desktop)"></td><td valign="top" width="50%"><b>Your account, Orders tab with no orders (story 31)</b><br><img src="../screenshots/story-31/orders-empty-1280.png" alt="Account tab: orders, empty (story 31) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Your account, Account details tab (story 31)</b><br><img src="../screenshots/story-31/details-1280.png" alt="Your account, Account details tab (story 31) (desktop)"></td><td valign="top" width="50%"><b>Your account, Orders tab with no orders (story 31)</b><br><img src="../screenshots/story-31/orders-empty-1280.png" alt="Your account, Orders tab with no orders (story 31) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Your account, For sale tab (story 31)</b><br><img src="../screenshots/story-31/for-sale-1280.png" alt="Account tab: for sale (story 31) (desktop)"></td><td valign="top" width="50%"><b>Orders created by paying the cart, in Your account (story 20)</b><br><img src="../screenshots/story-20/orders-in-account-1280.png" alt="Orders in your account (story 20) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Your account, For sale tab (story 31)</b><br><img src="../screenshots/story-31/for-sale-1280.png" alt="Your account, For sale tab (story 31) (desktop)"></td><td valign="top" width="50%"><b>Orders created by paying the cart, in Your account (story 20)</b><br><img src="../screenshots/story-20/orders-in-account-1280.png" alt="Orders created by paying the cart, in Your account (story 20) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Saved addresses before anything is saved (bug 9)</b><br><img src="../screenshots/bug-9/account-empty-1280.png" alt="Saved addresses, empty (bug 9) (desktop)"></td><td valign="top" width="50%"><b>A delivery address and a different billing address (bug 9)</b><br><img src="../screenshots/bug-9/account-billing-different-1280.png" alt="Delivery and a different billing address (bug 9) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Saved addresses before anything is saved (bug 9)</b><br><img src="../screenshots/bug-9/account-empty-1280.png" alt="Saved addresses before anything is saved (bug 9) (desktop)"></td><td valign="top" width="50%"><b>A delivery address and a different billing address (bug 9)</b><br><img src="../screenshots/bug-9/account-billing-different-1280.png" alt="A delivery address and a different billing address (bug 9) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>An order in progress, under “On its way” (story 7)</b><br><img src="../screenshots/story-7/account-on-its-way-1280.png" alt="Order &quot;On its way&quot; (story 7) (desktop)"></td><td valign="top" width="50%"><b>Confirmation before the money is released to the seller (story 7)</b><br><img src="../screenshots/story-7/account-are-you-sure-1280.png" alt="&quot;Are you sure? The money is released to the seller.&quot; (story 7) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>An order in progress, under “On its way” (story 7)</b><br><img src="../screenshots/story-7/account-on-its-way-1280.png" alt="An order in progress, under “On its way” (story 7) (desktop)"></td><td valign="top" width="50%"><b>Confirmation before the money is released to the seller (story 7)</b><br><img src="../screenshots/story-7/account-are-you-sure-1280.png" alt="Confirmation before the money is released to the seller (story 7) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>A delivered order, with the seller paid (story 7)</b><br><img src="../screenshots/story-7/account-delivered-1280.png" alt="Order delivered, seller paid (story 7) (desktop)"></td><td valign="top" width="50%"><b>Writing a message to the seller from the order (bug 8)</b><br><img src="../screenshots/bug-8/message-form-1280.png" alt="Message to the seller from the order (bug 8) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>A delivered order, with the seller paid; the rating question opens by itself (stories 7, 18)</b><br><img src="../screenshots/story-7/account-delivered-1280.png" alt="A delivered order, with the seller paid; the rating question opens by itself (stories 7, 18) (desktop)"></td><td valign="top" width="50%"><b>Writing a message to the seller from the order (bug 8)</b><br><img src="../screenshots/bug-8/message-form-1280.png" alt="Writing a message to the seller from the order (bug 8) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>The sent message stays on the order under “You wrote” (bug 8)</b><br><img src="../screenshots/bug-8/you-wrote-1280.png" alt="&quot;You wrote&quot;: the message stays on the order (bug 8) (desktop)"></td><td valign="top" width="50%"><b>A “Paid” order offers “Cancel order” (story 39)</b><br><img src="../screenshots/story-39/paid-with-link-1280.png" alt="A &quot;Paid&quot; order shows &quot;Cancel order&quot; (story 39) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>The sent message stays on the order under “You wrote” (bug 8)</b><br><img src="../screenshots/bug-8/you-wrote-1280.png" alt="The sent message stays on the order under “You wrote” (bug 8) (desktop)"></td><td valign="top" width="50%"><b>A “Paid” order offers “Cancel order” (story 39)</b><br><img src="../screenshots/story-39/paid-with-link-1280.png" alt="A “Paid” order offers “Cancel order” (story 39) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Cancelling asks for confirmation first (story 39)</b><br><img src="../screenshots/story-39/cancel-box-1280.png" alt="Cancel asks first (story 39) (desktop)"></td><td valign="top" width="50%"><b>A cancelled order: greyed out, with no steps (story 39)</b><br><img src="../screenshots/story-39/cancelled-1280.png" alt="Cancelled order: greyed, no steps (story 39) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Cancelling asks for confirmation first (story 39)</b><br><img src="../screenshots/story-39/cancel-box-1280.png" alt="Cancelling asks for confirmation first (story 39) (desktop)"></td><td valign="top" width="50%"><b>A cancelled order: greyed out, with no steps (story 39)</b><br><img src="../screenshots/story-39/cancelled-1280.png" alt="A cancelled order: greyed out, with no steps (story 39) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Rating the seller after confirming receipt (story 18)</b><br><img src="../screenshots/story-18/rate-this-seller-1280.png" alt="Rate the seller (story 18) (desktop)"></td><td valign="top" width="50%"><b>The rating question (story 18)</b><br><img src="../screenshots/story-18/rate-question-1280.png" alt="Rating question (story 18) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Rating the seller after confirming receipt (story 18)</b><br><img src="../screenshots/story-18/rate-this-seller-1280.png" alt="Rating the seller after confirming receipt (story 18) (desktop)"></td><td valign="top" width="50%"><b>The rating question (story 18)</b><br><img src="../screenshots/story-18/rate-question-1280.png" alt="The rating question (story 18) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>The seller’s rating shown on the listings (story 18)</b><br><img src="../screenshots/story-18/listings-rating-1280.png" alt="Seller rating on the listings (story 18) (desktop)"></td><td valign="top" width="50%"><b>Buying priorities shown in Your account (story 23)</b><br><img src="../screenshots/story-23/account-priorities-1280.png" alt="Buying priorities on the account page (story 23) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>The seller’s rating shown on the listings (story 18)</b><br><img src="../screenshots/story-18/listings-rating-1280.png" alt="The seller’s rating shown on the listings (story 18) (desktop)"></td><td valign="top" width="50%"><b>Buying priorities shown in Your account (story 23)</b><br><img src="../screenshots/story-23/account-priorities-1280.png" alt="Buying priorities shown in Your account (story 23) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Changing the buying priorities (story 26)</b><br><img src="../screenshots/story-26/change-priorities-1280.png" alt="Change buying priorities (story 26) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Changing the buying priorities (story 26)</b><br><img src="../screenshots/story-26/change-priorities-1280.png" alt="Changing the buying priorities (story 26) (desktop)"></td></tr></table>
 
 ## 2.5 Sell
 
@@ -567,31 +563,31 @@ How a seller lists and manages a record: finding the album, the sell form, My li
 
 **Selling: finding the album (story 8)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-8/sell-search-375.png" alt="Sell: find the album (story 8) (phone)"></td><td valign="top"><img src="../screenshots/story-8/sell-search-1280.png" alt="Sell: find the album (story 8) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-8/sell-search-375.png" alt="Selling: finding the album (story 8) (phone)"></td><td valign="top"><img src="../screenshots/story-8/sell-search-1280.png" alt="Selling: finding the album (story 8) (desktop)"></td></tr></table>
 
 **Selling: choosing the version (story 8)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-8/sell-versions-375.png" alt="Sell: pick the version (story 8) (phone)"></td><td valign="top"><img src="../screenshots/story-8/sell-versions-1280.png" alt="Sell: pick the version (story 8) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-8/sell-versions-375.png" alt="Selling: choosing the version (story 8) (phone)"></td><td valign="top"><img src="../screenshots/story-8/sell-versions-1280.png" alt="Selling: choosing the version (story 8) (desktop)"></td></tr></table>
 
 **The sell form for a first listing, where the city is required (story 8)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-8/sell-form-first-time-375.png" alt="Sell form, first time (city required) (story 8) (phone)"></td><td valign="top"><img src="../screenshots/story-8/sell-form-first-time-1280.png" alt="Sell form, first time (city required) (story 8) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-8/sell-form-first-time-375.png" alt="The sell form for a first listing, where the city is required (story 8) (phone)"></td><td valign="top"><img src="../screenshots/story-8/sell-form-first-time-1280.png" alt="The sell form for a first listing, where the city is required (story 8) (desktop)"></td></tr></table>
 
 **The sell form: the typical price range, price label and “No commission” appear while typing (story 8)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-8/sell-form-375.png" alt="Sell form: typical range, price label and &quot;No commission&quot; while typing (story 8) (phone)"></td><td valign="top"><img src="../screenshots/story-8/sell-form-1280.png" alt="Sell form: typical range, price label and &quot;No commission&quot; while typing (story 8) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-8/sell-form-375.png" alt="The sell form: the typical price range, price label and “No commission” appear while typing (story 8) (phone)"></td><td valign="top"><img src="../screenshots/story-8/sell-form-1280.png" alt="The sell form: the typical price range, price label and “No commission” appear while typing (story 8) (desktop)"></td></tr></table>
 
 **A published listing, shown yellow and marked “Your listing” (story 8)**
 
-<table><tr><td valign="top" width="25%"><img src="../screenshots/story-8/sell-listed-375.png" alt="Listing published, yellow, &quot;Your listing&quot; (story 8) (phone)"></td><td valign="top"><img src="../screenshots/story-8/sell-listed-1280.png" alt="Listing published, yellow, &quot;Your listing&quot; (story 8) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="25%"><img src="../screenshots/story-8/sell-listed-375.png" alt="A published listing, shown yellow and marked “Your listing” (story 8) (phone)"></td><td valign="top"><img src="../screenshots/story-8/sell-listed-1280.png" alt="A published listing, shown yellow and marked “Your listing” (story 8) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>The “Selling from” field: the city and shop for this listing (bug 11)</b><br><img src="../screenshots/bug-11/sell-form-selling-from-1280.png" alt="Selling from: city and shop for this listing (bug 11) (desktop)"></td><td valign="top" width="50%"><b>Two listings of one seller from two different places (bug 11)</b><br><img src="../screenshots/bug-11/two-listings-two-places-1280.png" alt="Two listings, two places (bug 11) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>The “Selling from” field: the city and shop for this listing (bug 11)</b><br><img src="../screenshots/bug-11/sell-form-selling-from-1280.png" alt="The “Selling from” field: the city and shop for this listing (bug 11) (desktop)"></td><td valign="top" width="50%"><b>Two listings of one seller from two different places (bug 11)</b><br><img src="../screenshots/bug-11/two-listings-two-places-1280.png" alt="Two listings of one seller from two different places (bug 11) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>My listings (story 8)</b><br><img src="../screenshots/story-8/my-listings-1280.png" alt="My listings (story 8) (desktop)"></td><td valign="top" width="50%"><b>Editing the price of a listing (story 8)</b><br><img src="../screenshots/story-8/my-listings-edit-1280.png" alt="Edit the price (story 8) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Your account, For sale tab: My listings (story 8)</b><br><img src="../screenshots/story-8/my-listings-1280.png" alt="Your account, For sale tab: My listings (story 8) (desktop)"></td><td valign="top" width="50%"><b>My listings: editing the price of a listing (story 8)</b><br><img src="../screenshots/story-8/my-listings-edit-1280.png" alt="My listings: editing the price of a listing (story 8) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Removing a listing asks for confirmation first (story 8)</b><br><img src="../screenshots/story-8/my-listings-confirm-1280.png" alt="Remove asks first (story 8) (desktop)"></td><td valign="top" width="50%"><b>Confirmation “Listing removed”, with an Undo button (story 8)</b><br><img src="../screenshots/story-8/my-listings-removed-1280.png" alt="&quot;Listing removed&quot; with Undo (story 8) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>My listings: removing a listing asks for confirmation first (story 8)</b><br><img src="../screenshots/story-8/my-listings-confirm-1280.png" alt="My listings: removing a listing asks for confirmation first (story 8) (desktop)"></td><td valign="top" width="50%"><b>My listings: confirmation “Listing removed”, with an Undo button (story 8)</b><br><img src="../screenshots/story-8/my-listings-removed-1280.png" alt="My listings: confirmation “Listing removed”, with an Undo button (story 8) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>The Sold tab, with the buyer’s message under the record (bug 8)</b><br><img src="../screenshots/bug-8/seller-sold-tab-1280.png" alt="Sold tab: the buyer&#x27;s message under the record (bug 8) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Your account, For sale tab, Sold list: the buyer’s message under the record (bug 8)</b><br><img src="../screenshots/bug-8/seller-sold-tab-1280.png" alt="Your account, For sale tab, Sold list: the buyer’s message under the record (bug 8) (desktop)"></td></tr></table>
 
 ## Notes on the screens
 

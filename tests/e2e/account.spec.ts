@@ -89,13 +89,14 @@ test("addresses: a different billing address is saved; ticking 'same as delivery
   await addressesForm(page).getByRole("button", { name: "Save addresses" }).click();
   await expect(addressesForm(page).getByRole("alert")).toHaveText("Fill in name, street, postcode and city.");
   await fill(page, "billing", WORK);
-  await screenshot(page, "bug-9", "account-billing-different");
   await addressesForm(page).getByRole("button", { name: "Save addresses" }).click();
   await expect(addressesForm(page).getByText("Addresses saved.")).toBeVisible();
   await page.reload();
   await expect(addressesForm(page).getByLabel("Billing is the same as delivery")).not.toBeChecked();
   await expect(page.locator("#billing-street")).toHaveValue("Avenida da Boavista 1");
   await expect(page.locator("#delivery-street")).toHaveValue("Rua das Flores 12"); // delivery untouched
+  await page.evaluate(() => window.scrollTo(0, 0)); // the fixed header would sit in the middle of a full-page picture
+  await screenshot(page, "bug-9", "account-billing-different"); // taken after the reload: the saved state, box unticked
   await addressesForm(page).getByLabel("Billing is the same as delivery").check();
   await addressesForm(page).getByRole("button", { name: "Save addresses" }).click();
   await expect(addressesForm(page).getByText("Addresses saved.")).toBeVisible();

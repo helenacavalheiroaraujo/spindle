@@ -79,6 +79,7 @@ test("tapping a version opens its page with its priorities and listings; browser
     await expect(page.getByRole("complementary", { name: "Verified listings for this version" })).toBeVisible();
     await expect(page.getByRole("link", { name: "See verified listings" })).toBeHidden();
   }
+  await expect(page.getByRole("status").filter({ hasText: "Checking listings…" })).toHaveCount(0); // desktop: the listings have loaded
   await screenshot(page, 4, "version");
 
   await expect(page.getByRole("link", { name: "Back to compare" })).toHaveCount(0); // no back link (DECISIONS 2026-11-11)

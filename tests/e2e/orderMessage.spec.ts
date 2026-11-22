@@ -154,5 +154,7 @@ test("the seller reads the message under the sold record on the Sold tab", async
   await expect(sold).toHaveCount(2);
   await expect(sold.filter({ hasText: "Message from Rui Costa" })).toHaveCount(1); // only the order with a message
   await expect(sold.filter({ hasText: `“${MESSAGE}”` })).toHaveCount(1);
+  await page.mouse.move(0, 0); // no hover on the selected pill
+  await page.evaluate(() => window.scrollTo(0, 0));
   await screenshot(page, "bug-8", "seller-sold-tab");
 });
