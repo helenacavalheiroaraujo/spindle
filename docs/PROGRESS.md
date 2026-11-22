@@ -7,15 +7,15 @@ Updated 2026-11-21 on request, after story 39 (cancel order) · Deadline 23 Nov 
 - **Stories:** 31 of 31 MVP stories built (15 with gaps), 0 in progress, 0 not started; user-test stories 35–39 also built, all rows tested; stories 35–39 and the 21 Nov changes are committed and pushed
 - **Tests:** Unit 852/852 · end-to-end 447 passed, 0 failed, 35 skipped (a full run of 17.8 min, the first clean one: earlier runs on 21 Nov had failures from a slow or dropped dev server, all green on re-run)
 - **Demo:** The happy path passes its end-to-end tests on phone and desktop. Not rehearsed live
-- **Next:** Brief items: review and attach the submission PDF (47 pages, built, kept out of git), 35 manual checks, `docs/database.md` migration 0012
+- **Next:** Brief items: review and attach the submission PDF (47 pages, built, kept out of git) and run the 35 manual checks
 - **Risk:** 2 days left. The code is done and the tests are green; the risk is the 35 manual checks (none run) and the review of the PDF. Nothing in the code is cut
-- **Brief:** 3 of 7 criteria done, 4 partly; S1 done, S2 (PDF) partly
+- **Brief:** 4 of 7 criteria done, 3 partly; S1 done, S2 (PDF) partly
 
 ## Against the brief
 | Criterion | Status | Evidence / what is missing |
 |---|---|---|
 | 1 · Core features end to end | Done | Core flow passes end to end on phone and desktop (search, recommendation, listings, checkout, confirmation). Not rehearsed live |
-| 2 · Data tables | Partly | Migrations 0001–0013 committed; 0013 confirmed in Supabase on 21 Nov (function cancel_order and value cancelled found); the PDF describes all 15 tables; `docs/database.md` does not mention 0012 |
+| 2 · Data tables | Done | Migrations 0001–0013 committed; 0013 confirmed in Supabase on 21 Nov (function cancel_order and value cancelled found); `docs/database.md` and the PDF describe all 15 tables and 13 migrations |
 | 3 · Testing, automated and manual | Partly | Unit 852/852; end-to-end 447 passed, 35 skipped, none failed (clean full run, 21 Nov); manual: all 35 entries in `docs/manual-tests.md` Not run |
 | 4 · LLM good practices in the repo | Done | SPEC, `specs/`, CLAUDE.md, ARCHITECTURE, DECISIONS, `docs/AI_USAGE.md`, use cases, flowchart, tests |
 | 5 · UX and UI quality | Partly | `docs/ux-review/findings.json`: 5 open (Medium #38, #39; Low #40, #42, #43), no High; story 25 covers them but they are still marked open |
@@ -27,9 +27,8 @@ Updated 2026-11-21 on request, after story 39 (cancel order) · Deadline 23 Nov 
 ### Missing for the brief, by impact on the grade
 1. Submission PDF (S2): review it page by page, then attach it on Moodle with the link (the file is docs/submission/spindle-submission.pdf; rebuild with python3 docs/submission/build/build.py).
 2. Manual test record: 35 entries "Not run" in `docs/manual-tests.md` (run them in the manual test plan page).
-3. `docs/database.md`: add migration 0012.
-4. Demo script: add the address and remove DRAFT (not part of the submission).
-5. Close the UX entries that story 25 already fixed (#38–#43), if the owner agrees.
+3. Demo script: add the address and remove DRAFT (not part of the submission).
+4. Close the UX entries that story 25 already fixed (#38–#43), if the owner agrees.
 
 ## Build phases
 | Phase | Stories | Status |

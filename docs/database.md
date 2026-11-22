@@ -16,7 +16,7 @@
 | 1 · Core | `albums`, `versions`, `tracks`, `glossary_terms`, `reason_texts`, `condition_grades`, `profiles`, `listings`, `check_results` | 1, 2, 3, 5, 6 | `0001_core.sql` |
 | 2 · Purchase | `user_preferences` (story 2), `orders` (story 7); story 9 adds no table, the app fills `profiles.user_id` at sign-up | 9, 7, 2 | `0002_orders.sql` (story 7), `0004_preferences.sql` (story 2) |
 | 3 · Seller | no new tables: a price limit on `listings`, the `listing-photos` bucket in Storage and `create_listing(...)` | 8 | `0003_sell.sql` |
-| 4 · If time allows | `reviews` (story 18); `albums.genre` (story 12); `cart_items` (story 20); `addresses` (bug 9); `order_messages` (bug 8); no new table for story 39: a `cancelled` status and `cancel_order(...)` | 18, 12, 20, 39 | `0007_reviews.sql` (story 18), `0006_genres.sql` (story 12), `0009_cart.sql` (story 20), `0010_addresses.sql` (bug 9), `0011_order_messages.sql` (bug 8), `0013_cancel_order.sql` (story 39) |
+| 4 · If time allows | `reviews` (story 18); `albums.genre` (story 12, with Classical added in story 24); `cart_items` (story 20); `addresses` (bug 9); `order_messages` (bug 8); no new table for story 39: a `cancelled` status and `cancel_order(...)` | 18, 12, 20, 24, 39 | `0007_reviews.sql` (story 18), `0006_genres.sql` (story 12), `0012_classical_genre.sql` (story 24), `0009_cart.sql` (story 20), `0010_addresses.sql` (bug 9), `0011_order_messages.sql` (bug 8), `0013_cancel_order.sql` (story 39) |
 
 ## Diagram (phase 1)
 
@@ -42,7 +42,7 @@ glossary_terms (stand-alone)
 | `artist` | text | searched (story 1) |
 | `release_year` | integer | search results: newest first |
 | `cover_url` | text | link to the real cover on Cover Art Archive (`coverartarchive.org/release-group/<id>/front-500`); required |
-| `genre` | text, optional: Rock, Jazz, Soul and funk, Fado, Electronic or Hip-hop | crates on the home page (story 12, `0006_genres.sql`); empty → in no crate |
+| `genre` | text, optional: Rock, Jazz, Soul and funk, Fado, Electronic, Hip-hop or Classical | crates on the home page (story 12, `0006_genres.sql`; Classical added in story 24, `0012_classical_genre.sql`); empty → in no crate |
 
 ### `versions`
 One pressing of an album (e.g. "2012 Remaster").
