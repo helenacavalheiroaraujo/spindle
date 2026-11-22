@@ -4,33 +4,32 @@
 Updated 2026-11-21 on request, after story 39 (cancel order) · Deadline 23 Nov 2026 · **2 days left**
 
 ## Summary
-- **Stories:** 31 of 31 MVP stories built (15 with gaps), 0 in progress, 0 not started; user-test stories 35–39 also built, all rows tested; stories 35–39 and the 21 Nov changes are committed and pushed (origin/main at 9cc76ba)
-- **Tests:** Unit 852/852 · end-to-end, full run of 24.5 min: 428 passed, 12 failed (all on the phone, click timeouts late in the run), 3 did not run, 35 skipped. The 3 files involved re-run alone passed 46 of 46. An earlier full run the same day also failed (15, after the dev server dropped) and passed on re-run: no clean full run yet
+- **Stories:** 31 of 31 MVP stories built (15 with gaps), 0 in progress, 0 not started; user-test stories 35–39 also built, all rows tested; stories 35–39 and the 21 Nov changes are committed and pushed
+- **Tests:** Unit 852/852 · end-to-end 447 passed, 0 failed, 35 skipped (a full run of 17.8 min, the first clean one: earlier runs on 21 Nov had failures from a slow or dropped dev server, all green on re-run)
 - **Demo:** The happy path passes its end-to-end tests on phone and desktop. Not rehearsed live
-- **Next:** Brief items: submission PDF (data tables now cover 0001–0013, screenshots not done), 35 manual checks, demo rehearsal, `docs/database.md` migration 0012
-- **Risk:** 2 days left. The code is done; the risk is the PDF and the manual checks, none run. If time runs out, nothing in the code is cut: the PDF and the demo come first
-- **Brief:** 3 of 7 criteria done, 4 partly; S1 done, S2 (PDF) missing
+- **Next:** Brief items: review and attach the submission PDF (47 pages, built, kept out of git), 35 manual checks, `docs/database.md` migration 0012
+- **Risk:** 2 days left. The code is done and the tests are green; the risk is the 35 manual checks (none run) and the review of the PDF. Nothing in the code is cut
+- **Brief:** 3 of 7 criteria done, 4 partly; S1 done, S2 (PDF) partly
 
 ## Against the brief
 | Criterion | Status | Evidence / what is missing |
 |---|---|---|
 | 1 · Core features end to end | Done | Core flow passes end to end on phone and desktop (search, recommendation, listings, checkout, confirmation). Not rehearsed live |
-| 2 · Data tables | Partly | Migrations 0001–0013 committed; the PDF draft lists all 13; `docs/database.md` does not mention 0012; not checked that 0013 is applied online |
-| 3 · Testing, automated and manual | Partly | Unit 852/852; end-to-end: two full runs today, neither clean (12 and 15 failures, all green when the files are re-run alone); manual: all 35 entries in `docs/manual-tests.md` Not run |
+| 2 · Data tables | Partly | Migrations 0001–0013 committed; 0013 confirmed in Supabase on 21 Nov (function cancel_order and value cancelled found); the PDF describes all 15 tables; `docs/database.md` does not mention 0012 |
+| 3 · Testing, automated and manual | Partly | Unit 852/852; end-to-end 447 passed, 35 skipped, none failed (clean full run, 21 Nov); manual: all 35 entries in `docs/manual-tests.md` Not run |
 | 4 · LLM good practices in the repo | Done | SPEC, `specs/`, CLAUDE.md, ARCHITECTURE, DECISIONS, `docs/AI_USAGE.md`, use cases, flowchart, tests |
 | 5 · UX and UI quality | Partly | `docs/ux-review/findings.json`: 5 open (Medium #38, #39; Low #40, #42, #43), no High; story 25 covers them but they are still marked open |
-| 6 · App online and reachable | Done | https://spindle-three.vercel.app opens the home page and the signed-out cart (checked 21 Nov); origin/main has all code (9cc76ba). Not confirmed that the deployed build includes stories 35–39: the layout checks could not run in a hidden browser pane |
+| 6 · App online and reachable | Done | https://spindle-three.vercel.app answers 200 (21 Nov) and serves the code of stories 36 and 39; all commits are pushed |
 | 7 · Live demo | Partly | `docs/demo-script.md` is a DRAFT, not rehearsed, no address |
 | S1 · Link to the app | Done | https://spindle-three.vercel.app, checked online |
-| S2 · PDF with tables and screenshots | Missing | No PDF. Draft: data tables now cover 0001–0013; screenshots section still covers stories 1–9, 12 and 17 only, and story 9 shows the old log-in page |
+| S2 · PDF with tables and screenshots | Partly | PDF built: cover, contents, 15 tables with diagram, 89 figures, 47 pages. Kept out of git; not yet reviewed page by page by the owner; to attach on Moodle |
 
 ### Missing for the brief, by impact on the grade
-1. Submission PDF (S2): screenshots of stories 14–39 grouped by journey, retake the desktop screenshots of the account, genre and order-placed pages, Vercel address in the draft, then export.
-2. Manual test record: 35 entries "Not run" in `docs/manual-tests.md`.
-3. Check online that the deployed build has stories 35–39 (code is pushed) and that migration 0013 is applied; push the docs commit.
-4. Demo: rehearse `docs/demo-script.md` once; add the address.
-5. `docs/database.md`: add migration 0012.
-6. Close the UX entries that story 25 already fixed (#38–#43), if the owner agrees.
+1. Submission PDF (S2): review it page by page, then attach it on Moodle with the link (the file is docs/submission/spindle-submission.pdf; rebuild with python3 docs/submission/build/build.py).
+2. Manual test record: 35 entries "Not run" in `docs/manual-tests.md` (run them in the manual test plan page).
+3. `docs/database.md`: add migration 0012.
+4. Demo script: add the address and remove DRAFT (not part of the submission).
+5. Close the UX entries that story 25 already fixed (#38–#43), if the owner agrees.
 
 ## Build phases
 | Phase | Stories | Status |
