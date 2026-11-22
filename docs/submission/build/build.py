@@ -114,7 +114,11 @@ def render(pages):
         buf = [line]; i += 1
         while i < len(lines) and lines[i].strip() and not re.match(r"(#|\||<table|- |```|<!--)", lines[i]):
             buf.append(lines[i]); i += 1
-        out.append(f'<p>{inline(" ".join(buf))}</p>')
+        para = f'<p>{inline(" ".join(buf))}</p>'
+        if " ".join(buf).startswith("*Note:") and out and out[-1].startswith('<div class="shots">'):
+            out[-1] = out[-1][: -len("</div>")] + para + "</div>"   # a note about a figure stays with the figure
+        else:
+            out.append(para)
 
     contents = '<section class="toc"><h1 class="pb tochead">Contents</h1><ol>' + "".join(
         f'<li class="l{n}"><a href="#{sl}"><span class="t">{html.escape(t)}</span><span class="d"></span>'

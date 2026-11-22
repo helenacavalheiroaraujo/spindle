@@ -61,3 +61,6 @@ h2.pb { break-before: page; margin-top: 0; }
 .cover .meta div:last-child { grid-column: 1 / -1; }
 .cover .meta dt { margin-bottom: 1.2mm; font-size: 8.4pt; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
 .cover .meta dd { margin: 0; font-size: 12pt; font-weight: 600; }
+
+h2 + p { break-after: avoid; }
+.shots > p { font-size: 8.4pt; color: var(--muted); margin: 2mm 0 0; }
