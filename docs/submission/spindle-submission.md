@@ -6,7 +6,7 @@ Helena Cavalheiro Araújo · Student number: up202510618
 
 **App:** https://spindle-three.vercel.app
 
-Spindle helps people who are not vinyl specialists to choose the right pressing of a record and to buy a verified copy safely. All data shown is illustrative: the application uses no real catalogue, and payments and shipping are simulated (Assignment 1, p. 12).
+Spindle helps people who are not vinyl specialists to choose the right pressing of a record and to buy a verified copy safely. The catalogue, prices, sellers, listings and checks are illustrative, and payments and shipping are simulated (Assignment 1, p. 12). Cover art, album details and track previews come from public services (Cover Art Archive, MusicBrainz, Wikipedia and iTunes).
 
 <!-- cover-end -->
 
@@ -14,7 +14,7 @@ Spindle helps people who are not vinyl specialists to choose the right pressing 
 
 - **Contents:** the data tables of the application (part 1) and screenshots of its screens (part 2).
 - **Data:** 15 tables, created by 13 migrations, and 4 database functions.
-- **Screens:** 89 screens, in five journeys: Explore, Choose, Buy, Your account and Sell.
+- **Screens:** 88 screens, in five journeys: Explore, Choose, Buy, Your account and Sell.
 - **Screen sizes:** phone (375 px) and desktop (1280 px).
 
 ## How to read this document
@@ -24,7 +24,7 @@ Spindle helps people who are not vinyl specialists to choose the right pressing 
 - **Part 2 · Screenshots.** The screens are grouped by what a person does. Figures with two images show the phone on the left and the desktop on the right; figures with one image show the desktop, which is the reference layout.
 - **“Finding #N”.** References such as “finding #41” in the Notes columns point to an entry in the specification review (`docs/spec-review/`): a question about the specification that was decided and then built into the table.
 - **Story and bug numbers.** Those in the captions refer to the numbered stories and bug reports; the Appendix gives the title of each.
-- **Illustrative data.** All data, prices, sellers and checks are illustrative; payments and refunds are simulated.
+- **Illustrative data.** The catalogue, prices, sellers, listings and checks are illustrative, and payments and refunds are simulated. Album pages show real cover art, details and previews from public services, and say so (“Source: MusicBrainz · Wikipedia”).
 
 <!-- toc -->
 
@@ -54,7 +54,7 @@ The app keeps its data in 15 tables, created by 13 migrations in `supabase/migra
 
 ## 1.2 Relationship diagram
 
-Each line joins a foreign key to the table it points to. A fork marks the “many” side of a one-to-many relationship.
+Each line joins a foreign key to the table it points to. A fork marks the “many” side of a one-to-many relationship. The tables `profiles` and `user_preferences` also point to the Supabase Auth user table, which is outside this diagram, and `glossary_terms` is a stand-alone list.
 
 ```mermaid
 erDiagram
@@ -155,7 +155,7 @@ One pressing of an album, for example “2012 Remaster”.
 | `sound_score` | integer 1–5 | stored value (story 3) |
 | `original_score` | integer 1–5 | stored value (story 3) |
 | `rating_count` | integer ≥ 0 | shown as “Based on N collector ratings” |
-| `typical_price_min`, `typical_price_max` | numeric, nullable | story 6; both empty or both filled, with the minimum not above the maximum |
+| `typical_price_min`, `typical_price_max` | numeric, nullable | story 6; both empty or both filled; the minimum must be above zero and not above the maximum |
 
 The price and condition scores are **not** columns: they are calculated from the listings (story 3, findings #1 and #2).
 
@@ -170,6 +170,8 @@ The price and condition scores are **not** columns: they are calculated from the
 | `position` | text | for example “A1”, “B3” |
 | `title` | text | |
 | `is_extra` | boolean | shown as “Bonus” (story 3) |
+
+The pair (`version_id`, `position`) is unique: a position appears only once in a version.
 
 ### `reason_texts`
 
@@ -201,9 +203,9 @@ A fixed list, written in the buyer’s own words (finding #8).
 | Column | Type | Notes |
 |---|---|---|
 | `code` | text, primary key | NM, VG+, VG, G |
-| `name` | text | Near mint, Very good, Good, Fair |
+| `name` | text, unique | Near mint, Very good, Good, Fair |
 | `explanation` | text | approved wording: “No marks, almost like new” (`0005_condition_text.sql`, finding #59); “Light signs of wear”; “Visible wear and some audible noise”; “Heavily played, noticeable noise” |
-| `sort_order` | integer | ordered from best to worst |
+| `sort_order` | integer, unique | ordered from best to worst |
 
 The condition **score** (Near mint = 5 down to Fair = 2) is defined in `lib/rules/recommendation.ts`, not in this table.
 
@@ -328,7 +330,7 @@ The pair (`profile_id`, `kind`) is unique: one delivery address and, only if it 
 | Column | Type | Notes |
 |---|---|---|
 | `user_id` | → Supabase Auth user, primary key | |
-| `ranking` | an ordered list of one to four criteria | story 2 |
+| `ranking` | an ordered list of one to four criteria | story 2; the values may only be sound, price, original and condition |
 
 ## 1.7 Reputation
 
@@ -397,7 +399,7 @@ How a buyer finds an album: the home page and its crates, the menu, search with 
 
 <table><tr><td valign="top" width="50%"><b>The crate row with seven genres (story 24)</b><br><img src="../screenshots/story-24/crate-row-1280.png" alt="More genres, crate row (story 24) (desktop)"></td><td valign="top" width="50%"><b>Desktop header: navy top row and search strip (story 22)</b><br><img src="../screenshots/story-22/header-search-strip-1280.png" alt="Navy header with the search strip (story 22) (desktop)"></td></tr></table>
 
-**Menu on phone and on desktop (story 19)**
+**Menu opened on the phone, and the desktop header (story 19)**
 
 <table><tr><td valign="top" width="25%"><img src="../screenshots/story-19/menu-open-375.png" alt="Menu: phone and desktop (story 19) (phone)"></td><td valign="top"><img src="../screenshots/story-19/menu-1280.png" alt="Menu: phone and desktop (story 19) (desktop)"></td></tr></table>
 
@@ -423,7 +425,7 @@ How a buyer picks the right pressing: what matters to them, one recommendation, 
 
 <table><tr><td valign="top" width="25%"><img src="../screenshots/story-2/priorities-empty-375.png" alt="Priorities screen, nothing picked: &quot;See recommendation&quot; is disabled (story 2) (phone)"></td><td valign="top"><img src="../screenshots/story-2/priorities-empty-1280.png" alt="Priorities screen, nothing picked: &quot;See recommendation&quot; is disabled (story 2) (desktop)"></td></tr></table>
 
-**Priorities chosen: Price first and Sound second, shown as numbers (story 2)**
+**Priorities chosen: Price ranked 1 and Sound ranked 2; the number on each option shows its rank (story 2)**
 
 <table><tr><td valign="top" width="25%"><img src="../screenshots/story-2/priorities-ranked-375.png" alt="1. Price, 2. Sound picked; ranks shown as numbers (story 2) (phone)"></td><td valign="top"><img src="../screenshots/story-2/priorities-ranked-1280.png" alt="1. Price, 2. Sound picked; ranks shown as numbers (story 2) (desktop)"></td></tr></table>
 
@@ -525,11 +527,11 @@ How a buyer pays: logging in, the cart, the checkout, the order confirmation, an
 
 <table><tr><td valign="top" width="50%"><b>Checkout for the whole cart (story 20)</b><br><img src="../screenshots/story-20/checkout-1280.png" alt="Checkout for the whole cart (story 20) (desktop)"></td><td valign="top" width="50%"><b>Record sold while the buyer is on the checkout: “Sorry, this record was just sold” (story 7)</b><br><img src="../screenshots/story-7/checkout-just-sold-1280.png" alt="Sold while on the checkout: &quot;Sorry, this record was just sold&quot; (story 7) (desktop)"></td></tr></table>
 
-**Order confirmation (story 7)**
+**Order confirmation, with its next steps (stories 7, 30)**
 
 <table><tr><td valign="top" width="25%"><img src="../screenshots/story-7/order-confirmation-375.png" alt="Order confirmation (story 7) (phone)"></td><td valign="top"><img src="../screenshots/story-7/order-confirmation-1280.png" alt="Order confirmation (story 7) (desktop)"></td></tr></table>
 
-<table><tr><td valign="top" width="50%"><b>Next steps after “Order placed”, for a whole cart (story 30)</b><br><img src="../screenshots/story-30/order-placed-cart-1280.png" alt="Next steps after &quot;Order placed&quot;: whole cart (story 30) (desktop)"></td><td valign="top" width="50%"><b>Next steps after “Order placed”, for one record (story 30)</b><br><img src="../screenshots/story-30/order-placed-one-1280.png" alt="Next steps after &quot;Order placed&quot;: one record (story 30) (desktop)"></td></tr></table>
+<table><tr><td valign="top" width="50%"><b>Next steps after “Order placed”, for a whole cart (story 30)</b><br><img src="../screenshots/story-30/order-placed-cart-1280.png" alt="Next steps after &quot;Order placed&quot;: whole cart (story 30) (desktop)"></td></tr></table>
 
 <table><tr><td valign="top" width="50%"><b>A sold or removed listing opened from a link (story 7)</b><br><img src="../screenshots/story-7/no-longer-available-1280.png" alt="A sold or removed listing opened from a link (story 7) (desktop)"></td></tr></table>
 
@@ -593,7 +595,7 @@ How a seller lists and manages a record: finding the album, the sell form, My li
 
 ## Notes on the screens
 
-- All records, prices, sellers, checks and payments are illustrative. The refund issued when an order is cancelled is simulated: nothing is stored for it.
+- The records, prices, sellers, checks and payments are illustrative. Cover art, album details and previews come from public services. The refund issued when an order is cancelled is simulated: nothing is stored for it.
 - Loading screens and error screens are checked manually (`docs/manual-tests.md`) and are therefore not shown here.
 
 # Appendix: stories and bugs in the captions

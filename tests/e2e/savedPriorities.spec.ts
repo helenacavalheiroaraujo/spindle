@@ -82,6 +82,7 @@ test("a signed-in buyer's ranking is saved, reused on the next album, and replac
   await page.goto(`/albums/${ZIGGY_ID}/priorities`);
   await page.waitForURL(`**/albums/${ZIGGY_ID}/recommendation?priorities=price,sound`);
   await expect(page.getByText("Based on: Price, Sound")).toBeVisible();
+  await expect(page.getByRole("status").filter({ hasText: "Checking listings…" })).toHaveCount(0); // desktop: the listings have loaded
   await screenshot(page, 2, "saved-ranking-skips-screen");
 
   // "Change" → the screen with the ranking filled in; the new ranking replaces the saved one (finding #11).
